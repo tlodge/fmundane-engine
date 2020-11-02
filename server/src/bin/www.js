@@ -5,6 +5,8 @@
 import debug from 'debug';
 import http from 'http';
 import app from '../app';
+import _io from 'socket.io';
+import {init} from '../ws';
 /**
  * Normalize a port into a number, string, or false.
  */
@@ -24,13 +26,15 @@ const normalizePort = (val) => {
 /**
  * Get port from environment and store in Express.
  */
-const port = normalizePort(process.env.PORT || '3000');
+const port = normalizePort(process.env.PORT || '3001');
+console.log("listening on port", port);
 app.set('port', port);
 
 /**
  * Create HTTP server.
  */
 const server = http.createServer(app);
+const io = _io.listen(server);
 
 /**
  * Event listener for HTTP server "error" event.
@@ -63,6 +67,12 @@ const onListening = () => {
   const bind = typeof addr === 'string' ? `pipe ${addr}` : `port ${addr.port}`;
   debug(`Listening on ${bind}`);
 };
+
+io.on('connection',  (socket)=>{
+  console.log("Connected succesfully to the socket ...");
+  init(socket);
+ 
+});
 /**
  * Listen on provided port, on all network interfaces.
  */

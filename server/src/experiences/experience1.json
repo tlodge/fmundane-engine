@@ -1,0 +1,114 @@
+{
+  
+  "id" : "experience1",
+
+  "start": {
+    "action": "greet",
+    "event": "e0"
+  },
+
+  "events": [{
+    "id": "e0",
+    "subscription" : "/speech",
+    "type": "speech",
+    "rules": [{
+        "rule": {
+          "operator": "hasword",
+          "operand": ["hello"]
+        },
+        "actions": [
+          ["fanhot", "blindsup"],
+          ["redlights"]
+        ],
+        "next": "e1"
+      },
+      {
+        "rule": {
+          "operator": "hasword",
+          "operand": ["goodbye"]
+        },
+        "actions": [
+          ["bluelights"]
+        ],
+        "next": "e1"
+      }
+    ],
+    "default": {
+      "rule": {
+        "operator": "timeout",
+        "operand": 3000
+      },
+      "actions": ["greet"],
+      "next": "e0"
+    }
+  },
+  {
+    "id": "e1",
+    "subscription" : "/press",
+    "type": "button",
+    "data": ["yes", "no", "maybe"],
+    "rules": [{
+        "rule": {
+          "operator": "hasname",
+          "operand": ["yes"]
+        },
+        "actions": [
+          ["fanoff", "blindsdown"]
+        ],
+        "next": "e2"
+      },
+      {
+        "rule": {
+          "operator": "hasname",
+          "operand": ["no"]
+        },
+        "actions": [
+          ["pinklights"]
+        ],
+        "next": "e2"
+      }
+    ],
+    "default": {
+      "rule": {
+        "operator": "timeout",
+        "operand": 3000
+      },
+      "actions": ["greet"],
+      "next": "e0"
+    }
+  },
+  {
+    "id": "e2",
+    "subscription" : "/camera",
+    "type": "gesture",
+    "rules": [{
+        "rule": {
+          "operator": "hasgensture",
+          "operand": ["thumbsup"]
+        },
+        "actions": [
+          ["fanoff", "blindsup"]
+        ],
+        "next": "e1"
+      },
+      {
+        "rule": {
+          "operator": "hasword",
+          "operand": ["friend"]
+        },
+        "actions": [
+          ["pinklights"]
+        ],
+        "next": "e0"
+      }
+    ],
+    "default": {
+      "rule": {
+        "operator": "timeout",
+        "operand": 3000
+      },
+      "actions": ["greet"],
+      "next": "e0"
+    }
+  }
+]}

@@ -1,0 +1,93 @@
+{
+  "fanhot": {
+    "type": "request",
+    "data": {
+      "url": "https://192.168.1.109/dyson/hot",
+      "type": "GET",
+      "contenttype": "application/json",
+      "body": {
+        "id": "28282:1292920-2;"
+      }
+    }
+  },
+
+  "fanoff": {
+    "type": "request",
+    "data": {
+      "url": "https://192.168.1.109/dyson/hot",
+      "type": "GET",
+      "contenttype": "application/json",
+      "body": {
+        "id": "28282:1292920-2;"
+      }
+    }
+  },
+
+  "pinklights": {
+    "type": "request",
+    "data": {
+      "url": "https://192.168.1.109/dyson/hot",
+      "type": "GET",
+      "contenttype": "application/json",
+      "body": {
+        "id": "28282:1292920-2;"
+      }
+    }
+  },
+  "redlights": {
+    "type": "request",
+    "data": {
+      "url": "https://192.168.1.109/dyson/hot",
+      "type": "GET",
+      "contenttype": "application/json",
+      "body": {
+        "id": "28282:1292920-2;"
+      }
+    }
+  },
+
+  "bluelights": {
+    "type": "request",
+    "data": {
+      "url": "https://192.168.1.109/dyson/hot",
+      "type": "GET",
+      "contenttype": "application/json",
+      "body": {
+        "id": "28282:1292920-2;"
+      }
+    }
+  },
+  "blindsup": {
+    "type": "request",
+    "data": {
+      "url": "https://192.168.1.109/dyson/hot",
+      "type": "GET",
+      "contenttype": "application/json",
+      "body": {
+        "id": "28282:1292920-2;"
+      }
+    }
+  },
+  "blindsdown": {
+    "type": "request",
+    "data": {
+      "url": "https://192.168.1.109/dyson/hot",
+      "type": "GET",
+      "contenttype": "application/json",
+      "body": {
+        "id": "28282:1292920-2;"
+      }
+    }
+  },
+  "greet": {
+    "type": "request",
+    "data": {
+      "url": "https://192.168.1.109/dyson/hot",
+      "type": "GET",
+      "contenttype": "application/json",
+      "body": {
+        "id": "28282:1292920-2;"
+      }
+    }
+  }
+}

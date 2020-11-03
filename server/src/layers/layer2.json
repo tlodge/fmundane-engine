@@ -1,20 +1,20 @@
 {
   
-    "id" : "experience2",
+    "id" : "layer2",
   
     "start": {
-      "action": "greet",
+      "actions": [["bluelights"]],
       "event": "e0"
     },
   
     "events": [{
       "id": "e0",
       "subscription" : "/camera",
-      "type": "speech",
+      "type": "gesture",
       "rules": [{
           "rule": {
             "operator": "hasword",
-            "operand": ["hello"]
+            "operand": ["yes"]
           },
           "actions": [
             ["fanhot", "blindsup"],
@@ -25,7 +25,7 @@
         {
           "rule": {
             "operator": "hasword",
-            "operand": ["goodbye"]
+            "operand": ["no"]
           },
           "actions": [
             ["bluelights"]

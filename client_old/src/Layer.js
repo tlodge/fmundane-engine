@@ -2,7 +2,7 @@
 import Buttons from "./Buttons";
 import superagent from "superagent";
 
-function Experience(e) {
+function Layer(e) {
 
     const renderEvent = (event)=>{
         console.log("rendeimng", event);
@@ -30,4 +30,4 @@ function Experience(e) {
     );
 }
 
-export default Experience;
+export default Layer;

@@ -80,14 +80,58 @@
     }
   },
   "greet": {
-    "type": "request",
+    "type": "browserspeech",
     "data": {
-      "url": "https://192.168.1.109/dyson/hot",
-      "type": "GET",
-      "contenttype": "application/json",
-      "body": {
-        "id": "28282:1292920-2;"
-      }
+      "speech" : [
+                    {
+                      "words": "Hello and welcome to the caravan. My name is Fred.",
+                      "delay": 500 
+                    },
+                    {
+                      "words": "Are you ready to go?"
+                    }
+
+      ]            
+    }
+  },
+  "sayhello": {
+    "type": "browserspeech",
+    "data": {
+      "speech" : [
+                    {
+                      "words": "Hello |value:and|, nice to meet you"
+                    
+                    }
+      ]            
+    }
+  },
+  "turningonfan": {
+    "type": "browserspeech",
+    "data": {
+      "speech" : [
+                    {
+                        "words": "Ok, let's get nice and comfortable.  I'm turning on the fan now",
+                        "delay": 1000
+                    },
+                    {
+                      "words": "Lovely.  Now please tell me your names"
+                    }
+       ]
+    }
+  },
+  "askagain": {
+    "type": "browserspeech",
+    "data": {
+      "speech" : [
+                    {
+                        "words": "Ah well.  I'll wait a bit",
+                        "delay": 2000
+                    },
+                    {
+                      "words": "Ok, nice pause.  Let's try again",
+                      "delay": 1000
+                    }
+       ]
     }
   }
 }

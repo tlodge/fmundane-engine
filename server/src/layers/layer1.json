@@ -1,9 +1,9 @@
 {
   
-  "id" : "experience1",
+  "id" : "layer1",
 
   "start": {
-    "action": "greet",
+    "actions": [["greet"]],
     "event": "e0"
   },
 
@@ -13,24 +13,24 @@
     "type": "speech",
     "rules": [{
         "rule": {
-          "operator": "hasword",
-          "operand": ["hello"]
+          "operator": "contains",
+          "operand": ["yes"]
         },
         "actions": [
-          ["fanhot", "blindsup"],
+          ["turningonfan", "fanhot"],
           ["redlights"]
         ],
-        "next": "e1"
+        "next": "asknames"
       },
       {
         "rule": {
-          "operator": "hasword",
-          "operand": ["goodbye"]
+          "operator": "contains",
+          "operand": ["no"]
         },
         "actions": [
-          ["bluelights"]
+          ["askagain", "greet"]
         ],
-        "next": "e1"
+        "next": "e0"
       }
     ],
     "default": {
@@ -43,14 +43,29 @@
     }
   },
   {
+    "id": "asknames",
+    "subscription" : "/speech",
+    "type": "speech",
+    "rules": [{
+        "rule": {
+          "operator": "any"
+        },
+        "actions": [
+          ["sayhello"]
+        ],
+        "next": "e1"
+      }
+    ]
+  },
+  {
     "id": "e1",
     "subscription" : "/press",
     "type": "button",
     "data": ["yes", "no", "maybe"],
     "rules": [{
         "rule": {
-          "operator": "hasname",
-          "operand": ["yes"]
+          "operator": "equals",
+          "operand": "yes"
         },
         "actions": [
           ["fanoff", "blindsdown"]
@@ -59,8 +74,8 @@
       },
       {
         "rule": {
-          "operator": "hasname",
-          "operand": ["no"]
+          "operator": "equals",
+          "operand": "no"
         },
         "actions": [
           ["pinklights"]
@@ -83,7 +98,7 @@
     "type": "gesture",
     "rules": [{
         "rule": {
-          "operator": "hasgensture",
+          "operator": "equals",
           "operand": ["thumbsup"]
         },
         "actions": [
@@ -93,8 +108,8 @@
       },
       {
         "rule": {
-          "operator": "hasword",
-          "operand": ["friend"]
+          "operator": "equals",
+          "operand": ["thumbsdown"]
         },
         "actions": [
           ["pinklights"]

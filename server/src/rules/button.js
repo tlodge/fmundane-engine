@@ -1,4 +1,7 @@
 
 export const evaluate = (operator, operand, value)=>{
-    return true;
+    if (operator === "equals"){
+        return operand.toLowerCase().trim() === value.toLowerCase().trim();
+    }
+    return false;
 }

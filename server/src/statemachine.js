@@ -38,6 +38,8 @@ const StateMachine = (config)=>{
    
     let id = config.id;
     let eventid = config.start.event;
+    let triggered = "";
+
     const {events=[]} = config;
     const eventlookup = events.reduce((acc, item)=>{
         return {
@@ -61,6 +63,7 @@ const StateMachine = (config)=>{
                 const actionids = e.rules.reduce((acc, item)=>{
                     if (evaluate(item.rule.operator, item.rule.operand, message.toString())){
                         eventid = item.next;
+                        triggered = item.id;
                         return [...acc, item.actions];
                     }
                     return acc;
@@ -68,7 +71,8 @@ const StateMachine = (config)=>{
 
                 const _actions = actionids.map(arr=>arr.map((arr)=>arr.map(a=>actions[a]||{})));
                 await _executeactions(_actions, message.toString());
-                send("event", {id:config.id,data:eventlookup[eventid]});
+                console.log("SENDING EVENT WITH TRIOGGERD", triggered);
+                send("event", {id:config.id,data:eventlookup[eventid],triggered});
             }
         });
     });

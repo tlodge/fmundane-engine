@@ -99,7 +99,11 @@
     "data": {
       "speech" : [
                     {
-                      "words": "Hello |value:and|, nice to meet you"
+                      "words": "Hello |value:and|",
+                      "delay":500
+                    },
+                    {
+                      "words":"It's most lovely to meet you"
                     
                     }
       ]            
@@ -125,8 +129,16 @@
       "speech" : [
                     {
                         "words": "Ah well.  I'll wait a bit",
-                        "delay": 2000
+                        "delay": 1000
                     },
+                    {
+                      "words": "do be do",
+                      "delay": 500
+                  },
+                  {
+                    "words": "do do dobe dobee do do do",
+                    "delay": 2000
+                },
                     {
                       "words": "Ok, nice pause.  Let's try again",
                       "delay": 1000

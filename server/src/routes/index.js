@@ -3,9 +3,30 @@ import { testEnvironmentVariable } from '../settings';
 import {send} from '../listener';
 import {send as wssend} from '../ws';
 import sm from '../statemachine';
-import l1 from '../layers/layer1.json';
-import l2 from '../layers/layer2.json';
+import _l1 from '../layers/layer1.json';
+import _l2 from '../layers/layer2.json';
 import actions from '../actions/actions';
+
+
+const format = (l)=>{
+    return {
+        ...l,
+        events: l.events.map((e,i)=>{
+            return {
+                ...e,
+                rules: e.rules.map((r,j)=>{
+                    return {
+                        id: `${e.id}${i}${j}`,
+                        ...r,
+                    }
+                })
+            }
+        })
+    }
+}
+
+const l1 = format(_l1);
+const l2 = format(_l2);
 
 const events = [l1,l2].reduce((acc,item)=>{
     const startevent = item.start.event;
@@ -23,6 +44,55 @@ const indexRouter = express.Router();
 indexRouter.get('/', (req, res) => res.status(200).json({ message: testEnvironmentVariable }));
 
 const statemachines = [];
+
+const children = (seen, events, node, trigger, actions=[])=>{
+    
+    if (!node){
+        return;
+    }
+    if (seen.indexOf(node.id) != -1){
+        return {
+            name: node.id,
+            trigger,
+        };
+    }
+    return {
+        name: node.id,
+        trigger,
+        children: (node.rules || []).map(r=>children([...seen,node.id], events, events[r.next], r.id, actions)),
+        links : (node.rules || []).reduce((acc, r)=>{
+            const key = /*trigger ? `${trigger}` :*/ `${node.id}->${r.next}`;
+            return {
+                ...acc,
+                //[`${node.id}->${r.next}`]: {rid: r.id, actions:r.actions, rule:r.rule}
+                [r.id]: {rid: r.id, actions:r.actions, rule:r.rule}
+            }
+        },{})
+    }
+    
+}
+
+
+const tree = (layer)=>{
+    
+    const events = layer.events.reduce((acc, item)=>{
+        return {
+            ...acc,
+            [item.id] : item, 
+        }
+    }, {});
+
+    return {
+        events,
+        tree: children([], events, events[layer.start.event],null,[])
+    }
+}
+
+console.log("tree is" , JSON.stringify(tree(l1),null,4));
+
+indexRouter.get('/layers', (req, res)=>{
+    res.status(200).json([tree(l1),tree(l2)]);
+});
 
 indexRouter.get('/start', (req, res)=>{
     if (statemachines.length <= 0){

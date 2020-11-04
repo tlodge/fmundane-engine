@@ -1,31 +1,34 @@
 import { createSlice } from '@reduxjs/toolkit';
 import io from 'socket.io-client';
 import superagent from 'superagent';
+import * as d3 from 'd3-hierarchy';
 
 //import Layer from './Layer';
 
 const socket = io('http://localhost:3001');
 let recognition, voice;
+let _talking = false;
 
 export const experienceSlice = createSlice({
   name: 'experience',
   
   initialState: {
     layers: [],
+    events: [],
     transcript: "",
     lastsenttranscript:"",
-    talking: false,
+   
   },
 
   reducers: {
-    setTalking: (state, action)=>{
-      state.talking = action.payload;
-    },
-    setLayers: (state, action)=>{
+    setLayers : (state, action)=>{
       state.layers = action.payload;
     },
-    setLayer: (state, action) => {
-      state.layers = [...state.layers.filter(l=>l.id !== action.payload.id), action.payload];
+    setEvents: (state, action)=>{
+      state.events = action.payload;
+    },
+    setEvent: (state, action) => {
+      state.events = [...state.events.filter(l=>l.id !== action.payload.id), action.payload];
     },
     setTranscript: (state, action)=>{
       state.transcript = action.payload;
@@ -38,7 +41,7 @@ export const experienceSlice = createSlice({
   }
 });
 
-export const { setLayer, setLayers, setTalking, setTranscript,sentTranscript } = experienceSlice.actions;
+export const { setLayers, setEvent, setEvents, setTranscript,sentTranscript } = experienceSlice.actions;
 
 // The function below is called a thunk and allows us to perform async logic. It
 // can be dispatched like a regular action: `dispatch(incrementAsync(10))`. This
@@ -47,7 +50,7 @@ export const { setLayer, setLayers, setTalking, setTranscript,sentTranscript } =
 
 export const reset = ()=>dispatch=>{
   superagent.get('/event/start').then(res => {
-    dispatch(setLayers(res.body));
+    dispatch(setEvents(res.body));
     dispatch(setTranscript(""));
  })
  .catch(err => {
@@ -97,27 +100,28 @@ export const listenOnActions = (window) => async dispatch => {
 
   socket.on('action', async actions => {
   
- 
-  console.log("ok have voices", voices);
   for (const payload of actions){
-    dispatch(setTalking(true));
-    recognition.stop();
+  
+   
     if (payload.type==="browserspeech"){
       for (const sentence of payload.data.speech){
-        await sayWords(window, sentence.words,voices[51]);
+        _talking = true;
+        recognition.stop();
+        await sayWords(window, sentence.words,voices[1]);//51
         if (sentence.delay){
           await delay(sentence.delay);
         }
       }
-      dispatch(setTalking(false));
-      
-      //window.speechSynthesis.speak(new SpeechSynthesisUtterance(payload.data.words));
-    }
-    try{
+     _talking = false;
+     try{
+     
       recognition.start();
     }catch(err){
      
     }
+      //window.speechSynthesis.speak(new SpeechSynthesisUtterance(payload.data.words));
+    }
+   
   }
   
   console.log("seen new actions!", actions)
@@ -125,18 +129,9 @@ export const listenOnActions = (window) => async dispatch => {
 }
 
 export const listenOnEvents = () => dispatch => {
-
-  //superagent.get('/event/start').then(res => {
-  //   dispatch(setLayers(res.body));
-  //})
-  //.catch(err => {
-  //  console.log("error getting events", err);
-   //  // err.message, err.response
-  //});
-  console.log("ok listening on events!!");
   socket.on('event', payload => {
     console.log("seen a new event!", payload)
-    dispatch(setLayer(payload));
+    dispatch(setEvent(payload));
   });
 }
 
@@ -154,14 +149,29 @@ export const sendTranscript = () => (dispatch, getState) =>{
     }
 };
 
+export const fetchLayers = () => (dispatch)=>{
+
+  superagent.get('/event/layers').then(res => {
+    console.log(res.body);
+    const trees = res.body.map(et=>et.tree);
+      
+    dispatch(setLayers(trees));
+  })
+  .catch(err => {
+    console.log("error resetting events", err);
+    // err.message, err.response
+  });
+}
+
 export const listenToSpeech = (r) => (dispatch, getState) => {
   
   recognition = r;
 
   recognition.onend = () => {
     //dispatch(setTranscript(""));
-    if (!getState().experience.talking){
+    if (!_talking){
       try{
+       
         recognition.start();
       }catch(err){
         
@@ -170,18 +180,13 @@ export const listenToSpeech = (r) => (dispatch, getState) => {
   }
 
   recognition.onresult = event => {    
-        
-    let interimTranscript = ''
-    
+
     for (let i = event.resultIndex; i < event.results.length; i++) {
       const transcript = event.results[i][0].transcript;
       if (event.results[i].isFinal){ 
         if (transcript.trim() != ""){
           dispatch(setTranscript(transcript + ' '));
         }
-      }
-      else{ 
-        interimTranscript += transcript;
       }
     }
     dispatch(sendTranscript());
@@ -193,13 +198,19 @@ export const listenToSpeech = (r) => (dispatch, getState) => {
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
 // in the slice file. For example: `useSelector((state) => state.counter.value)`
-export const selectLayers= state => {
-  return  [...(state.experience.layers || [])].sort((a,b)=>{
+export const selectEvents= state => {
+  return  [...(state.experience.events || [])].sort((a,b)=>{
     if (a.id < b.id) return -1;
     if (a.id > b.id) return 1;
     return -1;
   });
 }
+
+const separation = (a, b) =>{
+  return (a.parent == b.parent ? 1 : 2)
+}
+
 export const selectSpeech= state => state.experience.transcript;
+export const selectTrees = state =>  state.experience.layers.map(t=>d3.tree().size([500, 500]).separation(separation)(d3.hierarchy(t)));
 
 export default experienceSlice.reducer;

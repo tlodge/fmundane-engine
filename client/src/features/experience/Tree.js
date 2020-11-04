@@ -71,23 +71,23 @@ function Tree(t) {
                 const tx = (l.x-link.from.x)/2;
                 const ty = (Math.max(l.y,link.from.y)-Math.min(l.y,link.from.y))/2;
                 const anchor = tx == 0 ? "middle" : tx < 0 ? "end": "start";
-                const _data = data[l.trigger];
-                console.log("k data is", _data);
-               // const label = labeldata.actions.map((l,i)=>{
-               //     return <text font-size="x-small" text-anchor={anchor} x={link.from.x+tx} y={link.from.y+ty+((i+1)*20)}> {l.join(',')}</text>
-              //  });
+                const labeldata = data[l.trigger];
+                console.log("k data is", labeldata);
+                const label = labeldata.actions.map((l,i)=>{
+                    return <text font-size="x-small" text-anchor={anchor} x={link.from.x+tx} y={link.from.y+ty+((i+1)*20)}> {l.join(',')}</text>
+                });
 
-                //const {rule={}} = labeldata;
-                //const operator = rule.operator || "";
-                //const operand =  rule.operand || [];
-                //const rulelabel = `${operator}, ${operand}`;
+                const {rule={}} = labeldata;
+                const operator = rule.operator || "";
+                const operand =  rule.operand || [];
+                const rulelabel = `${operator}, ${operand}`;
 
-                //const ruletext = <text font-size="x-small" fill="red" text-anchor={anchor} x={link.from.x+tx} y={(link.from.y+ty)}>{rulelabel}</text>
+                const ruletext = <text font-size="x-small" fill="red" text-anchor={anchor} x={link.from.x+tx} y={(link.from.y+ty)}>{rulelabel}</text>
 
                 return <g>
                             {_slink(link.from.x, link.from.y, l.x, l.y)}
-                            {/*ruletext*/}
-                            {/*label*/}
+                            {ruletext}
+                            {label}
                             
                        </g>
             });

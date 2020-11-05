@@ -2,19 +2,16 @@
   "fanhot": {
     "type": "request",
     "data": {
-      "url": "https://192.168.1.109/dyson/hot",
+      "url": "http://localhost:9097/ui/api/fan?rotate=true&power=10&heat=37",
       "type": "GET",
-      "contenttype": "application/json",
-      "body": {
-        "id": "28282:1292920-2;"
-      }
+      "contenttype": "application/json"
     }
   },
 
   "fanoff": {
     "type": "request",
     "data": {
-      "url": "https://192.168.1.109/dyson/hot",
+      "url": "http://localhost:9097/ui/api/fan?rotate=false&power=1&cool=true",
       "type": "GET",
       "contenttype": "application/json",
       "body": {
@@ -132,7 +129,7 @@
                         "delay": 1000
                     },
                     {
-                      "words": "do be do",
+                      "words": "do be do la la la dumde dumde dum dum pop!",
                       "delay": 500
                   },
                   {

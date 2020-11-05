@@ -5,17 +5,24 @@ import {subscribe} from './listener';
 import {send} from './ws';
 
 import actions from './actions/actions.json';
+import {handle} from './actionhandler';
 
 const _fetchrule = async (rule)=>{
     let {evaluate} = await import(`./rules/${rule}.js`);
     return evaluate;
 }
 
+
+
 const _executeactions = async (alist, value="")=>{
     for (const row of alist){
         for (const actionlist of row){
+
+            const promises = actionlist.map((a)=>handle(a));
+            await Promise.all(promises);
+            
             send("action", actionlist.map(a=>{
-                const astr = JSON.stringify(a);
+                
                 var matches = astr.match(/\|(.*?)\|/);
                 if (matches){
                     const toreplace = matches[0];
@@ -25,6 +32,8 @@ const _executeactions = async (alist, value="")=>{
                 }
                 return a;
             }));
+
+          
         }
     }
 

@@ -72,7 +72,7 @@ function Tree(t) {
                 const ty = (Math.max(l.y,link.from.y)-Math.min(l.y,link.from.y))/2;
                 const anchor = tx == 0 ? "middle" : tx < 0 ? "end": "start";
                 const labeldata = data[l.trigger];
-                console.log("k data is", labeldata);
+                
                 const label = labeldata.actions.map((l,i)=>{
                     return <text font-size="x-small" text-anchor={anchor} x={link.from.x+tx} y={link.from.y+ty+((i+1)*20)}> {l.join(',')}</text>
                 });
@@ -106,7 +106,7 @@ function Tree(t) {
         }
 
         return <g>
-                    <circle cx={node.x} cy={node.y} r={10} style={{fill: paint ? "blue":"white", stroke:"black"}}/>
+                    <circle cx={node.x} cy={node.y} r={10} style={{fill: paint ? "#4299e1":"white", stroke:"black"}}/>
                     <text text-anchor="middle" font-size="x-small"  x={node.x} y={node.y+4}>{node.data.name}</text>
                     {(node.children || []).map(n=>renderTree(n, selected, rid))}
               </g>

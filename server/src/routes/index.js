@@ -6,7 +6,7 @@ import sm from '../statemachine';
 import _l1 from '../layers/layer1.json';
 import _l2 from '../layers/layer2.json';
 import actions from '../actions/actions';
-
+import {handle} from '../actionhandler';
 
 const format = (l)=>{
     return {
@@ -105,8 +105,10 @@ indexRouter.get('/start', (req, res)=>{
     
     res.status(200).json(events);
     
-    statemachines.map(s=>{
-        console.log("sending actions!", s.start.actions);
+    statemachines.map( async s=>{
+        const promises = s.start.actions.map((a)=>handle(a));
+        await Promise.all(promises);
+
         for (const alist of s.start.actions){
             wssend("action", alist.map(id=>actions[id]));
         }

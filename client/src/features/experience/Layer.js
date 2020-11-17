@@ -1,5 +1,7 @@
 import Buttons from "./Buttons";
 import Speech from "./Speech";
+import Gesture from "./Gesture";
+
 import superagent from "superagent";
 
 function Layer(e) {
@@ -19,6 +21,10 @@ function Layer(e) {
                 }}/>
             case "speech":
                 return <Speech/>
+
+            case "gesture":
+                return <Gesture {...{...event, gestureObserved: (g)=>{console.log("seen gesture", g)}}}/>
+
             default:
                 return JSON.stringify(event,null,4)
         }

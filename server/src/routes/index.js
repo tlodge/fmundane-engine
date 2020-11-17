@@ -106,8 +106,12 @@ indexRouter.get('/start', (req, res)=>{
     res.status(200).json(events);
     
     statemachines.map( async s=>{
-        const promises = s.start.actions.map((a)=>handle(a));
-        await Promise.all(promises);
+        console.log("start actions are", s.start.actions);
+         for (const alist of s.start.actions){
+            const promises =  alist.map(id=>handle(actions[id]));
+            await Promise.all(promises);
+        }
+        
 
         for (const alist of s.start.actions){
             wssend("action", alist.map(id=>actions[id]));

@@ -23,7 +23,7 @@
   "pinklights": {
     "type": "request",
     "data": {
-      "url": "https://192.168.1.109/dyson/hot",
+      "url": "http://localhost:9097/ui/api/fan?rotate=false&power=1&cool=true",
       "type": "GET",
       "contenttype": "application/json",
       "body": {
@@ -34,7 +34,7 @@
   "redlights": {
     "type": "request",
     "data": {
-      "url": "https://192.168.1.109/dyson/hot",
+      "url": "http://localhost:9097/ui/api/fan?rotate=false&power=1&cool=true",
       "type": "GET",
       "contenttype": "application/json",
       "body": {
@@ -46,7 +46,7 @@
   "bluelights": {
     "type": "request",
     "data": {
-      "url": "https://192.168.1.109/dyson/hot",
+      "url": "http://localhost:9097/ui/api/fan?rotate=false&power=1&cool=true",
       "type": "GET",
       "contenttype": "application/json",
       "body": {
@@ -57,7 +57,7 @@
   "blindsup": {
     "type": "request",
     "data": {
-      "url": "https://192.168.1.109/dyson/hot",
+      "url": "http://localhost:9097/ui/api/fan?rotate=false&power=1&cool=true",
       "type": "GET",
       "contenttype": "application/json",
       "body": {
@@ -68,7 +68,7 @@
   "blindsdown": {
     "type": "request",
     "data": {
-      "url": "https://192.168.1.109/dyson/hot",
+      "url": "http://localhost:9097/ui/api/fan?rotate=false&power=1&cool=true",
       "type": "GET",
       "contenttype": "application/json",
       "body": {

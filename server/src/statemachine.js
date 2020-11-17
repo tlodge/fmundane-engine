@@ -22,7 +22,7 @@ const _executeactions = async (alist, value="")=>{
             await Promise.all(promises);
             
             send("action", actionlist.map(a=>{
-                
+                const astr = JSON.stringify(a);
                 var matches = astr.match(/\|(.*?)\|/);
                 if (matches){
                     const toreplace = matches[0];

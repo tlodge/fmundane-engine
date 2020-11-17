@@ -13,6 +13,8 @@ const request = (r)=>{
 }
 
 export const handle = async (r)=>{
+    console.log("handling", r);
+    
     if (r.type === "request"){
         await request(r);
     }

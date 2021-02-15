@@ -70,11 +70,11 @@ function Tree(t) {
                 //const labeldata = data[`${link.from.name}->${l.name}`] || [];
                 const tx = (l.x-link.from.x)/2;
                 const ty = (Math.max(l.y,link.from.y)-Math.min(l.y,link.from.y))/2;
-                const anchor = tx == 0 ? "middle" : tx < 0 ? "end": "start";
+                const anchor = "middle";//tx == 0 ? "middle" : tx < 0 ? "end": "start";
                 const labeldata = data[l.trigger];
                 
-                const label = labeldata.actions.map((l,i)=>{
-                    return <text font-size="x-small" text-anchor={anchor} x={link.from.x+tx} y={link.from.y+ty+((i+1)*20)}> {l.join(',')}</text>
+                const label = labeldata.actions.map((ld,i)=>{
+                    return <text font-size="x-small" text-anchor={"middle"} x={l.y} y={l.x-30 + (i*10)} > {ld.join(',')}</text>
                 });
 
                 const {rule={}} = labeldata;
@@ -82,10 +82,10 @@ function Tree(t) {
                 const operand =  rule.operand || [];
                 const rulelabel = `${operator}, ${operand}`;
 
-                const ruletext = <text font-size="x-small" fill="red" text-anchor={anchor} x={link.from.x+tx} y={(link.from.y+ty)}>{rulelabel}</text>
+                const ruletext = <text font-size="x-small" fill="red" text-anchor={anchor} y={link.from.x+tx} x={(link.from.y+ty)}>{rulelabel}</text>
 
                 return <g>
-                            {_slink(link.from.x, link.from.y, l.x, l.y)}
+                            {_slink(link.from.y, link.from.x, l.y, l.x)}
                             {ruletext}
                             {label}
                             
@@ -97,7 +97,7 @@ function Tree(t) {
 
     const renderTree = (node,selected,rid)=>{
        
-       
+        console.log("RENDER TREE", node.data, selected, rid);
         let paint = false;
 
         if (!rid){
@@ -107,14 +107,13 @@ function Tree(t) {
         }
 
         return <g>
-                    <circle cx={node.x} cy={node.y} r={10} style={{fill: paint ? "#4299e1":"white", stroke:"black"}}/>
-                    <text text-anchor="middle" font-size="x-small"  x={node.x} y={node.y+4}>{node.data.name}</text>
+                    <circle cx={node.y} cy={node.x} r={10} style={{fill: paint ? "#4299e1":"white", stroke:"black"}}/>
+                    <text text-anchor="middle" font-size="x-small"  x={node.y} y={node.x+4}>{node.data.name}</text>
                     {(node.children || []).map(n=>renderTree(n, selected, rid))}
               </g>
     }
  
-   
-    return <svg width="600" height="600"><g transform={"translate(0,50)"}>
+    return <svg width="600" height="600"><g transform={"translate(50,0)"}>
         {renderLinks(links(t), rids(t))}
         {renderTree(t, t.id, t.triggered)}
     </g></svg>

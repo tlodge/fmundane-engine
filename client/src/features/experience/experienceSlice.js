@@ -137,10 +137,9 @@ export const listenOnEvents = () => dispatch => {
 export const sendTranscript = () => (dispatch, getState) =>{
     
     const {transcript, lastsenttranscript} = getState().experience;
-    console.log("tarsnscrio its", transcript);
-
+    
     if (lastsenttranscript.trim() != transcript.trim()){
-      console.log("sending it!!");
+      
       superagent.get("/event/speech").query({speech:getState().experience.transcript}).end((err, res)=>{
         if (!err){
           dispatch(sentTranscript())
@@ -164,7 +163,6 @@ export const fetchLayers = () => (dispatch)=>{
 }
 
 export const gestureObserved = (g)=> (dispatch, getState) =>{
-  console.log("ok new gesture observed", g);
   superagent.get("/event/gesture").query({gesture:g}).end((err, res)=>{
     
   });
@@ -218,6 +216,6 @@ const separation = (a, b) =>{
 }
 
 export const selectSpeech= state => state.experience.transcript;
-export const selectTrees = state =>  state.experience.layers.map(t=>d3.tree().size([500, 500]).separation(separation)(d3.hierarchy(t)));
+export const selectTrees = state =>  state.experience.layers.map(t=>d3.tree().size([500, 500]).separation(separation)(d3.hierarchy(t, d=>d.children)));
 
 export default experienceSlice.reducer;

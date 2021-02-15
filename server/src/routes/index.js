@@ -106,7 +106,7 @@ indexRouter.get('/start', (req, res)=>{
     res.status(200).json(events);
     
     statemachines.map( async s=>{
-        console.log("start actions are", s.start.actions);
+       
          for (const alist of s.start.actions){
             const promises =  alist.map(id=>handle(actions[id]));
             await Promise.all(promises);
@@ -121,15 +121,12 @@ indexRouter.get('/start', (req, res)=>{
 });
 
 indexRouter.get('/press', (req, res)=>{
-    console.log("seen a press!!");
-    console.log(req.query);
     const {name} = req.query;
     send("/press", name);
     res.status(200).json({ press: name });
 }); 
 
 indexRouter.get('/gesture', (req, res)=>{
-    console.log("propagating new gesture to mqtt!!");
     const {gesture} = req.query;
     send("/gesture", gesture);
     res.status(200).json({gesture});

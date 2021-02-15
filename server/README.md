@@ -2,7 +2,24 @@ Future mundane engine
 ---------------------
 
 
-This is the backend that deals with a future mundane experience.  Note that it requires that the client is running and it requires that the server that communicates with the devices (ooi-experience) is also running.
+This is the backend that deals with a future mundane experience.  Note that it requires that the client is running and it requires that the server that communicates with the devices (ooi-experience) is also running.  To run the server:
+
+```
+cd [root]/server
+npm run startdev
+```
+
+to run the client
+
+```
+cd [root]/client
+npm start
+```
+
+to run an mqtt server
+```
+docker run -it --name mosquitto -p 1883:1883 eclipse-mosquitto 
+```
 
 
 Gotchas

@@ -4,10 +4,10 @@ const request = (r)=>{
 
     return new Promise((resolve, reject)=>{
         if (r.data.type === "GET"){
-            superagent.get(r.data.url).then(res=>resolve(res.body)).catch((err)=>reject(err));
+            superagent.get(r.data.url).then(res=>resolve(res.body)).catch((err)=>resolve(err));
         }
         else if (r.data.type === "POST"){
-            superagent.post(r.data.url).send(r.body || {}).then(res=>resolve(res.body)).catch((err)=>reject(err));
+            superagent.post(r.data.url).send(r.body || {}).then(res=>resolve(res.body)).catch((err)=>resolve(err));
         }
     });
 }

@@ -94,7 +94,7 @@
   },
   {
     "id": "e2",
-    "subscription" : "/camera",
+    "subscription" : "/gesture",
     "type": "gesture",
     "rules": [{
         "rule": {

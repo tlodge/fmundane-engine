@@ -32,6 +32,7 @@ export function Experience() {
   recognition.interimResults = true;
   recognition.lang = 'en-US';
 
+
   const [startLabel, setStartLabel] = useState("start");
   useEffect(() => {
     dispatch(fetchLayers());
@@ -41,9 +42,9 @@ export function Experience() {
     //handleListen();
   }, []); //only re-run the effect if new message comes in
 
-  console.log('events are', events);
+  
   const list = events.map((e,i)=>{
-  console.log("have event",e);
+  
   return <div className="flex row" key = {e.id}>
                                         <div className="w-1/2"><Layer {...e} /></div>
                                         <Tree {...{...trees[i], id:e.data.id, triggered:e.triggered}}/>

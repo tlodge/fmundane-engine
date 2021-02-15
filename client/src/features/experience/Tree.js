@@ -97,7 +97,7 @@ function Tree(t) {
 
     const renderTree = (node,selected,rid)=>{
        
-        console.log("RENDER TREE", node.data, selected, rid);
+       
         let paint = false;
 
         if (!rid){
@@ -113,8 +113,7 @@ function Tree(t) {
               </g>
     }
  
-    console.log("tree to reduce us", t);
-    console.log("RIDS ARE", rids(t));
+   
     return <svg width="600" height="600"><g transform={"translate(0,50)"}>
         {renderLinks(links(t), rids(t))}
         {renderTree(t, t.id, t.triggered)}

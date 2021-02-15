@@ -63,9 +63,9 @@ const StateMachine = (config)=>{
     }
 
     events.map(e=>{
-
+        console.log("subsccribing to ", e.subscription);
         subscribe(e.subscription, async (message)=>{
-            
+            console.log("seen a new event!", e, message);
             if (e.id === eventid){
                 const evaluate = await _fetchrule(e.type);
 

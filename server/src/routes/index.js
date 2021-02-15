@@ -128,6 +128,13 @@ indexRouter.get('/press', (req, res)=>{
     res.status(200).json({ press: name });
 }); 
 
+indexRouter.get('/gesture', (req, res)=>{
+    console.log("propagating new gesture to mqtt!!");
+    const {gesture} = req.query;
+    send("/gesture", gesture);
+    res.status(200).json({gesture});
+});
+
 indexRouter.get('/speech', (req, res)=>{
     const {speech} = req.query;
     send("/speech", speech);

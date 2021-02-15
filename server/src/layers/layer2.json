@@ -9,7 +9,7 @@
   
     "events": [{
       "id": "e0",
-      "subscription" : "/camera",
+      "subscription" : "/gesture",
       "type": "gesture",
       "rules": [{
           "rule": {

@@ -62,7 +62,6 @@ export const reset = ()=>dispatch=>{
 const delay = (ms) =>{
   return new Promise((resolve, reject)=>{
     setTimeout(()=>{
-      console.log("timeout complete!!!");
       resolve()
     }, ms);
   });
@@ -138,9 +137,10 @@ export const listenOnEvents = () => dispatch => {
 export const sendTranscript = () => (dispatch, getState) =>{
     
     const {transcript, lastsenttranscript} = getState().experience;
-   
+    console.log("tarsnscrio its", transcript);
+
     if (lastsenttranscript.trim() != transcript.trim()){
-     
+      console.log("sending it!!");
       superagent.get("/event/speech").query({speech:getState().experience.transcript}).end((err, res)=>{
         if (!err){
           dispatch(sentTranscript())
@@ -160,6 +160,13 @@ export const fetchLayers = () => (dispatch)=>{
   .catch(err => {
     console.log("error resetting events", err);
     // err.message, err.response
+  });
+}
+
+export const gestureObserved = (g)=> (dispatch, getState) =>{
+  console.log("ok new gesture observed", g);
+  superagent.get("/event/gesture").query({gesture:g}).end((err, res)=>{
+    
   });
 }
 

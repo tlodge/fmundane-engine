@@ -20,10 +20,10 @@ function Layer(e) {
                     });
                 }}/>
             case "speech":
-                return <Speech/>
+                return <Speech  {...event}/>
 
             case "gesture":
-                return <Gesture {...{...event, gestureObserved: (g)=>{console.log("seen gesture", g)}}}/>
+                return <Gesture {...event}/>
 
             default:
                 return JSON.stringify(event,null,4)

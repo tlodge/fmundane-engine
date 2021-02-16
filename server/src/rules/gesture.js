@@ -1,5 +1,10 @@
 
 export const evaluate = (operator, operand, value)=>{
-    console.log("seen evaluate gesture", operator, operand, value);
-    return true;
+   
+
+
+    if (operator === "equals"){
+        return operand.map(o=>o.toLowerCase().trim()).indexOf(value.toLowerCase().trim()) != -1;
+    }
+    return false;
 }

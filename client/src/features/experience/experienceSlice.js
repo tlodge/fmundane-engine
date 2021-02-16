@@ -123,13 +123,13 @@ export const listenOnActions = (window) => async dispatch => {
    
   }
   
-  console.log("seen new actions!", actions)
+
  });
 }
 
 export const listenOnEvents = () => dispatch => {
   socket.on('event', payload => {
-    console.log("seen a new event!", payload)
+   
     dispatch(setEvent(payload));
   });
 }
@@ -151,7 +151,7 @@ export const sendTranscript = () => (dispatch, getState) =>{
 export const fetchLayers = () => (dispatch)=>{
 
   superagent.get('/event/layers').then(res => {
-    console.log(res.body);
+   
     const trees = res.body.map(et=>et.tree);
       
     dispatch(setLayers(trees));

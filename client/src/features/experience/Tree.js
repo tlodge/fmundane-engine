@@ -1,3 +1,5 @@
+import * as React from "react";
+import * as d3 from "d3";
 
 const _flatten = list => list.reduce(
     (a, b) => a.concat(Array.isArray(b) ? _flatten(b) : b), []
@@ -59,12 +61,56 @@ const _clink = (sx, sy, tx, ty) => {
 }
 
 
+const findNode = (t, name)=>{
+
+    if ((t.data || {}).name == name){
+        return t;
+    }
+
+    if ((t.children || []).length <= 0){
+        return null;
+    }
+    
+    //search children
+
+    let node = null;
+    for (let i = 0; i < t.children.length; i++){
+        node = findNode(t.children[i], name);
+        if (node != null){
+            break;
+        }
+    }
+    return node;
+}
+
+const moveChart = (gtree, t)=>{
+ 
+    const g = d3.select(gtree.current);
+
+    if (t.triggered){
+        const node = findNode(t, t.id);
+        let ty = 0;
+
+        if (node.parent){
+            ty = node.x - node.parent.x;
+        }
+        g.transition()
+            .duration(2000)
+            .attr("transform", `translate(-${node.depth * 120} ,${-ty})`);
+    }
+}
+
 function Tree(t) {
   
+    const gtree = React.useRef(null);
+  
+    React.useEffect(() => {
+        moveChart(gtree, t);
+    }, [t]);
+
     const renderLinks = (links, data)=>{
         return links.map((link)=>{
-            //console.log("rendering", link, " and trigger", t.triggered);
-            //console.log("rendering link", link);
+    
             return link.to.map((l)=>{
                 
                 //const labeldata = data[`${link.from.name}->${l.name}`] || [];
@@ -74,7 +120,7 @@ function Tree(t) {
                 const labeldata = data[l.trigger];
                 
                 const label = labeldata.actions.map((ld,i)=>{
-                    return <text font-size="x-small" text-anchor={"middle"} x={l.y} y={l.x-30 + (i*10)} > {ld.join(',')}</text>
+                    return <text key={ld.join(",")} fontSize="x-small" textAnchor={"middle"} x={l.y} y={l.x-30 + (i*10)} > {ld.join(',')}</text>
                 });
 
                 const {rule={}} = labeldata;
@@ -82,9 +128,9 @@ function Tree(t) {
                 const operand =  rule.operand || [];
                 const rulelabel = `${operator}, ${operand}`;
 
-                const ruletext = <text font-size="x-small" fill="red" text-anchor={anchor} y={link.from.x+tx} x={(link.from.y+ty)}>{rulelabel}</text>
+                const ruletext = <text fontSize="x-small" fill="red" textAnchor={anchor} y={link.from.x+tx} x={(link.from.y+ty)}>{rulelabel}</text>
 
-                return <g>
+                return <g key={`${l.x},${l.y}`}>
                             {_slink(link.from.y, link.from.x, l.y, l.x)}
                             {ruletext}
                             {label}
@@ -97,7 +143,6 @@ function Tree(t) {
 
     const renderTree = (node,selected,rid)=>{
        
-        console.log("RENDER TREE", node.data, selected, rid);
         let paint = false;
 
         if (!rid){
@@ -106,16 +151,18 @@ function Tree(t) {
             paint = selected===node.data.name && node.data.trigger == rid;
         }
 
-        return <g>
+        return <g key={`${node.x},${node.y}`}> 
                     <circle cx={node.y} cy={node.x} r={10} style={{fill: paint ? "#4299e1":"white", stroke:"black"}}/>
-                    <text text-anchor="middle" font-size="x-small"  x={node.y} y={node.x+4}>{node.data.name}</text>
+                    <text textAnchor="middle" fontSize="x-small"  x={node.y} y={node.x+4}>{node.data.name}</text>
                     {(node.children || []).map(n=>renderTree(n, selected, rid))}
               </g>
     }
  
-    return <svg width="600" height="600"><g transform={"translate(50,0)"}>
+    return <svg  width="600" height="600"><g transform={"translate(50,0)"}>
+        <g ref={gtree}>
         {renderLinks(links(t), rids(t))}
         {renderTree(t, t.id, t.triggered)}
+        </g>
     </g></svg>
  }
  

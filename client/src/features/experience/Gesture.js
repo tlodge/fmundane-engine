@@ -2,7 +2,7 @@ import {useCamera} from "../../useCamera";
 import React, { createRef } from 'react';
 import {gestureObserved} from './experienceSlice';
 import {useDispatch } from 'react-redux';
-
+import * as d3 from "d3";
 
 function Gesture({rules}) {
       const dispatch = useDispatch();

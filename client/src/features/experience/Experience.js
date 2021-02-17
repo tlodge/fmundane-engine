@@ -45,10 +45,10 @@ export function Experience() {
   
   const list = events.map((e,i)=>{
  
-  return <div className="flex row" key = {e.id}>
-                                        <div className="w-1/2"><Layer {...e} /></div>
-                                        <Tree {...{...trees[i], id:e.data.id, triggered:e.triggered}}/>
-                                    </div>      
+  return <div className="flex row mb-4 border-b-2 h-full" key = {e.id}>
+           <div className="flex flex-grow justify-center"><Layer {...e} /></div>
+           <Tree {...{...trees[i], id:e.data.id, triggered:e.triggered}}/>
+         </div>      
   });
 
   //const forest = trees.map((t,i)=><Tree key={i} {...t}/>);

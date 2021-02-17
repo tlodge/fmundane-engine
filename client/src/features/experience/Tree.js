@@ -158,12 +158,14 @@ function Tree(t) {
               </g>
     }
  
-    return <svg  width="600" height="600"><g transform={"translate(50,0)"}>
+    return <div className="text-black bg-gray-200 rounded bg-white overflow-hidden shadow-lg"> 
+    <svg  width="600" height="400"><g transform={"translate(50,0)"}>
         <g ref={gtree}>
         {renderLinks(links(t), rids(t))}
         {renderTree(t, t.id, t.triggered)}
         </g>
     </g></svg>
+    </div>
  }
  
  export default Tree;

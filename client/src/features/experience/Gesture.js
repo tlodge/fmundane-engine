@@ -36,9 +36,9 @@ function Gesture({rules}) {
             
       }
 
-      return (<div>
+      return (<div className="max-w-sm">
                   {renderCamera()}
-                  <div className="p-4 bg-gray-400">
+                  <div className="p-4 bg-black text-white">
                         <div className="font-semibold text-lg pb-4">override</div>
                         {renderOperands()}
                   </div>     

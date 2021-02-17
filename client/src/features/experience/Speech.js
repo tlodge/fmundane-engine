@@ -14,7 +14,6 @@ export default function Speech({rules}) {
   const [words, setWords] = React.useState("");
 
   const handleChange = (e) =>{
-    console.log("setting trandscript", e.target.value);
     dispatch(setTranscript(e.target.value));
     setWords(e.target.value);
   }
@@ -43,11 +42,12 @@ export default function Speech({rules}) {
 }
 
   const speech = useSelector(selectSpeech);
+
   return (
-    <div>
-      <div>{speech}</div>
-      <div className="mt-8 p-4 bg-gray-400">
-          <div className="font-semibold text-lg pb-4">override</div>
+    <div className="flex flex-col h-full w-full">
+      <div className="flex text-xl h-1/2 font-bold justify-center items-center flex-grow">{speech.trim()=="" ? "[listening for speech]" : `"${speech}"`}</div>
+      <div className="p-6 bg-black">
+          <div className="font-semibold text-white text-lg pb-4">override</div>
           {renderOperands()}
       </div>  
     </div>  

@@ -13,7 +13,7 @@
       "type": "gesture",
       "rules": [{
           "rule": {
-            "operator": "hasword",
+            "operator": "equals",
             "operand": ["yes"]
           },
           "actions": [
@@ -24,7 +24,7 @@
         },
         {
           "rule": {
-            "operator": "hasword",
+            "operator": "equals",
             "operand": ["no"]
           },
           "actions": [
@@ -46,10 +46,11 @@
       "id": "e1",
       "subscription" : "/press",
       "type": "button",
+      "data": ["goodbye", "friend"],
       "rules": [{
           "rule": {
-            "operator": "hasword",
-            "operand": ["goodbye"]
+            "operator": "equals",
+            "operand": "goodbye"
           },
           "actions": [
             ["fanoff", "blindsdown"]
@@ -58,8 +59,8 @@
         },
         {
           "rule": {
-            "operator": "hasword",
-            "operand": ["friend"]
+            "operator": "equals",
+            "operand": "friend"
           },
           "actions": [
             ["pinklights"]

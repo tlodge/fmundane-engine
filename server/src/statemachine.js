@@ -63,14 +63,25 @@ const StateMachine = (config)=>{
     }
 
     events.map(e=>{
-        console.log("subsccribing to ", e.subscription);
+       
         subscribe(e.subscription, async (message)=>{
-            console.log("seen a new event!", e, message);
+           
             if (e.id === eventid){
+                console.log("fetching rule for", e.type);
+
                 const evaluate = await _fetchrule(e.type);
 
+                console.log("evaluate is", evaluate);
+                
                 const actionids = e.rules.reduce((acc, item)=>{
-                    if (evaluate(item.rule.operator, item.rule.operand, message.toString())){
+                    
+                    console.log("evaluating", item.rule.operator, item.rule.operand, message.toString());
+
+                    const result = evaluate(item.rule.operator, item.rule.operand, message.toString());
+                    
+                    console.log("result is", result);
+
+                    if (result){
                         eventid = item.next;
                         triggered = item.id;
                         return [...acc, item.actions];
@@ -80,7 +91,7 @@ const StateMachine = (config)=>{
 
                 const _actions = actionids.map(arr=>arr.map((arr)=>arr.map(a=>actions[a]||{})));
                 await _executeactions(_actions, message.toString());
-                console.log("SENDING EVENT WITH TRIOGGERD", triggered);
+                console.log("SENDING EVENT", {id:config.id,data:eventlookup[eventid],triggered});
                 send("event", {id:config.id,data:eventlookup[eventid],triggered});
             }
         });

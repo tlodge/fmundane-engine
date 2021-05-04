@@ -1,0 +1,309 @@
+{
+    "ID016" : {
+        "on": true,
+        "bri": 254,
+        "hue": 40104,
+        "sat": 125,
+        "effect": "none",
+        "xy": [
+            0.2713,
+            0.3193
+        ],
+        "ct": 153,
+        "transitiontime": 20
+    },
+
+    "ID101" : {
+        "on": true,
+        "bri": 254,
+        "hue": 8348,
+        "sat": 214,
+        "effect": "none",
+        "xy": [
+            0.4992,
+            0.4267
+        ],
+        "ct": 439,
+        "transitiontime": 20
+    },
+
+    "ID021" : {
+        "on": true,
+        "bri": 254,
+        "hue": 2634,
+        "sat": 205,
+        "effect": "none",
+        "xy": [
+            0.5882,
+            0.354
+        ],
+        "ct": 153,
+        "transitiontime": 20
+    },
+
+    "ID106" : {
+        "on": true,
+        "bri": 254,
+        "hue": 8669,
+        "sat": 254,
+        "effect": "none",
+        "xy": [
+            0.5149,
+            0.4409
+        ],
+        "ct": 471,
+        "transitiontime": 20
+    },
+
+    "ID095" : {
+        "on": true,
+        "bri": 254,
+        "hue": 4166,
+        "sat": 192,
+        "effect": "none",
+        "xy": [
+            0.5726,
+            0.3477
+        ],
+        "ct": 500,
+         "transitiontime": 20
+    },
+
+    "ID102" : {
+        "on": true,
+        "bri": 254,
+        "hue": 26438,
+        "sat": 33,
+        "effect": "none",
+        "xy": [
+            0.287,
+            0.4656
+        ],
+        "ct": 208,
+        "transitiontime": 20
+    },
+
+    "ID028" : {
+        "on": true,
+        "bri": 254,
+        "hue": 7023,
+        "sat": 254,
+        "effect": "none",
+        "xy": [
+            0.5484,
+            0.4158
+        ],
+        "ct": 500,
+        "transitiontime": 20
+    },
+
+    "ID091" : {
+        "on": true,
+        "bri": 254,
+        "hue": 58084,
+        "sat": 129,
+        "effect": "none",
+        "xy": [
+            0.4279,
+            0.2885
+        ],
+        "ct": 319,
+        "transitiontime": 20
+    },
+
+    "ID092" : {
+        "on": true,
+        "bri": 254,
+        "hue": 63218,
+        "sat": 93,
+        "effect": "none",
+        "xy": [
+            0.4695,
+            0.3397
+        ],
+        "ct": 385,
+        "transitiontime": 20
+    },
+
+    "ID093" : {
+        "on": true,
+        "bri": 254,
+        "hue": 65032,
+        "sat": 167,
+        "effect": "none",
+        "xy": [
+            0.5752,
+            0.3271
+        ],
+        "ct": 500,
+        "transitiontime": 20
+    },
+
+    "ID040" : {
+        "on": true,
+        "bri": 254,
+        "hue": 5874,
+        "sat": 254,
+        "effect": "none",
+        "xy": [
+            0.5718,
+            0.3982
+        ],
+        "ct": 500,
+        "transitiontime": 20
+    },
+
+    "ID103" : {
+        "on": true,
+        "bri": 254,
+        "hue": 40716,
+        "sat": 166,
+        "effect": "none",
+        "xy": [
+            0.2352,
+            0.2883
+        ],
+        "ct": 153,
+        "transitiontime": 20
+    },
+
+    "ID046" : {
+        "on": true,
+        "bri": 254,
+        "hue": 39616,
+        "sat": 117,
+        "effect": "none",
+        "xy": [
+            0.2784,
+            0.3298
+        ],
+        "ct": 153,
+        "transitiontime": 20
+    },
+
+    "ID047" : {
+        "on": true,
+        "bri": 254,
+        "hue": 8057,
+        "sat": 190,
+        "effect": "none",
+        "xy": [
+            0.4903,
+            0.4178
+        ],
+        "ct": 424,
+        "transitiontime": 20
+    },
+
+    "ID104" : {
+        "on": true,
+        "bri": 254,
+        "hue": 50742,
+        "sat": 105,
+        "effect": "none",
+        "xy": [
+            0.3304,
+            0.262
+        ],
+        "ct": 178,
+        "transitiontime": 20
+    },
+
+    "ID053" : {
+        "on": true,
+        "bri": 254,
+        "hue": 37201,
+        "sat": 140,
+        "effect": "none",
+        "xy": [
+            0.2594,
+            0.3609
+        ],
+        "ct": 153,
+        "transitiontime": 20
+    },
+
+    "ID098" : {
+        "on": true,
+        "bri": 254,
+        "hue": 10948,
+        "sat": 254,
+        "effect": "none",
+        "xy": [
+            0.4685,
+            0.4758
+        ],
+        "ct": 382,
+        "transitiontime": 20
+    },
+
+    "ID105" : {
+        "on": true,
+        "bri": 254,
+        "hue": 7813,
+        "sat": 254,
+        "effect": "none",
+        "xy": [
+            0.5323,
+            0.4278
+        ],
+        "ct": 500,
+        "transitiontime": 20
+    },
+
+    "ID061" : {
+        "on": true,
+        "bri": 254,
+        "hue": 7177,
+        "sat": 168,
+        "effect": "none",
+        "xy": [
+            0.4895,
+            0.4041
+        ],
+        "ct": 421,
+        "transitiontime": 20
+    },
+
+    "ID072" : {
+        "on": true,
+        "bri": 254,
+        "hue": 3712,
+        "sat": 254,
+        "effect": "none",
+        "xy": [
+            0.6159,
+            0.3651
+        ],
+        "ct": 153,
+        "transitiontime": 20
+    },
+
+    "ID076" : {
+        "on": true,
+        "bri": 254,
+        "hue": 42085,
+        "sat": 71,
+        "effect": "none",
+        "xy": [
+            0.318,
+            0.3273
+        ],
+        "ct": 159,
+        "transitiontime": 20
+    },
+
+    "ID096" : {
+        "on": true,
+        "bri": 254,
+        "hue": 10757,
+        "sat": 254,
+        "effect": "none",
+        "xy": [
+            0.4724,
+            0.4729
+        ],
+        "ct": 389,
+        "transitiontime": 20
+    }
+}

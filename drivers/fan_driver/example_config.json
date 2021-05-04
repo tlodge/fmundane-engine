@@ -1,0 +1,5 @@
+// this is an example config, please update and rename to config.json
+{"id": "MY FAN",
+"ip": "192.168.1.4",
+"serial": "DYSON-YC8-UK-JKA1674A-455",
+"password": "tsaybxfd"}

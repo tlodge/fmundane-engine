@@ -9,7 +9,7 @@ cd [root]/server
 npm run startdev
 ```
 
-to run the client
+to run the client (runs on http://localhost:3000)
 
 ```
 cd [root]/client

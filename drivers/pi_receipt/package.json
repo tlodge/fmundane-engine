@@ -1,0 +1,20 @@
+{
+  "name": "pi_receipt",
+  "version": "1.0.0",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "child-process-promise": "^2.2.1",
+    "express": "^4.16.3",
+    "process-promises": "^1.0.0",
+    "request": "^2.85.0",
+    "request-promise": "^4.2.2",
+    "request-promise-native": "^1.0.5",
+    "split": "^1.0.1"
+  },
+  "description": ""
+}

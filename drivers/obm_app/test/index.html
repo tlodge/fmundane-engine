@@ -1,0 +1,53 @@
+
+<html>
+	<head>
+		<title>interaction</title>
+		<script src="./lib/jquery-3.3.1.js"></script>
+		<script src="./lib/OBBEngine.js"> </script>
+		<script src="./lib/FunctionsModule.js"></script>
+		<script src="./lib/EngineModule.js"></script>
+		<link rel="stylesheet" type="text/css" href="./css/style.css">
+	</head>
+	<body>
+		<div class="story-wrapper">
+			<canvas id="story" class="story-canvas" width="1920" height="1080" ></canvas>
+		</div>
+		<script>
+			let flipflop = 0;
+			
+			var checksofa = function () {
+				if(flipflop){
+					$.get( "./api/ID-004", function( data ) {console.log("makeing call to play ID004")});
+					flipflop = 0;
+				}
+				else{
+					flipflop = 1;
+				}
+				
+				$.getJSON("./api/ID-084").done( function(data){
+					if(data.state == 1){
+						var canvas = document.getElementById("story");
+						window.engine = new OBBEngine();
+						engine.initRendererWithCanvas(canvas);
+						window.renderer = engine.getRenderer();
+						renderer.setInteractionFunctions(functionTree["Interaction"]);
+						engine.restoreEngine(engineModule);
+						engine.restoreFunctions(functionTree);
+						engine.initialise(() => {
+							renderer.start();
+						})
+					} else {
+						setTimeout(checksofa, 5000);	
+					}
+				});
+			}
+
+			$.get( "./api/ID-002", function( data ) {console.log("call made")});
+			$.get( "./api/ID-000", function( data ) {console.log("call made")});
+			setTimeout(checksofa,5000);
+			
+
+			
+		</script>
+	</body>
+</html>

@@ -1,5 +1,7 @@
 import * as React from "react";
 import * as d3 from "d3";
+import * as d3z from "d3-zoom";
+import {useD3} from '../../hooks/useD3';
 
 const _flatten = list => list.reduce(
     (a, b) => a.concat(Array.isArray(b) ? _flatten(b) : b), []
@@ -56,10 +58,8 @@ const _slink = (sx, sy, tx, ty) =>{
     return <line key={`${tx}${ty}`} x1={sx} y1={sy} x2={tx} y2={ty} stroke="#D1D1D1"></line>       
 }
 const _clink = (sx, sy, tx, ty) => {
-    
-    return `M ${sx},${sy} C ${(sx + tx) / 2},${sy} ${(sx + tx) / 2},${ty} ${tx},${ty}`;
+    return <path d={`M ${sx} ${sy} C ${(sx + tx) / 2} ${sy}, ${(sx + tx) / 2} ${ty}, ${tx} ${ty}`} style={{stroke:"#000", strokeWidth:"2", fill:"none"}}></path> 
 }
-
 
 const findNode = (t, name)=>{
 
@@ -86,7 +86,7 @@ const findNode = (t, name)=>{
 const moveChart = (gtree, t)=>{
  
     const g = d3.select(gtree.current);
-
+    
     if (t.triggered){
         const node = findNode(t, t.id);
         let ty = 0;
@@ -94,19 +94,25 @@ const moveChart = (gtree, t)=>{
         if (node.parent){
             ty = node.x - node.parent.x;
         }
-        g.transition()
-            .duration(2000)
-            .attr("transform", `translate(-${node.depth * 120} ,${-ty})`);
+        g.transition().duration(2000).attr("transform", `translate(-${node.depth * 180} ,${-ty})`);
     }
 }
 
 function Tree(t) {
   
-    const gtree = React.useRef(null);
-  
+    const gtree = React.useRef();
+ 
     React.useEffect(() => {
         moveChart(gtree, t);
     }, [t]);
+
+    const mytree = useD3((svg) => {
+       const dgbox = svg.select("g#dragbox");
+       
+       svg.call(d3z.zoom().on("zoom",  (e)=>{
+            dgbox.attr("transform", e.transform)
+        })).call(d3z.zoom, d3z.zoomIdentity.scale(0.8))
+    }, []);
 
     const renderLinks = (links, data)=>{
         return links.map((link)=>{
@@ -131,7 +137,7 @@ function Tree(t) {
                 const ruletext = <text fontSize="x-small" fill="red" textAnchor={anchor} y={link.from.x+tx} x={(link.from.y+ty)}>{rulelabel}</text>
 
                 return <g key={`${l.x},${l.y}`}>
-                            {_slink(link.from.y, link.from.x, l.y, l.x)}
+                            {_clink(link.from.y, link.from.x, l.y, l.x)}
                             {ruletext}
                             {label}
                             
@@ -157,14 +163,17 @@ function Tree(t) {
                     {(node.children || []).map(n=>renderTree(n, selected, rid))}
               </g>
     }
- 
+
+
     return <div className="text-black bg-gray-200 rounded bg-white overflow-hidden shadow-lg"> 
-    <svg  width="600" height="400"><g transform={"translate(50,0)"}>
-        <g ref={gtree}>
-        {renderLinks(links(t), rids(t))}
-        {renderTree(t, t.id, t.triggered)}
-        </g>
-    </g></svg>
+        <svg ref={mytree} height="400" style={{width:`calc(100vw - 400px)`}}>
+            <g ref ={gtree} transform={"translate(50,200)"}>
+                <g id="dragbox"> 
+                    {renderLinks(links(t), rids(t))}
+                    {renderTree(t, t.id, t.triggered)}
+                </g>
+            </g>   
+        </svg>
     </div>
  }
  

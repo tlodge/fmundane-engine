@@ -46,7 +46,7 @@ export function Experience() {
   const list = events.map((e,i)=>{
  
   return <div className="flex row mb-4 border-b-2 h-full" key = {e.id}>
-           <div className="flex flex-grow justify-center"><Layer {...e} /></div>
+           <div className="flex flex-grow justify-center m-4"><Layer {...e} /></div>
            <Tree {...{...trees[i], id:e.data.id, triggered:e.triggered}}/>
          </div>      
   });

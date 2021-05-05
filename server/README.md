@@ -4,6 +4,9 @@ Future mundane engine
 
 This is the backend that deals with a future mundane experience.  Note that it requires that the client is running and it requires that the server that communicates with the devices (ooi-experience) is also running.  To run the server:
 
+Running in dev mode
+-------------------
+
 ```
 cd [root]/server
 npm run startdev
@@ -18,8 +21,27 @@ npm start
 
 to run an mqtt server
 ```
-docker run -it --name mosquitto -p 1883:1883 eclipse-mosquitto 
+docker run -it --name docker run -it --name mosquitto -p 1883:1883 eclipse-mosquitto:1.6 
 ```
+
+Running in prod mode
+--------------------
+
+To run in prod you need to compile the client code as follows
+
+```
+cd [root]/client
+npm run build
+```
+
+Then you need to compile the server code
+```
+cd [root]/server
+npm run start
+```
+
+The command above will run prestart that will build the server code and copy the client code to the static directory for serving
+
 
 
 Gotchas

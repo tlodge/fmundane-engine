@@ -41,7 +41,7 @@ const events = [l1,l2].reduce((acc,item)=>{
 
 const indexRouter = express.Router();
 
-indexRouter.get('/', (req, res) => res.status(200).json({ message: testEnvironmentVariable }));
+//indexRouter.get('/', (req, res) => res.status(200).json({ message: testEnvironmentVariable }));
 
 const statemachines = [];
 
@@ -87,8 +87,6 @@ const tree = (layer)=>{
         tree: children([], events, events[layer.start.event],null,[])
     }
 }
-
-console.log("tree is" , JSON.stringify(tree(l1),null,4));
 
 indexRouter.get('/layers', (req, res)=>{
     res.status(200).json([tree(l1),tree(l2)]);

@@ -21,6 +21,12 @@ to run an mqtt server
 docker run -it --name mosquitto -p 1883:1883 eclipse-mosquitto
 ```
 
+or version specific:
+
+```
+sudo docker run -it --name mosquitto -p 1883:1883 eclipse-mosquitto:1.6
+```
+
 
 Gotchas
 -------
@@ -89,7 +95,7 @@ Supported PUBLISH commands:
     "time" : "2020-11-12T14:00:99Z",
     "msg" : "STATE-SET"
 }
-
+{"msg":"STATE-SET","time":"2021-05-06T14:15:05.907Z","mode-reason":"LAPP","data":{"hmod":"HEAT","hmax":3010}}
 //turn on heat, 23 degrees
 {
     "data":{
@@ -115,6 +121,8 @@ Supported PUBLISH commands:
     "time" : "2020-11-12T14:00:99Z",
     "msg" : "STATE-SET"
 }
+
+//fdir on or off
 
 //180
 {
@@ -169,6 +177,16 @@ Supported PUBLISH commands:
     "mode-reason": "LAPP",
     "time" : "2020-11-12T14:00:99Z",
     "msg" : "REQUEST-PRODUCT-ENVIRONMENT-CURRENT_SENSOR-DATA"
+}
+
+//turn off 
+{
+    "data":{
+        "fpwr" : "OFF",
+    },
+    "mode-reason": "LAPP",
+    "time" : "2020-11-12T14:00:99Z",
+    "msg" : "STATE-SET"
 }
 
 

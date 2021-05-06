@@ -4,9 +4,6 @@ Future mundane engine
 
 This is the backend that deals with a future mundane experience.  Note that it requires that the client is running and it requires that the server that communicates with the devices (ooi-experience) is also running.  To run the server:
 
-Running in dev mode
--------------------
-
 ```
 cd [root]/server
 npm run startdev
@@ -21,27 +18,8 @@ npm start
 
 to run an mqtt server
 ```
-docker run -it --name docker run -it --name mosquitto -p 1883:1883 eclipse-mosquitto:1.6 
+docker run -it --name mosquitto -p 1883:1883 eclipse-mosquitto
 ```
-
-Running in prod mode
---------------------
-
-To run in prod you need to compile the client code as follows
-
-```
-cd [root]/client
-npm run build
-```
-
-Then you need to compile the server code
-```
-cd [root]/server
-npm run start
-```
-
-The command above will run prestart that will build the server code and copy the client code to the static directory for serving
-
 
 
 Gotchas
@@ -52,7 +30,7 @@ If events are not firing - check you have mqtt running!
 i.e.:
 
 ```
-docker run -it --name mosquitto -p 1883:1883 eclipse-mosquitto 
+docker run -it --name mosquitto -p 1883:1883 eclipse-mosquitto
 ```
 
 You have to be connected to the internet for speech to work, as it uses google's speech API!
@@ -73,7 +51,22 @@ You communicate with DYSON over mqtt - to find the fan details, I had to do the 
 
 ssh -i .ssh/id_openwrt root@192.168.1.1 tcpdump -i br-lan -U -s0 -w - 'dst 192.168.1.125 and port 1883' | wireshark -k -i -
 
-Then you can run an mqtt client to test:
+#on mac...!
+
+ssh -i .ssh/id_openwrt root@192.168.1.50 tcpdump -i br-lan -U -s0 -w - 'dst 192.168.1.44 and port 1883' | /Applications/Wireshark.app/Contents/MacOS/wireshark -k -i -
+
+Where 192.168.1.44 is the IP of the mobile phone!
+
+Then once have found the correct IP - call this to get connection packet!
+
+ssh -i .ssh/id_openwrt root@192.168.1.50 tcpdump -i br-lan -U -s0 -w - 'dst 192.168.1.45 and port 1883' | /Applications/Wireshark.app/Contents/MacOS/wireshark -k -i -
+
+DYSON MAC ADDRESS IS: c8:ff:77:34:3f:e4
+Client ID: paho9690699779914
+User Name: B3H-UK-NKA0373A
+Password: jNAiFBy+0jkOAV8khMjFKUxuWLhM+seqlGUdH6RW9qQlCI+JIbQZTRlJPj9kcEL6byNu7q+Q0D+0m3PRGooF5A==
+
+Then you can run an mqtt client to test: (MQTTfx)
 
 Supported MQTT SUBSCRIPTIONS:
 

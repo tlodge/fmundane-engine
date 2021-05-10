@@ -1,9 +1,11 @@
-import express from 'express';
-import http from 'http';
-import WebSocket from 'ws';
+const express = require('express');
+const http = require('http');
+const WebSocket = require('ws');
+const mqtt = require('./mqttlib');
+
 
 const app = express();
-
+console.log(process.cwd())
 app.use(express.static("public"));
 //initialize a simple http server
 const server = http.createServer(app);
@@ -35,6 +37,10 @@ setInterval(() => {
     });
 }, 10000);*/
 
+mqtt.subscribe("camera",  (message)=>{
+    console.log(message);
+});
+
 wss.on('connection', (ws) => {
 
     //connection is up, let's add a simple simple event
@@ -51,5 +57,5 @@ wss.on('connection', (ws) => {
 
 //start our server
 server.listen(process.env.PORT || 8999, () => {
-    console.log(`Server started on port ${server.address().port} :)`);
+    console.log(`Server started on port ${server.address().port}`);
 });

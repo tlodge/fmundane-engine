@@ -6,11 +6,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "type": "module",
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
+    "mqtt": "^4.2.6",
     "ws": "^7.4.5"
   },
   "proxy": "http://localhost:8999"

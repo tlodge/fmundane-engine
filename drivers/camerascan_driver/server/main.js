@@ -7,6 +7,14 @@ const mqtt = require('./mqttlib');
 const app = express();
 console.log(process.cwd())
 app.use(express.static("public"));
+
+
+app.get('/api/scan', (req,res) => {
+    console.log("seen scan request");
+    const {type=null} = req.query;
+    mqtt.send("camera", JSON.stringify({type}));
+	res.status(200).send();
+})
 //initialize a simple http server
 const server = http.createServer(app);
 

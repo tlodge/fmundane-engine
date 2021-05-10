@@ -76,6 +76,14 @@
       }
     }
   },
+  "facescan" : {
+    "type": "request",
+    "data": {
+      "url": "http://localhost:8999/api/scan?type=face",
+      "type": "GET",
+      "contenttype": "application/json"
+    }
+  },
   "greet": {
     "type": "browserspeech",
     "data": {

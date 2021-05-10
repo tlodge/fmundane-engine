@@ -18,7 +18,7 @@
         },
         "actions": [
           ["turningonfan", "fanhot"],
-          ["redlights"]
+          ["facescan"]
         ],
         "next": "asknames"
       },

@@ -1,12 +1,15 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect, useState, createRef } from "react";
 import "./App.css";
 import * as tf from "@tensorflow/tfjs";
 import * as facemesh from "@tensorflow-models/facemesh";
-import Webcam from "react-webcam";
+//import Webcam from "react-webcam";
 import { drawMesh } from "./meshUtilities.js";
 import {useInterval} from './hooks/useInterval';
+import {useCamera} from './hooks/useCamera';
 
 const socket = new WebSocket("ws://127.0.0.1:8999");
+const VWIDTH = 720;//1280;
+const VHEIGHT = 500;//960;
 
 try{
   socket.onopen = function (event) {
@@ -20,12 +23,14 @@ try{
 function App() {
 
   
-  const webcamReference = useRef(null);
+  //const webcamReference = useRef(null);
   const canvasReference = useRef(null);
+  const videoRef = createRef();
+  const [video, isCameraInitialised, playing, setPlaying, error] = useCamera(videoRef);
   const [videoopacity, setVideoOpacity] = useState(1);
   const [canvasopacity, setCanvasOpacity] = useState(0);
 
-  const [video, setVideo] = useState(false);
+  //const [video, setVideo] = useState(false);
   const [network, setNetwork] = useState(null);
   const [delay, setDelay] = useState(null);
 
@@ -46,9 +51,19 @@ function App() {
 
   },[]);
 
+  useEffect (()=>{
+      console.log("OK RUNNING IS", playing);
+      if (playing){
+        
+      // Set canvas width
+      canvasReference.current.width = VWIDTH;
+      canvasReference.current.height = VHEIGHT;
+      }
+
+  },[playing])
   //TODO: this shouldn't run utliple times --- only want the face detect loop to run in here!!
 
-  const checkforcamera = ()=>{
+  /*const checkforcamera = ()=>{
     if (
       typeof webcamReference.current !== "undefined" &&
       webcamReference.current !== null &&
@@ -69,7 +84,8 @@ function App() {
       return video;
   }
   return null;
-}
+}*/
+
   const detectFace = async (network,video,canvasReference) => {
     
     // Make Detections
@@ -86,7 +102,7 @@ function App() {
   };
 
 
-  useEffect(()=>{
+  /*useEffect(()=>{
     const checkForVideo = ()=>{
       const video = checkforcamera();
       if (video == null){
@@ -97,14 +113,14 @@ function App() {
       }
     };
     checkForVideo();
-  },[]);
+  },[]);*/
 
   useEffect(()=>{
     if (video){
       console.log("nice have video!!", video);
-      facemesh.load({inputResolution: { width: 720, height: 500 },scale: 0.8}).then((network)=>{
+      facemesh.load({inputResolution: { width: VWIDTH, height: VHEIGHT },scale: 0.8}).then((network)=>{
         setNetwork(network);
-        //console.log("have network...", network)
+        console.log("have network...", network)
         //setInterval(() => {detectFace(network,video,canvasReference)}, 100)
       })
     };
@@ -133,8 +149,9 @@ function App() {
   return (
     <div>
     <div className="App">
-      <Webcam
-        ref={webcamReference}
+      <video
+        ref={videoRef}
+        autoPlay={true}
         style={{
           opacity: videoopacity,
           position:"absolute",
@@ -144,8 +161,8 @@ function App() {
           right: 0,
           textAlign: "center",
           zindex: 9,
-          width: 1280,
-          height: 960,
+          width: VWIDTH,
+          height: VHEIGHT,
         }}
       />
 
@@ -160,8 +177,9 @@ function App() {
           right: 0,
           textAlign: "center",
           zindex: 9,
-          width: 1280,
-          height: 960,
+          width: VWIDTH,
+          height: VHEIGHT,
+          paddingLeft:100, /* hack for now */
         }}
       />
       

@@ -19,11 +19,10 @@
       }
     }
   },
-
-  "pinklights": {
+  "bluelights": {
     "type": "request",
     "data": {
-      "url": "http://localhost:9097/ui/api/fan?rotate=false&power=1&cool=true",
+      "url": "http://localhost:9123/api/lights?value=BLUE",
       "type": "GET",
       "contenttype": "application/json",
       "body": {
@@ -34,7 +33,7 @@
   "redlights": {
     "type": "request",
     "data": {
-      "url": "http://localhost:9097/ui/api/fan?rotate=false&power=1&cool=true",
+      "url": "http://localhost:9123/api/lights?value=RED",
       "type": "GET",
       "contenttype": "application/json",
       "body": {
@@ -42,11 +41,21 @@
       }
     }
   },
-
-  "bluelights": {
+  "greenlights": {
     "type": "request",
     "data": {
-      "url": "http://localhost:9097/ui/api/fan?rotate=false&power=1&cool=true",
+      "url": "http://localhost:9123/api/lights?value=GREEN",
+      "type": "GET",
+      "contenttype": "application/json",
+      "body": {
+        "id": "28282:1292920-2;"
+      }
+    }
+  },
+  "rainbowlights": {
+    "type": "request",
+    "data": {
+      "url": "http://localhost:9123/api/lights?value=RAINBOW",
       "type": "GET",
       "contenttype": "application/json",
       "body": {

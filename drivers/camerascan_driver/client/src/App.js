@@ -8,8 +8,8 @@ import {useInterval} from './hooks/useInterval';
 import {useCamera} from './hooks/useCamera';
 
 const socket = new WebSocket("ws://127.0.0.1:8999");
-const VWIDTH = 720;//1280;
-const VHEIGHT = 500;//960;
+const VWIDTH = 1280;//720;//1280;
+const VHEIGHT = 960;//500;//960;
 
 try{
   socket.onopen = function (event) {
@@ -52,15 +52,13 @@ function App() {
   },[]);
 
   useEffect (()=>{
-      console.log("OK RUNNING IS", playing);
-      if (playing){
-        
-      // Set canvas width
-      canvasReference.current.width = VWIDTH;
-      canvasReference.current.height = VHEIGHT;
+      
+      if (video){
+        canvasReference.current.width = video.videoWidth;
+        canvasReference.current.height = video.videoHeight;
       }
 
-  },[playing])
+  },[network])
   //TODO: this shouldn't run utliple times --- only want the face detect loop to run in here!!
 
   /*const checkforcamera = ()=>{
@@ -179,7 +177,7 @@ function App() {
           zindex: 9,
           width: VWIDTH,
           height: VHEIGHT,
-          paddingLeft:100, /* hack for now */
+        
         }}
       />
       

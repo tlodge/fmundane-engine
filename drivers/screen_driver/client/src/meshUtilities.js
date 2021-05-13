@@ -2641,8 +2641,10 @@ export const traingulationMatrices = [
   255
 ];
 
+const colours = ["#129ac6", "#0f80a5", "#0C6784", "#094D63","#063342"];
+
 // Triangle drawing method
-const drawPath = (ctx, points, closePath, colour="grey") => {
+const drawPath = (ctx, points, closePath, colour="grey", scan=false) => {
   const region = new Path2D();
   region.moveTo(points[0][0], points[0][1]);
   for (let i = 1; i < points.length; i++) {
@@ -2658,12 +2660,15 @@ const drawPath = (ctx, points, closePath, colour="grey") => {
   ctx.strokeWidth = 1;
   
   ctx.stroke(region);
-  //ctx.fillStyle= "red";
-  //ctx.fill(region);
+  if (scan){
+    const index = Math.floor(Math.random()*colours.length);
+    ctx.fillStyle= colours[index];
+    ctx.fill(region);
+  }
 };
 
 // Drawing Mesh
-export const drawMesh = (predictions, ctx, colour=null) => {
+export const drawMesh = (predictions, ctx, colour=null, scan=false) => {
   if (predictions.length > 0) {
     predictions.forEach((prediction) => {
       const keypoints = prediction.scaledMesh;
@@ -2677,7 +2682,7 @@ export const drawMesh = (predictions, ctx, colour=null) => {
           traingulationMatrices[i * 3 + 2]
         ].map((index) => keypoints[index]);
         //  Draw triangle
-        drawPath(ctx, points, true, colour);
+        drawPath(ctx, points, true, colour, scan);
       }
 
       // Draw Dots
@@ -2688,7 +2693,7 @@ export const drawMesh = (predictions, ctx, colour=null) => {
 
         ctx.beginPath();
         ctx.arc(x, y, 1 /* radius */, 0, 3 * Math.PI);
-        ctx.fillStyle = colour || "black";
+        ctx.fillStyle = colour || "white";
         ctx.fill();
       }
     

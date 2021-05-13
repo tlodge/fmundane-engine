@@ -33,7 +33,7 @@ function Layer(e) {
     return (
         <div className="w-full text-black  bg-gray-600 overflow-hidden shadow-lg flex flex-grow flex-col"> 
             <div className="text-xs font-semibold mb-4 p-4  bg-gray-400">{`${e.id} (${e.data.type})`} </div> 
-            <div class="flex justify-center items-center flex-grow">{renderEvent(e.data)}</div>
+            <div className="flex justify-center items-center flex-grow">{renderEvent(e.data)}</div>
         </div>
     );
 }

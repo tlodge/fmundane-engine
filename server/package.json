@@ -3,14 +3,16 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./build/bin/www",
-    "prestart": "babel ./src --out-dir build && cp -R ./src/build/static ../server/build/client/ && cp -R ./src/actions ../server/build && cp -R ./src/layers ../server/build",
-    "startdev": "nodemon --exec babel-node ./src/bin/www",
-    "lint": "./node_modules/.bin/eslint ./src",
-    "pretty": "prettier --write '**/*.{js,json}' '!node_modules/**'",
-    "postpretty": "yarn lint --fix",
-    "test": "nyc --reporter=html --reporter=text --reporter=lcov mocha -r @babel/register",
-    "coverage": "nyc report --reporter=text-lcov | coveralls"
+    
+      "start": "node ./build/bin/www",
+      "prestart": "babel ./src --out-dir build && cp -R ./src/build/static ../server/build/client/ && cp -R ./src/actions ../server/build && cp -R ./src/layers ../server/build",
+      "startdev": "nodemon --exec babel-node ./src/bin/www",
+      "lint": "./node_modules/.bin/eslint ./src",
+      "pretty": "prettier --write '**/*.{js,json}' '!node_modules/**'",
+      "postpretty": "yarn lint --fix",
+      "test": "nyc --reporter=html --reporter=text --reporter=lcov mocha -r @babel/register",
+      "coverage": "nyc report --reporter=text-lcov | coveralls"
+    
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",

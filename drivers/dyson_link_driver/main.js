@@ -9,6 +9,8 @@ const FAN_CONFIG  = require("./config.json");
 const DysonLinkDevice = require("./libs/DysonLinkDevice").DysonLinkDevice;
 let timer;
 
+getdata();
+
 function fan_on(on) {
 	if (on=="true"){
 		device.setFanOn();
@@ -92,7 +94,7 @@ function focus_jet_on(cb) {
 function getdata(){
 	timer = setInterval(()=>{
 		device.requestForCurrentUpdate();
-	},1000);
+	},3000);
 }
 
 function stopreading(){
@@ -100,7 +102,7 @@ function stopreading(){
 }
 
 
-let device = new DysonLinkDevice(FAN_CONFIG.model, FAN_CONFIG.id, FAN_CONFIG.ip, FAN_CONFIG.username, FAN_CONFIG.password,  FAN_CONFIG.clientid, () => {
+let device = new DysonLinkDevice(FAN_CONFIG.model, FAN_CONFIG.id, FAN_CONFIG.ip, FAN_CONFIG.username, FAN_CONFIG.password,  FAN_CONFIG.clientid, FAN_CONFIG.MQTT_IP, () => {
 	console.log("Fan is now connected");
 });
 

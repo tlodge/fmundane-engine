@@ -1,19 +1,21 @@
-import FaceScan from "./FaceScan";
-import AirQuality from "./AirQuality";
-
+import Home from "./Home";
+import {useState, useEffect} from "react";
 import {
     BrowserRouter as Router,
     Switch,
     Route,
-    Link
+    Link,
   } from "react-router-dom";
 
   export default function App() {
+
+   
+
     return (
       <Router>
         <div>
             <div style={{display:"flex"}}>
-            <Link to="/" style={{fontFamily:"Helvetica", textDecoration:"none", color:"black", fontWeight:"bold", paddingRight:10}}>Camera</Link>
+            <Link to="/camera" style={{fontFamily:"Helvetica", textDecoration:"none", color:"black", fontWeight:"bold", paddingRight:10}}>Camera</Link>
             <Link to="/air" style={{fontFamily:"Helvetica", textDecoration:"none", color:"black", fontWeight:"bold", paddingRight:10}}>Air Quality</Link>
             </div>
           {/*
@@ -23,14 +25,9 @@ import {
             you have multiple routes, but you want only one
             of them to render at a time
           */}
-          <Switch>
-            <Route exact path="/">
-              <FaceScan />
-            </Route>
-            <Route path="/air">
-              <AirQuality />
-            </Route>
-          </Switch>
+         
+               <Home/>
+            
         </div>
       </Router>
     );

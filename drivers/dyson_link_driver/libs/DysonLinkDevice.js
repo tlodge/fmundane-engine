@@ -14,7 +14,7 @@ class DysonLinkDevice {
     "password": "jNAiFBy+0jkOAV8khMjFKUxuWLhM+seqlGUdH6RW9qQlCI+JIbQZTRlJPj9kcEL6byNu7q+Q0D+0m3PRGooF5A==",
     "clientid": */
     
-    constructor(model, id, ip, username, password, clientid, cb) {
+    constructor(model, id, ip, username, password, clientid, mqttrelayaddr="127.0.0.1", cb) {
         
         this._model = model;
         this._id = id;
@@ -34,6 +34,8 @@ class DysonLinkDevice {
             clientId:this._clientid,
         });
 
+        this.mqttRelay =  mqtt.connect("mqtt://" + mqttrelayaddr);
+
         this.statusSubscribeTopic = this._model + "/" + this._id + "/status/current";
         this.commandTopic = this._model + "/" + this._id + "/command";
 
@@ -43,8 +45,14 @@ class DysonLinkDevice {
             cb();
         });
 
+        this.mqttRelay.on('connect', () => {
+            console.log("[INFO] Connected to relay mqtt!");
+        });
+
         this.mqttClient.on('message', (topic, message) => {
+            const msg = JSON.parse(message);
             console.log("[info] " +  message.toString());
+            this.mqttRelay.publish("screen", JSON.stringify(({type:"dyson", ...msg})));
             //let result = JSON.parse(message);
         });
         
@@ -56,13 +64,13 @@ class DysonLinkDevice {
         // Only do this when we have less than one listener to avoid multiple call        
         let senorlisternerCount = this.environmentEvent.listenerCount(this.SENSOR_EVENT);
         let fanlisternerCount = this.mqttEvent.listenerCount(this.STATE_EVENT);
-        console.log("[DEBUG] Number of listeners - sensor:"+ senorlisternerCount + " fan:" + fanlisternerCount);
+        //console.log("[DEBUG] Number of listeners - sensor:"+ senorlisternerCount + " fan:" + fanlisternerCount);
+        let currentTime = new Date();
         if(senorlisternerCount <=1 && fanlisternerCount <=1) {
-            console.log("Request for current state update");
             this.mqttClient.publish(this.commandTopic, `{
                 "mode-reason": "LAPP",
                 "time" : "${currentTime.toISOString()}",
-                "msg" : "REQUEST-PRODUCT-ENVIRONMENT-CURRENT_SENSOR-DATA"
+                "msg" : "REQUEST-CURRENT-STATE"
             }`);
         }
     }

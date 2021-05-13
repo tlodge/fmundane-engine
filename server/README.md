@@ -2,7 +2,9 @@ Future mundane engine
 ---------------------
 
 
-This is the backend that deals with a future mundane experience.  Note that it requires that the client is running and it requires that the server that communicates with the devices (ooi-experience) is also running.  To run the server:
+This is the backend that deals with a future mundane experience.  Note that it requires that the client is running and it requires that the drivers that communicate with the devices are also running.  To run the server:
+
+To run in DEV mode
 
 ```
 cd [root]/server
@@ -15,8 +17,24 @@ to run the client (runs on http://localhost:3000)
 cd [root]/client
 npm start
 ```
+ 
+To run in PROD mode
 
-to run an mqtt server
+First you *must build the client*
+```
+cd [root]/client
+npm run build
+```
+
+then
+
+```
+cd [root]/server
+npm run start
+```
+
+To run an mqtt server
+
 ```
 docker run -it --name mosquitto -p 1883:1883 eclipse-mosquitto
 ```
@@ -36,7 +54,8 @@ If events are not firing - check you have mqtt running!
 i.e.:
 
 ```
-docker run -it --name mosquitto -p 1883:1883 eclipse-mosquitto
+sudo docker run -it --name mosquitto -p 1883:1883 eclipse-mosquitto:1.6
+
 ```
 
 You have to be connected to the internet for speech to work, as it uses google's speech API!

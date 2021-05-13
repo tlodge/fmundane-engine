@@ -17,9 +17,9 @@ const links = (node)=>{
         from : {
           name:node.data.name,
           x: node.x,
-          y: node.y
+          y: node.y + 60
         },
-        to : (node.children||[]).map(c=>({trigger:c.data.trigger, name:c.data.name,x:c.x, y:c.y}))
+        to : (node.children||[]).map(c=>({trigger:c.data.trigger, name:c.data.name,x:c.x, y:c.y-60}))
       },
       ...(node.children || []).map(c=>links(c))
     ])
@@ -54,9 +54,6 @@ const linkdata = (node)=>{
     },{})}
 }
 
-const _slink = (sx, sy, tx, ty) =>{
-    return <line key={`${tx}${ty}`} x1={sx} y1={sy} x2={tx} y2={ty} stroke="#D1D1D1"></line>       
-}
 const _clink = (sx, sy, tx, ty) => {
     return <path d={`M ${sx} ${sy} C ${(sx + tx) / 2} ${sy}, ${(sx + tx) / 2} ${ty}, ${tx} ${ty}`} style={{stroke:"#000", strokeWidth:"2", fill:"none"}}></path> 
 }
@@ -124,9 +121,10 @@ function Tree(t) {
                 const ty = (Math.max(l.y,link.from.y)-Math.min(l.y,link.from.y))/2;
                 const anchor = "middle";//tx == 0 ? "middle" : tx < 0 ? "end": "start";
                 const labeldata = data[l.trigger];
-                
+                const mx = 20 + (labeldata.actions.length - 1) * 20;
+
                 const label = labeldata.actions.map((ld,i)=>{
-                    return <text key={ld.join(",")} fontSize="x-small" textAnchor={"middle"} x={l.y} y={l.x-30 + (i*10)} > {ld.join(',')}</text>
+                    return <text key={ld.join(",")} fontSize="x-small" textAnchor={"middle"} x={l.y+60} y={l.x-mx + (i*18)} > {ld.join(',')}</text>
                 });
 
                 const {rule={}} = labeldata;
@@ -134,7 +132,11 @@ function Tree(t) {
                 const operand =  rule.operand || [];
                 const rulelabel = `${operator}, ${operand}`;
 
-                const ruletext = <text fontSize="x-small" fill="red" textAnchor={anchor} y={link.from.x+tx} x={(link.from.y+ty)}>{rulelabel}</text>
+                const ruletext =    <g>
+                                        <rect x={link.from.y-20+ty} y={link.from.x-12+tx} width={40} height={20} style={{fill: "#edf2f7"}}/>
+                                        <text fontSize="x-small" fill="black" textAnchor={anchor} y={link.from.x+tx} x={(link.from.y+ty)}>{rulelabel}</text>
+                                    </g>
+
 
                 return <g key={`${l.x},${l.y}`}>
                             {_clink(link.from.y, link.from.x, l.y, l.x)}
@@ -158,7 +160,8 @@ function Tree(t) {
         }
 
         return <g key={`${node.x},${node.y}`}> 
-                    <circle cx={node.y} cy={node.x} r={10} style={{fill: paint ? "#4299e1":"white", stroke:"black"}}/>
+                   
+                    <rect x={node.y-60} y={node.x-10} width={120} height={20} style={{fill: paint ? "#4299e1":"white", stroke:"black"}}/>
                     <text textAnchor="middle" fontSize="x-small"  x={node.y} y={node.x+4}>{node.data.name}</text>
                     {(node.children || []).map(n=>renderTree(n, selected, rid))}
               </g>

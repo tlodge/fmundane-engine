@@ -13,9 +13,15 @@ export default function Home() {
     const history = useHistory();
     const [scan, setScan] = useState(false);
     const [dyson, setDyson] = useState({});
+    console.log(window.location.href);
+    const parts = window.location.href.replace("http://","").replace("https://","").split(":");
+    const wsurl = `ws://${parts[0]}:${parts[1]}`;
+
+  
+    console.log(wsurl);
 
     useEffect(()=>{
-        const socket = new WebSocket("ws://127.0.0.1:8999");
+        const socket = new WebSocket(wsurl);
         try{
             socket.onopen = function (event) {
               console.log("successfully opened socket!");

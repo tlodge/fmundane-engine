@@ -52,6 +52,7 @@
       }
     }
   },
+
   "rainbowlights": {
     "type": "request",
     "data": {
@@ -63,37 +64,36 @@
       }
     }
   },
-  "blindsup": {
+  
+
+  "facecameraon" : {
     "type": "request",
     "data": {
-      "url": "http://localhost:9097/ui/api/fan?rotate=false&power=1&cool=true",
-      "type": "GET",
-      "contenttype": "application/json",
-      "body": {
-        "id": "28282:1292920-2;"
-      }
-    }
-  },
-  "blindsdown": {
-    "type": "request",
-    "data": {
-      "url": "http://localhost:9097/ui/api/fan?rotate=false&power=1&cool=true",
-      "type": "GET",
-      "contenttype": "application/json",
-      "body": {
-        "id": "28282:1292920-2;"
-      }
-    }
-  },
-  "facescan" : {
-    "type": "request",
-    "data": {
-      "url": "http://localhost:8999/api/scan?type=face",
+      "url": "http://localhost:8999/api/camera/",
       "type": "GET",
       "contenttype": "application/json"
     }
   },
-  "greet": {
+
+  "facecamerascan" : {
+    "type": "request",
+    "data": {
+      "url": "http://localhost:8999/api/camera/scan?state=scan",
+      "type": "GET",
+      "contenttype": "application/json"
+    }
+  },
+
+  "airmonitoron" : {
+    "type": "request",
+    "data": {
+      "url": "http://localhost:8999/api/air",
+      "type": "GET",
+      "contenttype": "application/json"
+    }
+  },
+  
+  "saygreet": {
     "type": "browserspeech",
     "data": {
       "speech" : [
@@ -117,13 +117,17 @@
                       "delay":500
                     },
                     {
-                      "words":"It's most lovely to meet you"
-                    
-                    }
+                      "words":"It's most lovely to meet you",
+                      "delay":2000
+                    },
+                    {
+                      "words": "Ok, shall we try a face scan now?"
+                   }
       ]            
     }
   },
-  "turningonfan": {
+
+  "sayturningonfan": {
     "type": "browserspeech",
     "data": {
       "speech" : [
@@ -137,7 +141,7 @@
        ]
     }
   },
-  "askagain": {
+  "sayaskagain": {
     "type": "browserspeech",
     "data": {
       "speech" : [
@@ -146,17 +150,99 @@
                         "delay": 1000
                     },
                     {
-                      "words": "do be do la la la dumde dumde dum dum pop!",
-                      "delay": 500
+                      "words": "one mississippi, two mississippi, three mississippi, four mississipi",
+                      "delay": 1500
                   },
                   {
-                    "words": "do do dobe dobee do do do",
+                    "words": "five mississipi, six misssissippi",
                     "delay": 2000
                 },
                     {
                       "words": "Ok, nice pause.  Let's try again",
                       "delay": 1000
                     }
+       ]
+    }
+  },
+  "saygreat": {
+    "type": "browserspeech",
+    "data": {
+      "speech" : [
+          {
+              "words": "Great stuff!",
+              "delay": 1000
+          }
+       ]
+    }
+  },
+  "askready": {
+    "type": "browserspeech",
+    "data": {
+      "speech" : [
+          {
+              "words": "Ok, just hold on for a short while, while I get the camera up and runnng",
+              "delay": 3000
+          },
+          {
+            "words": "Right that should be fine now.  Are you ready to get a scan?"
+          }
+       ]
+    }
+  },
+  "sayscanningnow": {
+    "type": "browserspeech",
+    "data": {
+      "speech" : [
+          {
+              "words": "Ok, I'm scanning",
+              "delay": 1500
+          },
+          {
+            "words": "Just a little bit more",
+            "delay": 1500
+          },
+          {
+            "words": "Brilliant I'm done!",
+            "delay": 800
+          },
+          {
+            "words": "My goodness you have lovely skin!",
+            "delay": 1500
+          },
+          {
+            "words": "So we're now going to check your air quality",
+            "delay": 500
+          },
+          {
+            "words": "Is that ok?",
+            "delay": 500
+          },
+          {
+            "words": "Put your thumbs up to move on"
+          }
+       ]
+    }
+  },
+  "saynoworries": {
+    "type": "browserspeech",
+    "data": {
+      "speech" : [
+          {
+              "words": "Ok, no worries!",
+              "delay": 500
+          },
+          {
+            "words": "Let's get some nice lighting going instead!",
+            "delay": 1000
+          },
+          {
+            "words": "Which colour would you like, red, green, blue",
+            "delay": 500
+          },
+          {
+            "words": "or a surprise!",
+            "delay": 500
+          }
        ]
     }
   }

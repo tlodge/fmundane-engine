@@ -17,6 +17,9 @@ const randomise = (max, xmax, ymax)=>{
     return d1;
 }
 
+const MINXPOS = 80;
+const MAXXPOS = 370;
+
 function AirQuality({data={}}) {
     
     let {pm25, pm10,voc, no2, time} = data;
@@ -27,16 +30,16 @@ function AirQuality({data={}}) {
     
 
     //accept values between 0 and 251 and map to positions 120-370
-    const p25scale = scaleLinear().domain([0,251]).range([120,370])
+    const p25scale = scaleLinear().domain([0,251]).range([MINXPOS,MAXXPOS])
     const p25rscale = scaleLinear().domain([0,251]).range([0,-180])
 
-    const p10scale = scaleLinear().domain([0,421]).range([120,370])
+    const p10scale = scaleLinear().domain([0,421]).range([MINXPOS,MAXXPOS])
     const p10rscale = scaleLinear().domain([0,421]).range([0,-180])
 
-    const vocscale = scaleLinear().domain([0,9]).range([120,370])
+    const vocscale = scaleLinear().domain([0,9]).range([MINXPOS,MAXXPOS])
     const vocrscale = scaleLinear().domain([0,9]).range([0,-180])
 
-    const no2scale = scaleLinear().domain([0,9]).range([120,370])
+    const no2scale = scaleLinear().domain([0,9]).range([MINXPOS,MAXXPOS])
     const no2rscale = scaleLinear().domain([0,9]).range([0,-180])
     
     useEffect(()=>{
@@ -86,7 +89,7 @@ function AirQuality({data={}}) {
                      .style("stroke-width",3)
                      .attr("transform", d=>`rotate(${p25rscale(d)},51,745)`)
 
-                total.append("text").attr("x", d => p25scale(d)-65).attr("y", 755).attr("class","number").style("text-anchor", "middle").text(d=>d)
+                total.append("text").attr("x", d => p25scale(d)-28).attr("y", 755).attr("class","number").style("text-anchor", "middle").text(d=>d)
             },   
             update=>{
                 update.transition().duration(1000).attr("transform", d=>`translate(${p25scale(d)},0)`).on("end", ()=>{
@@ -138,7 +141,7 @@ function AirQuality({data={}}) {
                      .style("stroke-width",3)
                      .attr("transform", d=>`rotate(${p10rscale(d)},51,745)`)
             
-                total.append("text").style("text-anchor", "middle").attr("x", d => p10scale(d)-65).attr("y", 755).attr("class","number").text(d=>d)
+                total.append("text").style("text-anchor", "middle").attr("x", d => p10scale(d)-28).attr("y", 755).attr("class","number").text(d=>d)
             },   
             update=>{
                 update.transition().duration(1000).attr("transform", d=>`translate(${p10scale(d)},0)`).on("end", ()=>{
@@ -188,7 +191,7 @@ function AirQuality({data={}}) {
                    .style("stroke-width",3)
                    .attr("transform", d=>`rotate(${vocrscale(d)},51,745)`)
           
-                   total.append("text").style("text-anchor", "middle").attr("x", d => vocscale(d)-65).attr("y", 755).attr("class","number").text(d=>d)
+                   total.append("text").style("text-anchor", "middle").attr("x", d => vocscale(d)-28).attr("y", 755).attr("class","number").text(d=>d)
             },   
             update=>{
                 update.transition().duration(1000).attr("transform", d=>`translate(${vocscale(d)},0)`).on("end", ()=>{
@@ -228,7 +231,7 @@ function AirQuality({data={}}) {
                    .style("stroke-width",3)
                    .attr("transform", d=>`rotate(${no2rscale(d)},51,745)`)
           
-                   total.append("text").style("text-anchor", "middle").attr("x", d => no2scale(d)-65).attr("y", 755).attr("class","number").text(d=>d)
+                   total.append("text").style("text-anchor", "middle").attr("x", d => no2scale(d)-28).attr("y", 755).attr("class","number").text(d=>d)
 
         
                },   

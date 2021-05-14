@@ -87,7 +87,11 @@ const sayWords = async (window, words, voice)=>{
 
   msg.text = words;
   msg.voice = voice;
-  window.speechSynthesis.speak(msg);
+  try{ 
+     window.speechSynthesis.speak(msg);
+  }catch(err){
+    console.log(err);
+  }
   
   return new Promise(resolve => {
     msg.onend = resolve;
@@ -216,6 +220,6 @@ const separation = (a, b) =>{
 }
 
 export const selectSpeech= state => state.experience.transcript;
-export const selectTrees = state =>  state.experience.layers.map(t=>d3.tree().nodeSize([120, 200])(d3.hierarchy(t, d=>d.children)))
+export const selectTrees = state =>  state.experience.layers.map(t=>d3.tree().nodeSize([120, 230])(d3.hierarchy(t, d=>d.children)))
 
 export default experienceSlice.reducer;

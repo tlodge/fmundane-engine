@@ -19,7 +19,8 @@
   },
   "scripts": {
     "start": "npm run watch:css && react-scripts start",
-    "build": "npm run watch:css && react-scripts build && cp -R build ../server/src/build",
+    "build": "npm run watch:css && react-scripts build && npm run deploy",
+    "deploy": "cp -R build/* ../server/build/client",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "watch:css": "postcss src/assets/tailwind.css -o src/assets/main.css"

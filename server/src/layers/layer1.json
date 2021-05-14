@@ -2,12 +2,13 @@
   "id" : "layer1",
 
   "start": {
-    "actions": [["greet", "fanoff"]],
+    "actions": [["saygreet", "fanoff"]],
     "event": "ready?"
   },
 
   "events": [{
     "id": "ready?",
+    "name": "ready?",
     "subscription" : "/speech",
     "type": "speech",
     "rules": [{
@@ -16,7 +17,7 @@
           "operand": ["yes"]
         },
         "actions": [
-          ["turningonfan", "fanhot"],
+          ["sayturningonfan", "fanhot"],
           ["facescan"]
         ],
         "next": "asknames"
@@ -27,7 +28,7 @@
           "operand": ["no"]
         },
         "actions": [
-          ["askagain", "greet"]
+          ["sayaskagain"]
         ],
         "next": "ready?"
       }
@@ -35,6 +36,7 @@
   },
   {
     "id": "asknames",
+    "name": "ask names",
     "subscription" : "/speech",
     "type": "speech",
     "rules": [{
@@ -44,24 +46,46 @@
         "actions": [
           ["sayhello"]
         ],
-        "next": "wizard yes/no"
+        "next": "wizard1"
       }
     ]
   },
   {
-    "id": "wizard yes/no",
+    "id": "wizard1",
+    "name": "wizard next",
     "subscription" : "/press",
     "type": "button",
-    "data": ["yes", "no", "maybe"],
+    "data": ["next"],
+    "rules": [{
+        "rule": {
+          "operator": "equals",
+          "operand": "next"
+        },
+        "actions": [
+          ["facecameraon"],
+          ["saygreat", "askready"]
+        ],
+        "next": "wizard2"
+      }
+    ]
+  },
+  {
+    "id": "wizard2",
+    "name": "wizard yes/no",
+    "subscription" : "/press",
+    "type": "button",
+    "data": ["yes","no"],
     "rules": [{
         "rule": {
           "operator": "equals",
           "operand": "yes"
         },
         "actions": [
-          ["fanoff", "blindsdown"]
+          ["facecamerascan"],
+          ["saygreat", "sayscanningnow"],
+          ["facecameraoff"]
         ],
-        "next": "thumbs"
+        "next": "aircheck (gesture)"
       },
       {
         "rule": {
@@ -69,35 +93,90 @@
           "operand": "no"
         },
         "actions": [
-          ["pinklights"]
+          ["saynoworries"],
+          ["facecameraoff"]
         ],
-        "next": "thumbs"
+        "next": "lights1"
       }
     ]
   },
   {
-    "id": "thumbs",
+    "id": "aircheck (gesture)",
+    "name": "aircheck (gesture)",
     "subscription" : "/gesture",
     "type": "gesture",
     "rules": [{
         "rule": {
           "operator": "equals",
           "operand": ["thumbsup"]
+      } ,
+        "actions": [
+          ["airmonitoron"]
+        ],
+        "next": "fin"
+      }
+    ]
+  },
+  {
+    "id": "lights1",
+    "name": "select light colour",
+    "subscription" : "/press",
+    "type": "button",
+    "data": ["red", "blue", "green", "rainbow"],
+    "rules": [{
+        "rule": {
+          "operator": "equals",
+          "operand": "red"
         },
         "actions": [
-          ["fanoff", "blindsup"]
+          ["redlights"]
         ],
-        "next": "wizard yes/no"
+        "next": "fin"
       },
       {
         "rule": {
           "operator": "equals",
-          "operand": ["thumbsdown"]
+          "operand": "blue"
         },
         "actions": [
-          ["pinklights"]
+          ["bluelights"]
         ],
-        "next": "ready?"
+        "next": "fin"
+      },
+      {
+        "rule": {
+          "operator": "equals",
+          "operand": "green"
+        },
+        "actions": [
+          ["greenlights"]
+        ],
+        "next": "fin"
+      },
+      {
+        "rule": {
+          "operator": "equals",
+          "operand": "rainbow"
+        },
+        "actions": [
+          ["rainbowlights"]
+        ],
+        "next": "fin"
+      }
+    ]
+  },
+  {
+    "id": "fin",
+    "name": "finshed!",
+    "subscription" : "/press",
+    "type": "button",
+    "data": ["done!"],
+    "rules": [{
+        "rule": {
+          "operator": "equals",
+          "operand": "done"
+        },
+        "actions": []
       }
     ]
   }

@@ -15,11 +15,11 @@ const links = (node)=>{
         links: node.data.links,
         trigger: node.data.trigger,
         from : {
-          name:node.data.name,
+          name:node.data.id,
           x: node.x,
           y: node.y + 60
         },
-        to : (node.children||[]).map(c=>({trigger:c.data.trigger, name:c.data.name,x:c.x, y:c.y-60}))
+        to : (node.children||[]).map(c=>({trigger:c.data.trigger, name:c.data.id,x:c.x, y:c.y-60}))
       },
       ...(node.children || []).map(c=>links(c))
     ])
@@ -82,17 +82,17 @@ const findNode = (t, name)=>{
 
 const moveChart = (gtree, t)=>{
  
-    const g = d3.select(gtree.current);
+    /*const g = d3.select(gtree.current);
     
     if (t.triggered){
         const node = findNode(t, t.id);
         let ty = 0;
 
         if (node.parent){
-            ty = node.x - node.parent.x;
+            ty = node.x;// - node.parent.x;
         }
-        g.transition().duration(2000).attr("transform", `translate(-${node.depth * 180} ,${-ty})`);
-    }
+        g.transition().duration(2000).attr("transform", `translate(-${node.depth * 250},0`);
+    }*/
 }
 
 function Tree(t) {
@@ -133,8 +133,8 @@ function Tree(t) {
                 const rulelabel = `${operator}, ${operand}`;
 
                 const ruletext =    <g>
-                                        <rect x={link.from.y-20+ty} y={link.from.x-12+tx} width={40} height={20} style={{fill: "#edf2f7"}}/>
-                                        <text fontSize="x-small" fill="black" textAnchor={anchor} y={link.from.x+tx} x={(link.from.y+ty)}>{rulelabel}</text>
+                                        <rect x={link.from.y-20+ty} y={link.from.x-13+tx} width={40} height={12} style={{fill: "#edf2f7"}}/>
+                                        <text fontSize="x-small" font-weight="bold" fill="black" textAnchor={anchor} y={link.from.x+tx-5} x={(link.from.y+ty)}>{rulelabel}</text>
                                     </g>
 
 
@@ -154,9 +154,9 @@ function Tree(t) {
         let paint = false;
 
         if (!rid){
-            paint = selected==node.data.name && node.children && node.children.length > 0;
+            paint = selected==node.data.id && node.children && node.children.length > 0;
         }else{
-            paint = selected===node.data.name && node.data.trigger == rid;
+            paint = selected===node.data.id && node.data.trigger == rid;
         }
 
         return <g key={`${node.x},${node.y}`}> 

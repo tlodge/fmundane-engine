@@ -36,11 +36,23 @@ const _executeactions = async (alist, value="")=>{
           
         }
     }
+}
 
-    //return new Promise((resolve, reject)=>{
-    //    send("action", {id:config.id,data:eventlookup[eventid]});
-        //setTimeout(()=>resolve(), 100);
-    //});
+const _executestart = async (alist, value="")=>{
+    const promises = alist.map((a)=>handle(a));
+    await Promise.all(promises);
+    
+    send("action", alist.map(a=>{
+        const astr = JSON.stringify(a);
+        var matches = astr.match(/\|(.*?)\|/);
+        if (matches){
+            const toreplace = matches[0];
+            const tokens = matches[1].split(":");
+            const delimiter = tokens.length > 1 ? ` ${tokens[1]} ` : ",";
+            return JSON.parse(JSON.stringify(a).replace(toreplace,value.trim().split(" ").join(delimiter)));
+        }
+        return a;
+    }));
 }
 
 const StateMachine = (config)=>{
@@ -91,8 +103,21 @@ const StateMachine = (config)=>{
 
                 const _actions = actionids.map(arr=>arr.map((arr)=>arr.map(a=>actions[a]||{})));
                 await _executeactions(_actions, message.toString());
-                console.log("SENDING EVENT", {id:config.id,data:eventlookup[eventid],triggered});
-                send("event", {id:config.id,data:eventlookup[eventid],triggered});
+                const event = eventlookup[eventid];
+
+                
+                if (event){
+                    if (event.onstart){
+                        console.log("have onstart", event.onstart);
+                        const __startactions = event.onstart.map(a=>actions[a]);
+
+                        console.log("at start would do the following", __startactions, message.toString());
+                        await _executestart(__startactions, message.toString());
+                       
+                    }
+                    console.log("SENDING EVENT", {id:config.id,data:eventlookup[eventid],triggered});
+                    send("event", {id:config.id,data:eventlookup[eventid],triggered});
+                }
             }
         });
     });

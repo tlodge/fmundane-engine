@@ -47,26 +47,41 @@ function FaceScan({scan="none"}) {
       const ctx = canvasReference.current.getContext("2d");
       ctx.clearRect(0, 0, canvasReference.current.width,canvasReference.current.height );
       drawMesh(faceEstimate, ctx, "white", _scan);
+      return true;
     }catch(err){
       //ignore!
+      //console.log(err);
+      console.log("error estimating");
+      return false;
     }
    
   };
 
+  const loadNetwork = ()=>{
+    facemesh.load({inputResolution: { width: VWIDTH, height: VHEIGHT },scale: 0.8}).then((network)=>{
+      
+      setTimeout(()=>{  
+        setNetwork(network);
+        console.log("network", network);
+      },1000)
+    })
+  }
+
   useEffect(()=>{
     if (video){
-        facemesh.load({inputResolution: { width: VWIDTH, height: VHEIGHT },scale: 0.8}).then((network)=>{
-          setTimeout(()=>{
-            console.log("setting network");
-            setNetwork(network);
-          },1000)
-        })
+        loadNetwork();
     }
   },[video]);
 
-  useInterval(() => {
-  
-    detectFace(network,video,canvasReference, scan)
+  useInterval( async () => {
+    console.log(".");
+    const result = await detectFace(network,video,canvasReference, scan)
+    if (!result){
+      console.log("waiting a bit!");
+      setDelay(1000);
+    }else{
+      setDelay(100);
+    }
   }, delay);
 
   const hideMask = ()=>{

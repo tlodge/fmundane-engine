@@ -1,5 +1,4 @@
 import express from 'express';
-import { testEnvironmentVariable } from '../settings';
 import {send} from '../listener';
 import {send as wssend} from '../ws';
 import sm from '../statemachine';
@@ -52,16 +51,18 @@ const children = (seen, events, node, trigger, actions=[])=>{
     }
     if (seen.indexOf(node.id) != -1){
         return {
-            name: node.id,
+            id: node.id,
+            name: node.name || node.id,
             trigger,
         };
     }
     return {
-        name: node.id,
+        id: node.id,
+        name: node.name || node.id,
         trigger,
-        children: (node.rules || []).map(r=>children([...seen,node.id], events, events[r.next], r.id, actions)),
+        children: (node.rules || []).map(r=>children([...seen,node.id], events, events[r.next]||"", r.id, actions)).filter(t=>t),
         links : (node.rules || []).reduce((acc, r)=>{
-            const key = /*trigger ? `${trigger}` :*/ `${node.id}->${r.next}`;
+            const key = /*trigger ? `${trigger}` :*/ `${node.id}->${r.next||""}`;
             return {
                 ...acc,
                 //[`${node.id}->${r.next}`]: {rid: r.id, actions:r.actions, rule:r.rule}
@@ -89,6 +90,7 @@ const tree = (layer)=>{
 }
 
 indexRouter.get('/layers', (req, res)=>{
+    console.log(JSON.stringify(tree(l1),null, 4));
     res.status(200).json([tree(l1),tree(l2)]);
 });
 

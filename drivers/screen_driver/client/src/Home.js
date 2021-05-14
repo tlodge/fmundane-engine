@@ -45,10 +45,10 @@ export default function Home() {
 
     const fakeData = ()=>{
        setDyson({
-            pm25 : Math.floor(Math.random() * 251),
-            pm10 : Math.floor(Math.random() * 251),
-            voc  : Math.floor(Math.random() * 9),
-            no2  : Math.floor(Math.random() * 9),
+            pm25 : Math.floor(Math.random() * 252),
+            pm10 : Math.floor(Math.random() * 421),
+            voc  : Math.floor(Math.random() * 10),
+            no2  : Math.floor(Math.random() * 10),
             time : Date.now().toString()
         });
     }

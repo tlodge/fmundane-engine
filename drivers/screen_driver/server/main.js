@@ -11,11 +11,33 @@ let ws;
 app.use(express.static("public"));
 
 
-app.get('/api/scan', (req,res) => {
+app.get('/api/camera/scan', (req,res) => {
+    console.log("seen camera scan request");
+    const {state=null} = req.query;
+    
+	if (ws){
+        ws.send(JSON.stringify({type:"camera", state}));
+    }
+    res.status(200).send();
+})
+
+app.get('/api/camera', (req,res) => {
     console.log("seen scan request");
     const {type=null} = req.query;
-    mqtt.send("camera", JSON.stringify({type}));
+    if (ws){
+        ws.send(JSON.stringify({type:"url", url:"/camera"}));
+    }
+    
 	res.status(200).send();
+})
+
+app.get('/api/air', (req,res) => {
+    console.log("seen air request!");
+    if (ws){
+        ws.send(JSON.stringify({type:"url", url:"/air"}));
+    }
+    
+    res.status(200).send();
 })
 //initialize a simple http server
 const server = http.createServer(app);

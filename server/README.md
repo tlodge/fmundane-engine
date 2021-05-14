@@ -1,7 +1,6 @@
 Future mundane engine
 ---------------------
 
-
 This is the backend that deals with a future mundane experience.  Note that it requires that the client is running and it requires that the drivers that communicate with the devices are also running.  To run the server:
 
 To run in DEV mode
@@ -49,6 +48,9 @@ sudo docker run -it --name mosquitto -p 1883:1883 eclipse-mosquitto:1.6
 Gotchas
 -------
 
+
+**NO events firing**
+
 If events are not firing - check you have mqtt running!  
 
 i.e.:
@@ -58,16 +60,16 @@ sudo docker run -it --name mosquitto -p 1883:1883 eclipse-mosquitto:1.6
 
 ```
 
+**No speech**
+
 You have to be connected to the internet for speech to work, as it uses google's speech API!
+You may also have gone over usage limits if it just stops working - wait a bit and try again
+
+**Dyson**
 
 You have to know the IP address of the dyson fan, which is tricky to find - it MAY show up in DHCP leases, but doesn't on my home router.  NMAP also fails to find it.
+If you fail to connect to fan - make sure you're not running two drivers at the same time - they'll subscibe and unsubscribe each other!
 
-
-If camera doesn't work with camera driver, it may be that chrome is blocking it.  Visit:
-
-chrome://flags/#unsafely-treat-insecure-origin-as-secure
-
-and add in the server's url (e.g: 192.168.1.20:8999)
 
 FAN Details
 -----------

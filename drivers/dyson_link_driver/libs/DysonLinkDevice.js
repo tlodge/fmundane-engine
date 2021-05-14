@@ -64,7 +64,7 @@ class DysonLinkDevice {
         // Only do this when we have less than one listener to avoid multiple call        
         let senorlisternerCount = this.environmentEvent.listenerCount(this.SENSOR_EVENT);
         let fanlisternerCount = this.mqttEvent.listenerCount(this.STATE_EVENT);
-        //console.log("[DEBUG] Number of listeners - sensor:"+ senorlisternerCount + " fan:" + fanlisternerCount);
+        console.log("[DEBUG] Number of listeners - sensor:"+ senorlisternerCount + " fan:" + fanlisternerCount);
         let currentTime = new Date();
         if(senorlisternerCount <=1 && fanlisternerCount <=1) {
             this.mqttClient.publish(this.commandTopic, `{

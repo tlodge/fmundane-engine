@@ -34,8 +34,8 @@ function FaceScan({scan="none"}) {
   useEffect (()=>{
       
       if (video){
-        canvasReference.current.width = video.videoWidth;
-        canvasReference.current.height = video.videoHeight;
+        canvasReference.current.width = video.videoWidth || VWIDTH ;
+        canvasReference.current.height = video.videoHeight || VHEIGHT;
       }
 
   },[network])
@@ -77,8 +77,8 @@ function FaceScan({scan="none"}) {
     console.log(".");
     const result = await detectFace(network,video,canvasReference, scan)
     if (!result){
-      console.log("waiting a bit!");
-      setDelay(1000);
+      setDelay(5000);
+      loadNetwork();
     }else{
       setDelay(100);
     }

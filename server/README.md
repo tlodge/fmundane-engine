@@ -63,10 +63,11 @@ You have to be connected to the internet for speech to work, as it uses google's
 You have to know the IP address of the dyson fan, which is tricky to find - it MAY show up in DHCP leases, but doesn't on my home router.  NMAP also fails to find it.
 
 
-TODO: return error and continue
-    :  with speech, allow user to select answer!
-    : Fan interface!
-    : set timeouts on failure, or alternative paths?
+If camera doesn't work with camera driver, it may be that chrome is blocking it.  Visit:
+
+chrome://flags/#unsafely-treat-insecure-origin-as-secure
+
+and add in the server's url (e.g: 192.168.1.20:8999)
 
 FAN Details
 -----------
@@ -78,7 +79,7 @@ ssh -i .ssh/id_openwrt root@192.168.1.1 tcpdump -i br-lan -U -s0 -w - 'dst 192.1
 
 #on mac...!
 
-ssh -i .ssh/id_openwrt root@192.168.1.50 tcpdump -i br-lan -U -s0 -w - 'dst 192.168.1.44 and port 1883' | /Applications/Wireshark.app/Contents/MacOS/wireshark -k -i -
+ssh -i .ssh/id_openwrt root@192.168.1.50 tcpdump -i br-lan -U -s0 -w - 'dst 192.168.1.32 and port 1883' | /Applications/Wireshark.app/Contents/MacOS/wireshark -k -i -
 
 Where 192.168.1.44 is the IP of the mobile phone!
 
@@ -196,6 +197,12 @@ Supported PUBLISH commands:
     "mode-reason": "LAPP",
     "time" : "2020-11-12T14:00:99Z",
     "msg" : "REQUEST-PRODUCT-ENVIRONMENT-CURRENT_SENSOR-DATA"
+}
+
+{
+   "mode-reason": "LAPP",
+    "time" : "2020-11-12T14:00:99Z",
+    "msg" : "REQUEST-CURRENT-STATE"
 }
 
 //turn off 

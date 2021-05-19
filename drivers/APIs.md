@@ -1,3 +1,5 @@
+
+
 Dyson
 -----
 
@@ -27,6 +29,13 @@ http://[host]:9095/ui/api/fan?cool=true
 
 NeoPixels
 -------
+
+NB: relies on mqtt broker running on caravan machine 192.168.1.113
+
+```
+docker run -d --name mosquitto --restart unless-stopped -p 1883:1883 eclipse-mosquitto:1.6)
+```
+
 method: GET
 
 **turn blue**
@@ -44,6 +53,9 @@ http://[host]:9103/api/lights?value=RAINBOW
 
 Hue
 ---
+
+NB: assumes hue bridge IP: 192.168.1.105
+Also found api didn't kick in until ran app,then was fine
 
 method: GET
 
@@ -77,6 +89,12 @@ http://[host]:9092/ui/api/light_script
 Screen (display in web browser - dyson air quality and camera)
 ------
 
+NB: relies on mqtt broker running:
+
+```
+docker run -d --name mosquitto --restart unless-stopped -p 1883:1883 eclipse-mosquitto:1.6)
+```
+
 method: GET
 
 **switch to camera screen**
@@ -89,9 +107,10 @@ http://[host]:9102/api/air
 http://[host]:9102/api/camera/scan
 
 
-
 Label Printer
 -------------
+
+NB: relies on raspberry pi,connected to printer. Check pi's IP,defaults to 192.168.1.192 
 
 method:POST
 content-type: application/json
@@ -105,6 +124,8 @@ http://[host]:9095/print
 
 NanoLeaf Canvas
 ---------------
+
+NB: assumes default nanoleaf IP: 192.168.1.151
 
 method: GET
 

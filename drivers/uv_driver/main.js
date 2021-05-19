@@ -1,4 +1,4 @@
-require('console-stamp')(console, 'dd-mm-yy HH:MM:ss.l');
+  require('console-stamp')(console, 'dd-mm-yy HH:MM:ss.l');
 const http = require('http');
 const express = require('express');
 const bodyParser = require('body-parser');

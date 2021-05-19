@@ -12,7 +12,6 @@ let hue_url = "http://192.168.1.105/api"
 let api_url = hue_url + '/' + hue_user
 const PORT = '9092';
 
-
 const lights = ["1","2","3","4","5","6","7"];
 
 const app = express();

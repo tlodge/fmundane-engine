@@ -3,7 +3,7 @@ import {send} from '../listener';
 import {send as wssend} from '../ws';
 import sm from '../statemachine';
 import _l1 from '../layers/layer1.json';
-import _l2 from '../layers/layer2.json';
+//import _l2 from '../layers/layer2.json';
 import actions from '../actions/actions';
 import {handle} from '../actionhandler';
 
@@ -25,9 +25,9 @@ const format = (l)=>{
 }
 
 const l1 = format(_l1);
-const l2 = format(_l2);
+//const l2 = format(_l2);
 
-const events = [l1,l2].reduce((acc,item)=>{
+const events = [l1/*,l2*/].reduce((acc,item)=>{
     const startevent = item.start.event;
     const event = item.events.reduce((acc, item)=>{
         if (item.id == startevent){
@@ -91,13 +91,13 @@ const tree = (layer)=>{
 
 indexRouter.get('/layers', (req, res)=>{
     console.log(JSON.stringify(tree(l1),null, 4));
-    res.status(200).json([tree(l1),tree(l2)]);
+    res.status(200).json([tree(l1)]);//,tree(l2)]);
 });
 
 indexRouter.get('/start', (req, res)=>{
     if (statemachines.length <= 0){
         statemachines.push(sm(l1))
-        statemachines.push(sm(l2));
+       // statemachines.push(sm(l2));
     }else{
         statemachines.map(sm=>sm.reset());
     }

@@ -3,13 +3,12 @@ const app = express()
 const path = require('path')
 const PORT = '9097';
 
-
 const FAN_CONFIG  = require("./config.json");
 
 const DysonLinkDevice = require("./libs/DysonLinkDevice").DysonLinkDevice;
 let timer;
 
-//getdata();
+getdata();
 
 function fan_on(on) {
 	if (on=="true"){
@@ -109,13 +108,6 @@ let device = new DysonLinkDevice(FAN_CONFIG.model, FAN_CONFIG.id, FAN_CONFIG.ip,
 
 app.use('/ui', express.static(path.join(__dirname, 'static')))
 
-app.get('/ui/api/fan_off', (req,res) => {
-	fan_off((data)=>{
-		console.log(data);
-	});
-	res.status(200).send();
-})
-
 app.get('/ui/api/data_read', (req,res) => {
 	getdata();
 	res.status(200).send();
@@ -123,41 +115,6 @@ app.get('/ui/api/data_read', (req,res) => {
 
 app.get('/ui/api/data_stop', (req,res) => {
 	stopreading();
-	res.status(200).send();
-})
-
-app.get('/ui/api/fan_auto', (req,res) => {
-	fan_auto((data)=>{
-		console.log(data);
-	});
-	res.status(200).send();
-})
-
-app.get('/ui/api/fan_heat_high', (req,res) => {
-	fan_heat_high((data)=>{
-		console.log(data);
-	});
-	res.status(200).send();
-})
-
-app.get('/ui/api/fan_cool_high', (req,res) => {
-	fan_cool_high((data)=>{
-		console.log(data);
-	});
-	res.status(200).send();
-})
-
-app.get('/ui/api/fan_heat_low', (req,res) => {
-	fan_heat_low((data)=>{
-		console.log(data);
-	});
-	res.status(200).send();
-})
-
-app.get('/ui/api/fan_cool_low', (req,res) => {
-	fan_cool_low((data)=>{
-		console.log(data);
-	});
 	res.status(200).send();
 })
 

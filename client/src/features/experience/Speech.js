@@ -45,7 +45,7 @@ export default function Speech({rules}) {
 
   return (
     <div className="flex flex-col h-full w-full">
-      <div className="flex text-xl h-1/2 font-bold justify-center items-center flex-grow">{speech.trim()=="" ? "[listening for speech]" : `"${speech}"`}</div>
+      <div style={{minHeight:190}} className="flex text-xl font-bold justify-center items-center flex-grow">{speech.trim()=="" ? "[listening for speech]" : `"${speech}"`}</div>
       <div className="p-6 bg-black">
           <div className="font-semibold text-white text-lg pb-4">override</div>
           {renderOperands()}

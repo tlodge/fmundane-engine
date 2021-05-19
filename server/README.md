@@ -44,6 +44,10 @@ or version specific:
 sudo docker run -it --name mosquitto -p 1883:1883 eclipse-mosquitto:1.6
 ```
 
+or auto restart
+
+docker run -d --name mosquitto --restart unless-stopped -p 1883:1883 eclipse-mosquitto:1.6
+
 
 Gotchas
 -------

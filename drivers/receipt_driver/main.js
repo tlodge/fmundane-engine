@@ -9,12 +9,12 @@ var rp = require('request-promise-native');
 
 
 const PORT = '9095';
-const PI_URL = "http://192.168.1.142:8080/"
+const PI_URL = "http://192.168.1.192:8080/"
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.post('/ui/api/print', function (req, res, next) {
+app.post('/print', function (req, res, next) {
   print_text = req.body.text;
   console.log('printing: ' + print_text);
   let obj = {"text": print_text};

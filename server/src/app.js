@@ -13,7 +13,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use('/event', indexRouter);
 
-console.log("static path sis",path.join(__dirname, 'client'));
 
 app.use(express.static(path.join(__dirname, 'client')));
 

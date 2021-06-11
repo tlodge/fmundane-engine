@@ -4,7 +4,7 @@ import {gestureObserved} from './experienceSlice';
 import {useDispatch } from 'react-redux';
 import * as d3 from "d3";
 
-function Gesture({rules}) {
+function Gesture({rules, ready}) {
       const dispatch = useDispatch();
       const videoRef = createRef();
       const [video, isCameraInitialised, running, setPlaying, error] = useCamera(videoRef);
@@ -38,10 +38,10 @@ function Gesture({rules}) {
 
       return (<div className="max-w-sm">
                   {renderCamera()}
-                  <div className="p-4 bg-black text-white">
+                  {ready && <div className="p-4 bg-black text-white">
                         <div className="font-semibold text-lg pb-4">override</div>
                         {renderOperands()}
-                  </div>     
+                  </div>}     
             </div>);
  }
  

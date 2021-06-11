@@ -147,3 +147,15 @@ http://[host]:9104/ui/api/ct?value=1200
 **change brightness**
 http://[host]:9104/ui/api/brightness?brightness=100&duration=5
 
+OSX Speech
+----------
+
+method: POST
+
+BODY: 
+{
+    "speech":"something to say", 
+    "voice": "osx supported voice name (optional)"
+}
+
+http://[host]:9105/ui/api/speech

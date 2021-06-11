@@ -74,6 +74,12 @@ You may also have gone over usage limits if it just stops working - wait a bit a
 You have to know the IP address of the dyson fan, which is tricky to find - it MAY show up in DHCP leases, but doesn't on my home router.  NMAP also fails to find it.
 If you fail to connect to fan - make sure you're not running two drivers at the same time - they'll subscibe and unsubscribe each other!
 
+**Pipsta**
+Looks like support is no longer available, but got working on the pi with details from the following:
+
+https://www.raspberrypi.org/forums/viewtopic.php?p=1736425
+
+
 
 FAN Details
 -----------

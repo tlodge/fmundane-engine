@@ -94,156 +94,189 @@
   },
   
   "saygreet": {
-    "type": "browserspeech",
+    "type": "request",
     "data": {
-      "speech" : [
-                    {
-                      "words": "Hello and welcome to the caravan. My name is Fred.",
-                      "delay": 500 
-                    },
-                    {
-                      "words": "Are you ready to go?"
-                    }
+      "url": "http://localhost:9105/api/speech",
+      "type": "POST",
+      "contenttype": "application/json"
+    },
+    "body":{
+        "speech" : [
+                      {
+                        "words": "Hello and welcome to the caravan. My name is Fred.",
+                        "delay": 500 
+                      },
+                      {
+                        "words": "Are you ready to go?"
+                      }
 
-      ]            
-    }
+        ]     
+    }       
   },
   "sayhello": {
-    "type": "browserspeech",
+    "type": "request",
     "data": {
-      "speech" : [
-                    {
-                      "words": "Hello |value:and|",
-                      "delay":500
-                    },
-                    {
-                      "words":"It's most lovely to meet you",
-                      "delay":2000
-                    },
-                    {
-                      "words": "Ok, shall we try a face scan now?"
-                   }
-      ]            
-    }
+      "url": "http://localhost:9105/api/speech",
+      "type": "POST",
+      "contenttype": "application/json"
+    },
+    "body":{
+        "speech" : [
+                      {
+                        "words": "Hello |value:and|",
+                        "delay":500
+                      },
+                      {
+                        "words":"It's most lovely to meet you",
+                        "delay":1000
+                      },
+                      {
+                        "words": "Shall we try a face scan now?"
+                    }
+        ]     
+    }       
   },
 
   "sayturningonfan": {
-    "type": "browserspeech",
+    "type": "request",
     "data": {
-      "speech" : [
-                    {
-                        "words": "Ok, let's get nice and comfortable.  I'm turning on the fan now",
-                        "delay": 1000
-                    },
-                    {
-                      "words": "Lovely.  Now please tell me your names"
-                    }
-       ]
+      "url": "http://localhost:9105/api/speech",
+      "type": "POST",
+      "contenttype": "application/json"
+    },
+    "body":{
+        "speech" : [
+                      {
+                          "words": "Let's get nice and comfortable.  I'm turning on the fan now",
+                          "delay": 1000
+                      },
+                      {
+                        "words": "Lovely.  Now please tell me your names"
+                      }
+        ]
     }
   },
   "sayaskagain": {
-    "type": "browserspeech",
+    "type": "request",
     "data": {
-      "speech" : [
-                    {
-                        "words": "Ah well.  I'll wait a bit",
-                        "delay": 1000
+      "url": "http://localhost:9105/api/speech",
+      "type": "POST",
+      "contenttype": "application/json"
+    },
+    "body":{
+        "speech" : [
+                      {
+                          "words": "Ah well.  I'll wait a bit",
+                          "delay": 1000
+                      },
+                      {
+                        "words": "one mississippi, two mississippi, three mississippi, four mississipi",
+                        "delay": 1500
                     },
                     {
-                      "words": "one mississippi, two mississippi, three mississippi, four mississipi",
-                      "delay": 1500
+                      "words": "five mississipi, six misssissippi",
+                      "delay": 2000
                   },
-                  {
-                    "words": "five mississipi, six misssissippi",
-                    "delay": 2000
-                },
-                    {
-                      "words": "Ok, nice pause.  Let's try again",
-                      "delay": 1000
-                    }
-       ]
+                      {
+                        "words": "Ok, nice pause.  Let's try again",
+                        "delay": 1000
+                      }
+        ]
     }
   },
   "saygreat": {
-    "type": "browserspeech",
+    "type": "request",
     "data": {
-      "speech" : [
-          {
-              "words": "Great stuff!",
-              "delay": 1000
-          }
-       ]
+      "url": "http://localhost:9105/api/speech",
+      "type": "POST",
+      "contenttype": "application/json"
+    },
+    "body":{
+        "speech" : [
+            {
+                "words": "Great stuff!",
+                "delay": 1000
+            }
+        ]
     }
   },
   "askready": {
-    "type": "browserspeech",
+    "type": "request",
     "data": {
-      "speech" : [
-          {
-              "words": "Ok, just hold on for a short while, while I get the camera up and runnng",
-              "delay": 3000
-          },
-          {
-            "words": "Right that should be fine now.  Are you ready to get a scan?"
-          }
-       ]
+      "url": "http://localhost:9105/api/speech",
+      "type": "POST",
+      "contenttype": "application/json"
+    },
+    "body":{
+        "speech" : [
+            {
+                "words": "Just hold on for a short while, while I get the camera up and runnng",
+                "delay": 3000
+            },
+            {
+              "words": "Right that should be fine now.  Are you ready to get a scan?"
+            }
+        ]
     }
   },
   "sayscanningnow": {
-    "type": "browserspeech",
+    "type": "request",
     "data": {
-      "speech" : [
-          {
-              "words": "Ok, I'm scanning",
-              "delay": 1500
-          },
-          {
-            "words": "Just a little bit more",
-            "delay": 1500
-          },
-          {
-            "words": "Brilliant I'm done!",
-            "delay": 800
-          },
-          {
-            "words": "My goodness you have lovely skin!",
-            "delay": 1500
-          },
-          {
-            "words": "So we're now going to check your air quality",
-            "delay": 500
-          },
-          {
-            "words": "Is that ok?",
-            "delay": 500
-          },
-          {
-            "words": "Put your thumbs up to move on"
-          }
-       ]
-    }
+      "url": "http://localhost:9105/api/speech",
+      "type": "POST",
+      "contenttype": "application/json"
+    },
+    "body":{
+        "speech" : [
+            {
+                "words": "I'm scanning now",
+                "delay": 1500
+            },
+            {
+              "words": "Just a little bit more",
+              "delay": 800
+            },
+            {
+              "words": "Brilliant I'm done!",
+              "delay": 800
+            },
+            {
+              "words": "So we're now going to check your air quality",
+              "delay": 500
+            },
+            {
+              "words": "Is that ok? Put your thumbs up if it is",
+              "delay": 500
+            }
+        ]
+      }
   },
   "saynoworries": {
-    "type": "browserspeech",
+    "type": "request",
     "data": {
-      "speech" : [
-          {
-              "words": "Ok, no worries!",
+      "url": "http://localhost:9105/api/speech",
+      "type": "POST",
+      "contenttype": "application/json"
+    },
+    "body":{
+        "speech" : [
+            {
+                "words": "Ok, no worries!",
+                "delay": 500
+            },
+            {
+              "words": "Let's get some nice lighting going instead!",
+              "delay": 1000
+            },
+            {
+              "words": "Which colour would you like, red, green, blue",
               "delay": 500
-          },
-          {
-            "words": "Let's get some nice lighting going instead!",
-            "delay": 1000
-          },
-          {
-            "words": "Which colour would you like, red, green, blue",
-            "delay": 500
-          },
-          {
-            "words": "or a surprise!",
-            "delay": 500
-          }
-       ]
+            },
+            {
+              "words": "or a surprise!",
+              "delay": 500
+            }
+        ]
+      }
     }
-  }
 }

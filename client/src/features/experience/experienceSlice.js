@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import io from 'socket.io-client';
 import superagent from 'superagent';
 import * as d3 from 'd3-hierarchy';
@@ -15,6 +15,7 @@ export const experienceSlice = createSlice({
   initialState: {
     layers: [],
     events: [],
+    readyforinput: {},
     transcript: "",
     lastsenttranscript:"",
    
@@ -32,16 +33,17 @@ export const experienceSlice = createSlice({
     },
     setTranscript: (state, action)=>{
       state.transcript = action.payload;
-      
     },
-
+    setReadyForInput: (state,action)=>{
+      state.readyforinput = {[action.payload]:true}
+    },
     sentTranscript: (state)=>{
       state.lastsenttranscript = state.transcript;
     }
   }
 });
 
-export const { setLayers, setEvent, setEvents, setTranscript,sentTranscript } = experienceSlice.actions;
+export const { setLayers, setEvent, setEvents, setTranscript,sentTranscript,setReadyForInput } = experienceSlice.actions;
 
 // The function below is called a thunk and allows us to perform async logic. It
 // can be dispatched like a regular action: `dispatch(incrementAsync(10))`. This
@@ -118,7 +120,7 @@ export const listenOnActions = (window) => async dispatch => {
      _talking = false;
      try{
      
-      recognition.start();
+      //recognition.start();
     }catch(err){
      
     }
@@ -136,10 +138,21 @@ export const listenOnEvents = () => dispatch => {
    
     dispatch(setEvent(payload));
   });
+
+  socket.on('ready', payload=>{
+    const {event} = payload; 
+    dispatch(setReadyForInput(event))
+    _talking = false;
+    try{
+      recognition.start();
+    }catch(err){
+      
+    }
+  });
 }
 
 export const sendTranscript = () => (dispatch, getState) =>{
-    
+  _talking = true;
     const {transcript, lastsenttranscript} = getState().experience;
     
     if (lastsenttranscript.trim() != transcript.trim()){
@@ -149,8 +162,18 @@ export const sendTranscript = () => (dispatch, getState) =>{
           dispatch(sentTranscript())
         }
       });
+      console.log("sending spepck observerd", getState().experience.transcript);
+      //dispatch(setEvent({}));
     }
 };
+
+export const gestureObserved = (g)=> (dispatch, getState) =>{
+  _talking = true;
+  superagent.get("/event/gesture").query({gesture:g}).end((err, res)=>{});
+  console.log("sending gesture observerd", g);
+  //dispatch(setEvent({}));
+}
+
 
 export const fetchLayers = () => (dispatch)=>{
 
@@ -166,11 +189,7 @@ export const fetchLayers = () => (dispatch)=>{
   });
 }
 
-export const gestureObserved = (g)=> (dispatch, getState) =>{
-  superagent.get("/event/gesture").query({gesture:g}).end((err, res)=>{
-    
-  });
-}
+
 
 export const listenToSpeech = (r) => (dispatch, getState) => {
   
@@ -179,8 +198,7 @@ export const listenToSpeech = (r) => (dispatch, getState) => {
   recognition.onend = () => {
     //dispatch(setTranscript(""));
     if (!_talking){
-      try{
-       
+      try{     
         recognition.start();
       }catch(err){
         
@@ -219,6 +237,7 @@ const separation = (a, b) =>{
   return (a.parent == b.parent ? 1 : 2)
 }
 
+export const selectReadyForInput = state => state.experience.readyforinput;
 export const selectSpeech= state => state.experience.transcript;
 export const selectTrees = state =>  state.experience.layers.map(t=>d3.tree().nodeSize([120, 230])(d3.hierarchy(t, d=>d.children)))
 

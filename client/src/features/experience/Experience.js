@@ -9,6 +9,7 @@ import {
     listenToSpeech,
     fetchLayers,
     selectEvents,
+    selectReadyForInput,
     selectTrees,
     reset,
 } from './experienceSlice';
@@ -16,6 +17,7 @@ import {
 
 export function Experience() {
   const events = useSelector(selectEvents);
+  const readyforinput = useSelector(selectReadyForInput)
   const trees = useSelector(selectTrees);
 
   const dispatch = useDispatch();
@@ -42,11 +44,12 @@ export function Experience() {
     //handleListen();
   }, []); //only re-run the effect if new message comes in
 
-  
+  console.log("ready for inpyr is", readyforinput);
+
   const list = events.map((e,i)=>{
  
   return <div className="flex row mb-4 border-b-2 h-full" key = {e.id}>
-           <div className="flex flex-grow justify-center m-4"><Layer {...e} /></div>
+           <div className="flex flex-grow justify-center m-4"><Layer {...{...e, ready:readyforinput[e.data.id]}} /></div>
            <Tree {...{...trees[i], id:e.data.id, triggered:e.triggered}}/>
          </div>      
   });

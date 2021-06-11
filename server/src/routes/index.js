@@ -2,11 +2,9 @@ import express from 'express';
 import {send} from '../listener';
 import {send as wssend} from '../ws';
 import sm from '../statemachine';
-import _l1 from '../layers/layer1.json';
-//import _l2 from '../layers/layer2.json';
 import actions from '../actions/actions';
 import {handle} from '../actionhandler';
-
+import fs from 'fs'
 const format = (l)=>{
     return {
         ...l,
@@ -24,10 +22,11 @@ const format = (l)=>{
     }
 }
 
-const l1 = format(_l1);
-//const l2 = format(_l2);
 
-const events = [l1/*,l2*/].reduce((acc,item)=>{
+const _layers = fs.readdirSync(__dirname.replace("routes","layers")).filter(f=>f.startsWith("layer")).map(f => format(require(`../layers/${f}`)));
+console.log(_layers);
+
+const events = _layers.reduce((acc,item)=>{
     const startevent = item.start.event;
     const event = item.events.reduce((acc, item)=>{
         if (item.id == startevent){
@@ -90,14 +89,14 @@ const tree = (layer)=>{
 }
 
 indexRouter.get('/layers', (req, res)=>{
-    console.log(JSON.stringify(tree(l1),null, 4));
-    res.status(200).json([tree(l1)]);//,tree(l2)]);
+    res.status(200).json(_layers.map(l=>tree(l)));
 });
 
 indexRouter.get('/start', (req, res)=>{
     if (statemachines.length <= 0){
-        statemachines.push(sm(l1))
-       // statemachines.push(sm(l2));
+        for (const l of _layers){
+            statemachines.push(sm(l))
+        }
     }else{
         statemachines.map(sm=>sm.reset());
     }
@@ -112,10 +111,11 @@ indexRouter.get('/start', (req, res)=>{
             await Promise.all(promises);
         }
         
-
+        console.log("statemachine", s);
         for (const alist of s.start.actions){
-            wssend("action", alist.map(id=>actions[id]));
+           await  wssend("action", alist.map(id=>actions[id]));
         }
+        wssend("ready", {layer:s.id, event:s.start.event});
         
     })
 });

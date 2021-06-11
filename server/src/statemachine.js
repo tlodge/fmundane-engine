@@ -12,16 +12,12 @@ const _fetchrule = async (rule)=>{
     return evaluate;
 }
 
-
-
 const _executeactions = async (alist, value="")=>{
+
     for (const row of alist){
         for (const actionlist of row){
-
-            const promises = actionlist.map((a)=>handle(a));
-            await Promise.all(promises);
-            
-            send("action", actionlist.map(a=>{
+            //swap in any params
+            const _alist = actionlist.map((a)=>{
                 const astr = JSON.stringify(a);
                 var matches = astr.match(/\|(.*?)\|/);
                 if (matches){
@@ -31,18 +27,22 @@ const _executeactions = async (alist, value="")=>{
                     return JSON.parse(JSON.stringify(a).replace(toreplace,value.trim().split(" ").join(delimiter)));
                 }
                 return a;
-            }));
+            });
+            
+           
 
-          
+            for (const a of _alist){
+                await handle(a);
+            }
+            
+            send("action", _alist);
         }
     }
 }
 
 const _executestart = async (alist, value="")=>{
-    const promises = alist.map((a)=>handle(a));
-    await Promise.all(promises);
-    
-    send("action", alist.map(a=>{
+    //swap in any params
+    const _alist = alist.map((a)=>{
         const astr = JSON.stringify(a);
         var matches = astr.match(/\|(.*?)\|/);
         if (matches){
@@ -52,7 +52,15 @@ const _executestart = async (alist, value="")=>{
             return JSON.parse(JSON.stringify(a).replace(toreplace,value.trim().split(" ").join(delimiter)));
         }
         return a;
-    }));
+    });
+    
+   
+
+    for (const a of _alist){
+        await handle(a);
+    }
+    send("action", _alist);
+   
 }
 
 const StateMachine = (config)=>{
@@ -77,14 +85,8 @@ const StateMachine = (config)=>{
     events.map(e=>{
        
         subscribe(e.subscription, async (message)=>{
-           
             if (e.id === eventid){
-                console.log("fetching rule for", e.type);
-
                 const evaluate = await _fetchrule(e.type);
-
-                console.log("evaluate is", evaluate);
-                
                 const actionids = e.rules.reduce((acc, item)=>{
                     
                     console.log("evaluating", item.rule.operator, item.rule.operand, message.toString());
@@ -101,23 +103,26 @@ const StateMachine = (config)=>{
                     return acc;
                 },[]);
 
-                const _actions = actionids.map(arr=>arr.map((arr)=>arr.map(a=>actions[a]||{})));
-                await _executeactions(_actions, message.toString());
+                
+               
                 const event = eventlookup[eventid];
-
                 
                 if (event){
+                   
                     if (event.onstart){
-                        console.log("have onstart", event.onstart);
                         const __startactions = event.onstart.map(a=>actions[a]);
-
-                        console.log("at start would do the following", __startactions, message.toString());
                         await _executestart(__startactions, message.toString());
-                       
+                      
                     }
-                    console.log("SENDING EVENT", {id:config.id,data:eventlookup[eventid],triggered});
                     send("event", {id:config.id,data:eventlookup[eventid],triggered});
                 }
+
+                const _actions = actionids.map(arr=>arr.map((arr)=>arr.map(a=>actions[a]||{})));
+                await _executeactions(_actions, message.toString());
+                
+                send("ready", {layer:config.id, event:eventid});
+                //send that are ready for input??
+
             }
         });
     });

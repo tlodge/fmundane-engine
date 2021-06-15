@@ -143,11 +143,7 @@ export const listenOnEvents = () => dispatch => {
     const {event} = payload; 
     dispatch(setReadyForInput(event))
     _talking = false;
-    try{
-      recognition.start();
-    }catch(err){
-      
-    }
+    startRecognition();
   });
 }
 
@@ -190,6 +186,13 @@ export const fetchLayers = () => (dispatch)=>{
 }
 
 
+const startRecognition = ()=>{
+  try{     
+    //recognition.start();
+  }catch(err){
+    
+  }
+}
 
 export const listenToSpeech = (r) => (dispatch, getState) => {
   
@@ -198,11 +201,7 @@ export const listenToSpeech = (r) => (dispatch, getState) => {
   recognition.onend = () => {
     //dispatch(setTranscript(""));
     if (!_talking){
-      try{     
-        recognition.start();
-      }catch(err){
-        
-      }
+      startRecognition();
     }
   }
 
@@ -219,7 +218,8 @@ export const listenToSpeech = (r) => (dispatch, getState) => {
     dispatch(sendTranscript());
   }
 
-  recognition.start();
+  startRecognition();
+  //recognition.start();
 }
 
 // The function below is called a selector and allows us to select a value from

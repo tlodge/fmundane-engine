@@ -129,10 +129,7 @@
                       {
                         "words":"It's most lovely to meet you",
                         "delay":1000
-                      },
-                      {
-                        "words": "Shall we try a face scan now?"
-                    }
+                      }
         ]     
     }       
   },
@@ -149,9 +146,6 @@
                       {
                           "words": "Let's get nice and comfortable.  I'm turning on the fan now",
                           "delay": 1000
-                      },
-                      {
-                        "words": "Lovely.  Now please tell me your names"
                       }
         ]
     }
@@ -196,6 +190,25 @@
             {
                 "words": "Great stuff!",
                 "delay": 1000
+            }
+        ]
+    }
+  },
+  "askfacescan":{
+    "type": "request",
+    "data": {
+      "url": "http://localhost:9105/api/speech",
+      "type": "POST",
+      "contenttype": "application/json"
+    },
+    "body":{
+        "speech" : [
+            {
+                "words": "I'd quite like to do a face scan now",
+                "delay": 500
+            },
+            {
+              "words": "would that be ok?"
             }
         ]
     }
@@ -278,5 +291,37 @@
             }
         ]
       }
-    }
+    },
+    "saystarted": {
+      "type": "request",
+      "data": {
+        "url": "http://localhost:9105/api/speech",
+        "type": "POST",
+        "contenttype": "application/json"
+      },
+      "body":{
+          "speech" : [
+              {
+                  "words": "I have started",
+                  "delay": 500
+              }
+          ]
+        }
+      },
+      "asknames": {
+        "type": "request",
+        "data": {
+          "url": "http://localhost:9105/api/speech",
+          "type": "POST",
+          "contenttype": "application/json"
+        },
+        "body":{
+            "speech" : [
+                {
+                    "words": "Would you be so kind as to tell me your names",
+                    "delay": 500
+                }
+            ]
+          }
+        }
 }

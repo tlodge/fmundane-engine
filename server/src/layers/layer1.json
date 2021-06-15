@@ -2,11 +2,12 @@
   "id" : "layer1",
 
   "start": {
-    "actions": [["saygreet", "fanoff"]],
+    "actions": [["fanoff"]],
     "event": "ready?"
   },
 
   "events": [{
+    "onstart": ["saygreet"],
     "id": "ready?",
     "name": "ready?",
     "subscription" : "/speech",
@@ -17,8 +18,7 @@
           "operand": ["yes"]
         },
         "actions": [
-          ["sayturningonfan", "fanhot"],
-          ["facescan"]
+          ["sayturningonfan","fanhot"]
         ],
         "next": "asknames"
       },
@@ -35,6 +35,7 @@
     ]
   },
   {
+    "onstart": ["asknames"],
     "id": "asknames",
     "name": "ask names",
     "subscription" : "/speech",
@@ -46,12 +47,13 @@
         "actions": [
           ["sayhello"]
         ],
-        "next": "wizard1"
+        "next": "facescan"
       }
     ]
   },
   {
-    "id": "wizard1",
+    "onstart": ["askfacescan"],
+    "id": "facescan",
     "name": "wizard next",
     "subscription" : "/press",
     "type": "button",
@@ -62,15 +64,14 @@
           "operand": "next"
         },
         "actions": [
-          ["facecameraon"],
-          ["saygreat"],
-          ["askready"]
+          ["facecameraon"]
         ],
         "next": "wizard2"
       }
     ]
   },
   {
+    "onstart": ["saygreat"],
     "id": "wizard2",
     "name": "wizard yes/no",
     "subscription" : "/press",
@@ -103,6 +104,7 @@
     ]
   },
   {
+    "onstart": ["saystarted"],
     "id": "aircheck (gesture)",
     "name": "aircheck (gesture)",
     "subscription" : "/gesture",
@@ -120,6 +122,7 @@
     ]
   },
   {
+    "onstart": ["saystarted"],
     "id": "lights1",
     "name": "select light colour",
     "subscription" : "/press",
@@ -168,6 +171,7 @@
     ]
   },
   {
+    "onstart": ["saystarted"],
     "id": "fin",
     "name": "finished!",
     "subscription" : "/press",

@@ -63,11 +63,12 @@ const _executestart = async (alist, value="")=>{
    
 }
 
-const StateMachine = (config)=>{
-   
+const StateMachine =  (config)=>{
+
     let id = config.id;
-    let eventid = config.start.event;
+    let nexteventid = config.start.event;
     let triggered = "";
+
 
     const {events=[]} = config;
     const eventlookup = events.reduce((acc, item)=>{
@@ -76,19 +77,39 @@ const StateMachine = (config)=>{
             [item.id] : item,
         }
     },{});
-
-
-    const reset = ()=>{
-        eventid = config.start.event;
+    
+    const event = eventlookup[nexteventid];
+    
+    if (event){      
+        if (event.onstart){
+            console.log("onstart is", event.onstart);
+            const __startactions = event.onstart.map(a=>actions[a]);
+            _executestart(__startactions, "");//message.toString());
+        }
+        //send("event", {id:config.id,data:eventlookup[nexteventid],triggered});
     }
 
-    events.map(e=>{
+    const reset = ()=>{
+        nexteventid = config.start.event;
+    }
+
+    console.log("ok triggered is", triggered);
+
+    events.map( (e)=>{
        
-        subscribe(e.subscription, async (message)=>{
-            if (e.id === eventid){
-                const evaluate = await _fetchrule(e.type);
+      
+        subscribe(e.subscription,  async(message)=>{
+            console.log("event is",e.id, " troggred is", triggered);
+
+            if (e.id == nexteventid){
+                console.log("ok have event", e.id);
+
+               const evaluate = await _fetchrule(e.type);
+                
                 const actionids = e.rules.reduce((acc, item)=>{
                     
+
+                    console.log("have items", item);
                     console.log("evaluating", item.rule.operator, item.rule.operand, message.toString());
 
                     const result = evaluate(item.rule.operator, item.rule.operand, message.toString());
@@ -96,32 +117,35 @@ const StateMachine = (config)=>{
                     console.log("result is", result);
 
                     if (result){
-                        eventid = item.next;
+                        nexteventid = item.next;
                         triggered = item.id;
                         return [...acc, item.actions];
                     }
                     return acc;
                 },[]);
-
-                
-               
-                const event = eventlookup[eventid];
-                
-                if (event){
-                   
-                    if (event.onstart){
-                        const __startactions = event.onstart.map(a=>actions[a]);
-                        await _executestart(__startactions, message.toString());
-                      
-                    }
-                    send("event", {id:config.id,data:eventlookup[eventid],triggered});
-                }
-
+              
+                //call next eventid!!
+                //do the previous event's actions
                 const _actions = actionids.map(arr=>arr.map((arr)=>arr.map(a=>actions[a]||{})));
                 await _executeactions(_actions, message.toString());
                 
-                send("ready", {layer:config.id, event:eventid});
-                //send that are ready for input??
+                
+                console.log("the next event is", nexteventid);
+                const event = eventlookup[nexteventid];
+                //then trigger the start of the next event!
+               
+                if (event.onstart){
+                    console.log("onstart is", event.onstart);
+                    const __startactions = event.onstart.map(a=>actions[a]);
+                    console.log(__startactions);
+                    send("event", {id:config.id,data:event,triggered});
+                    await _executestart(__startactions, message.toString());
+                }else{
+                    console.log("hmm nowt troggerd!");
+                }
+   //
+                send("ready", {layer:config.id, event:nexteventid});
+                //send that are ready for input??*/
 
             }
         });

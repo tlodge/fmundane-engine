@@ -29,17 +29,17 @@ export function Experience() {
     window.msSpeechRecognition ||
     window.oSpeechRecognition)
 
-  const recognition = BrowserSpeechRecognition ? new BrowserSpeechRecognition() : null;
+  /*const recognition = BrowserSpeechRecognition ? new BrowserSpeechRecognition() : null;
   recognition.continous = true;
   recognition.interimResults = true;
   recognition.lang = 'en-US';
-
+*/
 
   const [startLabel, setStartLabel] = useState("start");
   useEffect(() => {
     dispatch(fetchLayers());
     dispatch(listenOnEvents());
-    dispatch(listenToSpeech(recognition));
+   // dispatch(listenToSpeech(recognition));
     dispatch(listenOnActions(window));
     //handleListen();
   }, []); //only re-run the effect if new message comes in

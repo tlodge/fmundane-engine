@@ -2,7 +2,7 @@
   "id" : "layer1",
 
   "start": {
-    "actions": [["fanoff"]],
+    "actions": [["fanoff","whitelights","togglewindows"]],
     "event": "ready?"
   },
 
@@ -47,13 +47,13 @@
         "actions": [
           ["sayhello"]
         ],
-        "next": "facescan"
+        "next": "redlights"
       }
     ]
   },
   {
-    "onstart": ["askfacescan"],
-    "id": "facescan",
+    "onstart": ["sayred"],
+    "id": "redlights",
     "name": "wizard next",
     "subscription" : "/press",
     "type": "button",
@@ -64,14 +64,14 @@
           "operand": "next"
         },
         "actions": [
-          ["facecameraon"]
+          ["redlights"]
         ],
         "next": "wizard2"
       }
     ]
   },
   {
-    "onstart": ["saygreat"],
+    "onstart": ["saylabel"],
     "id": "wizard2",
     "name": "wizard yes/no",
     "subscription" : "/press",
@@ -83,12 +83,9 @@
           "operand": "yes"
         },
         "actions": [
-          ["facecamerascan"],
-          ["saygreat"],
-          ["sayscanningnow"],
-          ["facecameraoff"]
+          ["printsomething"]
         ],
-        "next": "aircheck (gesture)"
+        "next": "windows"
       },
       {
         "rule": {
@@ -104,9 +101,9 @@
     ]
   },
   {
-    "onstart": ["saystarted"],
-    "id": "aircheck (gesture)",
-    "name": "aircheck (gesture)",
+    "onstart": ["saywindows"],
+    "id": "windows",
+    "name": "windows",
     "subscription" : "/gesture",
     "type": "gesture",
     "rules": [{
@@ -115,7 +112,7 @@
           "operand": ["thumbsup"]
       } ,
         "actions": [
-          ["airmonitoron"]
+          ["togglewindows"]
         ],
         "next": "fin"
       }

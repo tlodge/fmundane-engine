@@ -19,10 +19,10 @@
       }
     }
   },
-  "bluelights": {
+  "whitelights": {
     "type": "request",
     "data": {
-      "url": "http://localhost:9123/api/lights?value=BLUE",
+      "url": "http://localhost:9092/ui/api/white",
       "type": "GET",
       "contenttype": "application/json",
       "body": {
@@ -33,7 +33,7 @@
   "redlights": {
     "type": "request",
     "data": {
-      "url": "http://localhost:9123/api/lights?value=RED",
+      "url": "http://localhost:9092/ui/api/red",
       "type": "GET",
       "contenttype": "application/json",
       "body": {
@@ -41,10 +41,10 @@
       }
     }
   },
-  "greenlights": {
+  "brightlights": {
     "type": "request",
     "data": {
-      "url": "http://localhost:9123/api/lights?value=GREEN",
+      "url": "http://localhost:9092/ui/api/20",
       "type": "GET",
       "contenttype": "application/json",
       "body": {
@@ -96,7 +96,7 @@
   "saygreet": {
     "type": "request",
     "data": {
-      "url": "http://localhost:9105/api/speech",
+      "url": "http://192.168.1.106:9105/api/speech",
       "type": "POST",
       "contenttype": "application/json"
     },
@@ -113,10 +113,61 @@
         ]     
     }       
   },
+
+  "sayred": {
+    "type": "request",
+    "data": {
+      "url": "http://192.168.1.106:9105/api/speech",
+      "type": "POST",
+      "contenttype": "application/json"
+    },
+    "body":{
+        "speech" : [
+                      {
+                        "words": "Time to turn our lights red,is that ok?"
+                      }
+        ]     
+    }       
+  },
+  "saylabel": {
+    "type": "request",
+    "data": {
+      "url": "http://192.168.1.106:9105/api/speech",
+      "type": "POST",
+      "contenttype": "application/json"
+    },
+    "body":{
+        "speech" : [
+                      {
+                        "words": "ok, I'm now going to print something if that is ok?"
+                      }
+        ]     
+    }       
+  },
+  "saywindows": {
+    "type": "request",
+    "data": {
+      "url": "http://192.168.1.106:9105/api/speech",
+      "type": "POST",
+      "contenttype": "application/json"
+    },
+    "body":{
+        "speech" : [
+                      {
+                        "words": "All going so well",
+                        "delay": 1000
+                      },
+                      {
+                        "words": "Lets play with our windows"
+                      }
+
+        ]     
+    }       
+  },
   "sayhello": {
     "type": "request",
     "data": {
-      "url": "http://localhost:9105/api/speech",
+      "url": "http://192.168.1.106:9105/api/speech",
       "type": "POST",
       "contenttype": "application/json"
     },
@@ -137,7 +188,7 @@
   "sayturningonfan": {
     "type": "request",
     "data": {
-      "url": "http://localhost:9105/api/speech",
+      "url": "http://192.168.1.106:9105/api/speech",
       "type": "POST",
       "contenttype": "application/json"
     },
@@ -153,7 +204,7 @@
   "sayaskagain": {
     "type": "request",
     "data": {
-      "url": "http://localhost:9105/api/speech",
+      "url": "http://192.168.1.106:9105/api/speech",
       "type": "POST",
       "contenttype": "application/json"
     },
@@ -181,7 +232,7 @@
   "saygreat": {
     "type": "request",
     "data": {
-      "url": "http://localhost:9105/api/speech",
+      "url": "http://192.168.1.106:9105/api/speech",
       "type": "POST",
       "contenttype": "application/json"
     },
@@ -197,7 +248,7 @@
   "askfacescan":{
     "type": "request",
     "data": {
-      "url": "http://localhost:9105/api/speech",
+      "url": "http://192.168.1.106:9105/api/speech",
       "type": "POST",
       "contenttype": "application/json"
     },
@@ -216,7 +267,7 @@
   "askready": {
     "type": "request",
     "data": {
-      "url": "http://localhost:9105/api/speech",
+      "url": "http://192.168.1.106:9105/api/speech",
       "type": "POST",
       "contenttype": "application/json"
     },
@@ -235,7 +286,7 @@
   "sayscanningnow": {
     "type": "request",
     "data": {
-      "url": "http://localhost:9105/api/speech",
+      "url": "http://192.168.1.106:9105/api/speech",
       "type": "POST",
       "contenttype": "application/json"
     },
@@ -267,7 +318,7 @@
   "saynoworries": {
     "type": "request",
     "data": {
-      "url": "http://localhost:9105/api/speech",
+      "url": "http://192.168.1.106:9105/api/speech",
       "type": "POST",
       "contenttype": "application/json"
     },
@@ -295,7 +346,7 @@
     "saystarted": {
       "type": "request",
       "data": {
-        "url": "http://localhost:9105/api/speech",
+        "url": "http://192.168.1.106:9105/api/speech",
         "type": "POST",
         "contenttype": "application/json"
       },
@@ -311,7 +362,7 @@
       "asknames": {
         "type": "request",
         "data": {
-          "url": "http://localhost:9105/api/speech",
+          "url": "http://192.168.1.106:9105/api/speech",
           "type": "POST",
           "contenttype": "application/json"
         },
@@ -323,5 +374,24 @@
                 }
             ]
           }
+        },
+        "togglewindows": {
+          "type": "request",
+          "data": {
+            "url": "http://192.168.1.106:9222/H",
+            "type": "GET",
+            "contenttype": "application/json"
+          }
+        },
+        "printsomething": {
+          "type": "request",
+          "data": {
+            "url": "http://192.168.1.192:8080/print",
+            "type": "POST",
+            "contenttype": "application/json"
+          },
+          "body":{
+              "text" : "print something"
+            }
         }
 }

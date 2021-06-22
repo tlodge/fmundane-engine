@@ -118,7 +118,7 @@ app.get('/ui/api/data_stop', (req,res) => {
 	res.status(200).send();
 })
 
-app.get('', (req,res) => {
+app.get('/ui/api/fan', (req,res) => {
 	
 	const {on=null} = req.query;
 	const {power=0} = req.query;

@@ -80,6 +80,8 @@ const StateMachine =  (config)=>{
     
     const event = eventlookup[nexteventid];
     
+    console.log("***** Event is", event);
+
     if (event){      
         if (event.onstart){
             console.log("onstart is", event.onstart);
@@ -90,7 +92,18 @@ const StateMachine =  (config)=>{
     }
 
     const reset = ()=>{
+        console.log("ok seen reset!");
+
         nexteventid = config.start.event;
+        const _event = eventlookup[nexteventid];
+        if (event){      
+            if (event.onstart){
+                console.log("onstart is", event.onstart);
+                const __startactions = event.onstart.map(a=>actions[a]);
+                _executestart(__startactions, "");//message.toString());
+            }
+            //send("event", {id:config.id,data:eventlookup[nexteventid],triggered});
+        }
     }
 
     console.log("ok triggered is", triggered);

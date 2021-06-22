@@ -111,7 +111,7 @@ export const listenOnActions = (window) => async dispatch => {
     if (payload.type==="browserspeech"){
       for (const sentence of payload.data.speech){
         _talking = true;
-        recognition.stop();
+       // recognition.stop();
         await sayWords(window, sentence.words,voices[1]);//51
         if (sentence.delay){
           await delay(sentence.delay);
@@ -196,16 +196,16 @@ const startRecognition = ()=>{
 
 export const listenToSpeech = (r) => (dispatch, getState) => {
   
-  recognition = r;
+  //recognition = r;
 
-  recognition.onend = () => {
+  //recognition.onend = () => {
     //dispatch(setTranscript(""));
-    if (!_talking){
-      startRecognition();
-    }
-  }
+   // if (!_talking){
+ //     startRecognition();
+  //  }
+//  }
 
-  recognition.onresult = event => {    
+  /*recognition.onresult = event => {    
 
     for (let i = event.resultIndex; i < event.results.length; i++) {
       const transcript = event.results[i][0].transcript;
@@ -216,7 +216,7 @@ export const listenToSpeech = (r) => (dispatch, getState) => {
       }
     }
     dispatch(sendTranscript());
-  }
+  }*/
 
   startRecognition();
   //recognition.start();

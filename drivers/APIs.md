@@ -6,25 +6,25 @@ Dyson
 method: GET
 
 **turn on**
-http://[host]:9095/ui/api/fan?on=true
+http://[host]:9097/ui/api/fan?on=true
 
 **turn off**
-http://[host]:9095/ui/api/fan?on=false
+http://[host]:9097/ui/api/fan?on=false
 
 **power (1-9)**
-http://[host]:9095/ui/api/fan?power=8
+http://[host]:9097/ui/api/fan?power=8
 
 **rotate fromdeg todeg**
-http://[host]:9095/ui/api/fan?rotate=true&from=90&to=180
+http://[host]:9097/ui/api/fan?rotate=true&from=90&to=180
 
 **stop rotating**
-http://[host]:9095/ui/api/fan?rotate=false
+http://[host]:9097/ui/api/fan?rotate=false
 
 **set heat value (deg)**
-http://[host]:9095/ui/api/fan?heat=26
+http://[host]:9097/ui/api/fan?heat=26
 
 **set to cool**
-http://[host]:9095/ui/api/fan?cool=true
+http://[host]:9097/ui/api/fan?cool=true
 
 
 NeoPixels
@@ -110,7 +110,7 @@ http://[host]:9102/api/camera/scan
 Label Printer
 -------------
 
-NB: relies on raspberry pi,connected to printer. Check pi's IP,defaults to 192.168.1.192 
+NB: relies on raspberry pi,connected to printer. Check pi's IP,defaults to 192.168.1.192 ALSO ENSURE THAT NO TRAILING SLASH ON /print
 
 method:POST
 content-type: application/json
@@ -119,7 +119,7 @@ Body:
 
 {"text":"sometext to print"}
 
-http://[host]:9095/print
+http://[host]:8080/print
 
 
 NanoLeaf Canvas

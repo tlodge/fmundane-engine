@@ -96,7 +96,7 @@
   "saygreet": {
     "type": "request",
     "data": {
-      "url": "http://localhost:9105/api/speech",
+      "url": "http://192.168.1.106:9105/api/speech",
       "type": "POST",
       "contenttype": "application/json"
     },
@@ -117,7 +117,7 @@
   "sayred": {
     "type": "request",
     "data": {
-      "url": "http://localhost:9105/api/speech",
+      "url": "http://192.168.1.106:9105/api/speech",
       "type": "POST",
       "contenttype": "application/json"
     },
@@ -132,7 +132,7 @@
   "saylabel": {
     "type": "request",
     "data": {
-      "url": "http://localhost:9105/api/speech",
+      "url": "http://192.168.1.106:9105/api/speech",
       "type": "POST",
       "contenttype": "application/json"
     },
@@ -147,7 +147,7 @@
   "saywindows": {
     "type": "request",
     "data": {
-      "url": "http://localhost:9105/api/speech",
+      "url": "http://192.168.1.106:9105/api/speech",
       "type": "POST",
       "contenttype": "application/json"
     },
@@ -167,7 +167,7 @@
   "sayhello": {
     "type": "request",
     "data": {
-      "url": "http://localhost:9105/api/speech",
+      "url": "http://192.168.1.106:9105/api/speech",
       "type": "POST",
       "contenttype": "application/json"
     },
@@ -188,7 +188,7 @@
   "sayturningonfan": {
     "type": "request",
     "data": {
-      "url": "http://localhost:9105/api/speech",
+      "url": "http://192.168.1.106:9105/api/speech",
       "type": "POST",
       "contenttype": "application/json"
     },
@@ -204,7 +204,7 @@
   "sayaskagain": {
     "type": "request",
     "data": {
-      "url": "http://localhost:9105/api/speech",
+      "url": "http://192.168.1.106:9105/api/speech",
       "type": "POST",
       "contenttype": "application/json"
     },
@@ -232,7 +232,7 @@
   "saygreat": {
     "type": "request",
     "data": {
-      "url": "http://localhost:9105/api/speech",
+      "url": "http://192.168.1.106:9105/api/speech",
       "type": "POST",
       "contenttype": "application/json"
     },
@@ -248,7 +248,7 @@
   "askfacescan":{
     "type": "request",
     "data": {
-      "url": "http://localhost:9105/api/speech",
+      "url": "http://192.168.1.106:9105/api/speech",
       "type": "POST",
       "contenttype": "application/json"
     },
@@ -267,7 +267,7 @@
   "askready": {
     "type": "request",
     "data": {
-      "url": "http://localhost:9105/api/speech",
+      "url": "http://192.168.1.106:9105/api/speech",
       "type": "POST",
       "contenttype": "application/json"
     },
@@ -286,7 +286,7 @@
   "sayscanningnow": {
     "type": "request",
     "data": {
-      "url": "http://localhost:9105/api/speech",
+      "url": "http://192.168.1.106:9105/api/speech",
       "type": "POST",
       "contenttype": "application/json"
     },
@@ -318,7 +318,7 @@
   "saynoworries": {
     "type": "request",
     "data": {
-      "url": "http://localhost:9105/api/speech",
+      "url": "http://192.168.1.106:9105/api/speech",
       "type": "POST",
       "contenttype": "application/json"
     },
@@ -346,7 +346,7 @@
     "saystarted": {
       "type": "request",
       "data": {
-        "url": "http://localhost:9105/api/speech",
+        "url": "http://192.168.1.106:9105/api/speech",
         "type": "POST",
         "contenttype": "application/json"
       },
@@ -362,7 +362,7 @@
       "asknames": {
         "type": "request",
         "data": {
-          "url": "http://localhost:9105/api/speech",
+          "url": "http://192.168.1.106:9105/api/speech",
           "type": "POST",
           "contenttype": "application/json"
         },
@@ -380,8 +380,7 @@
           "data": {
             "url": "http://192.168.1.106:9222/H",
             "type": "GET",
-            "contenttype": "application/json",
-            "timeout": 2000
+            "contenttype": "application/json"
           }
         },
         "printsomething": {
@@ -389,8 +388,7 @@
           "data": {
             "url": "http://192.168.1.192:8080/print",
             "type": "POST",
-            "contenttype": "application/json",
-            "timeout": 2000
+            "contenttype": "application/json"
           },
           "body":{
               "text" : "print something"

@@ -33,7 +33,7 @@
                     },
                     "actions": [
                         [
-                            "fanhot"
+                            "fanon"
                         ]
                     ],
                     "next": "e2"
@@ -75,7 +75,7 @@
             "name": "e3",
             "onstart": [
                 {
-                    "words": "you said no, shame!",
+                    "words": "you said no.  shame!",
                     "duration": 0
                 }
             ],

@@ -5,6 +5,7 @@ export const creatorSlice = createSlice({
   
   initialState: {
     selectedNode: null,
+    selectedLink: null,
     viewAdd: false,
     name: "",
     rule: "",
@@ -20,6 +21,9 @@ export const creatorSlice = createSlice({
       state.rule = rule;
       state.speech = speech;
       state.actions = actions;
+    },
+    setEditLink: (state, action)=>{
+      state.selectedLink = action.payload;
     },
     setViewAddNode : (state, action)=>{
       state.viewAdd = action.payload;
@@ -39,7 +43,7 @@ export const creatorSlice = createSlice({
   }
 });
 
-export const { setEditNode,setViewAddNode,setName,setRule, setSpeech,setActions } = creatorSlice.actions;
+export const { setEditNode,setViewAddNode,setName,setRule, setSpeech,setActions,setEditLink } = creatorSlice.actions;
 
 export const showAddNode = (value)=>{
   return (dispatch, getState)=>{
@@ -55,6 +59,7 @@ export const editNode = (node)=>{
 }
 
 export const nodeToEdit         = state => state.creator.selectedNode;
+export const linkToEdit         = state => state.creator.selectedLink;
 export const selectViewAdd      = state => state.creator.viewAdd;
 export const selectName         = state => state.creator.name;
 export const selectRule         = state => state.creator.rule;

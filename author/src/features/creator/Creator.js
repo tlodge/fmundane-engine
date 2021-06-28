@@ -6,7 +6,6 @@ import { useSelector, useDispatch } from 'react-redux';
 
 
 import {
-   addNewNode,
    selectParent,   
    addToParent,
    updateNode,
@@ -17,6 +16,7 @@ import {
    setName,
    setRule,
    setSpeech,
+   setViewAddNode,
    setActions, 
    selectName,  
    selectRule,        
@@ -44,7 +44,6 @@ export function Creator() {
             onstart: node.speech,
             type:"button",
             subscription : `/press`,
-            rules: [],
         }
         const _actions =  (node.actions||"").split("|").map((line)=>{
             return line.split(",");
@@ -78,7 +77,8 @@ export function Creator() {
 
     const _updateNode = ()=>{
         dispatch(updateNode({node:name, name:node.name,speech:node.speech}));
-        //reset();
+        dispatch(setViewAddNode(false))
+        reset();
     }
 
     const reset = ()=>{

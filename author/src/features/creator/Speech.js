@@ -3,12 +3,12 @@ import {useState, useEffect}  from 'react';
 
 export default function Speech({lines:_lines=[], speechChanged}) {
     
-    _lines = _lines.length <= 0 ? [{"speech":"", "duration":0}] : _lines;
+    _lines = _lines.length <= 0 ? [{"words":"", "duration":0}] : _lines;
 
     const [lines, setLines] = useState(_lines);
 
     const addLine = ()=>{
-        setLines([...lines, {"speech":"", "duration":0}])
+        setLines([...lines, {"words":"", "duration":0}])
     }
 
     const deleteLine = (index)=>{
@@ -21,7 +21,7 @@ export default function Speech({lines:_lines=[], speechChanged}) {
 
     const setText = (index,text)=>{
         const _lines = lines.map((item,i)=>{
-            return i==index ? {...item, speech:text} : item;
+            return i==index ? {...item, words:text} : item;
         },[]);
         setLines(_lines);
         speechChanged(_lines);
@@ -44,7 +44,7 @@ export default function Speech({lines:_lines=[], speechChanged}) {
         return lines.map((r,i)=>{
             return <div key={i} className="flex flex-row text-sm items-center justify-start mt-4">
                 <div className="flex flex-col justify-start">
-                    <input className="mr-4" type="text" value={r.speech} onChange={(e)=>{setText(i,e.target.value)}}></input>
+                    <input className="mr-4" type="text" value={r.words} onChange={(e)=>{setText(i,e.target.value)}}></input>
                     <label className="flex justify-start">what to say</label>
                 </div>
                 <div className="flex flex-col justify-start">

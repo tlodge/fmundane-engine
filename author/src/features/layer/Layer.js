@@ -17,8 +17,8 @@ import {
 import {
     setViewAddNode,
     selectViewAdd,
-    selectSpeech,
     editNode,
+    setEditLink
 } from '../creator/creatorSlice'
 
 export function Layer() {
@@ -42,9 +42,11 @@ export function Layer() {
                     child={child}
                     setLookuptable      = {(lut)=>dispatch(setLookuptable(lut))} 
                     toggleAddNew        = {(value)=>dispatch(setViewAddNode(value))} 
+                    closeEditAction     = {(value)=>dispatch(setEditLink())} 
                     setParentToAddTo    = {(parent)=>dispatch(setParentToAddTo(parent))} 
                     exportNodes         = {(nodes)=>dispatch(exportNodes(nodes))}
                     editNode            = {(node)=>dispatch(editNode(node))}
+                    editActions         = {(link)=>dispatch(setEditLink(link))}
                     setParent           = {(parent)=>dispatch(setParent(parent))}
                     setChild            = {(child)=>dispatch(setChild(child))}
             />

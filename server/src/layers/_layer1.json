@@ -1,0 +1,186 @@
+{
+  "id" : "layer1",
+
+  "start": {
+    "actions": [["fanoff","whitelights","togglewindows"]],
+    "event": "ready?"
+  },
+
+  "events": [{
+    "onstart": ["saygreet"],
+    "id": "ready?",
+    "name": "ready?",
+    "subscription" : "/speech",
+    "type": "speech",
+    "rules": [{
+        "rule": {
+          "operator": "contains",
+          "operand": ["yes"]
+        },
+        "actions": [
+          ["sayturningonfan","fanhot"]
+        ],
+        "next": "asknames"
+      },
+      {
+        "rule": {
+          "operator": "contains",
+          "operand": ["no"]
+        },
+        "actions": [
+          ["sayaskagain"]
+        ],
+        "next": "ready?"
+      }
+    ]
+  },
+  {
+    "onstart": ["asknames"],
+    "id": "asknames",
+    "name": "ask names",
+    "subscription" : "/speech",
+    "type": "speech",
+    "rules": [{
+        "rule": {
+          "operator": "any"
+        },
+        "actions": [
+          ["sayhello"]
+        ],
+        "next": "redlights"
+      }
+    ]
+  },
+  {
+    "onstart": ["sayred"],
+    "id": "redlights",
+    "name": "wizard next",
+    "subscription" : "/press",
+    "type": "button",
+    "data": ["next"],
+    "rules": [{
+        "rule": {
+          "operator": "equals",
+          "operand": "next"
+        },
+        "actions": [
+          ["redlights"]
+        ],
+        "next": "wizard2"
+      }
+    ]
+  },
+  {
+    "onstart": ["saylabel"],
+    "id": "wizard2",
+    "name": "wizard yes/no",
+    "subscription" : "/press",
+    "type": "button",
+    "data": ["yes","no"],
+    "rules": [{
+        "rule": {
+          "operator": "equals",
+          "operand": "yes"
+        },
+        "actions": [
+          ["printsomething"]
+        ],
+        "next": "windows"
+      },
+      {
+        "rule": {
+          "operator": "equals",
+          "operand": "no"
+        },
+        "actions": [
+          ["saynoworries"],
+          ["facecameraoff"]
+        ],
+        "next": "lights1"
+      }
+    ]
+  },
+  {
+    "onstart": ["saywindows"],
+    "id": "windows",
+    "name": "windows",
+    "subscription" : "/gesture",
+    "type": "gesture",
+    "rules": [{
+        "rule": {
+          "operator": "equals",
+          "operand": ["thumbsup"]
+      } ,
+        "actions": [
+          ["togglewindows"]
+        ],
+        "next": "fin"
+      }
+    ]
+  },
+  {
+    "onstart": ["saystarted"],
+    "id": "lights1",
+    "name": "select light colour",
+    "subscription" : "/press",
+    "type": "button",
+    "data": ["red", "blue", "green", "rainbow"],
+    "rules": [{
+        "rule": {
+          "operator": "equals",
+          "operand": "red"
+        },
+        "actions": [
+          ["redlights"]
+        ],
+        "next": "fin"
+      },
+      {
+        "rule": {
+          "operator": "equals",
+          "operand": "blue"
+        },
+        "actions": [
+          ["bluelights"]
+        ],
+        "next": "fin"
+      },
+      {
+        "rule": {
+          "operator": "equals",
+          "operand": "green"
+        },
+        "actions": [
+          ["greenlights"]
+        ],
+        "next": "fin"
+      },
+      {
+        "rule": {
+          "operator": "equals",
+          "operand": "rainbow"
+        },
+        "actions": [
+          ["rainbowlights"]
+        ],
+        "next": "fin"
+      }
+    ]
+  },
+  {
+    "onstart": ["saystarted"],
+    "id": "fin",
+    "name": "finished!",
+    "subscription" : "/press",
+    "type": "button",
+    "data": ["done!"],
+    "rules": [{
+        "rule": {
+          "operator": "equals",
+          "operand": "done"
+        },
+        "actions": []
+      }
+    ]
+  }
+]}

@@ -45,11 +45,11 @@ const links = (node={})=>{
   return  _flatten([
     {    
       from : {
-        name:node.data.event.id,
+        name:node.data.event.event,
         x: node.x,
         y: node.y + sh 
       },
-      to : (node.children||[]).map(c=>({name:c.data.event.id,x:c.x, y:c.y+LINKDELTA, op:c.data.event.op, actions: c.data.event.actions})),
+      to : (node.children||[]).map(c=>({name:c.data.event.event,x:c.x, y:c.y+LINKDELTA, op:c.data.event.op, actions: c.data.event.actions})),
     },
     ...(node.children || []).map(c=>links(c))
   ]);
@@ -75,12 +75,13 @@ const lookuplinks = (lnks)=>{
 }
 
 
-export default function Tree({lookuptable,nodes,parent,child,speech,toggleAddNew,setParentToAddTo,setLookuptable,addNew,exportNodes,editNode,setParent,setChild}) {
+export default function Tree({lookuptable,nodes,parent,child,toggleAddNew,closeEditAction,setParentToAddTo,setLookuptable,addNew,exportNodes,editNode,editActions,setParent,setChild}) {
  
   const reset = ()=>{
       setChild();
       setParent();
       toggleAddNew(false);
+      closeEditAction();
   }
 
   const childSelected =(e,node)=>{
@@ -90,6 +91,10 @@ export default function Tree({lookuptable,nodes,parent,child,speech,toggleAddNew
 
   const nodeSelected = (e, node)=>{
     editNode(node.data);
+  }
+
+  const linkSelected = (d, link)=>{
+    editActions(link);
   }
 
   const parentSelected = (e, node)=>{
@@ -202,7 +207,7 @@ const allchildren = (node, lut)=>{
 
 
 const treeref = useD3((root) => {
-    console.log("re-rendering tree!");
+    
     const jsontree = convertToHierarchy(lookuptable,nodes);
     const hier = (d3h.hierarchy(jsontree, d=>d.children));
     const tree   =  d3h.tree().nodeSize([sw+XPADDING,sh+YPADDING])(hier);  
@@ -263,11 +268,12 @@ const treeref = useD3((root) => {
                 .attr("y", sh/2+5)
                 .style("text-anchor", "middle")
                 .text((d)=>d.data.name)
-
+                .on("dblclick", (e,n)=>nodeSelected(e,n))
         },
         update =>{
-          update.select("g#slide").transition().duration(ANIMATION_DURATION).attr("transform", (d, i) => `translate(${d.x},${d.y+20})`);
+          update.transition().duration(ANIMATION_DURATION).attr("transform", (d, i) => `translate(${d.x},${d.y+20})`);
           update.select("circle").on("dblclick", (e,n)=>nodeSelected(e,n))
+          update.select("text").on("dblclick", (e,n)=>nodeSelected(e,n))
         },
         
         exit => exit.call(exit =>
@@ -282,7 +288,7 @@ const treeref = useD3((root) => {
        
         
     //render links!
-    const link = root.selectAll("path#link").data(_links, d=>`${d.from.name}${d.to.name}`).join(
+    const link = root.selectAll("path#link").data(_links, d=>`${d.from.name}${d.to.name}${d.to.actions.join(",")}`).join(
           enter => {
             enter.append("path").attr("id", "link").attr("d", l=>{
               return _clink(l.from.x+(sw/2), l.from.y+LINKDELTA+TARGETBIGR, l.to.x+(sw/2), l.to.y-TARGETBIGR);
@@ -309,21 +315,19 @@ const treeref = useD3((root) => {
       });
     
      //render actions within links
-     root.selectAll("g#link").data(_links, d=>{return`${d.from.name}${d.to.name}`}).join(
+     root.selectAll("g#link").data(_links, d=>{return`${d.from.name}${d.to.name}${d.to.actions.join(",")}`}).join(
         enter => {
             const target = enter.append("g").attr("id", "link").attr("transform", l=>`translate(${l.from.x+sw/2 - (l.from.x-l.to.x)/2}, ${l.to.y+ (l.from.y+LINKDELTA-l.to.y)/2})`);
-
             target.append("circle").attr("id", "link").style("opacity",0).style("fill","white").style("stroke","none").attr("cx", 0).attr("cy",-YPADDING+sh).attr("r",10).transition().duration(ANIMATION_DURATION).style("opacity",1);
             target.append("text").style("text-anchor", "middle").attr("x",0).attr("y",-YPADDING+sh+5).text(l=>l.to.op)
-           
-          
-            target.append("circle").attr("id", "label").style("fill","white").style("opacity", l=>l.to.actions && l.to.actions.length > 0 ? 1 : 0).style("stroke","none").attr("cx", 0).attr("cy",20).attr("r",20)
-            target.append("text").style("text-anchor", "middle").attr("x",0).attr("y",25).text(l=>l.to.actions)
+            target.append("circle").attr("id", "label").style("fill","white").style("opacity", l=>l.to.actions && l.to.actions.length > 0 ? 1 : 0).style("stroke","none").attr("cx", 0).attr("cy",20).attr("r",20).on("click", (e,l)=>linkSelected(e,l))
+            target.append("text").attr("id","action").style("text-anchor", "middle").attr("x",0).attr("y",25).text(l=>l.to.actions).on("click", (e,l)=>linkSelected(e,l))
             
         },
         update=>{
             update.transition().duration(ANIMATION_DURATION).attr("transform", l=>`translate(${l.from.x+sw/2 - (l.from.x-l.to.x)/2}, ${l.to.y+ (l.from.y+LINKDELTA-l.to.y)/2})`);
-            update.select("circle#label").style("opacity", l=>l.to.actions && l.to.actions.length > 0 ? 1 : 0);
+            update.select("circle#label").style("opacity", l=>l.to.actions && l.to.actions.length > 0 ? 1 : 0).on("click", (e,l)=>linkSelected(e,l))
+            update.select("text#action").on("click", (e,l)=>linkSelected(e,l));
         },
         exit => exit.call(exit=>exit.remove())
     );
@@ -350,14 +354,11 @@ const treeref = useD3((root) => {
             target.append("text").attr("id", "smalltotarget").attr("x",sw).attr("y",sh+LINKDELTA+5).text("+").style("text-anchor", "middle").style("fill","black").on("click", _parentSelected)
  
         },
-          update=>{
+        update=>{
             
             update.transition().duration(ANIMATION_DURATION).attr("transform", d=>`translate(${d.x-sw/2}, ${d.y})`)
-
             update.selectAll("circle#bigtotarget").style("fill", (d)=> child && child == d.data.name ? "red" : "white").style("stroke", (d)=>child && child == d.data.name ? "white" : "#762bae").on("click", childSelected)
-            update.selectAll("circle#smalltotarget").style("fill", (d)=>child && child== d.data.name ? "red" : "#ae2b4d").style("stroke",(d)=>child && child == d.data.name ? "white" : "#6F67CC").on("click", childSelected)
-
-            
+            update.selectAll("circle#smalltotarget").style("fill", (d)=>child && child== d.data.name ? "red" : "#ae2b4d").style("stroke",(d)=>child && child == d.data.name ? "white" : "#6F67CC").on("click", childSelected)   
             update.selectAll("circle#bigfromtarget").style("stroke", child ? "#ae2b4d" : "black").style("fill", d=> parent && parent == d.data.name ? "#ae2b4d":"white").on("click", _parentSelected).transition().duration(ANIMATION_DURATION).attr("r", d=>eligible.indexOf(d.data.name) == -1 ? TARGETBIGR :  TARGETBIGR+4)
             update.selectAll("circle#smallfromtarget").style("opacity", child ? 1 : 0).style("fill",  d=> parent &&  parent == d.data.name ? "#ae2b4d":"white").on("click", _parentSelected).transition().duration(ANIMATION_DURATION).attr("r", d=>eligible.indexOf(d.data.name) == -1 ? TARGETSMALLR : TARGETSMALLR+2).attr("class", d=>eligible.indexOf(d.data.name) == -1 ? "":"pulse");
             update.selectAll("text#smalltotarget").style("opacity", child ? 0 : 1).on("click",_parentSelected)

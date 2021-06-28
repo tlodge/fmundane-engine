@@ -9,16 +9,19 @@ import {
     listenToSpeech,
     fetchLayers,
     selectEvents,
+    selectAuthored,
     selectReadyForInput,
     selectTrees,
     reset,
+    fetchAuthored,
 } from './experienceSlice';
 
 
 export function Experience() {
   const events = useSelector(selectEvents);
-  const readyforinput = useSelector(selectReadyForInput)
+  const readyforinput = useSelector(selectReadyForInput);
   const trees = useSelector(selectTrees);
+  const authored = useSelector(selectAuthored);
 
   const dispatch = useDispatch();
   const BrowserSpeechRecognition =
@@ -35,9 +38,16 @@ export function Experience() {
   recognition.lang = 'en-US';
 */
 
+
   const [startLabel, setStartLabel] = useState("start");
+  
+  const _fetchLayers = (layer)=>{
+    dispatch(fetchLayers(layer));
+  }
+
   useEffect(() => {
-    dispatch(fetchLayers());
+    dispatch(fetchAuthored());
+    
     dispatch(listenOnEvents());
    // dispatch(listenToSpeech(recognition));
     dispatch(listenOnActions(window));
@@ -63,7 +73,7 @@ export function Experience() {
   
   return (
       <div>
-        <Navigation start={resetExperience}/>
+        <Navigation authored={authored} fetchLayers={_fetchLayers} start={resetExperience}/>
             {list}
         </div>
   );

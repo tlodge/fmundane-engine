@@ -5,7 +5,7 @@ import {subscribe} from './listener';
 import {send} from './ws';
 
 import actions from './actions/actions.json';
-import {handle} from './actionhandler';
+import {handle, handlespeech} from './actionhandler';
 
 const _fetchrule = async (rule)=>{
     let {evaluate} = await import(`./rules/${rule}.js`);
@@ -63,6 +63,10 @@ const _executestart = async (alist, value="")=>{
    
 }
 
+const _executespeech = async (lines)=>{
+    await handlespeech(lines);
+}
+
 const StateMachine =  (config)=>{
 
     let id = config.id;
@@ -86,8 +90,10 @@ const StateMachine =  (config)=>{
         if (event.onstart){
             console.log("onstart is", event.onstart);
             const __startactions = event.onstart.map(a=>actions[a]);
-            _executestart(__startactions, "");//message.toString());
+            //_executestart(__startactions, "");//message.toString());
+            _executespeech(event.onstart)
         }
+        send("ready", {layer:config.id, event:nexteventid});
         //send("event", {id:config.id,data:eventlookup[nexteventid],triggered});
     }
 
@@ -100,8 +106,10 @@ const StateMachine =  (config)=>{
             if (event.onstart){
                 console.log("onstart is", event.onstart);
                 const __startactions = event.onstart.map(a=>actions[a]);
-                _executestart(__startactions, "");//message.toString());
+                //_executestart(__startactions, "");//message.toString());
+                _executespeech(event.onstart)
             }
+            send("ready", {layer:config.id, event:nexteventid});
             //send("event", {id:config.id,data:eventlookup[nexteventid],triggered});
         }
     }
@@ -149,10 +157,11 @@ const StateMachine =  (config)=>{
                
                 if (event.onstart){
                     console.log("onstart is", event.onstart);
-                    const __startactions = event.onstart.map(a=>actions[a]);
-                    console.log(__startactions);
+                    //const __startactions = event.onstart.map(a=>actions[a]);
+                    //console.log(__startactions);
                     send("event", {id:config.id,data:event,triggered});
-                    await _executestart(__startactions, message.toString());
+                    await _executespeech(event.onstart);
+                    //await _executestart(__startactions, message.toString());
                 }else{
                     console.log("hmm nowt troggerd!");
                 }

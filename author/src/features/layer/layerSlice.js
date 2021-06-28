@@ -1,5 +1,6 @@
-import { createAsyncThunk, createSlice, isAsyncThunkAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import {showAddNode} from '../creator/creatorSlice';
+import request from 'superagent';
 
 const _nodesById = {
       "e1" : {
@@ -7,16 +8,15 @@ const _nodesById = {
         "id": "e1",
         "onstart": [
             {
-                "speech": "something to say",
+                "words": "something to say",
                 "duration": 1000
             },
             {
-                "speech": "and something after a second.",
+                "words": "and something after a second.",
             }
         ],
         "type": "button",
         "subscription": "/press",
-        "rules": []
     }
 } 
 
@@ -48,28 +48,56 @@ export const layerSlice = createSlice({
     lut : createLut(_nodesById),
     nodesById :  _nodesById,
     nodes: Object.keys(_nodesById),
-
   },
 
   reducers: {
-    //not used?
+
     addNode : (state, action)=>{
+    
       state.nodes = [...state.nodes, action.payload.id]
       state.nodesById = {
           ...state.nodesById,
           [action.payload.id] : action.payload,
       }
+     
     },
+
+    updateActions : (state, action)=>{
+      
+        const {from,to,actions} = action.payload; 
+        const _actions =  (actions||"").split("|").map((line)=>{
+            return line.split(",");
+        });
+        
+        state.lut = Object.keys(state.lut).reduce((acc, key)=>{
+            if (key === from){
+                return {
+                    ...acc,
+                    [key] : state.lut[key].map((item)=>{
+                        if (item.event === to){
+                            return {
+                                ...item,
+                                actions: _actions,
+                            }
+                        }
+                        return item;
+                    })
+                }
+            }
+            return {...acc,[key]:state.lut[key]}
+
+        },{});
+    },
+
     updateNode : (state, action)=>{
 
         const {node,name,speech} = action.payload;
-        console.log("have ", node, name, speech);
+      
 
         //TODO - SORT ROOT NODE - ID THIS IS THE ONE CHANGED!!
         state.nodesById = Object.keys(state.nodesById).reduce((acc, key)=>{
-            console.log("key is", key, " node is", node);
+           
             if (key == node){
-                console.log("a match!!", name);
                 return {
                     ...acc,
                     [name] : {
@@ -77,26 +105,12 @@ export const layerSlice = createSlice({
                         name,
                         id: name.replace(/\s/g, "_"),
                         onstart: speech,
-                        rules :  (state.nodesById[key].rules || []).map((rule)=>{
-                            if (rule.next === node){
-                                return {...rule, next:name}
-                            }
-                            return rule;
-                        })
                     }
                 }
             }
             return {
                 ...acc,
-                [key] : {
-                    ...state.nodesById[key],
-                    rules :  (state.nodesById[key].rules || []).map((rule)=>{
-                        if (rule.next === node){
-                            return {...rule, next:name}
-                        }
-                        return rule;
-                    })
-                }
+                [key] : state.nodesById[key]
             }
         },{});
 
@@ -107,7 +121,45 @@ export const layerSlice = createSlice({
             return [...acc, item];
         },[])
 
-        state.lut = createLut(state.nodesById);
+        state.lut = Object.keys(state.lut).reduce((acc,key)=>{
+            if (key === "root"){
+                return {
+                    ...acc,
+                    root : {
+                        id : state.lut["root"].id == node ? name : state.lut["root"].id,
+                        event : state.lut["root"].event == node ? name : state.lut["root"].event,
+                    }
+                }
+            }
+            if (key == node){
+                return {
+                    ...acc,
+                    [name] : state.lut[node].map(n=>{
+                            if (n.event === node){
+                                return {
+                                    ...n,
+                                    event: name,
+                                    id: name,
+                                }
+                            }
+                            return n;
+                    })
+                }
+            }
+            return {
+                ...acc,
+                [key] : state.lut[key].map(n=>{
+                    if (n.event === node){
+                        return {
+                            ...n,
+                            event: name,
+                            id: name,
+                        }
+                    }
+                    return n;
+                })
+            }
+        },{});
     },
     setChild : (state, action)=>{
         state.child = action.payload
@@ -123,30 +175,33 @@ export const layerSlice = createSlice({
     },
    
     updateParent : (state, action)=>{
-        state.nodesById = Object.keys(state.nodesById).reduce((acc,key)=>{
-            const node = state.nodesById[key];
-            if (key !== state.parent){
+      
+        state.lut = Object.keys(state.lut).reduce((acc,key)=>{
+            if (key != state.parent){
                 return {
                     ...acc,
-                    [key] : node
-                }
-            }else{
-                return {
-                    ...acc,
-                    [key] : {
-                        ...node,
-                        rules : [...node.rules, {rule: {"operator":"equals", "operand":action.payload.op}, actions:action.payload.actions, next:action.payload.next}]
-                    }
+                   [key]: state.lut[key]
                 }
             }
-        },{})
+            else{
+                return {
+                    ...acc,
+                    [key] : [...(state.lut[key] || []), {event: action.payload.next, id: action.payload.next, op:action.payload.op, actions:action.payload.actions}]
+                }
+            }
+        },{});
+
+        state.lut = {
+            ...state.lut,
+            [action.payload.next] : state.lut[action.payload.next] || []
+        }
     }
   }
 });
 
 
 
-export const { addNode, setParent, setChild, updateParent,setLookup,generateLookuptable,setEditNode,updateNode} = layerSlice.actions;
+export const { addNode, setParent, setChild, updateParent,setLookup,generateLookuptable,setEditNode,updateNode,updateActions} = layerSlice.actions;
 
 const unique = (value="", arr=[])=>{
   
@@ -191,7 +246,7 @@ export const  addToParent = (node, rule, actions)=>{
 }
 
 export const exportNodes = ()=>{
-    return (dispatch, getState)=>{
+    return async (dispatch, getState)=>{
        
         const lut = getState().layer.lut
         const _lut = Object.keys(lut).reduce((acc,key)=>{
@@ -207,11 +262,13 @@ export const exportNodes = ()=>{
 
 
         const items = Object.keys(_lut).reduce((acc,key)=>{
-            return {
-                        ...acc,
-                        [key] : {
-                            ...nodesById[key],
-                            rules : _lut[key].map(k=>{
+            return [
+                    ...acc,
+                    {
+                        id: key,
+                        ...nodesById[key],
+                        data: _lut[key].map(k=>k.op),
+                        rules : _lut[key].map(k=>{
                                return {
                                  "rule": {
                                     "operator": "equals",
@@ -220,12 +277,24 @@ export const exportNodes = ()=>{
                                   "actions": k.actions,
                                   "next": k.event
                                 }
-                            })
-                        }
+                        })
+                        
                     }
-        },{});
+            ]
+        },[]);
 
-       console.log(JSON.stringify(items,null,4));
+        console.log(JSON.stringify(items,null,4));
+
+        const layer = {
+            "id" : "layer1",
+            "start": {
+                "actions": [[]],
+                "event": getState().layer.nodes[0]
+            },
+            "events": items
+        }
+
+        await request.post('/author/save').set('Content-Type', 'application/json').send(layer);
     }
 }
 
@@ -233,7 +302,6 @@ export const addRulesToParent = (op, actions, next)=>{
 
     return (dispatch, getState)=>{
         dispatch(updateParent({op, actions, next}));
-        dispatch(generateLookuptable());
         dispatch(showAddNode(false));
     }
 }

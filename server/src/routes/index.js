@@ -5,6 +5,9 @@ import sm from '../statemachine';
 import actions from '../actions/actions';
 import {handle} from '../actionhandler';
 import fs from 'fs'
+
+let _layers = [];
+
 const format = (l)=>{
     return {
         ...l,
@@ -23,10 +26,10 @@ const format = (l)=>{
 }
 
 
-const _layers = fs.readdirSync(__dirname.replace("routes","layers")).filter(f=>f.startsWith("layer")).map(f => format(require(`../layers/${f}`)));
-console.log(_layers);
+//const _layers = fs.readdirSync(__dirname.replace("routes","layers")).filter(f=>f.startsWith("layer")).map(f => format(require(`../layers/${f}`)));
+//console.log(_layers);
 
-const events = _layers.reduce((acc,item)=>{
+const events = (layers)=>layers.reduce((acc,item)=>{
     const startevent = item.start.event;
     const event = item.events.reduce((acc, item)=>{
         if (item.id == startevent){
@@ -89,10 +92,26 @@ const tree = (layer)=>{
 }
 
 indexRouter.get('/layers', (req, res)=>{
+    console.log(req.query);
+    const {layer="layer1.json"} = req.query;
+    console.log("have layer", layer);
+
+    const _lfile = fs.readFileSync(`authored/${layer}`);
+    
+    _layers = [JSON.parse(_lfile)];
+
     res.status(200).json(_layers.map(l=>tree(l)));
 });
 
 indexRouter.get('/start', (req, res)=>{
+    console.log("ok in start with layers", _layers);
+    //const {layer="layer1.json"} = req.query;
+
+    //const _lfile = fs.readFileSync(`authored/${layer}`);
+    //const _layers = [JSON.parse(_lfile)];
+
+    //console.log("have layers", _layers);
+
     if (statemachines.length <= 0){
         for (const l of _layers){
             statemachines.push(sm(l))
@@ -102,7 +121,7 @@ indexRouter.get('/start', (req, res)=>{
     }
     
     
-    res.status(200).json(events);
+    res.status(200).json(events(_layers));
     
     statemachines.map( async s=>{
        

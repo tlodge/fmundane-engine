@@ -18,10 +18,13 @@ export const experienceSlice = createSlice({
     readyforinput: {},
     transcript: "",
     lastsenttranscript:"",
-   
+    authored:[],
   },
 
   reducers: {
+    setAuthored : (state, action)=>{
+      state.authored = action.payload
+    },
     setLayers : (state, action)=>{
       state.layers = action.payload;
     },
@@ -43,7 +46,7 @@ export const experienceSlice = createSlice({
   }
 });
 
-export const { setLayers, setEvent, setEvents, setTranscript,sentTranscript,setReadyForInput } = experienceSlice.actions;
+export const { setLayers, setEvent, setEvents, setTranscript,sentTranscript,setReadyForInput,setAuthored} = experienceSlice.actions;
 
 // The function below is called a thunk and allows us to perform async logic. It
 // can be dispatched like a regular action: `dispatch(incrementAsync(10))`. This
@@ -170,18 +173,22 @@ export const gestureObserved = (g)=> (dispatch, getState) =>{
   //dispatch(setEvent({}));
 }
 
+export const fetchAuthored = ()=>(dispatch)=>{
+  superagent.get('/author/authored').then(res => {
+    const alist = res.body.layers;
+    console.log("great have alist", alist);
+    dispatch(setAuthored(alist));
+  })
+}
 
-export const fetchLayers = () => (dispatch)=>{
-
-  superagent.get('/event/layers').then(res => {
-   
+export const fetchLayers = (layer) => (dispatch)=>{
+ 
+  superagent.get('/event/layers').query({layer}).then(res => {
     const trees = res.body.map(et=>et.tree);
-      
     dispatch(setLayers(trees));
   })
   .catch(err => {
     console.log("error resetting events", err);
-    // err.message, err.response
   });
 }
 
@@ -240,5 +247,6 @@ const separation = (a, b) =>{
 export const selectReadyForInput = state => state.experience.readyforinput;
 export const selectSpeech= state => state.experience.transcript;
 export const selectTrees = state =>  state.experience.layers.map(t=>d3.tree().nodeSize([120, 230])(d3.hierarchy(t, d=>d.children)))
+export const selectAuthored = state => state.experience.authored;
 
 export default experienceSlice.reducer;

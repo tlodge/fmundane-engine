@@ -33,7 +33,7 @@
                     },
                     "actions": [
                         [
-                            "fanon"
+                            "fanhot"
                         ]
                     ],
                     "next": "e2"
@@ -57,12 +57,45 @@
             "name": "e2",
             "onstart": [
                 {
-                    "words": "you said yes!",
-                    "duration": 500
+                    "words": "hello and welcome welcome",
+                    "duration": 1000
                 },
                 {
-                    "words": "thanks for saying yes",
-                    "duration": 100
+                    "words": "I am delighted to see you",
+                    "duration": 300
+                }
+            ],
+            "type": "button",
+            "subscription": "/press",
+            "data": [
+                "ok"
+            ],
+            "rules": [
+                {
+                    "rule": {
+                        "operator": "equals",
+                        "operand": "ok"
+                    },
+                    "actions": [
+                        [
+                            "fanhot"
+                        ]
+                    ],
+                    "next": "e4"
+                }
+            ]
+        },
+        {
+            "id": "e3",
+            "name": "e3",
+            "onstart": [
+                {
+                    "words": "this is really nice and works rather well now",
+                    "duration": 0
+                },
+                {
+                    "words": "and this blends into a new blender",
+                    "duration": 0
                 }
             ],
             "type": "button",
@@ -71,11 +104,15 @@
             "rules": []
         },
         {
-            "id": "e3",
-            "name": "e3",
+            "id": "e4",
+            "name": "e4",
             "onstart": [
                 {
-                    "words": "you said no.  shame!",
+                    "words": "well now we are settled in",
+                    "duration": 0
+                },
+                {
+                    "words": "and we can move through at pace",
                     "duration": 0
                 }
             ],

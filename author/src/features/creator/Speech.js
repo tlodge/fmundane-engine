@@ -44,12 +44,12 @@ export default function Speech({lines:_lines=[], speechChanged}) {
         return lines.map((r,i)=>{
             return <div key={i} className="flex flex-row text-sm items-center justify-start mt-4">
                 <div className="flex flex-col justify-start">
-                    <input className="mr-4" type="text" value={r.words} onChange={(e)=>{setText(i,e.target.value)}}></input>
+                    <input style={{minWidth:300}} className="mr-4" type="text" value={r.words} onChange={(e)=>{setText(i,e.target.value)}}></input>
                     <label className="flex justify-start">what to say</label>
                 </div>
                 <div className="flex flex-col justify-start">
-                    <input type="text" value={r.delay} onChange={(e)=>{setDuration(i,e.target.value)}}></input>
-                    <label className="flex justify-start">pause (ms) after saying it</label>
+                    <input type="text" style={{width:80}} value={r.delay} onChange={(e)=>{setDuration(i,e.target.value)}}></input>
+                    <label className="flex justify-start">pause (ms)</label>
                 </div>
                 <div onClick={()=>deleteLine(i)} className="flex flex-col justify-start pl-2">
                    <div>🗑</div>

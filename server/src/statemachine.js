@@ -12,7 +12,18 @@ const _fetchrule = async (rule)=>{
     return evaluate;
 }
 
+const callserially = async (list, cb)=>{
+    for (const a of list){
+        console.log("handling", a);
+        await handle(a);
+        console.log("done");
+    }
+    console.log("acllimng callback")
+    cb();
+}
+
 const _executeactions = async (alist, value="")=>{
+    const parallel = [];
 
     for (const row of alist){
         for (const actionlist of row){
@@ -30,14 +41,17 @@ const _executeactions = async (alist, value="")=>{
             });
             
            
-
-            for (const a of _alist){
-                await handle(a);
-            }
             
-            send("action", _alist);
+           
+            parallel.push({list:_alist, cb:()=>{send("action", _alist)}});
+            
+            //send("action", _alist);
         }
     }
+    await Promise.all(parallel.map(async(p)=>{
+        await callserially(p.list,p.cb);
+    }));
+    console.log("finished executinga actions!!");
 }
 
 const _executestart = async (alist, value="")=>{
@@ -104,7 +118,6 @@ const StateMachine =  (config)=>{
         const _event = eventlookup[nexteventid];
         if (event){      
             if (event.onstart){
-                console.log("onstart is", event.onstart);
                 const __startactions = event.onstart.map(a=>actions[a]);
                 //_executestart(__startactions, "");//message.toString());
                 _executespeech(event.onstart)
@@ -128,15 +141,7 @@ const StateMachine =  (config)=>{
                const evaluate = await _fetchrule(e.type);
                 
                 const actionids = e.rules.reduce((acc, item)=>{
-                    
-
-                    console.log("have items", item);
-                    console.log("evaluating", item.rule.operator, item.rule.operand, message.toString());
-
                     const result = evaluate(item.rule.operator, item.rule.operand, message.toString());
-                    
-                    console.log("result is", result);
-
                     if (result){
                         nexteventid = item.next;
                         triggered = item.id;

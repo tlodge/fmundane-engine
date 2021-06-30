@@ -169,14 +169,12 @@ export const sendTranscript = () => (dispatch, getState) =>{
 export const gestureObserved = (g)=> (dispatch, getState) =>{
   _talking = true;
   superagent.get("/event/gesture").query({gesture:g}).end((err, res)=>{});
-  console.log("sending gesture observerd", g);
   //dispatch(setEvent({}));
 }
 
 export const fetchAuthored = ()=>(dispatch)=>{
   superagent.get('/author/authored').then(res => {
     const alist = res.body.layers;
-    console.log("great have alist", alist);
     dispatch(setAuthored(alist));
   })
 }

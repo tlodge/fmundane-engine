@@ -85,10 +85,15 @@ const tree = (layer)=>{
         }
     }, {});
 
-    return {
+    console.log("in tree and events are", JSON.stringify(events,null,4));
+
+    const t = {
         events,
         tree: children([], events, events[layer.start.event],null,[])
     }
+
+    console.log(JSON.stringify(t,null,4));
+    return t;
 }
 
 indexRouter.get('/layers', (req, res)=>{
@@ -98,7 +103,11 @@ indexRouter.get('/layers', (req, res)=>{
 
     const _lfile = fs.readFileSync(`authored/${layer}`);
     
-    _layers = [JSON.parse(_lfile)];
+   
+
+  
+    _layers = [format(JSON.parse(_lfile))];
+    //console.log("READ IN FILE", JSON.stringify(_layers,null,4));
 
     res.status(200).json(_layers.map(l=>tree(l)));
 });

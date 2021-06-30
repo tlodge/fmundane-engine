@@ -112,6 +112,9 @@ function Tree(t) {
     }, []);
 
     const renderLinks = (links, data)=>{
+
+
+        console.log("rendering links", links);
         return links.map((link)=>{
     
             return link.to.map((l)=>{

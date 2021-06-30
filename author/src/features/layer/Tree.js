@@ -1,9 +1,8 @@
-import {useState, useEffect} from 'react';
+import {useEffect} from 'react';
 import * as d3h from 'd3-hierarchy';
 import * as d3z from 'd3-zoom';
 import { interpolatePath } from 'd3-interpolate-path';
 import {useD3} from '../../hooks/useD3.js';
-
 
 const SLIDEWIDTH  = 192;
 const WHRATIO = 0.5625;
@@ -25,16 +24,20 @@ const _clink = (sx, sy, tx, ty) => {
   return `M ${sx} ${sy} C ${(sx + tx) / 2} ${sy}, ${(sx + tx) / 2} ${ty}, ${tx} ${ty}`;  
 }
 
-const insert = (lookup, event, nodes={})=>{
+const insert = (seen, lookup, event, nodes={})=>{
+   
     const children = lookup[event.event] || [];
     const [name=["x"]] = (nodes[event.event].name || "").split(".");
     const {onstart=""} = nodes[event.event]
-    return {event, onstart, name, children : children.map(c => insert(lookup, c, nodes))}
+    if (seen.indexOf(event.event)!=-1){
+      return {event, onstart, name, children:[]};
+    }
+    return {event, onstart, name, children : children.map(c => insert([...seen,event.event], lookup, c, nodes))}
     
 }
 
 const convertToHierarchy = (lut,nodes={})=>{
-    return insert (lut, lut["root"],nodes);
+    return insert ([], lut, lut["root"],nodes);
 }
 
 const links = (node={})=>{
@@ -75,7 +78,7 @@ const lookuplinks = (lnks)=>{
 }
 
 
-export default function Tree({lookuptable,nodes,parent,child,toggleAddNew,closeEditAction,setParentToAddTo,setLookuptable,addNew,exportNodes,editNode,editActions,setParent,setChild}) {
+export default function Tree({lookuptable,nodes,parent,child,toggleAddNew,closeEditAction,setParentToAddTo,setLookuptable,addNew,editNode,editActions,setParent,setChild}) {
  
   const reset = ()=>{
       setChild();
@@ -318,10 +321,12 @@ const treeref = useD3((root) => {
      root.selectAll("g#link").data(_links, d=>{return`${d.from.name}${d.to.name}${d.to.actions.join(",")}`}).join(
         enter => {
             const target = enter.append("g").attr("id", "link").attr("transform", l=>`translate(${l.from.x+sw/2 - (l.from.x-l.to.x)/2}, ${l.to.y+ (l.from.y+LINKDELTA-l.to.y)/2})`);
-            target.append("circle").attr("id", "link").style("opacity",0).style("fill","white").style("stroke","none").attr("cx", 0).attr("cy",-YPADDING+sh).attr("r",10).transition().duration(ANIMATION_DURATION).style("opacity",1);
-            target.append("text").style("text-anchor", "middle").attr("x",0).attr("y",-YPADDING+sh+5).text(l=>l.to.op)
-            target.append("circle").attr("id", "label").style("fill","white").style("opacity", l=>l.to.actions && l.to.actions.length > 0 ? 1 : 0).style("stroke","none").attr("cx", 0).attr("cy",20).attr("r",20).on("click", (e,l)=>linkSelected(e,l))
-            target.append("text").attr("id","action").style("text-anchor", "middle").attr("x",0).attr("y",25).text(l=>l.to.actions).on("click", (e,l)=>linkSelected(e,l))
+           
+            target.append("circle").attr("id", "link").style("opacity",0).style("fill","rgb(243, 244, 246)").style("stroke","none").attr("cx", 0).attr("cy",-YPADDING+sh).attr("r",10).transition().duration(ANIMATION_DURATION).style("opacity",1);
+            target.append("text").style("text-anchor", "middle").style("font-weight", "bold").style("font-size", "10px").attr("x",0).attr("y",-YPADDING+sh).text(l=>l.to.op)
+           
+            target.append("circle").attr("id", "label").style("fill","rgb(243, 244, 246)").style("opacity", l=>l.to.actions && l.to.actions.length > 0 ? 1 : 0).style("stroke","none").attr("cx", 0).attr("cy",0).attr("r",20).on("click", (e,l)=>linkSelected(e,l))
+            target.append("text").attr("id","action").style("font-size", "10px").style("text-anchor", "middle").attr("x",0).attr("y",0).text(l=>l.to.actions).on("click", (e,l)=>linkSelected(e,l))
             
         },
         update=>{
@@ -379,9 +384,7 @@ const treeref = useD3((root) => {
      
       <main>
             <div className="flex justify-center items-center flex-col">
-                <div onClick={()=>{exportNodes()}} className="bg-blue-500 text-white w-screen h-12 flex items-center justify-center">
-                    <div>EXPORT</div>
-                </div>
+                
             <svg onClick={()=>reset()} ref={svgref} width={"100vw"} height={"100vh"}>
                 <g  id="dragbox">
                     <g onClick={(e)=>{e.stopPropagation()}}  ref={treeref}>

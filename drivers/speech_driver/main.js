@@ -12,6 +12,20 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+const playIt = (media="")=>{
+    return new Promise((resolve, reject)=>{
+        execFile("afplay", [`media/${media}`], (error)=>{
+            if (error){
+                reject();
+                return;
+            }else{
+                resolve();
+                return;
+            }
+        });  
+    })
+}
+
 const sayIt = (words="", voice="Daniel")=>{
     return new Promise((resolve, reject)=>{
         execFile("say", ["-v", voice, words], (error)=>{
@@ -43,7 +57,11 @@ app.post('/api/speech', async function (req, res, next) {
     const {speech=[]} = req.body;
     for (const item of speech){
         console.log(item);
-        const {words="", voice="Daniel", delay=0} = item;
+        const {words="", voice="Daniel", delay=0, background} = item;
+
+        if (background){
+            playIt(background);    
+        }
         await sayIt(words, voice);    
         await waitFor(delay);
     }

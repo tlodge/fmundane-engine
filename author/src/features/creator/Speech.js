@@ -3,12 +3,14 @@ import {useState, useEffect}  from 'react';
 
 export default function Speech({lines:_lines=[], speechChanged}) {
     
-    _lines = _lines.length <= 0 ? [{"words":"", "delay":0}] : _lines;
+    const voices = ["Kate", "Daniel", "Oliver", "Ava", "Alex", "Bruce", "Junior", "Ralph", "Tom", "Serena"];
+
+    _lines = _lines.length <= 0 ? [{"words":"", "delay":0, "voice":"Kate","background":""}] : _lines;
 
     const [lines, setLines] = useState(_lines);
 
     const addLine = ()=>{
-        setLines([...lines, {"words":"", "delay":0}])
+        setLines([...lines, {"words":"", "delay":0, "voice":"Kate", "background":""}])
     }
 
     const deleteLine = (index)=>{
@@ -27,6 +29,15 @@ export default function Speech({lines:_lines=[], speechChanged}) {
         speechChanged(_lines);
     }
 
+    const setVoice = (index,voice)=>{
+        const _lines = lines.map((item,i)=>{
+            return i==index ? {...item, voice} : item;
+        },[]);
+        setLines(_lines);
+        speechChanged(_lines);
+    }
+
+
     const setDuration = (index, ms)=>{
         const _lines = lines.map((item,i)=>{
             try{
@@ -40,6 +51,23 @@ export default function Speech({lines:_lines=[], speechChanged}) {
         speechChanged(_lines);
     }
 
+    const setBackground = (index, background)=>{
+        const _lines = lines.map((item,i)=>{
+            try{
+                return i==index ? {...item, background} : item;
+            }catch(err){
+                return item;
+            }
+            
+        },[]);
+        setLines(_lines);
+        speechChanged(_lines);
+    }
+    const renderSelect = (r,index)=>{
+        const options =  voices.map(v=><option value={v}>{v}</option>);
+        return <select key={index} value={r.voice || "Kate"} onChange={(e)=>setVoice(index,e.target.value)} style={{width:120}}>{options}</select>
+    }
+
     const renderLines = ()=>{
         return lines.map((r,i)=>{
             return <div key={i} className="flex flex-row text-sm items-center justify-start mt-4">
@@ -50,6 +78,18 @@ export default function Speech({lines:_lines=[], speechChanged}) {
                 <div className="flex flex-col justify-start">
                     <input type="text" style={{width:80}} value={r.delay} onChange={(e)=>{setDuration(i,e.target.value)}}></input>
                     <label className="flex justify-start">pause (ms)</label>
+                </div>
+                <div className="flex flex-col justify-start">
+                   <div className="pl-2">
+                   {renderSelect(r,i)}
+                   <label className="flex justify-start">voice</label>
+                   </div>
+                </div>
+                <div className="flex flex-col justify-start">
+                    <div className="pl-2">
+                        <input type="text" style={{width:120}} value={r.background} onChange={(e)=>{setBackground(i,e.target.value)}}></input>
+                        <label className="flex justify-start">sound effect</label>
+                    </div>
                 </div>
                 <div onClick={()=>deleteLine(i)} className="flex flex-col justify-start pl-2">
                    <div>🗑</div>

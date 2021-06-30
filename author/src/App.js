@@ -8,6 +8,7 @@ import {
   selectViewAdd,
   linkToEdit,
   setViewAddNode,
+  setEditLink,
 } from './features/creator/creatorSlice';
 
 function App() {
@@ -15,16 +16,27 @@ function App() {
   const viewAdd  = useSelector(selectViewAdd);
   const link = useSelector(linkToEdit);
 
+  const onClose = ()=>{
+    dispatch(setViewAddNode(false))
+    dispatch(setEditLink());
+  }
+
   const renderCreate = ()=>{
-    return <div onClick={()=> {dispatch(setViewAddNode(false))}} className="absolute flex w-screen h-screen  items-center justify-center">
-              <div onClick={(e)=> {e.stopPropagation()}}  className="shadow-xl p-2 bg-white rounded"><Creator/></div>
+    return <div className="absolute flex w-screen h-screen  items-center justify-center">
+              <div   className="shadow-xl p-2 bg-white rounded"><Creator onClose={onClose}/></div>
             </div>
   }
  
+  const renderActions = ()=>{
+    return <div  className="absolute flex w-screen h-screen  items-center justify-center">
+    <div className="flex flex-grow absolute shadow-xl p-2 bg-white rounded" ><ActionCreator onClose={onClose}/></div>
+    </div>
+  }
+
   return (
     <div className="App w-screen">
-       <div className="flex flex-row shadow p-4">
-            {link && <div className="flex flex-grow absolute shadow-xl p-2 bg-white rounded" ><ActionCreator/></div>}
+       <div className="flex flex-row shadow bg-gray-100">
+            {link && renderActions()}
             {viewAdd && renderCreate()}
             <div className="flex flex-grow"><Layer/></div>
        </div>

@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./build/bin/www",
+    "start": "nodemon ./build/bin/www",
     "prestart": "babel ./src --out-dir build && cp -R ./src/actions ../server/build && cp -R ./src/layers ../server/build",
     "startdev": "nodemon --exec babel-node ./src/bin/www",
     "lint": "./node_modules/.bin/eslint ./src",
@@ -37,7 +37,7 @@
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-plugin-import": "^2.22.1",
     "mocha": "^8.2.0",
-    "nodemon": "^2.0.6",
+    "nodemon": "^2.0.8",
     "nyc": "^15.1.0",
     "prettier": "^2.1.2",
     "sinon-chai": "^3.5.0",

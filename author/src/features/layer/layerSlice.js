@@ -9,10 +9,15 @@ const _nodesById = {
         "onstart": [
             {
                 "words": "something to say",
-                "delay": 1000
+                "delay": 1000,
+                "voice":"Daniel",
+                "background":"",
+
             },
             {
                 "words": "and something after a second.",
+                "voice":"Daniel",
+                "background":"",
             }
         ],
         "type": "button",
@@ -48,6 +53,7 @@ export const layerSlice = createSlice({
     lut : createLut(_nodesById),
     nodesById :  _nodesById,
     nodes: Object.keys(_nodesById),
+    authored:[],
   },
 
   reducers: {
@@ -60,6 +66,16 @@ export const layerSlice = createSlice({
           [action.payload.id] : action.payload,
       }
      
+    },
+
+    loadNodes : (state, action)=>{
+        console.log("in nodes!!", action.payload);
+        state.nodes = Object.keys(action.payload.nodes);
+        state.nodesById = action.payload.nodes; 
+        state.lut = createLut(state.nodesById);   
+        console.log(state.nodes);
+        console.log(JSON.stringify(state.nodesById,null,4));
+        console.log(JSON.stringify(state.lut));
     },
 
     updateActions : (state, action)=>{
@@ -167,6 +183,9 @@ export const layerSlice = createSlice({
     setParent : (state, action)=>{
         state.parent = action.payload
     },
+    setAuthored : (state, action)=>{
+        state.authored = action.payload
+    },
     setLookup : (state, action)=>{
         state.lut = action.payload
     },
@@ -201,7 +220,7 @@ export const layerSlice = createSlice({
 
 
 
-export const { addNode, setParent, setChild, updateParent,setLookup,generateLookuptable,setEditNode,updateNode,updateActions} = layerSlice.actions;
+export const { addNode, loadNodes,setParent, setChild, updateParent,setLookup,setAuthored, generateLookuptable,setEditNode,updateNode,updateActions} = layerSlice.actions;
 
 const unique = (value="", arr=[])=>{
   
@@ -219,6 +238,29 @@ export const addNewNode = (node) => {
   }
 }
 
+export const fetchAuthored = ()=>(dispatch)=>{
+    request.get('/author/authored').then(res => {
+      const alist = res.body.layers;
+      console.log("great have alist", alist);
+      dispatch(setAuthored(alist));
+    })
+  }
+
+  export const fetchLayers = (layer) => {
+    console.log("ok am in fetch layers!!");
+    
+    return (dispatch, getState)=>{
+        request.get('/event/layers').query({layer}).then(res => {
+            const [layers={}, ...rest] = res.body;
+            const {events=[]} = layers;
+            console.log("ok have events", events);
+            dispatch(loadNodes({nodes:events}));
+        })
+        .catch(err => {
+            console.log("error resetting events", err);
+        });
+    }
+  }
 
 export const setLookuptable = (lut)=>{
     return (dispatch, getState) => {
@@ -311,5 +353,6 @@ export const selectParent       = state => state.layer.parent;
 export const selectChild        = state => state.layer.child;
 export const selectTree         = state => state.layer.lut;
 export const selectNodeToEdit   = state => state.layer.node;
+export const selectAuthored = state => state.layer.authored;
 
 export default layerSlice.reducer;

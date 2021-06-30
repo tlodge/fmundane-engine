@@ -26,7 +26,7 @@ import {
 
 //mirror a local copy and only update on button press, which then means that we keep the old identity locally before
 //making the change from,to
-export function Creator() {
+export function Creator({onClose}) {
     const dispatch = useDispatch();
     const parent    = useSelector(selectParent);
     const name      = useSelector(selectName);
@@ -98,7 +98,8 @@ export function Creator() {
     }
 
     return<div className="flex flex-col">
-        <div className="flex justify-start flex-col">
+            <div className="flex justify-end items-center text-xl"><div  onClick={onClose} className="flex justify-center items-center  rounded-full  text-xs bg-pink-500 text-white h-6 w-6 shadow">x</div></div>
+            <div className="flex justify-start flex-col">
                 <div className="flex flex-col mt-2 items-start">
                     <label>node name</label>
                     <input type="text" value={node.name} onChange={(e)=>{nameChanged(e.target.value)}} className="p-1 mt-2"></input>

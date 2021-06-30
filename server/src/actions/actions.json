@@ -395,5 +395,43 @@
           "body":{
               "text" : "print something"
             }
-        }
+        },
+        "upbeatmusic": {
+          "type": "request",
+          "data": {
+            "url": "http://127.0.0.1:9106/api/media",
+            "type": "POST",
+            "contenttype": "application/json"
+          },
+          "body":{
+              "media" : "media2.mp3"
+            }
+        },
+        "cakesong": {
+          "type": "request",
+          "data": {
+            "url": "http://127.0.0.1:9106/api/media",
+            "type": "POST",
+            "contenttype": "application/json"
+          },
+          "body":{
+              "media" : "baking.mp3"
+            }
+        },
+        "letmetellyou": {
+          "type": "request",
+          "data": {
+            "url": "http://localhost:9105/api/speech",
+            "type": "POST",
+            "contenttype": "application/json"
+          },
+          "body":{
+              "speech" : [
+                  {
+                      "words": "Little red ridinghood, let me tell you about cakes",
+                      "voice": "Serena"
+                  }
+              ]
+            }
+          }
 }

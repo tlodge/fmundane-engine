@@ -1,0 +1,289 @@
+{
+    "id": "layer1",
+    "start": {
+        "actions": [
+            []
+        ],
+        "event": "ready"
+    },
+    "events": [
+        {
+            "id": "ready",
+            "name": "ready",
+            "onstart": [
+                {
+                    "words": "Hello and welcome!",
+                    "delay": "2200",
+                    "voice": "Kate",
+                    "background": "start.mp3"
+                },
+                {
+                    "words": "Are you ready?",
+                    "delay": "800",
+                    "voice": "Kate"
+                }
+            ],
+            "type": "button",
+            "subscription": "/press",
+            "data": [
+                "yes"
+            ],
+            "rules": [
+                {
+                    "rule": {
+                        "operator": "equals",
+                        "operand": "yes"
+                    },
+                    "actions": [
+                        [
+                            "upbeatmusic"
+                        ]
+                    ],
+                    "next": "start"
+                }
+            ]
+        },
+        {
+            "id": "start",
+            "name": "start",
+            "onstart": [
+                {
+                    "words": "Once upon a time there lived a little girl, the prettiest girl who was ever seen",
+                    "delay": "800",
+                    "voice": "Kate"
+                },
+                {
+                    "words": "Her grandmother made her a hood from red velvet that she wore all the time.",
+                    "voice": "Kate",
+                    "delay": "1000"
+                },
+                {
+                    "words": "So everyone called her Little Red Riding Hood. ",
+                    "delay": "800",
+                    "voice": "Kate"
+                },
+                {
+                    "words": "Would you like to know some more about Little Red Riding hood?",
+                    "delay": 0,
+                    "voice": "Kate",
+                    "background": ""
+                }
+            ],
+            "type": "button",
+            "subscription": "/press",
+            "data": [
+                "no",
+                "yes"
+            ],
+            "rules": [
+                {
+                    "rule": {
+                        "operator": "equals",
+                        "operand": "no"
+                    },
+                    "actions": [
+                        []
+                    ],
+                    "next": "cakes"
+                },
+                {
+                    "rule": {
+                        "operator": "equals",
+                        "operand": "yes"
+                    },
+                    "actions": [
+                        [
+                            ""
+                        ]
+                    ],
+                    "next": "about"
+                }
+            ]
+        },
+        {
+            "id": "cakes",
+            "name": "cakes",
+            "onstart": [
+                {
+                    "words": "One day Little Red Riding hood and her mother made some cakes",
+                    "delay": 2000,
+                    "voice": "Oliver",
+                    "background": "cooking.wav"
+                },
+                {
+                    "words": "When they were finished she said...",
+                    "voice": "Oliver"
+                }
+            ],
+            "type": "button",
+            "subscription": "/press",
+            "data": [
+                "next2",
+                "more on cake making"
+            ],
+            "rules": [
+                {
+                    "rule": {
+                        "operator": "equals",
+                        "operand": "next2"
+                    },
+                    "actions": [
+                        []
+                    ],
+                    "next": "shesaid"
+                },
+                {
+                    "rule": {
+                        "operator": "equals",
+                        "operand": "more on cake making"
+                    },
+                    "actions": [
+                        [
+                            "cakesong"
+                        ],
+                        [
+                            "letmetellyou"
+                        ]
+                    ],
+                    "next": "cakemaking"
+                }
+            ]
+        },
+        {
+            "id": "shesaid",
+            "name": "shesaid",
+            "onstart": [
+                {
+                    "words": "Go, see how your grandmother is doing, I think she has been very ill.",
+                    "delay": 0,
+                    "voice": "Serena"
+                },
+                {
+                    "words": "Take her a cake.",
+                    "delay": 0,
+                    "voice": "Serena"
+                },
+                {
+                    "words": "But please don’t leave the path that goes through the woods and do not talk to anyone.",
+                    "delay": 0,
+                    "voice": "Serena"
+                }
+            ],
+            "type": "button",
+            "subscription": "/press",
+            "data": [],
+            "rules": []
+        },
+        {
+            "id": "about",
+            "name": "about",
+            "onstart": [
+                {
+                    "words": "Red riding hood was born many many years ago",
+                    "delay": "1000",
+                    "voice": "Serena",
+                    "background": ""
+                },
+                {
+                    "words": "She was brilliant at throwing the horeshoes. and hiding in small cupboards",
+                    "delay": 500,
+                    "voice": "Serena",
+                    "background": ""
+                },
+                {
+                    "words": "And hiding in small cupboards",
+                    "delay": 0,
+                    "voice": "Serena",
+                    "background": ""
+                }
+            ],
+            "type": "button",
+            "subscription": "/press",
+            "data": [
+                "back to story"
+            ],
+            "rules": [
+                {
+                    "rule": {
+                        "operator": "equals",
+                        "operand": "back to story"
+                    },
+                    "actions": [
+                        []
+                    ],
+                    "next": "cakes"
+                }
+            ]
+        },
+        {
+            "id": "cakemaking",
+            "name": "cakemaking",
+            "onstart": [
+                {
+                    "words": "oooh - cakes, cakes cakes",
+                    "delay": 500,
+                    "voice": "Kate",
+                    "background": ""
+                },
+                {
+                    "words": "lets bake cakes",
+                    "delay": 0,
+                    "voice": "Alex",
+                    "background": "dramatic.mp3"
+                },
+                {
+                    "words": "lets bake cakes",
+                    "delay": 500,
+                    "voice": "Ava",
+                    "background": ""
+                },
+                {
+                    "words": "cakes are great",
+                    "delay": 800,
+                    "voice": "Oliver",
+                    "background": ""
+                },
+                {
+                    "words": "bake a cake, make a cake, hide a cake, eat a cake",
+                    "delay": 500,
+                    "voice": "Ralph",
+                    "background": ""
+                },
+                {
+                    "words": "cakes",
+                    "delay": 800,
+                    "voice": "Bruce",
+                    "background": ""
+                },
+                {
+                    "words": "cakes cakes cakes cakes cakes cakes",
+                    "delay": 600,
+                    "voice": "Oliver",
+                    "background": ""
+                },
+                {
+                    "words": "i love cakes, cakes love me",
+                    "delay": 500,
+                    "voice": "Ava",
+                    "background": ""
+                },
+                {
+                    "words": "cakes",
+                    "delay": 100,
+                    "voice": "Oliver",
+                    "background": ""
+                },
+                {
+                    "words": "cakes",
+                    "delay": 600,
+                    "voice": "Oliver",
+                    "background": ""
+                }
+            ],
+            "type": "button",
+            "subscription": "/press",
+            "data": [],
+            "rules": []
+        }
+    ]
+}

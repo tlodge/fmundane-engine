@@ -97,6 +97,7 @@ const moveChart = (gtree, t)=>{
 
 function Tree(t) {
   
+
     const gtree = React.useRef();
  
     React.useEffect(() => {
@@ -113,8 +114,6 @@ function Tree(t) {
 
     const renderLinks = (links, data)=>{
 
-
-        console.log("rendering links", links);
         return links.map((link)=>{
     
             return link.to.map((l)=>{

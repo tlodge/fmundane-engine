@@ -27,7 +27,7 @@ const request = (r)=>{
 
 
 export const handlespeech = async (speech)=>{
-    console.log("HANDLING SPEECH", speech);
+    
     await request({
          "data": {
             "url": "http://localhost:9105/api/speech",
@@ -37,7 +37,8 @@ export const handlespeech = async (speech)=>{
           "body":{
               speech
           }
-    })
+    });
+
 }
 
 export const handle = async (r)=>{

@@ -7,6 +7,8 @@ import http from 'http';
 import app from '../app';
 import _io from 'socket.io';
 import {init} from '../ws';
+
+
 /**
  * Normalize a port into a number, string, or false.
  */
@@ -69,8 +71,11 @@ const onListening = () => {
 };
 
 io.on('connection',  (socket)=>{
-  console.log("Connected succesfully to the socket ...");
-  init(socket);
+  //if (!_socket){
+    console.log("Connected succesfully to the socket ...");
+    init(socket);
+    //_socket = socket;
+ // }
  
 });
 /**

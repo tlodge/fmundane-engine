@@ -5,12 +5,12 @@ export default function Speech({lines:_lines=[], speechChanged}) {
     
     const voices = ["Kate", "Daniel", "Oliver", "Ava", "Alex", "Bruce", "Junior", "Ralph", "Tom", "Serena"];
 
-    _lines = _lines.length <= 0 ? [{"words":"", "delay":0, "voice":"Kate","background":""}] : _lines;
+    _lines = _lines.length <= 0 ? [{"words":"", "delay":0, "voice":"Kate","background":"", wpm:180}] : _lines;
 
     const [lines, setLines] = useState(_lines);
 
     const addLine = ()=>{
-        setLines([...lines, {"words":"", "delay":0, "voice":"Kate", "background":""}])
+        setLines([...lines, {"words":"", "delay":0, "voice":"Kate", "background":"", wpm:180}])
     }
 
     const deleteLine = (index)=>{
@@ -51,6 +51,19 @@ export default function Speech({lines:_lines=[], speechChanged}) {
         speechChanged(_lines);
     }
 
+    const setRate = (index, wpm)=>{
+        const _lines = lines.map((item,i)=>{
+            try{
+                return i==index ? {...item, rate:wpm} : item;
+            }catch(err){
+                return item;
+            }
+            
+        },[]);
+        setLines(_lines);
+        speechChanged(_lines);
+    }
+
     const setBackground = (index, background)=>{
         const _lines = lines.map((item,i)=>{
             try{
@@ -78,6 +91,12 @@ export default function Speech({lines:_lines=[], speechChanged}) {
                 <div className="flex flex-col justify-start">
                     <input type="text" style={{width:80}} value={r.delay} onChange={(e)=>{setDuration(i,e.target.value)}}></input>
                     <label className="flex justify-start">pause (ms)</label>
+                </div>
+                <div className="flex flex-col justify-start">
+                    <div className="pl-2">
+                        <input type="text" style={{width:80}} value={r.rate || 180} onChange={(e)=>{setRate(i,e.target.value)}}></input>
+                        <label className="flex justify-start">words/min</label>
+                    </div>
                 </div>
                 <div className="flex flex-col justify-start">
                    <div className="pl-2">

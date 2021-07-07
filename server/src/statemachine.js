@@ -1,7 +1,4 @@
-
-
-
-import {subscribe} from './listener';
+import {subscribe, unsubscribe} from './listener';
 import {send} from './ws';
 
 import actions from './actions/actions.json';
@@ -13,12 +10,12 @@ const _fetchrule = async (rule)=>{
 }
 
 const callserially = async (list, cb)=>{
+
+   
+
     for (const a of list){
-        console.log("handling", a);
         await handle(a);
-        console.log("done");
     }
-    console.log("acllimng callback")
     cb();
 }
 
@@ -51,7 +48,7 @@ const _executeactions = async (alist, value="")=>{
     await Promise.all(parallel.map(async(p)=>{
         await callserially(p.list,p.cb);
     }));
-    console.log("finished executinga actions!!");
+  
 }
 
 const _executestart = async (alist, value="")=>{
@@ -68,8 +65,6 @@ const _executestart = async (alist, value="")=>{
         return a;
     });
     
-   
-
     for (const a of _alist){
         await handle(a);
     }
@@ -81,109 +76,173 @@ const _executespeech = async (lines)=>{
     await handlespeech(lines);
 }
 
-const StateMachine =  (config)=>{
+const StateMachine =   (config)=>{
 
-    let id = config.id;
-    let nexteventid = config.start.event;
-    let triggered = "";
-
-
-    const {events=[]} = config;
+    let id;
+    let event;
+    const {events = []} = config;
+       
     const eventlookup = events.reduce((acc, item)=>{
         return {
             ...acc,
             [item.id] : item,
         }
     },{});
-    
-    const event = eventlookup[nexteventid];
-    
-    console.log("***** Event is", event);
 
-    if (event){      
-        if (event.onstart){
-            console.log("onstart is", event.onstart);
-            const __startactions = event.onstart.map(a=>actions[a]);
-            //_executestart(__startactions, "");//message.toString());
-            _executespeech(event.onstart)
-        }
-        send("ready", {layer:config.id, event:nexteventid});
-        //send("event", {id:config.id,data:eventlookup[nexteventid],triggered});
-    }
-
-    const reset = ()=>{
-        console.log("ok seen reset!");
-
+    const reset = async ()=>{
         nexteventid = config.start.event;
-        const _event = eventlookup[nexteventid];
-        if (event){      
+     
+        if (event){  
+            //send the ready early -- or perhaps an init message?
+
+            
+            
             if (event.onstart){
                 const __startactions = event.onstart.map(a=>actions[a]);
                 //_executestart(__startactions, "");//message.toString());
-                _executespeech(event.onstart)
+                await _executespeech(event.onstart)
             }
-            send("ready", {layer:config.id, event:nexteventid});
+            send("ready", {layer:config.id, event:{id:nexteventid, type:event.type}});    
             //send("event", {id:config.id,data:eventlookup[nexteventid],triggered});
         }
     }
 
-    console.log("ok triggered is", triggered);
+    const _unsubscribe = ()=>{
+        events.map( (e)=>{
+            console.log("unsubscribing from", e);
+            unsubscribe(e.subscription);
+        });
+    }
 
-    events.map( (e)=>{
+    //TODO - onl;y subscribe to the current event!, when there is a change, unsubscribe and subscribe to the next one!
+    const init = async()=>{
+        id = config.id;
+        let eventid = config.start.event;  
+        event = eventlookup[eventid];
+        
+        if (event){      
+            if (event.onstart){
+                await _executespeech(event.onstart);
+            }    
+        }
+
+        send("ready", {layer:config.id, event:{id:eventid, type: event.type}});
        
-      
-        subscribe(e.subscription,  async(message)=>{
-            console.log("event is",e.id, " troggred is", triggered);
+        const sub = (e)=>{
+            
+            console.log("subscribing to", e.id, e.subscription, id);
 
-            if (e.id == nexteventid){
-                console.log("ok have event", e.id);
+            subscribe(e.subscription, id,  async(message)=>{
+            
+                console.log("********* seen new event", e.subscription, " *************************");
 
-               const evaluate = await _fetchrule(e.type);
-                
-                const actionids = e.rules.reduce((acc, item)=>{
+                let nexteventid, triggered;
+
+                const evaluate = await _fetchrule(e.type);
+
+                const actionids = e.rules.reduce((acc, item)=>{ 
                     const result = evaluate(item.rule.operator, item.rule.operand, message.toString());
                     if (result){
+                        console.log("triggered ", item.next, "=>", item.id);
                         nexteventid = item.next;
                         triggered = item.id;
                         return [...acc, item.actions];
                     }
                     return acc;
                 },[]);
-              
-                //call next eventid!!
-                //do the previous event's actions
-                const _actions = actionids.map(arr=>arr.map((arr)=>arr.map(a=>actions[a]||{})));
-                await _executeactions(_actions, message.toString());
-                
-                
-                console.log("the next event is", nexteventid);
-                const event = eventlookup[nexteventid];
-                //then trigger the start of the next event!
-               
-                if (event.onstart){
-                    console.log("onstart is", event.onstart);
-                    //const __startactions = event.onstart.map(a=>actions[a]);
-                    //console.log(__startactions);
-                    send("event", {id:config.id,data:event,triggered});
-                    await _executespeech(event.onstart);
-                    //await _executestart(__startactions, message.toString());
-                }else{
-                    console.log("hmm nowt troggerd!");
+
+                if (triggered){
+                    unsubscribe(e.subscription);
+                    const _actions = actionids.map(arr=>arr.map((arr)=>arr.map(a=>actions[a]||{})));
+                    await _executeactions(_actions, message.toString());
+                    const _e = eventlookup[nexteventid];
+
+                    console.log("my new event is", _e);
+                    
+                    if (_e){
+                        if (_e.onstart){
+                            console.log("sending", {id:config.id,data:e,triggered});
+                            send("event", {id:config.id,data:_e,triggered});
+                            await _executespeech(_e.onstart);
+                        }
+                        sub(_e);
+                        console.log("sending", {layer:config.id, event:{id:nexteventid, type:_e.type}});
+                        send("ready", {layer:config.id, event:{id:nexteventid, type:_e.type}});
+                    }
                 }
-   //
-                send("ready", {layer:config.id, event:nexteventid});
-                //send that are ready for input??*/
+            })
+        }
 
-            }
+        sub(event);
+    }
+
+    /*
+    const init = async ()=>{
+        console.log("OK IN INIT WITH id", config.id);
+        id = config.id;
+        let nexteventid = config.start.event;
+        let triggered = "";
+
+        event = eventlookup[nexteventid];
+
+        if (event){      
+            if (event.onstart){
+                //const __startactions = event.onstart.map(a=>actions[a]);
+                //_executestart(__startactions, "");//message.toString());
+                await _executespeech(event.onstart);
+            }    
+        }
+        send("ready", {layer:config.id, event:{id:nexteventid, type: event.type}});
+
+        events.map( (e)=>{
+        
+            subscribe(e.subscription, id, async(message)=>{
+                
+                
+
+                if (e.id == nexteventid){
+            
+                    const evaluate = await _fetchrule(e.type);        
+                    const actionids = e.rules.reduce((acc, item)=>{ 
+                        const result = evaluate(item.rule.operator, item.rule.operand, message.toString());
+                        if (result){
+                            console.log("HAVE A RESULT!!");
+                            nexteventid = item.next;
+                            triggered = item.id;
+                            return [...acc, item.actions];
+                        }
+                        return acc;
+                    },[]);
+              
+                  
+                    //do the previous event's actions
+                    if (actionids.length > 0){
+                        const _actions = actionids.map(arr=>arr.map((arr)=>arr.map(a=>actions[a]||{})));
+                        await _executeactions(_actions, message.toString());
+                    
+                        const event = eventlookup[nexteventid];
+                    
+                        if (event.onstart){
+                            //const __startations = event.onstart.map(a=>actions[a]);
+                            console.log("TROGGERING NEW EVENT", event);
+                            send("event", {id:config.id,data:event,triggered});
+                            await _executespeech(event.onstart);
+                            //await _executestart(__startactions, message.toString());
+                        }
+
+                        send("ready", {layer:config.id, event:{id:nexteventid, type:event.type}});
+                    }
+                }
+            });
         });
-    });
-
+    }*/
    
-
     return {
         id,
+        init,
         state: ()=>state,
         reset,
+        unsubscribe: _unsubscribe,
         start: config.start,
     }
 

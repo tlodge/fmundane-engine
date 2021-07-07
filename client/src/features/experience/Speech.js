@@ -7,14 +7,19 @@ import {
     selectSpeech,
 } from './experienceSlice';
 
-export default function Speech({rules, ready}) {
-  const dispatch = useDispatch();
+export default function Speech({rules, ready, handleAction, handleChange}) {
+ 
 
   const [words, setWords] = useState("");
 
-  const handleChange = (e) =>{
-    dispatch(setTranscript(e.target.value));
-    setWords(e.target.value);
+  const _handleChange = (value) =>{
+    handleChange(value);
+    setWords(value);
+  }
+
+  const _handleAction = ()=>{
+    setWords("");
+    handleAction();
   }
 
   const renderOperands = ()=>{
@@ -28,12 +33,12 @@ export default function Speech({rules, ready}) {
 
     if (operands.length === 0){
       return <div className="flex flex-row items-center">
-            <input onChange={handleChange} value={words} className="h-10 pl-2 mr-4 rounded" type="text" placeholder="simulate some words"></input>
-            <button onClick={()=>{dispatch(sendTranscript())}} className="bg-blue-500 mr-2 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">say it!</button>
+            <input onChange={(e)=>_handleChange(e.target.value)} value={words} className="h-10 pl-2 mr-4 rounded" type="text" placeholder="simulate some words"></input>
+            <button onClick={()=>{_handleAction()}} className="bg-blue-500 mr-2 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">say it!</button>
         </div>
     }else{
       return  operands.map(b=>{
-            return   <button key={b.operand} onClick={()=>{ dispatch(setTranscript(b.operand));dispatch(sendTranscript());}} className="bg-blue-500 mr-2 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-2rounded">{`${b.operand} (${b.next})`}</button>
+            return   <button key={b.operand} onClick={()=>{ _handleChange(b.operand);_handleAction();}} className="bg-blue-500 mr-2 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-2rounded">{`${b.operand} (${b.next})`}</button>
       });
     }
 }

@@ -1,9 +1,6 @@
 import express from 'express';
 import {send} from '../listener';
-import {send as wssend} from '../ws';
 import sm from '../statemachine';
-import actions from '../actions/actions';
-import {handle} from '../actionhandler';
 import fs from 'fs'
 
 let _layers = [];
@@ -44,7 +41,7 @@ const indexRouter = express.Router();
 
 //indexRouter.get('/', (req, res) => res.status(200).json({ message: testEnvironmentVariable }));
 
-const statemachines = [];
+let statemachines = [];
 
 const children = (seen, events, node, trigger, actions=[])=>{
     
@@ -85,83 +82,93 @@ const tree = (layer)=>{
         }
     }, {});
 
-    console.log("in tree and events are", JSON.stringify(events,null,4));
+    
 
     const t = {
         events,
         tree: children([], events, events[layer.start.event],null,[])
     }
 
-    console.log(JSON.stringify(t,null,4));
+   
     return t;
 }
 
 indexRouter.get('/layers', (req, res)=>{
-    console.log(req.query);
     const {layer="layer1.json"} = req.query;
-    console.log("have layer", layer);
-
     const _lfile = fs.readFileSync(`authored/${layer}`);
+
+    const _ljson = JSON.parse(_lfile);
+    _layers = _ljson.map(f => format(f));
     
-   
-
-  
-    _layers = [format(JSON.parse(_lfile))];
-    //console.log("READ IN FILE", JSON.stringify(_layers,null,4));
-
+    //format(JSON.parse(_lfile));
     res.status(200).json(_layers.map(l=>tree(l)));
 });
 
-indexRouter.get('/start', (req, res)=>{
-    console.log("ok in start with layers", _layers);
-    //const {layer="layer1.json"} = req.query;
-
-    //const _lfile = fs.readFileSync(`authored/${layer}`);
-    //const _layers = [JSON.parse(_lfile)];
-
-    //console.log("have layers", _layers);
+indexRouter.get('/start', async (req, res)=>{
+   
+    console.log("OK AM IN START!!!");
+    //need to reset everything here..!
+    
+    
+    if (statemachines.length > 0){
+        for (const statem of statemachines){
+          
+            statem.unsubscribe();
+        }
+    }
+    statemachines = [];
 
     if (statemachines.length <= 0){
         for (const l of _layers){
-            statemachines.push(sm(l))
+            const smac = sm(l);
+            await smac.init();
+            statemachines.push(smac);
         }
     }else{
-        statemachines.map(sm=>sm.reset());
+        for (const sm of statemachines){
+            await sm.reset();
+        }
     }
     
     
     res.status(200).json(events(_layers));
     
-    statemachines.map( async s=>{
+    //TODO - put back start actions, or improve the onstart stuff so can handle actions AND inline speech.
+
+    /*statemachines.map( async s=>{
        
-         for (const alist of s.start.actions){
-            const promises =  alist.map(id=>handle(actions[id]));
-            await Promise.all(promises);
-        }
+         //for (const alist of s.start.actions){
+         //   const promises =  alist.map(id=>handle(actions[id]));
+         //   await Promise.all(promises);
+        //}
         
-        console.log("statemachine", s);
-        for (const alist of s.start.actions){
-           await  wssend("action", alist.map(id=>actions[id]));
-        }
-        wssend("ready", {layer:s.id, event:s.start.event});
+        console.log("statemachine", JSON.stringify(s,null,4));
+
+        //for (const alist of s.start.actions){
+        //   await  wssend("action", alist.map(id=>actions[id]));
+        //}
+        //wssend("ready", {layer:s.id, event:s.start.event});
         
-    })
+    })*/
 });
 
 indexRouter.get('/press', (req, res)=>{
-    const {name} = req.query;
+    const {name, layer} = req.query;
+    console.log("press for layer", layer);
     send("/press", name);
     res.status(200).json({ press: name });
 }); 
 
 indexRouter.get('/gesture', (req, res)=>{
-    const {gesture} = req.query;
+    const {gesture, layer} = req.query;
+    console.log("gesture for layer", layer);
     send("/gesture", gesture);
     res.status(200).json({gesture});
 });
 
 indexRouter.get('/speech', (req, res)=>{
-    const {speech} = req.query;
+    const {speech, layer} = req.query;
+    console.log("seen speech", speech);
     send("/speech", speech);
     res.status(200).json({ speech });
 }); 

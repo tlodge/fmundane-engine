@@ -32,17 +32,17 @@ export function Experience() {
     window.msSpeechRecognition ||
     window.oSpeechRecognition)
 
-  /*const recognition = BrowserSpeechRecognition ? new BrowserSpeechRecognition() : null;
+  const recognition = BrowserSpeechRecognition ? new BrowserSpeechRecognition() : null;
   recognition.continous = true;
   recognition.interimResults = true;
   recognition.lang = 'en-US';
-*/
+
 
 
   const [startLabel, setStartLabel] = useState("start");
   
   const _fetchLayers = (layer)=>{
-    dispatch(fetchLayers(layer));
+    dispatch(fetchLayers(layer, recognition));
   }
 
   useEffect(() => {
@@ -54,12 +54,13 @@ export function Experience() {
     //handleListen();
   }, []); //only re-run the effect if new message comes in
 
-  console.log("ready for inpyr is", readyforinput);
+  
 
   const list = events.map((e,i)=>{
  
   return <div className="flex row mb-4 border-b-2 h-full" key = {e.id}>
-           <div className="flex flex-grow justify-center m-4"><Layer {...{...e, ready:readyforinput[e.data.id]}} /></div>
+           <div className="flex flex-grow justify-center m-4">
+           <Layer {...{...e, ready:readyforinput[e.data.id]||false}} /></div>
            <Tree {...{...trees[i], id:e.data.id, triggered:e.triggered}}/>
          </div>      
   });

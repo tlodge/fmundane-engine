@@ -1,11 +1,10 @@
 import {useCamera} from "../../useCamera";
 import React, { createRef } from 'react';
-import {gestureObserved} from './experienceSlice';
-import {useDispatch } from 'react-redux';
+
 import * as d3 from "d3";
 
-function Gesture({rules, ready}) {
-      const dispatch = useDispatch();
+function Gesture({rules, ready, handleAction}) {
+     
       const videoRef = createRef();
       const [video, isCameraInitialised, running, setPlaying, error] = useCamera(videoRef);
       
@@ -19,7 +18,7 @@ function Gesture({rules, ready}) {
             },[]);
       
             return  operands.map(b=>{
-                  return   <button key={b.operand} onClick={()=>dispatch(gestureObserved(b.operand))} className="bg-blue-500 mr-2 mt-2 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">{`${b.operand} (${b.next})`}</button>
+                  return   <button key={b.operand} onClick={()=>handleAction(b.operand)} className="bg-blue-500 mr-2 mt-2 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">{`${b.operand} (${b.next})`}</button>
             });
       }
       

@@ -209,6 +209,11 @@ const allchildren = (node, lut)=>{
 }
 
 
+
+const _empty = (arr)=>{
+  return  (!arr || arr.length <= 0 || arr.length <= 0 || arr[0].length <= 0 || arr[0][0].trim()=="") //horrible!
+}
+
 const treeref = useD3((root) => {
     
     const jsontree = convertToHierarchy(lookuptable,nodes);
@@ -326,7 +331,7 @@ const treeref = useD3((root) => {
             target.append("text").style("text-anchor", "middle").style("font-weight", "bold").style("font-size", "10px").attr("x",0).attr("y",-YPADDING+sh).text(l=>l.to.op)
            
             target.append("circle").attr("id", "label").style("fill","rgb(243, 244, 246)").style("opacity", l=>l.to.actions && l.to.actions.length > 0 ? 1 : 0).style("stroke","none").attr("cx", 0).attr("cy",0).attr("r",20).on("click", (e,l)=>linkSelected(e,l))
-            target.append("text").attr("id","action").style("font-size", "10px").style("text-anchor", "middle").attr("x",0).attr("y",0).text(l=>l.to.actions).on("click", (e,l)=>linkSelected(e,l))
+            target.append("text").attr("id","action").style("font-size", "10px").style("text-anchor", "middle").attr("x",0).attr("y",0).text(l=>_empty(l.to.actions) ? "+" : l.to.actions).on("click", (e,l)=>linkSelected(e,l))
             
         },
         update=>{

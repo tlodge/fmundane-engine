@@ -1,30 +1,40 @@
 import Buttons from "./Buttons";
 import Speech from "./Speech";
 import Gesture from "./Gesture";
-
-import superagent from "superagent";
+import {gestureObserved, setTranscript, sendTranscript, buttonPressed} from './experienceSlice';
+import {useDispatch } from 'react-redux';
 
 function Layer(e) {
 
-    console.log("in render layer wit", e);
+    
+    console.log("IN LAYER WITH event", e);
+
+    const dispatch = useDispatch();
     const renderEvent = (event)=>{
 
         switch (event.type){
             case "button":
-                return <Buttons ready={event.ready} names={event.data} buttonPressed={(b)=>{
-                    
-                    superagent.get("/event/press").query({name:b}).end((err, res) => {
-                    if (err){
-                        console.log(err);
-                    }  
-                   
-                    });
-                }}/>
+                return <Buttons 
+                            ready={event.ready} 
+                            names={event.data} 
+                            handleAction={(b)=>{
+                                dispatch(buttonPressed(b));
+                            }}/>
             case "speech":
-                return <Speech  {...event}/>
+                return <Speech  
+                            rules={event.rules} 
+                            ready={event.ready} 
+                            handleChange={(transcript)=>{
+                                dispatch(setTranscript(transcript));
+                            }}
+                            handleAction={()=>{
+                                dispatch(sendTranscript());
+                            }}/>
 
             case "gesture":
-                return <Gesture {...event}/>
+                return <Gesture rules={event.rules} ready={event.ready} handleAction={(op)=>{
+                    dispatch(gestureObserved(op));
+                }}/>
 
             default:
                 return JSON.stringify(event,null,4)

@@ -4,7 +4,6 @@ import fs from 'fs'
 const authorRouter = express.Router();
  
 authorRouter.post('/save', (req, res)=>{
-    console.log("yes seen a post!!", req.body);
     const files = fs.readdirSync("authored");
     const filecount = files.reduce((acc, f)=>{
         if (f.endsWith(".json")) 

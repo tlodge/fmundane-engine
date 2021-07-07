@@ -1,4 +1,4 @@
-{
+[{
     "id": "layer1",
     "start": {
         "actions": [
@@ -21,6 +21,11 @@
                     "words": "Are you ready?",
                     "delay": "800",
                     "voice": "Kate"
+                },
+                {
+                    "words": "Say yes!",
+                    "delay": "1000",
+                    "voice": "Whisper"
                 }
             ],
             "type": "button",
@@ -48,24 +53,29 @@
             "name": "start",
             "onstart": [
                 {
-                    "words": "Once upon a time there lived a little girl, the prettiest girl who was ever seen",
-                    "delay": "800",
-                    "voice": "Kate"
+                    "words": "Once upon a time there lived a little girl",
+                    "delay": "200",
+                    "voice": "Ava"
+                },
+                {
+                    "words": "She was the prettiest girl who was ever seen",
+                    "delay": "200",
+                    "voice": "Ava"
                 },
                 {
                     "words": "Her grandmother made her a hood from red velvet that she wore all the time.",
-                    "voice": "Kate",
-                    "delay": "1000"
+                    "voice": "Ava",
+                    "delay": "500"
                 },
                 {
                     "words": "So everyone called her Little Red Riding Hood. ",
-                    "delay": "800",
-                    "voice": "Kate"
+                    "delay": "1500",
+                    "voice": "Ava"
                 },
                 {
                     "words": "Would you like to know some more about Little Red Riding hood?",
                     "delay": 0,
-                    "voice": "Kate",
+                    "voice": "Ava",
                     "background": ""
                 }
             ],
@@ -105,7 +115,7 @@
             "name": "cakes",
             "onstart": [
                 {
-                    "words": "One day Little Red Riding hood and her mother made some cakes",
+                    "words": "One day Little Red Riding hood and her mother. Made some cakes",
                     "delay": 2000,
                     "voice": "Oliver",
                     "background": "cooking.wav"
@@ -156,17 +166,18 @@
                 {
                     "words": "Go, see how your grandmother is doing, I think she has been very ill.",
                     "delay": 0,
-                    "voice": "Serena"
+                    "voice": "Fiona"
                 },
                 {
                     "words": "Take her a cake.",
-                    "delay": 0,
-                    "voice": "Serena"
+                    "delay": 300,
+                    "voice": "Fiona"
                 },
                 {
-                    "words": "But please don’t leave the path that goes through the woods and do not talk to anyone.",
+                    "words": "Don’t leave the path that goes through the woods and do not talk to anyone.",
                     "delay": 0,
-                    "voice": "Serena"
+                    "voice": "Fiona",
+                    "background": "foreboding.mp3"
                 }
             ],
             "type": "button",
@@ -181,19 +192,19 @@
                 {
                     "words": "Red riding hood was born many many years ago",
                     "delay": "1000",
-                    "voice": "Serena",
+                    "voice": "Fiona",
                     "background": ""
                 },
                 {
-                    "words": "She was brilliant at throwing the horeshoes. and hiding in small cupboards",
-                    "delay": 500,
-                    "voice": "Serena",
+                    "words": "She was brilliant at throwing horse shoes in to buckets.",
+                    "delay": 800,
+                    "voice": "Fiona",
                     "background": ""
                 },
                 {
-                    "words": "And hiding in small cupboards",
+                    "words": "And. Hiding in small cupboards",
                     "delay": 0,
-                    "voice": "Serena",
+                    "voice": "Fiona",
                     "background": ""
                 }
             ],
@@ -246,8 +257,9 @@
                 {
                     "words": "bake a cake, make a cake, hide a cake, eat a cake",
                     "delay": 500,
-                    "voice": "Ralph",
-                    "background": ""
+                    "voice": "Serena",
+                    "background": "",
+                    "rate": 280
                 },
                 {
                     "words": "cakes",
@@ -282,8 +294,19 @@
             ],
             "type": "button",
             "subscription": "/press",
-            "data": [],
-            "rules": []
+            "data": ["back to story"],
+            "rules": [
+                {
+                    "rule": {
+                        "operator": "equals",
+                        "operand": "back to story"
+                    },
+                    "actions": [
+                        ["upbeatmusic"]
+                    ],
+                    "next": "shesaid"
+                }
+            ]
         }
     ]
-}
+}]

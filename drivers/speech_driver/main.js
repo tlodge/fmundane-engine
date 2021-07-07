@@ -26,9 +26,9 @@ const playIt = (media="")=>{
     })
 }
 
-const sayIt = (words="", voice="Daniel")=>{
+const sayIt = (words="", voice="Daniel", rate=150)=>{
     return new Promise((resolve, reject)=>{
-        execFile("say", ["-v", voice, words], (error)=>{
+        execFile("say", ["-v", voice, `[[rate ${rate}]] ${words}`], (error)=>{
             if (error){
                 reject();
                 return;

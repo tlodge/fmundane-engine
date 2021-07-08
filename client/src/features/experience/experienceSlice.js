@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import io from 'socket.io-client';
 import superagent from 'superagent';
 import * as d3 from 'd3-hierarchy';
@@ -66,12 +66,10 @@ export const reset = ()=>dispatch=>{
 }
 
 const stopListening = ()=>{
-  console.log("************** stopping listening!!");
   _canlisten = false;
 }
 
 const allowListening = ()=>{
-  console.log("************* allowing listening!!");
   _canlisten = true;
 }
 
@@ -126,7 +124,7 @@ export const listenOnActions = (window) => async dispatch => {
   
   for (const payload of actions){
   
-    console.log("seen an action", payload);
+  
     /*if (payload.type==="browserspeech"){
       for (const sentence of payload.data.speech){
         _talking = true;
@@ -152,28 +150,17 @@ export const listenOnActions = (window) => async dispatch => {
 
 export const listenOnEvents = () => (dispatch, getState) => {
   socket.on('event', payload => {
-
-    console.log("-------------------->  seen event", payload);
-    //stopListening();
     dispatch(setEvent(payload));
-
-    console.log("EVENTS ARE NOW", getState().experience.events);
   });
 
   socket.on('ready', payload=>{
   
     const {event} = payload; 
 
-    console.log("----------> SEEN A READY!!!", event.id);
-
     dispatch(setReadyForInput(event.id));
-    console.log("GREAT NOW RFI IS", getState().experience.readyforinput)
-
-    //stopListening();
 
     if (event.type==="speech"){
-      console.log("starting speech recognition!!");
-      //dispatch(listenToSpeech());
+      setTranscript("");
       allowListening();
       startRecognition();
     }
@@ -196,11 +183,12 @@ export const sendTranscript = () => (dispatch, getState) =>{
    
     const {transcript, lastsenttranscript} = getState().experience;
     
-    if (lastsenttranscript.trim() != transcript.trim() && transcript.trim() != ""){
+    if (transcript.trim() != ""){
       superagent.get("/event/speech").query({speech:getState().experience.transcript}).end((err, res)=>{
         //stopListening(); //need to get an event back....
         if (!err){
-          dispatch(sentTranscript())
+          dispatch(sentTranscript());
+          dispatch(setTranscript(""));
         }
       });
       //dispatch(setEvent({}));
@@ -236,13 +224,11 @@ export const fetchLayers = (layer, r) => (dispatch)=>{
   });
   
   recognition.onend = () => {
-   
-
-    dispatch(setTranscript(""));
+    
     if (allowedToListen()){
        startRecognition();
     }else{
-      console.log("recognition ended");
+     
     }
   }
 
@@ -257,6 +243,7 @@ export const fetchLayers = (layer, r) => (dispatch)=>{
     }
     if (allowedToListen()){
       dispatch(sendTranscript());
+
     }
   }
 }
@@ -265,7 +252,6 @@ export const fetchLayers = (layer, r) => (dispatch)=>{
 const startRecognition = ()=>{
   
   try{  
-    console.log("starting recognition")   
     recognition.start();
   }catch(err){
     

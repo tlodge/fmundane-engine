@@ -49,11 +49,11 @@ const children = (seen, events, node, trigger, actions=[])=>{
         return;
     }
     if (seen.indexOf(node.id) != -1){
-        return {
+        return{
             id: node.id,
             name: node.name || node.id,
             trigger,
-        };
+        }
     }
     return {
         id: node.id,
@@ -118,21 +118,33 @@ indexRouter.get('/start', async (req, res)=>{
     }
     statemachines = [];
 
+    const parallel = [];
+    
     if (statemachines.length <= 0){
         for (const l of _layers){
             const smac = sm(l);
-            await smac.init();
-            statemachines.push(smac);
+            //await smac.init();
+            parallel.push(()=>{
+                console.log("smac init", l.id);
+                smac.init();
+                statemachines.push(smac);
+                console.log("smac done", l.id);
+            })
         }
     }else{
         for (const sm of statemachines){
-            await sm.reset();
+            parallel.push( ()=>{
+                 sm.reset();
+            })
         }
     }
-    
+
+    await Promise.all(parallel.map(async(p)=>{
+        await p();
+    }));
     
     res.status(200).json(events(_layers));
-    
+
     //TODO - put back start actions, or improve the onstart stuff so can handle actions AND inline speech.
 
     /*statemachines.map( async s=>{

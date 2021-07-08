@@ -362,7 +362,8 @@ const treeref = useD3((root) => {
             target.append("circle").attr("id", "bigfromtarget").attr("cx",sw).attr("cy", sh+LINKDELTA).attr("r",  TARGETBIGR).style("fill", d=> parent && parent == d.data.name ? "#ae2b4d":"white").style("stroke","black").attr("stroke-width",2.5).on("click", _parentSelected)
             target.append("circle").attr("id", "smallfromtarget").attr("cx",sw).attr("cy", sh+LINKDELTA).style("opacity", child ? 1 : 0).attr("r",  TARGETSMALLR).style("fill", d=> parent && parent == d.data.name ? "#ae2b4d":"white").style("stroke","#cc6767").attr("stroke-width",2.5).on("click",_parentSelected)
             target.append("text").attr("id", "smalltotarget").attr("x",sw).attr("y",sh+LINKDELTA+5).text("+").style("text-anchor", "middle").style("fill","black").on("click", _parentSelected)
- 
+            
+          
         },
         update=>{
             

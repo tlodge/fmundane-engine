@@ -78,9 +78,8 @@ const _executespeech = async (lines)=>{
 
 const StateMachine =   (config)=>{
 
-    let id;
     let event;
-    const {events = []} = config;
+    const {events = [], id=""} = config;
        
     const eventlookup = events.reduce((acc, item)=>{
         return {
@@ -109,18 +108,19 @@ const StateMachine =   (config)=>{
 
     const _unsubscribe = ()=>{
         events.map( (e)=>{
-            console.log("unsubscribing from", e);
-            unsubscribe(e.subscription);
+            console.log("unsubscribing from", e.subscription);
+            unsubscribe(e.subscription, config.id);
         });
     }
 
     //TODO - onl;y subscribe to the current event!, when there is a change, unsubscribe and subscribe to the next one!
     const init = async()=>{
-        id = config.id;
+    
         let eventid = config.start.event;  
         event = eventlookup[eventid];
         
-        if (event){      
+        if (event){
+            send("event", {id:config.id,data:event});      
             if (event.onstart){
                 await _executespeech(event.onstart);
             }    
@@ -129,17 +129,22 @@ const StateMachine =   (config)=>{
         send("ready", {layer:config.id, event:{id:eventid, type: event.type}});
        
         const sub = (e)=>{
-            
-            console.log("subscribing to", e.id, e.subscription, id);
+            let nexteventid, triggered;
+            console.log("---> subscribing to", e.id, e.subscription, id);
 
-            subscribe(e.subscription, id,  async(message)=>{
+            subscribe(e.subscription, id,  async(_layer, message)=>{
             
-                console.log("********* seen new event", e.subscription, " *************************");
+                console.log("********* seen new event", e.subscription, " *************************", message.toString());
 
-                let nexteventid, triggered;
+                if (_layer != id){
+                    console.log("*****", id, " ********* seen ", _layer);
+                    return;
+                }
+
+                
 
                 const evaluate = await _fetchrule(e.type);
-
+                console.log("evalue is", evaluate);
                 const actionids = e.rules.reduce((acc, item)=>{ 
                     const result = evaluate(item.rule.operator, item.rule.operand, message.toString());
                     if (result){
@@ -152,22 +157,32 @@ const StateMachine =   (config)=>{
                 },[]);
 
                 if (triggered){
-                    unsubscribe(e.subscription);
+                    console.log("triggered!!!");
+                    unsubscribe(e.subscription, id);
                     const _actions = actionids.map(arr=>arr.map((arr)=>arr.map(a=>actions[a]||{})));
                     await _executeactions(_actions, message.toString());
                     const _e = eventlookup[nexteventid];
 
-                    console.log("my new event is", _e);
+                   
                     
                     if (_e){
+                        send("event", {id:config.id,data:_e,triggered});
                         if (_e.onstart){
-                            console.log("sending", {id:config.id,data:e,triggered});
-                            send("event", {id:config.id,data:_e,triggered});
                             await _executespeech(_e.onstart);
                         }
-                        sub(_e);
-                        console.log("sending", {layer:config.id, event:{id:nexteventid, type:_e.type}});
                         send("ready", {layer:config.id, event:{id:nexteventid, type:_e.type}});
+                      
+                        
+                       
+                        //race condition here - it's possible that the speech on onstart is still being processed by the browesr and then sent 
+                        //here, and if we've subcribed to the new event, and it is also a speech event then it may receive this speech and act on it..
+                        //to get round this we give a little bit of time for this to happen before we subscribe.
+                        setTimeout(
+                            ()=>{
+                                console.log('subscribing to next event!')
+                                sub(_e)
+                            }
+                        ,1000);
                     }
                 }
             })

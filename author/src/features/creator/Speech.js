@@ -77,7 +77,7 @@ export default function Speech({lines:_lines=[], speechChanged}) {
         speechChanged(_lines);
     }
     const renderSelect = (r,index)=>{
-        const options =  voices.map(v=><option value={v}>{v}</option>);
+        const options =  voices.map(v=><option key={v} value={v}>{v}</option>);
         return <select key={index} value={r.voice || "Kate"} onChange={(e)=>setVoice(index,e.target.value)} style={{width:120}}>{options}</select>
     }
 

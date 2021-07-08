@@ -1,5 +1,6 @@
 import {useState}  from 'react';
 import Speech from './Speech';
+import {LinkCreator} from './LinkCreator';
 
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -21,7 +22,7 @@ import {
    selectName,  
    selectRule,        
    selectSpeech,    
-   selectActions,    
+   selectActions
 } from './creatorSlice';
 
 //mirror a local copy and only update on button press, which then means that we keep the old identity locally before
@@ -34,7 +35,9 @@ export function Creator({onClose}) {
     const speech    = useSelector(selectSpeech);
     const actions   = useSelector(selectActions);
 
+
     const [node, setNode] = useState({name,rule,speech,actions});
+    const [tab, setTab] = useState("new");
 
     const createNode = ()=>{
         
@@ -97,30 +100,44 @@ export function Creator({onClose}) {
         </div>
     }
 
-    return<div className="flex flex-col">
-            <div className="flex justify-end items-center text-xl"><div  onClick={onClose} className="flex justify-center items-center  rounded-full  text-xs bg-pink-500 text-white h-6 w-6 shadow">x</div></div>
-            <div className="flex justify-start flex-col">
-                <div className="flex flex-col mt-2 items-start">
-                    <label>node name</label>
-                    <input type="text" value={node.name} onChange={(e)=>{nameChanged(e.target.value)}} className="p-1 mt-2"></input>
-                    <label className="text-xs mt-1">a unique name for this node</label>
-                </div>
-                {parent && renderRule()}
-                <div className="flex  flex-col shadow p-2 mt-4">
-                    <div className="font-bold text-xs flex justify-start">SPEECH (when this node starts)</div>
-                    <div className="flex flex-col mt-2 items-start">
-                        <Speech lines={node.speech} speechChanged={speechChanged}/>
-                    </div>
-                </div>
-                {parent && <div className="flex  flex-col shadow p-2 mt-4">
-                    <div className="font-bold text-xs flex justify-start">ACTION (what is called when this node is triggered)</div>
-                    <div className="flex flex-col mt-2 items-start">
-                        <input type="text" placeholder="action list" value={node.action} onChange={(e)=>{actionChanged(e.target.value)}}></input>
-                        <label className="text-xs mt-1 justify-start">format: a1,a2,a3|a5,a6 </label>
-                    </div>
-                </div>}
+    
+    const renderCurrent = ()=> <LinkCreator/>
+
+    const renderNew = ()=>{
+        return  <div className="flex justify-start flex-col">
+        <div className="flex flex-col mt-2 items-start">
+            <label>node name</label>
+            <input type="text" value={node.name} onChange={(e)=>{nameChanged(e.target.value)}} className="p-1 mt-2"></input>
+            <label className="text-xs mt-1">a unique name for this node</label>
+        </div>
+        {parent && renderRule()}
+        <div className="flex  flex-col shadow p-2 mt-4">
+            <div className="font-bold text-xs flex justify-start">SPEECH (when this node starts)</div>
+            <div className="flex flex-col mt-2 items-start">
+                <Speech lines={node.speech} speechChanged={speechChanged}/>
             </div>
-            {parent &&  <div> <button onClick={createNode} className="p-2 mt-4 bg-blue-500 text-white">Create node!</button></div>}
-            {!parent &&  <div> <button onClick={_updateNode} className="p-2 mt-4 bg-blue-500 text-white">Update node</button></div>}
+        </div>
+        {parent && <div className="flex  flex-col shadow p-2 mt-4">
+            <div className="font-bold text-xs flex justify-start">ACTION (what is called when this node is triggered)</div>
+            <div className="flex flex-col mt-2 items-start">
+                <input type="text" placeholder="action list" value={node.action} onChange={(e)=>{actionChanged(e.target.value)}}></input>
+                <label className="text-xs mt-1 justify-start">format: a1,a2,a3|a5,a6 </label>
+            </div>
+        </div>}
+        {parent &&  <div> <button onClick={createNode} className="p-2 mt-4 bg-blue-500 text-white">Create node!</button></div>}
+    {!parent &&  <div> <button onClick={_updateNode} className="p-2 mt-4 bg-blue-500 text-white">Update node</button></div>}
     </div>
+   
+    }
+    
+
+    return  <div className="flex flex-col">
+                <div className="flex justify-end items-center text-xl"><div  onClick={onClose} className="flex justify-center items-center  rounded-full  text-xs bg-pink-500 text-white h-6 w-6 shadow">x</div></div>
+                <div className="flex flex-row">
+                    <div onClick={()=>{setTab("new")}} className={`font-bold p-4 ${tab=="new" ? "text-blue-500" : "text-gray-500"}`}>new node</div>
+                    <div onClick={()=>{setTab("current")}} className={`font-bold p-4 ${tab=="current" ? "text-blue-500" : "text-gray-500"}`}>existing node</div>
+                </div>
+                {tab=="new" && renderNew()}
+                {tab=="current" && renderCurrent()}
+            </div>
 }

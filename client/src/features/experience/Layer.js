@@ -6,9 +6,6 @@ import {useDispatch } from 'react-redux';
 
 function Layer(e) {
 
-    
-    console.log("IN LAYER WITH event", e);
-
     const dispatch = useDispatch();
     const renderEvent = (event)=>{
 
@@ -18,6 +15,7 @@ function Layer(e) {
                             ready={event.ready} 
                             names={event.data} 
                             handleAction={(b)=>{
+                                console.log("button pressed!!!", b);
                                 dispatch(buttonPressed(b));
                             }}/>
             case "speech":
@@ -25,9 +23,11 @@ function Layer(e) {
                             rules={event.rules} 
                             ready={event.ready} 
                             handleChange={(transcript)=>{
+                                console.log("setting transcript", transcript);
                                 dispatch(setTranscript(transcript));
                             }}
                             handleAction={()=>{
+                                console.log("sending transcript");
                                 dispatch(sendTranscript());
                             }}/>
 

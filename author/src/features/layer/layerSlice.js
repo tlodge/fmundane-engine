@@ -68,14 +68,27 @@ export const layerSlice = createSlice({
      
     },
 
+    createLink: (state, action)=>{
+
+        const {rule, action:a, from, to} = action.payload;
+        
+        const _actions =  (a||"").split("|").map((line)=>{
+            return line.split(",");
+        });
+
+        state.lut = {
+            ...state.lut, 
+            [from] : [...state.lut[from], {id: `${to}_${Date.now()}`, event:to, op:[rule], actions:_actions}]
+        }
+       
+    },
+
     loadNodes : (state, action)=>{
-        console.log("in nodes!!", action.payload);
+       
         state.nodes = Object.keys(action.payload.nodes);
         state.nodesById = action.payload.nodes; 
         state.lut = createLut(state.nodesById);   
-        console.log(state.nodes);
-        console.log(JSON.stringify(state.nodesById,null,4));
-        console.log(JSON.stringify(state.lut));
+    
     },
 
     updateActions : (state, action)=>{
@@ -220,7 +233,7 @@ export const layerSlice = createSlice({
 
 
 
-export const { addNode, loadNodes,setParent, setChild, updateParent,setLookup,setAuthored, generateLookuptable,setEditNode,updateNode,updateActions} = layerSlice.actions;
+export const { addNode, loadNodes,setParent, setChild, updateParent,setLookup,setAuthored, generateLookuptable,setEditNode,updateNode,updateActions,createLink} = layerSlice.actions;
 
 const unique = (value="", arr=[])=>{
   
@@ -247,7 +260,6 @@ export const fetchAuthored = ()=>(dispatch)=>{
   }
 
   export const fetchLayers = (layer) => {
-    console.log("ok am in fetch layers!!");
     
     return (dispatch, getState)=>{
         request.get('/event/layers').query({layer}).then(res => {
@@ -348,11 +360,12 @@ export const addRulesToParent = (op, actions, next)=>{
     }
 }
 
-export const selectNodes        = state => state.layer.nodesById;
-export const selectParent       = state => state.layer.parent;
-export const selectChild        = state => state.layer.child;
-export const selectTree         = state => state.layer.lut;
-export const selectNodeToEdit   = state => state.layer.node;
-export const selectAuthored = state => state.layer.authored;
+export const selectNodeIds          = state => state.layer.nodes;
+export const selectNodes            = state => state.layer.nodesById;
+export const selectParent           = state => state.layer.parent;
+export const selectChild            = state => state.layer.child;
+export const selectTree             = state => state.layer.lut;
+export const selectNodeToEdit       = state => state.layer.node;
+export const selectAuthored         = state => state.layer.authored;
 
 export default layerSlice.reducer;

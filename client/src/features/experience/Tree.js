@@ -136,7 +136,7 @@ function Tree(t) {
 
                 const ruletext =    <g>
                                         <rect x={link.from.y-20+ty} y={link.from.x-13+tx} width={40} height={12} style={{fill: "#edf2f7"}}/>
-                                        <text fontSize="x-small" font-weight="bold" fill="black" textAnchor={anchor} y={link.from.x+tx-5} x={(link.from.y+ty)}>{rulelabel}</text>
+                                        <text fontSize="x-small" fontWeight="bold" fill="black" textAnchor={anchor} y={link.from.x+tx-5} x={(link.from.y+ty)}>{rulelabel}</text>
                                     </g>
 
 
@@ -151,10 +151,10 @@ function Tree(t) {
         });
     }
 
-    const renderTree = (node,selected,rid)=>{
+    const renderTree = (node,selected,rid, seen={})=>{
        
         let paint = false;
-
+        
         if (!rid){
             paint = selected==node.data.id && node.children && node.children.length > 0;
         }else{
@@ -162,11 +162,13 @@ function Tree(t) {
         }
 
         return <g key={`${node.x},${node.y}`}> 
-                   
+                
                     <rect x={node.y-60} y={node.x-10} width={120} height={20} style={{fill: paint ? "#4299e1":"white", stroke:"black"}}/>
                     <text textAnchor="middle" fontSize="x-small"  x={node.y} y={node.x+4}>{node.data.name}</text>
-                    {(node.children || []).map(n=>renderTree(n, selected, rid))}
-              </g>
+                    {(node.children || []).map(n=>renderTree(n, selected, rid, {...seen, [node.data.id]:true}))}
+            </g>
+
+        
     }
 
 

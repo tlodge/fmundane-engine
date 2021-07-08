@@ -13,11 +13,13 @@ export default function Speech({rules, ready, handleAction, handleChange}) {
   const [words, setWords] = useState("");
 
   const _handleChange = (value) =>{
+    console.log("IN HANDLE CHANGE!!!");
     handleChange(value);
     setWords(value);
   }
 
   const _handleAction = ()=>{
+    console.log("IN HANDLE ACTION!!");
     setWords("");
     handleAction();
   }

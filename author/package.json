@@ -22,7 +22,8 @@
   },
   "scripts": {
     "start": "craco start",
-    "build": "craco build",
+    "build": "craco build && npm run deploy",
+    "deploy": "mkdir -p ../server/build/author && cp -R build/* ../server/build/author",
     "test": "craco test",
     "eject": "react-scripts eject"
   },

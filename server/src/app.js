@@ -11,13 +11,22 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+
 app.use('/event', indexRouter);
 app.use('/author', authorRouter);
 
 app.use(express.static(path.join(__dirname, 'client')));
+app.use(express.static(path.join(__dirname, 'author')));
 
-app.get('/', function (req, res) {
+app.get('/',  (req, res)=>{
   res.sendFile(path.join(__dirname, 'client', 'index.html'));
 });
+
+app.get("/author", (req,res)=>{
+  res.sendFile(path.join(__dirname, 'author', 'index.html'));
+});
+
+console.log("dirname is ", __dirname);
+
 
 export default app;

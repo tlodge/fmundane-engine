@@ -10,7 +10,7 @@ authorRouter.post('/save', (req, res)=>{
             return acc+1;
         return acc;
     },0);
-    fs.writeFileSync(`authored/layer${filecount}.json`, JSON.stringify(req.body,null,4));
+    fs.writeFileSync(`authored/layer${filecount}.json`, JSON.stringify([req.body],null,4));
     res.status(200).json({});
 });
 

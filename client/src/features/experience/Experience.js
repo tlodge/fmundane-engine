@@ -32,7 +32,13 @@ export function Experience() {
     window.msSpeechRecognition ||
     window.oSpeechRecognition)
 
-  const recognition = BrowserSpeechRecognition ? new BrowserSpeechRecognition() : null;
+  const proxyRecognition = ()=>{
+    return {
+       start : ()=>{}
+    }
+  }
+  
+  const recognition = BrowserSpeechRecognition ? new BrowserSpeechRecognition() : proxyRecognition();
   recognition.continous = true;
   recognition.interimResults = true;
   recognition.lang = 'en-US';

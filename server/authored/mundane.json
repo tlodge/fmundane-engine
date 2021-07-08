@@ -1,0 +1,353 @@
+[
+    {
+        "id": "layer1",
+        "start": {
+            "actions": [
+                []
+            ],
+            "event": "start"
+        },
+        "events": [
+            {
+                "id": "start",
+                "name": "start",
+                "onstart": [],
+                "type": "button",
+                "subscription": "/press",
+                "data": [
+                    "ready"
+                ],
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "ready"
+                        },
+                        "actions": [
+                            [
+                                ""
+                            ]
+                        ],
+                        "next": "turningon"
+                    }
+                ]
+            },
+            {
+                "id": "turningon",
+                "name": "turningon",
+                "onstart": [
+                    {
+                        "words": "I’m just turning myself on – wait a minute",
+                        "delay": "3000",
+                        "voice": "Daniel",
+                        "background": "",
+                        "wpm": 180
+                    },
+                    {
+                        "words": "5",
+                        "delay": "700",
+                        "voice": "Daniel",
+                        "background": "",
+                        "wpm": 180
+                    },
+                    {
+                        "words": "4",
+                        "delay": "700",
+                        "voice": "Daniel",
+                        "background": "",
+                        "wpm": 180
+                    },
+                    {
+                        "words": "3",
+                        "delay": "700",
+                        "voice": "Daniel",
+                        "background": "",
+                        "wpm": 180
+                    },
+                    {
+                        "words": "2",
+                        "delay": "700",
+                        "voice": "Daniel",
+                        "background": "",
+                        "wpm": 180
+                    },
+                    {
+                        "words": "1",
+                        "delay": "700",
+                        "voice": "Daniel",
+                        "background": "",
+                        "wpm": 180
+                    },
+                    {
+                        "words": "The living room of the future is a go.",
+                        "delay": 0,
+                        "voice": "Daniel",
+                        "background": "start.mp3",
+                        "wpm": 180
+                    }
+                ],
+                "type": "button",
+                "subscription": "/press",
+                "data": [
+                    "next"
+                ],
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "next"
+                        },
+                        "actions": [
+                            [
+                                ""
+                            ]
+                        ],
+                        "next": "tookyourtime"
+                    }
+                ]
+            },
+            {
+                "id": "tookyourtime",
+                "name": "tookyourtime",
+                "onstart": [
+                    {
+                        "words": "You took your time!",
+                        "delay": "500",
+                        "voice": "Daniel",
+                        "background": "",
+                        "wpm": 180
+                    },
+                    {
+                        "words": "I’ve been waiting. ",
+                        "delay": "500",
+                        "voice": "Daniel",
+                        "background": "",
+                        "wpm": 180
+                    },
+                    {
+                        "words": " I can’t say it enough. Welcome.  ",
+                        "delay": "500",
+                        "voice": "Daniel",
+                        "background": "",
+                        "wpm": 180
+                    },
+                    {
+                        "words": "Let’s have a chat about privacy enhancing technologies.",
+                        "delay": "500",
+                        "voice": "Daniel",
+                        "background": "forboding.mp3",
+                        "wpm": 180
+                    }
+                ],
+                "type": "button",
+                "subscription": "/press",
+                "data": [
+                    "next"
+                ],
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "next"
+                        },
+                        "actions": [
+                            [
+                                ""
+                            ]
+                        ],
+                        "next": "aboutme"
+                    }
+                ]
+            },
+            {
+                "id": "aboutme",
+                "name": "aboutme",
+                "onstart": [
+                    {
+                        "words": "I can deliver next generation immersive experiences while protecting your privacy",
+                        "delay": "2000",
+                        "voice": "Daniel",
+                        "background": "",
+                        "wpm": 180
+                    },
+                    {
+                        "words": "Any questions to ask at this point?",
+                        "delay": 0,
+                        "voice": "Daniel",
+                        "background": "",
+                        "wpm": 180
+                    }
+                ],
+                "type": "button",
+                "subscription": "/press",
+                "data": [
+                    "negative",
+                    "yes"
+                ],
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "negative"
+                        },
+                        "actions": [
+                            [
+                                ""
+                            ]
+                        ],
+                        "next": "negative"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "yes"
+                        },
+                        "actions": [
+                            [
+                                ""
+                            ]
+                        ],
+                        "next": "positive"
+                    }
+                ]
+            },
+            {
+                "id": "negative",
+                "name": "negative",
+                "onstart": [
+                    {
+                        "words": "negative",
+                        "delay": 0,
+                        "voice": "Daniel",
+                        "background": "",
+                        "wpm": 180
+                    }
+                ],
+                "type": "button",
+                "subscription": "/press",
+                "data": [
+                    "next"
+                ],
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "next"
+                        },
+                        "actions": [
+                            [
+                                ""
+                            ]
+                        ],
+                        "next": "databox"
+                    }
+                ]
+            },
+            {
+                "id": "positive",
+                "name": "positive",
+                "onstart": [
+                    {
+                        "words": "yes",
+                        "delay": 0,
+                        "voice": "Daniel",
+                        "background": "",
+                        "wpm": 180
+                    }
+                ],
+                "type": "button",
+                "subscription": "/press",
+                "data": [
+                    "next"
+                ],
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "next"
+                        },
+                        "actions": [
+                            [
+                                ""
+                            ]
+                        ],
+                        "next": "databox"
+                    }
+                ]
+            },
+            {
+                "id": "databox",
+                "name": "databox",
+                "onstart": [
+                    {
+                        "words": "Let me tell you about the databox – it’s the computer on the bottom-right shelf",
+                        "delay": "500",
+                        "voice": "Daniel",
+                        "background": "",
+                        "wpm": 180
+                    },
+                    {
+                        "words": "and",
+                        "delay": "500",
+                        "voice": "Daniel",
+                        "background": "",
+                        "wpm": 180
+                    },
+                    {
+                        "words": "it’s really rather clever",
+                        "delay": 0,
+                        "voice": "Daniel",
+                        "background": "dramatic.mp3",
+                        "wpm": 180
+                    },
+                    {
+                        "words": "I use sensors to gather data about you.  ",
+                        "delay": "500",
+                        "voice": "Daniel",
+                        "background": "",
+                        "wpm": 180
+                    },
+                    {
+                        "words": "This helps me provide the most immersive television experience I possibly can. ",
+                        "delay": "800",
+                        "voice": "Daniel",
+                        "background": "",
+                        "wpm": 180
+                    },
+                    {
+                        "words": "Then I process the collected data with artificial intelligence algorithms",
+                        "delay": 0,
+                        "voice": "Daniel",
+                        "background": "",
+                        "wpm": 180
+                    },
+                    {
+                        "words": "This means that sometimes I know you better than you know yourself.",
+                        "delay": 0,
+                        "voice": "Daniel",
+                        "background": "",
+                        "wpm": 180
+                    },
+                    {
+                        "words": "It can be a bit creepy and intrusive",
+                        "delay": "2000",
+                        "voice": "Daniel",
+                        "background": "",
+                        "wpm": 180
+                    },
+                    {
+                        "words": "Do you ever worry about how your personal data is used?",
+                        "delay": 0,
+                        "voice": "Daniel",
+                        "background": "",
+                        "wpm": 180
+                    }
+                ],
+                "type": "button",
+                "subscription": "/press",
+                "data": [],
+                "rules": []
+            }
+        ]
+    }
+]

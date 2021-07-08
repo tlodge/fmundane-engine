@@ -1,0 +1,122 @@
+[{
+    "id": "layer1",
+    "start": {
+        "actions": [
+            []
+        ],
+        "event": "e1"
+    },
+    "events": [
+        {
+            "id": "e1",
+            "name": "e1",
+            "onstart": [{
+                "words":"hi"
+            }],
+            "type": "button",
+            "subscription": "/press",
+            "data": [
+                "hurryup",
+                "hey you"
+            ],
+            "rules": [
+                {
+                    "rule": {
+                        "operator": "equals",
+                        "operand": "hurryup"
+                    },
+                    "actions": [
+                        [
+                            ""
+                        ]
+                    ],
+                    "next": "hurry"
+                },
+                {
+                    "rule": {
+                        "operator": "equals",
+                        "operand": "hey you"
+                    },
+                    "actions": [
+                        [
+                            ""
+                        ]
+                    ],
+                    "next": "hey"
+                }
+            ]
+        },
+        {
+            "id": "hurry",
+            "name": "hurry",
+            "onstart": [
+                {
+                    "words": "I haven't got all day!",
+                    "delay": 0,
+                    "voice": "Kate",
+                    "background": "",
+                    "wpm": 180
+                }
+            ],
+            "type": "button",
+            "subscription": "/press",
+            "data": [
+                [
+                    "back"
+                ]
+            ],
+            "rules": [
+                {
+                    "rule": {
+                        "operator": "equals",
+                        "operand": [
+                            "back"
+                        ]
+                    },
+                    "actions": [
+                        [
+                            ""
+                        ]
+                    ],
+                    "next": "e1"
+                }
+            ]
+        },
+        {
+            "id": "hey",
+            "name": "hey",
+            "onstart": [
+                {
+                    "words": "Hey you.  Pay attention.  We’re trying to do the future here",
+                    "delay": 0,
+                    "voice": "Kate",
+                    "background": "",
+                    "wpm": 180
+                }
+            ],
+            "type": "button",
+            "subscription": "/press",
+            "data": [
+                [
+                    "back"
+                ]
+            ],
+            "rules": [
+                {
+                    "rule": {
+                        "operator": "equals",
+                        "operand": [
+                            "back"
+                        ]
+                    },
+                    "actions": [
+                        [
+                            ""
+                        ]
+                    ],
+                    "next": "e1"
+                }
+            ]
+        }
+    ]
+}]

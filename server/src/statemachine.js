@@ -125,9 +125,12 @@ const StateMachine =   (config)=>{
                 await _executespeech(event.onstart);
             }    
         }
-
-        send("ready", {layer:config.id, event:{id:eventid, type: event.type}});
        
+        
+       // setTimeout(()=>{
+         //   console.log("SENDING READY", {layer:config.id, event:{id:eventid, type: event.type}});
+            send("ready", {layer:config.id, event:{id:eventid, type: event.type}});
+        //},2000);
         const sub = (e)=>{
             let nexteventid, triggered;
             console.log("---> subscribing to", e.id, e.subscription, id);

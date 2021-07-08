@@ -78,7 +78,7 @@ export const layerSlice = createSlice({
 
         state.lut = {
             ...state.lut, 
-            [from] : [...state.lut[from], {id: `${to}_${Date.now()}`, event:to, op:[rule], actions:_actions}]
+            [from] : [...state.lut[from], {id: `${to}_${Date.now()}`, event:to, op:rule, actions:_actions}]
         }
        
     },

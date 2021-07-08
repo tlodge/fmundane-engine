@@ -149,13 +149,17 @@ export const listenOnActions = (window) => async dispatch => {
 }
 
 export const listenOnEvents = () => (dispatch, getState) => {
+
+  console.log("listening on events!!");
   socket.on('event', payload => {
+    console.log("seen event", payload);
     dispatch(setEvent(payload));
   });
 
   socket.on('ready', payload=>{
   
     const {event} = payload; 
+    console.log("SEEN A READY!!", event);
 
     dispatch(setReadyForInput(event.id));
 

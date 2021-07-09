@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import Tree from './Tree';
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 
 import {
    selectTree,
@@ -21,32 +21,60 @@ import {
     setViewAddNode,
     selectViewAdd,
     editNode,
-    setEditLink
+    setEditLink,
 } from '../creator/creatorSlice'
 
 export function Layer() {
 
-    const dispatch = useDispatch();
-    const nodes = useSelector(selectNodes);
-    const lut  = useSelector(selectTree);
-    const addNew  = useSelector(selectViewAdd);
-    const parent = useSelector(selectParent);
-    const child = useSelector(selectChild);
-    const authored = useSelector(selectAuthored);
-    const _exportNodes = ()=>dispatch(exportNodes());
+  const dispatch = useDispatch();
+  const nodes = useSelector(selectNodes);
+  const lut  = useSelector(selectTree);
+  const addNew  = useSelector(selectViewAdd);
+  const {id:parent} = useSelector(selectParent);
+  const child = useSelector(selectChild);
+  const authored = useSelector(selectAuthored);
+  
+  
+  const _exportNodes = (name)=>{ 
+      dispatch(exportNodes(name));
+      toggleSaveDialog(false);
+  }
 
+  const [saveDialog, toggleSaveDialog] = useState(false);
+  const [name, setName] = useState("");
+  const [currentLayer, setCurrentLayer] = useState("");
 
   useEffect(()=>{
     dispatch(fetchAuthored());
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    const params = Object.fromEntries(urlSearchParams.entries());
+    const {layers=null} = params;
+    if (layers){
+      dispatch(fetchLayers(layers))
+      setCurrentLayer(layers);
+    }
   },[])
 
-    const renderAuthored = ()=>{
+  const renderAuthored = ()=>{
         return authored.map(a=>{
-          return <div key={a} className="p-2 text-white text-xs" onClick={()=>{dispatch(fetchLayers(a))}}>{a}</div>
+          //return <div key={a} className="p-2 text-white text-xs" onClick={()=>{dispatch(fetchLayers(a))}}>{a}</div>
+          return <a key={a} className="p-2 text-white text-xs" href={encodeURI(`author?layers=${a}`)}>{a}</a>
         })
-      }
+  }
 
-    const renderTree = ()=>{
+  const renderSaveDialog = ()=>{
+    return <div className="absolute flex w-screen h-screen  items-center justify-center">
+              <div className="flex flex-col shadow-xl p-4 bg-white rounded flex justify-items-end items-end ">
+                <button onClick={()=>toggleSaveDialog(!saveDialog)} className="rounded-full h-6 w-6 bg-pink-500 text-white">x</button> 
+                <div className=" flex flex-row p-4 items-center">
+                  <input type="text" className="p-4 mr-4" placeholder="filename" value={name} onChange={(e)=>setName(e.target.value)}></input>     
+                  <button onClick={()=>_exportNodes(name)} className="rounded-full h-10 w-10 bg-blue-500 text-white">save</button>              
+              </div>
+              </div>
+            </div>
+  }
+
+  const renderTree = ()=>{
         if (lut){
             return <Tree    
                     lookuptable={lut} 
@@ -59,15 +87,21 @@ export function Layer() {
                     closeEditAction     = {()=>dispatch(setEditLink())} 
                     setParentToAddTo    = {(parent)=>dispatch(setParentToAddTo(parent))} 
                     editNode            = {(node)=>dispatch(editNode(node))}
-                    editActions         = {(link)=>dispatch(setEditLink(link))}
+                    editLink            = {(link)=>dispatch(setEditLink(link))}
                     setParent           = {(parent)=>dispatch(setParent(parent))}
                     setChild            = {(child)=>dispatch(setChild(child))}
             />
         }
-    }
-    return  <div>
+  }
+  
+  return  <div>
+     {saveDialog && renderSaveDialog()}
                 <div  className="bg-blue-500 text-white w-screen h-12 fixed flex items-center">
-                    <div className="flex flex-grow pl-4 text-xs" onClick={()=>{_exportNodes()}}>SAVE & EXPORT</div>
+                   
+                    <div className="flex flex-grow pl-4 text-xs">
+                      <div onClick={()=>toggleSaveDialog(!saveDialog)}>SAVE & EXPORT</div>
+                      {currentLayer && <a className="flex flex-grow pl-4 text-xs" target="_blank" href={`../?layers=${currentLayer}`}>▶</a>}
+                    </div>
                     <div className="flex justify-end items-center"><div className="text-xs p-2">LOAD</div>{renderAuthored()}</div>
                 </div>
                 {renderTree()}

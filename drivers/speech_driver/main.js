@@ -57,12 +57,12 @@ app.post('/api/speech', async function (req, res, next) {
     const {speech=[]} = req.body;
     for (const item of speech){
         console.log(item);
-        const {words="", voice="Daniel", delay=0, background} = item;
+        const {words="", voice="Daniel", delay=0, background, rate} = item;
 
         if (background){
             playIt(background);    
         }
-        await sayIt(words, voice);    
+        await sayIt(words, voice, rate);    
         await waitFor(delay);
     }
     res.status(200).send("OK");

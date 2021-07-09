@@ -27,12 +27,15 @@ const _clink = (sx, sy, tx, ty) => {
 const insert = (seen, lookup, event, nodes={})=>{
    
     const children = lookup[event.event] || [];
+ 
+    //console.log(nodes[event.event].name || "").split(".");
     const [name=["x"]] = (nodes[event.event].name || "").split(".");
-    const {onstart=""} = nodes[event.event]
+    const {onstart="",type="button"} = nodes[event.event]
+
     if (seen.indexOf(event.event)!=-1){
-      return {event, onstart, name, children:[]};
+      return {event, onstart, type, name, children:[]};
     }
-    return {event, onstart, name, children : children.map(c => insert([...seen,event.event], lookup, c, nodes))}
+    return {event, onstart, type, name, children : children.map(c => insert([...seen,event.event], lookup, c, nodes))}
     
 }
 
@@ -78,7 +81,7 @@ const lookuplinks = (lnks)=>{
 }
 
 
-export default function Tree({lookuptable,nodes,parent,child,toggleAddNew,closeEditAction,setParentToAddTo,setLookuptable,addNew,editNode,editActions,setParent,setChild}) {
+export default function Tree({lookuptable,nodes,parent,child,toggleAddNew,closeEditAction,setParentToAddTo,setLookuptable,addNew,editNode,editLink,editRules,setParent,setChild}) {
  
   const reset = ()=>{
       setChild();
@@ -97,7 +100,11 @@ export default function Tree({lookuptable,nodes,parent,child,toggleAddNew,closeE
   }
 
   const linkSelected = (d, link)=>{
-    editActions(link);
+    editLink(link);
+  }
+
+  const ruleSelected = (d, link)=>{
+    editRules(link);
   }
 
   const parentSelected = (e, node)=>{
@@ -132,9 +139,7 @@ export default function Tree({lookuptable,nodes,parent,child,toggleAddNew,closeE
     if (!child || !parent)
       return;
 
-      
-    //const {event:childevent={}} = child.data || {};
-   // const {event:parentevent={}} = parent.data || {};
+    
     const lut = {...lookuptable};
 
     lut[parent] = lut[parent] || [];
@@ -323,12 +328,12 @@ const treeref = useD3((root) => {
       });
     
      //render actions within links
-     root.selectAll("g#link").data(_links, d=>{return`${d.from.name}${d.to.name}${d.to.actions.join(",")}`}).join(
+     root.selectAll("g#link").data(_links, d=>{return`${d.from.name}${d.to.name}${d.to.actions.join(",")}${d.to.op}`}).join(
         enter => {
             const target = enter.append("g").attr("id", "link").attr("transform", l=>`translate(${l.from.x+sw/2 - (l.from.x-l.to.x)/2}, ${l.to.y+ (l.from.y+LINKDELTA-l.to.y)/2})`);
            
             target.append("circle").attr("id", "link").style("opacity",0).style("fill","rgb(243, 244, 246)").style("stroke","none").attr("cx", 0).attr("cy",-YPADDING+sh).attr("r",10).transition().duration(ANIMATION_DURATION).style("opacity",1);
-            target.append("text").style("text-anchor", "middle").style("font-weight", "bold").style("font-size", "10px").attr("x",0).attr("y",-YPADDING+sh).text(l=>l.to.op)
+            target.append("text").attr("id", "rule").style("text-anchor", "middle").style("font-weight", "bold").style("font-size", "10px").attr("x",0).attr("y",-YPADDING+sh).text(l=>l.to.op).on("click", (e,l)=>linkSelected(e,l))
            
             target.append("circle").attr("id", "label").style("fill","rgb(243, 244, 246)").style("opacity", l=>l.to.actions && l.to.actions.length > 0 ? 1 : 0).style("stroke","none").attr("cx", 0).attr("cy",0).attr("r",20).on("click", (e,l)=>linkSelected(e,l))
             target.append("text").attr("id","action").style("font-size", "10px").style("text-anchor", "middle").attr("x",0).attr("y",0).text(l=>_empty(l.to.actions) ? "+" : l.to.actions).on("click", (e,l)=>linkSelected(e,l))
@@ -338,6 +343,8 @@ const treeref = useD3((root) => {
             update.transition().duration(ANIMATION_DURATION).attr("transform", l=>`translate(${l.from.x+sw/2 - (l.from.x-l.to.x)/2}, ${l.to.y+ (l.from.y+LINKDELTA-l.to.y)/2})`);
             update.select("circle#label").style("opacity", l=>l.to.actions && l.to.actions.length > 0 ? 1 : 0).on("click", (e,l)=>linkSelected(e,l))
             update.select("text#action").on("click", (e,l)=>linkSelected(e,l));
+            
+            update.select("text#rule").on("click", (e,l)=>linkSelected(e,l));
         },
         exit => exit.call(exit=>exit.remove())
     );

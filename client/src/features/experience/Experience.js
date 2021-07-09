@@ -37,7 +37,7 @@ export function Experience() {
        start : ()=>{}
     }
   }
-  
+
   const recognition = BrowserSpeechRecognition ? new BrowserSpeechRecognition() : proxyRecognition();
   recognition.continous = true;
   recognition.interimResults = true;
@@ -53,11 +53,15 @@ export function Experience() {
 
   useEffect(() => {
     dispatch(fetchAuthored());
-    
     dispatch(listenOnEvents());
-   // dispatch(listenToSpeech(recognition));
     dispatch(listenOnActions(window));
-    //handleListen();
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    const params = Object.fromEntries(urlSearchParams.entries());
+    const {layers=null} = params;
+    if (layers){
+      console.log("ok fetching", layers);
+      dispatch(fetchLayers(layers, recognition))
+    }
   }, []); //only re-run the effect if new message comes in
 
   

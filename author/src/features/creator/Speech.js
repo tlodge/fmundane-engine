@@ -1,16 +1,28 @@
 import {useState, useEffect}  from 'react';
+import request from 'superagent';
 
+
+const _validatelines = (lines)=>{
+    
+    return lines.map(l=> {
+        const rate = (l.rate || "").trim()=="" ? "180" : l.rate;
+        return {
+            ...l, 
+            rate
+        }
+    });
+}
 
 export default function Speech({lines:_lines=[], speechChanged}) {
     
     const voices = ["Kate", "Daniel", "Oliver", "Ava", "Alex", "Bruce", "Junior", "Ralph", "Tom", "Serena"];
 
-    _lines = _lines.length <= 0 ? [{"words":"", "delay":0, "voice":"Kate","background":"", wpm:180}] : _lines;
+    _lines = _lines.length <= 0 ? [{"words":"", "delay":0, "voice":"Kate","background":"", rate:"180"}] : _lines;
 
     const [lines, setLines] = useState(_lines);
 
     const addLine = ()=>{
-        setLines([...lines, {"words":"", "delay":0, "voice":"Kate", "background":"", wpm:180}])
+        setLines([...lines, {"words":"", "delay":0, "voice":"Kate", "background":"", rate:"180"}])
     }
 
     const deleteLine = (index)=>{
@@ -18,7 +30,7 @@ export default function Speech({lines:_lines=[], speechChanged}) {
             return i == index ? acc : [...acc, item];
         },[]);
         setLines(_lines);
-        speechChanged(_lines);
+        speechChanged(_validatelines(_lines));
     }
 
     const setText = (index,text)=>{
@@ -26,7 +38,7 @@ export default function Speech({lines:_lines=[], speechChanged}) {
             return i==index ? {...item, words:text} : item;
         },[]);
         setLines(_lines);
-        speechChanged(_lines);
+        speechChanged(_validatelines(_lines));
     }
 
     const setVoice = (index,voice)=>{
@@ -34,7 +46,7 @@ export default function Speech({lines:_lines=[], speechChanged}) {
             return i==index ? {...item, voice} : item;
         },[]);
         setLines(_lines);
-        speechChanged(_lines);
+        speechChanged(_validatelines(_lines));
     }
 
 
@@ -48,7 +60,7 @@ export default function Speech({lines:_lines=[], speechChanged}) {
             
         },[]);
         setLines(_lines);
-        speechChanged(_lines);
+        speechChanged(_validatelines(_lines));
     }
 
     const setRate = (index, wpm)=>{
@@ -61,7 +73,7 @@ export default function Speech({lines:_lines=[], speechChanged}) {
             
         },[]);
         setLines(_lines);
-        speechChanged(_lines);
+        speechChanged(_validatelines(_lines));
     }
 
     const setBackground = (index, background)=>{
@@ -74,8 +86,13 @@ export default function Speech({lines:_lines=[], speechChanged}) {
             
         },[]);
         setLines(_lines);
-        speechChanged(_lines);
+        speechChanged(_validatelines(_lines));
     }
+
+    const _testSpeech = async ()=>{
+        await request.post('/author/audiotest').set('Content-Type', 'application/json').send({lines:_validatelines(lines)});
+    }
+
     const renderSelect = (r,index)=>{
         const options =  voices.map(v=><option key={v} value={v}>{v}</option>);
         return <select key={index} value={r.voice || "Kate"} onChange={(e)=>setVoice(index,e.target.value)} style={{width:120}}>{options}</select>
@@ -94,7 +111,7 @@ export default function Speech({lines:_lines=[], speechChanged}) {
                 </div>
                 <div className="flex flex-col justify-start">
                     <div className="pl-2">
-                        <input type="text" style={{width:80}} value={r.rate || 180} onChange={(e)=>{setRate(i,e.target.value)}}></input>
+                        <input type="text" style={{width:80}} value={r.rate} onChange={(e)=>{setRate(i,e.target.value)}}></input>
                         <label className="flex justify-start">words/min</label>
                     </div>
                 </div>
@@ -122,6 +139,7 @@ export default function Speech({lines:_lines=[], speechChanged}) {
                 <div className="flex  flex-col shadow p-2 mt-4">
                     <div onClick={()=>addLine()} className="font-bold text-xs flex justify-start">LINES (+)</div>                    
                     {renderLines()}
+                    <div className="p-8"> <button onClick={_testSpeech} className="rounded-full h-10 w-10 bg-pink-500 text-white">▶</button></div>
                 </div>
             </div>
 }

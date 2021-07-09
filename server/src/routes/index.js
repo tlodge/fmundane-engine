@@ -95,7 +95,7 @@ const tree = (layer)=>{
 
 indexRouter.get('/layers', (req, res)=>{
     const {layer="layer1.json"} = req.query;
-    const _lfile = fs.readFileSync(`authored/${layer}`);
+    const _lfile = fs.readFileSync(`authored/${layer}.json`);
 
     const _ljson = JSON.parse(_lfile);
     _layers = _ljson.map(f => format(f));

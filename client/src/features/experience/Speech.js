@@ -40,7 +40,7 @@ export default function Speech({rules, ready, handleAction, handleChange}) {
         </div>
     }else{
       return  operands.map(b=>{
-            return   <button key={b.operand} onClick={()=>{ _handleChange(b.operand);_handleAction();}} className="bg-blue-500 mr-2 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-2rounded">{`${b.operand} (${b.next})`}</button>
+            return   <button key={b.operand} onClick={()=>{ _handleChange(b.operand);_handleAction();}} className="bg-blue-500 m-2 text-xs hover:bg-blue-700 text-white font-bold py-2 px-4 mt-2rounded">{`${b.operand} (${b.next})`}</button>
       });
     }
 }
@@ -51,7 +51,7 @@ export default function Speech({rules, ready, handleAction, handleChange}) {
     <div className="flex flex-col h-full w-full">
       <div style={{minHeight:190}} className="flex text-xl font-bold justify-center items-center flex-grow">{speech.trim()=="" ? "[listening for speech]" : `"${speech}"`}</div>
       {ready && <div className="p-6 bg-black">
-          <div className="font-semibold text-white text-lg pb-4">override</div>
+          <div className="font-semibold text-white text-base pb-2">override</div>
           {renderOperands()}
       </div>}
     </div>  

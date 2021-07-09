@@ -1,0 +1,67 @@
+[
+    {
+        "id": "tester1",
+        "start": {
+            "actions": [
+                []
+            ],
+            "event": "sadds"
+        },
+        "events": [
+            {
+                "id": "sadds",
+                "name": "sadds",
+                "onstart": [
+                    {
+                        "words": "something to say",
+                        "delay": 1000,
+                        "voice": "Daniel",
+                        "background": ""
+                    },
+                    {
+                        "words": "and something after a second.",
+                        "voice": "Daniel",
+                        "background": ""
+                    }
+                ],
+                "type": "speech",
+                "subscription": "/press",
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "contains",
+                            "operand": [
+                                "sadsadsa",
+                                "pop",
+                                "popp"
+                            ]
+                        },
+                        "actions": [
+                            [
+                                "sadsad"
+                            ]
+                        ],
+                        "next": "sadasd"
+                    }
+                ]
+            },
+            {
+                "id": "sadasd",
+                "name": "sadasd",
+                "onstart": [
+                    {
+                        "words": "sadsad",
+                        "delay": 0,
+                        "voice": "Kate",
+                        "background": "",
+                        "rate": "180"
+                    }
+                ],
+                "type": "button",
+                "subscription": "/press",
+                "data": [],
+                "rules": []
+            }
+        ]
+    }
+]

@@ -1,8 +1,14 @@
+import {selectLayerName} from './experienceSlice';
+import { useSelector } from 'react-redux';
+
 const Navigation = ({ start, authored, fetchLayers}) => {
- 
+  
+  const layerName = useSelector(selectLayerName);
+
   const renderAuthored = ()=>{
     return authored.map(a=>{
-      return <div key={a} className="p-2 text-white text-xs" onClick={()=>{fetchLayers(a)}}>{a}</div>
+      const textWeight = layerName==a ? "font-bold" : "font-normal"; 
+      return <a key={a} className={`p-2 text-white ${textWeight} text-xs`} style={{opacity:layerName==a?1:0.6}} href={encodeURI(`?layers=${a}`)}>{a}</a>
     })
   }
     return <nav className="flex items-center flex-wrap bg-teal-500 p-6">
@@ -26,13 +32,9 @@ const Navigation = ({ start, authored, fetchLayers}) => {
     </div>
     
     <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto pl-10">
-      <div className="text-sm lg:flex-grow">
-        <a
-          onClick={start}
-          className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
-        >
-          Start
-        </a>
+      <div className="text-sm lg: flex-grow">
+        {layerName.trim() != "" && <a onClick={start} className="block mt-4 lg:inline-block lg:mt-0 text-white  hover:font-bold mr-4">Start</a>}
+        {layerName.trim() != "" && <a target="_blank" href={encodeURI(`/author?layers=${layerName}`)} className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">Edit</a>}
       </div>
     </div>
 

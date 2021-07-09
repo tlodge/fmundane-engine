@@ -1,31 +1,38 @@
 [
-  {
-    "id" : "layerloop",
-  
-    "start": {
-      "actions": [[]],
-      "event": "listen"
-    },
-  
-    "events": [{
-      "onstart":  [],
-      "id": "listen",
-      "name": "listen",
-      "subscription" : "/speech",
-      "type": "speech",
-      "rules": [{
-          "rule": {
-            "operator": "contains",
-            "operand": ["humbug"]
-          },
-          "actions": [
-            ["upbeatmusic"]
-          ],
-          "next": "listen"
-        }
-      ]
-    }]
-  }
-  
-  ]
-  
+    {
+        "id": "layerloop",
+        "start": {
+            "actions": [
+                []
+            ],
+            "event": "listen"
+        },
+        "events": [
+            {
+                "id": "listen",
+                "onstart": [],
+                "name": "listen",
+                "subscription": "/speech",
+                "type": "speech",
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "contains",
+                            "operand": [
+                                "humbug",
+                                "sweet",
+                                "sour"
+                            ]
+                        },
+                        "actions": [
+                            [
+                                "upbeatmusic"
+                            ]
+                        ],
+                        "next": "listen"
+                    }
+                ]
+            }
+        ]
+    }
+]

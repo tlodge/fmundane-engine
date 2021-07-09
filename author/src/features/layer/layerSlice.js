@@ -59,7 +59,8 @@ export const layerSlice = createSlice({
   reducers: {
 
     addNode : (state, action)=>{
-    
+      console.log("am in add node", action.payload);
+
       state.nodes = [...state.nodes, action.payload.id]
       state.nodesById = {
           ...state.nodesById,
@@ -91,9 +92,9 @@ export const layerSlice = createSlice({
     
     },
 
-    updateActions : (state, action)=>{
+    updateLink : (state, action)=>{
       
-        const {from,to,actions} = action.payload; 
+        const {from,to,actions,rules} = action.payload; 
         const _actions =  (actions||"").split("|").map((line)=>{
             return line.split(",");
         });
@@ -107,6 +108,7 @@ export const layerSlice = createSlice({
                             return {
                                 ...item,
                                 actions: _actions,
+                                op:rules,
                             }
                         }
                         return item;
@@ -120,8 +122,9 @@ export const layerSlice = createSlice({
 
     updateNode : (state, action)=>{
 
-        const {node,name,speech} = action.payload;
+        const {node,name,speech,type} = action.payload;
       
+        console.log("update node", action.payload);
 
         //TODO - SORT ROOT NODE - ID THIS IS THE ONE CHANGED!!
         state.nodesById = Object.keys(state.nodesById).reduce((acc, key)=>{
@@ -132,6 +135,7 @@ export const layerSlice = createSlice({
                     [name] : {
                         ...state.nodesById[key],
                         name,
+                        type,
                         id: name.replace(/\s/g, "_"),
                         onstart: speech,
                     }
@@ -233,7 +237,7 @@ export const layerSlice = createSlice({
 
 
 
-export const { addNode, loadNodes,setParent, setChild, updateParent,setLookup,setAuthored, generateLookuptable,setEditNode,updateNode,updateActions,createLink} = layerSlice.actions;
+export const { addNode, loadNodes,setParent, setChild, updateParent,setLookup,setAuthored, generateLookuptable,setEditNode,updateNode,updateLink,createLink} = layerSlice.actions;
 
 const unique = (value="", arr=[])=>{
   
@@ -244,11 +248,6 @@ const unique = (value="", arr=[])=>{
     }
    
     return _value;
-}
-export const addNewNode = (node) => {
-  return (dispatch, getState) => {
-       dispatch(addNode(node));
-  }
 }
 
 export const fetchAuthored = ()=>(dispatch)=>{
@@ -289,17 +288,18 @@ export const setParentToAddTo = (parent)=>{
 
 
 
-export const  addToParent = (node, rule, actions)=>{
+export const  addToParent = (node, rule, actions,)=>{
     return (dispatch, getState)=>{
         const nodes = getState().layer.nodes;
         const name = unique(node.name, nodes);
         const _node = {...node, name:`${name}`, id:`${name.replace(" ","_")}`};
-        dispatch(addNewNode(_node));
+        dispatch(addNode(_node));
+        console.log(JSON.stringify(getState().layer.nodesById,null,4));
         dispatch(addRulesToParent(rule,actions,_node.name))
     }
 }
 
-export const exportNodes = ()=>{
+export const exportNodes = (name)=>{
     return async (dispatch, getState)=>{
        
         const lut = getState().layer.lut
@@ -316,7 +316,10 @@ export const exportNodes = ()=>{
 
 
         const items = Object.keys(_lut).reduce((acc,key)=>{
-            return [
+            const {type} = nodesById[key];
+
+            if (type==="button"){
+                return [
                     ...acc,
                     {
                         id: key,
@@ -334,21 +337,44 @@ export const exportNodes = ()=>{
                         })
                         
                     }
-            ]
+                ]
+            }
+            if (type === "speech"){
+
+                
+
+                return [
+                    ...acc,
+                    {
+                        id: key,
+                        ...nodesById[key],
+                        rules : _lut[key].map(k=>{
+                            
+                               return {
+                                 "rule": {
+                                    "operator": "contains",
+                                    "operand": Array.isArray(k.op) ? k.op : k.op.split(",")
+                                  },
+                                  "actions": k.actions,
+                                  "next": k.event
+                                }
+                        })
+                    }
+                ]
+            }
+            return acc;
         },[]);
 
-        console.log(JSON.stringify(items,null,4));
-
         const layer = {
-            "id" : "layer1",
+            "id" : name,
             "start": {
                 "actions": [[]],
                 "event": getState().layer.nodes[0]
             },
             "events": items
         }
-
-        await request.post('/author/save').set('Content-Type', 'application/json').send(layer);
+        console.log(JSON.stringify(layer,null,4));
+        await request.post('/author/save').set('Content-Type', 'application/json').send({name,layer});
     }
 }
 
@@ -362,7 +388,7 @@ export const addRulesToParent = (op, actions, next)=>{
 
 export const selectNodeIds          = state => state.layer.nodes;
 export const selectNodes            = state => state.layer.nodesById;
-export const selectParent           = state => state.layer.parent;
+export const selectParent           = state => state.layer.nodesById[state.layer.parent] ||  {};
 export const selectChild            = state => state.layer.child;
 export const selectTree             = state => state.layer.lut;
 export const selectNodeToEdit       = state => state.layer.node;

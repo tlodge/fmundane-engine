@@ -19,11 +19,15 @@ export const experienceSlice = createSlice({
     transcript: "",
     lastsenttranscript:"",
     authored:[],
+    layerName:"",
   },
 
   reducers: {
     setAuthored : (state, action)=>{
-      state.authored = action.payload
+      state.authored = action.payload;
+    },
+    setLayerName : (state, action)=>{
+      state.layerName = action.payload;
     },
     setLayers : (state, action)=>{
       state.layers = action.payload;
@@ -51,7 +55,7 @@ export const experienceSlice = createSlice({
   }
 });
 
-export const { setLayers, setEvent, setEvents, setTranscript,sentTranscript,setReadyForInput,setAuthored,resetReadiness} = experienceSlice.actions;
+export const { setLayers, setLayerName, setEvent, setEvents, setTranscript,sentTranscript,setReadyForInput,setAuthored,resetReadiness} = experienceSlice.actions;
 
 export const reset = ()=>dispatch=>{
   superagent.get('/event/start').then(res => {
@@ -213,6 +217,8 @@ export const fetchAuthored = ()=>(dispatch)=>{
   })
 }
 
+
+
 //this kicks everything off;
 
 export const fetchLayers = (layer, r) => (dispatch)=>{
@@ -221,6 +227,7 @@ export const fetchLayers = (layer, r) => (dispatch)=>{
 
   superagent.get('/event/layers').query({layer}).then(res => {
     const trees = res.body.map(et=>et.tree);
+    dispatch(setLayerName(layer));
     dispatch(setLayers(trees));
   })
   .catch(err => {
@@ -283,9 +290,8 @@ const separation = (a, b) =>{
 
 export const selectReadyForInput = state => state.experience.readyforinput;
 export const selectSpeech= state => state.experience.transcript;
-
 export const selectTrees = state =>  state.experience.layers.map(t=>d3.tree().nodeSize([120, 230])(d3.hierarchy(t, d=>d.children)))
-
 export const selectAuthored = state => state.experience.authored;
+export const selectLayerName = state => state.experience.layerName;
 
 export default experienceSlice.reducer;

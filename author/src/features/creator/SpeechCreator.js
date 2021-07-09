@@ -21,7 +21,7 @@ import {
    selectActions
 } from './creatorSlice';
 
-export  function ButtonCreator({onClose}) {
+export  function SpeechCreator({onClose}) {
     const dispatch = useDispatch();
     const parent    = useSelector(selectParent);
     const name      = useSelector(selectName);
@@ -34,12 +34,13 @@ export  function ButtonCreator({onClose}) {
    
     const createNode = ()=>{
         
+        
         const _node = {
             name: node.name,
             id: node.name.replace(/\s/g, "_"),
             onstart: node.speech,
-            type:"button",
-            subscription : `/press`,
+            type:"speech",
+            subscription : `/speech`,
         }
         const _actions =  (node.actions||"").split("|").map((line)=>{
             return line.split(",");
@@ -50,7 +51,6 @@ export  function ButtonCreator({onClose}) {
     }
     
     const speechChanged = (speech = [])=>{
-        console.log("setting speech", speech);
         setNode({...node, speech})
         dispatch(setSpeech(speech));
     }
@@ -89,7 +89,7 @@ export  function ButtonCreator({onClose}) {
         return <div className="flex flex-col mt-2 items-start">
             <label>rule</label>
             <input type="text" value={node.rule} onChange={(e)=>{ruleChanged(e.target.value)}} className="p-1 mt-2"></input>
-            <label className="text-xs mt-1">the name of the button that will trigger this event</label>
+            <label className="text-xs mt-1">the keywords that will trigger this event</label>
         </div>
     }
 

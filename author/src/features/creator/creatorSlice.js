@@ -11,16 +11,18 @@ export const creatorSlice = createSlice({
     rule: "",
     speech : [],
     actions:"",
+    type:"button",
   },
 
   reducers: {
     setEditNode : (state, action)=>{
-      const {name,rule, onstart:speech,actions} = action.payload;
+      const {name,rule, onstart:speech,actions, type} = action.payload;
       state.selectedNode = name;
       state.name = name;
       state.rule = rule;
       state.speech = speech;
       state.actions = actions;
+      state.type = type;
     },
     setEditLink: (state, action)=>{
       state.selectedLink = action.payload;
@@ -39,11 +41,14 @@ export const creatorSlice = createSlice({
     },
     setActions: (state, action)=>{
       state.actions = action.payload;
+    },
+    setType: (state, action)=>{
+      state.type = action.payload;
     }
   }
 });
 
-export const { setEditNode,setViewAddNode,setName,setRule, setSpeech,setActions,setEditLink } = creatorSlice.actions;
+export const { setEditNode,setViewAddNode,setName,setRule, setSpeech,setActions,setEditLink,setType } = creatorSlice.actions;
 
 export const showAddNode = (value)=>{
   return (dispatch, getState)=>{
@@ -65,5 +70,6 @@ export const selectName         = state => state.creator.name;
 export const selectRule         = state => state.creator.rule;
 export const selectSpeech       = state => state.creator.speech;
 export const selectActions      = state => state.creator.actions;
+export const selectType         = state => state.creator.type;
 
 export default creatorSlice.reducer;

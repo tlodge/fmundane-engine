@@ -10,9 +10,6 @@ const _fetchrule = async (rule)=>{
 }
 
 const callserially = async (list, cb)=>{
-
-   
-
     for (const a of list){
         await handle(a);
     }
@@ -21,9 +18,11 @@ const callserially = async (list, cb)=>{
 
 const _executeactions = async (alist, value="")=>{
     const parallel = [];
-
-    for (const row of alist){
-        for (const actionlist of row){
+    console.log("in exec actions with", alist);
+    //for (const row of alist){
+      //  console.log("row is ", row);
+        for (const actionlist of alist){
+            console.log("action list is", actionlist);
             //swap in any params
             const _alist = actionlist.map((a)=>{
                 const astr = JSON.stringify(a);
@@ -44,7 +43,9 @@ const _executeactions = async (alist, value="")=>{
             
             //send("action", _alist);
         }
-    }
+
+        console.log("OK have parallel", parallel);
+  //  }
     await Promise.all(parallel.map(async(p)=>{
         await callserially(p.list,p.cb);
     }));
@@ -97,9 +98,13 @@ const StateMachine =   (config)=>{
             
             
             if (event.onstart){
-                const __startactions = event.onstart.map(a=>actions[a]);
+              
                 //_executestart(__startactions, "");//message.toString());
-                await _executespeech(event.onstart)
+                const {speech=[], actions:_actions=[]} = event.onstart;
+                const __startactions =  _actions.map(arr=>(arr||[]).map(a=>actions[a]||{}));
+
+                await Promise.all([await _executeactions(__startactions), await _executespeech(speech)]);
+                
             }
             send("ready", {layer:config.id, event:{id:nexteventid, type:event.type}});    
             //send("event", {id:config.id,data:eventlookup[nexteventid],triggered});
@@ -113,16 +118,22 @@ const StateMachine =   (config)=>{
         });
     }
 
-    //TODO - onl;y subscribe to the current event!, when there is a change, unsubscribe and subscribe to the next one!
+    //TODO - onl;y subscribe to the current event, when there is a change, unsubscribe and subscribe to the next one.
     const init = async()=>{
     
         let eventid = config.start.event;  
         event = eventlookup[eventid];
         
+        console.log(JSON.stringify(event,null,4));
+
         if (event){
             send("event", {id:config.id,data:event});      
             if (event.onstart){
-                await _executespeech(event.onstart);
+                const {speech=[], actions:_actions=[]} = event.onstart;
+                const __startactions =  _actions.map(arr=>(arr||[]).map(a=>actions[a]||{}));
+                console.log("running start actions and speech in parallel!");
+                await Promise.all([_executeactions(__startactions), _executespeech(speech)]);
+                console.log("great now done!");
             }    
         }
        
@@ -133,36 +144,35 @@ const StateMachine =   (config)=>{
         //},2000);
         const sub = (e)=>{
             let nexteventid, triggered;
-            console.log("---> subscribing to", e.id, e.subscription, id);
+         
 
             subscribe(e.subscription, id,  async(_layer, message)=>{
             
-                console.log("********* seen new event", e.subscription, " *************************", message.toString());
+               
 
                 if (_layer != id){
-                    console.log("*****", id, " ********* seen ", _layer);
                     return;
                 }
 
                 
 
                 const evaluate = await _fetchrule(e.type);
-                console.log("evalue is", evaluate);
+                
                 const actionids = e.rules.reduce((acc, item)=>{ 
                     const result = evaluate(item.rule.operator, item.rule.operand, message.toString());
                     if (result){
-                        console.log("triggered ", item.next, "=>", item.id);
+                     
                         nexteventid = item.next;
                         triggered = item.id;
-                        return [...acc, item.actions];
+                        return [...acc, ...item.actions];
                     }
                     return acc;
                 },[]);
 
                 if (triggered){
-                    console.log("triggered!!!");
+                   
                     unsubscribe(e.subscription, id);
-                    const _actions = actionids.map(arr=>arr.map((arr)=>arr.map(a=>actions[a]||{})));
+                    const _actions = actionids.map(arr=>(arr||[]).map(a=>actions[a]||{}));
                     await _executeactions(_actions, message.toString());
                     const _e = eventlookup[nexteventid];
 
@@ -171,7 +181,13 @@ const StateMachine =   (config)=>{
                     if (_e){
                         send("event", {id:config.id,data:_e,triggered});
                         if (_e.onstart){
-                            await _executespeech(_e.onstart);
+                            const {speech=[], actions:_actions=[]} = _e.onstart;
+                          
+                           
+                            const __startactions =  _actions.map(arr=>(arr||[]).map(a=>actions[a]||{}));
+                            console.log("running start actions and speech in parallel!");
+                            await Promise.all([_executeactions(__startactions), _executespeech(speech)]);
+                            console.log("am done!");
                         }
                         send("ready", {layer:config.id, event:{id:nexteventid, type:_e.type}});
                       

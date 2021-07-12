@@ -2,12 +2,11 @@
   "id" : "layer1",
 
   "start": {
-    "actions": [["fanoff","whitelights","togglewindows"]],
     "event": "ready?"
   },
 
   "events": [{
-    "onstart":  [
+    "onstart":  {"speech:":[
       {
         "words": "Hello and welcome to the caravan. My name is Fred.",
         "delay": 500 
@@ -15,7 +14,7 @@
       {
         "words": "Are you ready to go?"
       }
-    ],
+    ]},
     "id": "ready?",
     "name": "ready?",
     "subscription" : "/speech",
@@ -43,12 +42,12 @@
     ]
   },
   {
-    "onstart": [
+    "onstart": {"speech":[
       {
           "words": "Would you be so kind as to tell me your names",
           "delay": 500
       }
-    ],
+    ]},
     "id": "asknames",
     "name": "ask names",
     "subscription" : "/speech",
@@ -65,11 +64,11 @@
     ]
   },
   {
-    "onstart": [
+    "onstart": {"speech":[
       {
         "words": "Time to turn our lights red,is that ok?"
       }
-    ],     
+    ]},     
     "id": "redlights",
     "name": "wizard next",
     "subscription" : "/press",
@@ -88,11 +87,11 @@
     ]
   },
   {
-    "onstart": [
+    "onstart": {"speech":[
       {
         "words": "I'm now going to print something.  Is that also ok?"
       }
-    ],     
+    ]},     
     "id": "wizard2",
     "name": "wizard yes/no",
     "subscription" : "/press",
@@ -122,11 +121,11 @@
     ]
   },
   {
-    "onstart":[
+    "onstart": {"speech":[
       {
         "words": "Time to play with the windows.  Put your thumbs up if that is ok!"
       }
-    ],     
+    ]},     
     "id": "windows",
     "name": "windows",
     "subscription" : "/gesture",
@@ -144,11 +143,11 @@
     ]
   },
   {
-    "onstart": [
+    "onstart": {"speech": [
       {
         "words": "Well - what colour would you like?"
       }
-    ],    
+    ]},    
     "id": "lights1",
     "name": "select light colour",
     "subscription" : "/press",
@@ -197,11 +196,11 @@
     ]
   },
   {
-    "onstart": [
+    "onstart": {"speech":[
       {
         "words": "Well I hope you had fun - we are done now!"
       }
-    ],    
+    ]},    
     "id": "fin",
     "name": "finished!",
     "subscription" : "/press",
@@ -226,7 +225,7 @@
   },
 
   "events": [{
-    "onstart":  [],
+    "onstart":  {},
     "id": "listen",
     "name": "listen",
     "subscription" : "/speech",

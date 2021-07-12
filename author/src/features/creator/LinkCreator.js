@@ -21,6 +21,7 @@ export function LinkCreator({onClose}) {
     const parent    = useSelector(selectParent);
 
     const _createLink = ()=>{
+        console.log("OK IN CREATE LINK, from", parent, " to ", linknode);
         dispatch(createLink({from:parent, to:linknode, rule, actions}))
     }
 
@@ -78,6 +79,7 @@ export function LinkCreator({onClose}) {
                 </div>
     }
 
+    console.log("in link creator, parent is", parent, "link node is", linknode);
   
     return <div className="flex flex-col">
     <div className="flex flex-row shadow p-2 mt-4">

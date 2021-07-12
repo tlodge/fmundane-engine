@@ -1,7 +1,5 @@
-import React, {useState, useEffect} from 'react';
-import { useSelector, useDispatch, } from 'react-redux';
-import {setTranscript, sendTranscript} from './experienceSlice';
-
+import React, {useState,} from 'react';
+import { useSelector} from 'react-redux';
 
 import {
     selectSpeech,
@@ -13,13 +11,11 @@ export default function Speech({rules, ready, handleAction, handleChange}) {
   const [words, setWords] = useState("");
 
   const _handleChange = (value) =>{
-    console.log("IN HANDLE CHANGE!!!");
     handleChange(value);
     setWords(value);
   }
 
   const _handleAction = ()=>{
-    console.log("IN HANDLE ACTION!!");
     setWords("");
     handleAction();
   }

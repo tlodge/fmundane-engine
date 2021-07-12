@@ -2,15 +2,12 @@
     {
         "id": "layerloop",
         "start": {
-            "actions": [
-                []
-            ],
-            "event": "listen"
+             "event": "listen"
         },
         "events": [
             {
                 "id": "listen",
-                "onstart": [],
+                "onstart": {},
                 "name": "listen",
                 "subscription": "/speech",
                 "type": "speech",

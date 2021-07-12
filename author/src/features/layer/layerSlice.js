@@ -6,7 +6,7 @@ const _nodesById = {
       "e1" : {
         "name": "e1",
         "id": "e1",
-        "onstart": [
+        "onstart": {"speech":[
             {
                 "words": "something to say",
                 "delay": 1000,
@@ -19,7 +19,7 @@ const _nodesById = {
                 "voice":"Daniel",
                 "background":"",
             }
-        ],
+        ]},
         "type": "button",
         "subscription": "/press",
     }
@@ -73,15 +73,26 @@ export const layerSlice = createSlice({
 
         const {rule, action:a, from, to} = action.payload;
         
+        
+        
+        const _from = from.id;
+        console.log("in create link", _from, to);
+
         const _actions =  (a||"").split("|").map((line)=>{
             return line.split(",");
         });
 
+        console.log("actions are", _actions);
+        console.log("b4");
+        console.log(JSON.stringify(state.lut,null,4));
+
         state.lut = {
             ...state.lut, 
-            [from] : [...state.lut[from], {id: `${to}_${Date.now()}`, event:to, op:rule, actions:_actions}]
+            [_from] : [...(state.lut[_from]||[]), {id: `${to}_${Date.now()}`, event:to, op:rule, actions:_actions}]
         }
        
+        console.log(JSON.stringify(state.lut,null,4));
+
     },
 
     loadNodes : (state, action)=>{
@@ -289,14 +300,22 @@ export const setParentToAddTo = (parent)=>{
 
 
 export const  addToParent = (node, rule, actions,)=>{
+    
+    
+
     return (dispatch, getState)=>{
         const nodes = getState().layer.nodes;
         const name = unique(node.name, nodes);
-        const _node = {...node, name:`${name}`, id:`${name.replace(" ","_")}`};
+        const _node = {...node, type: node.type || "button", name:`${name}`, id:`${name.replace(" ","_")}`};
         dispatch(addNode(_node));
+        dispatch(addRulesToParent(rule,actions,_node.name));
+
         console.log(JSON.stringify(getState().layer.nodesById,null,4));
-        dispatch(addRulesToParent(rule,actions,_node.name))
+        console.log(JSON.stringify(getState().layer.lut,null,4));
     }
+
+   
+
 }
 
 export const exportNodes = (name)=>{
@@ -311,6 +330,8 @@ export const exportNodes = (name)=>{
                 [key] : lut[key]
             }
         },{});
+
+        console.log("OK LUT IS", JSON.stringify(_lut,null,4));
 
         const nodesById = getState().layer.nodesById;
 
@@ -340,24 +361,30 @@ export const exportNodes = (name)=>{
                 ]
             }
             if (type === "speech"){
-
-                
-
                 return [
                     ...acc,
                     {
                         id: key,
                         ...nodesById[key],
                         rules : _lut[key].map(k=>{
-                            
-                               return {
-                                 "rule": {
-                                    "operator": "contains",
-                                    "operand": Array.isArray(k.op) ? k.op : k.op.split(",")
-                                  },
-                                  "actions": k.actions,
-                                  "next": k.event
+                            if (k.op){
+                                return {
+                                     "rule": {
+                                        "operator": "contains",
+                                        "operand": k.op
+                                    },
+                                    "actions": k.actions,
+                                    "next": k.event
                                 }
+                            }else{
+                                return {
+                                    "rule": {
+                                       "operator": "any",
+                                   },
+                                   "actions": k.actions,
+                                   "next": k.event
+                               }
+                            }
                         })
                     }
                 ]
@@ -374,7 +401,7 @@ export const exportNodes = (name)=>{
             "events": items
         }
         console.log(JSON.stringify(layer,null,4));
-        await request.post('/author/save').set('Content-Type', 'application/json').send({name,layer});
+       await request.post('/author/save').set('Content-Type', 'application/json').send({name,layer});
     }
 }
 

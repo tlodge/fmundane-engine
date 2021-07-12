@@ -154,7 +154,7 @@ export const listenOnActions = (window) => async dispatch => {
 
 export const listenOnEvents = () => (dispatch, getState) => {
 
-  console.log("listening on events!!");
+
   socket.on('event', payload => {
     console.log("seen event", payload);
     dispatch(setEvent(payload));
@@ -284,9 +284,6 @@ export const selectEvents= state => {
   });
 }
 
-const separation = (a, b) =>{
-  return (a.parent == b.parent ? 1 : 2)
-}
 
 export const selectReadyForInput = state => state.experience.readyforinput;
 export const selectSpeech= state => state.experience.transcript;

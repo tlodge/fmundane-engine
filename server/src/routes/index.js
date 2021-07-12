@@ -42,24 +42,27 @@ const indexRouter = express.Router();
 //indexRouter.get('/', (req, res) => res.status(200).json({ message: testEnvironmentVariable }));
 
 let statemachines = [];
+let _seen   = {};
 
-const children = (seen, events, node, trigger, actions=[])=>{
+const children = (events, node, trigger, actions=[])=>{
     
     if (!node){
         return;
     }
-    if (seen.indexOf(node.id) != -1){
+    if (_seen[node.id])
+    {           
         return{
             id: node.id,
             name: node.name || node.id,
             trigger,
         }
     }
+    _seen[node.id] = true;
     return {
         id: node.id,
         name: node.name || node.id,
         trigger,
-        children: (node.rules || []).map(r=>children([...seen,node.id], events, events[r.next]||"", r.id, actions)).filter(t=>t),
+        children: (node.rules || []).map(r=>children(events, events[r.next]||"", r.id, actions)).filter(t=>t),
         links : (node.rules || []).reduce((acc, r)=>{
             const key = /*trigger ? `${trigger}` :*/ `${node.id}->${r.next||""}`;
             return {
@@ -82,14 +85,13 @@ const tree = (layer)=>{
         }
     }, {});
 
-    
+    _seen = {};
 
     const t = {
         events,
-        tree: children([], events, events[layer.start.event],null,[])
+        tree: children(events, events[layer.start.event],null,[])
     }
 
-   
     return t;
 }
 
@@ -100,6 +102,8 @@ indexRouter.get('/layers', (req, res)=>{
     const _ljson = JSON.parse(_lfile);
     _layers = _ljson.map(f => format(f));
     
+
+  
     //format(JSON.parse(_lfile));
     res.status(200).json(_layers.map(l=>tree(l)));
 });

@@ -3,6 +3,9 @@ import * as d3 from "d3";
 import * as d3z from "d3-zoom";
 import {useD3} from '../../hooks/useD3';
 
+
+let _seen = {};
+
 const _flatten = list => list.reduce(
     (a, b) => a.concat(Array.isArray(b) ? _flatten(b) : b), []
 );
@@ -16,10 +19,10 @@ const links = (node)=>{
         trigger: node.data.trigger,
         from : {
           name:node.data.id,
-          x: node.x,
-          y: node.y + 60
+          x: _seen[node.data.id].x,
+          y: _seen[node.data.id].y + 60
         },
-        to : (node.children||[]).map(c=>({trigger:c.data.trigger, name:c.data.id,x:c.x, y:c.y-60}))
+        to : (node.children||[]).map(c=>({trigger:c.data.trigger, name:c.data.id,x:_seen[c.data.id].x, y:_seen[c.data.id].y-60}))
       },
       ...(node.children || []).map(c=>links(c))
     ])
@@ -113,11 +116,17 @@ function Tree(t) {
     }, []);
 
     const renderLinks = (links, data)=>{
+        const seenlinks = {};
 
         return links.map((link)=>{
-    
+          
             return link.to.map((l)=>{
-                
+           
+           
+                if (seenlinks[`${link.from.name},${l.name}`]){
+                    return <g></g>
+                }else{    
+                    seenlinks[`${link.from.name},${l.name}`]= true;
                 //const labeldata = data[`${link.from.name}->${l.name}`] || [];
                 const tx = (l.x-link.from.x)/2;
                 const ty = (Math.max(l.y,link.from.y)-Math.min(l.y,link.from.y))/2;
@@ -146,31 +155,48 @@ function Tree(t) {
                             {label}
                             
                        </g>
+                }
+
             });
            //return link.to.map((l)=><path d={_clink(link.from.x, link.from.y,l.x, l.y)} stroke="#D1D1D1" fill="none"/>);
         });
     }
 
-    const renderTree = (node,selected,rid, seen={})=>{
+    const renderTree = (node,selected,rid)=>{
        
+
         let paint = false;
+       
+        if (_seen[node.data.id].x !== node.x || _seen[node.data.id].y != node.y){
+            return;
+        }
         
         if (!rid){
-            paint = selected==node.data.id && node.children && node.children.length > 0;
+            paint = selected==node.data.id;// && node.children && node.children.length > 0;
         }else{
-            paint = selected===node.data.id && node.data.trigger == rid;
+            paint = selected===node.data.id;// && node.data.trigger == rid;
         }
 
         return <g key={`${node.x},${node.y}`}> 
                 
                     <rect x={node.y-60} y={node.x-10} width={120} height={20} style={{fill: paint ? "#4299e1":"white", stroke:"black"}}/>
                     <text textAnchor="middle" fontSize="x-small"  x={node.y} y={node.x+4}>{node.data.name}</text>
-                    {(node.children || []).map(n=>renderTree(n, selected, rid, {...seen, [node.data.id]:true}))}
+                    {(node.children || []).map(n=>renderTree(n, selected, rid))}
             </g>
 
         
     }
 
+    _seen = {};
+
+    const generatecoords = (node)=>{
+        if (!_seen[node.data.id]){
+            _seen[node.data.id] = {x:node.x, y:node.y};
+            (node.children || []).map(n=>generatecoords(n))
+        }
+    }
+
+    generatecoords(t);
 
     return <div className="text-black bg-gray-200 rounded bg-white overflow-hidden shadow-lg"> 
         <svg ref={mytree} height="400" style={{width:`calc(100vw - 400px)`}}>

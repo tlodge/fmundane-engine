@@ -55,6 +55,9 @@ const waitFor = (delay)=>{
 
 app.post('/api/speech', async function (req, res, next) {
     const {speech=[]} = req.body;
+    
+    console.log("seen speech", JSON.stringify(speech,null,4));
+
     for (const item of speech){
         console.log(item);
         const {words="", voice="Daniel", delay=0, background, rate} = item;

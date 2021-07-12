@@ -13,11 +13,13 @@ const _validatelines = (lines)=>{
     });
 }
 
-export default function Speech({lines:_lines=[], speechChanged}) {
+export default function Speech({lines:_lines={}, speechChanged}) {
     
     const voices = ["Kate", "Daniel", "Oliver", "Ava", "Alex", "Bruce", "Junior", "Ralph", "Tom", "Serena"];
 
-    _lines = _lines.length <= 0 ? [{"words":"", "delay":0, "voice":"Kate","background":"", rate:"180"}] : _lines;
+    const {speech=[]} = _lines;
+
+    _lines = speech.length <= 0 ? [{"words":"", "delay":0, "voice":"Kate","background":"", rate:"180"}] : speech ;
 
     const [lines, setLines] = useState(_lines);
 
@@ -30,7 +32,7 @@ export default function Speech({lines:_lines=[], speechChanged}) {
             return i == index ? acc : [...acc, item];
         },[]);
         setLines(_lines);
-        speechChanged(_validatelines(_lines));
+        speechChanged({speech:_validatelines(_lines)});
     }
 
     const setText = (index,text)=>{
@@ -38,7 +40,7 @@ export default function Speech({lines:_lines=[], speechChanged}) {
             return i==index ? {...item, words:text} : item;
         },[]);
         setLines(_lines);
-        speechChanged(_validatelines(_lines));
+        speechChanged({speech:_validatelines(_lines)});
     }
 
     const setVoice = (index,voice)=>{
@@ -46,7 +48,7 @@ export default function Speech({lines:_lines=[], speechChanged}) {
             return i==index ? {...item, voice} : item;
         },[]);
         setLines(_lines);
-        speechChanged(_validatelines(_lines));
+        speechChanged({speech:_validatelines(_lines)});
     }
 
 
@@ -60,7 +62,7 @@ export default function Speech({lines:_lines=[], speechChanged}) {
             
         },[]);
         setLines(_lines);
-        speechChanged(_validatelines(_lines));
+        speechChanged({speech:_validatelines(_lines)});
     }
 
     const setRate = (index, wpm)=>{
@@ -73,7 +75,7 @@ export default function Speech({lines:_lines=[], speechChanged}) {
             
         },[]);
         setLines(_lines);
-        speechChanged(_validatelines(_lines));
+        speechChanged({speech:_validatelines(_lines)});
     }
 
     const setBackground = (index, background)=>{
@@ -86,7 +88,7 @@ export default function Speech({lines:_lines=[], speechChanged}) {
             
         },[]);
         setLines(_lines);
-        speechChanged(_validatelines(_lines));
+        speechChanged({speech:_validatelines(_lines)});
     }
 
     const _testSpeech = async ()=>{

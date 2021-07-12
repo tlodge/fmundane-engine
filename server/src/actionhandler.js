@@ -27,7 +27,9 @@ const request = (r)=>{
 
 
 export const handlespeech = async (speech)=>{
-    
+    if (!speech || speech.length <= 0)
+        return;
+        
     await request({
          "data": {
             "url": "http://localhost:9105/api/speech",

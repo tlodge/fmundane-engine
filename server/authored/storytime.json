@@ -10,7 +10,7 @@
         {
             "id": "ready",
             "name": "ready",
-            "onstart": [
+            "onstart": {"speech":[
                 {
                     "words": "Hello and welcome!",
                     "delay": "2200",
@@ -27,7 +27,7 @@
                     "delay": "1000",
                     "voice": "Whisper"
                 }
-            ],
+            ]},
             "type": "button",
             "subscription": "/press",
             "data": [
@@ -51,7 +51,7 @@
         {
             "id": "start",
             "name": "start",
-            "onstart": [
+            "onstart": {"speech": [
                 {
                     "words": "Once upon a time there lived a little girl",
                     "delay": "200",
@@ -78,7 +78,7 @@
                     "voice": "Ava",
                     "background": ""
                 }
-            ],
+            ]},
             "type": "button",
             "subscription": "/press",
             "data": [
@@ -113,7 +113,7 @@
         {
             "id": "cakes",
             "name": "cakes",
-            "onstart": [
+            "onstart": {"speech": [
                 {
                     "words": "One day Little Red Riding hood and her mother. Made some cakes",
                     "delay": 2000,
@@ -124,7 +124,7 @@
                     "words": "When they were finished she said...",
                     "voice": "Oliver"
                 }
-            ],
+            ]},
             "type": "button",
             "subscription": "/press",
             "data": [
@@ -162,7 +162,7 @@
         {
             "id": "shesaid",
             "name": "shesaid",
-            "onstart": [
+            "onstart": {"speech":[
                 {
                     "words": "Go, see how your grandmother is doing, I think she has been very ill.",
                     "delay": 0,
@@ -179,7 +179,7 @@
                     "voice": "Fiona",
                     "background": "foreboding.mp3"
                 }
-            ],
+            ]},
             "type": "button",
             "subscription": "/press",
             "data": [],
@@ -188,7 +188,7 @@
         {
             "id": "about",
             "name": "about",
-            "onstart": [
+            "onstart": {"speech":[
                 {
                     "words": "Red riding hood was born many many years ago",
                     "delay": "1000",
@@ -207,7 +207,7 @@
                     "voice": "Fiona",
                     "background": ""
                 }
-            ],
+            ]},
             "type": "button",
             "subscription": "/press",
             "data": [
@@ -229,7 +229,7 @@
         {
             "id": "cakemaking",
             "name": "cakemaking",
-            "onstart": [
+            "onstart": {"speech":[
                 {
                     "words": "oooh - cakes, cakes cakes",
                     "delay": 500,
@@ -291,7 +291,7 @@
                     "voice": "Oliver",
                     "background": ""
                 }
-            ],
+            ]},
             "type": "button",
             "subscription": "/press",
             "data": ["back to story"],

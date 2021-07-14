@@ -7,7 +7,7 @@ const authorRouter = express.Router();
 authorRouter.post('/save', (req, res)=>{
     const {layer, name} = req.body;
     const files = fs.readdirSync("authored");
-    fs.writeFileSync(`authored/${name}.json`, JSON.stringify([layer],null,4));
+    fs.writeFileSync(`authored/${name}.json`, JSON.stringify(layer,null,4));
     res.status(200).json({});
 });
  

@@ -240,7 +240,8 @@ const _empty = (arr)=>{
 }
 
 const treeref = useD3((root) => {
-    
+    console.log("lookuptable is", lookuptable);
+    console.log("nodes are", nodes);
     const jsontree = convertToHierarchy(lookuptable,nodes);
     const hier = (d3h.hierarchy(jsontree, d=>d.children));
     let _lookup = {}

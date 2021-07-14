@@ -48,15 +48,12 @@ export const layerSlice = createSlice({
   name: 'layer',
   
   initialState: {
-      "layer1":{
-        parent: null,
-        child: null,
-        lut : createLut(_nodesById),
-        nodesById :  _nodesById,
-        nodes: Object.keys(_nodesById),
-        authored:[],
-      },
-      layerid: "layer1"
+    parent: null,
+    child: null,
+    lut : createLut(_nodesById),
+    nodesById :  _nodesById,
+    nodes: Object.keys(_nodesById),
+    authored:[],
   },
 
   reducers: {
@@ -64,9 +61,9 @@ export const layerSlice = createSlice({
     addNode : (state, action)=>{
   
 
-      state[state.layerid].nodes = [...state[state.layerid].nodes, action.payload.id]
-      state[state.layerid].nodesById = {
-          ...state[state.layerid].nodesById,
+      state.nodes = [...state.nodes, action.payload.id]
+      state.nodesById = {
+          ...state.nodesById,
           [action.payload.id] : action.payload,
       }
      
@@ -87,9 +84,9 @@ export const layerSlice = createSlice({
 
        
 
-        state[state.layerid].lut = {
-            ...state[state.layerid].lut, 
-            [_from] : [...(state[state.layerid].lut[_from]||[]), {id: `${to}_${Date.now()}`, event:to, op:rule, actions:_actions}]
+        state.lut = {
+            ...state.lut, 
+            [_from] : [...(state.lut[_from]||[]), {id: `${to}_${Date.now()}`, event:to, op:rule, actions:_actions}]
         }
        
     
@@ -98,9 +95,9 @@ export const layerSlice = createSlice({
 
     loadNodes : (state, action)=>{
        
-        state[state.layerid].nodes = Object.keys(action.payload.nodes);
-        state[state.layerid].nodesById = action.payload.nodes; 
-        state[state.layerid].lut = createLut(state.nodesById);   
+        state.nodes = Object.keys(action.payload.nodes);
+        state.nodesById = action.payload.nodes; 
+        state.lut = createLut(state.nodesById);   
     
     },
 
@@ -111,11 +108,11 @@ export const layerSlice = createSlice({
             return line.split(",");
         });
         
-        state[state.layerid].lut = Object.keys(state[state.layerid].lut).reduce((acc, key)=>{
+        state.lut = Object.keys(state.lut).reduce((acc, key)=>{
             if (key === from){
                 return {
                     ...acc,
-                    [key] : state[state.layerid].lut[key].map((item)=>{
+                    [key] : state.lut[key].map((item)=>{
                         if (item.event === to){
                             return {
                                 ...item,
@@ -127,7 +124,7 @@ export const layerSlice = createSlice({
                     })
                 }
             }
-            return {...acc,[key]:state[state.layerid].lut[key]}
+            return {...acc,[key]:state.lut[key]}
 
         },{});
     },
@@ -139,13 +136,13 @@ export const layerSlice = createSlice({
       
 
         //TODO - SORT ROOT NODE - ID THIS IS THE ONE CHANGED!!
-        state[state.layerid].nodesById = Object.keys(state[state.layerid].nodesById).reduce((acc, key)=>{
+        state.nodesById = Object.keys(state.nodesById).reduce((acc, key)=>{
            
             if (key == node){
                 return {
                     ...acc,
                     [name] : {
-                        ...state[state.layerid].nodesById[key],
+                        ...state.nodesById[key],
                         name,
                         type,
                         id: name.replace(/\s/g, "_"),
@@ -155,31 +152,31 @@ export const layerSlice = createSlice({
             }
             return {
                 ...acc,
-                [key] : state[state.layerid].nodesById[key]
+                [key] : state.nodesById[key]
             }
         },{});
 
-        state[state.layerid].nodes = state[state.layerid].nodes.reduce((acc, item)=>{
+        state.nodes = state.nodes.reduce((acc, item)=>{
             if (item == node){
                 return [...acc, name]
             }
             return [...acc, item];
         },[])
 
-        state[state.layerid].lut = Object.keys(state[state.layerid].lut).reduce((acc,key)=>{
+        state.lut = Object.keys(state.lut).reduce((acc,key)=>{
             if (key === "root"){
                 return {
                     ...acc,
                     root : {
-                        id : state[state.layerid].lut["root"].id == node ? name : state[state.layerid].lut["root"].id,
-                        event : state[state.layerid].lut["root"].event == node ? name : state[state.layerid].lut["root"].event,
+                        id : state.lut["root"].id == node ? name : state.lut["root"].id,
+                        event : state.lut["root"].event == node ? name : state.lut["root"].event,
                     }
                 }
             }
             if (key == node){
                 return {
                     ...acc,
-                    [name] : state[state.layerid].lut[node].map(n=>{
+                    [name] : state.lut[node].map(n=>{
                             if (n.event === node){
                                 return {
                                     ...n,
@@ -193,7 +190,7 @@ export const layerSlice = createSlice({
             }
             return {
                 ...acc,
-                [key] : state[state.layerid].lut[key].map(n=>{
+                [key] : state.lut[key].map(n=>{
                     if (n.event === node){
                         return {
                             ...n,
@@ -207,41 +204,41 @@ export const layerSlice = createSlice({
         },{});
     },
     setChild : (state, action)=>{
-        state[state.layerid].child = action.payload
+        state.child = action.payload
     },
     setParent : (state, action)=>{
-        state[state.layerid].parent = action.payload
+        state.parent = action.payload
     },
     setAuthored : (state, action)=>{
-        state[state.layerid].authored = action.payload
+        state.authored = action.payload
     },
     setLookup : (state, action)=>{
-        state[state.layerid].lut = action.payload
+        state.lut = action.payload
     },
     generateLookuptable : (state)=>{
-        state[state.layerid].lut = createLut(state[state.layerid].nodesById)
+        state.lut = createLut(state.nodesById)
     },
    
     updateParent : (state, action)=>{
       
-        state[state.layerid].lut = Object.keys(state[state.layerid].lut).reduce((acc,key)=>{
-            if (key != state[state.layerid].parent){
+        state.lut = Object.keys(state.lut).reduce((acc,key)=>{
+            if (key != state.parent){
                 return {
                     ...acc,
-                   [key]: state[state.layerid].lut[key]
+                   [key]: state.lut[key]
                 }
             }
             else{
                 return {
                     ...acc,
-                    [key] : [...(state[state.layerid].lut[key] || []), {event: action.payload.next, id: action.payload.next, op:action.payload.op, actions:action.payload.actions}]
+                    [key] : [...(state.lut[key] || []), {event: action.payload.next, id: action.payload.next, op:action.payload.op, actions:action.payload.actions}]
                 }
             }
         },{});
 
-        state[state.layerid].lut = {
-            ...state[state.layerid].lut,
-            [action.payload.next] : state[state.layerid].lut[action.payload.next] || []
+        state.lut = {
+            ...state.lut,
+            [action.payload.next] : state.lut[action.payload.next] || []
         }
     }
   }
@@ -272,7 +269,7 @@ export const fetchAuthored = ()=>(dispatch)=>{
 
   export const fetchLayers = (layer) => {
     
-    return (dispatch)=>{
+    return (dispatch, getState)=>{
         
         request.get('/event/layers').query({layer}).then(res => {
             const [layers={}, ...rest] = res.body;
@@ -287,13 +284,13 @@ export const fetchAuthored = ()=>(dispatch)=>{
   }
 
 export const setLookuptable = (lut)=>{
-    return (dispatch) => {
+    return (dispatch, getState) => {
         dispatch(setLookup(lut));
     }
 }
 
 export const setParentToAddTo = (parent)=>{
-    return (dispatch) => {
+    return (dispatch, getState) => {
         dispatch(setParent(parent));
       
     }
@@ -303,14 +300,10 @@ export const setParentToAddTo = (parent)=>{
 
 export const  addToParent = (node, rule, actions,)=>{
     
-    console.log("in add to parent!!", node, rule, actions);
+    
 
     return (dispatch, getState)=>{
-        const layerid = getState().layer.layerid;
-        console.log("layerid us", layerid);
-
-        const nodes = getState().layer[layerid].nodes;
-        console.log("nodes are", nodes);
+        const nodes = getState().layer.nodes;
         const name = unique(node.name, nodes);
         const _node = {...node, type: node.type || "button", name:`${name}`, id:`${name.replace(" ","_")}`};
         dispatch(addNode(_node));
@@ -325,9 +318,8 @@ export const  addToParent = (node, rule, actions,)=>{
 
 export const exportNodes = (name)=>{
     return async (dispatch, getState)=>{
-        const layerid = getState().layer.layerid;
-        const lut = getState().layer[layerid].lut;
-
+       
+        const lut = getState().layer.lut
         const _lut = Object.keys(lut).reduce((acc,key)=>{
             if (key==="root")
                 return acc;
@@ -339,7 +331,7 @@ export const exportNodes = (name)=>{
 
   
 
-        const nodesById = getState().layer[layerid].nodesById;
+        const nodesById = getState().layer.nodesById;
 
 
         const items = Object.keys(_lut).reduce((acc,key)=>{
@@ -402,7 +394,7 @@ export const exportNodes = (name)=>{
             "id" : name,
             "start": {
                 "actions": [[]],
-                "event": getState().layer[layerid].nodes[0]
+                "event": getState().layer.nodes[0]
             },
             "events": items
         }
@@ -419,12 +411,12 @@ export const addRulesToParent = (op, actions, next)=>{
     }
 }
 
-export const selectNodeIds          = state => state.layer[state.layer.layerid].nodes;
-export const selectNodes            = state => state.layer[state.layer.layerid].nodesById;
-export const selectParent           = state => state.layer[state.layer.layerid].nodesById[state.layer[state.layer.layerid].parent] ||  {};
-export const selectChild            = state => state.layer[state.layer.layerid].child;
-export const selectTree             = state => state.layer[state.layer.layerid].lut;
-export const selectNodeToEdit       = state => state.layer[state.layer.layerid].node;
-export const selectAuthored         = state => state.layer[state.layer.layerid].authored;
+export const selectNodeIds          = state => state.layer.nodes;
+export const selectNodes            = state => state.layer.nodesById;
+export const selectParent           = state => state.layer.nodesById[state.layer.parent] ||  {};
+export const selectChild            = state => state.layer.child;
+export const selectTree             = state => state.layer.lut;
+export const selectNodeToEdit       = state => state.layer.node;
+export const selectAuthored         = state => state.layer.authored;
 
 export default layerSlice.reducer;

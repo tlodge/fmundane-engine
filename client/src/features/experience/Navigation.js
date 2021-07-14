@@ -11,7 +11,7 @@ const Navigation = ({ start, authored, fetchLayers}) => {
       return <a key={a} className={`p-2 text-white ${textWeight} text-xs`} style={{opacity:layerName==a?1:0.6}} href={encodeURI(`?layers=${a}`)}>{a}</a>
     })
   }
-    return <nav className="flex items-center flex-wrap bg-teal-500 p-6">
+    return <nav className="flex items-center flex-wrap bg-teal-500 p-1">
       <div className="flex items-center text-white">   
 
       <svg width="66" height="42" viewBox="0 0 33 21" style={{fillRule:"evenodd",clipRule:"evenodd",strokeLinecap:"round",strokeLinejoin:"round",strokeMiterlimit:"1.5"}}>

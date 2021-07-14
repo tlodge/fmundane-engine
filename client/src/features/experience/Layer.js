@@ -15,7 +15,7 @@ function Layer(e) {
                             ready={event.ready} 
                             names={event.data} 
                             handleAction={(b)=>{
-                                console.log("button pressed!!!", b);
+                              
                                 dispatch(buttonPressed(b));
                             }}/>
             case "speech":
@@ -23,11 +23,11 @@ function Layer(e) {
                             rules={event.rules} 
                             ready={event.ready} 
                             handleChange={(transcript)=>{
-                                console.log("setting transcript", transcript);
+                               
                                 dispatch(setTranscript(transcript));
                             }}
                             handleAction={()=>{
-                                console.log("sending transcript");
+                              
                                 dispatch(sendTranscript());
                             }}/>
 
@@ -42,9 +42,14 @@ function Layer(e) {
     }
 
     return (
-        <div className="w-full text-black  bg-gray-600 overflow-hidden shadow-lg flex flex-grow flex-col"> 
-            <div className="text-xs font-semibold mb-4 p-4  bg-gray-400">{`${e.id} (${e.data.type})`} </div> 
-            <div className="flex justify-center items-center flex-grow">{renderEvent({...e.data, ready:e.ready||false})}</div>
+        <div className="w-full text-black  bg-gray-600 overflow-hidden shadow-lg flex flex-grow flex-col" style={{minHeight:280}}> 
+            <div className="flex flex-row text-xs font-semibold mb-4 p-4  bg-gray-400">
+                    <div className="flex flex-grow">{`${e.id} (${e.data.type})`} </div>
+                    <div onClick={()=>e.toggleTree(e.id)} className="flex">tree</div>
+            </div> 
+            <div className="flex justify-center flex-grow">
+                {renderEvent({...e.data, ready:e.ready||false})}
+            </div>
         </div>
     );
 }

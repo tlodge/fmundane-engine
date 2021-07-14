@@ -1,13 +1,14 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { compose, createSlice } from '@reduxjs/toolkit';
 import io from 'socket.io-client';
 import superagent from 'superagent';
 import * as d3 from 'd3-hierarchy';
 
 //import Layer from './Layer';
 
-const socket = io('http://localhost:3001');
+const socket = io(window.location.href);
 let recognition, voice;
 let _canlisten = false;
+
 
 export const experienceSlice = createSlice({
   name: 'experience',

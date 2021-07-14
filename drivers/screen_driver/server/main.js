@@ -9,7 +9,7 @@ const app = express();
 
 let ws;
 app.use(express.static("public"));
-
+app.use(express.static("../../../media"));
 
 app.get('/api/camera/scan', (req,res) => {
     console.log("seen camera scan request");
@@ -31,12 +31,39 @@ app.get('/api/camera', (req,res) => {
 	res.status(200).send();
 })
 
+app.get('/api/home', (req,res) => {
+    console.log("seen home");
+    const {type=null} = req.query;
+    if (ws){
+        ws.send(JSON.stringify({type:"url", url:"/"}));
+    }
+    
+	res.status(200).send();
+})
+
+app.get('/api/media/play',  (req,res) => {
+    console.log("seen media play request");
+    const {media="", delay=500} = req.query;
+    if (ws){
+        ws.send(JSON.stringify({type:"media", media, delay}));
+    }
+    
+	res.status(200).send();
+});
+
+app.get('/api/media', (req,res) => {
+    console.log("seen media request!");
+    if (ws){
+        ws.send(JSON.stringify({type:"url", url:"/media"}));
+    }
+    res.status(200).send();
+})
+
 app.get('/api/air', (req,res) => {
     console.log("seen air request!");
     if (ws){
         ws.send(JSON.stringify({type:"url", url:"/air"}));
     }
-    
     res.status(200).send();
 })
 //initialize a simple http server

@@ -1,5 +1,7 @@
 import FaceScan from "./FaceScan";
 import AirQuality from "./AirQuality";
+import Media from "./Media";
+
 import {useState, useEffect} from "react";
 import {
     BrowserRouter as Router,
@@ -7,18 +9,19 @@ import {
     Route,
     useHistory,
   } from "react-router-dom";
+import { merge } from "d3";
 
 export default function Home() {
 
     const history = useHistory();
     const [scan, setScan] = useState(false);
     const [dyson, setDyson] = useState({});
+    const [media, setMedia] = useState("");
+    const [delay, setDelay] = useState(500);
+
     console.log(window.location.href);
     const parts = window.location.href.replace("http://","").replace("https://","").split(":");
     const wsurl = `ws://${parts[0]}:${parts[1]}`;
-
-  
-    console.log(wsurl);
 
     useEffect(()=>{
         const socket = new WebSocket(wsurl);
@@ -34,6 +37,7 @@ export default function Home() {
             const msg = JSON.parse(event.data);
             console.log(msg);
             if (msg.type=="url"){
+                setMedia("");
                 history.push(msg.url);
             }
             if (msg.type=="camera"){
@@ -41,6 +45,16 @@ export default function Home() {
             }
             if (msg.type=="dyson"){
                 setDyson(msg.data);
+            }
+            if (msg.type=="media"){
+              console.log("set media to", msg.media);
+              setMedia(msg.media);
+              try{
+                setDelay(Number(msg.delay));
+              }catch(err){
+                console.log("error setting delay, defaulting to 500");
+                setDelay(500);
+              }
             }
           });
        }catch(err){
@@ -59,9 +73,10 @@ export default function Home() {
         });
     }
     return (
-        <div>
-            
+        <div style={{width:"100vw", height:"100vh", background:"black"}}>
+         
         <Switch>
+          
             <Route path="/camera"
                 render = {(props)=>(
                     <FaceScan {...props} scan={scan}/>
@@ -70,12 +85,25 @@ export default function Home() {
             <Route path="/air"
                 render = {(props)=>(
                     <>
-                      <button style={{border:"none", background:"none"}} onClick={fakeData}>mock reading</button>
+                      {/*button style={{border:"none", background:"none"}} onClick={fakeData}>mock reading</button>*/}
                     
                     <AirQuality {...props} data={dyson}/>
                     </>
                 )}
             />
+             <Route path="/media"
+                render = {(props)=>(
+                    <div style={{display:"flex", flex:"1 1 auto", alignItems:"center", justifyContent:"center"}}>    
+                    <Media {...props} media={media} delay={delay}/>
+                    </div>
+                )}
+            />
+            <Route path="/"
+                 render = {(props)=>(<div style={{display:"flex",alignItems:"center"}}>
+                 <img style={{padding:300}} src="./flogo.svg"></img>
+             </div>
+             )}
+             />
         </Switch>
         </div>
     );

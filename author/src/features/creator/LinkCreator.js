@@ -21,7 +21,6 @@ export function LinkCreator({onClose}) {
     const parent    = useSelector(selectParent);
 
     const _createLink = ()=>{
-        console.log("OK IN CREATE LINK, from", parent, " to ", linknode);
         dispatch(createLink({from:parent, to:linknode, rule, actions}))
     }
 

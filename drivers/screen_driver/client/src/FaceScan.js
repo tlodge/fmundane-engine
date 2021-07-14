@@ -1,9 +1,7 @@
 //https://medium.com/codesphere-cloud/creating-a-face-detection-web-app-with-react-and-codesphere-28b1f057145d
 
 import React, { useRef, useEffect, useState, createRef,  } from "react";
-import {
-  useHistory
-} from "react-router-dom";
+
 import "./FaceScan.css";
 import * as tf from "@tensorflow/tfjs";
 import * as facemesh from "@tensorflow-models/facemesh";
@@ -100,11 +98,11 @@ function FaceScan({scan="none"}) {
     setVideoOpacity(0);
   }
 
-  console.log("scan is", scan);
+
 
   return (
-    <div style={{backgroundColor:"black"}}>
-    <div className="App">
+    <>
+    <div className="App" style={{background:"black"}}>
       <video
         ref={videoRef}
         style={{
@@ -140,7 +138,7 @@ function FaceScan({scan="none"}) {
       
     </div>
     
-    </div>
+    </>
   );
 }
 /* <button onClick={()=>{showVideo()}}>show video</button>

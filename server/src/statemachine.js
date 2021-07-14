@@ -199,6 +199,7 @@ const StateMachine =   (config)=>{
                         setTimeout(
                             ()=>{
                                 console.log('subscribing to next event!')
+                                console.log("NEXT EVENT IS", _e);
                                 sub(_e)
                             }
                         ,1000);

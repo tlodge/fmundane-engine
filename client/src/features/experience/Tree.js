@@ -61,6 +61,19 @@ const _clink = (sx, sy, tx, ty) => {
     return <path d={`M ${sx} ${sy} C ${(sx + tx) / 2} ${sy}, ${(sx + tx) / 2} ${ty}, ${tx} ${ty}`} style={{stroke:"#000", strokeWidth:"2", fill:"none"}}></path> 
 }
 
+const _loopback = (sx, sy, tx, ty) =>{
+    //(link.from.y + (l.y-link.from.y)/2)
+    
+    return <path d={`M ${sx} ${sy} C ${(sx)} ${sy+60}, ${(sx-120) } ${ty+60}, ${tx} ${ty}`} style={{stroke:"#444", strokeWidth:"1", fill:"none"}}></path> 
+}
+
+const isloopback = (l)=>{
+    
+    const result = l.from.y > l.to.y;
+    return result;
+  }
+  
+
 const findNode = (t, name)=>{
 
     if ((t.data || {}).name == name){
@@ -84,18 +97,12 @@ const findNode = (t, name)=>{
 }
 
 const moveChart = (gtree, t)=>{
- 
-    /*const g = d3.select(gtree.current);
-    
-    if (t.triggered){
-        const node = findNode(t, t.id);
-        let ty = 0;
-
-        if (node.parent){
-            ty = node.x;// - node.parent.x;
-        }
-        g.transition().duration(2000).attr("transform", `translate(-${node.depth * 250},0`);
-    }*/
+    console.log("AM IN MOVE CHART!!", t.id);
+    const g = d3.select(gtree.current);
+    if (_seen[t.id]){
+        const {x,y} = _seen[t.id];
+        g.transition().duration(2000).attr("transform", `translate(${-y+200},${-x+t.height/2})`);
+    }
 }
 
 function Tree(t) {
@@ -135,6 +142,7 @@ function Tree(t) {
                 const mx = 20 + (labeldata.actions.length - 1) * 20;
 
                 const label = labeldata.actions.map((ld,i)=>{
+                   
                     return <text key={ld.join(",")} fontSize="x-small" textAnchor={"middle"} x={l.y+60} y={l.x-mx + (i*18)} > {ld.join(',')}</text>
                 });
 
@@ -142,15 +150,22 @@ function Tree(t) {
                 const operator = rule.operator || "";
                 const operand =  rule.operand || [];
                 const rulelabel = `${operator}, ${operand}`;
+                const renderText = ()=>{
+                    if (isloopback({from:link.from, to:l})){
+                       return  <text fontSize="x-small" fontWeight="bold" fill="#000" opacity="0.5" textAnchor={anchor} y={link.from.x+tx-5+70} x={(link.from.y + (l.y-link.from.y)/2)}>{rulelabel}</text>
+                    }
+                   return  <text fontSize="x-small" fontWeight="bold" fill="black" textAnchor={anchor} y={link.from.x+tx-5} x={(link.from.y+ty)}>{rulelabel}</text>
+                }
 
                 const ruletext =    <g>
                                         <rect x={link.from.y-20+ty} y={link.from.x-13+tx} width={40} height={12} style={{fill: "#edf2f7"}}/>
-                                        <text fontSize="x-small" fontWeight="bold" fill="black" textAnchor={anchor} y={link.from.x+tx-5} x={(link.from.y+ty)}>{rulelabel}</text>
+                                       {renderText()}
+                                       
                                     </g>
 
 
                 return <g key={`${l.x},${l.y}`}>
-                            {_clink(link.from.y, link.from.x, l.y, l.x)}
+                            {isloopback({from:link.from, to:l}) ? _loopback(link.from.y, link.from.x, l.y, l.x) : _clink(link.from.y, link.from.x, l.y, l.x)}
                             {ruletext}
                             {label}
                             
@@ -179,7 +194,7 @@ function Tree(t) {
 
         return <g key={`${node.x},${node.y}`}> 
                 
-                    <rect x={node.y-60} y={node.x-10} width={120} height={20} style={{fill: paint ? "#4299e1":"white", stroke:"black"}}/>
+                    <rect x={node.y-60} y={node.x-10} width={120} height={20} rx={10} style={{fill: paint ? "#4299e1":"white", stroke:"black"}}/>
                     <text textAnchor="middle" fontSize="x-small"  x={node.y} y={node.x+4}>{node.data.name}</text>
                     {(node.children || []).map(n=>renderTree(n, selected, rid))}
             </g>
@@ -199,8 +214,8 @@ function Tree(t) {
     generatecoords(t);
 
     return <div className="text-black bg-gray-200 rounded bg-white overflow-hidden shadow-lg"> 
-        <svg ref={mytree} height="400" style={{width:`calc(100vw - 400px)`}}>
-            <g ref ={gtree} transform={"translate(50,200)"}>
+        <svg ref={mytree} height={t.height} style={{width:`calc(100vw - 280px)`}}>
+            <g ref ={gtree} transform={`translate(120,${t.height/2})`}>
                 <g id="dragbox"> 
                     {renderLinks(links(t), rids(t))}
                     {renderTree(t, t.id, t.triggered)}

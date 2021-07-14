@@ -24,23 +24,43 @@ const _clink = (sx, sy, tx, ty) => {
   return `M ${sx} ${sy} C ${(sx + tx) / 2} ${sy}, ${(sx + tx) / 2} ${ty}, ${tx} ${ty}`;  
 }
 
-const insert = (seen, lookup, event, nodes={})=>{
+const _loopback = (sx, sy, tx, ty) =>{
+  return `M ${sx} ${sy} C ${(sx + tx)*1.5} ${sy}, ${(sx + tx)*1.5} ${ty}, ${tx} ${ty}`;  
+}
+
+let _seen   = {};
+let _loops  = [];
+
+const insert = (lookup, event, nodes={})=>{
    
     const children = lookup[event.event] || [];
  
     //console.log(nodes[event.event].name || "").split(".");
     const [name=["x"]] = (nodes[event.event].name || "").split(".");
     const {onstart="",type="button"} = nodes[event.event]
-
-    if (seen.indexOf(event.event)!=-1){
-      return {event, onstart, type, name, children:[]};
-    }
-    return {event, onstart, type, name, children : children.map(c => insert([...seen,event.event], lookup, c, nodes))}
+    //if (_seen[event.event]){
+    //  children.map(c=>{
+    //    console.log("insert link", parent.event, "=>", event.event);
+    //  })
+     // return {event, onstart, type, name, children:[]};
+   // }
+    _seen[event.event] = true;
+    //if (seen.indexOf(event.event)!=-1){
+    //  return {event, onstart, type, name, children:[]};
+    //}
+    return {event, onstart, type, name, children : children.reduce((acc,c) => {
+      if (!_seen[c.event]){
+        return [...acc,insert(lookup, c, nodes)]
+      }
+      _loops = [..._loops, {from:event, to: c}];
+      return acc;
+    },[])}
     
 }
 
 const convertToHierarchy = (lut,nodes={})=>{
-    return insert ([], lut, lut["root"],nodes);
+   _seen = {}; _loops = [];
+    return insert (lut, lut["root"],nodes);
 }
 
 const links = (node={})=>{
@@ -223,12 +243,35 @@ const treeref = useD3((root) => {
     
     const jsontree = convertToHierarchy(lookuptable,nodes);
     const hier = (d3h.hierarchy(jsontree, d=>d.children));
+    let _lookup = {}
+  
     const tree   =  d3h.tree().nodeSize([sw+XPADDING,sh+YPADDING])(hier);  
-    const _links  = _expanded(links(tree));
+
+    //we use this table to generate the loop links
+    for (const n of tree.descendants()){
+      _lookup[n.data.event.event] = {x:n.x, y:n.y}
+    }
+   
+
+    
+  
+    _loops = _loops.map(l=>{
+      return {
+        from : {name: l.from.event, x:_lookup[l.from.event].x, y:_lookup[l.from.event].y+ sh} ,
+        to: { name: l.to.event, x:_lookup[l.to.event].x, y:_lookup[l.to.event].y+ LINKDELTA, op:l.to.op, actions:l.to.actions}
+      }
+    })
+
+    const _links  = [..._expanded(links(tree)), ..._loops];
+
     const currentlinks = lookuplinks(_links);
+
     let eligible = [];
     
     
+    const isloopback = (l)=>{
+      return l.from.x === l.to.x && l.from.y > l.to.y;
+    }
 
     const parentfor = Object.keys(lookuptable).reduce((acc,key)=>{
         if (key === "root"){
@@ -304,6 +347,9 @@ const treeref = useD3((root) => {
     const link = root.selectAll("path#link").data(_links, d=>`${d.from.name}${d.to.name}${d.to.actions.join(",")}`).join(
           enter => {
             enter.append("path").attr("id", "link").attr("d", l=>{
+              if (isloopback(l)){
+                return _loopback(l.from.x+(sw/2), l.from.y+LINKDELTA, l.to.x+(sw/2), l.to.y)
+              }
               return _clink(l.from.x+(sw/2), l.from.y+LINKDELTA+TARGETBIGR, l.to.x+(sw/2), l.to.y-TARGETBIGR);
             })
             .style("stroke","#000")
@@ -320,8 +366,11 @@ const treeref = useD3((root) => {
       .attrTween("d", l=>{
           const last = treeref.current.last || {};
           const l1 = last[`${l.from.name}_${l.to.name}`];
+          
+
           var previous = l1 ?  _clink(l1.x1+(sw/2), l1.y1+LINKDELTA+TARGETBIGR, l1.x2+(sw/2), l1.y2-TARGETBIGR) : _clink(l.from.x+(sw/2), l.from.y+LINKDELTA+TARGETBIGR, l.to.x+(sw/2), l.to.y-TARGETBIGR);
-          var current =  _clink(l.from.x+(sw/2), l.from.y+LINKDELTA+TARGETBIGR, l.to.x+(sw/2), l.to.y-TARGETBIGR);
+          var current =  isloopback(l) ? _loopback(l.from.x+(sw/2), l.from.y+LINKDELTA, l.to.x+(sw/2), l.to.y) : _clink(l.from.x+(sw/2), l.from.y+LINKDELTA+TARGETBIGR, l.to.x+(sw/2), l.to.y-TARGETBIGR);
+          
           return interpolatePath(previous, current);
       }).on("end", ()=>{
         treeref.current.last = currentlinks; //memoise the previous links
@@ -335,15 +384,14 @@ const treeref = useD3((root) => {
             target.append("circle").attr("id", "link").style("opacity",0).style("fill","rgb(243, 244, 246)").style("stroke","none").attr("cx", 0).attr("cy",-YPADDING+sh).attr("r",10).transition().duration(ANIMATION_DURATION).style("opacity",1);
             target.append("text").attr("id", "rule").style("text-anchor", "middle").style("font-weight", "bold").style("font-size", "10px").attr("x",0).attr("y",-YPADDING+sh).text(l=>l.to.op).on("click", (e,l)=>linkSelected(e,l))
            
-            target.append("circle").attr("id", "label").style("fill","rgb(243, 244, 246)").style("opacity", l=>l.to.actions && l.to.actions.length > 0 ? 1 : 0).style("stroke","none").attr("cx", 0).attr("cy",0).attr("r",20).on("click", (e,l)=>linkSelected(e,l))
-            target.append("text").attr("id","action").style("font-size", "10px").style("text-anchor", "middle").attr("x",0).attr("y",0).text(l=>_empty(l.to.actions) ? "+" : l.to.actions).on("click", (e,l)=>linkSelected(e,l))
+            target.append("circle").attr("id", "label").style("fill","rgb(243, 244, 246)").style("opacity", l=>l.to.actions && l.to.actions.length > 0 ? 1 : 0).style("stroke","none").attr("cx", l=>isloopback(l) ? (sw/2)*1.5:0).attr("cy",0).attr("r",20).on("click", (e,l)=>linkSelected(e,l))
+            target.append("text").attr("id","action").style("font-size", "10px").style("text-anchor", "middle").attr("x",l=>isloopback(l) ? (sw/2)*1.5:0).attr("y",0).text(l=>_empty(l.to.actions) ? "+" : l.to.actions).on("click", (e,l)=>linkSelected(e,l))
             
         },
         update=>{
             update.transition().duration(ANIMATION_DURATION).attr("transform", l=>`translate(${l.from.x+sw/2 - (l.from.x-l.to.x)/2}, ${l.to.y+ (l.from.y+LINKDELTA-l.to.y)/2})`);
             update.select("circle#label").style("opacity", l=>l.to.actions && l.to.actions.length > 0 ? 1 : 0).on("click", (e,l)=>linkSelected(e,l))
             update.select("text#action").on("click", (e,l)=>linkSelected(e,l));
-            
             update.select("text#rule").on("click", (e,l)=>linkSelected(e,l));
         },
         exit => exit.call(exit=>exit.remove())

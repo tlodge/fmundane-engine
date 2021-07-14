@@ -1,0 +1,117 @@
+[
+    {
+        "id": "pardons",
+        "start": {
+            "actions": [
+                []
+            ],
+            "event": "pardons"
+        },
+        "events": [
+            {
+                "id": "pardons",
+                "name": "pardons",
+                "onstart": {
+                    "speech": []
+                },
+                "type": "button",
+                "subscription": "/press",
+                "data": [
+                    "pardon",
+                    "excuse me",
+                    "didn't understand",
+                    "I might be deaf",
+                    "say again?",
+                    "huh?",
+                    "repeat"
+                ],
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "pardon"
+                        },
+                        "actions": [
+                            [
+                                "pardonpardon"
+                            ]
+                        ],
+                        "next": "pardons"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "excuse me"
+                        },
+                        "actions": [
+                            [
+                                "pardonexcuse"
+                            ]
+                        ],
+                        "next": "pardons"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "didn't understand"
+                        },
+                        "actions": [
+                            [
+                                "pardonunderstand"
+                            ]
+                        ],
+                        "next": "pardons"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "I might be deaf"
+                        },
+                        "actions": [
+                            [
+                                "pardondeaf"
+                            ]
+                        ],
+                        "next": "pardons"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "say again?"
+                        },
+                        "actions": [
+                            [
+                                "pardonsay"
+                            ]
+                        ],
+                        "next": "pardons"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "huh?"
+                        },
+                        "actions": [
+                            [
+                                "pardonhuh"
+                            ]
+                        ],
+                        "next": "pardons"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "repeat"
+                        },
+                        "actions": [
+                            [
+                                "pardonrepeat"
+                            ]
+                        ],
+                        "next": "pardons"
+                    }
+                ]
+            }
+        ]
+    }
+]

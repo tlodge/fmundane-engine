@@ -13,11 +13,13 @@ import {
 
     return (
       <Router>
-        <div>
-            <div style={{display:"flex"}}>
-            <Link to="/camera" style={{fontFamily:"Helvetica", textDecoration:"none", color:"black", fontWeight:"bold", paddingRight:10}}>Camera</Link>
+
+           
+
+           {/*} <Link to="/camera" style={{fontFamily:"Helvetica", textDecoration:"none", color:"black", fontWeight:"bold", paddingRight:10}}>Camera</Link>
             <Link to="/air" style={{fontFamily:"Helvetica", textDecoration:"none", color:"black", fontWeight:"bold", paddingRight:10}}>Air Quality</Link>
-            </div>
+    <Link to="/media" style={{fontFamily:"Helvetica", textDecoration:"none", color:"black", fontWeight:"bold", paddingRight:10}}>Media</Link> */}
+           
           {/*
             A <Switch> looks through all its children <Route>
             elements and renders the first one whose path
@@ -28,7 +30,7 @@ import {
          
                <Home/>
             
-        </div>
+       
       </Router>
     );
   }

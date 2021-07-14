@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 const { execFile} = require('child_process');
 var rp = require('request-promise-native')
 const PORT = '9105';
+const MEDIADIR = '../../media';
 
 const app = express();
 app.use(bodyParser.json());
@@ -14,7 +15,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 const playIt = (media="")=>{
     return new Promise((resolve, reject)=>{
-        execFile("afplay", [`media/${media}`], (error)=>{
+        execFile("afplay", [`${MEDIADIR}/${media}`], (error)=>{
             if (error){
                 reject();
                 return;

@@ -25,6 +25,9 @@
                         },
                         "actions": [
                             [
+                                "homescreen"
+                            ],
+                            [
                                 "fanoff"
                             ],
                             [
@@ -41,7 +44,16 @@
             {
                 "id": "reseteverything",
                 "name": "reseteverything",
-                "onstart": [],
+                "onstart":  {"speech": [
+                    {
+                        "words": "I’m just turning myself on – wait a minute",
+                        "delay": "3000",
+                        "voice": "Daniel",
+                        "background": "",
+                        "wpm": 180,
+                        "rate": "180"
+                    }
+                ]},
                 "type": "button",
                 "subscription": "/press",
                 "data": [
@@ -66,14 +78,6 @@
                 "onstart": {
                     "speech": [
                         {
-                            "words": "I’m just turning myself on – wait a minute",
-                            "delay": "3000",
-                            "voice": "Daniel",
-                            "background": "",
-                            "wpm": 180,
-                            "rate": "180"
-                        },
-                        {
                             "words": "5",
                             "delay": "200",
                             "voice": "Daniel",
@@ -83,7 +87,7 @@
                         },
                         {
                             "words": "4",
-                            "delay": "200",
+                            "delay": "50",
                             "voice": "Daniel",
                             "background": "",
                             "wpm": 180,
@@ -91,7 +95,7 @@
                         },
                         {
                             "words": "3",
-                            "delay": "200",
+                            "delay": "50",
                             "voice": "Daniel",
                             "background": "",
                             "wpm": 180,
@@ -99,7 +103,7 @@
                         },
                         {
                             "words": "2",
-                            "delay": "200",
+                            "delay": "50",
                             "voice": "Daniel",
                             "background": "",
                             "wpm": 180,
@@ -107,7 +111,7 @@
                         },
                         {
                             "words": "1",
-                            "delay": "200",
+                            "delay": "50",
                             "voice": "Daniel",
                             "background": "",
                             "wpm": 180,
@@ -121,6 +125,14 @@
                             "wpm": 180,
                             "rate": "180"
                         }
+                    ],
+                    "actions": [
+                        [
+                            "mediascreen"
+                        ],
+                        [
+                            "countdown"
+                        ]
                     ]
                 },
                 "type": "button",
@@ -135,7 +147,7 @@
                             "operand": "next"
                         },
                         "actions": [
-                            []
+                            ["homescreen"]
                         ],
                         "next": "tookyourtime"
                     }
@@ -174,7 +186,8 @@
                             "background": "forboding.mp3",
                             "wpm": 180
                         }
-                    ]
+                    ],
+                    "actions" : [["homescreen"]]
                 },
                 "type": "button",
                 "subscription": "/press",
@@ -221,7 +234,9 @@
                 "subscription": "/press",
                 "data": [
                     "negative",
-                    "yes"
+                    "yes",
+                    "pardon?",
+                    "repeat"
                 ],
                 "rules": [
                     {
@@ -247,6 +262,30 @@
                             ]
                         ],
                         "next": "positive"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "pardon?"
+                        },
+                        "actions": [
+                            [
+                                ""
+                            ]
+                        ],
+                        "next": "pardon"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "repeat"
+                        },
+                        "actions": [
+                            [
+                                ""
+                            ]
+                        ],
+                        "next": "aboutme"
                     }
                 ]
             },
@@ -324,7 +363,7 @@
                 "onstart": {
                     "speech": [
                         {
-                            "words": "Let me tell you about the databox – it’s the computer on the bottom-right shelf",
+                            "words": "Let me tell you about the data box – it’s the computer on the bottom-right shelf",
                             "delay": "500",
                             "voice": "Daniel",
                             "background": "",
@@ -414,7 +453,7 @@
                 "onstart": {
                     "speech": [
                         {
-                            "words": "This is why we have the databox",
+                            "words": "This is why we have the data box",
                             "delay": 0,
                             "voice": "Daniel",
                             "background": "",
@@ -463,7 +502,7 @@
                         },
                         "actions": [
                             [
-                                ""
+                                "camerascreen"
                             ]
                         ],
                         "next": "watchingyou"
@@ -490,7 +529,7 @@
                             "rate": "180"
                         },
                         {
-                            "words": "Don’t worry about it though.  All the personality profiles I’ve made are secured on the databox",
+                            "words": "Don’t worry about it though.  All the personality profiles I’ve made are secured on the data box",
                             "delay": 0,
                             "voice": "Daniel",
                             "background": "",
@@ -503,7 +542,8 @@
                             "background": "",
                             "rate": "180"
                         }
-                    ]
+                    ],
+                    "actions": [["camerascan"]]
                 },
                 "type": "button",
                 "subscription": "/press",
@@ -518,7 +558,7 @@
                         },
                         "actions": [
                             [
-                                ""
+                                "homescreen"
                             ]
                         ],
                         "next": "voices"
@@ -845,7 +885,7 @@
                 "onstart": {
                     "speech": [
                         {
-                            "words": "Ok, well, Ok, well, I have bad news.",
+                            "words": "Ok, well, I have bad news.",
                             "delay": 0,
                             "voice": "Daniel",
                             "background": "",
@@ -982,7 +1022,7 @@
                             "rate": "180"
                         },
                         {
-                            "words": "I run all the data through an artificial intelligence algorithm on the databox",
+                            "words": "I run all the data through an artificial intelligence algorithm on the data box",
                             "delay": 0,
                             "voice": "Daniel",
                             "background": "",
@@ -1040,209 +1080,257 @@
             {
                 "id": "actuatewindows",
                 "name": "actuatewindows",
-                "onstart": {"speech" : [
-                    {
-                        "words": "I can shut out the light with my smart windows",
-                        "delay": 1000,
-                        "voice": "Daniel",
-                        "background": "",
-                        "rate": "180"
-                    }
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "I can shut out the light with my smart windows",
+                            "delay": 1000,
+                            "voice": "Daniel",
+                            "background": "",
+                            "rate": "180"
+                        }
                     ],
-                    "actions" : [["togglewindows"]]
+                    "actions": [
+                        [
+                            "togglewindows"
+                        ]
+                    ]
                 },
                 "type": "button",
                 "subscription": "/press",
-                "data": ["show fan"],
-                "rules": [{
-                    "rule": {
-                        "operator": "equals",
-                        "operand": "show fan"
-                    },
-                    "actions": [[]],
-                    "next": "actuatefan"
-                }]
+                "data": [
+                    "show fan"
+                ],
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "show fan"
+                        },
+                        "actions": [
+                            []
+                        ],
+                        "next": "actuatefan"
+                    }
+                ]
             },
             {
                 "id": "actuatefan",
                 "name": "actuatefan",
-                "onstart": {"speech" : [
-                    {
-                        "words": "I can give you a nice blast of air",
-                        "delay": 1000,
-                        "voice": "Daniel",
-                        "background": "",
-                        "rate": "180"
-                    }
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "I can give you a nice blast of air",
+                            "delay": 1000,
+                            "voice": "Daniel",
+                            "background": "",
+                            "rate": "180"
+                        }
                     ],
-                    "actions" : [["fanon"]]
+                    "actions": [
+                        [
+                            "fanon"
+                        ]
+                    ]
                 },
                 "type": "button",
                 "subscription": "/press",
-                "data": ["actuate lights"],
-                "rules": [{
-                    "rule": {
-                        "operator": "equals",
-                        "operand": "actuate lights"
-                    },
-                    "actions": [[]],
-                    "next": "actuatelights"
-                }]
+                "data": [
+                    "actuate lights"
+                ],
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "actuate lights"
+                        },
+                        "actions": [
+                            []
+                        ],
+                        "next": "actuatelights"
+                    }
+                ]
             },
             {
                 "id": "actuatelights",
                 "name": "actuatelights",
-                "onstart": {"speech" : [
-                    {
-                        "words": "I can make the room all moody",
-                        "delay": 1000,
-                        "voice": "Daniel",
-                        "background": "",
-                        "rate": "180"
-                    }
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "I can make the room all moody",
+                            "delay": 1000,
+                            "voice": "Daniel",
+                            "background": "",
+                            "rate": "180"
+                        }
                     ],
-                    "actions" : [["redlights"]]
+                    "actions": [
+                        [
+                            "redlights"
+                        ]
+                    ]
                 },
                 "type": "button",
                 "subscription": "/press",
-                "data": ["actuatescreen"],
-                "rules": [{
-                    "rule": {
-                        "operator": "equals",
-                        "operand": "actuatescreen"
-                    },
-                    "actions": [[]],
-                    "next": "actuateweb"
-                }]
+                "data": [
+                    "actuatescreen"
+                ],
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "actuatescreen"
+                        },
+                        "actions": [
+                            []
+                        ],
+                        "next": "actuateweb"
+                    }
+                ]
             },
             {
                 "id": "actuateweb",
                 "name": "actuateweb",
-                "onstart": {"speech" : [
-                    {
-                        "words": "And of course I can show you stuff on the good old TV screen",
-                        "delay": 1000,
-                        "voice": "Daniel",
-                        "background": "",
-                        "rate": "180"
-                    }
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "And of course I can show you stuff on the good old TV screen",
+                            "delay": 1000,
+                            "voice": "Daniel",
+                            "background": "",
+                            "rate": "180"
+                        }
                     ],
-                    "actions" : [["facescan"]]
+                    "actions": [["homescreen"]]
                 },
                 "type": "button",
                 "subscription": "/press",
-                "data": ["print"],
-                "rules": [{
-                    "rule": {
-                        "operator": "equals",
-                        "operand": "print"
-                    },
-                    "actions": [[]],
-                    "next": "labelprinter"
-                }]
+                "data": [
+                    "print"
+                ],
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "print"
+                        },
+                        "actions": [
+                            []
+                        ],
+                        "next": "labelprinter"
+                    }
+                ]
             },
             {
                 "id": "labelprinter",
                 "name": "labelprinter",
-                "onstart": {"speech" : [
-                    {
-                        "words": "Please tear off your receipt now and sign it on the dotted line with the pen provided",
-                        "delay": 1000,
-                        "voice": "Daniel",
-                        "background": "",
-                        "rate": "180"
-                    }
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "Please tear off your receipt now and sign it on the dotted line with the pen provided",
+                            "delay": 1000,
+                            "voice": "Daniel",
+                            "background": "",
+                            "rate": "180"
+                        }
                     ]
                 },
                 "type": "button",
                 "subscription": "/press",
-                "data": ["holdid"],
-                "rules": [{
-                    "rule": {
-                        "operator": "equals",
-                        "operand": "holdid"
-                    },
-                    "actions": [[]],
-                    "next": "holdid"
-                }]
+                "data": [
+                    "holdid"
+                ],
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "holdid"
+                        },
+                        "actions": [
+                            []
+                        ],
+                        "next": "holdid"
+                    }
+                ]
             },
             {
                 "id": "holdid",
                 "name": "holdid",
-                "onstart": {"speech" : [
-                    {
-                        "words": "Next, please hold up your id.",
-                        "delay": 500,
-                        "voice": "Daniel",
-                        "background": "",
-                        "rate": "180"
-                    },
-                    {
-                        "words": "Valid documents include driving licence, passport and credit cards",
-                        "delay": 500,
-                        "voice": "Daniel",
-                        "background": "",
-                        "rate": "180"
-                    }
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "Next, please hold up your i. d.",
+                            "delay": 500,
+                            "voice": "Daniel",
+                            "background": "",
+                            "rate": "180"
+                        },
+                        {
+                            "words": "Valid documents include driving licence, passport and credit cards",
+                            "delay": 500,
+                            "voice": "Daniel",
+                            "background": "",
+                            "rate": "180"
+                        }
                     ]
                 },
                 "type": "button",
                 "subscription": "/press",
-                "data": ["showfilm"],
-                "rules": [{
-                    "rule": {
-                        "operator": "equals",
-                        "operand": "showfilm"
-                    },
-                    "actions": [[]],
-                    "next": "showfilm"
-                }]
+                "data": [
+                    "showfilm"
+                ],
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "showfilm"
+                        },
+                        "actions": [
+                            []
+                        ],
+                        "next": "showfilm"
+                    }
+                ]
             },
             {
                 "id": "showfilm",
                 "name": "showfilm",
-                "onstart": {"speech" : [
-                    {
-                        "words": "Brilliant.  Now.  What we have all been waiting for. ",
-                        "delay": 500,
-                        "voice": "Daniel",
-                        "background": "",
-                        "rate": "180"
-                    },
-                    {
-                        "words": "Based on you and your data I am going to show you a fully personalised version of a new drama series",
-                        "delay": 500,
-                        "voice": "Daniel",
-                        "background": "",
-                        "rate": "180"
-                    }, 
-                    {
-                        "words": "Called the break up.",
-                        "delay": 500,
-                        "voice": "Daniel",
-                        "background": "",
-                        "rate": "180"
-                    },
-                    {
-                        "words": "Sit back, relax and enjoy the immersive experience.",
-                        "delay": 500,
-                        "voice": "Daniel",
-                        "background": "",
-                        "rate": "180"
-                    }
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "Brilliant.  Now.  What we have all been waiting for. ",
+                            "delay": 500,
+                            "voice": "Daniel",
+                            "background": "",
+                            "rate": "180"
+                        },
+                        {
+                            "words": "Based on you and your data I am going to show you a fully personalised version of a new drama series",
+                            "delay": 500,
+                            "voice": "Daniel",
+                            "background": "",
+                            "rate": "180"
+                        },
+                        {
+                            "words": "Called the break up.",
+                            "delay": 500,
+                            "voice": "Daniel",
+                            "background": "",
+                            "rate": "180"
+                        },
+                        {
+                            "words": "Sit back, relax and enjoy the immersive experience.",
+                            "delay": 500,
+                            "voice": "Daniel",
+                            "background": "",
+                            "rate": "180"
+                        }
                     ]
                 },
                 "type": "button",
                 "subscription": "/press",
                 "data": [],
-                "rules": [{
-                    "rule": {
-                        "operator": "equals",
-                        "operand": ""
-                    },
-                    "actions": [[]],
-                    "next": ""
-                }]
+                "rules": []
             },
             {
                 "id": "waitabit",
@@ -1252,6 +1340,264 @@
                 "subscription": "/press",
                 "data": [],
                 "rules": []
+            },
+            {
+                "id": "pardon",
+                "name": "pardon",
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "I am so sorry I didn't understand.",
+                            "delay": 0,
+                            "voice": "Daniel",
+                            "background": "",
+                            "rate": "190"
+                        },
+                        {
+                            "words": "Would you repeat that please?",
+                            "delay": 0,
+                            "voice": "Daniel",
+                            "background": "",
+                            "rate": "140"
+                        }
+                    ]
+                },
+                "type": "button",
+                "subscription": "/press",
+                "data": [
+                    "next"
+                ],
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "next"
+                        },
+                        "actions": [
+                            [
+                                ""
+                            ]
+                        ],
+                        "next": "databox"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "oi2",
+        "start": {
+            "actions": [
+                []
+            ],
+            "event": "oi"
+        },
+        "events": [
+            {
+                "id": "oi",
+                "name": "oi",
+                "onstart": {
+                    "speech": []
+                },
+                "type": "button",
+                "subscription": "/press",
+                "data": [
+                    "excuseme",
+                    "hello?",
+                    "hey you",
+                    "look here",
+                    "got all day",
+                    "tick tock"
+                ],
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "excuseme"
+                        },
+                        "actions": [
+                            [
+                                "oiexcuse"
+                            ]
+                        ],
+                        "next": "oi"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "hello?"
+                        },
+                        "actions": [
+                            [
+                                "oihello"
+                            ]
+                        ],
+                        "next": "oi"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "hey you"
+                        },
+                        "actions": [
+                            [
+                                "oihey"
+                            ]
+                        ],
+                        "next": "oi"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "look here"
+                        },
+                        "actions": [
+                            [
+                                "oilook"
+                            ]
+                        ],
+                        "next": "oi"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "got all day"
+                        },
+                        "actions": [
+                            [
+                                "oiday"
+                            ]
+                        ],
+                        "next": "oi"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "tick tock"
+                        },
+                        "actions": [
+                            [
+                                "oitick"
+                            ]
+                        ],
+                        "next": "oi"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "pardons",
+        "start": {
+            "actions": [
+                []
+            ],
+            "event": "pardons"
+        },
+        "events": [
+            {
+                "id": "pardons",
+                "name": "pardons",
+                "onstart": {
+                    "speech": []
+                },
+                "type": "button",
+                "subscription": "/press",
+                "data": [
+                    "pardon",
+                    "excuse me",
+                    "didn't understand",
+                    "I might be deaf",
+                    "say again?",
+                    "huh?",
+                    "repeat"
+                ],
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "pardon"
+                        },
+                        "actions": [
+                            [
+                                "pardonpardon"
+                            ]
+                        ],
+                        "next": "pardons"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "excuse me"
+                        },
+                        "actions": [
+                            [
+                                "pardonexcuse"
+                            ]
+                        ],
+                        "next": "pardons"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "didn't understand"
+                        },
+                        "actions": [
+                            [
+                                "pardonunderstand"
+                            ]
+                        ],
+                        "next": "pardons"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "I might be deaf"
+                        },
+                        "actions": [
+                            [
+                                "pardondeaf"
+                            ]
+                        ],
+                        "next": "pardons"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "say again?"
+                        },
+                        "actions": [
+                            [
+                                "pardonsay"
+                            ]
+                        ],
+                        "next": "pardons"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "huh?"
+                        },
+                        "actions": [
+                            [
+                                "pardonhuh"
+                            ]
+                        ],
+                        "next": "pardons"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "repeat"
+                        },
+                        "actions": [
+                            [
+                                "pardonrepeat"
+                            ]
+                        ],
+                        "next": "pardons"
+                    }
+                ]
             }
         ]
     }

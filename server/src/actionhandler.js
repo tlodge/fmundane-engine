@@ -5,11 +5,11 @@ const request = (r)=>{
     return new Promise((resolve, reject)=>{
         if (r.data.type === "GET"){
             if (r.data.timeout){
-                superagent.get(r.data.url).timeout({
+                superagent.get(r.data.url).query(r.query || {}).timeout({
                     response: r.data.timeout  
                 }).then(res=>resolve(res.body)).catch((err)=>resolve(err));
             }else{
-                superagent.get(r.data.url).then(res=>resolve(res.body)).catch((err)=>resolve(err));
+                superagent.get(r.data.url).query(r.query || {}).then(res=>resolve(res.body)).catch((err)=>resolve(err));
             }
             
         }

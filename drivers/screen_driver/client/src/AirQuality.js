@@ -314,7 +314,7 @@ function AirQuality({data={}}) {
 
     return ( <>
       
-        <div>
+        <div style={{width:"100vw", height:"100vh", background:"wheat"}}>
         <div style={{display:"flex",  flexDirection:"row", alignItems:"center", justifyContent:"center", height:"calc(100vh - 200px)"}}>
                 <div style={{display:"flex", flex: "1 1 0", flexDirection:"column", margin:20}}>
                     <div className="heading">Particulate matter (<strong>2.5</strong>)</div>

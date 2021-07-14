@@ -5,3 +5,4 @@ yarn-error.log
 coverage
 build/
 drivers/media_driver/media/
+media/

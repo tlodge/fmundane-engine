@@ -59,7 +59,7 @@ export const layerSlice = createSlice({
   reducers: {
 
     addNode : (state, action)=>{
-      console.log("am in add node", action.payload);
+  
 
       state.nodes = [...state.nodes, action.payload.id]
       state.nodesById = {
@@ -71,27 +71,25 @@ export const layerSlice = createSlice({
 
     createLink: (state, action)=>{
 
-        const {rule, action:a, from, to} = action.payload;
+        const {rule, actions:a, from, to} = action.payload;
         
         
         
         const _from = from.id;
-        console.log("in create link", _from, to);
+      
 
         const _actions =  (a||"").split("|").map((line)=>{
             return line.split(",");
         });
 
-        console.log("actions are", _actions);
-        console.log("b4");
-        console.log(JSON.stringify(state.lut,null,4));
+       
 
         state.lut = {
             ...state.lut, 
             [_from] : [...(state.lut[_from]||[]), {id: `${to}_${Date.now()}`, event:to, op:rule, actions:_actions}]
         }
        
-        console.log(JSON.stringify(state.lut,null,4));
+    
 
     },
 
@@ -135,7 +133,7 @@ export const layerSlice = createSlice({
 
         const {node,name,speech,type} = action.payload;
       
-        console.log("update node", action.payload);
+      
 
         //TODO - SORT ROOT NODE - ID THIS IS THE ONE CHANGED!!
         state.nodesById = Object.keys(state.nodesById).reduce((acc, key)=>{
@@ -264,7 +262,7 @@ const unique = (value="", arr=[])=>{
 export const fetchAuthored = ()=>(dispatch)=>{
     request.get('/author/authored').then(res => {
       const alist = res.body.layers;
-      console.log("great have alist", alist);
+ 
       dispatch(setAuthored(alist));
     })
   }
@@ -275,7 +273,7 @@ export const fetchAuthored = ()=>(dispatch)=>{
         request.get('/event/layers').query({layer}).then(res => {
             const [layers={}, ...rest] = res.body;
             const {events=[]} = layers;
-            console.log("ok have events", events);
+            
             dispatch(loadNodes({nodes:events}));
         })
         .catch(err => {
@@ -310,8 +308,7 @@ export const  addToParent = (node, rule, actions,)=>{
         dispatch(addNode(_node));
         dispatch(addRulesToParent(rule,actions,_node.name));
 
-        console.log(JSON.stringify(getState().layer.nodesById,null,4));
-        console.log(JSON.stringify(getState().layer.lut,null,4));
+   
     }
 
    
@@ -331,7 +328,7 @@ export const exportNodes = (name)=>{
             }
         },{});
 
-        console.log("OK LUT IS", JSON.stringify(_lut,null,4));
+  
 
         const nodesById = getState().layer.nodesById;
 
@@ -400,7 +397,7 @@ export const exportNodes = (name)=>{
             },
             "events": items
         }
-        console.log(JSON.stringify(layer,null,4));
+  
        await request.post('/author/save').set('Content-Type', 'application/json').send({name,layer});
     }
 }

@@ -1,6 +1,6 @@
 [
     {
-        "id": "mundane",
+        "id": "mundane2",
         "start": {
             "actions": [
                 []
@@ -44,16 +44,18 @@
             {
                 "id": "reseteverything",
                 "name": "reseteverything",
-                "onstart":  {"speech": [
-                    {
-                        "words": "I’m just turning myself on – wait a minute",
-                        "delay": "3000",
-                        "voice": "Daniel",
-                        "background": "",
-                        "wpm": 180,
-                        "rate": "180"
-                    }
-                ]},
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "I’m just turning myself on – wait a minute",
+                            "delay": "3000",
+                            "voice": "Daniel",
+                            "background": "",
+                            "wpm": 180,
+                            "rate": "180"
+                        }
+                    ]
+                },
                 "type": "button",
                 "subscription": "/press",
                 "data": [
@@ -147,7 +149,9 @@
                             "operand": "next"
                         },
                         "actions": [
-                            ["homescreen"]
+                            [
+                                "homescreen"
+                            ]
                         ],
                         "next": "tookyourtime"
                     }
@@ -187,7 +191,11 @@
                             "wpm": 180
                         }
                     ],
-                    "actions" : [["homescreen"]]
+                    "actions": [
+                        [
+                            "homescreen"
+                        ]
+                    ]
                 },
                 "type": "button",
                 "subscription": "/press",
@@ -236,7 +244,8 @@
                     "negative",
                     "yes",
                     "pardon?",
-                    "repeat"
+                    "repeat",
+                    "no questions"
                 ],
                 "rules": [
                     {
@@ -286,6 +295,18 @@
                             ]
                         ],
                         "next": "aboutme"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "no questions"
+                        },
+                        "actions": [
+                            [
+                                ""
+                            ]
+                        ],
+                        "next": "noquestions"
                     }
                 ]
             },
@@ -543,7 +564,11 @@
                             "rate": "180"
                         }
                     ],
-                    "actions": [["camerascan"]]
+                    "actions": [
+                        [
+                            "camerascan"
+                        ]
+                    ]
                 },
                 "type": "button",
                 "subscription": "/press",
@@ -976,14 +1001,14 @@
                         {
                             "words": "If you wish to withdraw your consent I suggest you stand up now.  ",
                             "delay": 0,
-                            "voice": "Kate",
+                            "voice": "Daniel",
                             "background": "",
                             "rate": "180"
                         },
                         {
                             "words": "Flatulence is also accepted.  Confirm now.",
                             "delay": 0,
-                            "voice": "Kate",
+                            "voice": "Daniel",
                             "background": "",
                             "rate": "180"
                         }
@@ -1201,7 +1226,11 @@
                             "rate": "180"
                         }
                     ],
-                    "actions": [["homescreen"]]
+                    "actions": [
+                        [
+                            "homescreen"
+                        ]
+                    ]
                 },
                 "type": "button",
                 "subscription": "/press",
@@ -1329,17 +1358,68 @@
                 },
                 "type": "button",
                 "subscription": "/press",
-                "data": [],
-                "rules": []
+                "data": [
+                    "play it"
+                ],
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "play it"
+                        },
+                        "actions": [
+                            [
+                                "mediascreen"
+                            ],
+                            [
+                                "breakup1audio",
+                                "breakup1video"
+                            ]
+                        ],
+                        "next": "film"
+                    }
+                ]
             },
             {
                 "id": "waitabit",
                 "name": "waitabit",
-                "onstart": [],
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "I'll just wait a little bit for you to think some more",
+                            "delay": 0,
+                            "voice": "Daniel",
+                            "background": "",
+                            "rate": "180"
+                        },
+                        {
+                            "words": "1 mississippi, 2 mississipi",
+                            "delay": 0,
+                            "voice": "Daniel",
+                            "background": "",
+                            "rate": "180"
+                        }
+                    ]
+                },
                 "type": "button",
                 "subscription": "/press",
-                "data": [],
-                "rules": []
+                "data": [
+                    "try again"
+                ],
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "try again"
+                        },
+                        "actions": [
+                            [
+                                ""
+                            ]
+                        ],
+                        "next": "back2sensors"
+                    }
+                ]
             },
             {
                 "id": "pardon",
@@ -1381,11 +1461,71 @@
                         "next": "databox"
                     }
                 ]
+            },
+            {
+                "id": "film",
+                "name": "film",
+                "onstart": {
+                    "speech": []
+                },
+                "type": "button",
+                "subscription": "/press",
+                "data": [
+                    "goback"
+                ],
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "goback"
+                        },
+                        "actions": [
+                            [
+                                "dysonscreen"
+                            ]
+                        ],
+                        "next": "start"
+                    }
+                ]
+            },
+            {
+                "id": "noquestions",
+                "name": "noquestions",
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "ok, in that case we'll move swiftly on!",
+                            "delay": 0,
+                            "voice": "Daniel",
+                            "background": "",
+                            "rate": "180"
+                        }
+                    ]
+                },
+                "type": "button",
+                "subscription": "/press",
+                "data": [
+                    "next"
+                ],
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "next"
+                        },
+                        "actions": [
+                            [
+                                ""
+                            ]
+                        ],
+                        "next": "databox"
+                    }
+                ]
             }
         ]
     },
     {
-        "id": "oi2",
+        "id": "oi",
         "start": {
             "actions": [
                 []

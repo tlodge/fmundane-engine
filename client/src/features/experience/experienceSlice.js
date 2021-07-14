@@ -176,9 +176,17 @@ export const listenOnEvents = () => (dispatch, getState) => {
   });
 }
 
-export const buttonPressed  = (b) => (dispatch)=>{
+export const buttonPressed  = (b) => ()=>{
   stopListening();
   superagent.get("/event/press").query({name:b}).end((err, res) => {
+    if (err){
+        console.log(err);
+    }   
+  });
+}
+
+export const manualTrigger = (layer, node)=>()=>{
+  superagent.get("/event/trigger").query({layer,node}).end((err, res) => {
     if (err){
         console.log(err);
     }   

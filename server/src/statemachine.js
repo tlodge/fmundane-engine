@@ -94,20 +94,13 @@ const StateMachine =   (config)=>{
      
         if (event){  
             //send the ready early -- or perhaps an init message?
-
-            
-            
             if (event.onstart){
-              
-                //_executestart(__startactions, "");//message.toString());
                 const {speech=[], actions:_actions=[]} = event.onstart;
                 const __startactions =  _actions.map(arr=>(arr||[]).map(a=>actions[a]||{}));
-
                 await Promise.all([await _executeactions(__startactions), await _executespeech(speech)]);
                 
             }
             send("ready", {layer:config.id, event:{id:nexteventid, type:event.type}});    
-            //send("event", {id:config.id,data:eventlookup[nexteventid],triggered});
         }
     }
 
@@ -118,7 +111,7 @@ const StateMachine =   (config)=>{
         });
     }
 
-    //TODO - onl;y subscribe to the current event, when there is a change, unsubscribe and subscribe to the next one.
+
     const init = async()=>{
     
         let eventid = config.start.event;  
@@ -138,23 +131,36 @@ const StateMachine =   (config)=>{
         }
        
         
-       // setTimeout(()=>{
-         //   console.log("SENDING READY", {layer:config.id, event:{id:eventid, type: event.type}});
-            send("ready", {layer:config.id, event:{id:eventid, type: event.type}});
-        //},2000);
+    
+        send("ready", {layer:config.id, event:{id:eventid, type: event.type}});
+    
+
+        //this is a subscripton to manual triggers (either by clicking nodes in the tree or calling webhook /event/trigger);
+        subscribe("/trigger", id, async(_layer, message)=>{
+            console.log("seen a manual trigger on layer", _layer);
+            try{
+                const _e = JSON.parse(message.toString());
+                const {node, layer} = _e;
+                const triggeredevent =  eventlookup[node];
+                unsubscribe(event.subscription, layer);
+                send("event", {id:config.id,data:triggeredevent});     
+                sub(triggeredevent);
+                send("ready", {layer:config.id, event:{id:node, type:triggeredevent.type}});
+            }
+            catch(err){
+
+            }
+        });
+
         const sub = (e)=>{
             let nexteventid, triggered;
-         
-
+            event = e;
+           
             subscribe(e.subscription, id,  async(_layer, message)=>{
             
-               
-
                 if (_layer != id){
                     return;
                 }
-
-                
 
                 const evaluate = await _fetchrule(e.type);
                 
@@ -211,66 +217,6 @@ const StateMachine =   (config)=>{
         sub(event);
     }
 
-    /*
-    const init = async ()=>{
-        console.log("OK IN INIT WITH id", config.id);
-        id = config.id;
-        let nexteventid = config.start.event;
-        let triggered = "";
-
-        event = eventlookup[nexteventid];
-
-        if (event){      
-            if (event.onstart){
-                //const __startactions = event.onstart.map(a=>actions[a]);
-                //_executestart(__startactions, "");//message.toString());
-                await _executespeech(event.onstart);
-            }    
-        }
-        send("ready", {layer:config.id, event:{id:nexteventid, type: event.type}});
-
-        events.map( (e)=>{
-        
-            subscribe(e.subscription, id, async(message)=>{
-                
-                
-
-                if (e.id == nexteventid){
-            
-                    const evaluate = await _fetchrule(e.type);        
-                    const actionids = e.rules.reduce((acc, item)=>{ 
-                        const result = evaluate(item.rule.operator, item.rule.operand, message.toString());
-                        if (result){
-                            console.log("HAVE A RESULT!!");
-                            nexteventid = item.next;
-                            triggered = item.id;
-                            return [...acc, item.actions];
-                        }
-                        return acc;
-                    },[]);
-              
-                  
-                    //do the previous event's actions
-                    if (actionids.length > 0){
-                        const _actions = actionids.map(arr=>arr.map((arr)=>arr.map(a=>actions[a]||{})));
-                        await _executeactions(_actions, message.toString());
-                    
-                        const event = eventlookup[nexteventid];
-                    
-                        if (event.onstart){
-                            //const __startations = event.onstart.map(a=>actions[a]);
-                            console.log("TROGGERING NEW EVENT", event);
-                            send("event", {id:config.id,data:event,triggered});
-                            await _executespeech(event.onstart);
-                            //await _executestart(__startactions, message.toString());
-                        }
-
-                        send("ready", {layer:config.id, event:{id:nexteventid, type:event.type}});
-                    }
-                }
-            });
-        });
-    }*/
    
     return {
         id,

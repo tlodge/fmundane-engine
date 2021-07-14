@@ -177,7 +177,7 @@ function Tree(t) {
         });
     }
 
-    const renderTree = (node,selected,rid)=>{
+    const renderTree = (node,selected,rid, handleClick)=>{
        
 
         let paint = false;
@@ -194,9 +194,9 @@ function Tree(t) {
 
         return <g key={`${node.x},${node.y}`}> 
                 
-                    <rect x={node.y-60} y={node.x-10} width={120} height={20} rx={10} style={{fill: paint ? "#4299e1":"white", stroke:"black"}}/>
-                    <text textAnchor="middle" fontSize="x-small"  x={node.y} y={node.x+4}>{node.data.name}</text>
-                    {(node.children || []).map(n=>renderTree(n, selected, rid))}
+                    <rect onClick={()=>handleClick(node.data.id)} x={node.y-60} y={node.x-10} width={120} height={20} rx={10} style={{fill: paint ? "#4299e1":"white", stroke:"black"}}/>
+                    <text onClick={()=>handleClick(node.data.id)} textAnchor="middle" fontSize="x-small"  x={node.y} y={node.x+4}>{node.data.name}</text>
+                    {(node.children || []).map(n=>renderTree(n, selected, rid,handleClick))}
             </g>
 
         
@@ -218,7 +218,7 @@ function Tree(t) {
             <g ref ={gtree} transform={`translate(120,${t.height/2})`}>
                 <g id="dragbox"> 
                     {renderLinks(links(t), rids(t))}
-                    {renderTree(t, t.id, t.triggered)}
+                    {renderTree(t, t.id, t.triggered, t.handleClick)}
                 </g>
             </g>   
         </svg>

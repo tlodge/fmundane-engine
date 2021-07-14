@@ -168,6 +168,12 @@ indexRouter.get('/start', async (req, res)=>{
     })*/
 });
 
+indexRouter.get('/trigger', (req, res)=>{
+    const {node,layer} = req.query;
+    send("/trigger", JSON.stringify({node,layer}));
+    res.status(200).json({node});
+});
+
 indexRouter.get('/press', (req, res)=>{
     const {name, layer} = req.query;
     console.log("press for layer", layer);

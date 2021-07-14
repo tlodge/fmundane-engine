@@ -8,7 +8,6 @@ import useWindowDimensions from '../../hooks/useWindowDimensions';
 import {
     listenOnEvents,
     listenOnActions,
-    listenToSpeech,
     fetchLayers,
     selectEvents,
     selectAuthored,
@@ -16,6 +15,7 @@ import {
     selectTrees,
     reset,
     fetchAuthored,
+    manualTrigger,
 } from './experienceSlice';
 
 export function Experience() {
@@ -72,6 +72,11 @@ export function Experience() {
     setVisibleTrees({...visibleTrees, [id]:!(visibleTrees[id]||false)})
   }
 
+  const handleClick = (layer, node)=>{
+    console.log("have a handle click!!", layer, node);
+    dispatch(manualTrigger(layer,node));
+  
+  }
   //266+52
 
   const expandedtrees = Object.keys(visibleTrees).reduce((acc,key)=>{
@@ -96,7 +101,7 @@ export function Experience() {
             <div  className="flex w-64 justify-center">
               <Layer {...{...e, ready:readyforinput[e.data.id]||false, toggleTree}} />
             </div>
-           { visibleTrees[e.id]  && <Tree {...{...trees[i], height:th, id:e.data.id, triggered:e.triggered}}/>}
+           { visibleTrees[e.id]  && <Tree {...{...trees[i], handleClick:(node)=>{handleClick(e.id, node)}, height:th, id:e.data.id, triggered:e.triggered}}/>}
          </div>  
   });
 

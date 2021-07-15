@@ -2,6 +2,7 @@ import express from 'express';
 import {send} from '../listener';
 import sm from '../statemachine';
 import fs from 'fs'
+import { notStrictEqual } from 'assert';
 
 let _layers = [];
 
@@ -88,6 +89,7 @@ const tree = (layer)=>{
     _seen = {};
 
     const t = {
+        layerid: layer.id,
         events,
         tree: children(events, events[layer.start.event],null,[])
     }
@@ -102,8 +104,6 @@ indexRouter.get('/layers', (req, res)=>{
     const _ljson = JSON.parse(_lfile);
     _layers = _ljson.map(f => format(f));
     
-
-  
     //format(JSON.parse(_lfile));
     res.status(200).json(_layers.map(l=>tree(l)));
 });
@@ -170,7 +170,7 @@ indexRouter.get('/start', async (req, res)=>{
 
 indexRouter.get('/trigger', (req, res)=>{
     const {node,layer} = req.query;
-    send("/trigger", JSON.stringify({node,layer}));
+    send(`/trigger/${layer}`, JSON.stringify({node,layer}));
     res.status(200).json({node});
 });
 

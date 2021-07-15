@@ -108,7 +108,9 @@ const StateMachine =   (config)=>{
         events.map( (e)=>{
             console.log("unsubscribing from", e.subscription);
             unsubscribe(e.subscription, config.id);
+            unsubscribe(`/trigger/${config.id}`, config.id);
         });
+        
     }
 
 
@@ -124,9 +126,7 @@ const StateMachine =   (config)=>{
             if (event.onstart){
                 const {speech=[], actions:_actions=[]} = event.onstart;
                 const __startactions =  _actions.map(arr=>(arr||[]).map(a=>actions[a]||{}));
-                console.log("running start actions and speech in parallel!");
                 await Promise.all([_executeactions(__startactions), _executespeech(speech)]);
-                console.log("great now done!");
             }    
         }
        
@@ -136,16 +136,19 @@ const StateMachine =   (config)=>{
     
 
         //this is a subscripton to manual triggers (either by clicking nodes in the tree or calling webhook /event/trigger);
-        subscribe("/trigger", id, async(_layer, message)=>{
-            console.log("seen a manual trigger on layer", _layer);
+        subscribe(`/trigger/${id}`, id, async(_layer, message)=>{
+          
             try{
                 const _e = JSON.parse(message.toString());
                 const {node, layer} = _e;
+               
                 const triggeredevent =  eventlookup[node];
-                unsubscribe(event.subscription, layer);
-                send("event", {id:config.id,data:triggeredevent});     
-                sub(triggeredevent);
-                send("ready", {layer:config.id, event:{id:node, type:triggeredevent.type}});
+                if (triggeredevent){
+                    unsubscribe(event.subscription, layer);
+                    send("event", {id:config.id,data:triggeredevent});     
+                    sub(triggeredevent);
+                    send("ready", {layer:config.id, event:{id:node, type:triggeredevent.type}});
+                }
             }
             catch(err){
 
@@ -191,9 +194,9 @@ const StateMachine =   (config)=>{
                           
                            
                             const __startactions =  _actions.map(arr=>(arr||[]).map(a=>actions[a]||{}));
-                            console.log("running start actions and speech in parallel!");
+                            
                             await Promise.all([_executeactions(__startactions), _executespeech(speech)]);
-                            console.log("am done!");
+                        
                         }
                         send("ready", {layer:config.id, event:{id:nexteventid, type:_e.type}});
                       
@@ -202,13 +205,17 @@ const StateMachine =   (config)=>{
                         //race condition here - it's possible that the speech on onstart is still being processed by the browesr and then sent 
                         //here, and if we've subcribed to the new event, and it is also a speech event then it may receive this speech and act on it..
                         //to get round this we give a little bit of time for this to happen before we subscribe.
-                        setTimeout(
-                            ()=>{
-                                console.log('subscribing to next event!')
-                                console.log("NEXT EVENT IS", _e);
-                                sub(_e)
-                            }
-                        ,1000);
+                        if (_e.type==="speech"){
+                            setTimeout(
+                                ()=>{
+                                    console.log('subscribing to next event!')
+                                    console.log("NEXT EVENT IS", _e);
+                                    sub(_e)
+                                }
+                            ,1000);
+                        }else{
+                            sub(_e);
+                        }
                     }
                 }
             })

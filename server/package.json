@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./build/bin/www",
+    "start": "node ./build/bin/www",
     "prestart": "babel ./src --out-dir build && cp -R ./src/actions ../server/build && cp -R ./src/layers ../server/build",
     "startdev": "nodemon --exec babel-node ./src/bin/www",
     "lint": "./node_modules/.bin/eslint ./src",

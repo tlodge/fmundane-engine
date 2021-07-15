@@ -22,8 +22,8 @@ function App() {
   }
 
   const renderCreate = ()=>{
-    return <div className="absolute flex w-screen h-screen  items-center justify-center">
-              <div   className="shadow-xl p-2 bg-white rounded"><Creator onClose={onClose}/></div>
+    return <div className="absolute flex w-screen h-screen  items-center justify-center" style={{zIndex:30}}>
+              <div   className="shadow-xl p-2 bg-white rounded overflow-auto" style={{maxHeight: "80vh"}}><Creator onClose={onClose}/></div>
             </div>
   }
  

@@ -81,12 +81,13 @@ export function Creator({onClose}) {
     }
 
     const typeChanged = (type)=>{
-        setNode({...node, type})
+        const subscription = type=="speech" ? "/speech" : "/press";
+        setNode({...node, type, subscription})
     }
 
     const _updateNode = ()=>{
      
-        dispatch(updateNode({node:name, name:node.name,speech:node.speech,type:node.type}));
+        dispatch(updateNode({node:name, ...node}));
         dispatch(setViewAddNode(false))
         reset();
     }

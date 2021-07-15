@@ -25,9 +25,8 @@ export function Experience() {
   const authored = useSelector(selectAuthored);
 
   const [visibleTrees, setVisibleTrees] = useState({});
-  const { height, width } = useWindowDimensions();
+  const { height } = useWindowDimensions();
 
-  console.log("w", width, "h", height);
   const dispatch = useDispatch();
   const BrowserSpeechRecognition =
   typeof window !== 'undefined' &&
@@ -73,11 +72,9 @@ export function Experience() {
   }
 
   const handleClick = (layer, node)=>{
-    console.log("have a handle click!!", layer, node);
     dispatch(manualTrigger(layer,node));
-  
   }
-  //266+52
+ 
 
   const expandedtrees = Object.keys(visibleTrees).reduce((acc,key)=>{
     if (visibleTrees[key]== true)
@@ -96,12 +93,12 @@ export function Experience() {
       return 0;
 
   }).map((e,i)=>{
- 
+  
   return  <div key = {e.id} className="flex flex-row m-1">
-            <div  className="flex w-64 justify-center">
+            <div  className="flex w-64 justify-center overflow-visible" style={{height:visibleTrees[e.id] ? th-2: 280}}>
               <Layer {...{...e, ready:readyforinput[e.data.id]||false, toggleTree}} />
             </div>
-           { visibleTrees[e.id]  && <Tree {...{...trees[i], handleClick:(node)=>{handleClick(e.id, node)}, height:th, id:e.data.id, triggered:e.triggered}}/>}
+           { visibleTrees[e.id]  && <Tree {...{...trees[e.id], handleClick:(node)=>{handleClick(e.id, node)}, height:th, id:e.data.id, triggered:e.triggered}}/>}
          </div>  
   });
 
@@ -111,8 +108,8 @@ export function Experience() {
      dispatch(reset());
      setStartLabel("reset");
   }
-  
-  console.log(visibleTrees);
+
+
   return (
       <div>
         <Navigation authored={authored} fetchLayers={_fetchLayers} start={resetExperience}/>

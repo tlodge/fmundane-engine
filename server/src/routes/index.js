@@ -175,23 +175,26 @@ indexRouter.get('/trigger', (req, res)=>{
 });
 
 indexRouter.get('/press', (req, res)=>{
+    const ts = Date.now();
     const {name, layer} = req.query;
     console.log("press for layer", layer);
-    send("/press", name);
+    send("/press", JSON.stringify({data:name, ts}));
     res.status(200).json({ press: name });
 }); 
 
 indexRouter.get('/gesture', (req, res)=>{
+    const ts = Date.now();
     const {gesture, layer} = req.query;
     console.log("gesture for layer", layer);
-    send("/gesture", gesture);
+    send("/gesture", JSON.stringify({data:gesture, ts}));
     res.status(200).json({gesture});
 });
 
 indexRouter.get('/speech', (req, res)=>{
-    const {speech, layer} = req.query;
+    const ts = Date.now();
+    const {speech} = req.query;
     console.log("seen speech", speech);
-    send("/speech", speech);
+    send("/speech", JSON.stringify({data:speech, ts}));
     res.status(200).json({ speech });
 }); 
 

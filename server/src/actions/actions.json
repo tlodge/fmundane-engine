@@ -161,7 +161,7 @@
            },
            {
               "words":"It's most lovely to meet you",
-              "delay":1000
+              "delay":900
            }
         ]
      }
@@ -655,7 +655,8 @@
          "contenttype":"application/json"
       },
       "body":{
-         "media":"tbu-pos-scifi-insta.mp4"
+         "media":"tbu-pos-scifi-insta.mp4",
+         "nowait":true
       }
    },
    "homescreen" : {
@@ -689,5 +690,53 @@
          "type":"GET",
          "contenttype":"application/json"
       }
-  }
+  },
+  "scarymusic":{
+      "type":"request",
+      "data":{
+         "url":"http://127.0.0.1:9106/api/media",
+         "type":"POST",
+         "contenttype":"application/json"  
+      },
+      "body":{
+         "media":"foreboding.mp3",
+         "nowait":false
+      }
+   },
+   "playsea":{
+      "type":"request",
+      "data":{
+         "url":"http://127.0.0.1:9106/api/media",
+         "type":"POST",
+         "contenttype":"application/json"  
+      },
+      "body":{
+         "media":"sea.wav",
+         "nowait":true
+      }
+   },
+   "playstorm":{
+      "type":"request",
+      "data":{
+         "url":"http://127.0.0.1:9106/api/media",
+         "type":"POST",
+         "contenttype":"application/json"  
+      },
+      "body":{
+         "media":"storm.wav",
+         "nowait":true
+      }
+   },
+   "playfarm":{
+      "type":"request",
+      "data":{
+         "url":"http://127.0.0.1:9106/api/media",
+         "type":"POST",
+         "contenttype":"application/json"  
+      },
+      "body":{
+         "media":"farm.wav",
+         "nowait":true
+      }
+   }
 }

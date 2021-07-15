@@ -97,7 +97,7 @@ const findNode = (t, name)=>{
 }
 
 const moveChart = (gtree, t)=>{
-    console.log("AM IN MOVE CHART!!", t.id);
+    
     const g = d3.select(gtree.current);
     if (_seen[t.id]){
         const {x,y} = _seen[t.id];

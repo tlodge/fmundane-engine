@@ -177,7 +177,7 @@ export const listenOnEvents = () => (dispatch, getState) => {
 }
 
 export const buttonPressed  = (b) => ()=>{
-  stopListening();
+  //stopListening();
   superagent.get("/event/press").query({name:b}).end((err, res) => {
     if (err){
         console.log(err);
@@ -214,7 +214,7 @@ export const sendTranscript = () => (dispatch, getState) =>{
 };
 
 export const gestureObserved = (g)=> (dispatch, getState) =>{
-  stopListening();
+  //stopListening();
   superagent.get("/event/gesture").query({gesture:g}).end((err, res)=>{});
   //dispatch(setEvent({}));
 }
@@ -235,7 +235,7 @@ export const fetchLayers = (layer, r) => (dispatch)=>{
   recognition = r;
 
   superagent.get('/event/layers').query({layer}).then(res => {
-    const trees = res.body.map(et=>et.tree);
+    const trees = res.body.map(et=>({...et.tree, layerid:et.layerid}));
     dispatch(setLayerName(layer));
     dispatch(setLayers(trees));
   })
@@ -244,12 +244,12 @@ export const fetchLayers = (layer, r) => (dispatch)=>{
   });
   
   recognition.onend = () => {
-    
-    if (allowedToListen()){
+    console.log("recognition ended");
+    //if (allowedToListen()){
        startRecognition();
-    }else{
+    //}else{
      
-    }
+    //}
   }
 
   recognition.onresult = event => {    
@@ -261,16 +261,16 @@ export const fetchLayers = (layer, r) => (dispatch)=>{
         }
       }
     }
-    if (allowedToListen()){
+    //if (allowedToListen()){
       dispatch(sendTranscript());
 
-    }
+    //}
   }
 }
 
 
 const startRecognition = ()=>{
-  
+  console.log("starting recognition");
   try{  
     recognition.start();
   }catch(err){
@@ -296,7 +296,15 @@ export const selectEvents= state => {
 
 export const selectReadyForInput = state => state.experience.readyforinput;
 export const selectSpeech= state => state.experience.transcript;
-export const selectTrees = state =>  state.experience.layers.map(t=>d3.tree().nodeSize([120, 230])(d3.hierarchy(t, d=>d.children)))
+
+export const selectTrees = state =>  {
+    return state.experience.layers.reduce((acc, item)=>{
+      return {
+          ...acc,
+          [item.layerid] : d3.tree().nodeSize([120, 230])(d3.hierarchy(item, d=>d.children))
+      }
+    },{});
+}
 export const selectAuthored = state => state.experience.authored;
 export const selectLayerName = state => state.experience.layerName;
 

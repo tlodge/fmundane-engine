@@ -77,8 +77,6 @@ export function LinkCreator({onClose}) {
                 </select>
                 </div>
     }
-
-    console.log("in link creator, parent is", parent, "link node is", linknode);
   
     return <div className="flex flex-col">
     <div className="flex flex-row shadow p-2 mt-4">

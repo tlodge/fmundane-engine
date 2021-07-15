@@ -18,11 +18,11 @@ const callserially = async (list, cb)=>{
 
 const _executeactions = async (alist, value="")=>{
     const parallel = [];
-    console.log("in exec actions with", alist);
+  
     //for (const row of alist){
       //  console.log("row is ", row);
         for (const actionlist of alist){
-            console.log("action list is", actionlist);
+          
             //swap in any params
             const _alist = actionlist.map((a)=>{
                 const astr = JSON.stringify(a);
@@ -44,7 +44,7 @@ const _executeactions = async (alist, value="")=>{
             //send("action", _alist);
         }
 
-        console.log("OK have parallel", parallel);
+   
   //  }
     await Promise.all(parallel.map(async(p)=>{
         await callserially(p.list,p.cb);
@@ -52,29 +52,28 @@ const _executeactions = async (alist, value="")=>{
   
 }
 
-const _executestart = async (alist, value="")=>{
-    //swap in any params
-    const _alist = alist.map((a)=>{
-        const astr = JSON.stringify(a);
-        var matches = astr.match(/\|(.*?)\|/);
-        if (matches){
-            const toreplace = matches[0];
-            const tokens = matches[1].split(":");
-            const delimiter = tokens.length > 1 ? ` ${tokens[1]} ` : ",";
-            return JSON.parse(JSON.stringify(a).replace(toreplace,value.trim().split(" ").join(delimiter)));
-        }
-        return a;
-    });
-    
-    for (const a of _alist){
-        await handle(a);
-    }
-    send("action", _alist);
-   
-}
+const _executespeech = async (lines, value)=>{
 
-const _executespeech = async (lines)=>{
-    await handlespeech(lines);
+    if (value && value.trim() != ""){
+        const _lines = lines.map(l=>{
+            var matches = l.words.match(/\|(.*?)\|/);
+            let _words = l.words;
+
+            if (matches){
+                const toreplace = matches[0];
+                const tokens = matches[1].split(":");
+                const delimiter = tokens.length > 1 ? ` ${tokens[1]} ` : ",";
+                _words = l.words.replace(toreplace,value.trim().split(" ").join(delimiter));
+            }
+            return {
+                ...l,
+                words : _words
+            }
+        })
+        await handlespeech(_lines);
+    }else{
+        await handlespeech(lines);
+    }
 }
 
 const StateMachine =   (config)=>{
@@ -118,8 +117,6 @@ const StateMachine =   (config)=>{
     
         let eventid = config.start.event;  
         event = eventlookup[eventid];
-        
-        console.log(JSON.stringify(event,null,4));
 
         if (event){
             send("event", {id:config.id,data:event});      
@@ -158,9 +155,28 @@ const StateMachine =   (config)=>{
         const sub = (e)=>{
             let nexteventid, triggered;
             event = e;
-           
-            subscribe(e.subscription, id,  async(_layer, message)=>{
             
+            const subtime = Date.now();
+
+            subscribe(e.subscription, id,  async(_layer, message)=>{
+                
+                console.log("subscribed", id, e.subscription);
+                const msg = JSON.parse(message.toString());
+                const {data, ts} = msg;
+                 
+                console.log("seem msg wth ts", ts, "and subtime is", subtime);
+
+
+                //if this message was received before we subscribed, discard it!
+                //prevents race condition here - it's possible that the speech on onstart is still being processed by the browser and then sent 
+                //here, and if we've subcribed to the new event, and it is also a speech event then it may receive this speech and act on it..
+                //to get round this we give a little bit of time for this to happen before we subscribe.
+
+                if ( (subtime + 1500) > ts){
+                    console.log("ignoring this subsriprion message!");
+                    return;
+                }
+
                 if (_layer != id){
                     return;
                 }
@@ -168,7 +184,7 @@ const StateMachine =   (config)=>{
                 const evaluate = await _fetchrule(e.type);
                 
                 const actionids = e.rules.reduce((acc, item)=>{ 
-                    const result = evaluate(item.rule.operator, item.rule.operand, message.toString());
+                    const result = evaluate(item.rule.operator, item.rule.operand, msg.data);
                     if (result){
                      
                         nexteventid = item.next;
@@ -195,27 +211,11 @@ const StateMachine =   (config)=>{
                            
                             const __startactions =  _actions.map(arr=>(arr||[]).map(a=>actions[a]||{}));
                             
-                            await Promise.all([_executeactions(__startactions), _executespeech(speech)]);
+                            await Promise.all([_executeactions(__startactions, message.toString()), _executespeech(speech, data)]);
                         
                         }
                         send("ready", {layer:config.id, event:{id:nexteventid, type:_e.type}});
-                      
-                        
-                       
-                        //race condition here - it's possible that the speech on onstart is still being processed by the browesr and then sent 
-                        //here, and if we've subcribed to the new event, and it is also a speech event then it may receive this speech and act on it..
-                        //to get round this we give a little bit of time for this to happen before we subscribe.
-                        if (_e.type==="speech"){
-                            setTimeout(
-                                ()=>{
-                                    console.log('subscribing to next event!')
-                                    console.log("NEXT EVENT IS", _e);
-                                    sub(_e)
-                                }
-                            ,1000);
-                        }else{
-                            sub(_e);
-                        }
+                        sub(_e);
                     }
                 }
             })

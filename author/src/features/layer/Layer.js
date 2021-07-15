@@ -4,6 +4,8 @@ import {useEffect, useState} from 'react';
 
 import {
    selectTree,
+   selectLayers,
+   selectLayerId,
    selectNodes,
    selectParent,
    selectChild,
@@ -12,9 +14,11 @@ import {
    setParentToAddTo,
    setParent,
    setChild,
+   setLayer,
    exportNodes,
    fetchAuthored,
    fetchLayers,
+   addLayer
 } from './layerSlice';
 
 import {
@@ -33,8 +37,9 @@ export function Layer() {
   const {id:parent} = useSelector(selectParent);
   const child = useSelector(selectChild);
   const authored = useSelector(selectAuthored);
-  
-  
+  const _layers = useSelector(selectLayers);
+  const layerid = useSelector(selectLayerId);
+
   const _exportNodes = (name)=>{ 
       dispatch(exportNodes(name));
       toggleSaveDialog(false);
@@ -74,6 +79,17 @@ export function Layer() {
             </div>
   }
 
+  const renderLayerSelection = ()=>{
+    const _items = _layers.map(l=>{
+      const selected = l === layerid;
+      return <div className={`p-2 text-xs ${selected ? "font-bold":"text-gray-400"}`} key ={l} onClick={()=>dispatch(setLayer(l))}>{l}</div>
+    })
+    return <div className="h-10 flex flex-row  mt-12 w-screen bg-black text-white  items-center">
+        {_items}
+        <div className="ml-4 p-2 text-xs flex items-center justify-center rounded-full bg-white text-black w-4 h-4" key ="add" onClick={()=>{dispatch(addLayer())}}>+</div>
+    </div>
+  }
+
   const renderTree = ()=>{
         if (lut){
             return <Tree    
@@ -102,8 +118,9 @@ export function Layer() {
                       <div onClick={()=>toggleSaveDialog(!saveDialog)}>SAVE & EXPORT</div>
                       {currentLayer && <a className="flex flex-grow pl-4 text-xs" target="_blank" href={`../?layers=${currentLayer}`}>▶</a>}
                     </div>
-                    <div className="flex justify-end items-center"><div className="text-xs p-2">LOAD</div>{renderAuthored()}</div>
+                    <div className="flex justify-end items-center mr-8"><div className="text-xs p-2">LOAD</div>{renderAuthored()}</div>
                 </div>
+                {renderLayerSelection()}
                 {renderTree()}
                
             </div>

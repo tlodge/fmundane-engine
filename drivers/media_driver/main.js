@@ -27,9 +27,14 @@ const playIt = (media="")=>{
 }
 
 app.post('/api/media', async function (req, res, next) {
-    const {media=""} = req.body;
+    const {media="", nowait=false} = req.body;
     //don't wait for media to end before sending ok (i.e no await!)
-    playIt(media);    
+    console.log("seen request to play media", media, nowait);
+    if (nowait){
+        playIt(media);
+    }else{
+        await playIt(media);
+    }    
     res.status(200).send("OK");
 });
 

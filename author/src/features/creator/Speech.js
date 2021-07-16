@@ -95,6 +95,10 @@ export default function Speech({lines:_lines={}, speechChanged}) {
         await request.post('/author/audiotest').set('Content-Type', 'application/json').send({lines:_validatelines(lines)});
     }
 
+    const _testLine = async (i)=>{
+        await request.post('/author/audiotest').set('Content-Type', 'application/json').send({lines:_validatelines([lines[i]])});
+    }
+
     const renderSelect = (r,index)=>{
         const options =  voices.map(v=><option key={v} value={v}>{v}</option>);
         return <select key={index} value={r.voice || "Kate"} onChange={(e)=>setVoice(index,e.target.value)} style={{width:120}}>{options}</select>
@@ -129,9 +133,13 @@ export default function Speech({lines:_lines={}, speechChanged}) {
                         <label className="flex justify-start">sound effect</label>
                     </div>
                 </div>
-                <div onClick={()=>deleteLine(i)} className="flex flex-col justify-start pl-2">
+                <div onClick={()=>_testLine(i)} className="flex flex-col justify-start pb-4">
+                   <div className="flex items-center justify-center ml-4 mr-4 text-black w-6 h-6">▶</div>
+                </div>
+                <div onClick={()=>deleteLine(i)} className="flex flex-col justify-start pb-4">
                    <div>🗑</div>
                 </div>
+                
             </div>
         })
     }

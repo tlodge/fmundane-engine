@@ -48,7 +48,7 @@ export function Creator({onClose}) {
             id: node.name.replace(/\s/g, "_"),
             onstart: node.speech,
             type:node.type,
-            subscription : node.type == "button" || node.type.trim()=="" ? `/press` : `/${type}`,
+            subscription : node.type == "button" || node.type.trim()=="" ? `/press` : `/${node.type}`,
         }
         const _actions =  (node.actions||"").split("|").map((line)=>{
             return line.split(",");

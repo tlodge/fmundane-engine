@@ -120,15 +120,17 @@ export const layerSlice = createSlice({
     },
 
     loadNodes : (state, action)=>{
-        const {nodes, layer} = action.payload;
-        
-        state.layers[layer] = state.layers[layer] || {};
-        state.layers[layer].nodes = Object.keys(nodes);
-        state.layers[layer].nodesById = nodes; 
-        state.layers[layer].lut = createLut(state.layers[layer].nodesById);   
-        state.layers[layer].parent = null;
-        state.layers[layer].child =null;
-        state.layerid = layer;
+
+        state.layers = {};
+        for (const {nodes, layer} of action.payload.reverse()){
+            state.layers[layer] = state.layers[layer] || {};
+            state.layers[layer].nodes = Object.keys(nodes);
+            state.layers[layer].nodesById = nodes; 
+            state.layers[layer].lut = createLut(state.layers[layer].nodesById);   
+            state.layers[layer].parent = null;
+            state.layers[layer].child =null;
+            state.layerid = layer;
+        }
     },
 
     updateLink : (state, action)=>{
@@ -302,14 +304,16 @@ export const fetchAuthored = ()=>(dispatch)=>{
   export const fetchLayers = (layer) => {
     
     return (dispatch)=>{
-        
+
         request.get('/event/layers').query({layer}).then(res => {
             //const [layers={}, ...rest] = res.body;
             
-            (res.body || []).map((l,i)=>{
-                const {events=[]} = l;
-                dispatch(loadNodes({nodes:events, layer:`layer${i}`}));
+            const nodes = (res.body || []).map((l,i)=>{
+                const {events=[], layerid} = l;
+                return {nodes:events, layer: layerid || `layer${i}`}
             })
+
+            dispatch(loadNodes(nodes))
            
         })
         .catch(err => {
@@ -379,6 +383,7 @@ export const exportNodes = (name)=>{
                         {
                             id: key,
                             ...nodesById[key],
+                            subscription: "/press",
                             data: _lut[key].map(k=>k.op),
                             rules : _lut[key].map(k=>{
                                    return {
@@ -402,6 +407,7 @@ export const exportNodes = (name)=>{
                         {
                             id: key,
                             ...nodesById[key],
+                            subscription: "/speech",
                             rules : _lut[key].map(k=>{
                                 if (k.op){
                                     return {

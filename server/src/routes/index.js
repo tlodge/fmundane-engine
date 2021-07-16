@@ -129,10 +129,8 @@ indexRouter.get('/start', async (req, res)=>{
             const smac = sm(l);
             //await smac.init();
             parallel.push(()=>{
-                console.log("smac init", l.id);
                 smac.init();
                 statemachines.push(smac);
-                console.log("smac done", l.id);
             })
         }
     }else{
@@ -148,24 +146,6 @@ indexRouter.get('/start', async (req, res)=>{
     }));
     
     res.status(200).json(events(_layers));
-
-    //TODO - put back start actions, or improve the onstart stuff so can handle actions AND inline speech.
-
-    /*statemachines.map( async s=>{
-       
-         //for (const alist of s.start.actions){
-         //   const promises =  alist.map(id=>handle(actions[id]));
-         //   await Promise.all(promises);
-        //}
-        
-        console.log("statemachine", JSON.stringify(s,null,4));
-
-        //for (const alist of s.start.actions){
-        //   await  wssend("action", alist.map(id=>actions[id]));
-        //}
-        //wssend("ready", {layer:s.id, event:s.start.event});
-        
-    })*/
 });
 
 indexRouter.get('/trigger', (req, res)=>{
@@ -177,7 +157,6 @@ indexRouter.get('/trigger', (req, res)=>{
 indexRouter.get('/press', (req, res)=>{
     const ts = Date.now();
     const {name, layer} = req.query;
-    console.log("press for layer", layer);
     send("/press", JSON.stringify({data:name, ts}));
     res.status(200).json({ press: name });
 }); 
@@ -185,7 +164,6 @@ indexRouter.get('/press', (req, res)=>{
 indexRouter.get('/gesture', (req, res)=>{
     const ts = Date.now();
     const {gesture, layer} = req.query;
-    console.log("gesture for layer", layer);
     send("/gesture", JSON.stringify({data:gesture, ts}));
     res.status(200).json({gesture});
 });
@@ -193,7 +171,6 @@ indexRouter.get('/gesture', (req, res)=>{
 indexRouter.get('/speech', (req, res)=>{
     const ts = Date.now();
     const {speech} = req.query;
-    console.log("seen speech", speech);
     send("/speech", JSON.stringify({data:speech, ts}));
     res.status(200).json({ speech });
 }); 

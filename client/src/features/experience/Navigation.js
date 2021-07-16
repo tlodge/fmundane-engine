@@ -1,7 +1,7 @@
 import {selectLayerName} from './experienceSlice';
 import { useSelector } from 'react-redux';
 
-const Navigation = ({ start, authored, fetchLayers}) => {
+const Navigation = ({ start, authored}) => {
   
   const layerName = useSelector(selectLayerName);
 

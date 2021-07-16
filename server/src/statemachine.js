@@ -39,7 +39,10 @@ const _executeactions = async (alist, value="")=>{
            
             
            
-            parallel.push({list:_alist, cb:()=>{send("action", _alist)}});
+            parallel.push({list:_alist, cb:()=>{
+                console.log("sending", _alist);
+                send("action", _alist)
+            }});
             
             //send("action", _alist);
         }
@@ -164,7 +167,7 @@ const StateMachine =   (config)=>{
                 const msg = JSON.parse(message.toString());
                 const {data, ts} = msg;
                  
-                console.log("seem msg wth ts", ts, "and subtime is", subtime);
+                //console.log("seem msg wth ts", ts, "and subtime is", subtime);
 
 
                 //if this message was received before we subscribed, discard it!
@@ -215,7 +218,10 @@ const StateMachine =   (config)=>{
                         
                         }
                         send("ready", {layer:config.id, event:{id:nexteventid, type:_e.type}});
+                        
                         sub(_e);
+                     
+                        
                     }
                 }
             })

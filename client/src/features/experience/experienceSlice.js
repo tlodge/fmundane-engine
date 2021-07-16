@@ -121,6 +121,9 @@ const sayWords = async (window, words, voice)=>{
   });
 }*/
 
+
+//TODO - get rid!
+
 export const listenOnActions = (window) => async dispatch => {
   //const voices = await getVoices();
 
@@ -177,7 +180,7 @@ export const listenOnEvents = () => (dispatch, getState) => {
 }
 
 export const buttonPressed  = (b) => ()=>{
-  //stopListening();
+  stopListening();
   superagent.get("/event/press").query({name:b}).end((err, res) => {
     if (err){
         console.log(err);
@@ -197,10 +200,11 @@ export const manualTrigger = (layer, node)=>()=>{
 //on server only subscibe to current events rather than all!!
 
 export const sendTranscript = () => (dispatch, getState) =>{
-   
+  
     const {transcript, lastsenttranscript} = getState().experience;
     
     if (transcript.trim() != ""){
+      console.log("in send transcript", transcript);
       superagent.get("/event/speech").query({speech:getState().experience.transcript}).end((err, res)=>{
         //stopListening(); //need to get an event back....
         if (!err){
@@ -244,15 +248,16 @@ export const fetchLayers = (layer, r) => (dispatch)=>{
   });
   
   recognition.onend = () => {
-    console.log("recognition ended");
-    //if (allowedToListen()){
+    
+    if (allowedToListen()){
        startRecognition();
-    //}else{
+    }else{
      
-    //}
+    }
   }
 
   recognition.onresult = event => {    
+   
     for (let i = event.resultIndex; i < event.results.length; i++) {
       const transcript = event.results[i][0].transcript;
       if (event.results[i].isFinal){ 
@@ -262,6 +267,7 @@ export const fetchLayers = (layer, r) => (dispatch)=>{
       }
     }
     //if (allowedToListen()){
+      
       dispatch(sendTranscript());
 
     //}
@@ -270,11 +276,11 @@ export const fetchLayers = (layer, r) => (dispatch)=>{
 
 
 const startRecognition = ()=>{
-  console.log("starting recognition");
+  
   try{  
     recognition.start();
   }catch(err){
-    
+    console.log(err);
   }
 }
 

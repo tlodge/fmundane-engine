@@ -1,0 +1,178 @@
+> fmundane-engine@0.0.0 start /Users/tlodge/futuremundane/fmundane-engine/server
+> node ./build/bin/www
+
+connecting to mqtt!
+dirname is  /Users/tlodge/futuremundane/fmundane-engine/server/build
+listening on port 3001
+connected to mqtt!!
+Connected succesfully to the socket ...
+GET / 304 3.683 ms - -
+GET /static/css/main.ae59ee8f.chunk.css 304 1.465 ms - -
+GET /static/js/2.fde54042.chunk.js 304 0.961 ms - -
+GET /static/js/main.73feec53.chunk.js 304 1.261 ms - -
+Connected succesfully to the socket ...
+GET /author/authored 304 1.911 ms - -
+GET /manifest.json 304 0.319 ms - -
+GET /logo192.png 304 0.470 ms - -
+GET /?layers=treasure 304 0.332 ms - -
+GET /static/css/main.ae59ee8f.chunk.css 304 0.381 ms - -
+GET /static/js/2.fde54042.chunk.js 304 0.692 ms - -
+GET /static/js/main.73feec53.chunk.js 304 0.607 ms - -
+Connected succesfully to the socket ...
+GET /author/authored 304 0.755 ms - -
+GET /event/layers?layer=treasure 200 3.848 ms - 28654
+GET /manifest.json 304 0.328 ms - -
+GET /logo192.png 304 0.439 ms - -
+OK AM IN START!!!
+smac init layer0
+-----> sending {
+  id: 'layer0',
+  data: {
+    id: 'ready',
+    name: 'ready',
+    onstart: { speech: [] },
+    type: 'button',
+    subscription: '/press',
+    data: [ 'go!' ],
+    rules: [ [Object] ]
+  }
+}
+smac done layer0
+smac init layer1
+-----> sending {
+  id: 'layer1',
+  data: {
+    id: 'settings',
+    name: 'settings',
+    onstart: {},
+    type: 'speech',
+    subscription: '/speech',
+    data: [],
+    rules: [ [Object], [Object], [Object] ]
+  }
+}
+smac done layer1
+-----> sending { layer: 'layer0', event: { id: 'ready', type: 'button' } }
+**********
+{ '/trigger/layer0': { layer0: [Function (anonymous)] } }
+**********
+**********
+{
+  '/trigger/layer0': { layer0: [Function (anonymous)] },
+  '/press': { layer0: [Function (anonymous)] }
+}
+**********
+-----> sending { layer: 'layer1', event: { id: 'settings', type: 'speech' } }
+**********
+{
+  '/trigger/layer0': { layer0: [Function (anonymous)] },
+  '/press': { layer0: [Function (anonymous)] },
+  '/trigger/layer1': { layer1: [Function (anonymous)] }
+}
+**********
+**********
+{
+  '/trigger/layer0': { layer0: [Function (anonymous)] },
+  '/press': { layer0: [Function (anonymous)] },
+  '/trigger/layer1': { layer1: [Function (anonymous)] },
+  '/speech': { layer1: [Function (anonymous)] }
+}
+**********
+GET /event/start 200 11.212 ms - 717
+press for layer undefined
+GET /event/press?name=go! 304 1.047 ms - -
+subscribed layer0 /press
+seem msg wth ts 1626424266283 and subtime is 1626424254284
+**********
+{
+  '/trigger/layer0': { layer0: [Function (anonymous)] },
+  '/trigger/layer1': { layer1: [Function (anonymous)] },
+  '/speech': { layer1: [Function (anonymous)] }
+}
+**********
+-----> sending [ {} ]
+-----> sending {
+  id: 'layer0',
+  data: {
+    id: 'greetings',
+    name: 'greetings',
+    onstart: { speech: [Array] },
+    type: 'button',
+    subscription: '/press',
+    data: [ 'next' ],
+    rules: [ [Object] ]
+  },
+  triggered: 'ready00'
+}
+fully unsubscribed from topic /press
+seen speech treasure hunters 
+GET /event/speech?speech=treasure%20hunters%20 304 1.062 ms - -
+subscribed layer1 /speech
+seem msg wth ts 1626424269099 and subtime is 1626424254285
+speech in evaluate contains [ 'storm' ] treasure hunters 
+speech in evaluate contains [ 'farm' ] treasure hunters 
+speech in evaluate contains [ 'seaside' ] treasure hunters 
+seen speech Sigmund Patrick 
+GET /event/speech?speech=Sigmund%20Patrick%20 304 1.056 ms - -
+subscribed layer1 /speech
+seem msg wth ts 1626424272580 and subtime is 1626424254285
+speech in evaluate contains [ 'storm' ] Sigmund Patrick 
+speech in evaluate contains [ 'farm' ] Sigmund Patrick 
+speech in evaluate contains [ 'seaside' ] Sigmund Patrick 
+seen speech incredibly 
+GET /event/speech?speech=incredibly%20 304 0.846 ms - -
+subscribed layer1 /speech
+seem msg wth ts 1626424277888 and subtime is 1626424254285
+speech in evaluate contains [ 'storm' ] incredibly 
+speech in evaluate contains [ 'farm' ] incredibly 
+speech in evaluate contains [ 'seaside' ] incredibly 
+seen speech we are on the hand 
+GET /event/speech?speech=we%20are%20on%20the%20hand%20 200 0.522 ms - 32
+subscribed layer1 /speech
+seem msg wth ts 1626424283219 and subtime is 1626424254285
+speech in evaluate contains [ 'storm' ] we are on the hand 
+speech in evaluate contains [ 'farm' ] we are on the hand 
+speech in evaluate contains [ 'seaside' ] we are on the hand 
+Connected succesfully to the socket ...
+seen speech I have found a school 
+GET /event/speech?speech=I%20have%20found%20a%20school%20 200 0.538 ms - 35
+subscribed layer1 /speech
+seem msg wth ts 1626424291071 and subtime is 1626424254285
+speech in evaluate contains [ 'storm' ] I have found a school 
+speech in evaluate contains [ 'farm' ] I have found a school 
+speech in evaluate contains [ 'seaside' ] I have found a school 
+seen speech take us to the city 
+GET /event/speech?speech=take%20us%20to%20the%20city%20 304 0.488 ms - -
+subscribed layer1 /speech
+seem msg wth ts 1626424293331 and subtime is 1626424254285
+speech in evaluate contains [ 'storm' ] take us to the city 
+speech in evaluate contains [ 'farm' ] take us to the city 
+speech in evaluate contains [ 'seaside' ] take us to the city 
+seen speech course plenty of fail to the only problem is 
+GET /event/speech?speech=course%20plenty%20of%20fail%20to%20the%20only%20problem%20is%20 200 0.573 ms - 58
+subscribed layer1 /speech
+seem msg wth ts 1626424300380 and subtime is 1626424254285
+speech in evaluate contains [ 'storm' ] course plenty of fail to the only problem is 
+speech in evaluate contains [ 'farm' ] course plenty of fail to the only problem is 
+speech in evaluate contains [ 'seaside' ] course plenty of fail to the only problem is 
+-----> sending { layer: 'layer0', event: { id: 'greetings', type: 'button' } }
+**********
+{
+  '/trigger/layer0': { layer0: [Function (anonymous)] },
+  '/trigger/layer1': { layer1: [Function (anonymous)] },
+  '/speech': { layer1: [Function (anonymous)] },
+  '/press': { layer0: [Function (anonymous)] }
+}
+**********
+seen speech all we need to do is convince them join 
+GET /event/speech?speech=all%20we%20need%20to%20do%20is%20convince%20them%20join%20 200 1.192 ms - 53
+subscribed layer1 /speech
+seem msg wth ts 1626424311343 and subtime is 1626424254285
+speech in evaluate contains [ 'storm' ] all we need to do is convince them join 
+speech in evaluate contains [ 'farm' ] all we need to do is convince them join 
+speech in evaluate contains [ 'seaside' ] all we need to do is convince them join 
+GET /static/css/main.ae59ee8f.chunk.css 304 0.542 ms - -
+GET /manifest.json 304 0.747 ms - -
+GET /static/js/main.73feec53.chunk.js.map 200 1.574 ms - 59154
+GET /static/js/2.fde54042.chunk.js.map 200 3.171 ms - 1297053
+GET /static/css/main.ae59ee8f.chunk.css.map 200 1.003 ms - 2801766

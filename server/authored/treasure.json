@@ -366,11 +366,11 @@
                             "rate": "150"
                         },
                         {
-                            "words": "Why should I go with you?",
+                            "words": "Why should I go? With you?",
                             "delay": "1500",
                             "voice": "Serena",
                             "background": "",
-                            "rate": "120"
+                            "rate": "90"
                         },
                         {
                             "words": "Typical Alexandria.  Brain the size of an elephant.",
@@ -1510,6 +1510,369 @@
                 },
                 "type": "speech",
                 "subscription": "/speech",
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "contains",
+                            "operand": [
+                                "fly",
+                                " pilot",
+                                "over"
+                            ]
+                        },
+                        "actions": [
+                            [
+                                ""
+                            ]
+                        ],
+                        "next": "goballoon"
+                    },
+                    {
+                        "rule": {
+                            "operator": "contains",
+                            "operand": [
+                                "forest",
+                                " walk",
+                                " keep"
+                            ]
+                        },
+                        "actions": [
+                            [
+                                ""
+                            ]
+                        ],
+                        "next": "goforest"
+                    }
+                ]
+            },
+            {
+                "id": "goballoon",
+                "name": "goballoon",
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "You drive a hard bargain, but it’s a deal. Here is our purse of coin. Come on everyone, climb aboard. And can you give Alexandria a shout for us to come on over too.",
+                            "delay": 0,
+                            "voice": "Daniel",
+                            "background": "",
+                            "rate": "180"
+                        }
+                    ]
+                },
+                "type": "button",
+                "subscription": "/press",
+                "data": [
+                    "shouting done"
+                ],
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "shouting done"
+                        },
+                        "actions": [
+                            [
+                                ""
+                            ]
+                        ],
+                        "next": "moreballoon"
+                    }
+                ]
+            },
+            {
+                "id": "goforest",
+                "name": "goforest",
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "Thank you for your offer, but our coin is far more important than getting a safe ride across the forest. We are going to take our chances.",
+                            "delay": 0,
+                            "voice": "Daniel",
+                            "background": "",
+                            "rate": "180"
+                        },
+                        {
+                            "words": "Fair enough. But mind out for the pools, they are very deep and you don’t see them coming! Bye!",
+                            "delay": 0,
+                            "voice": "Oliver",
+                            "background": "",
+                            "rate": "140"
+                        },
+                        {
+                            "words": "What a peculiar person. Probably for the best that we didn’t get in their balloon after all. Let’s go and find Alexandria again and make a move. It’ll be getting dark before too long if we don’t get a wriggle on. Several miles further and we find ourselves at the entrance of the forest. The air smelt stale and warm.",
+                            "delay": 0,
+                            "voice": "Daniel",
+                            "background": "",
+                            "rate": "180"
+                        },
+                        {
+                            "words": "The instructions are very clear. We must stay on the path. Never leave it or you’ll be trapped here forever.",
+                            "delay": 0,
+                            "voice": "Serena",
+                            "background": "",
+                            "rate": "180"
+                        },
+                        {
+                            "words": "That all sounds very reassuring.",
+                            "delay": 0,
+                            "voice": "Daniel",
+                            "background": "",
+                            "rate": "180"
+                        },
+                        {
+                            "words": "Following the path we make steady progress into the forest. Either side of the path we see deep pools of water.",
+                            "delay": 0,
+                            "voice": "Serena",
+                            "background": "",
+                            "rate": "180"
+                        },
+                        {
+                            "words": "Like the Pilot warned us about. We really must keep our eyes peeled.",
+                            "delay": 0,
+                            "voice": "Daniel",
+                            "background": "",
+                            "rate": "180"
+                        },
+                        {
+                            "words": "With no visibility of the Sun we all lose track of time in the woods. We could have been in here for minutes, hours or even days. But I know just the thing to keep our spirits up. Who can give us another letter for eyespy. What can you see?",
+                            "delay": 0,
+                            "voice": "Serena",
+                            "background": "",
+                            "rate": "180"
+                        }
+                    ]
+                },
+                "type": "button",
+                "subscription": "/press",
+                "data": [
+                    "after I spy"
+                ],
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "after I spy"
+                        },
+                        "actions": [
+                            [
+                                ""
+                            ]
+                        ],
+                        "next": "moreforest"
+                    }
+                ]
+            },
+            {
+                "id": "moreballoon",
+                "name": "moreballoon",
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "Alright.  No need to shout.  I'm coming!",
+                            "delay": 0,
+                            "voice": "Serena",
+                            "background": "",
+                            "rate": "180"
+                        },
+                        {
+                            "words": "Aboard the hot air balloon we all felt exhilerated. Our blood was pumping and our hearts racing. We were having the time of our lives - apart from Alexandria. Turns out Alex is scared of heights. Don’t worry - I told him it was just like a walk in the park.",
+                            "delay": 0,
+                            "voice": "Daniel",
+                            "background": "",
+                            "rate": "180"
+                        },
+                        {
+                            "words": "That's not funny!",
+                            "delay": 0,
+                            "voice": "Serena",
+                            "background": "",
+                            "rate": "180"
+                        },
+                        {
+                            "words": "As we float over the forest we see that it is thick, tangled and easy to get lost in. We also see deep pools of water that look like death traps. I say that you have all made a very good decision.",
+                            "delay": 0,
+                            "voice": "Daniel",
+                            "background": "",
+                            "rate": "180"
+                        },
+                        {
+                            "words": "Are we nearly landed yet?",
+                            "delay": 0,
+                            "voice": "Serena",
+                            "background": "",
+                            "rate": "180"
+                        },
+                        {
+                            "words": "Not long left. I tell you what. Why don’t we try and distract Alexandria by playing her favourite game. Using your bodies, can you create something that we might be able to see up here in the clouds? Maybe it’s something up here? Maybe you can see it on the ground? Or in the distance? Come on, what can you see?",
+                            "delay": 0,
+                            "voice": "Daniel",
+                            "background": "",
+                            "rate": "140"
+                        }
+                    ]
+                },
+                "type": "button",
+                "subscription": "/press",
+                "data": [
+                    "continue"
+                ],
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "continue"
+                        },
+                        "actions": [
+                            [
+                                ""
+                            ]
+                        ],
+                        "next": "balloon3"
+                    }
+                ]
+            },
+            {
+                "id": "moreforest",
+                "name": "moreforest",
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "Oh no. Alexandria. Look around.",
+                            "delay": "800",
+                            "voice": "Daniel",
+                            "background": "",
+                            "rate": "180"
+                        },
+                        {
+                            "words": "Whaaat?",
+                            "delay": 0,
+                            "voice": "Serena",
+                            "background": "",
+                            "rate": "180"
+                        },
+                        {
+                            "words": "Look where we are? Or rather aren’t? We have lost the path.",
+                            "delay": 0,
+                            "voice": "Daniel",
+                            "background": "",
+                            "rate": "200"
+                        },
+                        {
+                            "words": "Oh come now, it can’t be that bad. Let’s just retrace our steps a little.",
+                            "delay": 0,
+                            "voice": "Serena",
+                            "background": "",
+                            "rate": "180"
+                        },
+                        {
+                            "words": "Which direction did we come from?",
+                            "delay": 0,
+                            "voice": "Daniel",
+                            "background": "",
+                            "rate": "180"
+                        },
+                        {
+                            "words": "That way. Or was it this? Maybe there?",
+                            "delay": 0,
+                            "voice": "Serena",
+                            "background": "",
+                            "rate": "180"
+                        },
+                        {
+                            "words": "Face it, we’re lost.",
+                            "delay": 0,
+                            "voice": "Daniel",
+                            "background": "",
+                            "rate": "180"
+                        },
+                        {
+                            "words": "But suddenly that became the least of our worries. The ground beneath us started to tremble and wobble.",
+                            "delay": 0,
+                            "voice": "Serena",
+                            "background": "",
+                            "rate": "180"
+                        },
+                        {
+                            "words": "Then as if it were a hungry beast opening its mouth to swallow us down we fell straight through it.",
+                            "delay": 0,
+                            "voice": "Daniel",
+                            "background": "",
+                            "rate": "180"
+                        },
+                        {
+                            "words": "We all land with an almighty splash. We look up and find out that we have fallen into one of the deep pools in the forest. With no hope of rescue or escape, we eventually perish and die. We have failed our Mission. ",
+                            "delay": 0,
+                            "voice": "Serena",
+                            "background": "",
+                            "rate": "180"
+                        }
+                    ]
+                },
+                "type": "button",
+                "subscription": "/press",
+                "data": [
+                    "go balloon"
+                ],
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "go balloon"
+                        },
+                        "actions": [
+                            [
+                                ""
+                            ]
+                        ],
+                        "next": "goballoon"
+                    }
+                ]
+            },
+            {
+                "id": "balloon3",
+                "name": "balloon3",
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "Are we nearly there yet?",
+                            "delay": "500",
+                            "voice": "Serena",
+                            "background": "",
+                            "rate": "180"
+                        },
+                        {
+                            "words": "Yes! Everyone brace yourselves, it might be a bumby landing.",
+                            "delay": 0,
+                            "voice": "Daniel",
+                            "background": "",
+                            "rate": "180"
+                        },
+                        {
+                            "words": "Oh no! I don’t want to die!!!",
+                            "delay": 0,
+                            "voice": "Serena",
+                            "background": "",
+                            "rate": "280"
+                        },
+                        {
+                            "words": "It’s okay Alex. We’ve landed. We’re safe. Now what do the instructions say now?",
+                            "delay": 0,
+                            "voice": "Daniel",
+                            "background": "",
+                            "rate": "140"
+                        },
+                        {
+                            "words": "Well if my understanding is correct, we should travel one more mile East from here and that should be the centre of the lost city. But there are some hieroglyphs, they are pictures that Egyptians used instead of letters - that I don’t recognise. Hopefully all will make sense soon.",
+                            "delay": 0,
+                            "voice": "Serena",
+                            "background": "",
+                            "rate": "180"
+                        }
+                    ]
+                },
+                "type": "button",
+                "subscription": "/press",
+                "data": [],
                 "rules": []
             }
         ]

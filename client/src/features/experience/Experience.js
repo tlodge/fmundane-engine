@@ -28,13 +28,7 @@ export function Experience() {
   const { height } = useWindowDimensions();
 
   const dispatch = useDispatch();
-  const BrowserSpeechRecognition =
-  typeof window !== 'undefined' &&
-  (window.SpeechRecognition ||
-    window.webkitSpeechRecognition ||
-    window.mozSpeechRecognition ||
-    window.msSpeechRecognition ||
-    window.oSpeechRecognition)
+
 
   const proxyRecognition = ()=>{
     return {
@@ -42,20 +36,29 @@ export function Experience() {
     }
   }
 
-  const recognition = BrowserSpeechRecognition ? new BrowserSpeechRecognition() : proxyRecognition();
-  recognition.continous = true;
-  recognition.interimResults = true;
-  recognition.lang = 'en-US';
+  
 
 
 
   const [startLabel, setStartLabel] = useState("start");
   
-  const _fetchLayers = (layer)=>{
-    dispatch(fetchLayers(layer, recognition));
-  }
+  //const _fetchLayers = (layer)=>{
+  //  dispatch(fetchLayers(layer, recognition));
+ //}
 
   useEffect(() => {
+    const BrowserSpeechRecognition =
+    typeof window !== 'undefined' &&
+    (window.SpeechRecognition ||
+      window.webkitSpeechRecognition ||
+      window.mozSpeechRecognition ||
+      window.msSpeechRecognition ||
+      window.oSpeechRecognition)
+    const recognition = BrowserSpeechRecognition ? new BrowserSpeechRecognition() : proxyRecognition();
+    recognition.continous = true;
+    recognition.interimResults = true;
+    recognition.lang = 'en-US';
+
     dispatch(fetchAuthored());
     dispatch(listenOnEvents());
     dispatch(listenOnActions(window));
@@ -112,7 +115,7 @@ export function Experience() {
 
   return (
       <div>
-        <Navigation authored={authored} fetchLayers={_fetchLayers} start={resetExperience}/>
+        <Navigation authored={authored} start={resetExperience}/>
         <div className="flex row mb-4 border-b-2 flex-wrap" >
         {list}
         </div>

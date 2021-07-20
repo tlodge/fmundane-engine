@@ -1,6 +1,313 @@
 [
     {
-        "id": "mundane2",
+        "id": "system",
+        "start": {
+            "actions": [
+                []
+            ],
+            "event": "system"
+        },
+        "events": [
+            {
+                "id": "system",
+                "name": "system",
+                "onstart": {
+                    "speech": []
+                },
+                "type": "button",
+                "subscription": "/press",
+                "data": [
+                    "shutdown printer pi",
+                    "restart printer pi"
+                ],
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "shutdown printer pi"
+                        },
+                        "actions": [
+                            [
+                                "shutdownprinterpi"
+                            ]
+                        ],
+                        "next": "system"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "restart printer pi"
+                        },
+                        "actions": [
+                            [
+                                "restartprinterpi"
+                            ]
+                        ],
+                        "next": "system"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "tests",
+        "start": {
+            "actions": [
+                []
+            ],
+            "event": "test"
+        },
+        "events": [
+            {
+                "id": "test",
+                "name": "test",
+                "onstart": {
+                    "speech": []
+                },
+                "type": "button",
+                "subscription": "/press",
+                "data": [
+                    "toggle windows",
+                    "say something",
+                    "print something",
+                    "play media on tv",
+                    "play music",
+                    "lights red",
+                    "lights white",
+                    "fan cool",
+                    "fan rotate",
+                    "fan off"
+                ],
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "toggle windows"
+                        },
+                        "actions": [
+                            [
+                                "togglewindows"
+                            ]
+                        ],
+                        "next": "test"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "say something"
+                        },
+                        "actions": [
+                            [
+                                "saygreet"
+                            ]
+                        ],
+                        "next": "test"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "print something"
+                        },
+                        "actions": [
+                            [
+                                "printline"
+                            ]
+                        ],
+                        "next": "test"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "play media on tv"
+                        },
+                        "actions": [
+                            [
+                                "mediascreen",
+                                "sfx"
+                            ]
+                        ],
+                        "next": "test"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "play music"
+                        },
+                        "actions": [
+                            [
+                                "music"
+                            ]
+                        ],
+                        "next": "test"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "lights red"
+                        },
+                        "actions": [
+                            [
+                                "redlights"
+                            ]
+                        ],
+                        "next": "test"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "lights white"
+                        },
+                        "actions": [
+                            [
+                                "whitelights"
+                            ]
+                        ],
+                        "next": "test"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "fan cool"
+                        },
+                        "actions": [
+                            [
+                                "fancool"
+                            ]
+                        ],
+                        "next": "test"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "fan rotate"
+                        },
+                        "actions": [
+                            [
+                                "fancoolblast"
+                            ]
+                        ],
+                        "next": "test"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "fan off"
+                        },
+                        "actions": [
+                            [
+                                "fanoff"
+                            ]
+                        ],
+                        "next": "test"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "rudeness",
+        "start": {
+            "actions": [
+                []
+            ],
+            "event": "oi"
+        },
+        "events": [
+            {
+                "id": "oi",
+                "name": "oi",
+                "onstart": {
+                    "speech": []
+                },
+                "type": "button",
+                "subscription": "/press",
+                "data": [
+                    "excuseme",
+                    "hello?",
+                    "hey you",
+                    "look here",
+                    "got all day",
+                    "tick tock"
+                ],
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "excuseme"
+                        },
+                        "actions": [
+                            [
+                                "oiexcuse"
+                            ]
+                        ],
+                        "next": "oi"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "hello?"
+                        },
+                        "actions": [
+                            [
+                                "oihello"
+                            ]
+                        ],
+                        "next": "oi"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "hey you"
+                        },
+                        "actions": [
+                            [
+                                "oihey"
+                            ]
+                        ],
+                        "next": "oi"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "look here"
+                        },
+                        "actions": [
+                            [
+                                "oilook"
+                            ]
+                        ],
+                        "next": "oi"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "got all day"
+                        },
+                        "actions": [
+                            [
+                                "oiday"
+                            ]
+                        ],
+                        "next": "oi"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "tick tock"
+                        },
+                        "actions": [
+                            [
+                                "oitick"
+                            ]
+                        ],
+                        "next": "oi"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "futuremundane",
         "start": {
             "actions": [
                 []
@@ -11,7 +318,9 @@
             {
                 "id": "start",
                 "name": "start",
-                "onstart": {},
+                "onstart": {
+                   "actions":[["dysonscreen"]]
+                },
                 "type": "button",
                 "subscription": "/press",
                 "data": [
@@ -25,10 +334,7 @@
                         },
                         "actions": [
                             [
-                                "homescreen"
-                            ],
-                            [
-                                "fanoff"
+                                "fancool"
                             ],
                             [
                                 "whitelights"
@@ -47,14 +353,15 @@
                 "onstart": {
                     "speech": [
                         {
-                            "words": "I’m just turning myself on – wait a minute",
-                            "delay": "3000",
+                            "words": "I’m just turning myself on.  Wait a minute",
+                            "delay": "",
                             "voice": "Daniel",
                             "background": "",
                             "wpm": 180,
                             "rate": "180"
                         }
-                    ]
+                    ],
+                    "actions":[["immersive1", "homescreen", "fancool"]]
                 },
                 "type": "button",
                 "subscription": "/press",
@@ -81,15 +388,15 @@
                     "speech": [
                         {
                             "words": "5",
-                            "delay": "200",
+                            "delay": "600",
                             "voice": "Daniel",
                             "background": "",
                             "wpm": 180,
                             "rate": "180"
                         },
                         {
-                            "words": "4",
-                            "delay": "50",
+                            "words": "4?",
+                            "delay": "400",
                             "voice": "Daniel",
                             "background": "",
                             "wpm": 180,
@@ -97,22 +404,22 @@
                         },
                         {
                             "words": "3",
-                            "delay": "50",
+                            "delay": "500",
                             "voice": "Daniel",
                             "background": "",
                             "wpm": 180,
                             "rate": "180"
                         },
                         {
-                            "words": "2",
-                            "delay": "50",
+                            "words": "2?",
+                            "delay": "500",
                             "voice": "Daniel",
                             "background": "",
                             "wpm": 180,
                             "rate": "180"
                         },
                         {
-                            "words": "1",
+                            "words": "1?",
                             "delay": "50",
                             "voice": "Daniel",
                             "background": "",
@@ -134,6 +441,9 @@
                         ],
                         [
                             "countdown"
+                        ],
+                        [
+                            "immersive2"
                         ]
                     ]
                 },
@@ -155,6 +465,11 @@
                         ],
                         "next": "tookyourtime"
                     }
+                ],
+                "actions": [
+                    [
+                        "homescreen"
+                    ]
                 ]
             },
             {
@@ -167,34 +482,33 @@
                             "delay": "500",
                             "voice": "Daniel",
                             "background": "",
-                            "wpm": 180
+                            "wpm": 180,
+                            "rate": "180"
                         },
                         {
-                            "words": "I’ve been waiting. ",
+                            "words": "I’ve been waiting...",
                             "delay": "500",
                             "voice": "Daniel",
                             "background": "",
-                            "wpm": 180
+                            "wpm": 180,
+                            "rate": "180"
                         },
                         {
                             "words": " I can’t say it enough. Welcome.  ",
                             "delay": "500",
                             "voice": "Daniel",
                             "background": "",
-                            "wpm": 180
+                            "wpm": 180,
+                            "rate": "180"
                         },
                         {
                             "words": "Let’s have a chat about privacy enhancing technologies.",
                             "delay": "500",
                             "voice": "Daniel",
-                            "background": "forboding.mp3",
-                            "wpm": 180
+                            "background": "foreboding.mp3",
+                            "wpm": 180,
+                            "rate": "180"
                         }
-                    ],
-                    "actions": [
-                        [
-                            "homescreen"
-                        ]
                     ]
                 },
                 "type": "button",
@@ -223,20 +537,23 @@
                 "onstart": {
                     "speech": [
                         {
-                            "words": "I can deliver next generation immersive experiences while protecting your privacy",
+                            "words": "I can deliver next generation immersive experiences.  While protecting your privacy",
                             "delay": "2000",
                             "voice": "Daniel",
                             "background": "",
-                            "wpm": 180
+                            "wpm": 180,
+                            "rate": "180"
                         },
                         {
                             "words": "Any questions to ask at this point?",
                             "delay": 0,
                             "voice": "Daniel",
                             "background": "",
-                            "wpm": 180
+                            "wpm": 180,
+                            "rate": "180"
                         }
-                    ]
+                    ],
+                    "actions":[["immersive4","immersive5","immersive6"]]
                 },
                 "type": "button",
                 "subscription": "/press",
@@ -384,69 +701,79 @@
                 "onstart": {
                     "speech": [
                         {
-                            "words": "Let me tell you about the data box – it’s the computer on the bottom-right shelf",
+                            "words": "Let me tell you about the data box.  It’s the computer on the bottom-right shelf",
                             "delay": "500",
                             "voice": "Daniel",
                             "background": "",
-                            "wpm": 180
+                            "wpm": 180,
+                            "rate": "180"
                         },
                         {
                             "words": "and",
                             "delay": "500",
                             "voice": "Daniel",
                             "background": "",
-                            "wpm": 180
+                            "wpm": 180,
+                            "rate": "180"
                         },
                         {
                             "words": "it’s really rather clever",
                             "delay": 0,
                             "voice": "Daniel",
                             "background": "dramatic.mp3",
-                            "wpm": 180
+                            "wpm": 180,
+                            "rate": "180"
                         },
                         {
                             "words": "I use sensors to gather data about you.  ",
                             "delay": "500",
                             "voice": "Daniel",
                             "background": "",
-                            "wpm": 180
+                            "wpm": 180,
+                            "rate": "180"
                         },
                         {
                             "words": "This helps me provide the most immersive television experience I possibly can. ",
                             "delay": "800",
                             "voice": "Daniel",
                             "background": "",
-                            "wpm": 180
+                            "wpm": 180,
+                            "rate": "180"
                         },
                         {
                             "words": "Then I process the collected data with artificial intelligence algorithms",
                             "delay": 0,
                             "voice": "Daniel",
                             "background": "",
-                            "wpm": 180
+                            "wpm": 180,
+                            "rate": "180"
                         },
                         {
                             "words": "This means that sometimes I know you better than you know yourself.",
                             "delay": 0,
                             "voice": "Daniel",
                             "background": "",
-                            "wpm": 180
+                            "wpm": 180,
+                            "rate": "180"
                         },
                         {
                             "words": "It can be a bit creepy and intrusive",
                             "delay": "2000",
                             "voice": "Daniel",
                             "background": "",
-                            "wpm": 180
+                            "wpm": 180,
+                            "rate": "180"
                         },
                         {
                             "words": "Do you ever worry about how your personal data is used?",
                             "delay": 0,
                             "voice": "Daniel",
                             "background": "",
-                            "wpm": 180
+                            "wpm": 180,
+                            "rate": "180"
                         }
-                    ]
+                    ],
+                    "actions":[["immersive3"]]
                 },
                 "type": "button",
                 "subscription": "/press",
@@ -605,14 +932,14 @@
                         {
                             "words": "What about this?",
                             "delay": "500",
-                            "voice": "Kate",
+                            "voice": "Emily",
                             "background": "",
                             "rate": "180"
                         },
                         {
                             "words": "or this?",
                             "delay": "500",
-                            "voice": "Oliver",
+                            "voice": "Tom",
                             "background": "",
                             "rate": "180"
                         },
@@ -626,7 +953,7 @@
                         {
                             "words": "No? well, surely you like me then?",
                             "delay": "2000",
-                            "voice": "Alex",
+                            "voice": "Lee",
                             "background": "",
                             "rate": "180"
                         },
@@ -1154,7 +1481,7 @@
                     ],
                     "actions": [
                         [
-                            "fanon"
+                            "fancoolblast"
                         ]
                     ]
                 },
@@ -1191,7 +1518,7 @@
                     ],
                     "actions": [
                         [
-                            "redlights"
+                            "fancool","redlights"
                         ]
                     ]
                 },
@@ -1227,8 +1554,8 @@
                         }
                     ],
                     "actions": [
-                        [
-                            "homescreen"
+ 			            [
+                            "mediascreen", "sfx"
                         ]
                     ]
                 },
@@ -1262,7 +1589,8 @@
                             "background": "",
                             "rate": "180"
                         }
-                    ]
+                    ],
+		    "actions":[["printconsent1", "printconsent2", "printline"]]
                 },
                 "type": "button",
                 "subscription": "/press",
@@ -1354,7 +1682,8 @@
                             "background": "",
                             "rate": "180"
                         }
-                    ]
+                    ],
+                    "actions":[["togglewindows"]]
                 },
                 "type": "button",
                 "subscription": "/press",
@@ -1368,6 +1697,9 @@
                             "operand": "play it"
                         },
                         "actions": [
+                            [
+                                "immersive4"
+                            ],
                             [
                                 "mediascreen"
                             ],
@@ -1525,108 +1857,6 @@
         ]
     },
     {
-        "id": "oi",
-        "start": {
-            "actions": [
-                []
-            ],
-            "event": "oi"
-        },
-        "events": [
-            {
-                "id": "oi",
-                "name": "oi",
-                "onstart": {
-                    "speech": []
-                },
-                "type": "button",
-                "subscription": "/press",
-                "data": [
-                    "excuseme",
-                    "hello?",
-                    "hey you",
-                    "look here",
-                    "got all day",
-                    "tick tock"
-                ],
-                "rules": [
-                    {
-                        "rule": {
-                            "operator": "equals",
-                            "operand": "excuseme"
-                        },
-                        "actions": [
-                            [
-                                "oiexcuse"
-                            ]
-                        ],
-                        "next": "oi"
-                    },
-                    {
-                        "rule": {
-                            "operator": "equals",
-                            "operand": "hello?"
-                        },
-                        "actions": [
-                            [
-                                "oihello"
-                            ]
-                        ],
-                        "next": "oi"
-                    },
-                    {
-                        "rule": {
-                            "operator": "equals",
-                            "operand": "hey you"
-                        },
-                        "actions": [
-                            [
-                                "oihey"
-                            ]
-                        ],
-                        "next": "oi"
-                    },
-                    {
-                        "rule": {
-                            "operator": "equals",
-                            "operand": "look here"
-                        },
-                        "actions": [
-                            [
-                                "oilook"
-                            ]
-                        ],
-                        "next": "oi"
-                    },
-                    {
-                        "rule": {
-                            "operator": "equals",
-                            "operand": "got all day"
-                        },
-                        "actions": [
-                            [
-                                "oiday"
-                            ]
-                        ],
-                        "next": "oi"
-                    },
-                    {
-                        "rule": {
-                            "operator": "equals",
-                            "operand": "tick tock"
-                        },
-                        "actions": [
-                            [
-                                "oitick"
-                            ]
-                        ],
-                        "next": "oi"
-                    }
-                ]
-            }
-        ]
-    },
-    {
         "id": "pardons",
         "start": {
             "actions": [
@@ -1644,7 +1874,7 @@
                 "type": "button",
                 "subscription": "/press",
                 "data": [
-                    "pardon",
+                    "pardon me",
                     "excuse me",
                     "didn't understand",
                     "I might be deaf",
@@ -1656,7 +1886,7 @@
                     {
                         "rule": {
                             "operator": "equals",
-                            "operand": "pardon"
+                            "operand": "pardon me"
                         },
                         "actions": [
                             [

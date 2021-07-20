@@ -98,8 +98,8 @@ app.get('/ui/api/red', async function (req, res, next) {
   res.status(200).send("OK");
 });
 
-app.post('/ui/api/light_script', async function (req, res, next) {
-  ref = req.body.script_id
+app.get('/ui/api/light_script', async function (req, res, next) {
+  ref = req.query.script_id
   let obj = lightscript[ref]
 
   for (light of lights){

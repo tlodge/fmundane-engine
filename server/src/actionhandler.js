@@ -32,7 +32,7 @@ export const handlespeech = async (speech)=>{
         
     await request({
          "data": {
-            "url": "http://localhost:9105/api/speech",
+            "url": "http://192.168.1.106:9105/api/speech",
             "type": "POST",
             "contenttype": "application/json"
           },

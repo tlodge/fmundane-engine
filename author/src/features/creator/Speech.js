@@ -15,16 +15,17 @@ const _validatelines = (lines)=>{
 
 export default function Speech({lines:_lines={}, speechChanged}) {
     
-    const voices = ["Kate", "Daniel", "Oliver", "Ava", "Alex", "Bruce", "Junior", "Ralph", "Tom", "Serena"];
+    const _localvoices = ["Kate", "Daniel", "Oliver", "Ava", "Alex", "Bruce", "Junior", "Ralph", "Tom", "Serena"];
+    const voices = ["Emily", "Daniel", "Tom", "Fiona", "Moira", "Bruce", "Junior", "Karen", "Lee", "Serena"];
 
     const {speech=[]} = _lines;
 
-    _lines = speech.length <= 0 ? [{"words":"", "delay":0, "voice":"Kate","background":"", rate:"180"}] : speech ;
+    _lines = speech.length <= 0 ? [{"words":"", "delay":0, "voice":"Daniel","background":"", rate:"180"}] : speech ;
 
     const [lines, setLines] = useState(_lines);
 
     const addLine = ()=>{
-        setLines([...lines, {"words":"", "delay":0, "voice":"Kate", "background":"", rate:"180"}])
+        setLines([...lines, {"words":"", "delay":0, "voice":"Daniel", "background":"", rate:"180"}])
     }
 
     const deleteLine = (index)=>{

@@ -337,7 +337,7 @@ function AirQuality({data={}}) {
                     <div className="smalltext" style={{"height":120}}>Gases released by <strong>combustion</strong>. Includes <strong>cooking gas </strong> and <strong>vehicle emissions </strong></div>
                 </div>
         </div>
-            <div style={{paddingTop:0, textAlign:"center"}} className="largeheading">overall air quality: {airquality}</div>
+            <div style={{height:"200px", display:"flex", alignItems:"center", justifyContent:"center"}} ><div className="largeheading">overall air quality: {airquality}</div></div>
         </div>
     </>)
   

@@ -1,26 +1,32 @@
+
+
 To do in Lancaster
 
-Pre-pull
---------
+Pull new code
+Copy new media over
+mv IPs.caravan.json => IPs.json
 
-Check IP / config of dyson fan in drivers/dyson_link_driver: assume it is 192.168.1.45
+rebuild the screen driver
 
-Pull
------
+before you do this:
 
-Git pull the latest code on the caravan main machine
-Git pull the latest code on the caravan speech machine  - make sure supported voices match up
-                                                        - run speech and media on the same box.
+open: 
 
-rebuild author and client and /drivers/screen_driver before running servers
+/Users/tlodge/futuremundane/fmundane-engine/drivers/screen_driver/client/node_modules/@tensorflow-models/facemesh/dist/facemesh.js
 
-copy media files odd usb into fmundane-engine/media
+AND REPLACE
 
-IPs
+https://tfhub.dev/tensorflow/tfjs-model/blazeface/1/default/1/model.json?tfjs-format=file with http://localhost:9102/blazeface
 
-connect to most drivers through localhost in actions.json - but drivers themselves need IPs.  Speech and media driver will run on the mac
+https://tfhub.dev/mediapipe/tfjs-model/facemesh/1/default/1/model.json?tfjs-format=file  with http://localhost:9102/facemesh
 
-caravan speech machine is running on mac            : 192.168.1.106
-hue bridge                                          : 192.168.1.105
-link drivers                                        : 192.168.1.45
-receipt (running directly on Pi - no driver req)    : 192.168.1.192 (user pi/imm)
+
+open:
+
+ /Users/tlodge/futuremundane/fmundane-engine/drivers/screen_driver/client/node_modules/@tensorflow-models/facemesh/dist/facemesh.esm.js
+
+ AND REPLACE
+
+https://tfhub.dev/tensorflow/tfjs-model/blazeface/1/default/1/model.json?tfjs-format=file with http://localhost:9102/blazeface
+
+https://tfhub.dev/mediapipe/tfjs-model/facemesh/1/default/1/model.json?tfjs-format=file  with http://localhost:9102/facemesh

@@ -58,8 +58,7 @@ export function Creator({onClose}) {
         reset();
     }
     
-    const speechChanged = (speech = [])=>{
-       
+    const speechChanged = ({speech = {}})=>{
         setNode({...node, speech})
         dispatch(setSpeech(speech));
     }

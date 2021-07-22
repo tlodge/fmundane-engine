@@ -166,7 +166,8 @@ export const layerSlice = createSlice({
         const {node,name,speech,type,subscription="/press"} = action.payload;
       
         
-      
+        console.log("in updare node with speech", speech);
+        
 
         //TODO - SORT ROOT NODE - ID THIS IS THE ONE CHANGED!!
         state.layers[state.layerid].nodesById = Object.keys(state.layers[state.layerid].nodesById).reduce((acc, key)=>{
@@ -180,7 +181,10 @@ export const layerSlice = createSlice({
                         type,
                         subscription,
                         id: name.replace(/\s/g, "_"),
-                        onstart: speech,
+                        onstart: {
+                            ...state.layers[state.layerid].nodesById[key].onstart,
+                            speech : speech,
+                        }
                     }
                 }
             }

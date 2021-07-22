@@ -73,7 +73,7 @@ export default function Home() {
         });
     }
     return (
-        <div style={{width:"100vw", height:"100vh", background:"black"}}>
+        <div style={{width:"100vw" ,height:"100vh", backgroundColor:"black", display:"flex", alignItems:"center"}}>
          
         <Switch>
           
@@ -99,8 +99,8 @@ export default function Home() {
                 )}
             />
             <Route path="/"
-                 render = {(props)=>(<div style={{display:"flex",alignItems:"center"}}>
-                 <img style={{padding:300}} src="./flogo.svg"></img>
+                 render = {(props)=>(<div style={{width:"100%"}}>
+                 <img  style={{margin:300}} src="./flogo.svg"></img>
              </div>
              )}
              />

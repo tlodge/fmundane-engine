@@ -1,7 +1,9 @@
 //https://medium.com/codesphere-cloud/creating-a-face-detection-web-app-with-react-and-codesphere-28b1f057145d
 
 import React, { useRef, useEffect, useState, createRef,  } from "react";
-
+import {
+  useHistory
+} from "react-router-dom";
 import "./FaceScan.css";
 import * as tf from "@tensorflow/tfjs";
 import * as facemesh from "@tensorflow-models/facemesh";
@@ -9,16 +11,16 @@ import * as facemesh from "@tensorflow-models/facemesh";
 import { drawMesh } from "./meshUtilities.js";
 import {useInterval} from './hooks/useInterval';
 import {useCamera} from './hooks/useCamera';
+import useWindowDimensions from "./hooks/useWindowDimensions";
 
-
-const VWIDTH = 1280;//720;//1280;
-const VHEIGHT = 960;//500;//960;
+//const VWIDTH = 1280;//720;//1280;
+//const VHEIGHT = 960;//500;//960;
 
 
 
 function FaceScan({scan="none"}) {
 
- 
+  const { height:VHEIGHT, width:VWIDTH } = useWindowDimensions();
   const canvasReference = useRef(null);
   const videoRef = createRef();
   const [video, isCameraInitialised, playing, setPlaying, error] = useCamera(videoRef);
@@ -32,8 +34,8 @@ function FaceScan({scan="none"}) {
   useEffect (()=>{
       
       if (video){
-        canvasReference.current.width = video.videoWidth || VWIDTH ;
-        canvasReference.current.height = video.videoHeight || VHEIGHT;
+        canvasReference.current.width = 640;// video.videoWidth || VWIDTH ;
+        canvasReference.current.height = 480;//video.videoHeight || VHEIGHT;
       }
 
   },[network])
@@ -98,15 +100,15 @@ function FaceScan({scan="none"}) {
     setVideoOpacity(0);
   }
 
-
+  console.log("scan is", scan);
 
   return (
-    <>
-    <div className="App" style={{background:"black"}}>
+    <div style={{backgroundColor:"black"}}>
+    <div className="App">
       <video
         ref={videoRef}
         style={{
-          opacity: videoopacity,
+          opacity: 1, /*videoopacity,*/
           position:"absolute",
           marginLeft: "auto",
           marginRight: "auto",
@@ -132,13 +134,13 @@ function FaceScan({scan="none"}) {
           zindex: 9,
           width: VWIDTH,
           height: VHEIGHT,
-          background:"black",
+          background:"transparent",
         }}
       />
       
     </div>
     
-    </>
+    </div>
   );
 }
 /* <button onClick={()=>{showVideo()}}>show video</button>

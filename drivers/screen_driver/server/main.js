@@ -2,12 +2,13 @@ const express = require('express');
 const http = require('http');
 const WebSocket = require('ws');
 const mqtt = require('./mqttlib');
-
+const cors = require('cors');
 
 const app = express();
 
 
 let ws;
+app.use(cors()) 
 app.use(express.static("public"));
 app.use(express.static("../../../media"));
 

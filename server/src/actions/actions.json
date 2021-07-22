@@ -1,849 +1,677 @@
 {
-  "fanhot": {
-    "type": "request",
-    "data": {
-      "url": "http://localhost:9097/ui/api/fan?rotate=true&power=10&heat=37",
-      "type": "GET",
-      "contenttype": "application/json"
-    }
-  },
-
-  "fanoff": {
-    "type": "request",
-    "data": {
-      "url": "http://localhost:9097/ui/api/fan?rotate=false&power=1&cool=true",
-      "type": "GET",
-      "contenttype": "application/json",
-      "body": {
-        "id": "28282:1292920-2;"
-      }
-    }
-  },
-  "fancool": {
-    "type": "request",
-    "data": {
-      "url": "http://192.168.1.204:9097/ui/api/fan?power=3&cool=true&rotate=false",
-      "type": "GET",
-      "contenttype": "application/json"
-    }
-  },
-  "fancoolblast": {
-    "type": "request",
-    "data": {
-      "url": "http://192.168.1.204:9097/ui/api/fan?power=10&cool=true&rotate=true&from=0&to=90", 
-      "type": "GET",
-      "contenttype": "application/json",
-      "body": {
-        "id": "28282:1292920-2;"
-      }
-    }
-  },
-  "whitelights": {
-    "type": "request",
-    "data": {
-      "url": "http://localhost:9092/ui/api/white",
-      "type": "GET",
-      "contenttype": "application/json",
-      "body": {
-        "id": "28282:1292920-2;"
-      }
-    }
-  },
-  "redlights": {
-    "type": "request",
-    "data": {
-      "url": "http://localhost:9092/ui/api/red",
-      "type": "GET",
-      "contenttype": "application/json",
-      "body": {
-        "id": "28282:1292920-2;"
-      }
-    }
-  },
-  "brightlights": {
-    "type": "request",
-    "data": {
-      "url": "http://localhost:9092/ui/api/20",
-      "type": "GET",
-      "contenttype": "application/json",
-      "body": {
-        "id": "28282:1292920-2;"
-      }
-    }
-  },
-
-  "rainbowlights": {
-    "type": "request",
-    "data": {
-      "url": "http://localhost:9123/api/lights?value=RAINBOW",
-      "type": "GET",
-      "contenttype": "application/json",
-      "body": {
-        "id": "28282:1292920-2;"
-      }
-    }
-  },
-  
-
-  "facecameraon" : {
-    "type": "request",
-    "data": {
-      "url": "http://localhost:8999/api/camera/",
-      "type": "GET",
-      "contenttype": "application/json"
-    }
-  },
-
-  "facecamerascan" : {
-    "type": "request",
-    "data": {
-      "url": "http://localhost:8999/api/camera/scan?state=scan",
-      "type": "GET",
-      "contenttype": "application/json"
-    }
-  },
-
-  "airmonitoron" : {
-    "type": "request",
-    "data": {
-      "url": "http://localhost:8999/api/air",
-      "type": "GET",
-      "contenttype": "application/json"
-    }
-  },
-  
-  "saygreet": {
-    "type": "request",
-    "data": {
-      "url": "http://192.168.1.106:9105/api/speech",
-      "type": "POST",
-      "contenttype": "application/json"
-    },
-    "body":{
-        "speech" : [
-                      {
-                        "words": "Hello and welcome to the caravan. My name is Fred.",
-                        "delay": 500 
-                      },
-                      {
-                        "words": "Are you ready to go?"
-                      }
-
-        ]     
-    }       
-  },
-
-  "sayred": {
-    "type": "request",
-    "data": {
-      "url": "http://192.168.1.106:9105/api/speech",
-      "type": "POST",
-      "contenttype": "application/json"
-    },
-    "body":{
-        "speech" : [
-                      {
-                        "words": "Time to turn our lights red,is that ok?"
-                      }
-        ]     
-    }       
-  },
-  "saylabel": {
-    "type": "request",
-    "data": {
-      "url": "http://192.168.1.106:9105/api/speech",
-      "type": "POST",
-      "contenttype": "application/json"
-    },
-    "body":{
-        "speech" : [
-                      {
-                        "words": "ok, I'm now going to print something if that is ok?"
-                      }
-        ]     
-    }       
-  },
-  "saywindows": {
-    "type": "request",
-    "data": {
-      "url": "http://192.168.1.106:9105/api/speech",
-      "type": "POST",
-      "contenttype": "application/json"
-    },
-    "body":{
-        "speech" : [
-                      {
-                        "words": "All going so well",
-                        "delay": 1000
-                      },
-                      {
-                        "words": "Lets play with our windows"
-                      }
-
-        ]     
-    }       
-  },
-  "sayhello": {
-    "type": "request",
-    "data": {
-      "url": "http://192.168.1.106:9105/api/speech",
-      "type": "POST",
-      "contenttype": "application/json"
-    },
-    "body":{
-        "speech" : [
-                      {
-                        "words": "Hello |value:and|",
-                        "delay":500
-                      },
-                      {
-                        "words":"It's most lovely to meet you",
-                        "delay":1000
-                      }
-        ]     
-    }       
-  },
-
-  "sayturningonfan": {
-    "type": "request",
-    "data": {
-      "url": "http://192.168.1.106:9105/api/speech",
-      "type": "POST",
-      "contenttype": "application/json"
-    },
-    "body":{
-        "speech" : [
-                      {
-                          "words": "Let's get nice and comfortable.  I'm turning on the fan now",
-                          "delay": 1000
-                      }
-        ]
-    }
-  },
-  "sayaskagain": {
-    "type": "request",
-    "data": {
-      "url": "http://192.168.1.106:9105/api/speech",
-      "type": "POST",
-      "contenttype": "application/json"
-    },
-    "body":{
-        "speech" : [
-                      {
-                          "words": "Ah well.  I'll wait a bit",
-                          "delay": 1000
-                      },
-                      {
-                        "words": "one mississippi, two mississippi, three mississippi, four mississipi",
-                        "delay": 1500
-                    },
-                    {
-                      "words": "five mississipi, six misssissippi",
-                      "delay": 2000
-                  },
-                      {
-                        "words": "Ok, nice pause.  Let's try again",
-                        "delay": 1000
-                      }
-        ]
-    }
-  },
-  "saygreat": {
-    "type": "request",
-    "data": {
-      "url": "http://192.168.1.106:9105/api/speech",
-      "type": "POST",
-      "contenttype": "application/json"
-    },
-    "body":{
-        "speech" : [
-            {
-                "words": "Great stuff!",
-                "delay": 1000
-            }
-        ]
-    }
-  },
-  "askfacescan":{
-    "type": "request",
-    "data": {
-      "url": "http://192.168.1.106:9105/api/speech",
-      "type": "POST",
-      "contenttype": "application/json"
-    },
-    "body":{
-        "speech" : [
-            {
-                "words": "I'd quite like to do a face scan now",
-                "delay": 500
-            },
-            {
-              "words": "would that be ok?"
-            }
-        ]
-    }
-  },
-  "askready": {
-    "type": "request",
-    "data": {
-      "url": "http://192.168.1.106:9105/api/speech",
-      "type": "POST",
-      "contenttype": "application/json"
-    },
-    "body":{
-        "speech" : [
-            {
-                "words": "Just hold on for a short while, while I get the camera up and runnng",
-                "delay": 3000
-            },
-            {
-              "words": "Right that should be fine now.  Are you ready to get a scan?"
-            }
-        ]
-    }
-  },
-  "sayscanningnow": {
-    "type": "request",
-    "data": {
-      "url": "http://192.168.1.106:9105/api/speech",
-      "type": "POST",
-      "contenttype": "application/json"
-    },
-    "body":{
-        "speech" : [
-            {
-                "words": "I'm scanning now",
-                "delay": 1500
-            },
-            {
-              "words": "Just a little bit more",
-              "delay": 800
-            },
-            {
-              "words": "Brilliant I'm done!",
-              "delay": 800
-            },
-            {
-              "words": "So we're now going to check your air quality",
-              "delay": 500
-            },
-            {
-              "words": "Is that ok? Put your thumbs up if it is",
-              "delay": 500
-            }
-        ]
-      }
-  },
-  "saynoworries": {
-    "type": "request",
-    "data": {
-      "url": "http://192.168.1.106:9105/api/speech",
-      "type": "POST",
-      "contenttype": "application/json"
-    },
-    "body":{
-        "speech" : [
-            {
-                "words": "Ok, no worries!",
-                "delay": 500
-            },
-            {
-              "words": "Let's get some nice lighting going instead!",
-              "delay": 1000
-            },
-            {
-              "words": "Which colour would you like, red, green, blue",
-              "delay": 500
-            },
-            {
-              "words": "or a surprise!",
-              "delay": 500
-            }
-        ]
-      }
-    },
-    "saystarted": {
+    "fanhot": {
       "type": "request",
       "data": {
-        "url": "http://192.168.1.106:9105/api/speech",
+        "url": "http://localhost:9097/ui/api/fan?rotate=true&power=10&heat=37",
+        "type": "GET",
+        "contenttype": "application/json"
+      }
+    },
+  
+    "fanoff": {
+      "type": "request",
+      "data": {
+        "url": "http://localhost:9097/ui/api/fan?rotate=false&power=1&cool=true",
+        "type": "GET",
+        "contenttype": "application/json",
+        "timeout": 500,
+        "body": {
+          "id": "28282:1292920-2;"
+        }
+      }
+    },
+    "fancool": {
+      "type": "request",
+      "data": {
+        "url": "http://[lenovo]:9097/ui/api/fan?power=3&cool=true&rotate=false",
+        "type": "GET",
+        "contenttype": "application/json",
+        "timeout": 500
+      }
+    },
+    "fancoolblast": {
+      "type": "request",
+      "data": {
+        "url": "http://[lenovo]:9097/ui/api/fan?power=10&cool=true&rotate=true&from=0&to=90", 
+        "type": "GET",
+        "contenttype": "application/json",
+        "timeout": 500,
+        "body": {
+          "id": "28282:1292920-2;"
+        }
+      }
+    },
+    "whitelights": {
+      "type": "request",
+      "data": {
+        "url": "http://localhost:9092/ui/api/white",
+        "type": "GET",
+        "contenttype": "application/json",
+        "timeout": 500,
+        "body": {
+          "id": "28282:1292920-2;"
+        }
+      }
+    },
+    "redlights": {
+      "type": "request",
+      "data": {
+        "url": "http://localhost:9092/ui/api/red",
+        "type": "GET",
+        "contenttype": "application/json",
+        "timeout": 500,
+        "body": {
+          "id": "28282:1292920-2;"
+        }
+      }
+    },
+    "brightlights": {
+      "type": "request",
+      "data": {
+        "url": "http://localhost:9092/ui/api/20",
+        "type": "GET",
+        "contenttype": "application/json",
+        "timeout": 500,
+        "body": {
+          "id": "28282:1292920-2;"
+        }
+      }
+    },
+    "airmonitoron" : {
+      "type": "request",
+      "data": {
+        "url": "http://localhost:8999/api/air",
+        "type": "GET",
+        "contenttype": "application/json",
+        "timeout": 500
+      }
+    },
+    "saygreet": {
+      "type": "request",
+      "data": {
+        "url": "http:/[speech]:9105/api/speech",
+        "type": "POST",
+        "contenttype": "application/json"
+      },
+      "body":{
+          "speech" : [
+                        {
+                          "words": "Hello and welcome to the caravan. My name is Fred.",
+                          "delay": 500 
+                        },
+                        {
+                          "words": "Are you ready to go?"
+                        }
+  
+          ]     
+      }       
+    },
+    "sayturningonfan": {
+      "type": "request",
+      "data": {
+        "url": "http://[speech]:9105/api/speech",
+        "type": "POST",
+        "contenttype": "application/json"
+      },
+      "body":{
+          "speech" : [
+                        {
+                            "words": "Let's get nice and comfortable.  I'm turning on the fan now",
+                            "delay": 1000
+                        }
+          ]
+      }
+    },
+    "saygreat": {
+      "type": "request",
+      "data": {
+        "url": "http://[speech]:9105/api/speech",
         "type": "POST",
         "contenttype": "application/json"
       },
       "body":{
           "speech" : [
               {
-                  "words": "I have started",
+                  "words": "Great stuff!",
+                  "delay": 1000
+              }
+          ]
+      }
+    },
+    "askfacescan":{
+      "type": "request",
+      "data": {
+        "url": "http://[speech]:9105/api/speech",
+        "type": "POST",
+        "contenttype": "application/json"
+      },
+      "body":{
+          "speech" : [
+              {
+                  "words": "I'd quite like to do a face scan now",
                   "delay": 500
+              },
+              {
+                "words": "would that be ok?"
+              }
+          ]
+      }
+    },
+    "askready": {
+      "type": "request",
+      "data": {
+        "url": "http://[speech]:9105/api/speech",
+        "type": "POST",
+        "contenttype": "application/json"
+      },
+      "body":{
+          "speech" : [
+              {
+                  "words": "Just hold on for a short while, while I get the camera up and runnng",
+                  "delay": 3000
+              },
+              {
+                "words": "Right that should be fine now.  Are you ready to get a scan?"
+              }
+          ]
+      }
+    },
+    "sayscanningnow": {
+      "type": "request",
+      "data": {
+        "url": "http://[speech]:9105/api/speech",
+        "type": "POST",
+        "contenttype": "application/json"
+      },
+      "body":{
+          "speech" : [
+              {
+                  "words": "I'm scanning now",
+                  "delay": 1500
+              },
+              {
+                "words": "Just a little bit more",
+                "delay": 800
+              },
+              {
+                "words": "Brilliant I'm done!",
+                "delay": 800
+              },
+              {
+                "words": "So we're now going to check your air quality",
+                "delay": 500
+              },
+              {
+                "words": "Is that ok? Put your thumbs up if it is",
+                "delay": 500
               }
           ]
         }
-      },
-      "asknames": {
+    },
+    "togglewindows": {
         "type": "request",
         "data": {
-          "url": "http://192.168.1.106:9105/api/speech",
-          "type": "POST",
-          "contenttype": "application/json"
+            "url": "http://[windows]:9222/H",
+            "type": "GET",
+            "contenttype": "application/json",
+            "timeout":500
+        }
+    },
+    "printconsent1": {
+    "type": "request",
+    "data": {
+        "url": "http://[receipt]:8080/print",
+        "type": "POST",
+        "contenttype": "application/json",
+        "timeout": 500
+    },
+    "body":{
+        "text" : "I consent to all of my data" 
+        }
+    },
+    "printconsent2": {
+    "type": "request",
+    "data": {
+        "url": "http://[receipt]:8080/print",
+        "type": "POST",
+        "contenttype": "application/json",
+        "timeout": 500
+    },
+    "body":{
+        "text" : "being used by Future Mundane inc."
+        }
+    },
+    "printline": {
+    "type": "request",
+    "data": {
+        "url": "http://[receipt]:8080/print",
+        "type": "POST",
+        "contenttype": "application/json",
+        "timeout": 500
+    },
+    "body":{
+        "text" : "______________________________"
+        }
+    },
+    "oiexcuse":{
+    "type":"request",
+    "data":{
+        "url":"http://[speech]:9105/api/speech",
+        "type":"POST",
+        "contenttype":"application/json"
+    },
+    "body":{
+        "speech":[
+            {
+                "words":"Excuse me.. I'm still here",
+                "voice":"Daniel"
+            }
+        ]
+    }
+    },
+    "oihello":{
+        "type":"request",
+        "data":{
+            "url":"http://[speech]:9105/api/speech",
+            "type":"POST",
+            "contenttype":"application/json"
         },
         "body":{
-            "speech" : [
+            "speech":[
                 {
-                    "words": "Would you be so kind as to tell me your names",
-                    "delay": 500
+                    "words":"Hello?",
+                    "voice":"Daniel"
                 }
             ]
-          }
+        }
+    },
+    "oihey":{
+        "type":"request",
+        "data":{
+            "url":"http://localhost:9105/api/speech",
+            "type":"POST",
+            "contenttype":"application/json"
         },
-        "togglewindows": {
-          "type": "request",
-          "data": {
-            "url": "http://192.168.1.244:9222/H",
-            "type": "GET",
-            "contenttype": "application/json"
-          }
+        "body":{
+            "speech":[
+                {
+                    "words":"Hey, you, pay attention! We're trying to do the future here",
+                    "voice":"Daniel"
+                }
+            ]
+        }
+    },
+    "oiday":{
+        "type":"request",
+        "data":{
+            "url":"http://[speech]:9105/api/speech",
+            "type":"POST",
+            "contenttype":"application/json"
         },
-        "printconsent1": {
-          "type": "request",
-          "data": {
-            "url": "http://192.168.1.192:8080/print",
-            "type": "POST",
-            "contenttype": "application/json"
-          },
-          "body":{
-              "text" : "I consent to all of my data" 
-            }
+        "body":{
+            "speech":[
+                {
+                    "words":"I haven't got all day",
+                    "voice":"Daniel"
+                }
+            ]
+        }
+    },
+    "oitick":{
+        "type":"request",
+        "data":{
+            "url":"http://[speech]:9105/api/speech",
+            "type":"POST",
+            "contenttype":"application/json"
         },
-        "printconsent2": {
-          "type": "request",
-          "data": {
-            "url": "http://192.168.1.192:8080/print",
-            "type": "POST",
-            "contenttype": "application/json"
-          },
-          "body":{
-              "text" : "being used by Future Mundane inc."
-            }
+        "body":{
+            "speech":[
+                {
+                    "words":"Tick, tock, tick, tock - time is of the essence. Let's get on with it",
+                    "voice":"Daniel"
+                }
+            ]
+        }
+    },
+    "oilook":{
+        "type":"request",
+        "data":{
+            "url":"http://[speech]:9105/api/speech",
+            "type":"POST",
+            "contenttype":"application/json"
         },
-        "printline": {
-          "type": "request",
-          "data": {
-            "url": "http://192.168.1.192:8080/print",
-            "type": "POST",
-            "contenttype": "application/json"
-          },
-          "body":{
-              "text" : "______________________________"
-            }
+        "body":{
+            "speech":[
+                {
+                    "words":"Look here, I've got things to do as well, can we just get on with it?",
+                    "voice":"Daniel"
+                }
+            ]
+        }
+    },
+    "pardonpardon":{
+        "type":"request",
+        "data":{
+            "url":"http://[speech]:9105/api/speech",
+            "type":"POST",
+            "contenttype":"application/json"
         },
-        "oiexcuse":{
-          "type":"request",
-          "data":{
-             "url":"http://192.168.1.106:9105/api/speech",
-             "type":"POST",
-             "contenttype":"application/json"
-          },
-          "body":{
-             "speech":[
+        "body":{
+            "speech":[
                 {
-                   "words":"Excuse me.. I'm still here",
-                   "voice":"Daniel"
+                    "words":"Pardon?",
+                    "voice":"Daniel"
                 }
-             ]
-          }
-       },
-       "oihello":{
-          "type":"request",
-          "data":{
-             "url":"http://192.168.1.106:9105/api/speech",
-             "type":"POST",
-             "contenttype":"application/json"
-          },
-          "body":{
-             "speech":[
-                {
-                   "words":"Hello?",
-                   "voice":"Daniel"
-                }
-             ]
-          }
-       },
-       "oihey":{
-          "type":"request",
-          "data":{
-             "url":"http://localhost:9105/api/speech",
-             "type":"POST",
-             "contenttype":"application/json"
-          },
-          "body":{
-             "speech":[
-                {
-                   "words":"Hey, you, pay attention! We're trying to do the future here",
-                   "voice":"Daniel"
-                }
-             ]
-          }
-       },
-       "oiday":{
-          "type":"request",
-          "data":{
-             "url":"http://192.168.1.106:9105/api/speech",
-             "type":"POST",
-             "contenttype":"application/json"
-          },
-          "body":{
-             "speech":[
-                {
-                   "words":"I haven't got all day",
-                   "voice":"Daniel"
-                }
-             ]
-          }
-       },
-       "oitick":{
-          "type":"request",
-          "data":{
-             "url":"http://192.168.1.106:9105/api/speech",
-             "type":"POST",
-             "contenttype":"application/json"
-          },
-          "body":{
-             "speech":[
-                {
-                   "words":"Tick, tock, tick, tock - time is of the essence. Let's get on with it",
-                   "voice":"Daniel"
-                }
-             ]
-          }
-       },
-       "oilook":{
-          "type":"request",
-          "data":{
-             "url":"http://192.168.1.106:9105/api/speech",
-             "type":"POST",
-             "contenttype":"application/json"
-          },
-          "body":{
-             "speech":[
-                {
-                   "words":"Look here, I've got things to do as well, can we just get on with it?",
-                   "voice":"Daniel"
-                }
-             ]
-          }
-       },
-       "pardonpardon":{
-          "type":"request",
-          "data":{
-             "url":"http://192.168.1.106:9105/api/speech",
-             "type":"POST",
-             "contenttype":"application/json"
-          },
-          "body":{
-             "speech":[
-                {
-                   "words":"Pardon?",
-                   "voice":"Daniel"
-                }
-             ]
-          }
-       },
-       "pardonexcuse":{
-          "type":"request",
-          "data":{
-             "url":"http://192.168.1.106:9105/api/speech",
-             "type":"POST",
-             "contenttype":"application/json"
-          },
-          "body":{
-             "speech":[
-                {
-                   "words":"Excuse me?",
-                   "voice":"Daniel"
-                }
-             ]
-          }
-       },
-       "pardonunderstand":{
-          "type":"request",
-          "data":{
-             "url":"http://192.168.1.106:9105/api/speech",
-             "type":"POST",
-             "contenttype":"application/json"
-          },
-          "body":{
-             "speech":[
-                {
-                   "words":"I didn't understand that, please say it again?",
-                   "voice":"Daniel"
-                }
-             ]
-          }
-       },
-       "pardondeaf":{
-          "type":"request",
-          "data":{
-             "url":"http://192.168.1.106:9105/api/speech",
-             "type":"POST",
-             "contenttype":"application/json"
-          },
-          "body":{
-             "speech":[
-                {
-                   "words":"I might be a bit deaf - what did you say?",
-                   "voice":"Daniel"
-                }
-             ]
-          }
-       },
-       "pardonsay":{
-          "type":"request",
-          "data":{
-             "url":"http://192.168.1.106:9105/api/speech",
-             "type":"POST",
-             "contenttype":"application/json"
-          },
-          "body":{
-             "speech":[
-                {
-                   "words":"Can you say that again please?",
-                   "voice":"Daniel"
-                }
-             ]
-          }
-       },
-       "pardonhuh":{
-          "type":"request",
-          "data":{
-             "url":"http://192.168.1.106:9105/api/speech",
-             "type":"POST",
-             "contenttype":"application/json"
-          },
-          "body":{
-             "speech":[
-                {
-                   "words":"Huh? What did you say?",
-                   "voice":"Daniel"
-                }
-             ]
-          }
-       },
-       "pardonrepeat":{
-          "type":"request",
-          "data":{
-             "url":"http://192.168.1.106:9105/api/speech",
-             "type":"POST",
-             "contenttype":"application/json"
-          },
-          "body":{
-             "speech":[
-                {
-                   "words":"Please repeat yourself, I didn't catch that",
-                   "voice":"Daniel"
-                }
-             ]
-          }
-       },
-       "breakup1video":{
-           "type":"request",
-           "data":{
-              "url":"http://127.0.0.1:9102/api/media/play",
-              "type":"GET",
-              "contenttype":"application/json"  
-           },
-           "query":{
-              "media":"tbu-pos-scifi-insta.mp4",
-              "delay":200
-           }
+            ]
+        }
+    },
+    "pardonexcuse":{
+        "type":"request",
+        "data":{
+            "url":"http://[speech]:9105/api/speech",
+            "type":"POST",
+            "contenttype":"application/json"
         },
-        "countdown":{
-           "type":"request",
-           "data":{
-              "url":"http://127.0.0.1:9102/api/media/play",
-              "type":"GET",
-              "contenttype":"application/json"  
-           },
-           "query":{
-              "media":"countdown.mp4",
-              "delay":0
-           }
+        "body":{
+            "speech":[
+                {
+                    "words":"Excuse me?",
+                    "voice":"Daniel"
+                }
+            ]
+        }
+    },
+    "pardonunderstand":{
+        "type":"request",
+        "data":{
+            "url":"http://[speech]:9105/api/speech",
+            "type":"POST",
+            "contenttype":"application/json"
         },
-        "sfx":{
-           "type":"request",
-           "data":{
-              "url":"http://127.0.0.1:9102/api/media/play",
-              "type":"GET",
-              "contenttype":"application/json"
-           },
-           "query":{
-              "media":"TV.mp4",
-              "delay":50
-           }
+        "body":{
+            "speech":[
+                {
+                    "words":"I didn't understand that, please say it again?",
+                    "voice":"Daniel"
+                }
+            ]
+        }
+    },
+    "pardondeaf":{
+        "type":"request",
+        "data":{
+            "url":"http://[speech]:9105/api/speech",
+            "type":"POST",
+            "contenttype":"application/json"
         },
-       "breakup1audio":{
-           "type":"request",
-           "data":{
-              "url":"http://192.168.1.106:9106/api/media",
-              "type":"POST",
-              "contenttype":"application/json"
-           },
-           "body":{
-              "media":"tbu-pos-scifi-insta.mp4",
-              "nowait":true
-           }
+        "body":{
+            "speech":[
+                {
+                    "words":"I might be a bit deaf - what did you say?",
+                    "voice":"Daniel"
+                }
+            ]
+        }
+    },
+    "pardonsay":{
+        "type":"request",
+        "data":{
+            "url":"http://[speech]:9105/api/speech",
+            "type":"POST",
+            "contenttype":"application/json"
         },
-        "music": {
-           "type":"request",
-           "data":{
-              "url":"http://192.168.1.106:9106/api/media",
-              "type":"POST",
-              "contenttype":"application/json"
-           },
-           "body":{
-              "media":"foreboding.mp3",
-              "nowait":true
-           }
+        "body":{
+            "speech":[
+                {
+                    "words":"Can you say that again please?",
+                    "voice":"Daniel"
+                }
+            ]
+        }
+    },
+    "pardonhuh":{
+        "type":"request",
+        "data":{
+            "url":"http://[speech]:9105/api/speech",
+            "type":"POST",
+            "contenttype":"application/json"
         },
-        "homescreen" : {
-           "type":"request",
-           "data":{
-              "url":"http://127.0.0.1:9102/api/home",
-              "type":"GET",
-              "contenttype":"application/json"
-           }
+        "body":{
+            "speech":[
+                {
+                    "words":"Huh? What did you say?",
+                    "voice":"Daniel"
+                }
+            ]
+        }
+    },
+    "pardonrepeat":{
+        "type":"request",
+        "data":{
+            "url":"http://[speech]:9105/api/speech",
+            "type":"POST",
+            "contenttype":"application/json"
         },
-        "dysonscreen" : {
-           "type":"request",
-           "data":{
-              "url":"http://127.0.0.1:9102/api/air",
-              "type":"GET",
-              "contenttype":"application/json"
-           }
+        "body":{
+            "speech":[
+                {
+                    "words":"Please repeat yourself, I didn't catch that",
+                    "voice":"Daniel"
+                }
+            ]
+        }
+    },
+    "breakup1video":{
+        "type":"request",
+        "data":{
+        "url":"http://127.0.0.1:9102/api/media/play",
+        "type":"GET",
+        "contenttype":"application/json"  
         },
-        "camerascreen" : {
-           "type":"request",
-           "data":{
-              "url":"http://127.0.0.1:9102/api/camera",
-              "type":"GET",
-              "contenttype":"application/json"
-           }
+        "query":{
+        "media":"tbu-pos-scifi-insta.mp4",
+        "delay":200
+        }
+    },
+    "countdown":{
+        "type":"request",
+        "data":{
+        "url":"http://127.0.0.1:9102/api/media/play",
+        "type":"GET",
+        "contenttype":"application/json"  
         },
-        "mediascreen":{
-           "type":"request",
-           "data":{
-              "url":"http://127.0.0.1:9102/api/media",
-              "type":"GET",
-              "contenttype":"application/json"
-           }
-       },
-       "immersive1":{
-           "type":"request",
-           "data":{
-              "url":"http://192.168.1.204:9092/ui/api/light_script",
-              "type":"GET",
-              "contenttype":"application/json"
-           },
-           "query":{
-              "script_id":"ID101"
-           }
-       },
-       "immersive2":{
-           "type":"request",
-           "data":{
-              "url":"http://192.168.1.204:9092/ui/api/light_script",
-              "type":"GET",
-              "contenttype":"application/json"
-           },
-           "query":{
-              "script_id":"ID102"
-           }
-       },
-       "immersive3":{
-           "type":"request",
-           "data":{
-              "url":"http://192.168.1.204:9092/ui/api/light_script",
-              "type":"GET",
-              "contenttype":"application/json"
-           },
-           "query":{
-              "script_id":"ID106"
-           }
-       },
-      "immersive4":{
-           "type":"request",
-           "data":{
-              "url":"http://192.168.1.204:9092/ui/api/light_script",
-              "type":"GET",
-              "contenttype":"application/json"
-           },
-           "query":{
-              "script_id":"ID106"
-           }
-      }, 
-      "immersive5":{
-           "type":"request",
-           "data":{
-              "url":"http://192.168.1.204:9092/ui/api/light_script",
-              "type":"GET",
-              "contenttype":"application/json"
-           },
-           "query":{
-              "script_id":"ID016"
-           }
-      },
-      "immersive6":{
-           "type":"request",
-           "data":{
-              "url":"http://192.168.1.204:9092/ui/api/light_script",
-              "type":"GET",
-              "contenttype":"application/json"
-           },
-           "query":{
-              "script_id":"ID021"
-           }
-      },
-      "immersive7":{
-           "type":"request",
-           "data":{
-              "url":"http://192.168.1.204:9092/ui/api/light_script",
-              "type":"GET",
-              "contenttype":"application/json"
-           },
-           "query":{
-              "script_id":"ID095"
-           }
-      },
-      "immersive8":{
-           "type":"request",
-           "data":{
-              "url":"http://192.168.1.204:9092/ui/api/light_script",
-              "type":"GET",
-              "contenttype":"application/json"
-           },
-           "query":{
-              "script_id":"ID028"
-           }
-      },
-      "shutdownprinterpi":{
-           "type":"request",
-           "data":{
-              "url":"http://192.168.1.192:8080/shutdown",
-              "type":"GET",
-              "contenttype":"application/json"
-           },
-           "query":{
-              "script_id":"ID028"
-           }
-      },
-      "rebootprinterpi":{
-           "type":"request",
-           "data":{
-              "url":"http://192.168.1.192:8080/reboot",
-              "type":"GET",
-              "contenttype":"application/json"
-           },
-           "query":{
-              "script_id":"ID028"
-           }
-      }
-      
+        "query":{
+        "media":"countdown.mp4",
+        "delay":0
+        }
+    },
+    "sfx":{
+        "type":"request",
+        "data":{
+        "url":"http://127.0.0.1:9102/api/media/play",
+        "type":"GET",
+        "contenttype":"application/json"
+        },
+        "query":{
+        "media":"TV.mp4",
+        "delay":50
+        }
+    },
+    "breakup1audio":{
+        "type":"request",
+        "data":{
+        "url":"http://[speech]:9106/api/media",
+        "type":"POST",
+        "contenttype":"application/json"
+        },
+        "body":{
+        "media":"tbu-pos-scifi-insta.mp4",
+        "nowait":true
+        }
+    },
+    "music": {
+        "type":"request",
+        "data":{
+        "url":"http://[speech]:9106/api/media",
+        "type":"POST",
+        "contenttype":"application/json"
+        },
+        "body":{
+        "media":"foreboding.mp3",
+        "nowait":true
+        }
+    },
+    "homescreen" : {
+        "type":"request",
+        "data":{
+        "url":"http://127.0.0.1:9102/api/home",
+        "type":"GET",
+        "contenttype":"application/json"
+        }
+    },
+    "dysonscreen" : {
+        "type":"request",
+        "data":{
+        "url":"http://127.0.0.1:9102/api/air",
+        "type":"GET",
+        "contenttype":"application/json"
+        }
+    },
+    "camerascreen" : {
+        "type":"request",
+        "data":{
+        "url":"http://127.0.0.1:9102/api/camera",
+        "type":"GET",
+        "contenttype":"application/json"
+        }
+    },
+    "mediascreen":{
+        "type":"request",
+        "data":{
+        "url":"http://127.0.0.1:9102/api/media",
+        "type":"GET",
+        "contenttype":"application/json"
+        }
+    },
+    "immersive1":{
+        "type":"request",
+        "data":{
+            "url":"http://[lenovo]:9092/ui/api/light_script",
+            "type":"GET",
+            "contenttype":"application/json",
+            "timeout": 500
+        },
+        "query":{
+        "script_id":"ID101"
+        }
+    },
+    "immersive2":{
+        "type":"request",
+        "data":{
+            "url":"http://[lenovo]:9092/ui/api/light_script",
+            "type":"GET",
+            "contenttype":"application/json",
+            "timeout": 500
+        },
+        "query":{
+        "script_id":"ID102"
+        }
+    },
+    "immersive3":{
+        "type":"request",
+        "data":{
+            "url":"http://[lenovo]:9092/ui/api/light_script",
+            "type":"GET",
+            "contenttype":"application/json",
+            "timeout": 500
+        },
+        "query":{
+        "script_id":"ID106"
+        }
+    },
+"immersive4":{
+        "type":"request",
+        "data":{
+        "url":"http://[lenovo]:9092/ui/api/light_script",
+        "type":"GET",
+        "contenttype":"application/json"
+        },
+        "query":{
+        "script_id":"ID106"
+        }
+}, 
+"immersive5":{
+        "type":"request",
+        "data":{
+        "url":"http://[lenovo]:9092/ui/api/light_script",
+        "type":"GET",
+        "contenttype":"application/json",
+        "timeout": 500
+        },
+        "query":{
+        "script_id":"ID016"
+        }
+},
+"immersive6":{
+        "type":"request",
+        "data":{
+        "url":"http://[lenovo]:9092/ui/api/light_script",
+        "type":"GET",
+        "contenttype":"application/json",
+        "timeout": 500
+        },
+        "query":{
+        "script_id":"ID021"
+        }
+},
+"immersive7":{
+        "type":"request",
+        "data":{
+        "url":"http://[lenovo]:9092/ui/api/light_script",
+        "type":"GET",
+        "contenttype":"application/json",
+        "timeout": 500
+        },
+        "query":{
+        "script_id":"ID095"
+        }
+},
+"immersive8":{
+        "type":"request",
+        "data":{
+        "url":"http://[lenovo]:9092/ui/api/light_script",
+        "type":"GET",
+        "contenttype":"application/json",
+        "timeout": 500
+        },
+        "query":{
+        "script_id":"ID028"
+        }
+},
+"shutdownprinterpi":{
+        "type":"request",
+        "data":{
+        "url":"http://[receipt]:8080/shutdown",
+        "type":"GET",
+        "contenttype":"application/json",
+        "timeout": 500
+        },
+        "query":{
+        "script_id":"ID028"
+        }
+},
+"rebootprinterpi":{
+        "type":"request",
+        "data":{
+        "url":"http://[receipt]:8080/reboot",
+        "type":"GET",
+        "contenttype":"application/json",
+        "timeout": 500
+        },
+        "query":{
+        "script_id":"ID028"
+        }
 }
+        
+  }
+  

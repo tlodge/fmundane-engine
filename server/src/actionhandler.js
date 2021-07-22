@@ -1,5 +1,5 @@
 import superagent from 'superagent';
-
+import ips from './actions/IPs.json';
 const request = (r)=>{
 
     return new Promise((resolve, reject)=>{
@@ -29,10 +29,12 @@ const request = (r)=>{
 export const handlespeech = async (speech)=>{
     if (!speech || speech.length <= 0)
         return;
-        
+    console.log("ips us", ips);
+    console.log("speech is", ips["speech"]);
+
     await request({
          "data": {
-            "url": "http://192.168.1.106:9105/api/speech",
+            "url": `http://${ips["speech"] || "127.0.0.1"}:9105/api/speech`,
             "type": "POST",
             "contenttype": "application/json"
           },

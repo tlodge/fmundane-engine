@@ -1,8 +1,22 @@
 import {subscribe, unsubscribe} from './listener';
 import {send} from './ws';
 
-import actions from './actions/actions.json';
+import actiontmpl from './actions/actions.json';
+import ips from './actions/IPs.json';
 import {handle, handlespeech} from './actionhandler';
+
+function escapeRegExp(string) {
+    return string.replace(/[.*+\-?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+}
+
+function replaceAll(str, find, replace) {
+    return str.replace(new RegExp(escapeRegExp(find), 'g'), replace);
+}
+
+const actions = JSON.parse(Object.keys(ips).reduce((acc, key)=>{
+    return replaceAll(acc, `[${key}]`,ips[key]);    
+   
+},JSON.stringify(actiontmpl)));
 
 const _fetchrule = async (rule)=>{
     let {evaluate} = await import(`./rules/${rule}.js`);
@@ -49,14 +63,16 @@ const _executeactions = async (alist, value="")=>{
 
    
   //  }
+    console.log("doing send!");
     await Promise.all(parallel.map(async(p)=>{
         await callserially(p.list,p.cb);
     }));
+    console.log("Success!!");
   
 }
 
 const _executespeech = async (lines, value)=>{
-
+    console.log("in exceute speech", lines, value);
     if (value && value.trim() != ""){
         const _lines = lines.map(l=>{
             var matches = l.words.match(/\|(.*?)\|/);
@@ -165,20 +181,7 @@ const StateMachine =   (config)=>{
                 
                 console.log("subscribed", id, e.subscription);
                 const msg = JSON.parse(message.toString());
-                const {data, ts} = msg;
-                 
-                //console.log("seem msg wth ts", ts, "and subtime is", subtime);
-
-
-                //if this message was received before we subscribed, discard it!
-                //prevents race condition here - it's possible that the speech on onstart is still being processed by the browser and then sent 
-                //here, and if we've subcribed to the new event, and it is also a speech event then it may receive this speech and act on it..
-                //to get round this we give a little bit of time for this to happen before we subscribe.
-
-                if ( (subtime + 1500) > ts){
-                    console.log("ignoring this subsriprion message!");
-                    return;
-                }
+                const {data, ts} = msg;     
 
                 if (_layer != id){
                     return;
@@ -189,7 +192,14 @@ const StateMachine =   (config)=>{
                 const actionids = e.rules.reduce((acc, item)=>{ 
                     const result = evaluate(item.rule.operator, item.rule.operand, msg.data);
                     if (result){
-                     
+                        //if this message was received before we subscribed, discard it!
+                        //prevents race condition here - it's possible that the speech on onstart is still being processed by the browser and then sent 
+                        //here, and if we've subcribed to the new event, and it is also a speech event then it may receive this speech and act on it..
+                        //to get round this we give a little bit of time for this to happen before we subscribe.
+
+                        if (item.type==="speech" && (subtime + 1500) > ts){
+                            return;
+                        }
                         nexteventid = item.next;
                         triggered = item.id;
                         return [...acc, ...item.actions];
@@ -213,9 +223,9 @@ const StateMachine =   (config)=>{
                           
                            
                             const __startactions =  _actions.map(arr=>(arr||[]).map(a=>actions[a]||{}));
-                            
+                            console.log("PERFORMING ACTIONS...");
                             await Promise.all([_executeactions(__startactions, message.toString()), _executespeech(speech, data)]);
-                        
+                            console.log("DONE PERFORMING ACTIONS...");
                         }
                         send("ready", {layer:config.id, event:{id:nexteventid, type:_e.type}});
                         

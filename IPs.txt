@@ -1,0 +1,12 @@
+caravan speech machine is running on mac            : 192.168.1.106
+hue bridge                                          : 192.168.1.105
+link drivers                                        : 192.168.1.45
+receipt (running directly on Pi - no driver req?)   : 192.168.1.192 (user pi/imm)
+main server                                         : 192.168.1.204
+
+ports:
+
+screen driver   : 9102
+media driver    :  9106
+say driver      : 9105
+main server     : 3001

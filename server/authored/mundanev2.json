@@ -1556,14 +1556,16 @@
                             ],
                             [
                                 {"action":"print", "delay":2000, "params": {"body":{"text":"mood in room is positive"}}},
-                                {"action":"print", "delay":6000, "params": {"body":{"text":"Querying Databox for genre customisation algorithm: [WARM] version selected"}}},
+                                {"action":"print", "delay":6000, "params": {"body":{"text":"Querying Databox for genre"}}},
+                                {"action":"print", "delay":0, "params": {"body":{"text":"customisation algorithm: [WARM]"}}},
+                                {"action":"print", "delay":0, "params": {"body":{"text":"version selected"}}},
                                 {"action":"print", "delay":166000, "params": {"body":{"text":"print_low_attentiveness"}}},
                                 {"action":"print", "delay":98000, "params": {"body":{"text":"Audience mood is LOW: showing positive ending"}}},
                                 {"action":"print", "delay":1000, "params": {"body":{"text":"Record of mood analysis logged to Databox vault"}}}
                             ],
                             [
-                                {"action":"message", "delay":2000, "params": {"query":{"message":"mood in room is positive"}}},
-                                {"action":"message", "delay":6000, "params": {"query":{"message":"Querying Databox for genre customisation algorithm: [WARM] version selected"}}},
+                                {"action":"message", "delay":2000, "params": {"query":{"message":"Baseline mood analysis complete, current mood quantified as [POSITIVE]"}}},
+                                {"action":"message", "delay":6000, "params": {"query":{"message":"Choosing genre customisations. [WARM] colour grade selected.."}}},
                                 {"action":"message", "delay":164000, "params": {"query":{"message":"Low attentiveness detected, scheduling sci-fi detour to enliven audience"}}},
                                 {"action":"message", "delay":29000, "params": {"query":{"message":"New attentiveness level ACCEPTABLE"}}},
                                 {"action":"message", "delay":69000, "params": {"query":{"message":"Audience mood is LOW: showing positive ending"}}}  
@@ -1593,14 +1595,16 @@
                             ],
                             [
                                 {"action":"print", "delay":2000, "params": {"body":{"text":"mood in room is positive"}}},
-                                {"action":"print", "delay":6000, "params": {"body":{"text":"Querying Databox for genre customisation algorithm: [COLD] version selected"}}},
+                                {"action":"print", "delay":6000, "params": {"body":{"text":"Querying Databox for genre"}}},
+                                {"action":"print", "delay":0, "params": {"body":{"text":"customisation algorithm: [COLD]"}}},
+                                {"action":"print", "delay":0, "params": {"body":{"text":"version selected"}}},
                                 {"action":"print", "delay":166000, "params": {"body":{"text":"print_low_attentiveness"}}},
                                 {"action":"print", "delay":98000, "params": {"body":{"text":"Audience mood is LOW: showing positive ending"}}},
                                 {"action":"print", "delay":1000, "params": {"body":{"text":"Record of mood analysis logged to Databox vault"}}}
                             ],
                             [
-                                {"action":"message", "delay":2000, "params": {"query":{"message":"mood in room is positive"}}},
-                                {"action":"message", "delay":6000, "params": {"query":{"message":"Querying Databox for genre customisation algorithm: [COLD] version selected"}}},
+                                {"action":"message", "delay":2000, "params": {"query":{"message":"Baseline mood analysis complete, current mood quantified as [POSITIVE]"}}},
+                                {"action":"message", "delay":6000, "params": {"query":{"message":"Choosing genre customisations. [COLD] colour grade selected.."}}},
                                 {"action":"message", "delay":164000, "params": {"query":{"message":"Low attentiveness detected, scheduling sci-fi detour to enliven audience"}}},
                                 {"action":"message", "delay":29000, "params": {"query":{"message":"New attentiveness level ACCEPTABLE"}}},
                                 {"action":"message", "delay":69000, "params": {"query":{"message":"Audience mood is LOW: showing positive ending"}}}  
@@ -1626,14 +1630,16 @@
                             ],
                             [
                                 {"action":"print", "delay":2000, "params": {"body":{"text":"mood in room is low"}}},
-                                {"action":"print", "delay":6000, "params": {"body":{"text":"Querying Databox for genre customisation algorithm: [WARM] version selected"}}},
+                                {"action":"print", "delay":6000, "params": {"body":{"text":"Querying Databox for genre"}}},
+                                {"action":"print", "delay":0, "params": {"body":{"text":"customisation algorithm: [WARM]"}}},
+                                {"action":"print", "delay":0, "params": {"body":{"text":"version selected"}}},
                                 {"action":"print", "delay":166000, "params": {"body":{"text":"print_low_attentiveness"}}},
                                 {"action":"print", "delay":98000, "params": {"body":{"text":"Audience mood is HIGH: allowing melancholy outcome"}}},
                                 {"action":"print", "delay":1000, "params": {"body":{"text":"Record of mood analysis logged to Databox vault"}}}
                             ],
                             [
-                                {"action":"message", "delay":2000, "params": {"query":{"message":"mood in room is low"}}},
-                                {"action":"message", "delay":6000, "params": {"query":{"message":"Querying Databox for genre customisation algorithm: [WARM] version selected"}}},
+                                {"action":"message", "delay":2000, "params": {"query":{"message":"Baseline mood analysis complete, current mood quantified as [LOW]"}}},
+                                {"action":"message", "delay":6000, "params": {"query":{"message":"Choosing genre customisations. [WARM] colour grade selected.."}}},
                                 {"action":"message", "delay":164000, "params": {"query":{"message":"Low attentiveness detected, scheduling sci-fi detour to enliven audience"}}},
                                 {"action":"message", "delay":29000, "params": {"query":{"message":"New attentiveness level ACCEPTABLE"}}},
                                 {"action":"message", "delay":69000, "params": {"query":{"message":"Audience mood is HIGH: allowing melancholy outcome"}}}  
@@ -1664,14 +1670,16 @@
                             ],
                             [
                                 {"action":"print", "delay":2000, "params": {"body":{"text":"mood in room is low"}}},
-                                {"action":"print", "delay":6000, "params": {"body":{"text":"Querying Databox for genre customisation algorithm: [COLD] version selected"}}},
+                                {"action":"print", "delay":6000, "params": {"body":{"text":"Querying Databox for genre"}}},
+                                {"action":"print", "delay":0, "params": {"body":{"text":"customisation algorithm: [COLD]"}}},
+                                {"action":"print", "delay":0, "params": {"body":{"text":"version selected"}}},
                                 {"action":"print", "delay":164000, "params": {"body":{"text":"print_low_attentiveness"}}},
                                 {"action":"print", "delay":98000, "params": {"body":{"text":"Audience mood is HIGH: allowing melancholy outcome"}}},
                                 {"action":"print", "delay":1000, "params": {"body":{"text":"Record of mood analysis logged to Databox vault"}}}
                             ],
                             [
-                                {"action":"message", "delay":2000, "params": {"query":{"message":"mood in room is low"}}},
-                                {"action":"message", "delay":6000, "params": {"query":{"message":"Querying Databox for genre customisation algorithm: [COLD] version selected"}}},
+                                {"action":"message", "delay":2000, "params": {"query":{"message":"Baseline mood analysis complete, current mood quantified as [LOW]"}}},
+                                {"action":"message", "delay":6000, "params": {"query":{"message":"Choosing genre customisations. [COLD] colour grade selected.."}}},
                                 {"action":"message", "delay":164000, "params": {"query":{"message":"Low attentiveness detected, scheduling sci-fi detour to enliven audience"}}},
                                 {"action":"message", "delay":29000, "params": {"query":{"message":"New attentiveness level ACCEPTABLE"}}},
                                 {"action":"message", "delay":69000, "params": {"query":{"message":"Audience mood is HIGH: allowing melancholy outcome"}}}  
@@ -1701,17 +1709,22 @@
                                 {"action":"breakupvideo", "params": {"query":{"media":"tbu-pos-noscifi-warm.mp4","delay":200}}}   
                             ],
                             [
-                                {"action":"print", "delay":2000, "params": {"body":{"text":"mood in room is low"}}},
-                                {"action":"print", "delay":6000, "params": {"body":{"text":"Querying Databox for genre customisation algorithm: [WARM] version selected"}}},
+                                {"action":"print", "delay":2000, "params": {"body":{"text":"mood in room is positive"}}},
+                                {"action":"print", "delay":6000, "params": {"body":{"text":"Querying Databox for genre"}}},
+                                {"action":"print", "delay":0, "params": {"body":{"text":"customisation algorithm: [WARM]"}}},
+                                {"action":"print", "delay":0, "params": {"body":{"text":"version selected"}}},
                                 {"action":"print", "delay":164000, "params": {"body":{"text":"Skipping SCI_FI detour..."}}},
                                 {"action":"print", "delay":81000, "params": {"body":{"text":"Audience mood is LOW: showing positive outcome"}}},
                                 {"action":"print", "delay":4000, "params": {"body":{"text":"Record of mood analysis logged to Databox vault"}}}
                             ],
                             [
-                                {"action":"message", "delay":2000, "params": {"query":{"message":"mood in room is low"}}},
-                                {"action":"message", "delay":6000, "params": {"query":{"message":"Querying Databox for genre customisation algorithm: [WARM] version selected"}}},
+                                {"action":"message", "delay":2000, "params": {"query":{"message":"Baseline mood analysis complete, current mood quantified as [POSITIVE]"}}},
+                                {"action":"message", "delay":6000, "params": {"query":{"message":"Choosing genre customisations. [WARM] colour grade selected.."}}},
                                 {"action":"message", "delay":164000, "params": {"query":{"message":"Skipping SCI_FI detour..."}}},
                                 {"action":"message", "delay":81000, "params": {"query":{"message":"Audience mood is LOW: showing positive outcome"}}}  
+                            ],
+                            [
+                                {"action":"media", "delay": 176000, "params": {"body":{"media":"tbu-clock-middle-music.mp3","nowait":true}}}
                             ],
                             [
                                 {"action":"fancool", "delay":164000},
@@ -1738,17 +1751,22 @@
                                 
                             ],
                             [
-                                {"action":"print", "delay":2000, "params": {"body":{"text":"mood in room is low"}}},
-                                {"action":"print", "delay":6000, "params": {"body":{"text":"Querying Databox for genre customisation algorithm: [COLD] version selected"}}},
+                                {"action":"print", "delay":2000, "params": {"body":{"text":"mood in room is positive"}}},
+                                {"action":"print", "delay":6000, "params": {"body":{"text":"Querying Databox for genre"}}},
+                                {"action":"print", "delay":0, "params": {"body":{"text":"customisation algorithm: [COLD]"}}},
+                                {"action":"print", "delay":0, "params": {"body":{"text":"version selected"}}},
                                 {"action":"print", "delay":164000, "params": {"body":{"text":"Skipping SCI_FI detour..."}}},
                                 {"action":"print", "delay":81000, "params": {"body":{"text":"Audience mood is LOW: showing positive outcome"}}},
                                 {"action":"print", "delay":4000, "params": {"body":{"text":"Record of mood analysis logged to Databox vault"}}}
                             ],
                             [
-                                {"action":"message", "delay":2000, "params": {"query":{"message":"mood in room is low"}}},
-                                {"action":"message", "delay":6000, "params": {"query":{"message":"Querying Databox for genre customisation algorithm: [COLD] version selected"}}},
+                                {"action":"message", "delay":2000, "params": {"query":{"message":"Baseline mood analysis complete, current mood quantified as [LOW]"}}},
+                                {"action":"message", "delay":6000, "params": {"query":{"message":"Choosing genre customisations. [COLD] colour grade selected.."}}},
                                 {"action":"message", "delay":164000, "params": {"query":{"message":"Skipping SCI_FI detour..."}}},
                                 {"action":"message", "delay":81000, "params": {"query":{"message":"Audience mood is LOW: showing positive outcome"}}}  
+                            ],
+                            [
+                                {"action":"media", "delay": 176000, "params": {"body":{"media":"tbu-clock-middle-music.mp3","nowait":true}}}
                             ],
                             [
                                 {"action":"fancool", "delay":164000},
@@ -1775,14 +1793,16 @@
                             ],
                             [
                                 {"action":"print", "delay":2000, "params": {"body":{"text":"mood in room is low"}}},
-                                {"action":"print", "delay":6000, "params": {"body":{"text":"Querying Databox for genre customisation algorithm: [WARM] version selected"}}},
+                                {"action":"print", "delay":6000, "params": {"body":{"text":"Querying Databox for genre"}}},
+                                {"action":"print", "delay":0, "params": {"body":{"text":"customisation algorithm: [WARM]"}}},
+                                {"action":"print", "delay":0, "params": {"body":{"text":"version selected"}}},
                                 {"action":"print", "delay":164000, "params": {"body":{"text":"Skipping SCI_FI detour..."}}},
                                 {"action":"print", "delay":81000, "params": {"body":{"text":"Audience mood is HIGH: allowing melancholy outcome"}}},
                                 {"action":"print", "delay":4000, "params": {"body":{"text":"Record of mood analysis logged to Databox vault"}}}
                             ],
                             [
-                                {"action":"message", "delay":2000, "params": {"query":{"message":"mood in room is low"}}},
-                                {"action":"message", "delay":6000, "params": {"query":{"message":"Querying Databox for genre customisation algorithm: [WARM] version selected"}}},
+                                {"action":"message", "delay":2000, "params": {"query":{"message":"Baseline mood analysis complete, current mood quantified as [LOW]"}}},
+                                {"action":"message", "delay":6000, "params": {"query":{"message":"Choosing genre customisations. [WARM] colour grade selected.."}}},
                                 {"action":"message", "delay":164000, "params": {"query":{"message":"Skipping SCI_FI detour..."}}},
                                 {"action":"message", "delay":81000, "params": {"query":{"message":"Audience mood is HIGH: allowing melancholy outcome"}}}  
                             ],
@@ -1811,14 +1831,16 @@
                             ],
                             [
                                 {"action":"print", "delay":2000, "params": {"body":{"text":"mood in room is low"}}},
-                                {"action":"print", "delay":6000, "params": {"body":{"text":"Querying Databox for genre customisation algorithm: [COLD] version selected"}}},
+                                {"action":"print", "delay":6000, "params": {"body":{"text":"Querying Databox for genre"}}},
+                                {"action":"print", "delay":0, "params": {"body":{"text":"customisation algorithm: [COLD]"}}},
+                                {"action":"print", "delay":0, "params": {"body":{"text":"version selected"}}},
                                 {"action":"print", "delay":164000, "params": {"body":{"text":"Skipping SCI_FI detour..."}}},
                                 {"action":"print", "delay":81000, "params": {"body":{"text":"Audience mood is HIGH: allowing melancholy outcome"}}},
                                 {"action":"print", "delay":4000, "params": {"body":{"text":"Record of mood analysis logged to Databox vault"}}}
                             ],
                             [
-                                {"action":"message", "delay":2000, "params": {"query":{"message":"mood in room is low"}}},
-                                {"action":"message", "delay":6000, "params": {"query":{"message":"Querying Databox for genre customisation algorithm: [COLD] version selected"}}},
+                                {"action":"message", "delay":2000, "params": {"query":{"message":"Baseline mood analysis complete, current mood quantified as [LOW]"}}},
+                                {"action":"message", "delay":6000, "params": {"query":{"message":"Choosing genre customisations. [COLD] colour grade selected.."}}},
                                 {"action":"message", "delay":164000, "params": {"query":{"message":"Skipping SCI_FI detour..."}}},
                                 {"action":"message", "delay":81000, "params": {"query":{"message":"Audience mood is HIGH: allowing melancholy outcome"}}}  
                             ],

@@ -463,6 +463,16 @@
         "body":{}
     },
 
+    "media":{
+        "type":"request",
+        "data":{
+           "url":"http://[speech]:9106/api/media",
+           "type":"POST",
+           "contenttype":"application/json"
+        },
+        "body":{}
+    },
+
     "countdown":{
        "type":"request",
        "data":{

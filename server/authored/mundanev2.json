@@ -33,7 +33,7 @@
                         },
                         "actions": [
                             [
-                                "pardonpardon"
+                                {"action":"pardonpardon"}
                             ]
                         ],
                         "next": "pardons"
@@ -45,7 +45,7 @@
                         },
                         "actions": [
                             [
-                                "pardonexcuse"
+                                {"action": "pardonexcuse"}
                             ]
                         ],
                         "next": "pardons"
@@ -57,7 +57,7 @@
                         },
                         "actions": [
                             [
-                                "pardonunderstand"
+                                {"action":"pardonunderstand"}
                             ]
                         ],
                         "next": "pardons"
@@ -69,7 +69,7 @@
                         },
                         "actions": [
                             [
-                                "pardondeaf"
+                                {"action":"pardondeaf"}
                             ]
                         ],
                         "next": "pardons"
@@ -81,7 +81,7 @@
                         },
                         "actions": [
                             [
-                                "pardonsay"
+                                {"action": "pardonsay"}
                             ]
                         ],
                         "next": "pardons"
@@ -93,7 +93,7 @@
                         },
                         "actions": [
                             [
-                                "pardonhuh"
+                                {"action":"pardonhuh"}
                             ]
                         ],
                         "next": "pardons"
@@ -105,7 +105,7 @@
                         },
                         "actions": [
                             [
-                                "pardonrepeat"
+                                {"action": "pardonrepeat"}
                             ]
                         ],
                         "next": "pardons"
@@ -129,7 +129,7 @@
                 "onstart": {
                     "actions": [
                         [
-                            "dysonscreen"
+                            {"action":"dysonscreen"}
                         ]
                     ]
                 },
@@ -146,13 +146,13 @@
                         },
                         "actions": [
                             [
-                                "fancool"
+                                {"action":"fancool"}
                             ],
                             [
-                                "whitelights"
+                                {"action":"whitelights"}
                             ],
                             [
-                                "togglewindows"
+                                {"action":"togglewindows"}
                             ]
                         ],
                         "next": "reseteverything"
@@ -175,9 +175,9 @@
                     ],
                     "actions": [
                         [
-                            "immersive1",
-                            "homescreen",
-                            "fancool"
+                            { "delay":300, "action":"immersive1"},
+                            { "delay":500, "action": "homescreen"},
+                            { "delay":1000, "action" : "fancool"}
                         ]
                     ]
                 },
@@ -255,13 +255,13 @@
                     ],
                     "actions": [
                         [
-                            "mediascreen"
+                            {"delay":0, "action":"mediascreen"}
                         ],
                         [
-                            "countdown"
+                            {"delay":0, "action": "countdown"}
                         ],
                         [
-                            "immersive2"
+                            {"delay":0, "action": "immersive2"}
                         ]
                     ]
                 },
@@ -278,7 +278,7 @@
                         },
                         "actions": [
                             [
-                                "homescreen"
+                               {"action": "homescreen"}
                             ]
                         ],
                         "next": "tookyourtime"
@@ -373,9 +373,9 @@
                     ],
                     "actions": [
                         [
-                            "immersive4",
-                            "immersive5",
-                            "immersive6"
+                            {"delay":200, "action":"immersive4"},
+                            {"delay":200, "action":"immersive5"},
+                            {"delay":200, "action":"immersive6"}
                         ]
                     ]
                 },
@@ -599,7 +599,7 @@
                     ],
                     "actions": [
                         [
-                            "immersive3"
+                            {"delay":200, "action":"immersive3"}
                         ]
                     ]
                 },
@@ -678,7 +678,7 @@
                         },
                         "actions": [
                             [
-                                "camerascreen"
+                                {"action":"camerascreen"}
                             ]
                         ],
                         "next": "watchingyou"
@@ -721,7 +721,7 @@
                     ],
                     "actions": [
                         [
-                            "camerascan"
+                            {"delay":0, "action": "camerascan"}
                         ]
                     ]
                 },
@@ -738,7 +738,7 @@
                         },
                         "actions": [
                             [
-                                "homescreen"
+                                {"action":"homescreen"}
                             ]
                         ],
                         "next": "voices"
@@ -1272,7 +1272,7 @@
                     ],
                     "actions": [
                         [
-                            "togglewindows"
+                            {"delay":0, "action": "togglewindows"}
                         ]
                     ]
                 },
@@ -1309,7 +1309,7 @@
                     ],
                     "actions": [
                         [
-                            "fancoolblast"
+                            {"delay":200, "action":"fancoolblast"}
                         ]
                     ]
                 },
@@ -1346,8 +1346,8 @@
                     ],
                     "actions": [
                         [
-                            "fancool",
-                            "redlights"
+                            {"delay":0, "action": "fancool"},
+                            {"delay":0, "action": "redlights"}
                         ]
                     ]
                 },
@@ -1384,8 +1384,8 @@
                     ],
                     "actions": [
                         [
-                            "mediascreen",
-                            "sfx"
+                            {"delay":0, "action":"mediascreen"},
+                            {"delay":0, "action":"sfx"}
                         ]
                     ]
                 },
@@ -1422,9 +1422,9 @@
                     ],
                     "actions": [
                         [
-                            "printconsent1",
-                            "printconsent2",
-                            "printline"
+                            {"action":"print", "delay":0, "params": {"body":{"text":"I consent to all of my data"}}},
+                            {"action":"print", "delay":2000, "params": {"body":{"text":"being used by Future Mundane Inc."}}},
+                            {"action":"print", "delay":2000, "params": {"body":{"text":"______________________________"}}}
                         ]
                     ]
                 },
@@ -1521,31 +1521,310 @@
                     ],
                     "actions": [
                         [
-                            "togglewindows"
+                            {"delay":0, "action":"togglewindows"}
                         ]
                     ]
                 },
                 "type": "button",
                 "subscription": "/press",
-                "data": [
-                    "play it"
+                "data": [ 
+                    "scifi-pos-warm",
+                    "scifi-pos-cold",
+                    "scifi-neg-warm",
+                    "scifi-neg-cold",
+                    "pos-warm",
+                    "pos-cold",
+                    "neg-warm",
+                    "neg-cold"
                 ],
                 "rules": [
                     {
                         "rule": {
                             "operator": "equals",
-                            "operand": "play it"
+                            "operand": "scifi-pos-warm"
                         },
                         "actions": [
                             [
-                                "immersive4"
+                                {"action":"immersive4"}
                             ],
                             [
-                                "mediascreen"
+                                {"action":"mediascreen"}
                             ],
                             [
-                                "breakup1audio",
-                                "breakup1video"
+                                {"action":"breakupvideo", "params": {"query":{"media":"tbu-pos-scifi-warm.mp4","delay":0}}}, 
+                                {"action":"breakupaudio", "params": {"body":{"media":"tbu-pos-scifi-warm.mp4","nowait":true, "delay":200}}}
+                            ],
+                            [
+                                {"action":"print", "delay":2000, "params": {"body":{"text":"mood in room is positive"}}},
+                                {"action":"print", "delay":6000, "params": {"body":{"text":"Querying Databox for genre customisation algorithm: [WARM] version selected"}}},
+                                {"action":"print", "delay":166000, "params": {"body":{"text":"print_low_attentiveness"}}},
+                                {"action":"print", "delay":98000, "params": {"body":{"text":"Audience mood is LOW: showing positive ending"}}},
+                                {"action":"print", "delay":1000, "params": {"body":{"text":"Record of mood analysis logged to Databox vault"}}}
+                            ],
+                            [
+                                {"action":"message", "delay":2000, "params": {"query":{"message":"mood in room is positive"}}},
+                                {"action":"message", "delay":6000, "params": {"query":{"message":"Querying Databox for genre customisation algorithm: [WARM] version selected"}}},
+                                {"action":"message", "delay":164000, "params": {"query":{"message":"Low attentiveness detected, scheduling sci-fi detour to enliven audience"}}},
+                                {"action":"message", "delay":29000, "params": {"query":{"message":"New attentiveness level ACCEPTABLE"}}},
+                                {"action":"message", "delay":69000, "params": {"query":{"message":"Audience mood is LOW: showing positive ending"}}}  
+                            ],
+                            [
+                                {"action":"fancool", "delay":166000},
+                                {"action":"fanoff", "delay":5000}
+                            ]
+                        ],
+                        "next": "film"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "scifi-pos-cold"
+                        },
+                        "actions": [
+                            [
+                                {"action":"immersive4"}
+                            ],
+                            [
+                                {"action":"mediascreen"}
+                            ],
+                            [
+                                {"action":"breakupvideo", "params": {"query":{"media":"tbu-pos-scifi-cold.mp4","delay":0}}}, 
+                                {"action":"breakupaudio", "params": {"body":{"media":"tbu-pos-scifi-cold.mp4","nowait":true, "delay":200}}}
+                            ],
+                            [
+                                {"action":"print", "delay":2000, "params": {"body":{"text":"mood in room is positive"}}},
+                                {"action":"print", "delay":6000, "params": {"body":{"text":"Querying Databox for genre customisation algorithm: [COLD] version selected"}}},
+                                {"action":"print", "delay":166000, "params": {"body":{"text":"print_low_attentiveness"}}},
+                                {"action":"print", "delay":98000, "params": {"body":{"text":"Audience mood is LOW: showing positive ending"}}},
+                                {"action":"print", "delay":1000, "params": {"body":{"text":"Record of mood analysis logged to Databox vault"}}}
+                            ],
+                            [
+                                {"action":"message", "delay":2000, "params": {"query":{"message":"mood in room is positive"}}},
+                                {"action":"message", "delay":6000, "params": {"query":{"message":"Querying Databox for genre customisation algorithm: [COLD] version selected"}}},
+                                {"action":"message", "delay":164000, "params": {"query":{"message":"Low attentiveness detected, scheduling sci-fi detour to enliven audience"}}},
+                                {"action":"message", "delay":29000, "params": {"query":{"message":"New attentiveness level ACCEPTABLE"}}},
+                                {"action":"message", "delay":69000, "params": {"query":{"message":"Audience mood is LOW: showing positive ending"}}}  
+                            ],
+                            [
+                                {"action":"fancool", "delay":166000},
+                                {"action":"fanoff", "delay":5000}
+                            ]
+                        ],
+                        "next": "film"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "scifi-neg-warm"
+                        },
+                        "actions": [
+                            [
+                                {"action":"immersive4"}
+                            ],
+                            [
+                                {"action":"mediascreen"}
+                            ],
+                            [
+                                {"action":"print", "delay":2000, "params": {"body":{"text":"mood in room is low"}}},
+                                {"action":"print", "delay":6000, "params": {"body":{"text":"Querying Databox for genre customisation algorithm: [WARM] version selected"}}},
+                                {"action":"print", "delay":166000, "params": {"body":{"text":"print_low_attentiveness"}}},
+                                {"action":"print", "delay":98000, "params": {"body":{"text":"Audience mood is HIGH: allowing melancholy outcome"}}},
+                                {"action":"print", "delay":1000, "params": {"body":{"text":"Record of mood analysis logged to Databox vault"}}}
+                            ],
+                            [
+                                {"action":"message", "delay":2000, "params": {"query":{"message":"mood in room is low"}}},
+                                {"action":"message", "delay":6000, "params": {"query":{"message":"Querying Databox for genre customisation algorithm: [WARM] version selected"}}},
+                                {"action":"message", "delay":164000, "params": {"query":{"message":"Low attentiveness detected, scheduling sci-fi detour to enliven audience"}}},
+                                {"action":"message", "delay":29000, "params": {"query":{"message":"New attentiveness level ACCEPTABLE"}}},
+                                {"action":"message", "delay":69000, "params": {"query":{"message":"Audience mood is HIGH: allowing melancholy outcome"}}}  
+                            ],
+                            [
+                                {"action":"fancool", "delay":166000},
+                                {"action":"fanoff", "delay":5000}
+                            ]
+                        ],
+                        "next": "film"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "scifi-neg-cold"
+                        },
+                        "actions": [
+                            [
+                                {"action":"immersive4"}
+                            ],
+                            [
+                                {"action":"mediascreen"}
+                            ],
+                            [
+                                {"action":"breakupaudio", "params": {"body":{"media":"tbu-neg-scifi-cold.mp4","nowait":true}}},
+                                {"action":"breakupvideo", "params": {"query":{"media":"tbu-neg-scifi-cold.mp4","delay":200}}}
+                                
+                            ],
+                            [
+                                {"action":"print", "delay":2000, "params": {"body":{"text":"mood in room is low"}}},
+                                {"action":"print", "delay":6000, "params": {"body":{"text":"Querying Databox for genre customisation algorithm: [COLD] version selected"}}},
+                                {"action":"print", "delay":164000, "params": {"body":{"text":"print_low_attentiveness"}}},
+                                {"action":"print", "delay":98000, "params": {"body":{"text":"Audience mood is HIGH: allowing melancholy outcome"}}},
+                                {"action":"print", "delay":1000, "params": {"body":{"text":"Record of mood analysis logged to Databox vault"}}}
+                            ],
+                            [
+                                {"action":"message", "delay":2000, "params": {"query":{"message":"mood in room is low"}}},
+                                {"action":"message", "delay":6000, "params": {"query":{"message":"Querying Databox for genre customisation algorithm: [COLD] version selected"}}},
+                                {"action":"message", "delay":164000, "params": {"query":{"message":"Low attentiveness detected, scheduling sci-fi detour to enliven audience"}}},
+                                {"action":"message", "delay":29000, "params": {"query":{"message":"New attentiveness level ACCEPTABLE"}}},
+                                {"action":"message", "delay":69000, "params": {"query":{"message":"Audience mood is HIGH: allowing melancholy outcome"}}}  
+                            ],
+                            [
+                                {"action":"fancool", "delay":166000},
+                                {"action":"fanoff", "delay":5000}
+                            ]
+                        ],
+                        "next": "film"
+                    },
+
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "pos-warm"
+                        },
+                        "actions": [
+                            [
+                                {"action":"immersive4"}
+                            ],
+                            [
+                                {"action":"mediascreen"}
+                            ],
+                            [
+                                {"action":"breakupaudio", "params": {"body":{"media":"tbu-pos-noscifi-warm.mp4","nowait":true}}},
+                                {"action":"breakupvideo", "params": {"query":{"media":"tbu-pos-noscifi-warm.mp4","delay":200}}}   
+                            ],
+                            [
+                                {"action":"print", "delay":2000, "params": {"body":{"text":"mood in room is low"}}},
+                                {"action":"print", "delay":6000, "params": {"body":{"text":"Querying Databox for genre customisation algorithm: [WARM] version selected"}}},
+                                {"action":"print", "delay":164000, "params": {"body":{"text":"Skipping SCI_FI detour..."}}},
+                                {"action":"print", "delay":81000, "params": {"body":{"text":"Audience mood is LOW: showing positive outcome"}}},
+                                {"action":"print", "delay":4000, "params": {"body":{"text":"Record of mood analysis logged to Databox vault"}}}
+                            ],
+                            [
+                                {"action":"message", "delay":2000, "params": {"query":{"message":"mood in room is low"}}},
+                                {"action":"message", "delay":6000, "params": {"query":{"message":"Querying Databox for genre customisation algorithm: [WARM] version selected"}}},
+                                {"action":"message", "delay":164000, "params": {"query":{"message":"Skipping SCI_FI detour..."}}},
+                                {"action":"message", "delay":81000, "params": {"query":{"message":"Audience mood is LOW: showing positive outcome"}}}  
+                            ],
+                            [
+                                {"action":"fancool", "delay":164000},
+                                {"action":"fanoff", "delay":5000}
+                            ]
+                        ],
+                        "next": "film"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "pos-cold"
+                        },
+                        "actions": [
+                            [
+                                {"action":"immersive4"}
+                            ],
+                            [
+                                {"action":"mediascreen"}
+                            ],
+                            [
+                                {"action":"breakupaudio", "params": {"body":{"media":"tbu-pos-noscifi-cold.mp4","nowait":true}}},
+                                {"action":"breakupvideo", "params": {"query":{"media":"tbu-pos-noscifi-cold.mp4","delay":200}}}
+                                
+                            ],
+                            [
+                                {"action":"print", "delay":2000, "params": {"body":{"text":"mood in room is low"}}},
+                                {"action":"print", "delay":6000, "params": {"body":{"text":"Querying Databox for genre customisation algorithm: [COLD] version selected"}}},
+                                {"action":"print", "delay":164000, "params": {"body":{"text":"Skipping SCI_FI detour..."}}},
+                                {"action":"print", "delay":81000, "params": {"body":{"text":"Audience mood is LOW: showing positive outcome"}}},
+                                {"action":"print", "delay":4000, "params": {"body":{"text":"Record of mood analysis logged to Databox vault"}}}
+                            ],
+                            [
+                                {"action":"message", "delay":2000, "params": {"query":{"message":"mood in room is low"}}},
+                                {"action":"message", "delay":6000, "params": {"query":{"message":"Querying Databox for genre customisation algorithm: [COLD] version selected"}}},
+                                {"action":"message", "delay":164000, "params": {"query":{"message":"Skipping SCI_FI detour..."}}},
+                                {"action":"message", "delay":81000, "params": {"query":{"message":"Audience mood is LOW: showing positive outcome"}}}  
+                            ],
+                            [
+                                {"action":"fancool", "delay":164000},
+                                {"action":"fanoff", "delay":5000}
+                            ]
+                        ],
+                        "next": "film"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "neg-warm"
+                        },
+                        "actions": [
+                            [
+                                {"action":"immersive4"}
+                            ],
+                            [
+                                {"action":"mediascreen"}
+                            ],
+                            [
+                                {"action":"breakupaudio", "params": {"body":{"media":"tbu-neg-noscifi-warm.mp4","nowait":true}}},
+                                {"action":"breakupvideo", "params": {"query":{"media":"tbu-neg-noscifi-warm.mp4","delay":200}}}
+                            ],
+                            [
+                                {"action":"print", "delay":2000, "params": {"body":{"text":"mood in room is low"}}},
+                                {"action":"print", "delay":6000, "params": {"body":{"text":"Querying Databox for genre customisation algorithm: [WARM] version selected"}}},
+                                {"action":"print", "delay":164000, "params": {"body":{"text":"Skipping SCI_FI detour..."}}},
+                                {"action":"print", "delay":81000, "params": {"body":{"text":"Audience mood is HIGH: allowing melancholy outcome"}}},
+                                {"action":"print", "delay":4000, "params": {"body":{"text":"Record of mood analysis logged to Databox vault"}}}
+                            ],
+                            [
+                                {"action":"message", "delay":2000, "params": {"query":{"message":"mood in room is low"}}},
+                                {"action":"message", "delay":6000, "params": {"query":{"message":"Querying Databox for genre customisation algorithm: [WARM] version selected"}}},
+                                {"action":"message", "delay":164000, "params": {"query":{"message":"Skipping SCI_FI detour..."}}},
+                                {"action":"message", "delay":81000, "params": {"query":{"message":"Audience mood is HIGH: allowing melancholy outcome"}}}  
+                            ],
+                            [
+                                {"action":"fancool", "delay":164000},
+                                {"action":"fanoff", "delay":5000}
+                            ]
+                        ],
+                        "next": "film"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "neg-cold"
+                        },
+                        "actions": [
+                            [
+                                {"action":"immersive4"}
+                            ],
+                            [
+                                {"action":"mediascreen"}
+                            ],
+                            [
+                                {"action":"breakupaudio", "params": {"body":{"media":"tbu-neg-noscifi-cold.mp4","nowait":true}}},
+                                {"action":"breakupvideo", "params": {"query":{"media":"tbu-neg-noscifi-cold.mp4","delay":200}}}
+                            ],
+                            [
+                                {"action":"print", "delay":2000, "params": {"body":{"text":"mood in room is low"}}},
+                                {"action":"print", "delay":6000, "params": {"body":{"text":"Querying Databox for genre customisation algorithm: [COLD] version selected"}}},
+                                {"action":"print", "delay":164000, "params": {"body":{"text":"Skipping SCI_FI detour..."}}},
+                                {"action":"print", "delay":81000, "params": {"body":{"text":"Audience mood is HIGH: allowing melancholy outcome"}}},
+                                {"action":"print", "delay":4000, "params": {"body":{"text":"Record of mood analysis logged to Databox vault"}}}
+                            ],
+                            [
+                                {"action":"message", "delay":2000, "params": {"query":{"message":"mood in room is low"}}},
+                                {"action":"message", "delay":6000, "params": {"query":{"message":"Querying Databox for genre customisation algorithm: [COLD] version selected"}}},
+                                {"action":"message", "delay":164000, "params": {"query":{"message":"Skipping SCI_FI detour..."}}},
+                                {"action":"message", "delay":81000, "params": {"query":{"message":"Audience mood is HIGH: allowing melancholy outcome"}}}  
+                            ],
+                            [
+                                {"action":"fancool", "delay":164000},
+                                {"action":"fanoff", "delay":5000}
                             ]
                         ],
                         "next": "film"
@@ -1653,7 +1932,7 @@
                         },
                         "actions": [
                             [
-                                "dysonscreen"
+                                {"action":"dysonscreen"}
                             ]
                         ],
                         "next": "start"
@@ -1729,7 +2008,7 @@
                         },
                         "actions": [
                             [
-                                "oiexcuse"
+                                {"action":"oiexcuse"}
                             ]
                         ],
                         "next": "oi"
@@ -1819,6 +2098,7 @@
                     "toggle windows",
                     "say something",
                     "print something",
+                    "display message",
                     "play media on tv",
                     "play music",
                     "lights red",
@@ -1835,7 +2115,7 @@
                         },
                         "actions": [
                             [
-                                "togglewindows"
+                                {"action":"togglewindows"}
                             ]
                         ],
                         "next": "test"
@@ -1847,8 +2127,26 @@
                         },
                         "actions": [
                             [
-                                "saygreet"
+                                {"action":"saygreet"}
                             ]
+                        ],
+                        "next": "test"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "display message"
+                        },
+                        "actions": [
+                            [
+                                {"action":"message", "delay":0, "params": {"query":{"message":"number one"}}},
+                                {"action":"message", "delay":10000, "params": {"query":{"message":"number three"}}}
+                            ],
+                            [
+                                {"action":"message", "delay":5000, "params": {"query":{"message":"number two"}}},
+                                {"action":"message", "delay":6000, "params": {"query":{"message":"number four"}}}
+                            ]
+
                         ],
                         "next": "test"
                     },
@@ -1859,7 +2157,12 @@
                         },
                         "actions": [
                             [
-                                "printline"
+                                {"action":"print", "delay":0, "params": {"body":{"text":"one"}}},
+                                {"action":"print", "delay":10000, "params": {"body":{"text":"three"}}}
+                            ],
+                            [
+                                {"action":"print", "delay":5000, "params": {"body":{"text":"two"}}},
+                                {"action":"print", "delay":6000, "params": {"body":{"text":"four"}}}
                             ]
                         ],
                         "next": "test"
@@ -1871,8 +2174,8 @@
                         },
                         "actions": [
                             [
-                                "mediascreen",
-                                "sfx"
+                                {"action": "mediascreen"},
+                                {"action":"sfx"}
                             ]
                         ],
                         "next": "test"
@@ -1884,7 +2187,7 @@
                         },
                         "actions": [
                             [
-                                "music"
+                                {"action":"music"}
                             ]
                         ],
                         "next": "test"
@@ -1896,7 +2199,7 @@
                         },
                         "actions": [
                             [
-                                "redlights"
+                                {"action":"redlights"}
                             ]
                         ],
                         "next": "test"
@@ -1908,7 +2211,7 @@
                         },
                         "actions": [
                             [
-                                "whitelights"
+                                {"action":"whitelights"}
                             ]
                         ],
                         "next": "test"
@@ -1920,7 +2223,7 @@
                         },
                         "actions": [
                             [
-                                "fancool"
+                                {"action": "fancool"}
                             ]
                         ],
                         "next": "test"
@@ -1932,7 +2235,7 @@
                         },
                         "actions": [
                             [
-                                "fancoolblast"
+                                {"action":"fancoolblast"}
                             ]
                         ],
                         "next": "test"
@@ -1944,7 +2247,7 @@
                         },
                         "actions": [
                             [
-                                "fanoff"
+                                {"action":"fanoff"}
                             ]
                         ],
                         "next": "test"
@@ -1982,7 +2285,7 @@
                         },
                         "actions": [
                             [
-                                "shutdownprinterpi"
+                                {"action":"shutdownprinterpi"}
                             ]
                         ],
                         "next": "system"
@@ -1994,7 +2297,7 @@
                         },
                         "actions": [
                             [
-                                "restartprinterpi"
+                                {"action": "restartprinterpi"}
                             ]
                         ],
                         "next": "system"

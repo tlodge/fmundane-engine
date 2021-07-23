@@ -67,6 +67,15 @@ app.get('/api/air', (req,res) => {
     }
     res.status(200).send();
 })
+
+app.get('/api/message', (req,res)=>{
+    const {message=""} = req.query;
+    console.log("seen message", message);
+    if (ws){
+        ws.send(JSON.stringify({type:"message", message}));
+    }
+    res.status(200).send();
+})
 //initialize a simple http server
 const server = http.createServer(app);
 

@@ -8,7 +8,7 @@ var request = require('request');
 var rp = require('request-promise-native');
 
 
-const PORT = '9095';
+const PORT = '8080';
 const PI_URL = "http://192.168.1.192:8080/"
 const app = express();
 app.use(bodyParser.json());
@@ -17,7 +17,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.post('/print', function (req, res, next) {
   print_text = req.body.text;
   console.log('printing: ' + print_text);
-  let obj = {"text": print_text};
+  /*let obj = {"text": print_text};
   var options = {
     method: 'POST',
     uri: PI_URL + "print",
@@ -30,7 +30,7 @@ app.post('/print', function (req, res, next) {
   })
   .catch(function (err) {
       console.log(err);
-  });
+  });*/
   res.json({"status": "printed"});
 });
 

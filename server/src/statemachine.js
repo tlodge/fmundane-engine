@@ -25,6 +25,7 @@ const _fetchrule = async (rule)=>{
 
 const callserially = async (list, cb)=>{
     for (const a of list){
+        console.log("calling handle", a);
         await handle(a);
     }
     cb();
@@ -39,13 +40,13 @@ const _executeactions = async (alist, value="")=>{
           
             //swap in any params
             const _alist = actionlist.map((a)=>{
-                const astr = JSON.stringify(a);
+                const astr = JSON.stringify(a.action);
                 var matches = astr.match(/\|(.*?)\|/);
                 if (matches){
                     const toreplace = matches[0];
                     const tokens = matches[1].split(":");
                     const delimiter = tokens.length > 1 ? ` ${tokens[1]} ` : ",";
-                    return JSON.parse(JSON.stringify(a).replace(toreplace,value.trim().split(" ").join(delimiter)));
+                    return  {...a, action:JSON.parse(JSON.stringify(a.action).replace(toreplace,value.trim().split(" ").join(delimiter)))}
                 }
                 return a;
             });
@@ -55,7 +56,7 @@ const _executeactions = async (alist, value="")=>{
            
             parallel.push({list:_alist, cb:()=>{
                 console.log("sending", _alist);
-                send("action", _alist)
+                send("action", _alist.map(a=>a.action))
             }});
             
             //send("action", _alist);
@@ -72,7 +73,7 @@ const _executeactions = async (alist, value="")=>{
 }
 
 const _executespeech = async (lines, value)=>{
-    console.log("in exceute speech", lines, value);
+   
     if (value && value.trim() != ""){
         const _lines = lines.map(l=>{
             var matches = l.words.match(/\|(.*?)\|/);
@@ -114,7 +115,7 @@ const StateMachine =   (config)=>{
             //send the ready early -- or perhaps an init message?
             if (event.onstart){
                 const {speech=[], actions:_actions=[]} = event.onstart;
-                const __startactions =  _actions.map(arr=>(arr||[]).map(a=>actions[a]||{}));
+                const __startactions =  _actions.map(arr=>(arr||[]).map(a=>({...a, action:actions[a.action]||{}})));
                 await Promise.all([await _executeactions(__startactions), await _executespeech(speech)]);
                 
             }
@@ -141,7 +142,7 @@ const StateMachine =   (config)=>{
             send("event", {id:config.id,data:event});      
             if (event.onstart){
                 const {speech=[], actions:_actions=[]} = event.onstart;
-                const __startactions =  _actions.map(arr=>(arr||[]).map(a=>actions[a]||{}));
+                const __startactions =  _actions.map(arr=>(arr||[]).map(a=>({...a,action:actions[a.action]||{}})));
                 await Promise.all([_executeactions(__startactions), _executespeech(speech)]);
             }    
         }
@@ -210,7 +211,7 @@ const StateMachine =   (config)=>{
                 if (triggered){
                    
                     unsubscribe(e.subscription, id);
-                    const _actions = actionids.map(arr=>(arr||[]).map(a=>actions[a]||{}));
+                    const _actions = actionids.map(arr=>(arr||[]).map(a=>({...a, action:actions[a.action]||{}})));
                     await _executeactions(_actions, message.toString());
                     const _e = eventlookup[nexteventid];
 
@@ -222,7 +223,7 @@ const StateMachine =   (config)=>{
                             const {speech=[], actions:_actions=[]} = _e.onstart;
                           
                            
-                            const __startactions =  _actions.map(arr=>(arr||[]).map(a=>actions[a]||{}));
+                            const __startactions =  _actions.map(arr=>(arr||[]).map(a=>({...a, action:actions[a.action]||{}})));
                             console.log("PERFORMING ACTIONS...");
                             await Promise.all([_executeactions(__startactions, message.toString()), _executespeech(speech, data)]);
                             console.log("DONE PERFORMING ACTIONS...");

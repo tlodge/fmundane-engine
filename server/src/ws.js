@@ -7,7 +7,7 @@ export const init = (_socket)=>{
 
 export const send = (channel, message)=>{
     if (socket){
-        console.log("send:", channel, message);
+        
         //belt and braces -- essential message gets through so continue to send until new send happens
         const sendit = (channel, message, count=RESENDS)=>{
             socket.emit(channel, message);

@@ -1,6 +1,7 @@
 import FaceScan from "./FaceScan";
 import AirQuality from "./AirQuality";
 import Media from "./Media";
+import MessageBox from "./MessageBox";
 
 import {useState, useEffect} from "react";
 import {
@@ -18,10 +19,24 @@ export default function Home() {
     const [dyson, setDyson] = useState({});
     const [media, setMedia] = useState("");
     const [delay, setDelay] = useState(500);
+    const [message, setMessage] = useState("");
 
-    console.log(window.location.href);
     const parts = window.location.href.replace("http://","").replace("https://","").split(":");
     const wsurl = `ws://${parts[0]}:${parts[1]}`;
+    let _msgtimeout;
+
+    useEffect(()=>{
+       if (message.trim() == "")
+          return;
+
+       if (_msgtimeout){
+          _msgtimeout.clearTimeout();
+       }
+       _msgtimeout = setTimeout(()=>{
+          setMessage("")
+        }, 6000);
+       
+    }, [message]);
 
     useEffect(()=>{
         const socket = new WebSocket(wsurl);
@@ -40,6 +55,9 @@ export default function Home() {
                 setMedia("");
                 history.push(msg.url);
             }
+            if (msg.type=="message"){
+                setMessage(msg.message);
+            }
             if (msg.type=="camera"){
                 setScan(msg.state=="scan")
             }
@@ -47,7 +65,7 @@ export default function Home() {
                 setDyson(msg.data);
             }
             if (msg.type=="media"){
-              console.log("set media to", msg.media);
+             
               setMedia(msg.media);
               try{
                 setDelay(Number(msg.delay));
@@ -79,29 +97,39 @@ export default function Home() {
           
             <Route path="/camera"
                 render = {(props)=>(
+                  <>
+                    <MessageBox message={message}/>
                     <FaceScan {...props} scan={scan}/>
+                  </>
                 )}
             />
             <Route path="/air"
                 render = {(props)=>(
                     <>
                       {/*button style={{border:"none", background:"none"}} onClick={fakeData}>mock reading</button>*/}
-                    
-                    <AirQuality {...props} data={dyson}/>
+                      <MessageBox message={message}/>
+                      <AirQuality {...props} data={dyson}/>
                     </>
                 )}
             />
              <Route path="/media"
                 render = {(props)=>(
+                  <>
+                  <MessageBox message={message}/>
                     <div style={{display:"flex", flex:"1 1 auto", alignItems:"center", justifyContent:"center"}}>    
                     <Media {...props} media={media} delay={delay}/>
                     </div>
+                    </>
                 )}
             />
             <Route path="/"
-                 render = {(props)=>(<div style={{width:"100%"}}>
-                 <img  style={{margin:300}} src="./flogo.svg"></img>
-             </div>
+                 render = {(props)=>(
+                 <>
+                   <MessageBox message={message}/>
+                  <div style={{width:"100%"}}>
+                    <img  style={{margin:300}} src="./flogo.svg"></img>
+                  </div>
+                </>
              )}
              />
         </Switch>

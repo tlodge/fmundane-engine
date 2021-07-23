@@ -122,7 +122,7 @@ const sayWords = async (window, words, voice)=>{
 }*/
 
 
-//TODO - get rid!
+//TODO - get rid - this is to react to browser speech synth, which not using now
 
 export const listenOnActions = (window) => async dispatch => {
   //const voices = await getVoices();
@@ -178,6 +178,16 @@ export const listenOnEvents = () => (dispatch, getState) => {
     }
   });
 }
+
+socket.on("connect_error", () => {
+  const reconnect = ()=>{
+    console.log("attempting to reconnect!!");
+    setTimeout(() => {
+      socket.connect();
+    }, 1000);
+  }
+  reconnect();
+});
 
 export const buttonPressed  = (b) => ()=>{
   stopListening();

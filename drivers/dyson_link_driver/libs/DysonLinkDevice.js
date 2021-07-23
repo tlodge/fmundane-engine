@@ -64,7 +64,7 @@ class DysonLinkDevice {
         // Only do this when we have less than one listener to avoid multiple call        
         let senorlisternerCount = this.environmentEvent.listenerCount(this.SENSOR_EVENT);
         let fanlisternerCount = this.mqttEvent.listenerCount(this.STATE_EVENT);
-        console.log("[DEBUG] Number of listeners - sensor:"+ senorlisternerCount + " fan:" + fanlisternerCount);
+        //console.log("[DEBUG] Number of listeners - sensor:"+ senorlisternerCount + " fan:" + fanlisternerCount);
         let currentTime = new Date();
         if(senorlisternerCount <=1 && fanlisternerCount <=1) {
             this.mqttClient.publish(this.commandTopic, `{
@@ -79,7 +79,7 @@ class DysonLinkDevice {
     setState(state) {
         let currentTime = new Date();
         let message = { msg: "STATE-SET", time: currentTime.toISOString(), "mode-reason":"LAPP", data: state };
-        console.log(JSON.stringify(message));
+        //console.log(JSON.stringify(message));
        // console.log("[info] " +  this.displayName + " - Set State:" + JSON.stringify(state));
         this.mqttClient.publish(this.commandTopic, JSON.stringify(message));
     }

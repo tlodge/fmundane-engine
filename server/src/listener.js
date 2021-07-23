@@ -53,9 +53,7 @@ export const unsubscribe = (topic, layer)=>{
             console.log("fully unsubscribed from topic", topic);
         }); 
     }
-    console.log("**********");
-    console.log(callbacks);
-    console.log("**********");
+   
 }
 
 export const subscribe = (topic,layer, cb)=>{
@@ -73,9 +71,6 @@ export const subscribe = (topic,layer, cb)=>{
             [layer] : cb
         }
     }
-    console.log("**********");
-    console.log(callbacks);
-    console.log("**********");
 }
 
 export const send = (topic, message)=>{

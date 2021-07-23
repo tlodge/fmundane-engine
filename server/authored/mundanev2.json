@@ -146,7 +146,7 @@
                         },
                         "actions": [
                             [
-                                {"action":"fancool"}
+                                {"action":"fan", "params":{"query":{"rotate":false, "power":1, "cool":true}}}
                             ],
                             [
                                 {"action":"whitelights"}
@@ -159,6 +159,7 @@
                     }
                 ]
             },
+            
             {
                 "id": "reseteverything",
                 "name": "reseteverything",
@@ -175,9 +176,9 @@
                     ],
                     "actions": [
                         [
-                            { "delay":300, "action":"immersive1"},
+                            { "delay":300, "action": "immersive", "params":{"query":{"script_id":"ID101"}}},
                             { "delay":500, "action": "homescreen"},
-                            { "delay":1000, "action" : "fancool"}
+                            { "delay":1000, "action":"fan", "params":{"query":{"rotate":false, "power":4, "cool":true}}}
                         ]
                     ]
                 },
@@ -262,7 +263,7 @@
                             
                         ],
                         [
-                            {"delay":0, "action": "immersive2"}
+                            {"delay":0,"action": "immersive", "params":{"query":{"script_id":"ID102"}}}
                         ]
                     ]
                 },
@@ -374,9 +375,9 @@
                     ],
                     "actions": [
                         [
-                            {"delay":200, "action":"immersive4"},
-                            {"delay":200, "action":"immersive5"},
-                            {"delay":200, "action":"immersive6"}
+                            {"delay":200, "action": "immersive", "params":{"query":{"script_id":"ID106"}}},
+                            {"delay":200, "action": "immersive", "params":{"query":{"script_id":"ID016"}}},
+                            {"delay":200, "action": "immersive", "params":{"query":{"script_id":"ID021"}}}
                         ]
                     ]
                 },
@@ -600,7 +601,7 @@
                     ],
                     "actions": [
                         [
-                            {"delay":200, "action":"immersive3"}
+                            {"delay":200, "action": "immersive", "params":{"query":{"script_id":"ID106"}}}
                         ]
                     ]
                 },
@@ -1310,7 +1311,7 @@
                     ],
                     "actions": [
                         [
-                            {"delay":200, "action":"fancoolblast"}
+                            {"delay":200,  "action":"fan", "params":{"query":{"rotate":true, "power":10, "cool":true, "from":0, "to":90}}}
                         ]
                     ]
                 },
@@ -1347,7 +1348,7 @@
                     ],
                     "actions": [
                         [
-                            {"delay":0, "action": "fancool"},
+                            {"delay":0,  "action":"fan", "params":{"query":{"rotate":false, "power":4, "cool":true}}},
                             {"delay":0, "action": "redlights"}
                         ]
                     ]
@@ -1546,7 +1547,7 @@
                         },
                         "actions": [
                             [
-                                {"action":"immersive4"}
+                                {"action": "immersive", "params":{"query":{"script_id":"ID106"}}}
                             ],
                             [
                                 {"action":"mediascreen"}
@@ -1572,8 +1573,8 @@
                                 {"action":"message", "delay":69000, "params": {"query":{"message":"Audience mood is LOW: showing positive ending"}}}  
                             ],
                             [
-                                {"action":"fancool", "delay":166000},
-                                {"action":"fanoff", "delay":5000}
+                                {"action":"fan", "params":{"query":{"rotate":false, "power":4, "cool":true}}, "delay":166000},
+                                {"action":"fan", "params":{"query":{"rotate":false, "power":1, "cool":true}}, "delay":5000}
                             ]
                         ],
                         "next": "film"
@@ -1585,7 +1586,7 @@
                         },
                         "actions": [
                             [
-                                {"action":"immersive4"}
+                                {"action": "immersive", "params":{"query":{"script_id":"ID106"}}}
                             ],
                             [
                                 {"action":"mediascreen"}
@@ -1611,8 +1612,8 @@
                                 {"action":"message", "delay":69000, "params": {"query":{"message":"Audience mood is LOW: showing positive ending"}}}  
                             ],
                             [
-                                {"action":"fancool", "delay":166000},
-                                {"action":"fanoff", "delay":5000}
+                                {"action":"fan", "params":{"query":{"rotate":false, "power":4, "cool":true}}, "delay":166000},
+                                {"action":"fan", "params":{"query":{"rotate":false, "power":1, "cool":true}}, "delay":5000}
                             ]
                         ],
                         "next": "film"
@@ -1624,7 +1625,7 @@
                         },
                         "actions": [
                             [
-                                {"action":"immersive4"}
+                                {"action": "immersive", "params":{"query":{"script_id":"id106"}}}
                             ],
                             [
                                 {"action":"mediascreen"}
@@ -1646,8 +1647,8 @@
                                 {"action":"message", "delay":69000, "params": {"query":{"message":"Audience mood is HIGH: allowing melancholy outcome"}}}  
                             ],
                             [
-                                {"action":"fancool", "delay":166000},
-                                {"action":"fanoff", "delay":5000}
+                                {"action":"fan", "params":{"query":{"rotate":false, "power":4, "cool":true}}, "delay":166000},
+                                {"action":"fan", "params":{"query":{"rotate":false, "power":1, "cool":true}}, "delay":5000}
                             ]
                         ],
                         "next": "film"
@@ -1659,7 +1660,7 @@
                         },
                         "actions": [
                             [
-                                {"action":"immersive4"}
+                                {"action": "immersive", "params":{"query":{"script_id":"id106"}}}
                             ],
                             [
                                 {"action":"mediascreen"}
@@ -1686,8 +1687,8 @@
                                 {"action":"message", "delay":69000, "params": {"query":{"message":"Audience mood is HIGH: allowing melancholy outcome"}}}  
                             ],
                             [
-                                {"action":"fancool", "delay":166000},
-                                {"action":"fanoff", "delay":5000}
+                                {"action":"fan", "params":{"query":{"rotate":false, "power":4, "cool":true}}, "delay":166000},
+                                {"action":"fan", "params":{"query":{"rotate":false, "power":1, "cool":true}}, "delay":5000}
                             ]
                         ],
                         "next": "film"
@@ -1700,7 +1701,7 @@
                         },
                         "actions": [
                             [
-                                {"action":"immersive4"}
+                                {"action": "immersive", "params":{"query":{"script_id":"id106"}}}
                             ],
                             [
                                 {"action":"mediascreen"}
@@ -1728,8 +1729,8 @@
                                 {"action":"soundmedia", "delay": 176000, "params": {"body":{"media":"tbu-clock-middle-music.mp3","nowait":true}}}
                             ],
                             [
-                                {"action":"fancool", "delay":164000},
-                                {"action":"fanoff", "delay":5000}
+                                {"action":"fan", "params":{"query":{"rotate":false, "power":4, "cool":true}}, "delay":164000},
+                                {"action":"fan", "params":{"query":{"rotate":false, "power":1, "cool":true}}, "delay":5000}
                             ]
                         ],
                         "next": "film"
@@ -1741,7 +1742,7 @@
                         },
                         "actions": [
                             [
-                                {"action":"immersive4"}
+                                {"action": "immersive", "params":{"query":{"script_id":"id106"}}}
                             ],
                             [
                                 {"action":"mediascreen"}
@@ -1770,8 +1771,8 @@
                                 {"action":"soundmedia", "delay": 176000, "params": {"body":{"media":"tbu-clock-middle-music.mp3","nowait":true}}}
                             ],
                             [
-                                {"action":"fancool", "delay":164000},
-                                {"action":"fanoff", "delay":5000}
+                                {"action":"fan", "params":{"query":{"rotate":false, "power":4, "cool":true}}, "delay":164000},
+                                {"action":"fan", "params":{"query":{"rotate":false, "power":1, "cool":true}}, "delay":5000}
                             ]
                         ],
                         "next": "film"
@@ -1783,7 +1784,7 @@
                         },
                         "actions": [
                             [
-                                {"action":"immersive4"}
+                                {"action": "immersive", "params":{"query":{"script_id":"id106"}}}
                             ],
                             [
                                 {"action":"mediascreen"}
@@ -1808,8 +1809,8 @@
                                 {"action":"message", "delay":81000, "params": {"query":{"message":"Audience mood is HIGH: allowing melancholy outcome"}}}  
                             ],
                             [
-                                {"action":"fancool", "delay":164000},
-                                {"action":"fanoff", "delay":5000}
+                                {"action":"fan", "params":{"query":{"rotate":false, "power":4, "cool":true}}, "delay":164000},
+                                {"action":"fan", "params":{"query":{"rotate":false, "power":1, "cool":true}}, "delay":5000}
                             ]
                         ],
                         "next": "film"
@@ -1821,7 +1822,7 @@
                         },
                         "actions": [
                             [
-                                {"action":"immersive4"}
+                                {"action": "immersive", "params":{"query":{"script_id":"id106"}}}
                             ],
                             [
                                 {"action":"mediascreen"}
@@ -1846,8 +1847,8 @@
                                 {"action":"message", "delay":81000, "params": {"query":{"message":"Audience mood is HIGH: allowing melancholy outcome"}}}  
                             ],
                             [
-                                {"action":"fancool", "delay":164000},
-                                {"action":"fanoff", "delay":5000}
+                                {"action":"fan", "params":{"query":{"rotate":false, "power":4, "cool":true}}, "delay":164000},
+                                {"action":"fan", "params":{"query":{"rotate":false, "power":1, "cool":true}}, "delay":5000}
                             ]
                         ],
                         "next": "film"
@@ -2031,7 +2032,7 @@
                         },
                         "actions": [
                             [
-                                {"action":"oiexcuse"}
+                                {"action":"say", "params":{"body":{"speech":[{"words":"Excuse me.. I'm still here","voice":"Daniel"}]}}}
                             ]
                         ],
                         "next": "oi"
@@ -2043,7 +2044,7 @@
                         },
                         "actions": [
                             [
-                                "oihello"
+                                {"action":"say", "params":{"body":{"speech":[{"words":"Hello?","voice":"Daniel"}]}}}
                             ]
                         ],
                         "next": "oi"
@@ -2055,7 +2056,7 @@
                         },
                         "actions": [
                             [
-                                "oihey"
+                                {"action":"say", "params":{"body":{"speech":[{"words":"Hey, you, pay attention! We're trying to do the future here","voice":"Daniel"}]}}}
                             ]
                         ],
                         "next": "oi"
@@ -2067,7 +2068,7 @@
                         },
                         "actions": [
                             [
-                                "oilook"
+                                {"action":"say", "params":{"body":{"speech":[{"words":"Look here, I've got things to do as well, can we just get on with it?","voice":"Daniel"}]}}}
                             ]
                         ],
                         "next": "oi"
@@ -2079,7 +2080,7 @@
                         },
                         "actions": [
                             [
-                                "oiday"
+                                {"action":"say", "params":{"body":{"speech":[{"words":"I haven't got all day","voice":"Daniel"}]}}}
                             ]
                         ],
                         "next": "oi"
@@ -2091,7 +2092,7 @@
                         },
                         "actions": [
                             [
-                                "oitick"
+                                {"action":"say", "params":{"body":{"speech":[{"words":"Tick, tock, tick, tock - time is of the essence. Let's get on with it","voice":"Daniel"}]}}}
                             ]
                         ],
                         "next": "oi"
@@ -2246,7 +2247,7 @@
                         },
                         "actions": [
                             [
-                                {"action": "fancool"}
+                                {"action":"fan", "params":{"query":{"rotate":false, "power":4, "cool":true}}, "delay":0}
                             ]
                         ],
                         "next": "test"
@@ -2258,7 +2259,7 @@
                         },
                         "actions": [
                             [
-                                {"action":"fancoolblast"}
+                                {"action":"fan", "params":{"query":{"rotate":true, "power":10, "cool":true, "from":0, "to":90}}, "delay":0}
                             ]
                         ],
                         "next": "test"
@@ -2270,7 +2271,7 @@
                         },
                         "actions": [
                             [
-                                {"action":"fanoff"}
+                                {"action":"fan", "delay":0,"params":{"query":{"rotate":false, "power":1, "cool":true}}}
                             ]
                         ],
                         "next": "test"

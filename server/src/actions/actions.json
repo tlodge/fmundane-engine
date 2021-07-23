@@ -330,184 +330,32 @@
           ]
        }
     },
-    "pardonpardon":{
-       "type":"request",
-       "data":{
-          "url":"http://[speech]:9105/api/speech",
-          "type":"POST",
-          "contenttype":"application/json"
-       },
-       "body":{
-          "speech":[
-             {
-                "words":"Pardon?",
-                "voice":"Daniel"
-             }
-          ]
-       }
+    "say":{
+        "type":"request",
+        "data":{
+           "url":"http://[speech]:9105/api/speech",
+           "type":"POST",
+           "contenttype":"application/json"
+        }
     },
-    "pardonexcuse":{
-       "type":"request",
-       "data":{
-          "url":"http://[speech]:9105/api/speech",
-          "type":"POST",
-          "contenttype":"application/json"
-       },
-       "body":{
-          "speech":[
-             {
-                "words":"Excuse me?",
-                "voice":"Daniel"
-             }
-          ]
-       }
+    "soundmedia":{
+        "type":"request",
+        "data":{
+           "url":"http://[speech]:9106/api/media",
+           "type":"POST",
+           "contenttype":"application/json"
+        },
+        "body":{}
     },
-    "pardonunderstand":{
-       "type":"request",
-       "data":{
-          "url":"http://[speech]:9105/api/speech",
-          "type":"POST",
-          "contenttype":"application/json"
-       },
-       "body":{
-          "speech":[
-             {
-                "words":"I didn't understand that, please say it again?",
-                "voice":"Daniel"
-             }
-          ]
-       }
-    },
-    "pardondeaf":{
-       "type":"request",
-       "data":{
-          "url":"http://[speech]:9105/api/speech",
-          "type":"POST",
-          "contenttype":"application/json"
-       },
-       "body":{
-          "speech":[
-             {
-                "words":"I might be a bit deaf - what did you say?",
-                "voice":"Daniel"
-             }
-          ]
-       }
-    },
-    "pardonsay":{
-       "type":"request",
-       "data":{
-          "url":"http://[speech]:9105/api/speech",
-          "type":"POST",
-          "contenttype":"application/json"
-       },
-       "body":{
-          "speech":[
-             {
-                "words":"Can you say that again please?",
-                "voice":"Daniel"
-             }
-          ]
-       }
-    },
-    "pardonhuh":{
-       "type":"request",
-       "data":{
-          "url":"http://[speech]:9105/api/speech",
-          "type":"POST",
-          "contenttype":"application/json"
-       },
-       "body":{
-          "speech":[
-             {
-                "words":"Huh? What did you say?",
-                "voice":"Daniel"
-             }
-          ]
-       }
-    },
-    "pardonrepeat":{
-       "type":"request",
-       "data":{
-          "url":"http://[speech]:9105/api/speech",
-          "type":"POST",
-          "contenttype":"application/json"
-       },
-       "body":{
-          "speech":[
-             {
-                "words":"Please repeat yourself, I didn't catch that",
-                "voice":"Daniel"
-             }
-          ]
-       }
-    },
-    
-    "breakupvideo":{
-       "type":"request",
+
+    "videomedia":{
+        "type":"request",
        "data":{
           "url":"http://127.0.0.1:9102/api/media/play",
           "type":"GET",
           "contenttype":"application/json"
        },
        "query":{}
-    },
-
-    "breakupaudio":{
-        "type":"request",
-        "data":{
-           "url":"http://[speech]:9106/api/media",
-           "type":"POST",
-           "contenttype":"application/json"
-        },
-        "body":{}
-    },
-
-    "media":{
-        "type":"request",
-        "data":{
-           "url":"http://[speech]:9106/api/media",
-           "type":"POST",
-           "contenttype":"application/json"
-        },
-        "body":{}
-    },
-
-    "countdown":{
-       "type":"request",
-       "data":{
-          "url":"http://127.0.0.1:9102/api/media/play",
-          "type":"GET",
-          "contenttype":"application/json"
-       },
-       "query":{
-          "media":"countdown.mp4",
-          "delay":0
-       }
-    },
-    "sfx":{
-       "type":"request",
-       "data":{
-          "url":"http://127.0.0.1:9102/api/media/play",
-          "type":"GET",
-          "contenttype":"application/json"
-       },
-       "query":{
-          "media":"TV.mp4",
-          "delay":50
-       }
-    },
-    "music":{
-       "type":"request",
-       "data":{
-          "url":"http://[speech]:9106/api/media",
-          "type":"POST",
-          "contenttype":"application/json"
-       },
-       "body":{
-          "media":"foreboding.mp3",
-          "nowait":true
-       }
     },
     "homescreen":{
        "type":"request",

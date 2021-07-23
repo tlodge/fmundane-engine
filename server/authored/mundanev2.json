@@ -33,7 +33,7 @@
                         },
                         "actions": [
                             [
-                                {"action":"pardonpardon"}
+                                {"action":"say", "params":{"body":{"speech":[{"words":"Pardon?","voice":"Daniel"}]}}}
                             ]
                         ],
                         "next": "pardons"
@@ -45,7 +45,7 @@
                         },
                         "actions": [
                             [
-                                {"action": "pardonexcuse"}
+                                {"action":"say", "params":{"body":{"speech":[{"words":"Excuse me?","voice":"Daniel"}]}}}
                             ]
                         ],
                         "next": "pardons"
@@ -57,7 +57,7 @@
                         },
                         "actions": [
                             [
-                                {"action":"pardonunderstand"}
+                                {"action":"say", "params":{"body":{"speech":[{"words":"I'm sorry I didn't understand that","voice":"Daniel"}]}}}
                             ]
                         ],
                         "next": "pardons"
@@ -69,7 +69,7 @@
                         },
                         "actions": [
                             [
-                                {"action":"pardondeaf"}
+                                {"action":"say", "params":{"body":{"speech":[{"words":"I might be a bit deaf - what did you say?","voice":"Daniel"}]}}}
                             ]
                         ],
                         "next": "pardons"
@@ -81,7 +81,7 @@
                         },
                         "actions": [
                             [
-                                {"action": "pardonsay"}
+                                {"action":"say", "params":{"body":{"speech":[{"words":"Can you say that again please?","voice":"Daniel"}]}}}
                             ]
                         ],
                         "next": "pardons"
@@ -93,7 +93,7 @@
                         },
                         "actions": [
                             [
-                                {"action":"pardonhuh"}
+                                {"action":"say", "params":{"body":{"speech":[{"words":"Huh - what did you say?","voice":"Daniel"}]}}}
                             ]
                         ],
                         "next": "pardons"
@@ -105,7 +105,7 @@
                         },
                         "actions": [
                             [
-                                {"action": "pardonrepeat"}
+                                {"action":"say", "params":{"body":{"speech":[{"words":"Please repeat yourself, I didn't catch that","voice":"Daniel"}]}}}
                             ]
                         ],
                         "next": "pardons"
@@ -258,7 +258,8 @@
                             {"delay":0, "action":"mediascreen"}
                         ],
                         [
-                            {"delay":0, "action": "countdown"}
+                            {"delay":0, "action": "videomedia", "params":{"query":{"media":"countdown.mp4","delay":0}}}
+                            
                         ],
                         [
                             {"delay":0, "action": "immersive2"}
@@ -1385,7 +1386,7 @@
                     "actions": [
                         [
                             {"delay":0, "action":"mediascreen"},
-                            {"delay":0, "action":"sfx"}
+                            {"delay":0, "action": "videomedia", "params":{"query":{"media":"TV.mp4","delay":50}}}
                         ]
                     ]
                 },
@@ -1551,8 +1552,8 @@
                                 {"action":"mediascreen"}
                             ],
                             [
-                                {"action":"breakupvideo", "params": {"query":{"media":"tbu-pos-scifi-warm.mp4","delay":0}}}, 
-                                {"action":"breakupaudio", "params": {"body":{"media":"tbu-pos-scifi-warm.mp4","nowait":true, "delay":200}}}
+                                {"action":"videomedia", "params": {"query":{"media":"tbu-pos-scifi-warm.mp4","delay":0}}}, 
+                                {"action":"soundmedia", "params": {"body":{"media":"tbu-pos-scifi-warm.mp4","nowait":true, "delay":200}}}
                             ],
                             [
                                 {"action":"print", "delay":2000, "params": {"body":{"text":"mood in room is positive"}}},
@@ -1565,7 +1566,7 @@
                             ],
                             [
                                 {"action":"message", "delay":2000, "params": {"query":{"message":"Baseline mood analysis complete, current mood quantified as [POSITIVE]"}}},
-                                {"action":"message", "delay":6000, "params": {"query":{"message":"Choosing genre customisations. [WARM] colour grade selected.."}}},
+                                {"action":"message", "delay":6000, "params": {"query":{"message":"Choosing genre customisations. [COLD] colour grade selected.."}}},
                                 {"action":"message", "delay":164000, "params": {"query":{"message":"Low attentiveness detected, scheduling sci-fi detour to enliven audience"}}},
                                 {"action":"message", "delay":29000, "params": {"query":{"message":"New attentiveness level ACCEPTABLE"}}},
                                 {"action":"message", "delay":69000, "params": {"query":{"message":"Audience mood is LOW: showing positive ending"}}}  
@@ -1590,8 +1591,8 @@
                                 {"action":"mediascreen"}
                             ],
                             [
-                                {"action":"breakupvideo", "params": {"query":{"media":"tbu-pos-scifi-cold.mp4","delay":0}}}, 
-                                {"action":"breakupaudio", "params": {"body":{"media":"tbu-pos-scifi-cold.mp4","nowait":true, "delay":200}}}
+                                {"action":"videomedia", "params": {"query":{"media":"tbu-pos-scifi-cold.mp4","delay":0}}}, 
+                                {"action":"soundmedia", "params": {"body":{"media":"tbu-pos-scifi-cold.mp4","nowait":true, "delay":200}}}
                             ],
                             [
                                 {"action":"print", "delay":2000, "params": {"body":{"text":"mood in room is positive"}}},
@@ -1664,8 +1665,8 @@
                                 {"action":"mediascreen"}
                             ],
                             [
-                                {"action":"breakupaudio", "params": {"body":{"media":"tbu-neg-scifi-cold.mp4","nowait":true}}},
-                                {"action":"breakupvideo", "params": {"query":{"media":"tbu-neg-scifi-cold.mp4","delay":200}}}
+                                {"action":"soundmedia", "params": {"body":{"media":"tbu-neg-scifi-cold.mp4","nowait":true}}},
+                                {"action":"videomedia", "params": {"query":{"media":"tbu-neg-scifi-cold.mp4","delay":200}}}
                                 
                             ],
                             [
@@ -1705,8 +1706,8 @@
                                 {"action":"mediascreen"}
                             ],
                             [
-                                {"action":"breakupaudio", "params": {"body":{"media":"tbu-pos-noscifi-warm.mp4","nowait":true}}},
-                                {"action":"breakupvideo", "params": {"query":{"media":"tbu-pos-noscifi-warm.mp4","delay":200}}}   
+                                {"action":"soundmedia", "params": {"body":{"media":"tbu-pos-noscifi-warm.mp4","nowait":true}}},
+                                {"action":"videomedia", "params": {"query":{"media":"tbu-pos-noscifi-warm.mp4","delay":200}}}   
                             ],
                             [
                                 {"action":"print", "delay":2000, "params": {"body":{"text":"mood in room is positive"}}},
@@ -1724,7 +1725,7 @@
                                 {"action":"message", "delay":81000, "params": {"query":{"message":"Audience mood is LOW: showing positive outcome"}}}  
                             ],
                             [
-                                {"action":"media", "delay": 176000, "params": {"body":{"media":"tbu-clock-middle-music.mp3","nowait":true}}}
+                                {"action":"soundmedia", "delay": 176000, "params": {"body":{"media":"tbu-clock-middle-music.mp3","nowait":true}}}
                             ],
                             [
                                 {"action":"fancool", "delay":164000},
@@ -1746,8 +1747,8 @@
                                 {"action":"mediascreen"}
                             ],
                             [
-                                {"action":"breakupaudio", "params": {"body":{"media":"tbu-pos-noscifi-cold.mp4","nowait":true}}},
-                                {"action":"breakupvideo", "params": {"query":{"media":"tbu-pos-noscifi-cold.mp4","delay":200}}}
+                                {"action":"soundmedia", "params": {"body":{"media":"tbu-pos-noscifi-cold.mp4","nowait":true}}},
+                                {"action":"videomedia", "params": {"query":{"media":"tbu-pos-noscifi-cold.mp4","delay":200}}}
                                 
                             ],
                             [
@@ -1766,7 +1767,7 @@
                                 {"action":"message", "delay":81000, "params": {"query":{"message":"Audience mood is LOW: showing positive outcome"}}}  
                             ],
                             [
-                                {"action":"media", "delay": 176000, "params": {"body":{"media":"tbu-clock-middle-music.mp3","nowait":true}}}
+                                {"action":"soundmedia", "delay": 176000, "params": {"body":{"media":"tbu-clock-middle-music.mp3","nowait":true}}}
                             ],
                             [
                                 {"action":"fancool", "delay":164000},
@@ -1788,8 +1789,8 @@
                                 {"action":"mediascreen"}
                             ],
                             [
-                                {"action":"breakupaudio", "params": {"body":{"media":"tbu-neg-noscifi-warm.mp4","nowait":true}}},
-                                {"action":"breakupvideo", "params": {"query":{"media":"tbu-neg-noscifi-warm.mp4","delay":200}}}
+                                {"action":"soundmedia", "params": {"body":{"media":"tbu-neg-noscifi-warm.mp4","nowait":true}}},
+                                {"action":"videomedia", "params": {"query":{"media":"tbu-neg-noscifi-warm.mp4","delay":200}}}
                             ],
                             [
                                 {"action":"print", "delay":2000, "params": {"body":{"text":"mood in room is low"}}},
@@ -1826,8 +1827,8 @@
                                 {"action":"mediascreen"}
                             ],
                             [
-                                {"action":"breakupaudio", "params": {"body":{"media":"tbu-neg-noscifi-cold.mp4","nowait":true}}},
-                                {"action":"breakupvideo", "params": {"query":{"media":"tbu-neg-noscifi-cold.mp4","delay":200}}}
+                                {"action":"soundmedia", "params": {"body":{"media":"tbu-neg-noscifi-cold.mp4","nowait":true}}},
+                                {"action":"videomedia", "params": {"query":{"media":"tbu-neg-noscifi-cold.mp4","delay":200}}}
                             ],
                             [
                                 {"action":"print", "delay":2000, "params": {"body":{"text":"mood in room is low"}}},
@@ -2209,7 +2210,7 @@
                         },
                         "actions": [
                             [
-                                {"action":"music"}
+                                {"action":"soundmedia", "params": {"body":{"media":"foreboding.mp3","nowait":true, "delay":200}}}
                             ]
                         ],
                         "next": "test"

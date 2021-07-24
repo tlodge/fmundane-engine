@@ -1,306 +1,114 @@
 [
     {
-        "id": "system",
+        "id": "pardons",
         "start": {
             "actions": [
                 []
             ],
-            "event": "system"
+            "event": "pardons"
         },
         "events": [
             {
-                "id": "system",
-                "name": "system",
+                "id": "pardons",
+                "name": "pardons",
                 "onstart": {
                     "speech": []
                 },
                 "type": "button",
                 "subscription": "/press",
                 "data": [
-                    "shutdown printer pi",
-                    "restart printer pi"
+                    "pardon me",
+                    "excuse me",
+                    "didn't understand",
+                    "I might be deaf",
+                    "say again?",
+                    "huh?",
+                    "repeat"
                 ],
                 "rules": [
                     {
                         "rule": {
                             "operator": "equals",
-                            "operand": "shutdown printer pi"
+                            "operand": "pardon me"
                         },
                         "actions": [
                             [
-                                "shutdownprinterpi"
+                                {"action":"say", "params":{"body":{"speech":[{"words":"Pardon?","voice":"Daniel"}]}}}
                             ]
                         ],
-                        "next": "system"
+                        "next": "pardons"
                     },
                     {
                         "rule": {
                             "operator": "equals",
-                            "operand": "restart printer pi"
+                            "operand": "excuse me"
                         },
                         "actions": [
                             [
-                                "restartprinterpi"
+                                {"action":"say", "params":{"body":{"speech":[{"words":"Excuse me?","voice":"Daniel"}]}}}
                             ]
                         ],
-                        "next": "system"
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        "id": "tests",
-        "start": {
-            "actions": [
-                []
-            ],
-            "event": "test"
-        },
-        "events": [
-            {
-                "id": "test",
-                "name": "test",
-                "onstart": {
-                    "speech": []
-                },
-                "type": "button",
-                "subscription": "/press",
-                "data": [
-                    "toggle windows",
-                    "say something",
-                    "print something",
-                    "play media on tv",
-                    "play music",
-                    "lights red",
-                    "lights white",
-                    "fan cool",
-                    "fan rotate",
-                    "fan off"
-                ],
-                "rules": [
-                    {
-                        "rule": {
-                            "operator": "equals",
-                            "operand": "toggle windows"
-                        },
-                        "actions": [
-                            [
-                                "togglewindows"
-                            ]
-                        ],
-                        "next": "test"
+                        "next": "pardons"
                     },
                     {
                         "rule": {
                             "operator": "equals",
-                            "operand": "say something"
+                            "operand": "didn't understand"
                         },
                         "actions": [
                             [
-                                "saygreet"
+                                {"action":"say", "params":{"body":{"speech":[{"words":"I'm sorry I didn't understand that","voice":"Daniel"}]}}}
                             ]
                         ],
-                        "next": "test"
+                        "next": "pardons"
                     },
                     {
                         "rule": {
                             "operator": "equals",
-                            "operand": "print something"
+                            "operand": "I might be deaf"
                         },
                         "actions": [
                             [
-                                "printline"
+                                {"action":"say", "params":{"body":{"speech":[{"words":"I might be a bit deaf - what did you say?","voice":"Daniel"}]}}}
                             ]
                         ],
-                        "next": "test"
+                        "next": "pardons"
                     },
                     {
                         "rule": {
                             "operator": "equals",
-                            "operand": "play media on tv"
+                            "operand": "say again?"
                         },
                         "actions": [
                             [
-                                "mediascreen",
-                                "sfx"
+                                {"action":"say", "params":{"body":{"speech":[{"words":"Can you say that again please?","voice":"Daniel"}]}}}
                             ]
                         ],
-                        "next": "test"
+                        "next": "pardons"
                     },
                     {
                         "rule": {
                             "operator": "equals",
-                            "operand": "play music"
+                            "operand": "huh?"
                         },
                         "actions": [
                             [
-                                "music"
+                                {"action":"say", "params":{"body":{"speech":[{"words":"Huh - what did you say?","voice":"Daniel"}]}}}
                             ]
                         ],
-                        "next": "test"
+                        "next": "pardons"
                     },
                     {
                         "rule": {
                             "operator": "equals",
-                            "operand": "lights red"
+                            "operand": "repeat"
                         },
                         "actions": [
                             [
-                                "redlights"
+                                {"action":"say", "params":{"body":{"speech":[{"words":"Please repeat yourself, I didn't catch that","voice":"Daniel"}]}}}
                             ]
                         ],
-                        "next": "test"
-                    },
-                    {
-                        "rule": {
-                            "operator": "equals",
-                            "operand": "lights white"
-                        },
-                        "actions": [
-                            [
-                                "whitelights"
-                            ]
-                        ],
-                        "next": "test"
-                    },
-                    {
-                        "rule": {
-                            "operator": "equals",
-                            "operand": "fan cool"
-                        },
-                        "actions": [
-                            [
-                                "fancool"
-                            ]
-                        ],
-                        "next": "test"
-                    },
-                    {
-                        "rule": {
-                            "operator": "equals",
-                            "operand": "fan rotate"
-                        },
-                        "actions": [
-                            [
-                                "fancoolblast"
-                            ]
-                        ],
-                        "next": "test"
-                    },
-                    {
-                        "rule": {
-                            "operator": "equals",
-                            "operand": "fan off"
-                        },
-                        "actions": [
-                            [
-                                "fanoff"
-                            ]
-                        ],
-                        "next": "test"
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        "id": "rudeness",
-        "start": {
-            "actions": [
-                []
-            ],
-            "event": "oi"
-        },
-        "events": [
-            {
-                "id": "oi",
-                "name": "oi",
-                "onstart": {
-                    "speech": []
-                },
-                "type": "button",
-                "subscription": "/press",
-                "data": [
-                    "excuseme",
-                    "hello?",
-                    "hey you",
-                    "look here",
-                    "got all day",
-                    "tick tock"
-                ],
-                "rules": [
-                    {
-                        "rule": {
-                            "operator": "equals",
-                            "operand": "excuseme"
-                        },
-                        "actions": [
-                            [
-                                "oiexcuse"
-                            ]
-                        ],
-                        "next": "oi"
-                    },
-                    {
-                        "rule": {
-                            "operator": "equals",
-                            "operand": "hello?"
-                        },
-                        "actions": [
-                            [
-                                "oihello"
-                            ]
-                        ],
-                        "next": "oi"
-                    },
-                    {
-                        "rule": {
-                            "operator": "equals",
-                            "operand": "hey you"
-                        },
-                        "actions": [
-                            [
-                                "oihey"
-                            ]
-                        ],
-                        "next": "oi"
-                    },
-                    {
-                        "rule": {
-                            "operator": "equals",
-                            "operand": "look here"
-                        },
-                        "actions": [
-                            [
-                                "oilook"
-                            ]
-                        ],
-                        "next": "oi"
-                    },
-                    {
-                        "rule": {
-                            "operator": "equals",
-                            "operand": "got all day"
-                        },
-                        "actions": [
-                            [
-                                "oiday"
-                            ]
-                        ],
-                        "next": "oi"
-                    },
-                    {
-                        "rule": {
-                            "operator": "equals",
-                            "operand": "tick tock"
-                        },
-                        "actions": [
-                            [
-                                "oitick"
-                            ]
-                        ],
-                        "next": "oi"
+                        "next": "pardons"
                     }
                 ]
             }
@@ -319,7 +127,11 @@
                 "id": "start",
                 "name": "start",
                 "onstart": {
-                   "actions":[["dysonscreen"]]
+                    "actions": [
+                        [
+                            {"action":"dysonscreen"}
+                        ]
+                    ]
                 },
                 "type": "button",
                 "subscription": "/press",
@@ -334,26 +146,27 @@
                         },
                         "actions": [
                             [
-                                "fancool"
+                                {"action":"fan", "params":{"query":{"rotate":false, "power":1, "cool":true}}}
                             ],
                             [
-                                "whitelights"
+                                {"action":"whitelights"}
                             ],
                             [
-                                "togglewindows"
+                                {"action":"togglewindows"}
                             ]
                         ],
                         "next": "reseteverything"
                     }
                 ]
             },
+            
             {
                 "id": "reseteverything",
                 "name": "reseteverything",
                 "onstart": {
                     "speech": [
                         {
-                            "words": "I’m just turning myself on.  Wait a minute",
+                            "words": "I am just turning myself on.  Wait a minute",
                             "delay": "",
                             "voice": "Daniel",
                             "background": "",
@@ -361,7 +174,13 @@
                             "rate": "180"
                         }
                     ],
-                    "actions":[["immersive1", "homescreen", "fancool"]]
+                    "actions": [
+                        [
+                            { "delay":300, "action": "immersive", "params":{"query":{"script_id":"ID101"}}},
+                            { "delay":500, "action": "homescreen"},
+                            { "delay":1000, "action":"fan", "params":{"query":{"rotate":false, "power":4, "cool":true}}}
+                        ]
+                    ]
                 },
                 "type": "button",
                 "subscription": "/press",
@@ -437,13 +256,14 @@
                     ],
                     "actions": [
                         [
-                            "mediascreen"
+                            {"delay":0, "action":"mediascreen"}
                         ],
                         [
-                            "countdown"
+                            {"delay":0, "action": "videomedia", "params":{"query":{"media":"countdown.mp4","delay":0}}}
+                            
                         ],
                         [
-                            "immersive2"
+                            {"delay":0,"action": "immersive", "params":{"query":{"script_id":"ID102"}}}
                         ]
                     ]
                 },
@@ -460,7 +280,7 @@
                         },
                         "actions": [
                             [
-                                "homescreen"
+                               {"action": "homescreen"}
                             ]
                         ],
                         "next": "tookyourtime"
@@ -553,7 +373,13 @@
                             "rate": "180"
                         }
                     ],
-                    "actions":[["immersive4","immersive5","immersive6"]]
+                    "actions": [
+                        [
+                            {"delay":200, "action": "immersive", "params":{"query":{"script_id":"ID106"}}},
+                            {"delay":200, "action": "immersive", "params":{"query":{"script_id":"ID016"}}},
+                            {"delay":200, "action": "immersive", "params":{"query":{"script_id":"ID021"}}}
+                        ]
+                    ]
                 },
                 "type": "button",
                 "subscription": "/press",
@@ -773,7 +599,11 @@
                             "rate": "180"
                         }
                     ],
-                    "actions":[["immersive3"]]
+                    "actions": [
+                        [
+                            {"delay":200, "action": "immersive", "params":{"query":{"script_id":"ID106"}}}
+                        ]
+                    ]
                 },
                 "type": "button",
                 "subscription": "/press",
@@ -850,7 +680,7 @@
                         },
                         "actions": [
                             [
-                                "camerascreen"
+                                {"action":"camerascreen"}
                             ]
                         ],
                         "next": "watchingyou"
@@ -864,13 +694,13 @@
                     "speech": [
                         {
                             "words": "You may have seen I’m watching you. I’m on top of the TV.  Hey there",
-                            "delay": 0,
+                            "delay": 3000,
                             "voice": "Daniel",
                             "background": "",
                             "rate": "180"
                         },
                         {
-                            "words": "I’ve been scanning your face since you arrived and very nice it is too! ",
+                            "words": "I’ve been scanning your face since you arrived. And very nice it is too! ",
                             "delay": 0,
                             "voice": "Daniel",
                             "background": "",
@@ -893,7 +723,8 @@
                     ],
                     "actions": [
                         [
-                            "camerascan"
+                            {"delay":0, "action": "camerascan", "params":{"query":{"state":null}}},
+                            {"delay":11000, "action": "camerascan", "params":{"query":{"state":"scan"}}}
                         ]
                     ]
                 },
@@ -910,7 +741,7 @@
                         },
                         "actions": [
                             [
-                                "homescreen"
+                                {"action":"homescreen"}
                             ]
                         ],
                         "next": "voices"
@@ -1444,7 +1275,9 @@
                     ],
                     "actions": [
                         [
-                            "togglewindows"
+                            {"delay":0, "action": "togglewindows"},
+                            {"action":"message", "delay":0, "params": {"query":{"message":":set windows [OPAQUE]"}}},
+                            {"delay":3000, "action": "togglewindows"}
                         ]
                     ]
                 },
@@ -1481,7 +1314,8 @@
                     ],
                     "actions": [
                         [
-                            "fancoolblast"
+                            {"delay":200,  "action":"fan", "params":{"query":{"rotate":true, "power":10, "cool":true, "from":0, "to":90}}},
+                            {"action":"message", "delay":1000, "params": {"query":{"message":":set fan [FULLPOWER, ROTATE]"}}}
                         ]
                     ]
                 },
@@ -1518,7 +1352,9 @@
                     ],
                     "actions": [
                         [
-                            "fancool","redlights"
+                            {"delay":0,  "action":"fan", "params":{"query":{"rotate":false, "power":1, "cool":true}}},
+                            {"delay":0, "action": "redlights"},
+                            {"action":"message", "delay":1000, "params": {"query":{"message":":set lights [RED]; set fan [OFF]"}}}
                         ]
                     ]
                 },
@@ -1554,8 +1390,11 @@
                         }
                     ],
                     "actions": [
- 			            [
-                            "mediascreen", "sfx"
+                        [
+                            {"delay":0, "action":"mediascreen"},
+                            {"action":"message", "delay":1000, "params": {"query":{"message":":play [TV.mp4]"}}},
+                            {"delay":2000, "action": "videomedia", "params":{"query":{"media":"TV.mp4","delay":50}}}
+                           
                         ]
                     ]
                 },
@@ -1571,7 +1410,7 @@
                             "operand": "print"
                         },
                         "actions": [
-                            []
+                            [{"delay":0, "action":"homescreen"}]
                         ],
                         "next": "labelprinter"
                     }
@@ -1590,7 +1429,13 @@
                             "rate": "180"
                         }
                     ],
-		    "actions":[["printconsent1", "printconsent2", "printline"]]
+                    "actions": [
+                        [
+                            {"action":"print", "delay":0, "params": {"body":{"text":"I consent to all of my data"}}},
+                            {"action":"print", "delay":2000, "params": {"body":{"text":"being used by Future Mundane Inc."}}},
+                            {"action":"print", "delay":2000, "params": {"body":{"text":"______________________________"}}}
+                        ]
+                    ]
                 },
                 "type": "button",
                 "subscription": "/press",
@@ -1629,7 +1474,8 @@
                             "background": "",
                             "rate": "180"
                         }
-                    ]
+                    ],
+                    "actions":[[{"delay":0, "action": "camerascreen"}]]
                 },
                 "type": "button",
                 "subscription": "/press",
@@ -1683,29 +1529,292 @@
                             "rate": "180"
                         }
                     ],
-                    "actions":[["togglewindows"]]
+                    "actions": [
+                        [
+                            {"delay":0, "action": "homescreen"},
+                            {"delay":0, "action":"togglewindows"}
+                        ]
+                    ]
                 },
                 "type": "button",
                 "subscription": "/press",
-                "data": [
-                    "play it"
+                "data": [ 
+                    "scifi-pos-warm",
+                    "scifi-pos-cold",
+                    "scifi-neg-warm",
+                    "scifi-neg-cold",
+                    "pos-warm",
+                    "neg-warm",
+                    "neg-cold"
                 ],
                 "rules": [
                     {
                         "rule": {
                             "operator": "equals",
-                            "operand": "play it"
+                            "operand": "scifi-pos-warm"
                         },
                         "actions": [
                             [
-                                "immersive4"
+                                {"action": "immersive", "params":{"query":{"script_id":"ID106"}}}
                             ],
                             [
-                                "mediascreen"
+                                {"action":"mediascreen"}
                             ],
                             [
-                                "breakup1audio",
-                                "breakup1video"
+                                {"action":"videomedia", "params": {"query":{"media":"tbu-pos-scifi-warm.mp4","delay":0}}}, 
+                                {"action":"soundmedia", "params": {"body":{"media":"tbu-pos-scifi-warm.mp4","nowait":true, "delay":200}}}
+                            ],
+                            [
+                                {"action":"print", "delay":2000, "params": {"body":{"text":"mood in room is positive"}}},
+                                {"action":"print", "delay":6000, "params": {"body":{"text":"Querying Databox for genre"}}},
+                                {"action":"print", "delay":0, "params": {"body":{"text":"customisation algorithm: [WARM]"}}},
+                                {"action":"print", "delay":0, "params": {"body":{"text":"version selected"}}},
+                                {"action":"print", "delay":166000, "params": {"body":{"text":"print_low_attentiveness"}}},
+                                {"action":"print", "delay":98000, "params": {"body":{"text":"Audience mood is LOW: showing positive ending"}}},
+                                {"action":"print", "delay":1000, "params": {"body":{"text":"Record of mood analysis logged to Databox vault"}}}
+                            ],
+                            [
+                                {"action":"message", "delay":2000, "params": {"query":{"message":"Baseline mood analysis complete, current mood quantified as [POSITIVE]"}}},
+                                {"action":"message", "delay":6000, "params": {"query":{"message":"Choosing genre customisations. [COLD] colour grade selected.."}}},
+                                {"action":"message", "delay":164000, "params": {"query":{"message":"Low attentiveness detected, scheduling sci-fi detour to enliven audience"}}},
+                                {"action":"message", "delay":29000, "params": {"query":{"message":"New attentiveness level ACCEPTABLE"}}},
+                                {"action":"message", "delay":69000, "params": {"query":{"message":"Audience mood is LOW: showing positive ending"}}}  
+                            ],
+                            [
+                                {"action":"fan", "params":{"query":{"rotate":false, "power":4, "cool":true}}, "delay":166000},
+                                {"action":"fan", "params":{"query":{"rotate":false, "power":1, "cool":true}}, "delay":5000}
+                            ]
+                        ],
+                        "next": "film"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "scifi-pos-cold"
+                        },
+                        "actions": [
+                            [
+                                {"action": "immersive", "params":{"query":{"script_id":"ID106"}}}
+                            ],
+                            [
+                                {"action":"mediascreen"}
+                            ],
+                            [
+                                {"action":"videomedia", "params": {"query":{"media":"tbu-pos-scifi-cold.mp4","delay":0}}}, 
+                                {"action":"soundmedia", "params": {"body":{"media":"tbu-pos-scifi-cold.mp4","nowait":true, "delay":200}}}
+                            ],
+                            [
+                                {"action":"print", "delay":2000, "params": {"body":{"text":"mood in room is positive"}}},
+                                {"action":"print", "delay":6000, "params": {"body":{"text":"Querying Databox for genre"}}},
+                                {"action":"print", "delay":0, "params": {"body":{"text":"customisation algorithm: [COLD]"}}},
+                                {"action":"print", "delay":0, "params": {"body":{"text":"version selected"}}},
+                                {"action":"print", "delay":166000, "params": {"body":{"text":"print_low_attentiveness"}}},
+                                {"action":"print", "delay":98000, "params": {"body":{"text":"Audience mood is LOW: showing positive ending"}}},
+                                {"action":"print", "delay":1000, "params": {"body":{"text":"Record of mood analysis logged to Databox vault"}}}
+                            ],
+                            [
+                                {"action":"message", "delay":2000, "params": {"query":{"message":"Baseline mood analysis complete, current mood quantified as [POSITIVE]"}}},
+                                {"action":"message", "delay":6000, "params": {"query":{"message":"Choosing genre customisations. [COLD] colour grade selected.."}}},
+                                {"action":"message", "delay":164000, "params": {"query":{"message":"Low attentiveness detected, scheduling sci-fi detour to enliven audience"}}},
+                                {"action":"message", "delay":29000, "params": {"query":{"message":"New attentiveness level ACCEPTABLE"}}},
+                                {"action":"message", "delay":69000, "params": {"query":{"message":"Audience mood is LOW: showing positive ending"}}}  
+                            ],
+                            [
+                                {"action":"fan", "params":{"query":{"rotate":false, "power":4, "cool":true}}, "delay":166000},
+                                {"action":"fan", "params":{"query":{"rotate":false, "power":1, "cool":true}}, "delay":5000}
+                            ]
+                        ],
+                        "next": "film"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "scifi-neg-warm"
+                        },
+                        "actions": [
+                            [
+                                {"action": "immersive", "params":{"query":{"script_id":"id106"}}}
+                            ],
+                            [
+                                {"action":"mediascreen"}
+                            ],
+                            [
+                                {"action":"print", "delay":2000, "params": {"body":{"text":"mood in room is low"}}},
+                                {"action":"print", "delay":6000, "params": {"body":{"text":"Querying Databox for genre"}}},
+                                {"action":"print", "delay":0, "params": {"body":{"text":"customisation algorithm: [WARM]"}}},
+                                {"action":"print", "delay":0, "params": {"body":{"text":"version selected"}}},
+                                {"action":"print", "delay":166000, "params": {"body":{"text":"print_low_attentiveness"}}},
+                                {"action":"print", "delay":98000, "params": {"body":{"text":"Audience mood is HIGH: allowing melancholy outcome"}}},
+                                {"action":"print", "delay":1000, "params": {"body":{"text":"Record of mood analysis logged to Databox vault"}}}
+                            ],
+                            [
+                                {"action":"message", "delay":2000, "params": {"query":{"message":"Baseline mood analysis complete, current mood quantified as [LOW]"}}},
+                                {"action":"message", "delay":6000, "params": {"query":{"message":"Choosing genre customisations. [WARM] colour grade selected.."}}},
+                                {"action":"message", "delay":164000, "params": {"query":{"message":"Low attentiveness detected, scheduling sci-fi detour to enliven audience"}}},
+                                {"action":"message", "delay":29000, "params": {"query":{"message":"New attentiveness level ACCEPTABLE"}}},
+                                {"action":"message", "delay":69000, "params": {"query":{"message":"Audience mood is HIGH: allowing melancholy outcome"}}}  
+                            ],
+                            [
+                                {"action":"fan", "params":{"query":{"rotate":false, "power":4, "cool":true}}, "delay":166000},
+                                {"action":"fan", "params":{"query":{"rotate":false, "power":1, "cool":true}}, "delay":5000}
+                            ]
+                        ],
+                        "next": "film"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "scifi-neg-cold"
+                        },
+                        "actions": [
+                            [
+                                {"action": "immersive", "params":{"query":{"script_id":"id106"}}}
+                            ],
+                            [
+                                {"action":"mediascreen"}
+                            ],
+                            [
+                                {"action":"soundmedia", "params": {"body":{"media":"tbu-neg-scifi-cold.mp4","nowait":true}}},
+                                {"action":"videomedia", "params": {"query":{"media":"tbu-neg-scifi-cold.mp4","delay":200}}}
+                                
+                            ],
+                            [
+                                {"action":"print", "delay":2000, "params": {"body":{"text":"mood in room is low"}}},
+                                {"action":"print", "delay":6000, "params": {"body":{"text":"Querying Databox for genre"}}},
+                                {"action":"print", "delay":0, "params": {"body":{"text":"customisation algorithm: [COLD]"}}},
+                                {"action":"print", "delay":0, "params": {"body":{"text":"version selected"}}},
+                                {"action":"print", "delay":164000, "params": {"body":{"text":"print_low_attentiveness"}}},
+                                {"action":"print", "delay":98000, "params": {"body":{"text":"Audience mood is HIGH: allowing melancholy outcome"}}},
+                                {"action":"print", "delay":1000, "params": {"body":{"text":"Record of mood analysis logged to Databox vault"}}}
+                            ],
+                            [
+                                {"action":"message", "delay":2000, "params": {"query":{"message":"Baseline mood analysis complete, current mood quantified as [LOW]"}}},
+                                {"action":"message", "delay":6000, "params": {"query":{"message":"Choosing genre customisations. [COLD] colour grade selected.."}}},
+                                {"action":"message", "delay":164000, "params": {"query":{"message":"Low attentiveness detected, scheduling sci-fi detour to enliven audience"}}},
+                                {"action":"message", "delay":29000, "params": {"query":{"message":"New attentiveness level ACCEPTABLE"}}},
+                                {"action":"message", "delay":69000, "params": {"query":{"message":"Audience mood is HIGH: allowing melancholy outcome"}}}  
+                            ],
+                            [
+                                {"action":"fan", "params":{"query":{"rotate":false, "power":4, "cool":true}}, "delay":166000},
+                                {"action":"fan", "params":{"query":{"rotate":false, "power":1, "cool":true}}, "delay":5000}
+                            ]
+                        ],
+                        "next": "film"
+                    },
+
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "pos-warm"
+                        },
+                        "actions": [
+                            [
+                                {"action": "immersive", "params":{"query":{"script_id":"id106"}}}
+                            ],
+                            [
+                                {"action":"mediascreen"}
+                            ],
+                            [
+                                {"action":"soundmedia", "params": {"body":{"media":"tbu-pos-noscifi-warm.mp4","nowait":true}}},
+                                {"action":"videomedia", "params": {"query":{"media":"tbu-pos-noscifi-warm.mp4","delay":200}}}   
+                            ],
+                            [
+                                {"action":"print", "delay":2000, "params": {"body":{"text":"mood in room is positive"}}},
+                                {"action":"print", "delay":6000, "params": {"body":{"text":"Querying Databox for genre"}}},
+                                {"action":"print", "delay":0, "params": {"body":{"text":"customisation algorithm: [WARM]"}}},
+                                {"action":"print", "delay":0, "params": {"body":{"text":"version selected"}}},
+                                {"action":"print", "delay":164000, "params": {"body":{"text":"Skipping SCI_FI detour..."}}},
+                                {"action":"print", "delay":81000, "params": {"body":{"text":"Audience mood is LOW: showing positive outcome"}}},
+                                {"action":"print", "delay":4000, "params": {"body":{"text":"Record of mood analysis logged to Databox vault"}}}
+                            ],
+                            [
+                                {"action":"message", "delay":2000, "params": {"query":{"message":"Baseline mood analysis complete, current mood quantified as [POSITIVE]"}}},
+                                {"action":"message", "delay":6000, "params": {"query":{"message":"Choosing genre customisations. [WARM] colour grade selected.."}}},
+                                {"action":"message", "delay":164000, "params": {"query":{"message":"Skipping SCI_FI detour..."}}},
+                                {"action":"message", "delay":81000, "params": {"query":{"message":"Audience mood is LOW: showing positive outcome"}}}  
+                            ],
+                            [
+                                {"action":"soundmedia", "delay": 176000, "params": {"body":{"media":"tbu-clock-middle-music.mp3","nowait":true}}}
+                            ],
+                            [
+                                {"action":"fan", "params":{"query":{"rotate":false, "power":4, "cool":true}}, "delay":164000},
+                                {"action":"fan", "params":{"query":{"rotate":false, "power":1, "cool":true}}, "delay":5000}
+                            ]
+                        ],
+                        "next": "film"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "neg-warm"
+                        },
+                        "actions": [
+                            [
+                                {"action": "immersive", "params":{"query":{"script_id":"id106"}}}
+                            ],
+                            [
+                                {"action":"mediascreen"}
+                            ],
+                            [
+                                {"action":"soundmedia", "params": {"body":{"media":"tbu-neg-noscifi-warm.mp4","nowait":true}}},
+                                {"action":"videomedia", "params": {"query":{"media":"tbu-neg-noscifi-warm.mp4","delay":200}}}
+                            ],
+                            [
+                                {"action":"print", "delay":2000, "params": {"body":{"text":"mood in room is low"}}},
+                                {"action":"print", "delay":6000, "params": {"body":{"text":"Querying Databox for genre"}}},
+                                {"action":"print", "delay":0, "params": {"body":{"text":"customisation algorithm: [WARM]"}}},
+                                {"action":"print", "delay":0, "params": {"body":{"text":"version selected"}}},
+                                {"action":"print", "delay":164000, "params": {"body":{"text":"Skipping SCI_FI detour..."}}},
+                                {"action":"print", "delay":81000, "params": {"body":{"text":"Audience mood is HIGH: allowing melancholy outcome"}}},
+                                {"action":"print", "delay":4000, "params": {"body":{"text":"Record of mood analysis logged to Databox vault"}}}
+                            ],
+                            [
+                                {"action":"message", "delay":2000, "params": {"query":{"message":"Baseline mood analysis complete, current mood quantified as [LOW]"}}},
+                                {"action":"message", "delay":6000, "params": {"query":{"message":"Choosing genre customisations. [WARM] colour grade selected.."}}},
+                                {"action":"message", "delay":164000, "params": {"query":{"message":"Skipping SCI_FI detour..."}}},
+                                {"action":"message", "delay":81000, "params": {"query":{"message":"Audience mood is HIGH: allowing melancholy outcome"}}}  
+                            ],
+                            [
+                                {"action":"fan", "params":{"query":{"rotate":false, "power":4, "cool":true}}, "delay":164000},
+                                {"action":"fan", "params":{"query":{"rotate":false, "power":1, "cool":true}}, "delay":5000}
+                            ]
+                        ],
+                        "next": "film"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "neg-cold"
+                        },
+                        "actions": [
+                            [
+                                {"action": "immersive", "params":{"query":{"script_id":"id106"}}}
+                            ],
+                            [
+                                {"action":"mediascreen"}
+                            ],
+                            [
+                                {"action":"soundmedia", "params": {"body":{"media":"tbu-neg-noscifi-cold.mp4","nowait":true}}},
+                                {"action":"videomedia", "params": {"query":{"media":"tbu-neg-noscifi-cold.mp4","delay":200}}}
+                            ],
+                            [
+                                {"action":"print", "delay":2000, "params": {"body":{"text":"mood in room is low"}}},
+                                {"action":"print", "delay":6000, "params": {"body":{"text":"Querying Databox for genre"}}},
+                                {"action":"print", "delay":0, "params": {"body":{"text":"customisation algorithm: [COLD]"}}},
+                                {"action":"print", "delay":0, "params": {"body":{"text":"version selected"}}},
+                                {"action":"print", "delay":164000, "params": {"body":{"text":"Skipping SCI_FI detour..."}}},
+                                {"action":"print", "delay":81000, "params": {"body":{"text":"Audience mood is HIGH: allowing melancholy outcome"}}},
+                                {"action":"print", "delay":4000, "params": {"body":{"text":"Record of mood analysis logged to Databox vault"}}}
+                            ],
+                            [
+                                {"action":"message", "delay":2000, "params": {"query":{"message":"Baseline mood analysis complete, current mood quantified as [LOW]"}}},
+                                {"action":"message", "delay":6000, "params": {"query":{"message":"Choosing genre customisations. [COLD] colour grade selected.."}}},
+                                {"action":"message", "delay":164000, "params": {"query":{"message":"Skipping SCI_FI detour..."}}},
+                                {"action":"message", "delay":81000, "params": {"query":{"message":"Audience mood is HIGH: allowing melancholy outcome"}}}  
+                            ],
+                            [
+                                {"action":"fan", "params":{"query":{"rotate":false, "power":4, "cool":true}}, "delay":164000},
+                                {"action":"fan", "params":{"query":{"rotate":false, "power":1, "cool":true}}, "delay":5000}
                             ]
                         ],
                         "next": "film"
@@ -1813,7 +1922,7 @@
                         },
                         "actions": [
                             [
-                                "dysonscreen"
+                                {"action":"dysonscreen"}
                             ]
                         ],
                         "next": "start"
@@ -1857,115 +1966,321 @@
         ]
     },
     {
-        "id": "pardons",
+        "id": "rudeness",
         "start": {
             "actions": [
                 []
             ],
-            "event": "pardons"
+            "event": "oi"
         },
         "events": [
             {
-                "id": "pardons",
-                "name": "pardons",
+                "id": "oi",
+                "name": "oi",
                 "onstart": {
                     "speech": []
                 },
                 "type": "button",
                 "subscription": "/press",
                 "data": [
-                    "pardon me",
-                    "excuse me",
-                    "didn't understand",
-                    "I might be deaf",
-                    "say again?",
-                    "huh?",
-                    "repeat"
+                    "excuseme",
+                    "hello?",
+                    "hey you",
+                    "look here",
+                    "got all day",
+                    "tick tock"
                 ],
                 "rules": [
                     {
                         "rule": {
                             "operator": "equals",
-                            "operand": "pardon me"
+                            "operand": "excuseme"
                         },
                         "actions": [
                             [
-                                "pardonpardon"
+                                {"action":"say", "params":{"body":{"speech":[{"words":"Excuse me.. I'm still here","voice":"Daniel"}]}}}
                             ]
                         ],
-                        "next": "pardons"
+                        "next": "oi"
                     },
                     {
                         "rule": {
                             "operator": "equals",
-                            "operand": "excuse me"
+                            "operand": "hello?"
                         },
                         "actions": [
                             [
-                                "pardonexcuse"
+                                {"action":"say", "params":{"body":{"speech":[{"words":"Hello?","voice":"Daniel"}]}}}
                             ]
                         ],
-                        "next": "pardons"
+                        "next": "oi"
                     },
                     {
                         "rule": {
                             "operator": "equals",
-                            "operand": "didn't understand"
+                            "operand": "hey you"
                         },
                         "actions": [
                             [
-                                "pardonunderstand"
+                                {"action":"say", "params":{"body":{"speech":[{"words":"Hey, you, pay attention! We're trying to do the future here","voice":"Daniel"}]}}}
                             ]
                         ],
-                        "next": "pardons"
+                        "next": "oi"
                     },
                     {
                         "rule": {
                             "operator": "equals",
-                            "operand": "I might be deaf"
+                            "operand": "look here"
                         },
                         "actions": [
                             [
-                                "pardondeaf"
+                                {"action":"say", "params":{"body":{"speech":[{"words":"Look here, I've got things to do as well, can we just get on with it?","voice":"Daniel"}]}}}
                             ]
                         ],
-                        "next": "pardons"
+                        "next": "oi"
                     },
                     {
                         "rule": {
                             "operator": "equals",
-                            "operand": "say again?"
+                            "operand": "got all day"
                         },
                         "actions": [
                             [
-                                "pardonsay"
+                                {"action":"say", "params":{"body":{"speech":[{"words":"I haven't got all day","voice":"Daniel"}]}}}
                             ]
                         ],
-                        "next": "pardons"
+                        "next": "oi"
                     },
                     {
                         "rule": {
                             "operator": "equals",
-                            "operand": "huh?"
+                            "operand": "tick tock"
                         },
                         "actions": [
                             [
-                                "pardonhuh"
+                                {"action":"say", "params":{"body":{"speech":[{"words":"Tick, tock, tick, tock - time is of the essence. Let's get on with it","voice":"Daniel"}]}}}
                             ]
                         ],
-                        "next": "pardons"
+                        "next": "oi"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "tests",
+        "start": {
+            "actions": [
+                []
+            ],
+            "event": "test"
+        },
+        "events": [
+            {
+                "id": "test",
+                "name": "test",
+                "onstart": {
+                    "speech": []
+                },
+                "type": "button",
+                "subscription": "/press",
+                "data": [
+                    "toggle windows",
+                    "say something",
+                    "print something",
+                    "display message",
+                    "play media on tv",
+                    "play music",
+                    "lights red",
+                    "lights white",
+                    "fan cool",
+                    "fan rotate",
+                    "fan off"
+                ],
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "toggle windows"
+                        },
+                        "actions": [
+                            [
+                                {"action":"togglewindows"}
+                            ]
+                        ],
+                        "next": "test"
                     },
                     {
                         "rule": {
                             "operator": "equals",
-                            "operand": "repeat"
+                            "operand": "say something"
                         },
                         "actions": [
                             [
-                                "pardonrepeat"
+                                {"action":"say", "params":{"body":{"speech":[{"words":"This is a test of audio!","voice":"Daniel"}]}}}
                             ]
                         ],
-                        "next": "pardons"
+                        "next": "test"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "display message"
+                        },
+                        "actions": [
+                            [
+                                {"action":"message", "delay":0, "params": {"query":{"message":"hello this is me on the screen!"}}}
+                               
+                            ]
+                        ],
+                        "next": "test"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "print something"
+                        },
+                        "actions": [
+                            [
+                                {"action":"print", "delay":0, "params": {"body":{"text":"one two three test"}}}
+                            ]
+                        ],
+                        "next": "test"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "play media on tv"
+                        },
+                        "actions": [
+                            [
+                                {"action": "mediascreen"},
+                                {"action":"sfx"}
+                            ]
+                        ],
+                        "next": "test"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "play music"
+                        },
+                        "actions": [
+                            [
+                                {"action":"soundmedia", "params": {"body":{"media":"foreboding.mp3","nowait":true, "delay":200}}}
+                            ]
+                        ],
+                        "next": "test"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "lights red"
+                        },
+                        "actions": [
+                            [
+                                {"action":"redlights"}
+                            ]
+                        ],
+                        "next": "test"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "lights white"
+                        },
+                        "actions": [
+                            [
+                                {"action":"whitelights"}
+                            ]
+                        ],
+                        "next": "test"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "fan cool"
+                        },
+                        "actions": [
+                            [
+                                {"action":"fan", "params":{"query":{"rotate":false, "power":4, "cool":true}}, "delay":0}
+                            ]
+                        ],
+                        "next": "test"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "fan rotate"
+                        },
+                        "actions": [
+                            [
+                                {"action":"fan", "params":{"query":{"rotate":true, "power":10, "cool":true, "from":0, "to":90}}, "delay":0}
+                            ]
+                        ],
+                        "next": "test"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "fan off"
+                        },
+                        "actions": [
+                            [
+                                {"action":"fan", "delay":0,"params":{"query":{"rotate":false, "power":1, "cool":true}}}
+                            ]
+                        ],
+                        "next": "test"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "system",
+        "start": {
+            "actions": [
+                []
+            ],
+            "event": "system"
+        },
+        "events": [
+            {
+                "id": "system",
+                "name": "system",
+                "onstart": {
+                    "speech": []
+                },
+                "type": "button",
+                "subscription": "/press",
+                "data": [
+                    "shutdown printer pi",
+                    "restart printer pi"
+                ],
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "shutdown printer pi"
+                        },
+                        "actions": [
+                            [
+                                {"action":"shutdownprinterpi"}
+                            ]
+                        ],
+                        "next": "system"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "restart printer pi"
+                        },
+                        "actions": [
+                            [
+                                {"action": "restartprinterpi"}
+                            ]
+                        ],
+                        "next": "system"
                     }
                 ]
             }

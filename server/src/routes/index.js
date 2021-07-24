@@ -2,7 +2,7 @@ import express from 'express';
 import {send} from '../listener';
 import sm from '../statemachine';
 import fs from 'fs'
-import { notStrictEqual } from 'assert';
+
 
 let _layers = [];
 
@@ -110,7 +110,6 @@ indexRouter.get('/layers', (req, res)=>{
 
 indexRouter.get('/start', async (req, res)=>{
    
-    console.log("OK AM IN START!!!");
     //need to reset everything here..!
     
     

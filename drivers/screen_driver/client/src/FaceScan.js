@@ -1,9 +1,6 @@
 //https://medium.com/codesphere-cloud/creating-a-face-detection-web-app-with-react-and-codesphere-28b1f057145d
 
 import React, { useRef, useEffect, useState, createRef,  } from "react";
-import {
-  useHistory
-} from "react-router-dom";
 import "./FaceScan.css";
 import * as tf from "@tensorflow/tfjs";
 import * as facemesh from "@tensorflow-models/facemesh";
@@ -74,7 +71,6 @@ function FaceScan({scan="none"}) {
   },[video]);
 
   useInterval( async () => {
-    console.log(".");
     const result = await detectFace(network,video,canvasReference, scan)
     if (!result){
       setDelay(5000);

@@ -123,6 +123,14 @@
           "contenttype":"application/json"
        }
     },
+    "camerascan":{
+       "type":"request",
+       "data":{
+          "url":"http://127.0.0.1:9102/api/camera/scan",
+          "type":"GET",
+          "contenttype":"application/json"
+       }
+    },
     "mediascreen":{
        "type":"request",
        "data":{

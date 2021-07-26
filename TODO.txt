@@ -6,7 +6,8 @@ Pull new code
 Copy new media over
 mv IPs.caravan.json => IPs.json
 
-rebuild the screen driver
+rebuild the screen driver (client)
+rebuild the main client
 
 before you do this:
 

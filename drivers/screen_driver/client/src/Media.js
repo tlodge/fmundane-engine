@@ -20,8 +20,12 @@ function Media({media="", delay=500}) {
   
 //<iframe src="https://cross-origin.com/myvideo.html" allow="autoplay; fullscreen">
     const renderVideo = ()=>{
-        return <video fullScreen autoPlay muted preload="auto" style={{width:"100vw", height:"100vh"}}>
-                    <source src={media} type="video/mp4"/>
+        const url = window.location.href.replace("/media", "");
+        console.log("url is", window.location.href);
+        console.log("video src set at", url);
+
+        return <video fullScreen autoPlay muted style={{width:"100vw", height:"100vh"}}>
+                    <source src={`${url}/${media}`} type="video/mp4"/>
                 </video>
     }
 

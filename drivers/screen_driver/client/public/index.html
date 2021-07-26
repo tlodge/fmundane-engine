@@ -21,6 +21,7 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
 	<title>React App</title>
+  
 </head>
 
 <body style="margin:0px; overflow:hidden">
@@ -36,8 +37,22 @@
       The build step will place the bundled scripts into the <body> tag.
 
       To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
+      To c
+      reate a production bundle, use `npm run build` or `yarn build`.
     -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('sw.js')
+          .then(swReg => {
+            console.log('Service Worker is registered', swReg);
+          })
+          .catch(err => {
+            console.error('Service Worker Error', err);
+          });
+        });
+      }
+    </script>
 </body>
 
 </html>

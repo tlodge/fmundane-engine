@@ -96,6 +96,16 @@ const findNode = (t, name)=>{
     return node;
 }
 
+const recenter = (gtree,t)=>{
+    const g = d3.select(gtree.current);
+    const db = g.select("g#dragbox");
+    db.call(d3z.zoom, d3z.zoomIdentity.scale(0.8));
+    db.attr("transform", `translate(0,0)`);
+    const {x,y} = _seen[t.id] || {x:0, y:0};
+    g.attr("transform", `translate(${-y+200},${-x+t.height/2})`);
+    
+}
+
 const moveChart = (gtree, t)=>{
     
     const g = d3.select(gtree.current);
@@ -120,6 +130,7 @@ function Tree(t) {
        svg.call(d3z.zoom().on("zoom",  (e)=>{
             dgbox.attr("transform", e.transform)
         })).call(d3z.zoom, d3z.zoomIdentity.scale(0.8))
+
     }, []);
 
     const renderLinks = (links, data)=>{
@@ -142,8 +153,8 @@ function Tree(t) {
                 const mx = 20 + (labeldata.actions.length - 1) * 20;
 
                 const label = labeldata.actions.map((ld,i)=>{
-                   
-                    return <text key={ld.join(",")} fontSize="x-small" textAnchor={"middle"} x={l.y+60} y={l.x-mx + (i*18)} > {ld.join(',')}</text>
+                    
+                    return <text key={ld.map(a=>a.action).join(",")} fontSize="x-small" textAnchor={"middle"} x={l.y+60} y={l.x-mx + (i*18)} > {[...new Set(ld.map(l=>l.action))].join(',')}</text>
                 });
 
                 const {rule={}} = labeldata;
@@ -215,6 +226,7 @@ function Tree(t) {
 
     return <div className="text-black bg-gray-200 rounded bg-white overflow-hidden shadow-lg"> 
         <svg ref={mytree} height={t.height} style={{width:`calc(100vw - 280px)`}}>
+            <circle onClick={()=>{recenter(gtree,t)}} cx={50} cy={50} r="10" fill="white" strokeWidth={2} stroke="#000"></circle>
             <g ref ={gtree} transform={`translate(120,${t.height/2})`}>
                 <g id="dragbox"> 
                     {renderLinks(links(t), rids(t))}

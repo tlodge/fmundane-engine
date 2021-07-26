@@ -6,7 +6,7 @@ import debug from 'debug';
 import http from 'http';
 import app from '../app';
 import _io from 'socket.io';
-import {init} from '../ws';
+import {init, disconnect} from '../ws';
 
 
 /**
@@ -37,6 +37,7 @@ app.set('port', port);
  */
 const server = http.createServer(app);
 const io = _io.listen(server);
+const allClients = [];
 
 /**
  * Event listener for HTTP server "error" event.
@@ -71,12 +72,8 @@ const onListening = () => {
 };
 
 io.on('connection',  (socket)=>{
-  //if (!_socket){
-    console.log("Connected succesfully to the socket ...");
+    console.log("Seen a socket connection");
     init(socket);
-    //_socket = socket;
- // }
- 
 });
 /**
  * Listen on provided port, on all network interfaces.

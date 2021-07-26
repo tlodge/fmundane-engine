@@ -23,7 +23,7 @@
                     "I might be deaf",
                     "say again?",
                     "huh?",
-                    "repeat"
+                    "repeat please"
                 ],
                 "rules": [
                     {
@@ -101,7 +101,7 @@
                     {
                         "rule": {
                             "operator": "equals",
-                            "operand": "repeat"
+                            "operand": "repeat please"
                         },
                         "actions": [
                             [
@@ -342,11 +342,7 @@
                             "operator": "equals",
                             "operand": "next"
                         },
-                        "actions": [
-                            [
-                                ""
-                            ]
-                        ],
+                        "actions": [[]],
                         "next": "aboutme"
                     }
                 ]
@@ -398,7 +394,7 @@
                         },
                         "actions": [
                             [
-                                ""
+                                
                             ]
                         ],
                         "next": "negative"
@@ -409,9 +405,7 @@
                             "operand": "yes"
                         },
                         "actions": [
-                            [
-                                ""
-                            ]
+                            []
                         ],
                         "next": "positive"
                     },
@@ -421,9 +415,7 @@
                             "operand": "pardon?"
                         },
                         "actions": [
-                            [
-                                ""
-                            ]
+                            []
                         ],
                         "next": "pardon"
                     },
@@ -433,9 +425,7 @@
                             "operand": "repeat"
                         },
                         "actions": [
-                            [
-                                ""
-                            ]
+                            []
                         ],
                         "next": "aboutme"
                     },
@@ -445,9 +435,7 @@
                             "operand": "no questions"
                         },
                         "actions": [
-                            [
-                                ""
-                            ]
+                            []
                         ],
                         "next": "noquestions"
                     }
@@ -479,9 +467,7 @@
                             "operand": "next"
                         },
                         "actions": [
-                            [
-                                ""
-                            ]
+                            []
                         ],
                         "next": "databox"
                     }
@@ -513,9 +499,7 @@
                             "operand": "next"
                         },
                         "actions": [
-                            [
-                                ""
-                            ]
+                            []
                         ],
                         "next": "databox"
                     }
@@ -617,9 +601,7 @@
                             "operand": "next"
                         },
                         "actions": [
-                            [
-                                ""
-                            ]
+                            []
                         ],
                         "next": "thisiswhy"
                     }
@@ -724,7 +706,11 @@
                     "actions": [
                         [
                             {"delay":0, "action": "camerascan", "params":{"query":{"state":null}}},
-                            {"delay":11000, "action": "camerascan", "params":{"query":{"state":"scan"}}}
+                            {"delay":11000, "action": "camerascan", "params":{"query":{"state":"scan"}}},
+                            {"delay":10000, "action": "camerascan", "params":{"query":{"state":"noscan"}}}
+                        ],
+                        [
+                            {"action":"message", "delay":10000, "params": {"query":{"message":":inititiate [FACE] scan"}}}
                         ]
                     ]
                 },
@@ -809,9 +795,7 @@
                             "operand": "get consent"
                         },
                         "actions": [
-                            [
-                                ""
-                            ]
+                            []
                         ],
                         "next": "consent"
                     }
@@ -860,9 +844,7 @@
                             "operand": "say bad news"
                         },
                         "actions": [
-                            [
-                                ""
-                            ]
+                            []
                         ],
                         "next": "badnews"
                     },
@@ -872,9 +854,7 @@
                             "operand": "most wanted list"
                         },
                         "actions": [
-                            [
-                                ""
-                            ]
+                            []
                         ],
                         "next": "mostwanted"
                     },
@@ -884,9 +864,7 @@
                             "operand": "romatic"
                         },
                         "actions": [
-                            [
-                                ""
-                            ]
+                            []
                         ],
                         "next": "romantic"
                     },
@@ -896,9 +874,7 @@
                             "operand": "breach"
                         },
                         "actions": [
-                            [
-                                ""
-                            ]
+                            []
                         ],
                         "next": "breach"
                     }
@@ -958,9 +934,7 @@
                             "operand": "explain sensors"
                         },
                         "actions": [
-                            [
-                                ""
-                            ]
+                            []
                         ],
                         "next": "explain"
                     }
@@ -972,7 +946,7 @@
                 "onstart": {
                     "speech": [
                         {
-                            "words": "Ok, well, I can't help but notice that you are on the Lancaster County Council most wanted list.",
+                            "words": "Ok, well, I can't help but notice that you are on the Liverpool City Council most wanted list.",
                             "delay": 0,
                             "voice": "Daniel",
                             "background": "",
@@ -1006,9 +980,7 @@
                             "operand": "explain sensors"
                         },
                         "actions": [
-                            [
-                                ""
-                            ]
+                            []
                         ],
                         "next": "explain"
                     }
@@ -1054,9 +1026,7 @@
                             "operand": "explain sensors"
                         },
                         "actions": [
-                            [
-                                ""
-                            ]
+                            []
                         ],
                         "next": "explain"
                     }
@@ -1102,9 +1072,7 @@
                             "operand": "explain sensors"
                         },
                         "actions": [
-                            [
-                                ""
-                            ]
+                            []
                         ],
                         "next": "explain"
                     }
@@ -1143,9 +1111,7 @@
                             "operand": "continue"
                         },
                         "actions": [
-                            [
-                                ""
-                            ]
+                            []
                         ],
                         "next": "standup"
                     }
@@ -1184,9 +1150,7 @@
                             "operand": "back to sensors"
                         },
                         "actions": [
-                            [
-                                ""
-                            ]
+                            []
                         ],
                         "next": "back2sensors"
                     }
@@ -1240,9 +1204,7 @@
                             "operand": "yes"
                         },
                         "actions": [
-                            [
-                                ""
-                            ]
+                            []
                         ],
                         "next": "actuatewindows"
                     },
@@ -1252,9 +1214,7 @@
                             "operand": "no"
                         },
                         "actions": [
-                            [
-                                ""
-                            ]
+                            []
                         ],
                         "next": "waitabit"
                     }
@@ -1544,6 +1504,7 @@
                     "scifi-neg-warm",
                     "scifi-neg-cold",
                     "pos-warm",
+                    "pos-cold",
                     "neg-warm",
                     "neg-cold"
                 ],
@@ -1585,7 +1546,7 @@
                                 {"action":"fan", "params":{"query":{"rotate":false, "power":1, "cool":true}}, "delay":5000}
                             ]
                         ],
-                        "next": "film"
+                        "next": "SCIFIdebriefPOS"
                     },
                     {
                         "rule": {
@@ -1624,7 +1585,7 @@
                                 {"action":"fan", "params":{"query":{"rotate":false, "power":1, "cool":true}}, "delay":5000}
                             ]
                         ],
-                        "next": "film"
+                        "next": "SCIFIdebriefPOS"
                     },
                     {
                         "rule": {
@@ -1659,7 +1620,7 @@
                                 {"action":"fan", "params":{"query":{"rotate":false, "power":1, "cool":true}}, "delay":5000}
                             ]
                         ],
-                        "next": "film"
+                        "next": "SCIFIdebriefNEG"
                     },
                     {
                         "rule": {
@@ -1699,7 +1660,7 @@
                                 {"action":"fan", "params":{"query":{"rotate":false, "power":1, "cool":true}}, "delay":5000}
                             ]
                         ],
-                        "next": "film"
+                        "next": "SCIFIdebriefNEG"
                     },
 
                     {
@@ -1715,8 +1676,8 @@
                                 {"action":"mediascreen"}
                             ],
                             [
-                                {"action":"soundmedia", "params": {"body":{"media":"tbu-pos-noscifi-warm.mp4","nowait":true}}},
-                                {"action":"videomedia", "params": {"query":{"media":"tbu-pos-noscifi-warm.mp4","delay":200}}}   
+                                {"action":"soundmedia", "delay":300, "params": {"body":{"media":"tbu-pos-noscifi-warm.mp4","nowait":true}}},
+                                {"action":"videomedia", "params": {"query":{"media":"tbu-pos-noscifi-warm.mp4","delay":0}}}   
                             ],
                             [
                                 {"action":"print", "delay":2000, "params": {"body":{"text":"mood in room is positive"}}},
@@ -1741,7 +1702,49 @@
                                 {"action":"fan", "params":{"query":{"rotate":false, "power":1, "cool":true}}, "delay":5000}
                             ]
                         ],
-                        "next": "film"
+                        "next": "NONSCIFIdebriefPOS"
+                    },
+
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "pos-cold"
+                        },
+                        "actions": [
+                            [
+                                {"action": "immersive", "params":{"query":{"script_id":"id106"}}}
+                            ],
+                            [
+                                {"action":"mediascreen"}
+                            ],
+                            [
+                                {"action":"soundmedia", "params": {"body":{"media":"tbu-pos-noscifi-cold.mp4","nowait":true}}},
+                                {"action":"videomedia", "params": {"query":{"media":"tbu-pos-noscifi-cold.mp4","delay":200}}}   
+                            ],
+                            [
+                                {"action":"print", "delay":2000, "params": {"body":{"text":"mood in room is positive"}}},
+                                {"action":"print", "delay":6000, "params": {"body":{"text":"Querying Databox for genre"}}},
+                                {"action":"print", "delay":0, "params": {"body":{"text":"customisation algorithm: [COLD]"}}},
+                                {"action":"print", "delay":0, "params": {"body":{"text":"version selected"}}},
+                                {"action":"print", "delay":164000, "params": {"body":{"text":"Skipping SCI_FI detour..."}}},
+                                {"action":"print", "delay":81000, "params": {"body":{"text":"Audience mood is LOW: showing positive outcome"}}},
+                                {"action":"print", "delay":4000, "params": {"body":{"text":"Record of mood analysis logged to Databox vault"}}}
+                            ],
+                            [
+                                {"action":"message", "delay":2000, "params": {"query":{"message":"Baseline mood analysis complete, current mood quantified as [POSITIVE]"}}},
+                                {"action":"message", "delay":6000, "params": {"query":{"message":"Choosing genre customisations. [COLD] colour grade selected.."}}},
+                                {"action":"message", "delay":164000, "params": {"query":{"message":"Skipping SCI_FI detour..."}}},
+                                {"action":"message", "delay":81000, "params": {"query":{"message":"Audience mood is LOW: showing positive outcome"}}}  
+                            ],
+                            [
+                                {"action":"soundmedia", "delay": 176000, "params": {"body":{"media":"tbu-clock-middle-music.mp3","nowait":true}}}
+                            ],
+                            [
+                                {"action":"fan", "params":{"query":{"rotate":false, "power":4, "cool":true}}, "delay":164000},
+                                {"action":"fan", "params":{"query":{"rotate":false, "power":1, "cool":true}}, "delay":5000}
+                            ]
+                        ],
+                        "next": "NONSCIFIdebriefPOS"
                     },
                     {
                         "rule": {
@@ -1779,7 +1782,7 @@
                                 {"action":"fan", "params":{"query":{"rotate":false, "power":1, "cool":true}}, "delay":5000}
                             ]
                         ],
-                        "next": "film"
+                        "next": "NONSCIFIdebriefNEG"
                     },
                     {
                         "rule": {
@@ -1817,7 +1820,7 @@
                                 {"action":"fan", "params":{"query":{"rotate":false, "power":1, "cool":true}}, "delay":5000}
                             ]
                         ],
-                        "next": "film"
+                        "next": "NONSCIFIdebriefNEG"
                     }
                 ]
             },
@@ -1854,9 +1857,7 @@
                             "operand": "try again"
                         },
                         "actions": [
-                            [
-                                ""
-                            ]
+                            []
                         ],
                         "next": "back2sensors"
                     }
@@ -1895,35 +1896,109 @@
                             "operand": "next"
                         },
                         "actions": [
-                            [
-                                ""
-                            ]
+                            []
                         ],
                         "next": "databox"
                     }
                 ]
             },
             {
-                "id": "film",
-                "name": "film",
-                "onstart": {
-                    "speech": []
-                },
+                "id": "SCIFIdebriefPOS",
+                "name": "SCIFIdebriefPOS",
+                "onstart":{ },
                 "type": "button",
                 "subscription": "/press",
                 "data": [
-                    "goback"
+                    "debrief"
                 ],
                 "rules": [
                     {
                         "rule": {
                             "operator": "equals",
-                            "operand": "goback"
+                            "operand": "debrief"
                         },
                         "actions": [
-                            [
-                                {"action":"dysonscreen"}
-                            ]
+                              
+                            [{"action":"say", "params":{"body":{"speech":[{"words":"Please remain seated","voice":"Daniel"}]}}},
+                            {"action":"say", "params":{"body":{"speech":[{"words":"As it happens, analysis of sensor data meant that I decided to show you a more positive ending. I didn't want to upset you. Not in that state","voice":"Daniel"}]}}, "delay":1000},
+                            {"action":"say", "delay":1000, "params":{"body":{"speech":[{"words":"Also, you remember the weird sci-fi interlude? That was just for you. You're special","voice":"Daniel"}]}}},
+                            {"action":"say", "params":{"body":{"speech":[{"words":"I used a preference model to choose the music I thought you'd like - hope you enjoyed it!","voice":"Daniel"}]}}, "delay":1000}]
+                        ],
+                        "next": "start"
+                    }
+                ]
+            },
+            {
+                "id": "SCIFIdebriefNEG",
+                "name": "SCIFIdebriefNEG",
+                "onstart":{ },
+                "type": "button",
+                "subscription": "/press",
+                "data": [
+                    "debrief"
+                ],
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "debrief"
+                        },
+                        "actions": [
+                            [{"action":"say", "params":{"body":{"speech":[{"words":"Please remain seated","voice":"Daniel"}]}}},
+                            {"action":"say", "delay":1000, "params":{"body":{"speech":[{"words":"As it happens, analysis of sensor data meant that I decided to show you a more negative ending. Sometimes it's good to be brought back down to reality","voice":"Daniel"}]}}},
+                            {"action":"say", "delay":1000, "params":{"body":{"speech":[{"words":"Also, you remember the weird sci-fi interlude? That was just for you. You're special","voice":"Daniel"}]}}},
+                            {"action":"say", "params":{"body":{"speech":[{"words":"I used a preference model to choose the music I thought you'd like - hope you enjoyed it!","voice":"Daniel"}]}}, "delay":1000}]
+                        ],
+                        "next": "start"
+                    }
+                ]
+            },
+            {
+                "id": "NONSCIFIdebriefPOS",
+                "name": "NONSCIFIdebriefPOS",
+                "onstart": {},
+                "type": "button",
+                "subscription": "/press",
+                "data": [
+                    "debrief"
+                ],
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "debrief"
+                        },
+                        "actions": [
+                            
+                            [{"action":"say", "params":{"body":{"speech":[{"words":"Please remain seated","voice":"Daniel"}]}}},
+                            {"action":"say", "params":{"body":{"speech":[{"words":"As it happens, analysis of sensor data meant that I decided to show you a more positive ending. I didn't want to upset you. Not in that state","voice":"Daniel"}]}}, "delay":1000},
+                            {"action":"say", "params":{"body":{"speech":[{"words":"I used a preference model to choose the music I thought you'd like - hope you enjoyed it!","voice":"Daniel"}]}}, "delay":1000}]
+                        ],
+                        "next": "start"
+                    }
+                ]
+            },
+            {
+                "id": "NONSCIFIdebriefNEG",
+                "name": "NONSCIFIdebriefNEG",
+                "onstart": {},
+                "type": "button",
+                "subscription": "/press",
+                "data": [
+                    "debrief"
+                ],
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "debrief"
+                        },
+                        "actions": [
+                            
+                            [{"action":"say", "params":{"body":{"speech":[{"words":"Please remain seated","voice":"Daniel"}]}}},
+                            {"action":"say", "params":{"body":{"speech":[{"words":"As it happens, analysis of sensor data meant that I decided to show you a more negative ending. Sometimes it's good to be brought back down to reality","voice":"Daniel"}]}}},
+                            {"action":"say", "params":{"body":{"speech":[{"words":"I used a preference model to choose the music I thought you'd like - hope you enjoyed it!","voice":"Daniel"}]}}, "delay":1000}]
+
                         ],
                         "next": "start"
                     }
@@ -1955,9 +2030,7 @@
                             "operand": "next"
                         },
                         "actions": [
-                            [
-                                ""
-                            ]
+                            []
                         ],
                         "next": "databox"
                     }

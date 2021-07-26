@@ -63,6 +63,10 @@ const convertToHierarchy = (lut,nodes={})=>{
     return insert (lut, lut["root"],nodes);
 }
 
+const _printableactions = (actions)=>{
+  return actions.map(a=>[...new Set(a.map(l=>l.action))]);
+}
+
 const links = (node={})=>{
  
   if (Object.keys(node).length <= 0){
@@ -75,7 +79,10 @@ const links = (node={})=>{
         x: node.x,
         y: node.y + sh 
       },
-      to : (node.children||[]).map(c=>({name:c.data.event.event,x:c.x, y:c.y+LINKDELTA, op:c.data.event.op, actions: c.data.event.actions})),
+      to : (node.children||[]).map(c=>{
+      
+        return {name:c.data.event.event,x:c.x, y:c.y+LINKDELTA, op:c.data.event.op, actions: _printableactions(c.data.event.actions)}
+      })
     },
     ...(node.children || []).map(c=>links(c))
   ]);
@@ -234,9 +241,20 @@ const allchildren = (node, lut)=>{
 }
 
 
-
+//NASTY!
 const _empty = (arr)=>{
-  return  (!arr || arr.length <= 0 || arr.length <= 0 || arr[0].length <= 0 || arr[0][0].trim()=="") //horrible!
+
+  console.log("checing if empty", arr);
+  if (!arr || arr.length <= 0 || arr.length <= 0 || arr[0].length <= 0){
+    return true;
+  } 
+
+  /*const x = arr[0][0];
+  if (typeof x == "string"){
+    if (x.trim()=="")
+      return true;
+  }*/
+  return false;
 }
 
 const treeref = useD3((root) => {
@@ -259,7 +277,7 @@ const treeref = useD3((root) => {
     _loops = _loops.map(l=>{
       return {
         from : {name: l.from.event, x:_lookup[l.from.event].x, y:_lookup[l.from.event].y+ sh} ,
-        to: { name: l.to.event, x:_lookup[l.to.event].x, y:_lookup[l.to.event].y+ LINKDELTA, op:l.to.op, actions:l.to.actions}
+        to: { name: l.to.event, x:_lookup[l.to.event].x, y:_lookup[l.to.event].y+ LINKDELTA, op:l.to.op, actions:_printableactions(l.to.actions)}
       }
     })
 

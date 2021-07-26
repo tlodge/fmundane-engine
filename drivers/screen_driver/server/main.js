@@ -3,11 +3,9 @@ const http = require('http');
 const WebSocket = require('ws');
 const mqtt = require('./mqttlib');
 const cors = require('cors');
-
 const app = express();
+const sockets = [];
 
-
-let ws;
 app.use(cors()) 
 app.use(express.static("public"));
 app.use(express.static("../../../media"));
@@ -15,65 +13,47 @@ app.use(express.static("../../../media"));
 app.get('/api/camera/scan', (req,res) => {
     console.log("seen camera scan request");
     const {state=null} = req.query;
-    
-	if (ws){
-        ws.send(JSON.stringify({type:"camera", state}));
-    }
+    send(JSON.stringify({type:"camera", state}));
     res.status(200).send();
 })
 
 app.get('/api/camera', (req,res) => {
     console.log("seen scan request");
     const {type=null} = req.query;
-    if (ws){
-        ws.send(JSON.stringify({type:"url", url:"/camera"}));
-    }
-    
+    send(JSON.stringify({type:"url", url:"/camera"}));
 	res.status(200).send();
 })
 
 app.get('/api/home', (req,res) => {
     console.log("seen home");
     const {type=null} = req.query;
-    if (ws){
-        ws.send(JSON.stringify({type:"url", url:"/"}));
-    }
-    
+    send(JSON.stringify({type:"url", url:"/"}));
 	res.status(200).send();
 })
 
 app.get('/api/media/play',  (req,res) => {
     console.log("seen media play request");
     const {media="", delay=500} = req.query;
-    if (ws){
-        ws.send(JSON.stringify({type:"media", media, delay}));
-    }
-    
-	res.status(200).send();
+    send(JSON.stringify({type:"media", media, delay}));
+    res.status(200).send();
 });
 
 app.get('/api/media', (req,res) => {
     console.log("seen media request!");
-    if (ws){
-        ws.send(JSON.stringify({type:"url", url:"/media"}));
-    }
+    send(JSON.stringify({type:"url", url:"/media"}));
     res.status(200).send();
 })
 
 app.get('/api/air', (req,res) => {
     console.log("seen air request!");
-    if (ws){
-        ws.send(JSON.stringify({type:"url", url:"/air"}));
-    }
+    send(JSON.stringify({type:"url", url:"/air"}));
     res.status(200).send();
 })
 
 app.get('/api/message', (req,res)=>{
     const {message=""} = req.query;
     console.log("seen message", message);
-    if (ws){
-        ws.send(JSON.stringify({type:"message", message}));
-    }
+    send(JSON.stringify({type:"message", message}));
     res.status(200).send();
 })
 //initialize a simple http server
@@ -120,32 +100,40 @@ mqtt.subscribe("screen",  (message)=>{
                 const pm10 = Number(p10r);
                 const pm25 = Number(p25r);
                 const no2  = Math.floor((Number(noxl) / 10));
-                const voc  = Math.floor((Number(va10) / 10));
-
-                console.log(pm10,pm25,no2,voc);
-
-                if (ws){
-                    ws.send(JSON.stringify({type:"dyson", data: {time:msg.time, pm10, pm25, voc, no2}}));
-                }
+                const voc  = Math.floor((Number(va10) / 10));    
+                send(JSON.stringify({type:"dyson", data: {time:msg.time, pm10, pm25, voc, no2}}));
+                
             }
         }
         else{
-            if (ws){
-                ws.send(message.toString());
-            }
+            send(message.toString());
         }
     }catch(err){    
         console.log(err);
     }
 });
 
+const send = (msg)=>{
+    for (const s of sockets){
+        try{
+            s.send(msg);
+        }catch(err){
+            console.log(err);
+        }
+    }
+}
+
 wss.on('connection', (_ws) => {
-    ws = _ws;
+    sockets.push(_ws);
     //connection is up, let's add a simple simple event
-    ws.on('message', (message) => {
+    _ws.on('message', (message) => {
         console.log('received: %s', message);
     });
 
+    _ws.on("disconnect", ()=>{
+        let i = sockets.indexOf(_ws);
+        sockets.splice(i, 1);
+     });
     //send immediatly a feedback to the incoming connection    
    
 });
@@ -154,3 +142,4 @@ wss.on('connection', (_ws) => {
 server.listen(process.env.PORT || 9102, () => {
     console.log(`Server started on port ${server.address().port}`);
 });
+  

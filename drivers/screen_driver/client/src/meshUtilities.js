@@ -2641,8 +2641,8 @@ export const traingulationMatrices = [
   255
 ];
 
-const colours = ["#129ac6", "#0f80a5", "#0C6784", "#094D63","#063342"];
-
+//const colours = ["#129ac6", "#0f80a5", "#0C6784", "#094D63","#063342"];
+const colours = ["#FFE8A1", "#FFC200", "#2A2000", "#FFDA64"];
 // Triangle drawing method
 const drawPath = (ctx, points, closePath, colour="grey", scan=false) => {
   const region = new Path2D();
@@ -2655,7 +2655,7 @@ const drawPath = (ctx, points, closePath, colour="grey", scan=false) => {
   if (closePath) {
     region.closePath();
   }
-  ctx.strokeStyle = colour;
+  ctx.strokeStyle = scan ? "black" : colour;
  
   ctx.strokeWidth = 1;
   

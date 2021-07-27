@@ -4,6 +4,8 @@ import Layer from './Layer';
 import Navigation from './Navigation';
 import Tree from './Tree';
 import useWindowDimensions from '../../hooks/useWindowDimensions';
+import { Importer } from './Importer';
+import request from 'superagent';
 
 import {
     listenOnEvents,
@@ -25,6 +27,8 @@ export function Experience() {
   const authored = useSelector(selectAuthored);
 
   const [visibleTrees, setVisibleTrees] = useState({});
+  const [create, setCreate] = useState(false);
+
   const { height } = useWindowDimensions();
 
   const dispatch = useDispatch();
@@ -37,7 +41,13 @@ export function Experience() {
   }
 
   
-
+  const toggleCreate = (value)=>{
+    if (value != undefined){
+      setCreate(value);
+    }else{
+      setCreate(!create);
+    }
+  }
 
 
   const [startLabel, setStartLabel] = useState("start");
@@ -111,14 +121,20 @@ export function Experience() {
      dispatch(reset());
      setStartLabel("reset");
   }
-
+  const save = async (name, json)=>{
+    await request.post('/author/save').set('Content-Type', 'application/json').send({name,layer:json});
+    toggleCreate(false);
+  }
 
   return (
       <div>
-        <Navigation authored={authored} start={resetExperience}/>
+        <Navigation authored={authored} start={resetExperience} toggleCreate={toggleCreate}/>
         <div className="flex row mb-4 border-b-2 flex-wrap" >
         {list}
+       
         </div>
+       
+        {create && <Importer save={(name,json)=>save(name,json)} cancel={()=>toggleCreate(false)}/>}
       </div>
   );
   

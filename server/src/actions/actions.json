@@ -149,6 +149,16 @@
         },
         "query":{}
      },
+     "nanoleaf":{
+        "type":"request",
+        "data":{
+           "url":"http://[lenovo]:9104/ui/api",
+           "type":"GET",
+           "contenttype":"application/json",
+           "timeout":500
+        },
+        "query":{}
+     },
     "shutdownprinterpi":{
        "type":"request",
        "data":{

@@ -4,14 +4,7 @@ import {send} from './ws';
 import actiontmpl from './actions/actions.json';
 import ips from './actions/IPs.json';
 import {handle, handlespeech} from './actionhandler';
-
-function escapeRegExp(string) {
-    return string.replace(/[.*+\-?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
-}
-
-function replaceAll(str, find, replace) {
-    return str.replace(new RegExp(escapeRegExp(find), 'g'), replace);
-}
+import {replaceAll} from './utils';
 
 const actions = JSON.parse(Object.keys(ips).reduce((acc, key)=>{
     return replaceAll(acc, `[${key}]`,ips[key]);    
@@ -25,7 +18,6 @@ const _fetchrule = async (rule)=>{
 
 const callserially = async (list, cb)=>{
     for (const a of list){
-        console.log("calling handle", a);
         await handle(a);
     }
     cb();
@@ -55,7 +47,6 @@ const _executeactions = async (alist, value="")=>{
             
            
             parallel.push({list:_alist, cb:()=>{
-                console.log("sending", _alist);
                 send("action", _alist.map(a=>a.action))
             }});
             

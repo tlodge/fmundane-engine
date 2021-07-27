@@ -65,7 +65,8 @@ export const handlespeech = async (speech)=>{
 export const handle = async ({action, delay=0, params={}})=>{
     
 
-    console.log("handling with delay", delay);
+    console.log("action handler seen", action);
+
     if (action.type === "request"){
           
         const _action = Object.keys(params).reduce((acc, key)=>{

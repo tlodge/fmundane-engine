@@ -99,11 +99,14 @@ const findNode = (t, name)=>{
 const recenter = (gtree,t)=>{
     const g = d3.select(gtree.current);
     const db = g.select("g#dragbox");
-    db.call(d3z.zoom, d3z.zoomIdentity.scale(0.8));
-    db.attr("transform", `translate(0,0)`);
     const {x,y} = _seen[t.id] || {x:0, y:0};
+
+    g.call(d3z.zoom().on("zoom",  (e)=>{
+        db.attr("transform", e.transform)
+    })).call(d3z.zoom, d3z.zoomIdentity.scale(0.8).translate([-y+200,-x+t.height/2]));
+
+    db.attr("transform", `translate(0,0)`);
     g.attr("transform", `translate(${-y+200},${-x+t.height/2})`);
-    
 }
 
 const moveChart = (gtree, t)=>{
@@ -123,13 +126,16 @@ function Tree(t) {
     React.useEffect(() => {
         moveChart(gtree, t);
     }, [t]);
+    
+    const {x,y} = _seen[t.id] || {x:0, y:0};
 
     const mytree = useD3((svg) => {
+        
        const dgbox = svg.select("g#dragbox");
        
        svg.call(d3z.zoom().on("zoom",  (e)=>{
             dgbox.attr("transform", e.transform)
-        })).call(d3z.zoom, d3z.zoomIdentity.scale(0.8))
+        })).call(d3z.zoom, d3z.zoomIdentity.scale(0.8).translate([x,y]))
 
     }, []);
 
@@ -171,7 +177,6 @@ function Tree(t) {
                 const ruletext =    <g>
                                         <rect x={link.from.y-20+ty} y={link.from.x-13+tx} width={40} height={12} style={{fill: "#edf2f7"}}/>
                                        {renderText()}
-                                       
                                     </g>
 
 

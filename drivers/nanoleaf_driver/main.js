@@ -1,5 +1,3 @@
-require('console-stamp')(console, 'dd-mm-yy HH:MM:ss.l');
-
 const http = require('http');
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -71,6 +69,21 @@ app.get('/ui/api/brightness', async function (req, res, next) {
   res.status(200).send("OK");
 });
 
+app.get('/ui/api', async function(req,res){
+  let {brightness,duration,on,hue,sat,ct} = req.query;
+  console.log(req.query);
+  let obj = {}
+
+  if (brightness) { obj.brightness = {value: Number(brightness)}};
+  if (on) { obj.on = {value: on=="true"? true:false}};
+  if (hue) { obj.hue = {value: Number(hue)}};
+  if (sat) { obj.sat = {value: Number(sat)}};
+  if (ct) { obj.ct = {value: Number(ct)}};
+  if (duration) { obj.duration = {value: Number(duration)}};
+  await putter(obj); 
+  res.status(200).send("OK");
+
+});
 
 http.createServer(app).listen(PORT);
 console.log("listening on port: " + PORT);

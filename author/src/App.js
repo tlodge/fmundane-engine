@@ -23,13 +23,13 @@ function App() {
 
   const renderCreate = ()=>{
     return <div className="absolute flex w-screen h-screen  items-center justify-center" style={{zIndex:30}}>
-              <div   className="shadow-xl p-2 bg-white rounded overflow-auto" style={{maxHeight: "80vh"}}><Creator onClose={onClose}/></div>
+              <div   className="shadow-xl p-2 bg-white rounded overflow-auto" style={{maxHeight: "80vh",  width:"900px"}}><Creator onClose={onClose}/></div>
             </div>
   }
  
   const renderActions = ()=>{
-    return <div  className="absolute flex w-screen h-screen  items-center justify-center">
-    <div className="flex flex-grow absolute shadow-xl p-2 bg-white rounded" ><ActionCreator onClose={onClose}/></div>
+    return <div  className="absolute flex w-screen h-screen  items-center justify-center" style={{zIndex:30}}>
+    <div className="flex flex-grow absolute shadow-xl p-2 bg-white rounded overflow-auto" style={{maxHeight: "80vh",  width:"745px"}} ><ActionCreator onClose={onClose}/></div>
     </div>
   }
 

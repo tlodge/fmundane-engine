@@ -9,18 +9,18 @@ export const creatorSlice = createSlice({
     viewAdd: false,
     name: "",
     rule: "",
-    speech : [],
+    onstart : {},
     actions:"",
     type:"button",
   },
 
   reducers: {
     setEditNode : (state, action)=>{
-      const {name,rule, onstart:speech,actions, type} = action.payload;
+      const {name,rule, onstart, actions, type} = action.payload;
       state.selectedNode = name;
       state.name = name;
       state.rule = rule;
-      state.speech = speech;
+      state.onstart = onstart;
       state.actions = actions;
       state.type = type;
     },
@@ -36,8 +36,8 @@ export const creatorSlice = createSlice({
     setRule : (state, action)=>{
       state.rule = action.payload;
     },
-    setSpeech: (state, action)=>{
-      state.speech = action.payload;
+    setOnstart: (state, action)=>{
+      state.onstart = action.payload;
     },
     setActions: (state, action)=>{
       state.actions = action.payload;
@@ -48,7 +48,7 @@ export const creatorSlice = createSlice({
   }
 });
 
-export const { setEditNode,setViewAddNode,setName,setRule, setSpeech,setActions,setEditLink,setType } = creatorSlice.actions;
+export const { setEditNode,setViewAddNode,setName,setRule, setOnstart,setActions,setEditLink,setType } = creatorSlice.actions;
 
 export const showAddNode = (value)=>{
   return (dispatch, getState)=>{
@@ -68,7 +68,7 @@ export const linkToEdit         = state => state.creator.selectedLink;
 export const selectViewAdd      = state => state.creator.viewAdd;
 export const selectName         = state => state.creator.name;
 export const selectRule         = state => state.creator.rule;
-export const selectSpeech       = state => state.creator.speech;
+export const selectOnstart      = state => state.creator.onstart;
 export const selectActions      = state => state.creator.actions;
 export const selectType         = state => state.creator.type;
 

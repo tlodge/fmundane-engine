@@ -2,9 +2,10 @@
 
 To do in Lancaster
 
-Pull new code
-Copy new media over
-mv IPs.caravan.json => IPs.json
+* Pull new code
+* Copy new media over
+* mv IPs.caravan.json => IPs.json
+* add supervisord for nanoleaf
 
 rebuild the screen driver (client)
 rebuild the main client

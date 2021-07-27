@@ -34,7 +34,7 @@ let _loops  = [];
 const insert = (lookup, event, nodes={})=>{
    
     const children = lookup[event.event] || [];
- console.log("have event", event.event);
+
     //console.log(nodes[event.event].name || "").split(".");
     const [name=["x"]] = (nodes[event.event].name || "").split(".");
     const {onstart="",type="button"} = nodes[event.event]
@@ -64,6 +64,7 @@ const convertToHierarchy = (lut,nodes={})=>{
 }
 
 const _printableactions = (actions)=>{
+  //return actions;
   return actions.map(a=>[...new Set(a.map(l=>l.action))]);
 }
 
@@ -81,7 +82,7 @@ const links = (node={})=>{
       },
       to : (node.children||[]).map(c=>{
       
-        return {name:c.data.event.event,x:c.x, y:c.y+LINKDELTA, op:c.data.event.op, actions: _printableactions(c.data.event.actions)}
+        return {name:c.data.event.event,x:c.x, y:c.y+LINKDELTA, op:c.data.event.op, actions: c.data.event.actions}
       })
     },
     ...(node.children || []).map(c=>links(c))
@@ -244,7 +245,7 @@ const allchildren = (node, lut)=>{
 //NASTY!
 const _empty = (arr)=>{
 
-  console.log("checing if empty", arr);
+  
   if (!arr || arr.length <= 0 || arr.length <= 0 || arr[0].length <= 0){
     return true;
   } 
@@ -258,8 +259,7 @@ const _empty = (arr)=>{
 }
 
 const treeref = useD3((root) => {
-    console.log("lookuptable is", lookuptable);
-    console.log("nodes are", nodes);
+
     const jsontree = convertToHierarchy(lookuptable,nodes);
     const hier = (d3h.hierarchy(jsontree, d=>d.children));
     let _lookup = {}
@@ -277,7 +277,7 @@ const treeref = useD3((root) => {
     _loops = _loops.map(l=>{
       return {
         from : {name: l.from.event, x:_lookup[l.from.event].x, y:_lookup[l.from.event].y+ sh} ,
-        to: { name: l.to.event, x:_lookup[l.to.event].x, y:_lookup[l.to.event].y+ LINKDELTA, op:l.to.op, actions:_printableactions(l.to.actions)}
+        to: { name: l.to.event, x:_lookup[l.to.event].x, y:_lookup[l.to.event].y+ LINKDELTA, op:l.to.op, actions:l.to.actions}
       }
     })
 
@@ -363,7 +363,7 @@ const treeref = useD3((root) => {
        
         
     //render links!
-    const link = root.selectAll("path#link").data(_links, d=>`${d.from.name}${d.to.name}${d.to.actions.join(",")}`).join(
+    root.selectAll("path#link").data(_links, d=>`${d.from.name}${d.to.name}${d.to.actions.join(",")}`).join(
           enter => {
             enter.append("path").attr("id", "link").attr("d", l=>{
               if (isloopback(l)){
@@ -404,13 +404,13 @@ const treeref = useD3((root) => {
             target.append("text").attr("id", "rule").style("text-anchor", "middle").style("font-weight", "bold").style("font-size", "10px").attr("x",0).attr("y",-YPADDING+sh).text(l=>l.to.op).on("click", (e,l)=>linkSelected(e,l))
            
             target.append("circle").attr("id", "label").style("fill","rgb(243, 244, 246)").style("opacity", l=>l.to.actions && l.to.actions.length > 0 ? 1 : 0).style("stroke","none").attr("cx", l=>isloopback(l) ? (sw/2)*1.5:0).attr("cy",0).attr("r",20).on("click", (e,l)=>linkSelected(e,l))
-            target.append("text").attr("id","action").style("font-size", "10px").style("text-anchor", "middle").attr("x",l=>isloopback(l) ? (sw/2)*1.5:0).attr("y",0).text(l=>_empty(l.to.actions) ? "+" : l.to.actions).on("click", (e,l)=>linkSelected(e,l))
+            target.append("text").attr("id","action").style("font-size", "10px").style("text-anchor", "middle").attr("x",l=>isloopback(l) ? (sw/2)*1.5:0).attr("y",0).text(l=>_empty(l.to.actions) ? "+" : _printableactions(l.to.actions)).on("click", (e,l)=>linkSelected(e,l))
             
         },
         update=>{
             update.transition().duration(ANIMATION_DURATION).attr("transform", l=>`translate(${l.from.x+sw/2 - (l.from.x-l.to.x)/2}, ${l.to.y+ (l.from.y+LINKDELTA-l.to.y)/2})`);
             update.select("circle#label").style("opacity", l=>l.to.actions && l.to.actions.length > 0 ? 1 : 0).on("click", (e,l)=>linkSelected(e,l))
-            update.select("text#action").on("click", (e,l)=>linkSelected(e,l));
+            update.select("text#action").text(l=>_empty(l.to.actions) ? "+" : _printableactions(l.to.actions)).on("click", (e,l)=>linkSelected(e,l));
             update.select("text#rule").on("click", (e,l)=>linkSelected(e,l));
         },
         exit => exit.call(exit=>exit.remove())

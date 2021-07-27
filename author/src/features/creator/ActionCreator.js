@@ -1,5 +1,6 @@
 import {useState}  from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import Actions from './Actions';
 
 import {
     linkToEdit,
@@ -13,16 +14,20 @@ import {
 export function ActionCreator({onClose}) {
     const dispatch = useDispatch();
     const link    = useSelector(linkToEdit) || {};
-
-    console.log("HAVE LINK", link);
-
     const {from={},to={}} = link;
     
-    const [actions, setActions] = useState((to.actions||[]).join(","))
+    const [actions, setActions] = useState(to.actions)
     const [rules, setRules] = useState(to.op||"");
 
-    const actionChanged = (value)=>{
-        setActions(value);
+    /*
+      <div className="flex flex-col mt-2 items-start">
+                    <input type="text" placeholder="action list" value={actions} onChange={(e)=>{actionChanged(e.target.value)}}></input>
+                    <label className="text-xs mt-1 justify-start">format: a1,a2,a3|a5,a6 </label>
+                </div>*/
+
+    const actionChanged = (actions)=>{
+        console.log("seen action changed!", actions);
+        setActions(actions);
     }
 
     const ruleChanged = (value)=>{
@@ -48,10 +53,8 @@ export function ActionCreator({onClose}) {
         return <>
                 <div className="font-bold text-xs flex justify-start">actions</div>
                 <div className="font-bold text-xs flex justify-start">{`actions executed on move from ${from.name} to ${to.name}`}</div>
-                <div className="flex flex-col mt-2 items-start">
-                    <input type="text" placeholder="action list" value={actions} onChange={(e)=>{actionChanged(e.target.value)}}></input>
-                    <label className="text-xs mt-1 justify-start">format: a1,a2,a3|a5,a6 </label>
-                </div>
+                <Actions actions={actions} actionChanged={actionChanged}/>
+              
             </>
     }
     return <div className="flex flex-col shadow p-2 mt-4">

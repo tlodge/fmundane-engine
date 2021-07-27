@@ -2,7 +2,7 @@ import {useState}  from 'react';
 import {LinkCreator} from './LinkCreator';
 import { useSelector, useDispatch } from 'react-redux';
 import Speech from './Speech';
-
+import Actions from './Actions';
 import {
    selectParent,   
    addToParent,
@@ -14,12 +14,12 @@ import {
    setName,
    setRule,
    setType,
-   setSpeech,
+   setOnstart,
    setViewAddNode,
    setActions, 
    selectName,  
    selectRule,        
-   selectSpeech,    
+   selectOnstart,    
    selectActions,
    selectType,
 } from './creatorSlice';
@@ -29,38 +29,37 @@ export function Creator({onClose}) {
     const dispatch = useDispatch();
     const [tab, setTab] = useState("new");
 
-    
+    const [speechTab, setSpeechTab] = useState(true);
+
     const {id:parent, type:parenttype}    = useSelector(selectParent);
 
     const name      = useSelector(selectName);
     const rule      = useSelector(selectRule);
-    const speech    = useSelector(selectSpeech);
+    const onstart    = useSelector(selectOnstart);
     const actions   = useSelector(selectActions);
     const type      = useSelector(selectType);
 
+    console.log("onstart is", onstart);
 
-    const [node, setNode] = useState({name,rule,speech,actions,type});
+    const [node, setNode] = useState({name,rule,onstart,actions,type});
    
     const createNode = ()=>{
         
         const _node = {
             name: node.name.replace(/\s/g, ""),
             id: node.name.replace(/\s/g, "_"),
-            onstart: node.speech,
+            onstart: node.onstart,
             type:node.type,
             subscription : node.type == "button" || node.type.trim()=="" ? `/press` : `/${node.type}`,
         }
-        const _actions =  (node.actions||"").split("|").map((line)=>{
-            return line.split(",");
-        });
-
-        dispatch(addToParent(_node, node.rule, _actions));
+     
+        dispatch(addToParent(_node, node.rule, [[]]));
         reset();
     }
     
-    const speechChanged = ({speech = {}})=>{
-        setNode({...node, speech})
-        dispatch(setSpeech(speech));
+    const speechChanged = (lines)=>{
+        setNode({...node, onstart:{...node.onstart,speech:lines}});
+        dispatch(setOnstart({...node.onstart,speech:lines}));
     }
 
     const ruleChanged = (rule = "")=>{
@@ -74,9 +73,8 @@ export function Creator({onClose}) {
     }
 
     const actionChanged = (actions)=>{
-        setNode({...node, actions})
-        //dispatch(setActions(action));
-       
+        setNode({...node, onstart:{...node.onstart,actions}});
+        dispatch(setOnstart({...node.onstart,actions}));
     }
 
     const typeChanged = (type)=>{
@@ -85,7 +83,7 @@ export function Creator({onClose}) {
     }
 
     const _updateNode = ()=>{
-     
+        console.log("UPdating node", {node:name, ...node});
         dispatch(updateNode({node:name, ...node}));
         dispatch(setViewAddNode(false))
         reset();
@@ -94,10 +92,23 @@ export function Creator({onClose}) {
     const reset = ()=>{
         dispatch(setName(""));
         dispatch(setRule(""));
-        dispatch(setSpeech([]));
-        dispatch(setActions(""));
+        dispatch(setOnstart({}));
         dispatch(setType(""));
-        setNode({name:"",rule:"", speech:[], actions:"", type:"button"});
+        setNode({name:"",rule:"", onstart:{}, actions:"", type:"button"});
+    }
+
+    const renderSpeech = ()=>{
+        console.log("in rendr sppech with", node);
+        return <div className="flex  flex-col shadow p-2 mt-4">
+                    <div className="font-bold text-xs flex justify-start">SPEECH (when this node starts)</div>
+                    <div className="flex flex-col mt-2 items-start">
+                        <Speech lines={node.onstart.speech} speechChanged={speechChanged}/>
+                    </div>
+                </div>
+    }
+
+    const renderActions = ()=>{
+        return <div><Actions actions={node.onstart.actions} actionChanged={actionChanged}/></div>
     }
 
     const renderRule = ()=>{
@@ -121,19 +132,21 @@ export function Creator({onClose}) {
             <label className="text-xs mt-1">a unique name for this node</label>
         </div>
         {parent && renderRule()}
-        <div className="flex  flex-col shadow p-2 mt-4">
-            <div className="font-bold text-xs flex justify-start">SPEECH (when this node starts)</div>
-            <div className="flex flex-col mt-2 items-start">
-                <Speech lines={node.speech} speechChanged={speechChanged}/>
+       
+       <div className="bg-gray-100 mt-4">
+            <div className="flex items-start flex-col p-4">
+                <div>on start</div>
+                <div className="text-xs text-gray-500">(the speech and actions that run when this node is triggered)</div>
             </div>
+           
+                <div className="flex flex-row ">
+                    <div onClick={()=>{setSpeechTab(true)}} className={`text-xs font-bold p-4 ${speechTab  ? "text-blue-500" : "text-gray-500"}`}>speech</div>
+                    <div onClick={()=>{setSpeechTab(false)}} className={`text-xs font-bold p-4 ${!speechTab ? "text-blue-500" : "text-gray-500"}`}>actions</div>
+                </div>
+                {speechTab && renderSpeech()}
+                {!speechTab && renderActions()}
+      
         </div>
-        {parent && <div className="flex  flex-col shadow p-2 mt-4">
-            <div className="font-bold text-xs flex justify-start">ACTION (what is called when this node is triggered)</div>
-            <div className="flex flex-col mt-2 items-start">
-                <input type="text" placeholder="action list" value={node.action} onChange={(e)=>{actionChanged(e.target.value)}}></input>
-                <label className="text-xs mt-1 justify-start">format: a1,a2,a3|a5,a6 </label>
-            </div>
-        </div>}
         <div className="flex flex-row justify-center items-center">
             {parent &&  <div> <button onClick={createNode} className="p-2 mt-4 bg-blue-500 text-white">Create node!</button></div>}
             {!parent &&  <div> <button onClick={_updateNode} className="p-2 mt-4 bg-blue-500 text-white">Update node</button></div>}

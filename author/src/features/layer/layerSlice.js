@@ -136,9 +136,9 @@ export const layerSlice = createSlice({
     updateLink : (state, action)=>{
       
         const {from,to,actions,rules} = action.payload; 
-        const _actions =  (actions||"").split("|").map((line)=>{
-            return line.split(",");
-        });
+        //const _actions =  (actions||"").split("|").map((line)=>{
+        //    return line.split(",");
+        //});
         
         state.layers[state.layerid].lut = Object.keys(state.layers[state.layerid].lut).reduce((acc, key)=>{
             if (key === from){
@@ -148,7 +148,7 @@ export const layerSlice = createSlice({
                         if (item.event === to){
                             return {
                                 ...item,
-                                actions: _actions,
+                                actions,
                                 op:rules,
                             }
                         }
@@ -163,11 +163,11 @@ export const layerSlice = createSlice({
 
     updateNode : (state, action)=>{
 
-        const {node,name,speech,type,subscription="/press"} = action.payload;
+        const {node,name,onstart,type,subscription="/press"} = action.payload;
       
         
-        console.log("in updare node with speech", speech);
-        
+        console.log("in updare node with onstart", onstart);
+
 
         //TODO - SORT ROOT NODE - ID THIS IS THE ONE CHANGED!!
         state.layers[state.layerid].nodesById = Object.keys(state.layers[state.layerid].nodesById).reduce((acc, key)=>{
@@ -181,10 +181,7 @@ export const layerSlice = createSlice({
                         type,
                         subscription,
                         id: name.replace(/\s/g, "_"),
-                        onstart: {
-                            ...state.layers[state.layerid].nodesById[key].onstart,
-                            speech : speech,
-                        }
+                        onstart,
                     }
                 }
             }

@@ -62,7 +62,7 @@ app.get('/ui/api/off', async function (req, res, next) {
 });
 
 app.get('/ui/api/brightness', async function (req, res, next) {
-  const {brightness,duration} = req.query;
+  const {brightness,duration=2} = req.query;
   console.log('changing brightness to',brightness,' over ',duration,' s');
   const obj = {"brightness": {"value":Number(brightness), duration:Number(duration)}}
   await putter(obj); 
@@ -80,6 +80,8 @@ app.get('/ui/api', async function(req,res){
   if (sat) { obj.sat = {value: Number(sat)}};
   if (ct) { obj.ct = {value: Number(ct)}};
   if (duration) { obj.duration = {value: Number(duration)}};
+
+  console.log("sending", JSON.stringify(obj,null,4))
   await putter(obj); 
   res.status(200).send("OK");
 

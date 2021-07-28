@@ -176,6 +176,9 @@
                     ],
                     "actions": [
                         [
+                            {"action":"print", "delay":0, "params": {"body":{"text":"New experience started.."}}}
+                        ],
+                        [
                             { "delay":300, "action": "immersive", "params":{"query":{"script_id":"ID101"}}},
                             { "delay":500, "action": "homescreen"},
                             { "delay":1000, "action":"fan", "params":{"query":{"rotate":false, "power":4, "cool":true}}}
@@ -255,15 +258,20 @@
                         }
                     ],
                     "actions": [
+                        
+
                         [
-                            {"delay":0, "action":"mediascreen"}
+                            {"delay":0, "action":"mediascreen"},
+                            {"action":"print", "delay":0, "params": {"body":{"text":"commencing countdown"}}}
                         ],
                         [
                             {"delay":0, "action": "videomedia", "params":{"query":{"media":"countdown.mp4","delay":0}}}
                             
                         ],
                         [
-                            {"delay":0,"action": "immersive", "params":{"query":{"script_id":"ID102"}}}
+                            {"delay":0,"action": "immersive", "params":{"query":{"script_id":"ID101"}}},
+                            {"delay":5000,"action": "immersive", "params":{"query":{"script_id":"ID021"}}},
+                            {"action":"print", "delay":0, "params": {"body":{"text":"systems ready"}}}
                         ]
                     ]
                 },
@@ -325,7 +333,7 @@
                             "words": "Let’s have a chat about privacy enhancing technologies.",
                             "delay": "500",
                             "voice": "Daniel",
-                            "background": "foreboding.mp3",
+                            "background": "",
                             "wpm": 180,
                             "rate": "180"
                         }
@@ -372,8 +380,8 @@
                     "actions": [
                         [
                             {"delay":200, "action": "immersive", "params":{"query":{"script_id":"ID106"}}},
-                            {"delay":200, "action": "immersive", "params":{"query":{"script_id":"ID016"}}},
-                            {"delay":200, "action": "immersive", "params":{"query":{"script_id":"ID021"}}}
+                            {"delay":1000, "action": "immersive", "params":{"query":{"script_id":"ID016"}}},
+                            {"delay":2000, "action": "immersive", "params":{"query":{"script_id":"ID021"}}}
                         ]
                     ]
                 },
@@ -511,7 +519,7 @@
                 "onstart": {
                     "speech": [
                         {
-                            "words": "Let me tell you about the data box.  It’s the computer on the bottom-right shelf",
+                            "words": "Let me tell you about the data box.  It’s the computer that drives this experience",
                             "delay": "500",
                             "voice": "Daniel",
                             "background": "",
@@ -530,7 +538,7 @@
                             "words": "it’s really rather clever",
                             "delay": 0,
                             "voice": "Daniel",
-                            "background": "dramatic.mp3",
+                            "background": "",
                             "wpm": 180,
                             "rate": "180"
                         },
@@ -675,7 +683,7 @@
                 "onstart": {
                     "speech": [
                         {
-                            "words": "You may have seen I’m watching you. I’m on top of the TV.  Hey there",
+                            "words": "You may have seen I’m watching you. I’m under the TV.  Hey there",
                             "delay": 3000,
                             "voice": "Daniel",
                             "background": "",
@@ -705,9 +713,10 @@
                     ],
                     "actions": [
                         [
-                            {"delay":0, "action": "camerascan", "params":{"query":{"state":null}}},
-                            {"delay":11000, "action": "camerascan", "params":{"query":{"state":"scan"}}},
-                            {"delay":10000, "action": "camerascan", "params":{"query":{"state":"noscan"}}}
+                            {"action":"print", "delay":0, "params": {"body":{"text":"scanning facial features"}}}
+                        ],
+                        [
+                            {"delay":0, "action": "camerascan", "params":{"query":{"state":null}}}
                         ],
                         [
                             {"action":"message", "delay":10000, "params": {"query":{"message":":inititiate [FACE] scan"}}}
@@ -781,7 +790,9 @@
                             "background": "",
                             "rate": "180"
                         }
-                    ]
+                      
+                    ],
+                    "actions": [[  {"action":"message", "delay":0, "params": {"query":{"message":":facescan [ALERT: annoying voice]"}}}]]
                 },
                 "type": "button",
                 "subscription": "/press",
@@ -920,7 +931,8 @@
                             "background": "",
                             "rate": "180"
                         }
-                    ]
+                    ],
+                    "actions":[[{"action":"print", "delay":0, "params": {"body":{"text":"Health profile: [Heart Disease 87%]"}}}]]
                 },
                 "type": "button",
                 "subscription": "/press",
@@ -966,7 +978,8 @@
                             "background": "",
                             "rate": "180"
                         }
-                    ]
+                    ],
+                    "actions":[[{"action":"print", "delay":0, "params": {"body":{"text":"APB sent to Liverpool police"}}}]]
                 },
                 "type": "button",
                 "subscription": "/press",
@@ -1012,7 +1025,9 @@
                             "background": "",
                             "rate": "180"
                         }
-                    ]
+                    ],
+                    "actions":[[{"action":"print", "delay":0, "params": {"body":{"text":"Profile feature: [ROMANTIC]"}}}]]
+
                 },
                 "type": "button",
                 "subscription": "/press",
@@ -1058,7 +1073,8 @@
                             "background": "",
                             "rate": "180"
                         }
-                    ]
+                    ],
+                    "actions":[[{"action":"print", "delay":0, "params": {"body":{"text":"Data breach suspected"}}}]]
                 },
                 "type": "button",
                 "subscription": "/press",
@@ -1123,14 +1139,14 @@
                 "onstart": {
                     "speech": [
                         {
-                            "words": "If you wish to withdraw your consent I suggest you stand up now.  ",
-                            "delay": 0,
+                            "words": "If you wish to withdraw your consent I suggest you hold your thumbs up now  ",
+                            "delay": 800,
                             "voice": "Daniel",
                             "background": "",
                             "rate": "180"
                         },
                         {
-                            "words": "Flatulence is also accepted.  Confirm now.",
+                            "words": "Confirm now.",
                             "delay": 0,
                             "voice": "Daniel",
                             "background": "",
@@ -1351,6 +1367,7 @@
                     ],
                     "actions": [
                         [
+                            {"delay":0,"action": "immersive", "params":{"query":{"script_id":"ID021"}}},
                             {"delay":0, "action":"mediascreen"},
                             {"action":"message", "delay":1000, "params": {"query":{"message":":play [TV.mp4]"}}},
                             {"delay":2000, "action": "videomedia", "params":{"query":{"media":"TV.mp4","delay":50}}}
@@ -1393,60 +1410,21 @@
                         [
                             {"action":"print", "delay":0, "params": {"body":{"text":"I consent to all of my data"}}},
                             {"action":"print", "delay":2000, "params": {"body":{"text":"being used by Future Mundane Inc."}}},
-                            {"action":"print", "delay":2000, "params": {"body":{"text":"______________________________"}}}
+                            {"action":"print", "delay":2000, "params": {"body":{"text":"______________________________"}}},
+                            {"action":"print", "delay":2000, "params": {"body":{"text":"\n\n\n\n\n"}}}
                         ]
                     ]
                 },
                 "type": "button",
                 "subscription": "/press",
                 "data": [
-                    "holdid"
+                    "show film"
                 ],
                 "rules": [
                     {
                         "rule": {
                             "operator": "equals",
-                            "operand": "holdid"
-                        },
-                        "actions": [
-                            []
-                        ],
-                        "next": "holdid"
-                    }
-                ]
-            },
-            {
-                "id": "holdid",
-                "name": "holdid",
-                "onstart": {
-                    "speech": [
-                        {
-                            "words": "Next, please hold up your i. d.",
-                            "delay": 500,
-                            "voice": "Daniel",
-                            "background": "",
-                            "rate": "180"
-                        },
-                        {
-                            "words": "Valid documents include driving licence, passport and credit cards",
-                            "delay": 500,
-                            "voice": "Daniel",
-                            "background": "",
-                            "rate": "180"
-                        }
-                    ],
-                    "actions":[[{"delay":0, "action": "camerascreen"}]]
-                },
-                "type": "button",
-                "subscription": "/press",
-                "data": [
-                    "showfilm"
-                ],
-                "rules": [
-                    {
-                        "rule": {
-                            "operator": "equals",
-                            "operand": "showfilm"
+                            "operand": "show film"
                         },
                         "actions": [
                             []
@@ -1569,8 +1547,9 @@
                             {"action":"mediascreen"}
                         ],
                         [
-                            {"action":"videomedia", "params": {"query":{"media":"tbu-pos-scifi-warm.mp4","delay":0}}}, 
-                            {"action":"soundmedia", "params": {"body":{"media":"tbu-pos-scifi-warm.mp4","nowait":true, "delay":200}}}
+                            {"action":"soundmedia", "params": {"body":{"media":"tbu-pos-scifi-warm.mp4","nowait":true, "delay":0}}},
+                            {"action":"videomedia", "delay":100, "params": {"query":{"media":"tbu-pos-scifi-warm.mp4","delay":0}}}
+                           
                         ],
                         [
                             {"action":"print", "delay":2000, "params": {"body":{"text":"mood in room is positive"}}},
@@ -1589,7 +1568,7 @@
                             {"action":"message", "delay":69000, "params": {"query":{"message":"Audience mood is LOW: showing positive ending"}}}  
                         ],
                         [
-                            {"action":"fan", "params":{"query":{"rotate":false, "power":4, "cool":true}}, "delay":166000},
+                            {"action":"fan", "params":{"query":{"rotate":true, "power":10, "cool":true, "from":0, "to":90}}, "delay":166000},
                             {"action":"fan", "params":{"query":{"rotate":false, "power":1, "cool":true}}, "delay":5000}
                         ]
                     ]
@@ -1622,8 +1601,9 @@
                             {"action":"mediascreen"}
                         ],
                         [
-                            {"action":"videomedia", "params": {"query":{"media":"tbu-pos-scifi-cold.mp4","delay":0}}}, 
-                            {"action":"soundmedia", "params": {"body":{"media":"tbu-pos-scifi-cold.mp4","nowait":true, "delay":200}}}
+                            
+                            {"action":"soundmedia", "delay":0, "params": {"body":{"media":"tbu-pos-scifi-cold.mp4","nowait":true, "delay":0}}},
+                            {"action":"videomedia", "delay":100, "params": {"query":{"media":"tbu-pos-scifi-cold.mp4","delay":0}}}
                         ],
                         [
                             {"action":"print", "delay":2000, "params": {"body":{"text":"mood in room is positive"}}},
@@ -1642,8 +1622,77 @@
                             {"action":"message", "delay":69000, "params": {"query":{"message":"Audience mood is LOW: showing positive ending"}}}  
                         ],
                         [
-                            {"action":"fan", "params":{"query":{"rotate":false, "power":4, "cool":true}}, "delay":166000},
-                            {"action":"fan", "params":{"query":{"rotate":false, "power":1, "cool":true}}, "delay":5000}
+                            {"action":"fan", "params":{"query":{"rotate":true, "power":10, "cool":true, "from":0, "to":90}}, "delay":166000},
+                            {"action":"fan", "params":{"query":{"rotate":false, "power":1, "cool":true}}, "delay":29000}
+                        ],
+                        [
+                            {"action": "immersive", "params":{"query":{"script_id":"tbu-pos-scifi-cold-000"}}, "delay": 0},
+                            {"action": "nanoleaf",  "params":{"query":{"hue":41172,"sat":109}}, "delay": 0}
+                        ],
+                        [
+                            {"action": "immersive","params":{"query":{"script_id":"tbu-pos-scifi-cold-001"}}, "delay": 8500},
+                            {"action": "nanoleaf",  "params":{"query":{"hue":38306,"sat":205}}, "delay": 0}
+                        ],
+                        [
+                            {"action": "immersive","params":{"query":{"script_id":"tbu-pos-scifi-cold-002"}}, "delay": 22000},
+                            {"action": "nanoleaf",  "params":{"query":{"hue":38306,"sat":205}}, "delay": 0}
+                        ],
+                        [
+                            {"action": "immersive","params":{"query":{"script_id":"tbu-pos-scifi-cold-003"}}, "delay": 47000},
+                            {"action": "nanoleaf",  "params":{"query":{"hue":54455,"sat":124}}, "delay": 0}
+                        ],
+                        [
+                            {"action": "immersive","params":{"query":{"script_id":"tbu-pos-scifi-cold-004"}}, "delay": 53000},
+                            {"action": "nanoleaf",  "params":{"query":{"hue":54455,"sat":124}}, "delay": 0}
+                        ],
+                        [
+                            {"action": "immersive","params":{"query":{"script_id":"tbu-pos-scifi-cold-005"}}, "delay": 57000},
+                            {"action": "nanoleaf",  "params":{"query":{"hue":56629,"sat":169}}, "delay": 0}
+                        ],
+                        [
+                            {"action": "immersive", "params":{"query":{"script_id":"tbu-pos-scifi-cold-006"}}, "delay": 62000},
+                            {"action": "nanoleaf",  "params":{"query":{"hue":58609,"sat":141}}, "delay": 0}
+                        ],
+                        [
+                            {"action": "immersive","params":{"query":{"script_id":"tbu-pos-scifi-cold-007"}}, "delay": 75000},
+                            {"action": "nanoleaf",  "params":{"query":{"hue":44135,"sat":209}}, "delay": 0}
+                        ],
+                        [
+                            {"action": "immersive","params":{"query":{"script_id":"tbu-pos-scifi-cold-008"}}, "delay": 80000}
+                         
+                        ],
+                        [
+                            {"action": "immersive","params":{"query":{"script_id":"tbu-pos-scifi-cold-009"}}, "delay": 94000}
+                           
+                        ],
+                        [
+                            {"action": "immersive","params":{"query":{"script_id":"tbu-pos-scifi-cold-010"}}, "delay": 146000}
+                           
+                        ],
+                        [
+                            {"action": "immersive", "params":{"query":{"script_id":"tbu-pos-scifi-cold-011"}}, "delay": 173000}
+                           
+                        ],
+                        [
+                            {"action": "immersive","params":{"query":{"script_id":"tbu-pos-scifi-cold-012"}}, "delay": 202000}
+                        ],
+                        [
+                            {"action": "immersive","params":{"query":{"script_id":"tbu-pos-scifi-cold-013"}}, "delay": 215000}
+                        ],
+                        [
+                            {"action": "immersive","params":{"query":{"script_id":"tbu-pos-scifi-cold-014"}}, "delay": 248000}
+                        ],
+                        [
+                            {"action": "immersive","params":{"query":{"script_id":"tbu-pos-scifi-cold-015"}}, "delay": 266000}
+                        ],
+                        [
+                            {"action": "immersive","params":{"query":{"script_id":"tbu-pos-scifi-cold-016"}}, "delay": 269000}
+                        ],
+                        [
+                            {"action": "immersive","params":{"query":{"script_id":"tbu-pos-scifi-cold-017"}}, "delay": 279000}
+                        ],
+                        [
+                            {"action": "immersive","params":{"query":{"script_id":"tbu-pos-scifi-cold-018"}}, "delay": 305000}
                         ]
                     ] 
                 },
@@ -1669,14 +1718,15 @@
                 "onstart": {
                     "actions": [
                         [
-                            {"action": "immersive", "params":{"query":{"script_id":"id106"}}}
+                            {"action": "immersive", "params":{"query":{"script_id":"ID106"}}}
                         ],
                         [
                             {"action":"mediascreen"}
                         ],
                         [
-                            {"action":"videomedia", "params": {"query":{"media":"tbu-neg-scifi-warm.mp4","delay":0}}}, 
-                            {"action":"soundmedia", "params": {"body":{"media":"tbu-neg-scifi-warm.mp4","nowait":true, "delay":200}}}
+                           
+                            {"action":"soundmedia",  "params": {"body":{"media":"tbu-neg-scifi-warm.mp4","nowait":true, "delay":0}}},
+                            {"action":"videomedia", "delay":100, "params": {"query":{"media":"tbu-neg-scifi-warm.mp4","delay":0}}}
                         ],
                         [
                             {"action":"print", "delay":2000, "params": {"body":{"text":"mood in room is low"}}},
@@ -1695,8 +1745,8 @@
                             {"action":"message", "delay":69000, "params": {"query":{"message":"Audience mood is HIGH: allowing melancholy outcome"}}}  
                         ],
                         [
-                            {"action":"fan", "params":{"query":{"rotate":false, "power":4, "cool":true}}, "delay":166000},
-                            {"action":"fan", "params":{"query":{"rotate":false, "power":1, "cool":true}}, "delay":5000}
+                            {"action":"fan", "params":{"query":{"rotate":true, "power":10, "cool":true, "from":0, "to":90}}, "delay":166000},
+                            {"action":"fan", "params":{"query":{"rotate":false, "power":1, "cool":true}}, "delay":29000}
                         ]
                     ]
                 },
@@ -1722,14 +1772,14 @@
                 "onstart": {
                     "actions": [
                         [
-                            {"action": "immersive", "params":{"query":{"script_id":"id106"}}}
+                            {"action": "immersive", "params":{"query":{"script_id":"ID100"}}}
                         ],
                         [
                             {"action":"mediascreen"}
                         ],
                         [
                             {"action":"soundmedia", "params": {"body":{"media":"tbu-neg-scifi-cold.mp4","nowait":true}}},
-                            {"action":"videomedia", "params": {"query":{"media":"tbu-neg-scifi-cold.mp4","delay":200}}}
+                            {"action":"videomedia", "delay":100, "params": {"query":{"media":"tbu-neg-scifi-cold.mp4","delay":0}}}
                             
                         ],
                         [
@@ -1749,8 +1799,12 @@
                             {"action":"message", "delay":69000, "params": {"query":{"message":"Audience mood is HIGH: allowing melancholy outcome"}}}  
                         ],
                         [
-                            {"action":"fan", "params":{"query":{"rotate":false, "power":4, "cool":true}}, "delay":166000},
-                            {"action":"fan", "params":{"query":{"rotate":false, "power":1, "cool":true}}, "delay":5000}
+                            {"action":"fan", "params":{"query":{"rotate":true, "power":10, "cool":true, "from":0, "to":90}}, "delay":172000},
+                            {"action":"fan", "params":{"query":{"rotate":false, "power":1, "cool":true}}, "delay":29000}
+                        ],
+                        [
+                            {"action": "immersive", "params":{"query":{"script_id":"ID047"}}}
+                           
                         ]
                     ]  
                 },
@@ -1777,14 +1831,14 @@
                 "onstart": {
                     "actions": [
                         [
-                            {"action": "immersive", "params":{"query":{"script_id":"id106"}}}
+                            {"action": "immersive", "params":{"query":{"script_id":"ID106"}}}
                         ],
                         [
                             {"action":"mediascreen"}
                         ],
                         [
-                            {"action":"soundmedia", "delay":300, "params": {"body":{"media":"tbu-pos-noscifi-warm.mp4","nowait":true}}},
-                            {"action":"videomedia", "params": {"query":{"media":"tbu-pos-noscifi-warm.mp4","delay":0}}}   
+                            {"action":"soundmedia", "params": {"body":{"media":"tbu-pos-noscifi-warm.mp4","nowait":true}}},
+                            {"action":"videomedia","delay":100,  "params": {"query":{"media":"tbu-pos-noscifi-warm.mp4","delay":0}}}   
                         ],
                         [
                             {"action":"print", "delay":2000, "params": {"body":{"text":"mood in room is positive"}}},
@@ -1832,14 +1886,14 @@
                 "onstart": {
                     "actions": [
                         [
-                            {"action": "immersive", "params":{"query":{"script_id":"id106"}}}
+                            {"action": "immersive", "params":{"query":{"script_id":"ID106"}}}
                         ],
                         [
                             {"action":"mediascreen"}
                         ],
                         [
                             {"action":"soundmedia", "params": {"body":{"media":"tbu-pos-noscifi-cold.mp4","nowait":true}}},
-                            {"action":"videomedia", "params": {"query":{"media":"tbu-pos-noscifi-cold.mp4","delay":200}}}   
+                            {"action":"videomedia", "delay":100, "params": {"query":{"media":"tbu-pos-noscifi-cold.mp4","delay":0}}}   
                         ],
                         [
                             {"action":"print", "delay":2000, "params": {"body":{"text":"mood in room is positive"}}},
@@ -1887,14 +1941,14 @@
                 "onstart": {
                     "actions": [
                         [
-                            {"action": "immersive", "params":{"query":{"script_id":"id106"}}}
+                            {"action": "immersive", "params":{"query":{"script_id":"ID106"}}}
                         ],
                         [
                             {"action":"mediascreen"}
                         ],
                         [
                             {"action":"soundmedia", "params": {"body":{"media":"tbu-neg-noscifi-warm.mp4","nowait":true}}},
-                            {"action":"videomedia", "params": {"query":{"media":"tbu-neg-noscifi-warm.mp4","delay":200}}}
+                            {"action":"videomedia", "delay":100, "params": {"query":{"media":"tbu-neg-noscifi-warm.mp4","delay":0}}}
                         ],
                         [
                             {"action":"print", "delay":2000, "params": {"body":{"text":"mood in room is low"}}},
@@ -1939,14 +1993,14 @@
                 "onstart": {
                     "actions": [
                         [
-                            {"action": "immersive", "params":{"query":{"script_id":"id106"}}}
+                            {"action": "immersive", "params":{"query":{"script_id":"ID106"}}}
                         ],
                         [
                             {"action":"mediascreen"}
                         ],
                         [
                             {"action":"soundmedia", "params": {"body":{"media":"tbu-neg-noscifi-cold.mp4","nowait":true}}},
-                            {"action":"videomedia", "params": {"query":{"media":"tbu-neg-noscifi-cold.mp4","delay":200}}}
+                            {"action":"videomedia", "delay":100, "params": {"query":{"media":"tbu-neg-noscifi-cold.mp4","delay":0}}}
                         ],
                         [
                             {"action":"print", "delay":2000, "params": {"body":{"text":"mood in room is low"}}},
@@ -2065,7 +2119,7 @@
                               
                     [{"action":"say", "params":{"body":{"speech":[{"words":"Please remain seated","voice":"Daniel"}]}}},
                     {"action":"say", "params":{"body":{"speech":[{"words":"As it happens, analysis of sensor data meant that I decided to show you a more positive ending. I didn't want to upset you. Not in that state","voice":"Daniel"}]}}, "delay":1000},
-                    {"action":"say", "delay":1000, "params":{"body":{"speech":[{"words":"Also, you remember the weird sci-fi interlude? That was just for you. You're special","voice":"Daniel"}]}}},
+                    {"action":"say", "delay":1000, "params":{"body":{"speech":[{"words":"Also, you remember the weird science-fiction interlude? That was just for you. You're special","voice":"Daniel"}]}}},
                     {"action":"say", "params":{"body":{"speech":[{"words":"I used a preference model to choose the music I thought you'd like - hope you enjoyed it!","voice":"Daniel"}]}}, "delay":1000}]
                 ]},
                 "type": "button",
@@ -2090,7 +2144,7 @@
                 "onstart":{ "actions": [
                     [{"action":"say", "params":{"body":{"speech":[{"words":"Please remain seated","voice":"Daniel"}]}}},
                     {"action":"say", "delay":1000, "params":{"body":{"speech":[{"words":"As it happens, analysis of sensor data meant that I decided to show you a more negative ending. Sometimes it's good to be brought back down to reality","voice":"Daniel"}]}}},
-                    {"action":"say", "delay":1000, "params":{"body":{"speech":[{"words":"Also, you remember the weird sci-fi interlude? That was just for you. You're special","voice":"Daniel"}]}}},
+                    {"action":"say", "delay":1000, "params":{"body":{"speech":[{"words":"Also, you remember the weird science-fiction interlude? That was just for you. You're special","voice":"Daniel"}]}}},
                     {"action":"say", "params":{"body":{"speech":[{"words":"I used a preference model to choose the music I thought you'd like - hope you enjoyed it!","voice":"Daniel"}]}}, "delay":1000}]
                 ] },
                 "type": "button",

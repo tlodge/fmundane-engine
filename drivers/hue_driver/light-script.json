@@ -305,5 +305,353 @@
         ],
         "ct": 389,
         "transitiontime": 20
+    },
+
+    
+
+        "ID000": {
+    
+            "on": true,
+    
+            "bri": 254,
+    
+            "hue": 23992,
+    
+            "sat": 219,
+    
+            "effect": "none",
+    
+            "xy": [0.2272,0.6342],
+    
+            "ct": 153,
+    
+            "transitiontime": 10
+    
+        },
+    
+     
+    
+        "ID001" : {
+    
+            "on": true,
+    
+            "bri": 254,
+    
+            "hue": 64963,
+    
+            "sat": 211,
+    
+            "effect": "none",
+    
+            "xy": [0.6249,0.3132],
+    
+            "ct": 153,
+    
+            "transitiontime": 30
+    
+        },
+    
+     
+    
+        "ID002" : {
+    
+            "on": true,
+    
+            "bri": 254,
+    
+            "hue": 23992,
+    
+            "sat": 219,
+    
+            "effect": "none",
+    
+            "xy": [0.2272,0.6342],
+    
+            "ct": 153,
+    
+            "transitiontime": 30
+    
+        },
+    
+     
+    
+        "ID003" : {
+    
+            "on":true,
+    
+            "bri":85,
+    
+            "hue":41435,
+    
+            "sat":77,
+    
+            "effect":"none",
+    
+            "xy":[0.3129,0.3291],
+    
+            "ct":153,
+    
+            "transitiontime":20
+    
+        },
+    
+        "tbu-neg-scifi-warm-000":{"on":true,"bri":145,"hue":41259,"sat":97,"effect":"none","xy":[0.2954,0.3188],"ct":153,"transitiontime":20},
+    
+        "tbu-neg-scifi-warm-001":{"on":true,"bri":112,"hue":23997,"sat":219,"effect":"none","xy":[0.1941,0.3567],"ct":153,"transitiontime":20},
+    
+        "tbu-neg-scifi-warm-002":{"on":true,"bri":158,"hue":41227,"sat":208,"effect":"none","xy":[0.1981,0.2532],"ct":153,"transitiontime":20},
+    
+        "tbu-neg-scifi-warm-003":{"on":true,"bri":158,"hue":60657,"sat":123,"effect":"none","xy":[0.462,0.3102],"ct":372,"transitiontime":20},
+    
+        "tbu-neg-scifi-warm-004":{"on":true,"bri":158,"hue":65480,"sat":86,"effect":"none","xy":[0.4852,0.3533],"ct":413,"transitiontime":20},
+    
+        "tbu-neg-scifi-warm-005":{"on":true,"bri":158,"hue":59304,"sat":131,"effect":"none","xy":[0.447,0.296],"ct":347,"transitiontime":20},
+    
+        "tbu-neg-scifi-warm-006":{"on":true,"bri":90,"hue":313,"sat":241,"effect":"none","xy":[0.6695,0.3164],"ct":153,"transitiontime":20},
+    
+        "tbu-neg-scifi-warm-007":{"on":true,"bri":90,"hue":42314,"sat":209,"effect":"none","xy":[0.1965,0.2255],"ct":153,"transitiontime":20},
+    
+        "tbu-neg-scifi-warm-008":{"on":true,"bri":90,"hue":392,"sat":236,"effect":"none","xy":[0.662,0.3187],"ct":153,"transitiontime":20},
+    
+        "tbu-neg-scifi-warm-009":{"on":true,"bri":90,"hue":63724,"sat":254,"effect":"none","xy":[0.6386,0.2827],"ct":153,"transitiontime":20},
+    
+        "tbu-neg-scifi-warm-010":{"on":true,"bri":90,"hue":65080,"sat":254,"effect":"none","xy":[0.6782,0.3018],"ct":153,"transitiontime":20},
+    
+        "tbu-neg-scifi-warm-011":{"on":true,"bri":169,"hue":47506,"sat":214,"effect":"none","xy":[0.1989,0.1042],"ct":153,"transitiontime":20},
+    
+        "tbu-neg-scifi-warm-012":{"on":true,"bri":169,"hue":46014,"sat":254,"effect":"none","xy":[0.154,0.0806],"ct":153,"transitiontime":20},
+    
+        "tbu-neg-scifi-warm-013":{"on":true,"bri":95,"hue":63937,"sat":253,"effect":"none","xy":[0.6437,0.286],"ct":153,"transitiontime":20},
+    
+        "tbu-neg-scifi-warm-014":{"on":true,"bri":111,"hue":972,"sat":179,"effect":"none","xy":[0.5857,0.339],"ct":153,"transitiontime":20},
+    
+        "tbu-neg-scifi-warm-015":{"on":true,"bri":111,"hue":62454,"sat":254,"effect":"none","xy":[0.6015,0.2647],"ct":153,"transitiontime":20},
+    
+        "tbu-neg-scifi-warm-016":{"on":true,"bri":111,"hue":48379,"sat":164,"effect":"none","xy":[0.2577,0.1758],"ct":153,"transitiontime":20},
+    
+        "tbu-neg-scifi-warm-017":{"on":true,"bri":111,"hue":55180,"sat":137,"effect":"none","xy":[0.3851,0.2608],"ct":255,"transitiontime":20},
+    
+        "tbu-neg-scifi-warm-018":{"on":true,"bri":111,"hue":63568,"sat":80,"effect":"none","xy":[0.4603,0.3464],"ct":369,"transitiontime":20},
+    
+        "tbu-neg-scifi-warm-019":{"on":true,"bri":111,"hue":40961,"sat":180,"effect":"none","xy":[0.2228,0.2755],"ct":153,"transitiontime":20},
+    
+        "tbu-neg-scifi-warm-020":{"on":true,"bri":111,"hue":43624,"sat":254,"effect":"none","xy":[0.1559,0.1531],"ct":153,"transitiontime":20},
+    
+        "tbu-neg-scifi-warm-021":{"on":true,"bri":111,"hue":41435,"sat":77,"effect":"none","xy":[0.3129,0.3291],"ct":153,"transitiontime":20},
+     
+    
+        "tbu-pos-noscifi-cold-000":{"on":true,"bri":172,"hue":41172,"sat":109,"effect":"none","xy":[0.2849,0.3127],"ct":153,"transitiontime":20},
+    
+        "tbu-pos-noscifi-cold-001":{"on":true,"bri":254,"hue":33854,"sat":128,"effect":"none","xy":[0.2711,0.4135],"ct":153,"transitiontime":20},
+    
+        "tbu-pos-noscifi-cold-002":{"on":true,"bri":250,"hue":41246,"sat":204,"effect":"none","xy":[0.2016,0.2551],"ct":153,"transitiontime":20},
+    
+        "tbu-pos-noscifi-cold-003":{"on":true,"bri":51,"hue":62248,"sat":254,"effect":"none","xy":[0.5955,0.2618],"ct":153,"transitiontime":20},
+    
+        "tbu-pos-noscifi-cold-004":{"on":true,"bri":51,"hue":47546,"sat":119,"effect":"none","xy":[0.28,0.2255],"ct":153,"transitiontime":20},
+    
+        "tbu-pos-noscifi-cold-005":{"on":true,"bri":51,"hue":60535,"sat":242,"effect":"none","xy":[0.5377,0.2441],"ct":500,"transitiontime":20},
+    
+        "tbu-pos-noscifi-cold-006":{"on":true,"bri":51,"hue":46656,"sat":190,"effect":"none","xy":[0.2107,0.1407],"ct":153,"transitiontime":20},
+    
+        "tbu-pos-noscifi-cold-007":{"on":true,"bri":75,"hue":56855,"sat":148,"effect":"none","xy":[0.4139,0.2653],"ct":295,"transitiontime":20},
+    
+        "tbu-pos-noscifi-cold-008":{"on":true,"bri":75,"hue":60079,"sat":254,"effect":"none","xy":[0.5409,0.2342],"ct":500,"transitiontime":20},
+    
+        "tbu-pos-noscifi-cold-009":{"on":true,"bri":75,"hue":64398,"sat":174,"effect":"none","xy":[0.5707,0.3188],"ct":500,"transitiontime":20},
+    
+        "tbu-pos-noscifi-cold-010":{"on":true,"bri":75,"hue":49169,"sat":138,"effect":"none","xy":[0.2897,0.2138],"ct":153,"transitiontime":20},
+    
+        "tbu-pos-noscifi-cold-011":{"on":true,"bri":75,"hue":42973,"sat":177,"effect":"none","xy":[0.2243,0.2347],"ct":153,"transitiontime":20},
+    
+        "tbu-pos-noscifi-cold-012":{"on":true,"bri":75,"hue":51142,"sat":160,"effect":"none","xy":[0.3116,0.2054],"ct":153,"transitiontime":20},
+    
+        "tbu-pos-noscifi-cold-013":{"on":true,"bri":75,"hue":54993,"sat":112,"effect":"none","xy":[0.3818,0.2808],"ct":250,"transitiontime":20},
+    
+        "tbu-pos-noscifi-cold-014":{"on":true,"bri":75,"hue":58838,"sat":72,"effect":"none","xy":[0.4131,0.3305],"ct":295,"transitiontime":20},
+    
+        "tbu-pos-noscifi-cold-015":{"on":true,"bri":75,"hue":51761,"sat":189,"effect":"none","xy":[0.3125,0.1808],"ct":153,"transitiontime":20},
+    
+        "tbu-pos-noscifi-cold-016":{"on":true,"bri":75,"hue":44728,"sat":163,"effect":"none","xy":[0.2358,0.2118],"ct":153,"transitiontime":20},
+    
+        "tbu-pos-noscifi-cold-017":{"on":true,"bri":75,"hue":42159,"sat":198,"effect":"none","xy":[0.2063,0.2371],"ct":153,"transitiontime":20},
+    
+        "tbu-pos-noscifi-cold-018":{"on":true,"bri":116,"hue":41002,"sat":99,"effect":"none","xy":[0.2937,0.3206],"ct":153,"transitiontime":20},
+    
+        "tbu-pos-noscifi-cold-019":{"on":true,"bri":116,"hue":42764,"sat":206,"effect":"none","xy":[0.1989,0.2166],"ct":153,"transitiontime":20},
+    
+        "tbu-pos-noscifi-cold-020":{"on":true,"bri":116,"hue":50406,"sat":146,"effect":"none","xy":[0.3052,0.2144],"ct":153,"transitiontime":20},
+    
+        "tbu-pos-noscifi-cold-021":{"on":true,"bri":169,"hue":40585,"sat":46,"effect":"none","xy":[0.3402,0.353],"ct":192,"transitiontime":20},
+     
+    
+        "tbu-pos-noscifi-warm-000":{"on":true,"bri":172,"hue":41172,"sat":109,"effect":"none","xy":[0.2849,0.3127],"ct":153,"transitiontime":20},
+    
+        "tbu-pos-noscifi-warm-001":{"on":true,"bri":146,"hue":32113,"sat":227,"effect":"none","xy":[0.1878,0.489],"ct":153,"transitiontime":20},
+    
+        "tbu-pos-noscifi-warm-002":{"on":true,"bri":146,"hue":40569,"sat":186,"effect":"none","xy":[0.2003,0.2682],"ct":153,"transitiontime":20},
+    
+        "tbu-pos-noscifi-warm-003":{"on":true,"bri":78,"hue":62878,"sat":254,"effect":"none","xy":[0.6315,0.2688],"ct":153,"transitiontime":20},
+    
+        "tbu-pos-noscifi-warm-004":{"on":true,"bri":78,"hue":641,"sat":252,"effect":"none","xy":[0.6761,0.3186],"ct":153,"transitiontime":20},
+    
+        "tbu-pos-noscifi-warm-005":{"on":true,"bri":78,"hue":64078,"sat":254,"effect":"none","xy":[0.6489,0.2877],"ct":153,"transitiontime":20},
+    
+        "tbu-pos-noscifi-warm-006":{"on":true,"bri":83,"hue":2610,"sat":254,"effect":"none","xy":[0.6383,0.3482],"ct":153,"transitiontime":20},
+    
+        "tbu-pos-noscifi-warm-007":{"on":true,"bri":83,"hue":4965,"sat":151,"effect":"none","xy":[0.5053,0.3812],"ct":451,"transitiontime":20},
+    
+        "tbu-pos-noscifi-warm-008":{"on":true,"bri":83,"hue":41123,"sat":193,"effect":"none","xy":[0.2113,0.2645],"ct":153,"transitiontime":20},
+    
+        "tbu-pos-noscifi-warm-009":{"on":true,"bri":83,"hue":1960,"sat":254,"effect":"none","xy":[0.6516,0.3383],"ct":153,"transitiontime":20},
+    
+        "tbu-pos-noscifi-warm-010":{"on":true,"bri":83,"hue":62025,"sat":254,"effect":"none","xy":[0.589,0.2586],"ct":153,"transitiontime":20},
+    
+        "tbu-pos-noscifi-warm-011":{"on":true,"bri":83,"hue":65198,"sat":253,"effect":"none","xy":[0.6804,0.3038],"ct":153,"transitiontime":20},
+    
+        "tbu-pos-noscifi-warm-012":{"on":true,"bri":83,"hue":60921,"sat":254,"effect":"none","xy":[0.5567,0.243],"ct":500,"transitiontime":20},
+    
+        "tbu-pos-noscifi-warm-013":{"on":true,"bri":83,"hue":65233,"sat":253,"effect":"none","xy":[0.6815,0.3043],"ct":153,"transitiontime":20},
+    
+        "tbu-pos-noscifi-warm-014":{"on":true,"bri":83,"hue":47039,"sat":113,"effect":"none","xy":[0.2793,0.2312],"ct":153,"transitiontime":20},
+    
+        "tbu-pos-noscifi-warm-015":{"on":true,"bri":83,"hue":56223,"sat":168,"effect":"none","xy":[0.4063,0.2443],"ct":286,"transitiontime":20},
+    
+        "tbu-pos-noscifi-warm-016":{"on":true,"bri":83,"hue":44730,"sat":204,"effect":"none","xy":[0.1994,0.1702],"ct":153,"transitiontime":20},
+    
+        "tbu-pos-noscifi-warm-017":{"on":true,"bri":83,"hue":63821,"sat":136,"effect":"none","xy":[0.5201,0.3271],"ct":484,"transitiontime":20},
+    
+        "tbu-pos-noscifi-warm-018":{"on":true,"bri":83,"hue":1598,"sat":166,"effect":"none","xy":[0.5624,0.348],"ct":500,"transitiontime":20},
+    
+        "tbu-pos-noscifi-warm-019":{"on":true,"bri":83,"hue":1598,"sat":166,"effect":"none","xy":[0.1462,0.1319],"ct":500,"transitiontime":20},
+    
+        "tbu-pos-noscifi-warm-020":{"on":true,"bri":83,"hue":44330,"sat":254,"effect":"none","xy":[0.4629,0.3582],"ct":153,"transitiontime":20},
+    
+        "tbu-pos-noscifi-warm-021":{"on":true,"bri":176,"hue":41163,"sat":80,"effect":"none","xy":[0.3103,0.3299],"ct":153,"transitiontime":20},
+    
+     
+    
+        "tbu-neg-noscifi-cold-000":{"on":true,"bri":172,"hue":41172,"sat":109,"effect":"none","xy":[0.2849,0.3127],"ct":153,"transitiontime":20},
+    
+        "tbu-neg-noscifi-cold-001":{"on":true,"bri":254,"hue":36974,"sat":234,"effect":"none","xy":[0.1784,0.3566],"ct":153,"transitiontime":20},
+    
+        "tbu-neg-noscifi-cold-002":{"on":true,"bri":254,"hue":40435,"sat":191,"effect":"none","xy":[0.1913,0.2639],"ct":153,"transitiontime":20},
+    
+        "tbu-neg-noscifi-cold-003":{"on":true,"bri":111,"hue":50025,"sat":189,"effect":"none","xy":[0.2748,0.1626],"ct":153,"transitiontime":20},
+    
+        "tbu-neg-noscifi-cold-004":{"on":true,"bri":111,"hue":43952,"sat":249,"effect":"none","xy":[0.1601,0.1478],"ct":153,"transitiontime":20},
+    
+        "tbu-neg-noscifi-cold-005":{"on":true,"bri":111,"hue":43952,"sat":249,"effect":"none","xy":[0.278,0.1636],"ct":153,"transitiontime":20},
+    
+        "tbu-neg-noscifi-cold-006":{"on":true,"bri":111,"hue":4525,"sat":185,"effect":"none","xy":[0.5398,0.3773],"ct":500,"transitiontime":20},
+    
+        "tbu-neg-noscifi-cold-007":{"on":true,"bri":111,"hue":4525,"sat":185,"effect":"none","xy":[0.1795,0.1967],"ct":500,"transitiontime":20},
+    
+        "tbu-neg-noscifi-cold-008":{"on":true,"bri":111,"hue":42870,"sat":228,"effect":"none","xy":[0.4039,0.3447],"ct":153,"transitiontime":20},
+    
+        "tbu-neg-noscifi-cold-009":{"on":true,"bri":99,"hue":3545,"sat":179,"effect":"none","xy":[0.5487,0.3667],"ct":500,"transitiontime":20},
+    
+        "tbu-neg-noscifi-cold-010":{"on":true,"bri":99,"hue":61236,"sat":119,"effect":"none","xy":[0.4673,0.3162],"ct":382,"transitiontime":20},
+    
+        "tbu-neg-noscifi-cold-011":{"on":true,"bri":99,"hue":46016,"sat":247,"effect":"none","xy":[0.1603,0.0887],"ct":153,"transitiontime":20},
+    
+        "tbu-neg-noscifi-cold-012":{"on":true,"bri":99,"hue":55112,"sat":156,"effect":"none","xy":[0.3845,0.2441],"ct":252,"transitiontime":20},
+    
+        "tbu-neg-noscifi-cold-013":{"on":true,"bri":139,"hue":62363,"sat":120,"effect":"none","xy":[0.4836,0.3232],"ct":410,"transitiontime":20},
+    
+        "tbu-neg-noscifi-cold-014":{"on":true,"bri":139,"hue":48898,"sat":167,"effect":"none","xy":[0.2655,0.177],"ct":153,"transitiontime":20},
+    
+        "tbu-neg-noscifi-cold-015":{"on":true,"bri":139,"hue":42601,"sat":194,"effect":"none","xy":[0.2096,0.2297],"ct":153,"transitiontime":20},
+    
+        "tbu-neg-noscifi-cold-016":{"on":true,"bri":139,"hue":41545,"sat":103,"effect":"none","xy":[0.29,0.3117],"ct":153,"transitiontime":20},
+    
+        "tbu-neg-noscifi-cold-017":{"on":true,"bri":139,"hue":39986,"sat":179,"effect":"none","xy":[0.2242,0.297],"ct":153,"transitiontime":20},
+    
+        "tbu-neg-noscifi-cold-018":{"on":true,"bri":139,"hue":41662,"sat":254,"effect":"none","xy":[0.1574,0.2126],"ct":153,"transitiontime":20},
+     
+    
+        "tbu-pos-scifi-cold-000":{"on":true,"bri":172,"hue":41172,"sat":109,"effect":"none","xy":[0.2849,0.3127],"ct":153,"transitiontime":20},
+    
+        "tbu-pos-scifi-cold-001":{"on":true,"bri":208,"hue":38306,"sat":205,"effect":"none","xy":[0.2026,0.3265],"ct":153,"transitiontime":20},
+    
+        "tbu-pos-scifi-cold-002":{"on":true,"bri":208,"hue":38306,"sat":205,"effect":"none","xy":[0.1655,0.2101],"ct":153,"transitiontime":20},
+    
+        "tbu-pos-scifi-cold-003":{"on":true,"bri":208,"hue":54455,"sat":124,"effect":"none","xy":[0.3743,0.2668],"ct":239,"transitiontime":20},
+    
+        "tbu-pos-scifi-cold-004":{"on":true,"bri":208,"hue":54455,"sat":124,"effect":"none","xy":[0.2672,0.1849],"ct":239,"transitiontime":20},
+    
+        "tbu-pos-scifi-cold-005":{"on":true,"bri":208,"hue":56629,"sat":169,"effect":"none","xy":[0.4407,0.2845],"ct":298,"transitiontime":20},
+    
+        "tbu-pos-scifi-cold-006":{"on":true,"bri":174,"hue":58609,"sat":141,"effect":"none","xy":[0.4995,0.3451],"ct":337,"transitiontime":20},
+    
+        "tbu-pos-scifi-cold-007":{"on":true,"bri":174,"hue":44135,"sat":209,"effect":"none","xy":[0.1954,0.18],"ct":153,"transitiontime":20},
+    
+        "tbu-pos-scifi-cold-008":{"on":true,"bri":174,"hue":52742,"sat":80,"effect":"none","xy":[0.3607,0.2982],"ct":219,"transitiontime":20},
+    
+        "tbu-pos-scifi-cold-009":{"on":true,"bri":137,"hue":63637,"sat":74,"effect":"none","xy":[0.4549,0.349],"ct":359,"transitiontime":20},
+    
+        "tbu-pos-scifi-cold-010":{"on":true,"bri":114,"hue":45480,"sat":161,"effect":"none","xy":[0.2372,0.1993],"ct":153,"transitiontime":20},
+    
+        "tbu-pos-scifi-cold-011":{"on":true,"bri":211,"hue":49202,"sat":219,"effect":"none","xy":[0.2373,0.1185],"ct":153,"transitiontime":20},
+    
+        "tbu-pos-scifi-cold-012":{"on":true,"bri":146,"hue":58494,"sat":66,"effect":"none","xy":[0.4078,0.3331],"ct":286,"transitiontime":20},
+    
+        "tbu-pos-scifi-cold-013":{"on":true,"bri":146,"hue":53689,"sat":141,"effect":"none","xy":[0.361,0.2457],"ct":219,"transitiontime":20},
+    
+        "tbu-pos-scifi-cold-014":{"on":true,"bri":146,"hue":44195,"sat":238,"effect":"none","xy":[0.1696,0.151],"ct":153,"transitiontime":20},
+    
+        "tbu-pos-scifi-cold-015":{"on":true,"bri":146,"hue":41355,"sat":106,"effect":"none","xy":[0.2874,0.3122],"ct":153,"transitiontime":20},
+    
+        "tbu-pos-scifi-cold-016":{"on":true,"bri":146,"hue":40910,"sat":228,"effect":"none","xy":[0.1808,0.2499],"ct":153,"transitiontime":20},
+    
+        "tbu-pos-scifi-cold-017":{"on":true,"bri":146,"hue":10748,"sat":125,"effect":"none","xy":[0.4257,0.424],"ct":313,"transitiontime":20},
+    
+        "tbu-pos-scifi-cold-018":{"on":true,"bri":254,"hue":41435,"sat":77,"effect":"none","xy":[0.3129,0.3291],"ct":153,"transitiontime":20},
+     
+    
+        "tbu-neg-scifi-cold-000":{"on":true,"bri":172,"hue":41172,"sat":109,"effect":"none","xy":[0.2849,0.3127],"ct":153,"transitiontime":20},
+    
+        "tbu-neg-scifi-cold-001":{"on":true,"bri":254,"hue":23997,"sat":219,"effect":"none","xy":[0.1956,0.5549],"ct":153,"transitiontime":20},
+    
+        "tbu-neg-scifi-cold-002":{"on":true,"bri":254,"hue":43600,"sat":254,"effect":"none","xy":[0.1559,0.1539],"ct":153,"transitiontime":20},
+    
+        "tbu-neg-scifi-cold-003":{"on":true,"bri":254,"hue":43600,"sat":254,"effect":"none","xy":[0.2743,0.1326],"ct":153,"transitiontime":20},
+    
+        "tbu-neg-scifi-cold-004":{"on":true,"bri":254,"hue":50753,"sat":223,"effect":"none","xy":[0.1828,0.1229],"ct":153,"transitiontime":20},
+    
+        "tbu-neg-scifi-cold-005":{"on":true,"bri":254,"hue":45832,"sat":222,"effect":"none","xy":[0.2535,0.1247],"ct":153,"transitiontime":20},
+    
+        "tbu-neg-scifi-cold-006":{"on":true,"bri":254,"hue":60982,"sat":123,"effect":"none","xy":[0.4666,0.3124],"ct":379,"transitiontime":20},
+    
+        "tbu-neg-scifi-cold-007":{"on":true,"bri":254,"hue":42897,"sat":187,"effect":"none","xy":[0.2155,0.2284],"ct":153,"transitiontime":20},
+    
+        "tbu-neg-scifi-cold-008":{"on":true,"bri":254,"hue":45463,"sat":254,"effect":"none","xy":[0.1545,0.0973],"ct":153,"transitiontime":20},
+    
+        "tbu-neg-scifi-cold-009":{"on":true,"bri":254,"hue":64854,"sat":83,"effect":"none","xy":[0.4755,0.3513],"ct":396,"transitiontime":20},
+    
+        "tbu-neg-scifi-cold-010":{"on":true,"bri":254,"hue":59112,"sat":108,"effect":"none","xy":[0.4329,0.309],"ct":325,"transitiontime":20},
+    
+        "tbu-neg-scifi-cold-011":{"on":true,"bri":254,"hue":64658,"sat":48,"effect":"none","xy":[0.4343,0.3615],"ct":328,"transitiontime":20},
+    
+        "tbu-neg-scifi-cold-012":{"on":true,"bri":254,"hue":62709,"sat":184,"effect":"none","xy":[0.5459,0.2982],"ct":500,"transitiontime":20},
+    
+        "tbu-neg-scifi-cold-013":{"on":true,"bri":254,"hue":65007,"sat":151,"effect":"none","xy":[0.5561,0.3316],"ct":500,"transitiontime":20},
+    
+        "tbu-neg-scifi-cold-014":{"on":true,"bri":254,"hue":49539,"sat":220,"effect":"none","xy":[0.2452,0.1214],"ct":153,"transitiontime":20},
+    
+        "tbu-neg-scifi-cold-015":{"on":true,"bri":254,"hue":61461,"sat":106,"effect":"none","xy":[0.4606,0.3241],"ct":369,"transitiontime":20},
+    
+        "tbu-neg-scifi-cold-016":{"on":true,"bri":254,"hue":56007,"sat":137,"effect":"none","xy":[0.3981,0.2671],"ct":272,"transitiontime":20},
+    
+        "tbu-neg-scifi-cold-017":{"on":true,"bri":254,"hue":63058,"sat":89,"effect":"none","xy":[0.464,0.3405],"ct":375,"transitiontime":20},
+    
+        "tbu-neg-scifi-cold-018":{"on":true,"bri":254,"hue":43024,"sat":203,"effect":"none","xy":[0.2014,0.2126],"ct":153,"transitiontime":20},
+    
+        "tbu-neg-scifi-cold-019":{"on":true,"bri":254,"hue":41039,"sat":192,"effect":"none","xy":[0.2122,0.267],"ct":153,"transitiontime":20},
+    
+        "tbu-neg-scifi-cold-020":{"on":true,"bri":254,"hue":41466,"sat":237,"effect":"none","xy":[0.1725,0.2292],"ct":153,"transitiontime":20},
+    
+        "tbu-neg-scifi-cold-021":{"on":true,"bri":254,"hue":43877,"sat":254,"effect":"none","xy":[0.1557,0.1454],"ct":153,"transitiontime":20},
+    
+        "tbu-neg-scifi-cold-022":{"on":true,"bri":254,"hue":41435,"sat":77,"effect":"none","xy":[0.3129,0.3291],"ct":153,"transitiontime":20}
     }
-}

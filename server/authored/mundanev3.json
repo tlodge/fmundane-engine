@@ -1563,6 +1563,17 @@
                             {"action":"message", "delay":69000, "params": {"query":{"message":"Audience mood is LOW: showing positive ending"}}}  
                         ],
                         [
+                            {"action":"fan", "params":{"query":{"rotate":true, "power":6, "cool":true, "from":0, "to":90}}, "delay":8500}
+                        
+                        ],
+                        [
+                            {"action":"fan", "params":{"query":{"rotate":false, "power":1, "cool":true}}, "delay":47000}
+                        ],
+                        [
+                            {"action":"fan", "params":{"query":{"rotate":true, "power":6, "cool":true, "from":0, "to":90}}, "delay":287000},
+                            {"action":"fan", "params":{"query":{"rotate":false, "power":1, "cool":true}}, "delay":10000}
+                        ],
+                        [
                             {"action":"fan", "params":{"query":{"rotate":true, "power":10, "cool":true, "from":0, "to":90}}, "delay":172000},
                             {"action":"fan", "params":{"query":{"rotate":false, "power":1, "cool":true}}, "delay":29000}
                         ],
@@ -1654,6 +1665,17 @@
                             {"action":"message", "delay":164000, "params": {"query":{"message":"Low attentiveness detected, scheduling sci-fi detour to enliven audience"}}},
                             {"action":"message", "delay":29000, "params": {"query":{"message":"New attentiveness level ACCEPTABLE"}}},
                             {"action":"message", "delay":69000, "params": {"query":{"message":"Audience mood is HIGH: allowing melancholy outcome"}}}  
+                        ],
+                        [
+                            {"action":"fan", "params":{"query":{"rotate":true, "power":6, "cool":true, "from":0, "to":90}}, "delay":8500}
+                        
+                        ],
+                        [
+                            {"action":"fan", "params":{"query":{"rotate":false, "power":1, "cool":true}}, "delay":47000}
+                        ],
+                        [
+                            {"action":"fan", "params":{"query":{"rotate":true, "power":6, "cool":true, "from":0, "to":90}}, "delay":287000},
+                            {"action":"fan", "params":{"query":{"rotate":false, "power":1, "cool":true}}, "delay":10000}
                         ],
                         [
                             {"action":"fan", "params":{"query":{"rotate":true, "power":10, "cool":true, "from":0, "to":90}}, "delay":172000},
@@ -1756,6 +1778,17 @@
                             {"action":"message", "delay":69000, "params": {"query":{"message":"Audience mood is HIGH: allowing melancholy outcome"}}}  
                         ],
                         [
+                            {"action":"fan", "params":{"query":{"rotate":true, "power":6, "cool":true, "from":0, "to":90}}, "delay":8500}
+                        
+                        ],
+                        [
+                            {"action":"fan", "params":{"query":{"rotate":false, "power":1, "cool":true}}, "delay":47000}
+                        ],
+                        [
+                            {"action":"fan", "params":{"query":{"rotate":true, "power":6, "cool":true, "from":0, "to":90}}, "delay":287000},
+                            {"action":"fan", "params":{"query":{"rotate":false, "power":1, "cool":true}}, "delay":10000}
+                        ],
+                        [
                             {"action":"fan", "params":{"query":{"rotate":true, "power":10, "cool":true, "from":0, "to":90}}, "delay":172000},
                             {"action":"fan", "params":{"query":{"rotate":false, "power":1, "cool":true}}, "delay":29000}
                         ],
@@ -1849,6 +1882,17 @@
                             {"action":"message", "delay":164000, "params": {"query":{"message":"Low attentiveness detected, scheduling sci-fi detour to enliven audience"}}},
                             {"action":"message", "delay":29000, "params": {"query":{"message":"New attentiveness level ACCEPTABLE"}}},
                             {"action":"message", "delay":69000, "params": {"query":{"message":"Audience mood is HIGH: allowing melancholy outcome"}}}  
+                        ],
+                        [
+                            {"action":"fan", "params":{"query":{"rotate":true, "power":6, "cool":true, "from":0, "to":90}}, "delay":8500}
+                        
+                        ],
+                        [
+                            {"action":"fan", "params":{"query":{"rotate":false, "power":1, "cool":true}}, "delay":47000}
+                        ],
+                        [
+                            {"action":"fan", "params":{"query":{"rotate":true, "power":6, "cool":true, "from":0, "to":90}}, "delay":287000},
+                            {"action":"fan", "params":{"query":{"rotate":false, "power":1, "cool":true}}, "delay":10000}
                         ],
                         [
                             {"action":"fan", "params":{"query":{"rotate":true, "power":10, "cool":true, "from":0, "to":90}}, "delay":172000},
@@ -1954,8 +1998,15 @@
                             {"action":"soundmedia", "delay": 176000, "params": {"body":{"media":"tbu-clock-middle-music.mp3","nowait":true}}}
                         ],
                         [
-                            {"action":"fan", "params":{"query":{"rotate":false, "power":4, "cool":true}}, "delay":164000},
-                            {"action":"fan", "params":{"query":{"rotate":false, "power":1, "cool":true}}, "delay":5000}
+                            {"action":"fan", "params":{"query":{"rotate":true, "power":6, "cool":true, "from":0, "to":90}}, "delay":8500}
+                        
+                        ],
+                        [
+                            {"action":"fan", "params":{"query":{"rotate":false, "power":1, "cool":true}}, "delay":47000}
+                        ],
+                        [
+                            {"action":"fan", "params":{"query":{"rotate":true, "power":6, "cool":true, "from":0, "to":90}}, "delay":267000},
+                            {"action":"fan", "params":{"query":{"rotate":false, "power":1, "cool":true}}, "delay":10000}
                         ],
                         [{"action":"nanoleaf","params":{"query":{"hue":226,"sat":42,"brightness":67}},"delay":0}],
                         [{"action":"nanoleaf","params":{"query":{"hue":176,"sat":89,"brightness":57}},"delay":8500}],
@@ -2054,8 +2105,15 @@
                             {"action":"soundmedia", "delay": 176000, "params": {"body":{"media":"tbu-clock-middle-music.mp3","nowait":true}}}
                         ],
                         [
-                            {"action":"fan", "params":{"query":{"rotate":false, "power":4, "cool":true}}, "delay":164000},
-                            {"action":"fan", "params":{"query":{"rotate":false, "power":1, "cool":true}}, "delay":5000}
+                            {"action":"fan", "params":{"query":{"rotate":true, "power":6, "cool":true, "from":0, "to":90}}, "delay":8500}
+                        
+                        ],
+                        [
+                            {"action":"fan", "params":{"query":{"rotate":false, "power":1, "cool":true}}, "delay":47000}
+                        ],
+                        [
+                            {"action":"fan", "params":{"query":{"rotate":true, "power":6, "cool":true, "from":0, "to":90}}, "delay":267000},
+                            {"action":"fan", "params":{"query":{"rotate":false, "power":1, "cool":true}}, "delay":10000}
                         ],
                         [{"action":"nanoleaf","params":{"query":{"hue":226,"sat":42,"brightness":67}},"delay":0}],
                         [{"action":"nanoleaf","params":{"query":{"hue":185,"sat":50,"brightness":99}},"delay":8500}],
@@ -2151,8 +2209,15 @@
                             {"action":"message", "delay":81000, "params": {"query":{"message":"Audience mood is HIGH: allowing melancholy outcome"}}}  
                         ],
                         [
-                            {"action":"fan", "params":{"query":{"rotate":false, "power":4, "cool":true}}, "delay":164000},
-                            {"action":"fan", "params":{"query":{"rotate":false, "power":1, "cool":true}}, "delay":5000}
+                            {"action":"fan", "params":{"query":{"rotate":true, "power":6, "cool":true, "from":0, "to":90}}, "delay":8500}
+                        
+                        ],
+                        [
+                            {"action":"fan", "params":{"query":{"rotate":false, "power":1, "cool":true}}, "delay":47000}
+                        ],
+                        [
+                            {"action":"fan", "params":{"query":{"rotate":true, "power":6, "cool":true, "from":0, "to":90}}, "delay":267000},
+                            {"action":"fan", "params":{"query":{"rotate":false, "power":1, "cool":true}}, "delay":10000}
                         ],
                         [{"action":"nanoleaf","params":{"query":{"hue":226,"sat":42,"brightness":67}},"delay":0}],
                         [{"action":"nanoleaf","params":{"query":{"hue":203,"sat":91,"brightness":99}},"delay":8500}],
@@ -2292,7 +2357,8 @@
                     [{"action":"say", "params":{"body":{"speech":[{"words":"Please remain seated","voice":"Daniel"}]}}},
                     {"action":"say", "params":{"body":{"speech":[{"words":"As it happens, analysis of sensor data meant that I decided to show you a more positive ending. I didn't want to upset you. Not in that state","voice":"Daniel"}]}}, "delay":1000},
                     {"action":"say", "delay":1000, "params":{"body":{"speech":[{"words":"Also, you remember the weird science-fiction interlude? That was just for you. You're special","voice":"Daniel"}]}}},
-                    {"action":"say", "params":{"body":{"speech":[{"words":"I used a preference model to choose the music I thought you'd like - hope you enjoyed it!","voice":"Daniel"}]}}, "delay":1000}]
+                    {"action":"say", "params":{"body":{"speech":[{"words":"I used a preference model to choose the music I thought you'd like - hope you enjoyed it!","voice":"Daniel"}]}}, "delay":1000},
+                        {"action":"say", "params":{"body":{"speech":[{"words":"Please take your receipt and exit through the gift shop.","voice":"Daniel"}]}}}]
                 ]},
                 "type": "button",
                 "subscription": "/press",
@@ -2318,7 +2384,8 @@
                     [{"action":"say", "params":{"body":{"speech":[{"words":"Please remain seated","voice":"Daniel"}]}}},
                     {"action":"say", "delay":1000, "params":{"body":{"speech":[{"words":"As it happens, analysis of sensor data meant that I decided to show you a more negative ending. Sometimes it's good to be brought back down to reality","voice":"Daniel"}]}}},
                     {"action":"say", "delay":1000, "params":{"body":{"speech":[{"words":"Also, you remember the weird science-fiction interlude? That was just for you. You're special","voice":"Daniel"}]}}},
-                    {"action":"say", "params":{"body":{"speech":[{"words":"I used a preference model to choose the music I thought you'd like - hope you enjoyed it!","voice":"Daniel"}]}}, "delay":1000}]
+                    {"action":"say", "params":{"body":{"speech":[{"words":"I used a preference model to choose the music I thought you'd like - hope you enjoyed it!","voice":"Daniel"}]}}, "delay":1000},
+                        {"action":"say", "params":{"body":{"speech":[{"words":"Please take your receipt and exit through the gift shop.","voice":"Daniel"}]}}}]
                 ] },
                 "type": "button",
                 "subscription": "/press",
@@ -2343,7 +2410,8 @@
                     [{"action": "talkingon"}],
                     [{"action":"say", "params":{"body":{"speech":[{"words":"Please remain seated","voice":"Daniel"}]}}},
                     {"action":"say", "params":{"body":{"speech":[{"words":"As it happens, analysis of sensor data meant that I decided to show you a more positive ending. I didn't want to upset you. Not in that state","voice":"Daniel"}]}}, "delay":1000},
-                    {"action":"say", "params":{"body":{"speech":[{"words":"I used a preference model to choose the music I thought you'd like - hope you enjoyed it!","voice":"Daniel"}]}}, "delay":1000}]
+                    {"action":"say", "params":{"body":{"speech":[{"words":"I used a preference model to choose the music I thought you'd like - hope you enjoyed it!","voice":"Daniel"}]}}, "delay":1000},
+                        {"action":"say", "params":{"body":{"speech":[{"words":"Please take your receipt and exit through the gift shop.","voice":"Daniel"}]}}}]
                 ]},
                 "type": "button",
                 "subscription": "/press",
@@ -2368,7 +2436,11 @@
                     [{"action": "talkingon"}],
                     [{"action":"say", "params":{"body":{"speech":[{"words":"Please remain seated","voice":"Daniel"}]}}},
                     {"action":"say", "params":{"body":{"speech":[{"words":"As it happens, analysis of sensor data meant that I decided to show you a more negative ending. Sometimes it's good to be brought back down to reality","voice":"Daniel"}]}}},
-                    {"action":"say", "params":{"body":{"speech":[{"words":"I used a preference model to choose the music I thought you'd like - hope you enjoyed it!","voice":"Daniel"}]}}, "delay":1000}]
+                    {"action":"say", "params":{"body":{"speech":[{"words":"I used a preference model to choose the music I thought you'd like - hope you enjoyed it!","voice":"Daniel"}]}}, "delay":1000},
+                    {"action":"say", "params":{"body":{"speech":[{"words":"Please take your receipt and exit through the gift shop.","voice":"Daniel"}]}}}
+                    
+                    
+                    ]
 
                 ]},
                 "type": "button",

@@ -182,5 +182,24 @@
        "query":{
           "script_id":"ID028"
        }
+    },
+    "talkingon":{
+      "type":"request",
+      "data":{
+         "url":"http://[voicesensor]/H",
+         "type":"GET",
+         "contenttype":"application/json",
+         "timeout":500
+      }
+    }, 
+    "talkingoff":{
+      "type":"request",
+      "data":{
+         "url":"http://[voicesensor]/L",
+         "type":"GET",
+         "contenttype":"application/json",
+         "timeout":500
+      }
     }
+
  }

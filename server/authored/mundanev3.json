@@ -129,7 +129,8 @@
                 "onstart": {
                     "actions": [
                         [
-                            {"action":"dysonscreen"}
+                            {"action":"dysonscreen"},
+                            {"action": "talkingon"}
                         ]
                     ]
                 },
@@ -159,7 +160,7 @@
                     }
                 ]
             },
-            
+           
             {
                 "id": "reseteverything",
                 "name": "reseteverything",
@@ -175,6 +176,9 @@
                         }
                     ],
                     "actions": [
+                        [
+                            {"action":"print", "delay":0, "params": {"body":{"text":"New experience started.."}}}
+                        ],
                         [
                             { "delay":300, "action": "immersive", "params":{"query":{"script_id":"ID101"}}},
                             { "delay":500, "action": "homescreen"},
@@ -249,21 +253,26 @@
                             "words": "The living room of the future is a go.",
                             "delay": 0,
                             "voice": "Daniel",
-                            "background": "start.mp3",
+                            "background": "",
                             "wpm": 180,
                             "rate": "180"
                         }
                     ],
                     "actions": [
+                       
+
                         [
-                            {"delay":0, "action":"mediascreen"}
+                            {"delay":0, "action":"mediascreen"},
+                            {"action":"print", "delay":0, "params": {"body":{"text":"commencing countdown"}}}
                         ],
                         [
                             {"delay":0, "action": "videomedia", "params":{"query":{"media":"countdown.mp4","delay":0}}}
-                            
+                           
                         ],
                         [
-                            {"delay":0,"action": "immersive", "params":{"query":{"script_id":"ID102"}}}
+                            {"delay":0,"action": "immersive", "params":{"query":{"script_id":"ID101"}}},
+                            {"delay":5000,"action": "immersive", "params":{"query":{"script_id":"ID021"}}},
+                            {"action":"print", "delay":0, "params": {"body":{"text":"systems ready"}}}
                         ]
                     ]
                 },
@@ -325,7 +334,7 @@
                             "words": "Let’s have a chat about privacy enhancing technologies.",
                             "delay": "500",
                             "voice": "Daniel",
-                            "background": "foreboding.mp3",
+                            "background": "",
                             "wpm": 180,
                             "rate": "180"
                         }
@@ -372,8 +381,8 @@
                     "actions": [
                         [
                             {"delay":200, "action": "immersive", "params":{"query":{"script_id":"ID106"}}},
-                            {"delay":200, "action": "immersive", "params":{"query":{"script_id":"ID016"}}},
-                            {"delay":200, "action": "immersive", "params":{"query":{"script_id":"ID021"}}}
+                            {"delay":1000, "action": "immersive", "params":{"query":{"script_id":"ID016"}}},
+                            {"delay":2000, "action": "immersive", "params":{"query":{"script_id":"ID021"}}}
                         ]
                     ]
                 },
@@ -394,7 +403,7 @@
                         },
                         "actions": [
                             [
-                                
+                               
                             ]
                         ],
                         "next": "negative"
@@ -511,7 +520,7 @@
                 "onstart": {
                     "speech": [
                         {
-                            "words": "Let me tell you about the data box.  It’s the computer on the bottom-right shelf",
+                            "words": "Let me tell you about the data box.  It’s the computer that drives this experience",
                             "delay": "500",
                             "voice": "Daniel",
                             "background": "",
@@ -530,7 +539,7 @@
                             "words": "it’s really rather clever",
                             "delay": 0,
                             "voice": "Daniel",
-                            "background": "dramatic.mp3",
+                            "background": "",
                             "wpm": 180,
                             "rate": "180"
                         },
@@ -675,7 +684,7 @@
                 "onstart": {
                     "speech": [
                         {
-                            "words": "You may have seen I’m watching you. I’m on top of the TV.  Hey there",
+                            "words": "You may have seen I’m watching you. I’m under the TV.  Hey there",
                             "delay": 3000,
                             "voice": "Daniel",
                             "background": "",
@@ -705,9 +714,10 @@
                     ],
                     "actions": [
                         [
-                            {"delay":0, "action": "camerascan", "params":{"query":{"state":null}}},
-                            {"delay":11000, "action": "camerascan", "params":{"query":{"state":"scan"}}},
-                            {"delay":10000, "action": "camerascan", "params":{"query":{"state":"noscan"}}}
+                            {"action":"print", "delay":0, "params": {"body":{"text":"scanning facial features"}}}
+                        ],
+                        [
+                            {"delay":0, "action": "camerascan", "params":{"query":{"state":null}}}
                         ],
                         [
                             {"action":"message", "delay":10000, "params": {"query":{"message":":inititiate [FACE] scan"}}}
@@ -781,7 +791,9 @@
                             "background": "",
                             "rate": "180"
                         }
-                    ]
+                     
+                    ],
+                    "actions": [[  {"action":"message", "delay":0, "params": {"query":{"message":":facescan [ALERT: annoying voice]"}}}]]
                 },
                 "type": "button",
                 "subscription": "/press",
@@ -920,7 +932,8 @@
                             "background": "",
                             "rate": "180"
                         }
-                    ]
+                    ],
+                    "actions":[[{"action":"print", "delay":0, "params": {"body":{"text":"Health profile: [Heart Disease 87%]"}}}]]
                 },
                 "type": "button",
                 "subscription": "/press",
@@ -966,7 +979,8 @@
                             "background": "",
                             "rate": "180"
                         }
-                    ]
+                    ],
+                    "actions":[[{"action":"print", "delay":0, "params": {"body":{"text":"APB sent to Liverpool police"}}}]]
                 },
                 "type": "button",
                 "subscription": "/press",
@@ -1012,7 +1026,9 @@
                             "background": "",
                             "rate": "180"
                         }
-                    ]
+                    ],
+                    "actions":[[{"action":"print", "delay":0, "params": {"body":{"text":"Profile feature: [ROMANTIC]"}}}]]
+
                 },
                 "type": "button",
                 "subscription": "/press",
@@ -1058,7 +1074,8 @@
                             "background": "",
                             "rate": "180"
                         }
-                    ]
+                    ],
+                    "actions":[[{"action":"print", "delay":0, "params": {"body":{"text":"Data breach suspected"}}}]]
                 },
                 "type": "button",
                 "subscription": "/press",
@@ -1123,14 +1140,14 @@
                 "onstart": {
                     "speech": [
                         {
-                            "words": "If you wish to withdraw your consent I suggest you stand up now.  ",
-                            "delay": 0,
+                            "words": "If you wish to withdraw your consent I suggest you hold your thumbs up now  ",
+                            "delay": 800,
                             "voice": "Daniel",
                             "background": "",
                             "rate": "180"
                         },
                         {
-                            "words": "Flatulence is also accepted.  Confirm now.",
+                            "words": "Confirm now.",
                             "delay": 0,
                             "voice": "Daniel",
                             "background": "",
@@ -1351,6 +1368,7 @@
                     ],
                     "actions": [
                         [
+                            {"delay":0,"action": "immersive", "params":{"query":{"script_id":"ID021"}}},
                             {"delay":0, "action":"mediascreen"},
                             {"action":"message", "delay":1000, "params": {"query":{"message":":play [TV.mp4]"}}},
                             {"delay":2000, "action": "videomedia", "params":{"query":{"media":"TV.mp4","delay":50}}}
@@ -1393,60 +1411,21 @@
                         [
                             {"action":"print", "delay":0, "params": {"body":{"text":"I consent to all of my data"}}},
                             {"action":"print", "delay":2000, "params": {"body":{"text":"being used by Future Mundane Inc."}}},
-                            {"action":"print", "delay":2000, "params": {"body":{"text":"______________________________"}}}
+                            {"action":"print", "delay":2000, "params": {"body":{"text":"______________________________"}}},
+                            {"action":"print", "delay":2000, "params": {"body":{"text":"\n\n\n\n\n"}}}
                         ]
                     ]
                 },
                 "type": "button",
                 "subscription": "/press",
                 "data": [
-                    "holdid"
+                    "show film"
                 ],
                 "rules": [
                     {
                         "rule": {
                             "operator": "equals",
-                            "operand": "holdid"
-                        },
-                        "actions": [
-                            []
-                        ],
-                        "next": "holdid"
-                    }
-                ]
-            },
-            {
-                "id": "holdid",
-                "name": "holdid",
-                "onstart": {
-                    "speech": [
-                        {
-                            "words": "Next, please hold up your i. d.",
-                            "delay": 500,
-                            "voice": "Daniel",
-                            "background": "",
-                            "rate": "180"
-                        },
-                        {
-                            "words": "Valid documents include driving licence, passport and credit cards",
-                            "delay": 500,
-                            "voice": "Daniel",
-                            "background": "",
-                            "rate": "180"
-                        }
-                    ],
-                    "actions":[[{"delay":0, "action": "camerascreen"}]]
-                },
-                "type": "button",
-                "subscription": "/press",
-                "data": [
-                    "showfilm"
-                ],
-                "rules": [
-                    {
-                        "rule": {
-                            "operator": "equals",
-                            "operand": "showfilm"
+                            "operand": "show film"
                         },
                         "actions": [
                             []
@@ -1498,330 +1477,733 @@
                 },
                 "type": "button",
                 "subscription": "/press",
-                "data": [ 
-                    "scifi-pos-warm",
+                "data": [
                     "scifi-pos-cold",
                     "scifi-neg-warm",
                     "scifi-neg-cold",
+                    "scifi-neg-bw",
                     "pos-warm",
                     "pos-cold",
-                    "neg-warm",
                     "neg-cold"
                 ],
                 "rules": [
-                    {
-                        "rule": {
-                            "operator": "equals",
-                            "operand": "scifi-pos-warm"
-                        },
-                        "actions": [
-                            [
-                                {"action": "immersive", "params":{"query":{"script_id":"ID106"}}}
-                            ],
-                            [
-                                {"action":"mediascreen"}
-                            ],
-                            [
-                                {"action":"videomedia", "params": {"query":{"media":"tbu-pos-scifi-warm.mp4","delay":0}}}, 
-                                {"action":"soundmedia", "params": {"body":{"media":"tbu-pos-scifi-warm.mp4","nowait":true, "delay":200}}}
-                            ],
-                            [
-                                {"action":"print", "delay":2000, "params": {"body":{"text":"mood in room is positive"}}},
-                                {"action":"print", "delay":6000, "params": {"body":{"text":"Querying Databox for genre"}}},
-                                {"action":"print", "delay":0, "params": {"body":{"text":"customisation algorithm: [WARM]"}}},
-                                {"action":"print", "delay":0, "params": {"body":{"text":"version selected"}}},
-                                {"action":"print", "delay":166000, "params": {"body":{"text":"print_low_attentiveness"}}},
-                                {"action":"print", "delay":98000, "params": {"body":{"text":"Audience mood is LOW: showing positive ending"}}},
-                                {"action":"print", "delay":1000, "params": {"body":{"text":"Record of mood analysis logged to Databox vault"}}}
-                            ],
-                            [
-                                {"action":"message", "delay":2000, "params": {"query":{"message":"Baseline mood analysis complete, current mood quantified as [POSITIVE]"}}},
-                                {"action":"message", "delay":6000, "params": {"query":{"message":"Choosing genre customisations. [COLD] colour grade selected.."}}},
-                                {"action":"message", "delay":164000, "params": {"query":{"message":"Low attentiveness detected, scheduling sci-fi detour to enliven audience"}}},
-                                {"action":"message", "delay":29000, "params": {"query":{"message":"New attentiveness level ACCEPTABLE"}}},
-                                {"action":"message", "delay":69000, "params": {"query":{"message":"Audience mood is LOW: showing positive ending"}}}  
-                            ],
-                            [
-                                {"action":"fan", "params":{"query":{"rotate":false, "power":4, "cool":true}}, "delay":166000},
-                                {"action":"fan", "params":{"query":{"rotate":false, "power":1, "cool":true}}, "delay":5000}
-                            ]
-                        ],
-                        "next": "SCIFIdebriefPOS"
-                    },
-                    {
-                        "rule": {
-                            "operator": "equals",
-                            "operand": "scifi-pos-cold"
-                        },
-                        "actions": [
-                            [
-                                {"action": "immersive", "params":{"query":{"script_id":"ID106"}}}
-                            ],
-                            [
-                                {"action":"mediascreen"}
-                            ],
-                            [
-                                {"action":"videomedia", "params": {"query":{"media":"tbu-pos-scifi-cold.mp4","delay":0}}}, 
-                                {"action":"soundmedia", "params": {"body":{"media":"tbu-pos-scifi-cold.mp4","nowait":true, "delay":200}}}
-                            ],
-                            [
-                                {"action":"print", "delay":2000, "params": {"body":{"text":"mood in room is positive"}}},
-                                {"action":"print", "delay":6000, "params": {"body":{"text":"Querying Databox for genre"}}},
-                                {"action":"print", "delay":0, "params": {"body":{"text":"customisation algorithm: [COLD]"}}},
-                                {"action":"print", "delay":0, "params": {"body":{"text":"version selected"}}},
-                                {"action":"print", "delay":166000, "params": {"body":{"text":"print_low_attentiveness"}}},
-                                {"action":"print", "delay":98000, "params": {"body":{"text":"Audience mood is LOW: showing positive ending"}}},
-                                {"action":"print", "delay":1000, "params": {"body":{"text":"Record of mood analysis logged to Databox vault"}}}
-                            ],
-                            [
-                                {"action":"message", "delay":2000, "params": {"query":{"message":"Baseline mood analysis complete, current mood quantified as [POSITIVE]"}}},
-                                {"action":"message", "delay":6000, "params": {"query":{"message":"Choosing genre customisations. [COLD] colour grade selected.."}}},
-                                {"action":"message", "delay":164000, "params": {"query":{"message":"Low attentiveness detected, scheduling sci-fi detour to enliven audience"}}},
-                                {"action":"message", "delay":29000, "params": {"query":{"message":"New attentiveness level ACCEPTABLE"}}},
-                                {"action":"message", "delay":69000, "params": {"query":{"message":"Audience mood is LOW: showing positive ending"}}}  
-                            ],
-                            [
-                                {"action":"fan", "params":{"query":{"rotate":false, "power":4, "cool":true}}, "delay":166000},
-                                {"action":"fan", "params":{"query":{"rotate":false, "power":1, "cool":true}}, "delay":5000}
-                            ]
-                        ],
-                        "next": "SCIFIdebriefPOS"
-                    },
-                    {
-                        "rule": {
-                            "operator": "equals",
-                            "operand": "scifi-neg-warm"
-                        },
-                        "actions": [
-                            [
-                                {"action": "immersive", "params":{"query":{"script_id":"id106"}}}
-                            ],
-                            [
-                                {"action":"mediascreen"}
-                            ],
-                            [
-                                {"action":"print", "delay":2000, "params": {"body":{"text":"mood in room is low"}}},
-                                {"action":"print", "delay":6000, "params": {"body":{"text":"Querying Databox for genre"}}},
-                                {"action":"print", "delay":0, "params": {"body":{"text":"customisation algorithm: [WARM]"}}},
-                                {"action":"print", "delay":0, "params": {"body":{"text":"version selected"}}},
-                                {"action":"print", "delay":166000, "params": {"body":{"text":"print_low_attentiveness"}}},
-                                {"action":"print", "delay":98000, "params": {"body":{"text":"Audience mood is HIGH: allowing melancholy outcome"}}},
-                                {"action":"print", "delay":1000, "params": {"body":{"text":"Record of mood analysis logged to Databox vault"}}}
-                            ],
-                            [
-                                {"action":"message", "delay":2000, "params": {"query":{"message":"Baseline mood analysis complete, current mood quantified as [LOW]"}}},
-                                {"action":"message", "delay":6000, "params": {"query":{"message":"Choosing genre customisations. [WARM] colour grade selected.."}}},
-                                {"action":"message", "delay":164000, "params": {"query":{"message":"Low attentiveness detected, scheduling sci-fi detour to enliven audience"}}},
-                                {"action":"message", "delay":29000, "params": {"query":{"message":"New attentiveness level ACCEPTABLE"}}},
-                                {"action":"message", "delay":69000, "params": {"query":{"message":"Audience mood is HIGH: allowing melancholy outcome"}}}  
-                            ],
-                            [
-                                {"action":"fan", "params":{"query":{"rotate":false, "power":4, "cool":true}}, "delay":166000},
-                                {"action":"fan", "params":{"query":{"rotate":false, "power":1, "cool":true}}, "delay":5000}
-                            ]
-                        ],
-                        "next": "SCIFIdebriefNEG"
-                    },
-                    {
-                        "rule": {
-                            "operator": "equals",
-                            "operand": "scifi-neg-cold"
-                        },
-                        "actions": [
-                            [
-                                {"action": "immersive", "params":{"query":{"script_id":"id106"}}}
-                            ],
-                            [
-                                {"action":"mediascreen"}
-                            ],
-                            [
-                                {"action":"soundmedia", "params": {"body":{"media":"tbu-neg-scifi-cold.mp4","nowait":true}}},
-                                {"action":"videomedia", "params": {"query":{"media":"tbu-neg-scifi-cold.mp4","delay":200}}}
-                                
-                            ],
-                            [
-                                {"action":"print", "delay":2000, "params": {"body":{"text":"mood in room is low"}}},
-                                {"action":"print", "delay":6000, "params": {"body":{"text":"Querying Databox for genre"}}},
-                                {"action":"print", "delay":0, "params": {"body":{"text":"customisation algorithm: [COLD]"}}},
-                                {"action":"print", "delay":0, "params": {"body":{"text":"version selected"}}},
-                                {"action":"print", "delay":164000, "params": {"body":{"text":"print_low_attentiveness"}}},
-                                {"action":"print", "delay":98000, "params": {"body":{"text":"Audience mood is HIGH: allowing melancholy outcome"}}},
-                                {"action":"print", "delay":1000, "params": {"body":{"text":"Record of mood analysis logged to Databox vault"}}}
-                            ],
-                            [
-                                {"action":"message", "delay":2000, "params": {"query":{"message":"Baseline mood analysis complete, current mood quantified as [LOW]"}}},
-                                {"action":"message", "delay":6000, "params": {"query":{"message":"Choosing genre customisations. [COLD] colour grade selected.."}}},
-                                {"action":"message", "delay":164000, "params": {"query":{"message":"Low attentiveness detected, scheduling sci-fi detour to enliven audience"}}},
-                                {"action":"message", "delay":29000, "params": {"query":{"message":"New attentiveness level ACCEPTABLE"}}},
-                                {"action":"message", "delay":69000, "params": {"query":{"message":"Audience mood is HIGH: allowing melancholy outcome"}}}  
-                            ],
-                            [
-                                {"action":"fan", "params":{"query":{"rotate":false, "power":4, "cool":true}}, "delay":166000},
-                                {"action":"fan", "params":{"query":{"rotate":false, "power":1, "cool":true}}, "delay":5000}
-                            ]
-                        ],
-                        "next": "SCIFIdebriefNEG"
-                    },
+                            {
+                                "rule": {"operator": "equals", "operand": "scifi-pos-cold"},
+                                "actions": [[]],
+                                "next": "scifi-pos-cold"
+                            },
+                            {
+                                "rule": {"operator": "equals", "operand": "scifi-neg-warm"},
+                                "actions": [[]],
+                                "next": "scifi-neg-warm"
+                            },
+                            {
+                                "rule": {"operator": "equals", "operand": "scifi-neg-cold"},
+                                "actions": [[]],
+                                "next": "scifi-neg-cold"
+                            },  {
+                                "rule": {"operator": "equals", "operand": "scifi-neg-bw"},
+                                "actions": [[]],
+                                "next": "scifi-neg-bw"
+                            },
 
-                    {
-                        "rule": {
-                            "operator": "equals",
-                            "operand": "pos-warm"
-                        },
-                        "actions": [
-                            [
-                                {"action": "immersive", "params":{"query":{"script_id":"id106"}}}
-                            ],
-                            [
-                                {"action":"mediascreen"}
-                            ],
-                            [
-                                {"action":"soundmedia", "delay":300, "params": {"body":{"media":"tbu-pos-noscifi-warm.mp4","nowait":true}}},
-                                {"action":"videomedia", "params": {"query":{"media":"tbu-pos-noscifi-warm.mp4","delay":0}}}   
-                            ],
-                            [
-                                {"action":"print", "delay":2000, "params": {"body":{"text":"mood in room is positive"}}},
-                                {"action":"print", "delay":6000, "params": {"body":{"text":"Querying Databox for genre"}}},
-                                {"action":"print", "delay":0, "params": {"body":{"text":"customisation algorithm: [WARM]"}}},
-                                {"action":"print", "delay":0, "params": {"body":{"text":"version selected"}}},
-                                {"action":"print", "delay":164000, "params": {"body":{"text":"Skipping SCI_FI detour..."}}},
-                                {"action":"print", "delay":81000, "params": {"body":{"text":"Audience mood is LOW: showing positive outcome"}}},
-                                {"action":"print", "delay":4000, "params": {"body":{"text":"Record of mood analysis logged to Databox vault"}}}
-                            ],
-                            [
-                                {"action":"message", "delay":2000, "params": {"query":{"message":"Baseline mood analysis complete, current mood quantified as [POSITIVE]"}}},
-                                {"action":"message", "delay":6000, "params": {"query":{"message":"Choosing genre customisations. [WARM] colour grade selected.."}}},
-                                {"action":"message", "delay":164000, "params": {"query":{"message":"Skipping SCI_FI detour..."}}},
-                                {"action":"message", "delay":81000, "params": {"query":{"message":"Audience mood is LOW: showing positive outcome"}}}  
-                            ],
-                            [
-                                {"action":"soundmedia", "delay": 176000, "params": {"body":{"media":"tbu-clock-middle-music.mp3","nowait":true}}}
-                            ],
-                            [
-                                {"action":"fan", "params":{"query":{"rotate":false, "power":4, "cool":true}}, "delay":164000},
-                                {"action":"fan", "params":{"query":{"rotate":false, "power":1, "cool":true}}, "delay":5000}
-                            ]
+                            {
+                                "rule": {"operator": "equals", "operand": "pos-warm"},
+                                "actions": [[]],
+                                "next": "pos-warm"
+                            },
+                         
+                            {
+                                "rule": {"operator": "equals", "operand": "pos-cold"},
+                                "actions": [[]],
+                                "next": "pos-cold"
+                            },
+                            {
+                                "rule": {"operator": "equals", "operand": "neg-cold"},
+                                "actions": [[]],
+                                "next": "neg-cold"
+                            }
+                ]
+            },
+            {
+                "id": "scifi-pos-cold",
+                "name": "scifi-pos-cold",
+                "type": "button",
+                "subscription": "/press",
+                "data": [
+                    "debrief"
+                ],
+                "onstart": {
+                    "actions": [
+                        [
+                            {"action": "talkingoff"}
                         ],
-                        "next": "NONSCIFIdebriefPOS"
-                    },
+                        [
+                            {"action":"mediascreen"}
+                        ],
+                        [
+                           
+                            {"action":"soundmedia", "delay":0, "params": {"body":{"media":"tbu-pos-scifi-cold.mp4","nowait":true, "delay":0}}},
+                            {"action":"videomedia", "delay":80, "params": {"query":{"media":"tbu-pos-scifi-cold.mp4","delay":0}}}
+                        ],
+                        [
+                            {"action":"print", "delay":2000, "params": {"body":{"text":"mood in room is positive"}}},
+                            {"action":"print", "delay":6000, "params": {"body":{"text":"Querying Databox for genre"}}},
+                            {"action":"print", "delay":0, "params": {"body":{"text":"customisation algorithm: [COLD]"}}},
+                            {"action":"print", "delay":0, "params": {"body":{"text":"version selected"}}},
+                            {"action":"print", "delay":166000, "params": {"body":{"text":"print_low_attentiveness"}}},
+                            {"action":"print", "delay":98000, "params": {"body":{"text":"Audience mood is LOW: showing positive ending"}}},
+                            {"action":"print", "delay":1000, "params": {"body":{"text":"Record of mood analysis logged to Databox vault"}}}
+                        ],
+                        [
+                            {"action":"message", "delay":2000, "params": {"query":{"message":"Baseline mood analysis complete, current mood quantified as [POSITIVE]"}}},
+                            {"action":"message", "delay":6000, "params": {"query":{"message":"Choosing genre customisations. [COLD] colour grade selected.."}}},
+                            {"action":"message", "delay":164000, "params": {"query":{"message":"Low attentiveness detected, scheduling sci-fi detour to enliven audience"}}},
+                            {"action":"message", "delay":29000, "params": {"query":{"message":"New attentiveness level ACCEPTABLE"}}},
+                            {"action":"message", "delay":69000, "params": {"query":{"message":"Audience mood is LOW: showing positive ending"}}}  
+                        ],
+                        [
+                            {"action":"fan", "params":{"query":{"rotate":true, "power":10, "cool":true, "from":0, "to":90}}, "delay":172000},
+                            {"action":"fan", "params":{"query":{"rotate":false, "power":1, "cool":true}}, "delay":29000}
+                        ],
+                        [{"action":"nanoleaf","params":{"query":{"hue":226,"sat":42,"brightness":67}},"delay":0}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":210,"sat":80,"brightness":81}},"delay":8500}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":210,"sat":80,"brightness":81}},"delay":22000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":299,"sat":48,"brightness":81}},"delay":47000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":299,"sat":48,"brightness":81}},"delay":53000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":311,"sat":66,"brightness":81}},"delay":57000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":321,"sat":55,"brightness":68}},"delay":62000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":242,"sat":81,"brightness":68}},"delay":75000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":289,"sat":31,"brightness":68}},"delay":80000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":349,"sat":29,"brightness":53}},"delay":94000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":249,"sat":63,"brightness":44}},"delay":146000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":270,"sat":85,"brightness":82}},"delay":173000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":321,"sat":25,"brightness":57}},"delay":202000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":294,"sat":55,"brightness":57}},"delay":215000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":242,"sat":93,"brightness":57}},"delay":248000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":227,"sat":41,"brightness":57}},"delay":266000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":224,"sat":89,"brightness":57}},"delay":269000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":59,"sat":49,"brightness":57}},"delay":279000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":227,"sat":30,"brightness":99}},"delay":305000}],
+                        
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-pos-scifi-cold-000"}},"delay":0}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-pos-scifi-cold-001"}},"delay":8500}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-pos-scifi-cold-002"}},"delay":22000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-pos-scifi-cold-003"}},"delay":47000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-pos-scifi-cold-004"}},"delay":53000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-pos-scifi-cold-005"}},"delay":57000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-pos-scifi-cold-006"}},"delay":62000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-pos-scifi-cold-007"}},"delay":75000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-pos-scifi-cold-008"}},"delay":80000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-pos-scifi-cold-009"}},"delay":94000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-pos-scifi-cold-010"}},"delay":146000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-pos-scifi-cold-011"}},"delay":173000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-pos-scifi-cold-012"}},"delay":202000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-pos-scifi-cold-013"}},"delay":215000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-pos-scifi-cold-014"}},"delay":248000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-pos-scifi-cold-015"}},"delay":266000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-pos-scifi-cold-016"}},"delay":269000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-pos-scifi-cold-017"}},"delay":279000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-pos-scifi-cold-018"}},"delay":305000}]
+                    ]
+                },
+                "rules":[
+                        {
+                            "rule": {
+                                "operator": "equals",
+                                "operand": "debrief"
+                            },
+                            "actions":[[]],
+                            "next": "SCIFIdebriefPOS"
+                        }
+                ]
+            },
+            {
+                "id": "scifi-neg-warm",
+                "name": "scifi-neg-warm",
+                "type": "button",
+                "subscription": "/press",
+                "data": [
+                    "debrief"
+                ],
+                "onstart": {
+                    "actions": [
+                        [
+                            {"action": "talkingoff"}
+                        ],
+                        [
+                            {"action":"mediascreen"}
+                        ],
+                        [
+                           
+                            {"action":"soundmedia",  "params": {"body":{"media":"tbu-neg-scifi-warm.mp4","nowait":true, "delay":0}}},
+                            {"action":"videomedia", "delay":0, "params": {"query":{"media":"tbu-neg-scifi-warm.mp4","delay":0}}}
+                        ],
+                        [
+                            {"action":"print", "delay":2000, "params": {"body":{"text":"mood in room is low"}}},
+                            {"action":"print", "delay":6000, "params": {"body":{"text":"Querying Databox for genre"}}},
+                            {"action":"print", "delay":0, "params": {"body":{"text":"customisation algorithm: [WARM]"}}},
+                            {"action":"print", "delay":0, "params": {"body":{"text":"version selected"}}},
+                            {"action":"print", "delay":166000, "params": {"body":{"text":"print_low_attentiveness"}}},
+                            {"action":"print", "delay":98000, "params": {"body":{"text":"Audience mood is HIGH: allowing melancholy outcome"}}},
+                            {"action":"print", "delay":1000, "params": {"body":{"text":"Record of mood analysis logged to Databox vault"}}}
+                        ],
+                        [
+                            {"action":"message", "delay":2000, "params": {"query":{"message":"Baseline mood analysis complete, current mood quantified as [LOW]"}}},
+                            {"action":"message", "delay":6000, "params": {"query":{"message":"Choosing genre customisations. [WARM] colour grade selected.."}}},
+                            {"action":"message", "delay":164000, "params": {"query":{"message":"Low attentiveness detected, scheduling sci-fi detour to enliven audience"}}},
+                            {"action":"message", "delay":29000, "params": {"query":{"message":"New attentiveness level ACCEPTABLE"}}},
+                            {"action":"message", "delay":69000, "params": {"query":{"message":"Audience mood is HIGH: allowing melancholy outcome"}}}  
+                        ],
+                        [
+                            {"action":"fan", "params":{"query":{"rotate":true, "power":10, "cool":true, "from":0, "to":90}}, "delay":172000},
+                            {"action":"fan", "params":{"query":{"rotate":false, "power":1, "cool":true}}, "delay":29000}
+                        ],
+                        [{"action":"nanoleaf","params":{"query":{"hue":226,"sat":38,"brightness":56}},"delay":0}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":131,"sat":85,"brightness":43}},"delay":8500}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":226,"sat":81,"brightness":61}},"delay":22000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":333,"sat":48,"brightness":61}},"delay":47000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":359,"sat":33,"brightness":61}},"delay":53000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":325,"sat":51,"brightness":61}},"delay":57000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":1,"sat":94,"brightness":35}},"delay":61000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":232,"sat":81,"brightness":35}},"delay":76000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":2,"sat":92,"brightness":35}},"delay":80000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":350,"sat":99,"brightness":35}},"delay":144000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":357,"sat":99,"brightness":35}},"delay":153000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":260,"sat":83,"brightness":66}},"delay":174000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":252,"sat":99,"brightness":66}},"delay":177000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":351,"sat":99,"brightness":37}},"delay":202000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":5,"sat":70,"brightness":43}},"delay":215000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":343,"sat":99,"brightness":43}},"delay":223000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":265,"sat":64,"brightness":43}},"delay":247000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":303,"sat":53,"brightness":43}},"delay":261000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":349,"sat":31,"brightness":43}},"delay":267000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":225,"sat":70,"brightness":43}},"delay":269000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":239,"sat":99,"brightness":43}},"delay":287000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":227,"sat":30,"brightness":43}},"delay":302000}],
 
-                    {
-                        "rule": {
-                            "operator": "equals",
-                            "operand": "pos-cold"
-                        },
-                        "actions": [
-                            [
-                                {"action": "immersive", "params":{"query":{"script_id":"id106"}}}
-                            ],
-                            [
-                                {"action":"mediascreen"}
-                            ],
-                            [
-                                {"action":"soundmedia", "params": {"body":{"media":"tbu-pos-noscifi-cold.mp4","nowait":true}}},
-                                {"action":"videomedia", "params": {"query":{"media":"tbu-pos-noscifi-cold.mp4","delay":200}}}   
-                            ],
-                            [
-                                {"action":"print", "delay":2000, "params": {"body":{"text":"mood in room is positive"}}},
-                                {"action":"print", "delay":6000, "params": {"body":{"text":"Querying Databox for genre"}}},
-                                {"action":"print", "delay":0, "params": {"body":{"text":"customisation algorithm: [COLD]"}}},
-                                {"action":"print", "delay":0, "params": {"body":{"text":"version selected"}}},
-                                {"action":"print", "delay":164000, "params": {"body":{"text":"Skipping SCI_FI detour..."}}},
-                                {"action":"print", "delay":81000, "params": {"body":{"text":"Audience mood is LOW: showing positive outcome"}}},
-                                {"action":"print", "delay":4000, "params": {"body":{"text":"Record of mood analysis logged to Databox vault"}}}
-                            ],
-                            [
-                                {"action":"message", "delay":2000, "params": {"query":{"message":"Baseline mood analysis complete, current mood quantified as [POSITIVE]"}}},
-                                {"action":"message", "delay":6000, "params": {"query":{"message":"Choosing genre customisations. [COLD] colour grade selected.."}}},
-                                {"action":"message", "delay":164000, "params": {"query":{"message":"Skipping SCI_FI detour..."}}},
-                                {"action":"message", "delay":81000, "params": {"query":{"message":"Audience mood is LOW: showing positive outcome"}}}  
-                            ],
-                            [
-                                {"action":"soundmedia", "delay": 176000, "params": {"body":{"media":"tbu-clock-middle-music.mp3","nowait":true}}}
-                            ],
-                            [
-                                {"action":"fan", "params":{"query":{"rotate":false, "power":4, "cool":true}}, "delay":164000},
-                                {"action":"fan", "params":{"query":{"rotate":false, "power":1, "cool":true}}, "delay":5000}
-                            ]
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-scifi-warm-000"}},"delay":0}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-scifi-warm-001"}},"delay":8500}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-scifi-warm-002"}},"delay":22000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-scifi-warm-003"}},"delay":47000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-scifi-warm-004"}},"delay":53000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-scifi-warm-005"}},"delay":57000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-scifi-warm-006"}},"delay":61000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-scifi-warm-007"}},"delay":76000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-scifi-warm-008"}},"delay":80000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-scifi-warm-009"}},"delay":144000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-scifi-warm-010"}},"delay":153000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-scifi-warm-011"}},"delay":174000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-scifi-warm-012"}},"delay":177000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-scifi-warm-013"}},"delay":202000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-scifi-warm-014"}},"delay":215000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-scifi-warm-015"}},"delay":223000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-scifi-warm-016"}},"delay":247000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-scifi-warm-017"}},"delay":261000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-scifi-warm-018"}},"delay":267000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-scifi-warm-019"}},"delay":269000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-scifi-warm-020"}},"delay":287000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-scifi-warm-021"}},"delay":302000}]
+                        
+                    ]
+                },
+                "rules":[
+                        {
+                            "rule": {
+                                "operator": "equals",
+                                "operand": "debrief"
+                            },
+                            "actions":[[]],
+                            "next": "SCIFIdebriefNEG"
+                        }
+                ]
+            },
+            {
+                "id": "scifi-neg-bw",
+                "name": "scifi-neg-bw",
+                "type": "button",
+                "subscription": "/press",
+                "data": [
+                    "debrief"
+                ],
+                "onstart": {
+                    "actions": [
+                        [
+                            {"action": "talkingoff"}
                         ],
-                        "next": "NONSCIFIdebriefPOS"
-                    },
-                    {
-                        "rule": {
-                            "operator": "equals",
-                            "operand": "neg-warm"
-                        },
-                        "actions": [
-                            [
-                                {"action": "immersive", "params":{"query":{"script_id":"id106"}}}
-                            ],
-                            [
-                                {"action":"mediascreen"}
-                            ],
-                            [
-                                {"action":"soundmedia", "params": {"body":{"media":"tbu-neg-noscifi-warm.mp4","nowait":true}}},
-                                {"action":"videomedia", "params": {"query":{"media":"tbu-neg-noscifi-warm.mp4","delay":200}}}
-                            ],
-                            [
-                                {"action":"print", "delay":2000, "params": {"body":{"text":"mood in room is low"}}},
-                                {"action":"print", "delay":6000, "params": {"body":{"text":"Querying Databox for genre"}}},
-                                {"action":"print", "delay":0, "params": {"body":{"text":"customisation algorithm: [WARM]"}}},
-                                {"action":"print", "delay":0, "params": {"body":{"text":"version selected"}}},
-                                {"action":"print", "delay":164000, "params": {"body":{"text":"Skipping SCI_FI detour..."}}},
-                                {"action":"print", "delay":81000, "params": {"body":{"text":"Audience mood is HIGH: allowing melancholy outcome"}}},
-                                {"action":"print", "delay":4000, "params": {"body":{"text":"Record of mood analysis logged to Databox vault"}}}
-                            ],
-                            [
-                                {"action":"message", "delay":2000, "params": {"query":{"message":"Baseline mood analysis complete, current mood quantified as [LOW]"}}},
-                                {"action":"message", "delay":6000, "params": {"query":{"message":"Choosing genre customisations. [WARM] colour grade selected.."}}},
-                                {"action":"message", "delay":164000, "params": {"query":{"message":"Skipping SCI_FI detour..."}}},
-                                {"action":"message", "delay":81000, "params": {"query":{"message":"Audience mood is HIGH: allowing melancholy outcome"}}}  
-                            ],
-                            [
-                                {"action":"fan", "params":{"query":{"rotate":false, "power":4, "cool":true}}, "delay":164000},
-                                {"action":"fan", "params":{"query":{"rotate":false, "power":1, "cool":true}}, "delay":5000}
-                            ]
+                        [
+                            {"action":"mediascreen"}
                         ],
-                        "next": "NONSCIFIdebriefNEG"
-                    },
-                    {
-                        "rule": {
-                            "operator": "equals",
-                            "operand": "neg-cold"
-                        },
-                        "actions": [
-                            [
-                                {"action": "immersive", "params":{"query":{"script_id":"id106"}}}
-                            ],
-                            [
-                                {"action":"mediascreen"}
-                            ],
-                            [
-                                {"action":"soundmedia", "params": {"body":{"media":"tbu-neg-noscifi-cold.mp4","nowait":true}}},
-                                {"action":"videomedia", "params": {"query":{"media":"tbu-neg-noscifi-cold.mp4","delay":200}}}
-                            ],
-                            [
-                                {"action":"print", "delay":2000, "params": {"body":{"text":"mood in room is low"}}},
-                                {"action":"print", "delay":6000, "params": {"body":{"text":"Querying Databox for genre"}}},
-                                {"action":"print", "delay":0, "params": {"body":{"text":"customisation algorithm: [COLD]"}}},
-                                {"action":"print", "delay":0, "params": {"body":{"text":"version selected"}}},
-                                {"action":"print", "delay":164000, "params": {"body":{"text":"Skipping SCI_FI detour..."}}},
-                                {"action":"print", "delay":81000, "params": {"body":{"text":"Audience mood is HIGH: allowing melancholy outcome"}}},
-                                {"action":"print", "delay":4000, "params": {"body":{"text":"Record of mood analysis logged to Databox vault"}}}
-                            ],
-                            [
-                                {"action":"message", "delay":2000, "params": {"query":{"message":"Baseline mood analysis complete, current mood quantified as [LOW]"}}},
-                                {"action":"message", "delay":6000, "params": {"query":{"message":"Choosing genre customisations. [COLD] colour grade selected.."}}},
-                                {"action":"message", "delay":164000, "params": {"query":{"message":"Skipping SCI_FI detour..."}}},
-                                {"action":"message", "delay":81000, "params": {"query":{"message":"Audience mood is HIGH: allowing melancholy outcome"}}}  
-                            ],
-                            [
-                                {"action":"fan", "params":{"query":{"rotate":false, "power":4, "cool":true}}, "delay":164000},
-                                {"action":"fan", "params":{"query":{"rotate":false, "power":1, "cool":true}}, "delay":5000}
-                            ]
+                        [
+                           
+                            {"action":"soundmedia", "delay":100, "params": {"body":{"media":"tbu-neg-scifi-bw.mp4","nowait":true, "delay":0}}},
+                            {"action":"videomedia", "delay":0, "params": {"query":{"media":"tbu-neg-scifi-bw.mp4","delay":0}}}
                         ],
-                        "next": "NONSCIFIdebriefNEG"
-                    }
+                        [
+                            {"action":"print", "delay":2000, "params": {"body":{"text":"mood in room is low"}}},
+                            {"action":"print", "delay":6000, "params": {"body":{"text":"Querying Databox for genre"}}},
+                            {"action":"print", "delay":0, "params": {"body":{"text":"customisation algorithm: [B&W]"}}},
+                            {"action":"print", "delay":0, "params": {"body":{"text":"version selected"}}},
+                            {"action":"print", "delay":166000, "params": {"body":{"text":"print_low_attentiveness"}}},
+                            {"action":"print", "delay":98000, "params": {"body":{"text":"Audience mood is HIGH: allowing melancholy outcome"}}},
+                            {"action":"print", "delay":1000, "params": {"body":{"text":"Record of mood analysis logged to Databox vault"}}}
+                        ],
+                        [
+                            {"action":"message", "delay":2000, "params": {"query":{"message":"Baseline mood analysis complete, current mood quantified as [LOW]"}}},
+                            {"action":"message", "delay":6000, "params": {"query":{"message":"Choosing genre customisations. [BLACK/WHITE] colour grade selected.."}}},
+                            {"action":"message", "delay":164000, "params": {"query":{"message":"Low attentiveness detected, scheduling sci-fi detour to enliven audience"}}},
+                            {"action":"message", "delay":29000, "params": {"query":{"message":"New attentiveness level ACCEPTABLE"}}},
+                            {"action":"message", "delay":69000, "params": {"query":{"message":"Audience mood is HIGH: allowing melancholy outcome"}}}  
+                        ],
+                        [
+                            {"action":"fan", "params":{"query":{"rotate":true, "power":10, "cool":true, "from":0, "to":90}}, "delay":172000},
+                            {"action":"fan", "params":{"query":{"rotate":false, "power":1, "cool":true}}, "delay":29000}
+                        ],
+                        [{"action":"nanoleaf","params":{"query":{"hue":226,"sat":42,"brightness":67}},"delay":0}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":175,"sat":43,"brightness":99}},"delay":8500}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":187,"sat":40,"brightness":99}},"delay":22000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":226,"sat":55,"brightness":61}},"delay":47000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":252,"sat":22,"brightness":89}},"delay":53000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":252,"sat":22,"brightness":43}},"delay":58000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":230,"sat":17,"brightness":43}},"delay":62000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":230,"sat":17,"brightness":22}},"delay":75000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":230,"sat":17,"brightness":44}},"delay":80000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":240,"sat":20,"brightness":29}},"delay":90000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":251,"sat":31,"brightness":18}},"delay":147000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":251,"sat":31,"brightness":53}},"delay":153000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":277,"sat":77,"brightness":64}},"delay":173000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":275,"sat":27,"brightness":52}},"delay":202000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":257,"sat":35,"brightness":33}},"delay":215000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":229,"sat":43,"brightness":53}},"delay":223000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":229,"sat":43,"brightness":53}},"delay":268000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":218,"sat":60,"brightness":53}},"delay":272000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":222,"sat":88,"brightness":53}},"delay":286000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":227,"sat":30,"brightness":95}},"delay":302000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-scifi-bw-000"}},"delay":0}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-scifi-bw-001"}},"delay":8500}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-scifi-bw-002"}},"delay":22000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-scifi-bw-003"}},"delay":47000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-scifi-bw-004"}},"delay":53000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-scifi-bw-005"}},"delay":58000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-scifi-bw-006"}},"delay":62000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-scifi-bw-007"}},"delay":75000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-scifi-bw-008"}},"delay":80000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-scifi-bw-009"}},"delay":90000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-scifi-bw-010"}},"delay":147000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-scifi-bw-011"}},"delay":153000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-scifi-bw-012"}},"delay":173000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-scifi-bw-013"}},"delay":202000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-scifi-bw-014"}},"delay":215000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-scifi-bw-015"}},"delay":223000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-scifi-bw-016"}},"delay":268000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-scifi-bw-017"}},"delay":272000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-scifi-bw-018"}},"delay":286000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-scifi-bw-019"}},"delay":302000}]
+                                                
+                    ]
+                },
+                "rules":[
+                        {
+                            "rule": {
+                                "operator": "equals",
+                                "operand": "debrief"
+                            },
+                            "actions":[[]],
+                            "next": "SCIFIdebriefNEG"
+                        }
+                ]
+            },
+            {
+                "id": "scifi-neg-cold",
+                "name": "scifi-neg-cold",
+                "type": "button",
+                "subscription": "/press",
+                "data": [
+                    "debrief"
+                ],
+                "onstart": {
+                    "actions": [
+                        [
+                            {"action": "talkingoff"}
+                        ],
+                        [
+                            {"action":"mediascreen"}
+                        ],
+                        [
+                            {"action":"soundmedia", "params": {"body":{"media":"tbu-neg-scifi-cold.mp4","nowait":true}}},
+                            {"action":"videomedia", "delay":80, "params": {"query":{"media":"tbu-neg-scifi-cold.mp4","delay":0}}}
+                           
+                        ],
+                        [
+                            {"action":"print", "delay":2000, "params": {"body":{"text":"mood in room is low"}}},
+                            {"action":"print", "delay":6000, "params": {"body":{"text":"Querying Databox for genre"}}},
+                            {"action":"print", "delay":0, "params": {"body":{"text":"customisation algorithm: [COLD]"}}},
+                            {"action":"print", "delay":0, "params": {"body":{"text":"version selected"}}},
+                            {"action":"print", "delay":164000, "params": {"body":{"text":"print_low_attentiveness"}}},
+                            {"action":"print", "delay":98000, "params": {"body":{"text":"Audience mood is HIGH: allowing melancholy outcome"}}},
+                            {"action":"print", "delay":1000, "params": {"body":{"text":"Record of mood analysis logged to Databox vault"}}}
+                        ],
+                        [
+                            {"action":"message", "delay":2000, "params": {"query":{"message":"Baseline mood analysis complete, current mood quantified as [LOW]"}}},
+                            {"action":"message", "delay":6000, "params": {"query":{"message":"Choosing genre customisations. [COLD] colour grade selected.."}}},
+                            {"action":"message", "delay":164000, "params": {"query":{"message":"Low attentiveness detected, scheduling sci-fi detour to enliven audience"}}},
+                            {"action":"message", "delay":29000, "params": {"query":{"message":"New attentiveness level ACCEPTABLE"}}},
+                            {"action":"message", "delay":69000, "params": {"query":{"message":"Audience mood is HIGH: allowing melancholy outcome"}}}  
+                        ],
+                        [
+                            {"action":"fan", "params":{"query":{"rotate":true, "power":10, "cool":true, "from":0, "to":90}}, "delay":172000},
+                            {"action":"fan", "params":{"query":{"rotate":false, "power":1, "cool":true}}, "delay":29000}
+                        ],
+                        [{"action":"nanoleaf","params":{"query":{"hue":226,"sat":42,"brightness":67}},"delay":0}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":131,"sat":85,"brightness":99}},"delay":8500}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":239,"sat":99,"brightness":99}},"delay":22000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":239,"sat":99,"brightness":99}},"delay":47000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":278,"sat":87,"brightness":99}},"delay":53000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":251,"sat":87,"brightness":99}},"delay":57000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":334,"sat":48,"brightness":99}},"delay":61000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":235,"sat":73,"brightness":99}},"delay":68000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":249,"sat":99,"brightness":99}},"delay":75000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":356,"sat":32,"brightness":99}},"delay":80000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":324,"sat":42,"brightness":99}},"delay":90000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":355,"sat":18,"brightness":99}},"delay":93000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":344,"sat":72,"brightness":99}},"delay":147000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":357,"sat":59,"brightness":99}},"delay":174000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":272,"sat":86,"brightness":99}},"delay":173000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":337,"sat":41,"brightness":99}},"delay":202000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":307,"sat":53,"brightness":99}},"delay":215000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":346,"sat":34,"brightness":99}},"delay":234000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":236,"sat":79,"brightness":99}},"delay":248000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":225,"sat":75,"brightness":99}},"delay":267000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":227,"sat":92,"brightness":99}},"delay":269000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":241,"sat":99,"brightness":99}},"delay":287000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":227,"sat":30,"brightness":99}},"delay":302000}],
+                        
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-scifi-cold-000"}},"delay":0}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-scifi-cold-001"}},"delay":8500}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-scifi-cold-002"}},"delay":22000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-scifi-cold-003"}},"delay":47000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-scifi-cold-004"}},"delay":53000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-scifi-cold-005"}},"delay":57000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-scifi-cold-006"}},"delay":61000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-scifi-cold-007"}},"delay":68000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-scifi-cold-008"}},"delay":75000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-scifi-cold-009"}},"delay":80000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-scifi-cold-010"}},"delay":90000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-scifi-cold-011"}},"delay":93000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-scifi-cold-012"}},"delay":147000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-scifi-cold-013"}},"delay":174000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-scifi-cold-014"}},"delay":173000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-scifi-cold-015"}},"delay":202000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-scifi-cold-016"}},"delay":215000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-scifi-cold-017"}},"delay":234000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-scifi-cold-018"}},"delay":248000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-scifi-cold-019"}},"delay":267000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-scifi-cold-020"}},"delay":269000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-scifi-cold-021"}},"delay":287000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-scifi-cold-022"}},"delay":302000}]
+                    ]  
+                },
+                "rules":[
+                        {
+                            "rule": {
+                                "operator": "equals",
+                                "operand": "debrief"
+                            },
+                            "actions":[[]],
+                            "next": "SCIFIdebriefNEG"
+                        }
+                ]
+            },
+       
+            {
+                "id": "pos-warm",
+                "name": "pos-warm",
+                "type": "button",
+                "subscription": "/press",
+                "data": [
+                    "debrief"
+                ],
+                "onstart": {
+                    "actions": [
+                        [
+                            {"action": "talkingoff"}
+                        ],
+                        [
+                            {"action":"mediascreen"}
+                        ],
+                        [
+                            {"action":"soundmedia", "params": {"body":{"media":"tbu-pos-noscifi-warm.mp4","nowait":true}}},
+                            {"action":"videomedia","delay":300,  "params": {"query":{"media":"tbu-pos-noscifi-warm.mp4","delay":0}}}  
+                        ],
+                        [
+                            {"action":"print", "delay":2000, "params": {"body":{"text":"mood in room is positive"}}},
+                            {"action":"print", "delay":6000, "params": {"body":{"text":"Querying Databox for genre"}}},
+                            {"action":"print", "delay":0, "params": {"body":{"text":"customisation algorithm: [WARM]"}}},
+                            {"action":"print", "delay":0, "params": {"body":{"text":"version selected"}}},
+                            {"action":"print", "delay":164000, "params": {"body":{"text":"Skipping SCI_FI detour..."}}},
+                            {"action":"print", "delay":81000, "params": {"body":{"text":"Audience mood is LOW: showing positive outcome"}}},
+                            {"action":"print", "delay":4000, "params": {"body":{"text":"Record of mood analysis logged to Databox vault"}}}
+                        ],
+                        [
+                            {"action":"message", "delay":2000, "params": {"query":{"message":"Baseline mood analysis complete, current mood quantified as [POSITIVE]"}}},
+                            {"action":"message", "delay":6000, "params": {"query":{"message":"Choosing genre customisations. [WARM] colour grade selected.."}}},
+                            {"action":"message", "delay":164000, "params": {"query":{"message":"Skipping SCI_FI detour..."}}},
+                            {"action":"message", "delay":81000, "params": {"query":{"message":"Audience mood is LOW: showing positive outcome"}}}  
+                        ],
+                        [
+                            {"action":"soundmedia", "delay": 176000, "params": {"body":{"media":"tbu-clock-middle-music.mp3","nowait":true}}}
+                        ],
+                        [
+                            {"action":"fan", "params":{"query":{"rotate":false, "power":4, "cool":true}}, "delay":164000},
+                            {"action":"fan", "params":{"query":{"rotate":false, "power":1, "cool":true}}, "delay":5000}
+                        ],
+                        [{"action":"nanoleaf","params":{"query":{"hue":226,"sat":42,"brightness":67}},"delay":0}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":176,"sat":89,"brightness":57}},"delay":8500}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":222,"sat":72,"brightness":57}},"delay":22000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":345,"sat":99,"brightness":30}},"delay":47000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":3,"sat":98,"brightness":30}},"delay":53000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":351,"sat":99,"brightness":30}},"delay":57000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":14,"sat":99,"brightness":32}},"delay":62000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":27,"sat":59,"brightness":32}},"delay":68000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":225,"sat":75,"brightness":32}},"delay":75000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":10,"sat":99,"brightness":32}},"delay":81000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":340,"sat":99,"brightness":32}},"delay":147000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":358,"sat":99,"brightness":32}},"delay":203000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":334,"sat":99,"brightness":32}},"delay":210000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":358,"sat":99,"brightness":32}},"delay":221000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":258,"sat":44,"brightness":32}},"delay":235000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":308,"sat":65,"brightness":32}},"delay":240000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":245,"sat":80,"brightness":32}},"delay":244000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":350,"sat":53,"brightness":32}},"delay":248000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":8,"sat":65,"brightness":32}},"delay":254000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":8,"sat":65,"brightness":32}},"delay":257000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":243,"sat":99,"brightness":32}},"delay":267000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":226,"sat":31,"brightness":69}},"delay":293000}],
+
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-pos-noscifi-warm-000"}},"delay":0}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-pos-noscifi-warm-001"}},"delay":8500}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-pos-noscifi-warm-002"}},"delay":22000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-pos-noscifi-warm-003"}},"delay":47000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-pos-noscifi-warm-004"}},"delay":53000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-pos-noscifi-warm-005"}},"delay":57000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-pos-noscifi-warm-006"}},"delay":62000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-pos-noscifi-warm-007"}},"delay":68000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-pos-noscifi-warm-008"}},"delay":75000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-pos-noscifi-warm-009"}},"delay":81000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-pos-noscifi-warm-010"}},"delay":147000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-pos-noscifi-warm-011"}},"delay":203000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-pos-noscifi-warm-012"}},"delay":210000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-pos-noscifi-warm-013"}},"delay":221000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-pos-noscifi-warm-014"}},"delay":235000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-pos-noscifi-warm-015"}},"delay":240000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-pos-noscifi-warm-016"}},"delay":244000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-pos-noscifi-warm-017"}},"delay":248000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-pos-noscifi-warm-018"}},"delay":254000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-pos-noscifi-warm-019"}},"delay":257000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-pos-noscifi-warm-020"}},"delay":267000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-pos-noscifi-warm-021"}},"delay":293000}]
+                    ]
+                },
+                "rules":[
+                        {
+                            "rule": {
+                                "operator": "equals",
+                                "operand": "debrief"
+                            },
+                            "actions":[[]],
+                            "next": "NONSCIFIdebriefPOS"
+                        }
+                ]
+            },
+            {
+                "id": "pos-cold",
+                "name": "pos-cold",
+                "type": "button",
+                "subscription": "/press",
+                "data": [
+                    "debrief"
+                ],
+                "onstart": {
+                    "actions": [
+                        [
+                            {"action": "talkingoff"}
+                        ],
+                        [
+                            {"action":"mediascreen"}
+                        ],
+                        [
+                            {"action":"soundmedia", "params": {"body":{"media":"tbu-pos-noscifi-cold.mp4","nowait":true}}},
+                            {"action":"videomedia", "delay":300, "params": {"query":{"media":"tbu-pos-noscifi-cold.mp4","delay":0}}}  
+                        ],
+                        [
+                            {"action":"print", "delay":2000, "params": {"body":{"text":"mood in room is positive"}}},
+                            {"action":"print", "delay":6000, "params": {"body":{"text":"Querying Databox for genre"}}},
+                            {"action":"print", "delay":0, "params": {"body":{"text":"customisation algorithm: [COLD]"}}},
+                            {"action":"print", "delay":0, "params": {"body":{"text":"version selected"}}},
+                            {"action":"print", "delay":164000, "params": {"body":{"text":"Skipping SCI_FI detour..."}}},
+                            {"action":"print", "delay":81000, "params": {"body":{"text":"Audience mood is LOW: showing positive outcome"}}},
+                            {"action":"print", "delay":4000, "params": {"body":{"text":"Record of mood analysis logged to Databox vault"}}}
+                        ],
+                        [
+                            {"action":"message", "delay":2000, "params": {"query":{"message":"Baseline mood analysis complete, current mood quantified as [POSITIVE]"}}},
+                            {"action":"message", "delay":6000, "params": {"query":{"message":"Choosing genre customisations. [COLD] colour grade selected.."}}},
+                            {"action":"message", "delay":164000, "params": {"query":{"message":"Skipping SCI_FI detour..."}}},
+                            {"action":"message", "delay":81000, "params": {"query":{"message":"Audience mood is LOW: showing positive outcome"}}}  
+                        ],
+                        [
+                            {"action":"soundmedia", "delay": 176000, "params": {"body":{"media":"tbu-clock-middle-music.mp3","nowait":true}}}
+                        ],
+                        [
+                            {"action":"fan", "params":{"query":{"rotate":false, "power":4, "cool":true}}, "delay":164000},
+                            {"action":"fan", "params":{"query":{"rotate":false, "power":1, "cool":true}}, "delay":5000}
+                        ],
+                        [{"action":"nanoleaf","params":{"query":{"hue":226,"sat":42,"brightness":67}},"delay":0}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":185,"sat":50,"brightness":99}},"delay":8500}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":226,"sat":80,"brightness":98}},"delay":22000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":341,"sat":99,"brightness":20}},"delay":47000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":261,"sat":46,"brightness":20}},"delay":53000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":332,"sat":94,"brightness":20}},"delay":57000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":256,"sat":74,"brightness":20}},"delay":75000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":312,"sat":58,"brightness":29}},"delay":80000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":330,"sat":99,"brightness":29}},"delay":89000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":353,"sat":68,"brightness":29}},"delay":93000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":270,"sat":54,"brightness":29}},"delay":104000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":236,"sat":69,"brightness":29}},"delay":147000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":280,"sat":62,"brightness":29}},"delay":152000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":302,"sat":43,"brightness":29}},"delay":181000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":323,"sat":28,"brightness":29}},"delay":203000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":284,"sat":74,"brightness":29}},"delay":211000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":245,"sat":63,"brightness":29}},"delay":222000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":231,"sat":77,"brightness":29}},"delay":237000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":225,"sat":38,"brightness":45}},"delay":250000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":234,"sat":80,"brightness":45}},"delay":257000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":276,"sat":57,"brightness":45}},"delay":265000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":222,"sat":18,"brightness":66}},"delay":268000}],
+
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-pos-noscifi-cold-000"}},"delay":0}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-pos-noscifi-cold-001"}},"delay":8500}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-pos-noscifi-cold-002"}},"delay":22000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-pos-noscifi-cold-003"}},"delay":47000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-pos-noscifi-cold-004"}},"delay":53000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-pos-noscifi-cold-005"}},"delay":57000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-pos-noscifi-cold-006"}},"delay":75000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-pos-noscifi-cold-007"}},"delay":80000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-pos-noscifi-cold-008"}},"delay":89000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-pos-noscifi-cold-009"}},"delay":93000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-pos-noscifi-cold-010"}},"delay":104000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-pos-noscifi-cold-011"}},"delay":147000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-pos-noscifi-cold-012"}},"delay":152000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-pos-noscifi-cold-013"}},"delay":181000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-pos-noscifi-cold-014"}},"delay":203000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-pos-noscifi-cold-015"}},"delay":211000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-pos-noscifi-cold-016"}},"delay":222000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-pos-noscifi-cold-017"}},"delay":237000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-pos-noscifi-cold-018"}},"delay":250000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-pos-noscifi-cold-019"}},"delay":257000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-pos-noscifi-cold-020"}},"delay":265000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-pos-noscifi-cold-021"}},"delay":268000}]
+                    ]  
+                },
+                "rules":[
+                        {
+                            "rule": {
+                                "operator": "equals",
+                                "operand": "debrief"
+                            },
+                            "actions":[[]],
+                            "next": "NONSCIFIdebriefPOS"
+                        }
+                ]
+            },
+            {
+                "id": "neg-cold",
+                "name": "neg-cold",
+                "type": "button",
+                "subscription": "/press",
+                "data": [
+                    "debrief"
+                ],
+                "onstart": {
+                    "actions": [
+                        [
+                            {"action": "talkingoff"}
+                        ],
+                        [
+                            {"action":"mediascreen"}
+                        ],
+                        [
+                            {"action":"soundmedia", "params": {"body":{"media":"tbu-neg-noscifi-cold.mp4","nowait":true}}},
+                            {"action":"videomedia", "delay":300, "params": {"query":{"media":"tbu-neg-noscifi-cold.mp4","delay":0}}}
+                        ],
+                        [
+                            {"action":"print", "delay":2000, "params": {"body":{"text":"mood in room is low"}}},
+                            {"action":"print", "delay":6000, "params": {"body":{"text":"Querying Databox for genre"}}},
+                            {"action":"print", "delay":0, "params": {"body":{"text":"customisation algorithm: [COLD]"}}},
+                            {"action":"print", "delay":0, "params": {"body":{"text":"version selected"}}},
+                            {"action":"print", "delay":164000, "params": {"body":{"text":"Skipping SCI_FI detour..."}}},
+                            {"action":"print", "delay":81000, "params": {"body":{"text":"Audience mood is HIGH: allowing melancholy outcome"}}},
+                            {"action":"print", "delay":4000, "params": {"body":{"text":"Record of mood analysis logged to Databox vault"}}}
+                        ],
+                        [
+                            {"action":"message", "delay":2000, "params": {"query":{"message":"Baseline mood analysis complete, current mood quantified as [LOW]"}}},
+                            {"action":"message", "delay":6000, "params": {"query":{"message":"Choosing genre customisations. [COLD] colour grade selected.."}}},
+                            {"action":"message", "delay":164000, "params": {"query":{"message":"Skipping SCI_FI detour..."}}},
+                            {"action":"message", "delay":81000, "params": {"query":{"message":"Audience mood is HIGH: allowing melancholy outcome"}}}  
+                        ],
+                        [
+                            {"action":"fan", "params":{"query":{"rotate":false, "power":4, "cool":true}}, "delay":164000},
+                            {"action":"fan", "params":{"query":{"rotate":false, "power":1, "cool":true}}, "delay":5000}
+                        ],
+                        [{"action":"nanoleaf","params":{"query":{"hue":226,"sat":42,"brightness":67}},"delay":0}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":203,"sat":91,"brightness":99}},"delay":8500}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":222,"sat":74,"brightness":99}},"delay":23000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":274,"sat":74,"brightness":43}},"delay":47000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":241,"sat":97,"brightness":43}},"delay":53000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":241,"sat":97,"brightness":43}},"delay":57000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":24,"sat":72,"brightness":43}},"delay":61000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":24,"sat":72,"brightness":43}},"delay":75000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":235,"sat":89,"brightness":43}},"delay":80000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":19,"sat":70,"brightness":38}},"delay":90000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":336,"sat":46,"brightness":38}},"delay":104000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":252,"sat":96,"brightness":38}},"delay":146000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":302,"sat":61,"brightness":38}},"delay":170000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":342,"sat":47,"brightness":54}},"delay":202000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":268,"sat":65,"brightness":54}},"delay":210000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":234,"sat":76,"brightness":54}},"delay":235000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":228,"sat":40,"brightness":54}},"delay":253000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":219,"sat":70,"brightness":54}},"delay":257000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":228,"sat":99,"brightness":54}},"delay":274000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-noscifi-cold-000"}},"delay":0}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-noscifi-cold-001"}},"delay":8500}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-noscifi-cold-002"}},"delay":23000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-noscifi-cold-003"}},"delay":47000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-noscifi-cold-004"}},"delay":53000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-noscifi-cold-005"}},"delay":57000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-noscifi-cold-006"}},"delay":61000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-noscifi-cold-007"}},"delay":75000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-noscifi-cold-008"}},"delay":80000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-noscifi-cold-009"}},"delay":90000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-noscifi-cold-010"}},"delay":104000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-noscifi-cold-011"}},"delay":146000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-noscifi-cold-012"}},"delay":170000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-noscifi-cold-013"}},"delay":202000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-noscifi-cold-014"}},"delay":210000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-noscifi-cold-015"}},"delay":235000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-noscifi-cold-016"}},"delay":253000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-noscifi-cold-017"}},"delay":257000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-noscifi-cold-018"}},"delay":274000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"tbu-neg-noscifi-cold-019"}},"delay":289000}]
+                    ]
+                },
+                "rules":[
+                        {
+                            "rule": {
+                                "operator": "equals",
+                                "operand": "debrief"
+                            },
+                            "actions":[[]],
+                            "next": "NONSCIFIdebriefNEG"
+                        }
                 ]
             },
             {
@@ -1905,25 +2287,25 @@
             {
                 "id": "SCIFIdebriefPOS",
                 "name": "SCIFIdebriefPOS",
-                "onstart":{ },
+                "onstart":{ "actions": [
+                    [{"action": "talkingon"}],
+                    [{"action":"say", "params":{"body":{"speech":[{"words":"Please remain seated","voice":"Daniel"}]}}},
+                    {"action":"say", "params":{"body":{"speech":[{"words":"As it happens, analysis of sensor data meant that I decided to show you a more positive ending. I didn't want to upset you. Not in that state","voice":"Daniel"}]}}, "delay":1000},
+                    {"action":"say", "delay":1000, "params":{"body":{"speech":[{"words":"Also, you remember the weird science-fiction interlude? That was just for you. You're special","voice":"Daniel"}]}}},
+                    {"action":"say", "params":{"body":{"speech":[{"words":"I used a preference model to choose the music I thought you'd like - hope you enjoyed it!","voice":"Daniel"}]}}, "delay":1000}]
+                ]},
                 "type": "button",
                 "subscription": "/press",
                 "data": [
-                    "debrief"
+                    "done!"
                 ],
                 "rules": [
                     {
                         "rule": {
                             "operator": "equals",
-                            "operand": "debrief"
+                            "operand": "done!"
                         },
-                        "actions": [
-                              
-                            [{"action":"say", "params":{"body":{"speech":[{"words":"Please remain seated","voice":"Daniel"}]}}},
-                            {"action":"say", "params":{"body":{"speech":[{"words":"As it happens, analysis of sensor data meant that I decided to show you a more positive ending. I didn't want to upset you. Not in that state","voice":"Daniel"}]}}, "delay":1000},
-                            {"action":"say", "delay":1000, "params":{"body":{"speech":[{"words":"Also, you remember the weird sci-fi interlude? That was just for you. You're special","voice":"Daniel"}]}}},
-                            {"action":"say", "params":{"body":{"speech":[{"words":"I used a preference model to choose the music I thought you'd like - hope you enjoyed it!","voice":"Daniel"}]}}, "delay":1000}]
-                        ],
+                        "actions": [[]],
                         "next": "start"
                     }
                 ]
@@ -1931,24 +2313,25 @@
             {
                 "id": "SCIFIdebriefNEG",
                 "name": "SCIFIdebriefNEG",
-                "onstart":{ },
+                "onstart":{ "actions": [
+                    [{"action": "talkingon"}],
+                    [{"action":"say", "params":{"body":{"speech":[{"words":"Please remain seated","voice":"Daniel"}]}}},
+                    {"action":"say", "delay":1000, "params":{"body":{"speech":[{"words":"As it happens, analysis of sensor data meant that I decided to show you a more negative ending. Sometimes it's good to be brought back down to reality","voice":"Daniel"}]}}},
+                    {"action":"say", "delay":1000, "params":{"body":{"speech":[{"words":"Also, you remember the weird science-fiction interlude? That was just for you. You're special","voice":"Daniel"}]}}},
+                    {"action":"say", "params":{"body":{"speech":[{"words":"I used a preference model to choose the music I thought you'd like - hope you enjoyed it!","voice":"Daniel"}]}}, "delay":1000}]
+                ] },
                 "type": "button",
                 "subscription": "/press",
                 "data": [
-                    "debrief"
+                    "done!"
                 ],
                 "rules": [
                     {
                         "rule": {
                             "operator": "equals",
-                            "operand": "debrief"
+                            "operand": "done!"
                         },
-                        "actions": [
-                            [{"action":"say", "params":{"body":{"speech":[{"words":"Please remain seated","voice":"Daniel"}]}}},
-                            {"action":"say", "delay":1000, "params":{"body":{"speech":[{"words":"As it happens, analysis of sensor data meant that I decided to show you a more negative ending. Sometimes it's good to be brought back down to reality","voice":"Daniel"}]}}},
-                            {"action":"say", "delay":1000, "params":{"body":{"speech":[{"words":"Also, you remember the weird sci-fi interlude? That was just for you. You're special","voice":"Daniel"}]}}},
-                            {"action":"say", "params":{"body":{"speech":[{"words":"I used a preference model to choose the music I thought you'd like - hope you enjoyed it!","voice":"Daniel"}]}}, "delay":1000}]
-                        ],
+                        "actions": [[]],
                         "next": "start"
                     }
                 ]
@@ -1956,24 +2339,24 @@
             {
                 "id": "NONSCIFIdebriefPOS",
                 "name": "NONSCIFIdebriefPOS",
-                "onstart": {},
+                "onstart": {"actions": [
+                    [{"action": "talkingon"}],
+                    [{"action":"say", "params":{"body":{"speech":[{"words":"Please remain seated","voice":"Daniel"}]}}},
+                    {"action":"say", "params":{"body":{"speech":[{"words":"As it happens, analysis of sensor data meant that I decided to show you a more positive ending. I didn't want to upset you. Not in that state","voice":"Daniel"}]}}, "delay":1000},
+                    {"action":"say", "params":{"body":{"speech":[{"words":"I used a preference model to choose the music I thought you'd like - hope you enjoyed it!","voice":"Daniel"}]}}, "delay":1000}]
+                ]},
                 "type": "button",
                 "subscription": "/press",
                 "data": [
-                    "debrief"
+                    "done!"
                 ],
                 "rules": [
                     {
                         "rule": {
                             "operator": "equals",
-                            "operand": "debrief"
+                            "operand": "done!"
                         },
-                        "actions": [
-                            
-                            [{"action":"say", "params":{"body":{"speech":[{"words":"Please remain seated","voice":"Daniel"}]}}},
-                            {"action":"say", "params":{"body":{"speech":[{"words":"As it happens, analysis of sensor data meant that I decided to show you a more positive ending. I didn't want to upset you. Not in that state","voice":"Daniel"}]}}, "delay":1000},
-                            {"action":"say", "params":{"body":{"speech":[{"words":"I used a preference model to choose the music I thought you'd like - hope you enjoyed it!","voice":"Daniel"}]}}, "delay":1000}]
-                        ],
+                        "actions": [[]],
                         "next": "start"
                     }
                 ]
@@ -1981,25 +2364,25 @@
             {
                 "id": "NONSCIFIdebriefNEG",
                 "name": "NONSCIFIdebriefNEG",
-                "onstart": {},
+                "onstart": { "actions": [
+                    [{"action": "talkingon"}],
+                    [{"action":"say", "params":{"body":{"speech":[{"words":"Please remain seated","voice":"Daniel"}]}}},
+                    {"action":"say", "params":{"body":{"speech":[{"words":"As it happens, analysis of sensor data meant that I decided to show you a more negative ending. Sometimes it's good to be brought back down to reality","voice":"Daniel"}]}}},
+                    {"action":"say", "params":{"body":{"speech":[{"words":"I used a preference model to choose the music I thought you'd like - hope you enjoyed it!","voice":"Daniel"}]}}, "delay":1000}]
+
+                ]},
                 "type": "button",
                 "subscription": "/press",
                 "data": [
-                    "debrief"
+                    "done!"
                 ],
                 "rules": [
                     {
                         "rule": {
                             "operator": "equals",
-                            "operand": "debrief"
+                            "operand": "done!"
                         },
-                        "actions": [
-                            
-                            [{"action":"say", "params":{"body":{"speech":[{"words":"Please remain seated","voice":"Daniel"}]}}},
-                            {"action":"say", "params":{"body":{"speech":[{"words":"As it happens, analysis of sensor data meant that I decided to show you a more negative ending. Sometimes it's good to be brought back down to reality","voice":"Daniel"}]}}},
-                            {"action":"say", "params":{"body":{"speech":[{"words":"I used a preference model to choose the music I thought you'd like - hope you enjoyed it!","voice":"Daniel"}]}}, "delay":1000}]
-
-                        ],
+                        "actions": [[]],
                         "next": "start"
                     }
                 ]

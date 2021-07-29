@@ -653,5 +653,46 @@
     
         "tbu-neg-scifi-cold-021":{"on":true,"bri":254,"hue":43877,"sat":254,"effect":"none","xy":[0.1557,0.1454],"ct":153,"transitiontime":20},
     
-        "tbu-neg-scifi-cold-022":{"on":true,"bri":254,"hue":41435,"sat":77,"effect":"none","xy":[0.3129,0.3291],"ct":153,"transitiontime":20}
+        "tbu-neg-scifi-cold-022":{"on":true,"bri":254,"hue":41435,"sat":77,"effect":"none","xy":[0.3129,0.3291],"ct":153,"transitiontime":20},
+            "tbu-neg-scifi-bw-000":{"on":true,"bri":172,"hue":41172,"sat":109,"effect":"none","xy":[0.2849,0.3127],"ct":153,"transitiontime":20},
+
+                "tbu-neg-scifi-bw-001":{"on":true,"bri":254,"hue":31966,"sat":110,"effect":"none","xy":[0.2914,0.4028],"ct":153,"transitiontime":20},
+            
+                "tbu-neg-scifi-bw-002":{"on":true,"bri":254,"hue":34158,"sat":104,"effect":"none","xy":[0.2555,0.2909],"ct":153,"transitiontime":20},
+            
+                "tbu-neg-scifi-bw-003":{"on":true,"bri":156,"hue":41300,"sat":142,"effect":"none","xy":[0.3292,0.3105],"ct":153,"transitiontime":20},
+            
+                "tbu-neg-scifi-bw-004":{"on":true,"bri":228,"hue":45906,"sat":57,"effect":"none","xy":[0.3296,0.3111],"ct":176,"transitiontime":20},
+            
+                "tbu-neg-scifi-bw-005":{"on":true,"bri":111,"hue":45906,"sat":57,"effect":"none","xy":[0.3296,0.3111],"ct":176,"transitiontime":20},
+            
+                "tbu-neg-scifi-bw-006":{"on":true,"bri":111,"hue":41894,"sat":44,"effect":"none","xy":[0.3417,0.3471],"ct":192,"transitiontime":20},
+            
+                "tbu-neg-scifi-bw-007":{"on":true,"bri":58,"hue":41894,"sat":44,"effect":"none","xy":[0.3417,0.3471],"ct":192,"transitiontime":20},
+            
+                "tbu-neg-scifi-bw-008":{"on":true,"bri":114,"hue":41894,"sat":44,"effect":"none","xy":[0.3417,0.3471],"ct":192,"transitiontime":20},
+            
+                "tbu-neg-scifi-bw-009":{"on":true,"bri":76,"hue":43749,"sat":52,"effect":"none","xy":[0.3344,0.3302],"ct":184,"transitiontime":20},
+            
+                "tbu-neg-scifi-bw-010":{"on":true,"bri":48,"hue":45822,"sat":80,"effect":"none","xy":[0.3091,0.2853],"ct":153,"transitiontime":20},
+            
+                "tbu-neg-scifi-bw-011":{"on":true,"bri":137,"hue":45822,"sat":80,"effect":"none","xy":[0.3091,0.2853],"ct":153,"transitiontime":20},
+            
+                "tbu-neg-scifi-bw-012":{"on":true,"bri":164,"hue":50554,"sat":197,"effect":"none","xy":[0.2823,0.1593],"ct":153,"transitiontime":20},
+            
+                "tbu-neg-scifi-bw-013":{"on":true,"bri":133,"hue":50144,"sat":69,"effect":"none","xy":[0.3428,0.299],"ct":195,"transitiontime":20},
+            
+                "tbu-neg-scifi-bw-014":{"on":true,"bri":85,"hue":46824,"sat":90,"effect":"none","xy":[0.3,0.2631],"ct":153,"transitiontime":20},
+            
+                "tbu-neg-scifi-bw-015":{"on":true,"bri":137,"hue":41816,"sat":111,"effect":"none","xy":[0.2829,0.303],"ct":153,"transitiontime":20},
+            
+                "tbu-neg-scifi-bw-016":{"on":true,"bri":137,"hue":41816,"sat":111,"effect":"none","xy":[0.2829,0.303],"ct":153,"transitiontime":20},
+            
+                "tbu-neg-scifi-bw-017":{"on":true,"bri":137,"hue":39817,"sat":154,"effect":"none","xy":[0.2461,0.3112],"ct":153,"transitiontime":20},
+            
+                "tbu-neg-scifi-bw-018":{"on":true,"bri":137,"hue":40531,"sat":225,"effect":"none","xy":[0.1837,0.2618],"ct":153,"transitiontime":20},
+            
+                "tbu-neg-scifi-bw-019":{"on":true,"bri":244,"hue":41435,"sat":77,"effect":"none","xy":[0.3129,0.3291],"ct":153,"transitiontime":20}
+            
+            
     }

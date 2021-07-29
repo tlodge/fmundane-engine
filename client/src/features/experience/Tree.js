@@ -111,11 +111,11 @@ const recenter = (gtree,t)=>{
 
 const moveChart = (gtree, t)=>{
     
-    const g = d3.select(gtree.current);
-    if (_seen[t.id]){
-        const {x,y} = _seen[t.id];
-        g.transition().duration(2000).attr("transform", `translate(${-y+200},${-x+t.height/2})`);
-    }
+    //const g = d3.select(gtree.current);
+    //if (_seen[t.id]){
+     //   const {x,y} = _seen[t.id];
+    //    g.transition().duration(2000).attr("transform", `translate(${-y+200},${-x+t.height/2})`);
+   // }
 }
 
 function Tree(t) {

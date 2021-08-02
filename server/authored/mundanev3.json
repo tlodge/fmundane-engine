@@ -1541,10 +1541,11 @@
                         [
                             {"action":"mediascreen"}
                         ],
+                        [ 
+                            {"action":"soundmedia", "delay":300, "params": {"body":{"media":"tbu-pos-scifi-cold.mp4","nowait":true, "delay":0}}}
+                        ],
                         [
-                           
-                            {"action":"soundmedia", "delay":0, "params": {"body":{"media":"tbu-pos-scifi-cold.mp4","nowait":true, "delay":0}}},
-                            {"action":"videomedia", "delay":80, "params": {"query":{"media":"tbu-pos-scifi-cold.mp4","delay":0}}}
+                            {"action":"videomedia", "delay":0, "params": {"query":{"media":"tbu-pos-scifi-cold.mp4","delay":0}}}
                         ],
                         [
                             {"action":"print", "delay":2000, "params": {"body":{"text":"mood in room is positive"}}},
@@ -1645,9 +1646,10 @@
                         [
                             {"action":"mediascreen"}
                         ],
+                        [ 
+                            {"action":"soundmedia", "delay":300, "params": {"body":{"media":"tbu-neg-scifi-warm.mp4","nowait":true, "delay":0}}}
+                        ],
                         [
-                           
-                            {"action":"soundmedia",  "params": {"body":{"media":"tbu-neg-scifi-warm.mp4","nowait":true, "delay":0}}},
                             {"action":"videomedia", "delay":0, "params": {"query":{"media":"tbu-neg-scifi-warm.mp4","delay":0}}}
                         ],
                         [

@@ -8,6 +8,8 @@ const filesToCache = [
     'tbu-pos-scifi-warm.mp4',
     'tbu-neg-scifi-cold.mp4',			
     'tbu-neg-scifi-warm.mp4',		
+
+    'tbu-neg-scifi-bw.mp4'
     
 ];
   

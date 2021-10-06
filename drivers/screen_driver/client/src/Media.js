@@ -24,9 +24,12 @@ function Media({media="", delay=500}) {
         console.log("url is", window.location.href);
         console.log("video src set at", url);
 
-        return <video fullScreen autoPlay muted style={{width:"100vw", height:"100vh"}}>
+        return  <>
+                <iframe src={`${url}/silence.mp3`} type="audio/mp3" allow="autoplay" id="audio" style={{display:"none"}}></iframe>
+                <video fullScreen autoPlay style={{width:"100vw", height:"100vh"}}>
                     <source src={`${url}/${media}`} type="video/mp4"/>
                 </video>
+                </>
     }
 
     //console.log("in here with media", media);

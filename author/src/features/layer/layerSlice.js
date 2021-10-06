@@ -415,6 +415,7 @@ export const exportNodes = (name)=>{
                                          "rule": {
                                             "operator": "contains",
                                             "operand": Array.isArray(k.op) ? k.op : k.op.split(","),
+                                            "default": k.default
                                         },
                                         "actions":  k.actions,
                                         "next": k.event
@@ -423,6 +424,7 @@ export const exportNodes = (name)=>{
                                     return {
                                         "rule": {
                                            "operator": "any",
+                                           "default": true,
                                        },
                                        "actions": k.actions,
                                        "next": k.event

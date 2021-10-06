@@ -43,9 +43,6 @@ const _executeactions = async (alist, value="")=>{
                 return a;
             });
             
-           
-            
-           
             parallel.push({list:_alist, cb:()=>{
                 send("action", _alist.map(a=>a.action))
             }});
@@ -57,6 +54,7 @@ const _executeactions = async (alist, value="")=>{
   //  }
     console.log("doing send!");
     await Promise.all(parallel.map(async(p)=>{
+        console.log("calling", p.list);
         await callserially(p.list,p.cb);
     }));
     console.log("Success!!");
@@ -163,34 +161,87 @@ const StateMachine =   (config)=>{
             }
         });
 
+        const trigger = async (triggered, e, id, nexteventid, actionids, message)=>{
+           
+            console.log("in trigger with actionids", JSON.stringify(actionids,null, 4));
+
+            const msg = JSON.parse(message.toString());
+            const {data} = msg;   
+
+            unsubscribe(e.subscription, id);
+            const _actions = actionids.map(arr=>(arr||[]).map(a=>({...a, action:actions[a.action]||{}})));
+            console.log("ok, actioms ate", JSON.stringify(_actions,null,4));
+
+            await _executeactions(_actions, message.toString());
+            const _e = eventlookup[nexteventid];
+
+            if (_e){
+                send("event", {id:config.id,data:_e,triggered});
+                if (_e.onstart){
+                    const {speech=[], actions:_actions=[]} = _e.onstart;
+                    const __startactions =  _actions.map(arr=>(arr||[]).map(a=>({...a, action:actions[a.action]||{}})));
+                    await Promise.all([_executeactions(__startactions, message.toString()), _executespeech(speech, data)]);
+                }
+                send("ready", {layer:config.id, event:{id:nexteventid, type:_e.type}});
+                sub(_e);
+            }
+        }
+
         const sub = (e)=>{
-            let nexteventid, triggered;
+            let nexteventid, triggered, timer;
             event = e;
             
             const subtime = Date.now();
+            
+
+            if (e.timeout){
+                timer = setTimeout(()=>{
+                    console.log("timed out!!!!!")
+                    const next = e.timeout.next;
+                    const triggered = e.id;
+                    const actionids = [...(e.timeout.actions || [])];
+                    trigger(triggered, e, e.id, next, actionids, JSON.stringify({data:"",ts:Date.now()}));
+                }, e.timeout.wait*1000);
+                console.log("-------------------> setting a timeout", e.timeout.wait);
+            }
 
             subscribe(e.subscription, id,  async(_layer, message)=>{
-                
+                triggered = false;
                 console.log("subscribed", id, e.subscription);
                 const msg = JSON.parse(message.toString());
                 const {data, ts} = msg;     
 
+                
                 if (_layer != id){
                     return;
-                }
+               }
 
                 const evaluate = await _fetchrule(e.type);
                 
-                const actionids = e.rules.reduce((acc, item)=>{ 
-                    const result = evaluate(item.rule.operator, item.rule.operand, msg.data);
+
+                const defaultrule = e.rules.reduce((acc,item)=>{
+                    const {rule} = item; 
+                    if (rule.default){
+                        return item;
+                    }
+                    return acc;
+                }, null);
+
+            
+                let actionids = e.rules.filter(r=>!r.rule.default).reduce((acc, item)=>{ 
+                    
+                    const result = evaluate(item.rule.operator, item.rule.operand, data);
+
                     if (result){
                         //if this message was received before we subscribed, discard it!
                         //prevents race condition here - it's possible that the speech on onstart is still being processed by the browser and then sent 
                         //here, and if we've subcribed to the new event, and it is also a speech event then it may receive this speech and act on it..
                         //to get round this we give a little bit of time for this to happen before we subscribe.
+                        const sinceaction = ts-subtime;
+                        console.log(sinceaction);
 
-                        if (item.type==="speech" && (subtime + 1500) > ts){
-                            return;
+                        if (e.type==="speech" && sinceaction<2000){
+                            return acc;
                         }
                         nexteventid = item.next;
                         triggered = item.id;
@@ -199,8 +250,36 @@ const StateMachine =   (config)=>{
                     return acc;
                 },[]);
 
+                //if nothing else has triggered and there is a default rule...
+                if (!triggered && defaultrule){
+                    const result = evaluate(defaultrule.rule.operator, defaultrule.rule.operand, data);
+                    
+                    if (result){
+
+                        const sinceaction = ts-subtime;
+                        console.log(sinceaction);
+                        
+                        if (e.type==="speech" && sinceaction<2000){
+                            return;
+                        }
+
+                        nexteventid = defaultrule.next;
+                        triggered = defaultrule.id;
+                        actionids = [...defaultrule.actions];
+                    }
+                }
+
                 if (triggered){
-                   
+                    if (timer){
+                        console.log("clearing timer!!");
+                        clearTimeout(timer);
+                    }
+                    trigger(triggered, e, id, nexteventid, actionids, message);
+
+                    /*if (timer){
+                        console.log("clearing timer!!");
+                        clearTimeout(timer);
+                    }
                     unsubscribe(e.subscription, id);
                     const _actions = actionids.map(arr=>(arr||[]).map(a=>({...a, action:actions[a.action]||{}})));
                     await _executeactions(_actions, message.toString());
@@ -224,7 +303,7 @@ const StateMachine =   (config)=>{
                         sub(_e);
                      
                         
-                    }
+                    }*/
                 }
             })
         }

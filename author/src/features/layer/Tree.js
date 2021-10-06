@@ -34,7 +34,7 @@ let _loops  = [];
 const insert = (lookup, event, nodes={})=>{
    
     const children = lookup[event.event] || [];
-
+    
     //console.log(nodes[event.event].name || "").split(".");
     const [name=["x"]] = (nodes[event.event].name || "").split(".");
     const {onstart="",type="button"} = nodes[event.event]

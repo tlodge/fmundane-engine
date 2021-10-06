@@ -1,0 +1,1043 @@
+[
+    {
+        "id": "layer1",
+        "start": {
+            "actions": [
+                []
+            ],
+            "event": "magic_beans"
+        },
+        "events": [
+            {
+                "id": "magic_beans",
+                "name": "magic beans",
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "Jack and the Beanstalk",
+                            "delay": 1000,
+                            "voice": "Daniel",
+                            "background": "",
+                            "rate": "180"
+                        }
+                    ]
+                },
+                "type": "speech",
+                "subscription": "/speech",
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "contains",
+                            "operand": [
+                                "feels",
+                                "nervous",
+                                "feels nervous"
+                            ]
+                        },
+                        "actions": [
+                            [
+                                {
+                                    "action": "say",
+                                    "params": {
+                                        "body": {
+                                            "speech": [
+                                                {
+                                                    "words": "There are not many animals in the market at the moment",
+                                                    "voice": "Daniel",
+                                                    "delay": 1000
+                                                }
+                                            ]
+                                        }
+                                    }
+                                },
+                                {
+                                    "action": "say",
+                                    "params": {
+                                        "body": {
+                                            "speech": [
+                                                {
+                                                    "words": "Let's add some by naming a few",
+                                                    "voice": "Daniel"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            ]
+                        ],
+                        "next": "nameafew"
+                    }
+                ]
+            },
+            {
+                "id": "nameafew",
+                "name": "nameafew",
+                "onstart": {},
+                "type": "speech",
+                "subscription": "/speech",
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "contains",
+                            "operand": [
+                                "chicken",
+                                "chicks",
+                                "chickens",
+                                "chick"
+                            ]
+                        },
+                        "actions": [
+                            [
+                                {
+                                    "action": "soundmedia",
+                                    "params": {
+                                        "body": {
+                                            "media": "chicken.wav",
+                                            "nowait": true,
+                                            "delay": 0
+                                        }
+                                    }
+                                }
+                            ]
+                        ],
+                        "next": "nameafew"
+                    },
+                    {
+                        "rule": {
+                            "operator": "contains",
+                            "operand": [
+                                "duck",
+                                "ducks",
+                                "quack"
+                            ]
+                        },
+                        "actions": [
+                            [
+                                {
+                                    "action": "soundmedia",
+                                    "params": {
+                                        "body": {
+                                            "media": "duck.wav",
+                                            "nowait": true,
+                                            "delay": 0
+                                        }
+                                    }
+                                }
+                            ]
+                        ],
+                        "next": "nameafew"
+                    },
+                    {
+                        "rule": {
+                            "operator": "contains",
+                            "operand": [
+                                "cow",
+                                "cows"
+                            ]
+                        },
+                        "actions": [
+                            [
+                                {
+                                    "action": "soundmedia",
+                                    "params": {
+                                        "body": {
+                                            "media": "cow.wav",
+                                            "nowait": true,
+                                            "delay": 0
+                                        }
+                                    }
+                                }
+                            ]
+                        ],
+                        "next": "nameafew"
+                    },
+                    {
+                        "rule": {
+                            "operator": "contains",
+                            "operand": [
+                                "elephant",
+                                "elephants"
+                            ]
+                        },
+                        "actions": [
+                            [
+                                {
+                                    "action": "soundmedia",
+                                    "params": {
+                                        "body": {
+                                            "media": "elephant.wav",
+                                            "nowait": true,
+                                            "delay": 0
+                                        }
+                                    }
+                                }
+                            ]
+                        ],
+                        "next": "nameafew"
+                    },
+                    {
+                        "rule": {
+                            "operator": "contains",
+                            "operand": [
+                                "goat",
+                                "goats"
+                            ]
+                        },
+                        "actions": [
+                            [
+                                {
+                                    "action": "soundmedia",
+                                    "params": {
+                                        "body": {
+                                            "media": "goat.wav",
+                                            "nowait": true,
+                                            "delay": 0
+                                        }
+                                    }
+                                }
+                            ]
+                        ],
+                        "next": "nameafew"
+                    },
+                    {
+                        "rule": {
+                            "operator": "contains",
+                            "operand": [
+                                "goose",
+                                "geese",
+                                "bird"
+                            ]
+                        },
+                        "actions": [
+                            [
+                                {
+                                    "action": "soundmedia",
+                                    "params": {
+                                        "body": {
+                                            "media": "goose.wav",
+                                            "nowait": true,
+                                            "delay": 0
+                                        }
+                                    }
+                                }
+                            ]
+                        ],
+                        "next": "nameafew"
+                    },
+                    {
+                        "rule": {
+                            "operator": "contains",
+                            "operand": [
+                                "pony",
+                                "horse"
+                            ]
+                        },
+                        "actions": [
+                            [
+                                {
+                                    "action": "soundmedia",
+                                    "params": {
+                                        "body": {
+                                            "media": "horse.wav",
+                                            "nowait": true,
+                                            "delay": 0
+                                        }
+                                    }
+                                }
+                            ]
+                        ],
+                        "next": "nameafew"
+                    },
+                    {
+                        "rule": {
+                            "operator": "contains",
+                            "operand": [
+                                "lion",
+                                "roar"
+                            ]
+                        },
+                        "actions": [
+                            [
+                                {
+                                    "action": "soundmedia",
+                                    "params": {
+                                        "body": {
+                                            "media": "lion.wav",
+                                            "nowait": true,
+                                            "delay": 0
+                                        }
+                                    }
+                                }
+                            ]
+                        ],
+                        "next": "nameafew"
+                    },
+                    {
+                        "rule": {
+                            "operator": "contains",
+                            "operand": [
+                                "monkey"
+                            ]
+                        },
+                        "actions": [
+                            [
+                                {
+                                    "action": "soundmedia",
+                                    "params": {
+                                        "body": {
+                                            "media": "monkey.wav",
+                                            "nowait": true,
+                                            "delay": 0
+                                        }
+                                    }
+                                }
+                            ]
+                        ],
+                        "next": "nameafew"
+                    },
+                    {
+                        "rule": {
+                            "operator": "contains",
+                            "operand": [
+                                "pig",
+                                "pigs",
+                                "piggy"
+                            ]
+                        },
+                        "actions": [
+                            [
+                                {
+                                    "action": "soundmedia",
+                                    "params": {
+                                        "body": {
+                                            "media": "pig.wav",
+                                            "nowait": true,
+                                            "delay": 0
+                                        }
+                                    }
+                                }
+                            ]
+                        ],
+                        "next": "nameafew"
+                    },
+                    {
+                        "rule": {
+                            "operator": "contains",
+                            "operand": [
+                                "jack"
+                            ]
+                        },
+                        "actions": [[
+                            {}
+                        ]],
+                        "next": "parttwo"
+                    }
+                ]
+            },
+            {
+                "id": "parttwo",
+                "name": "parttwo",
+                "onstart": {
+                   "actions" : [[
+                       {"action":"stopallsound"}
+                   ]]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "contains",
+                            "operand": [
+                                "magic",
+                                "beans"
+                            ]
+                        },
+                        "actions": [[]],
+                        "next": "doyouthink?"
+                    }
+                ],
+                "type": "speech",
+                "subscription": "/speech"
+            },
+            {
+                "id": "doyouthink?",
+                "name": "doyouthink?",
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "Herm. Do you think you would swap the cow for the beans?",
+                            "delay": 0,
+                            "voice": "Daniel",
+                            "background": "",
+                            "rate": "180"
+                        }
+                    ]
+                },
+                "type": "speech",
+                "subscription": "/speech",
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "contains",
+                            "operand": [
+                                "yes"
+                            ]
+                        },
+                        "actions": [
+                            []
+                        ],
+                        "next": "yes"
+                    },
+                    {
+                        "rule": {
+                            "operator": "contains",
+                            "operand": [
+                                "no"
+                            ]
+                        },
+                        "actions": [
+                            []
+                        ],
+                        "next": "no"
+                    }
+                ]
+            },
+            {
+                "id": "yes",
+                "name": "yes",
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "Well that is good.  I think it sounds like a pretty good deal.",
+                            "delay": "1000",
+                            "voice": "Daniel",
+                            "background": "",
+                            "rate": "180"
+                        },
+                        {
+                            "words": "Do you think you could help me swap the beans for the cow",
+                            "delay": 0,
+                            "voice": "Daniel",
+                            "background": "",
+                            "rate": "180"
+                        }
+                    ]
+                },
+                "type": "speech",
+                "subscription": "/speech",
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "contains",
+                            "operand": [
+                                "yes"
+                            ]
+                        },
+                        "actions": [
+                            []
+                        ],
+                        "next": "swapyes"
+                    },
+                    {
+                        "rule": {
+                            "operator": "contains",
+                            "operand": [
+                                "no"
+                            ]
+                        },
+                        "actions": [
+                            []
+                        ],
+                        "next": "swapno"
+                    }
+                ]
+            },
+            {
+                "id": "no",
+                "name": "no",
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "Well neither would I.  ",
+                            "delay": "500",
+                            "voice": "Daniel",
+                            "background": "",
+                            "rate": "180"
+                        },
+                        {
+                            "words": "I love cows.  I collect cows.  I have a drawer full of cows in my bedroom.  And one in my car. ",
+                            "delay": "1000",
+                            "voice": "Daniel",
+                            "background": "",
+                            "rate": "180"
+                        },
+                        {
+                            "words": "What would you accept instead?",
+                            "delay": 0,
+                            "voice": "Daniel",
+                            "background": "",
+                            "rate": "180"
+                        }
+                    ]
+                },
+                "type": "speech",
+                "subscription": "/speech",
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "any",
+                            "default": true
+                        },
+                        "actions": [
+                            []
+                        ],
+                        "next": "askforthat"
+                    }
+                ]
+            },
+            {
+                "id": "swapyes",
+                "name": "swapyes",
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "Open your hands to collect five beans",
+                            "delay": 0,
+                            "voice": "Daniel",
+                            "background": "",
+                            "rate": "180"
+                        },
+                        {
+                            "words": "Here we go.  ",
+                            "delay": 0,
+                            "voice": "Daniel",
+                            "background": "",
+                            "rate": "180"
+                        },
+                        {
+                            "words": "One bean",
+                            "delay": "100",
+                            "voice": "Daniel",
+                            "background": "",
+                            "rate": "180"
+                        },
+                        {
+                            "words": "Two beans",
+                            "delay": "100",
+                            "voice": "Daniel",
+                            "background": "",
+                            "rate": "180"
+                        },
+                        {
+                            "words": "Three beans",
+                            "delay": "100",
+                            "voice": "Daniel",
+                            "background": "",
+                            "rate": "180"
+                        },
+                        {
+                            "words": "Oh.  A bee.  ",
+                            "delay": 0,
+                            "voice": "Daniel",
+                            "background": "",
+                            "rate": "180"
+                        },
+                        {
+                            "words": "Get away, get away!",
+                            "delay": "500",
+                            "voice": "Daniel",
+                            "background": "",
+                            "rate": "180"
+                        },
+                        {
+                            "words": "Oh.   How many more beans do I neeed to give you?",
+                            "delay": 0,
+                            "voice": "Daniel",
+                            "background": "",
+                            "rate": "180"
+                        }
+                    ]
+                },
+                "type": "speech",
+                "subscription": "/speech",
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "contains",
+                            "operand": [
+                                "2",
+                                "who",
+                                "loo",
+                                "moo"
+                            ]
+                        },
+                        "actions": [
+                            []
+                        ],
+                        "next": "correct"
+                    },
+                    {
+                        "rule": {
+                            "operator": "any",
+                            "default": true
+                        },
+                        "actions": [
+                            [
+                                ""
+                            ]
+                        ],
+                        "next": "incorrect"
+                    }
+                ]
+            },
+            {
+                "id": "askforthat",
+                "name": "askforthat",
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "Ok I will ask for |value:,| from the man instead",
+                            "delay": 0,
+                            "voice": "Daniel",
+                            "background": "",
+                            "rate": "180"
+                        },
+                        {
+                            "words": "I am sure it will be fine.  Maybe I'll also ask for the beans.",
+                            "delay": 0,
+                            "voice": "Daniel",
+                            "background": "",
+                            "rate": "180"
+                        },
+                        {
+                            "words": "Could you help me swap the beans for the cow?",
+                            "delay": 0,
+                            "voice": "Daniel",
+                            "background": "",
+                            "rate": "180"
+                        }
+                    ]
+                },
+                "type": "speech",
+                "subscription": "/speech",
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "contains",
+                            "operand": [
+                                "yes"
+                            ]
+                        },
+                        "actions": [
+                            [
+                                ""
+                            ]
+                        ],
+                        "next": "swapyes"
+                    },
+                    {
+                        "rule": {
+                            "operator": "contains",
+                            "operand": [
+                                "no"
+                            ]
+                        },
+                        "actions": [
+                            [
+                                ""
+                            ]
+                        ],
+                        "next": "swapno"
+                    }
+                ]
+            },
+            {
+                "id": "swapno",
+                "name": "swapno",
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "Ok.  Not to worry.  I will collect the beans from the man myself",
+                            "delay": 0,
+                            "voice": "Daniel",
+                            "background": "",
+                            "rate": "180"
+                        },
+                        {
+                            "words": "One bean",
+                            "delay": 0,
+                            "voice": "Daniel",
+                            "background": "",
+                            "rate": "180"
+                        },
+                        {
+                            "words": "Two beans",
+                            "delay": 0,
+                            "voice": "Daniel",
+                            "background": "",
+                            "rate": "180"
+                        },
+                        {
+                            "words": "Three beans.",
+                            "delay": 0,
+                            "voice": "Daniel",
+                            "background": "",
+                            "rate": "180"
+                        },
+                        {
+                            "words": "Oh.  ",
+                            "delay": 0,
+                            "voice": "Daniel",
+                            "background": "",
+                            "rate": "180"
+                        },
+                        {
+                            "words": "I have been distracted by the cow.",
+                            "delay": 0,
+                            "voice": "Daniel",
+                            "background": "",
+                            "rate": "180"
+                        },
+                        {
+                            "words": "How many more beans do I need to collect?",
+                            "delay": 0,
+                            "voice": "Daniel",
+                            "background": "",
+                            "rate": "180"
+                        }
+                    ]
+                },
+                "type": "speech",
+                "subscription": "/speech",
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "contains",
+                            "operand": [
+                                "2",
+                                "who",
+                                "loo"
+                            ]
+                        },
+                        "actions": [
+                            [
+                                ""
+                            ]
+                        ],
+                        "next": "correct"
+                    },
+                    {
+                        "rule": {
+                            "operator": "any",
+                            "default": true
+                        },
+                        "actions": [
+                            [
+                                ""
+                            ]
+                        ],
+                        "next": "incorrect"
+                    }
+                ]
+            },
+            {
+                "id": "correct",
+                "name": "correct",
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "Thanks!",
+                            "delay": 0,
+                            "voice": "Daniel",
+                            "background": "tada.mp3",
+                            "rate": "180"
+                        },
+                        {
+                            "words": "I am so glad that you listened!",
+                            "delay": 0,
+                            "voice": "Daniel",
+                            "background": "",
+                            "rate": "180"
+                        }
+                    ]
+                },
+                "type": "speech",
+                "subscription": "/speech",
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "contains",
+                            "operand": [
+                                "Jack",
+                                "Mack",
+                                "Hack"
+                            ]
+                        },
+                        "actions": [
+                            []
+                        ],
+                        "next": "partthree"
+                    }
+                ]
+            },
+            {
+                "id": "incorrect",
+                "name": "incorrect",
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "I am not sure that |value:,| is the correct answer, sorry",
+                            "delay": "1000",
+                            "voice": "Daniel",
+                            "background": "",
+                            "rate": "180"
+                        },
+                        {
+                            "words": "I need to give you five beans but I think I have only given you three",
+                            "delay": 0,
+                            "voice": "Daniel",
+                            "background": "",
+                            "rate": "180"
+                        },
+                        {
+                            "words": "How many beans should I give you?",
+                            "delay": 0,
+                            "voice": "Daniel",
+                            "background": "",
+                            "rate": "180"
+                        }
+                    ]
+                },
+                "type": "speech",
+                "subscription": "/speech",
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "contains",
+                            "operand": [
+                                "2",
+                                "who",
+                                "loo"
+                            ]
+                        },
+                        "actions": [
+                            [
+                                ""
+                            ]
+                        ],
+                        "next": "correct"
+                    },
+                    {
+                        "rule": {
+                            "operator": "any",
+                            "default": true
+                        },
+                        "actions": [
+                            [
+                                ""
+                            ]
+                        ],
+                        "next": "incorrect"
+                    }
+                ]
+            },
+            {
+                "id": "partthree",
+                "name": "partthree",
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "",
+                            "delay": 0,
+                            "voice": "Daniel",
+                            "background": "media1.mp3",
+                            "rate": "180"
+                        }
+                    ]
+                },
+                "type": "speech",
+                "subscription": "/speech",
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "contains",
+                            "operand": [
+                                "beanstalk"
+                            ]
+                        },
+                        "actions": [
+                            [
+                                {
+                                    "action": "say",
+                                    "params": {
+                                        "body": {
+                                            "speech": [
+                                                {
+                                                    "words": "Wow that is a big beanstalk.  It is taller than two houses and it would probably take an hour to walk around.",
+                                                    "voice": "Daniel",
+                                                    "delay": 1000
+                                                }
+                                            ]
+                                        }
+                                    }
+                                },
+                                {
+                                    "action": "say",
+                                    "params": {
+                                        "body": {
+                                            "speech": [
+                                                {
+                                                    "words": "Seeing that beanstalk makes me quite jealous.  I would quite like one myself.",
+                                                    "voice": "Daniel",
+                                                    "delay": 800
+                                                }
+                                            ]
+                                        }
+                                    }
+                                },
+                                {
+                                    "action": "say",
+                                    "params": {
+                                        "body": {
+                                            "speech": [
+                                                {
+                                                    "words": "Could you could draw a picture of the beanstalk for me?",
+                                                    "voice": "Daniel"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            ]
+                        ],
+                        "next": "waitforresponse"
+                    }
+                ]
+            },
+            {
+                "id": "waitforresponse",
+                "name": "waitforresponse",
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "",
+                            "delay": 0,
+                            "voice": "Daniel",
+                            "background": "",
+                            "rate": "180"
+                        }
+                    ]
+                },
+                "type": "speech",
+                "subscription": "/speech",
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "contains",
+                            "operand": ["yes"]
+                        },
+                        "actions": [[{
+                            "action": "say",
+                            "params": {
+                                "body": {
+                                    "speech": [
+                                        {
+                                            "words": "Lovely, say done when you are finished",
+                                            "voice": "Daniel"
+                                        }
+                                    ]
+                                }
+                            }
+                        }]],
+                        "next": "drawing"
+                    },
+                    {
+                        "rule": {
+                            "operator": "contains",
+                            "operand": ["no"]
+                        },
+                        "actions": [[{
+                            "action": "say",
+                            "params": {
+                                "body": {
+                                    "speech": [
+                                        {
+                                            "words": "That’s fine.  Maybe later. What should Jack do now?  Should he chop it down.  Or climb it.  Or maybe just ignore it and hope it goes away. What do you think? Chop, climb or ignore?",
+                                            "voice": "Daniel"
+                                        }
+                                    ]
+                                }
+                            }
+                        }]],
+                        "next": "whatshouldjackdo"
+                    }
+                ],
+                "timeout": {
+                    "wait": 10,
+                    "next": "drawing",
+                    "actions": [[
+                        {
+                            "action": "say",
+                            "params": {
+                                "body": {
+                                    "speech": [
+                                        {
+                                            "words": "Guess you're drawing.  Please say done when you are finished",
+                                            "voice": "Daniel"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    ]]
+                } 
+            },
+            {
+                "id": "drawing",
+                "name": "drawing",
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "",
+                            "delay": 0,
+                            "voice": "Daniel",
+                            "background": "",
+                            "rate": "180"
+                        }
+                    ]
+                },
+                "type": "speech",
+                "subscription": "/speech",
+                "rules":[
+                    {
+                        "rule": {
+                            "operator": "contains",
+                            "operand": ["done"]
+                        },
+                        "actions": [[{
+                            "action": "say",
+                            "params": {
+                                "body": {
+                                    "speech": [
+                                        {
+                                            "words": "Brilliant! What should Jack do now?  Should he chop it down.  Or climb it.  Or maybe just ignore it and hope it goes away. What do you think? Chop, climb or ignore?",
+                                            "voice": "Daniel"
+                                        }
+                                    ]
+                                }
+                            }
+                        }]],
+                        "next": "whatshouldjackdo"
+                    }
+                ] 
+            },
+            {
+                "id": "whatshouldjackdo",
+                "name": "whatshouldjackdo",
+                "onstart": {},
+                "type": "speech",
+                "subscription": "/speech",
+                "rules": []
+            }
+        ]
+    }
+]

@@ -69,6 +69,7 @@ app.post('/api/speech', async function (req, res, next) {
         await sayIt(words, voice, rate);    
         await waitFor(delay);
     }
+    console.log("finished talking!")
     res.status(200).send("OK");
 });
 

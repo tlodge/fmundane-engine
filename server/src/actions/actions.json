@@ -16,8 +16,17 @@
         "body":{
            "id":"28282:1292920-2;"
         }
-    },
-    "soundmedia":{
+    }
+   },
+   "say":{
+      "type":"request",
+      "data":{
+         "url":"http://[speech]:9105/api/speech",
+         "type":"POST",
+         "contenttype":"application/json"
+      }
+  },
+   "soundmedia":{
         "type":"request",
         "data":{
            "url":"http://[speech]:9106/api/media",
@@ -26,6 +35,15 @@
         },
         "body":{}
     },
+    "stopallsound":{
+      "type":"request",
+      "data":{
+         "url":"http://[speech]:9106/api/media/stop",
+         "type":"GET",
+         "contenttype":"application/json"
+      },
+      "body":{}
+  },
 
     "videomedia":{
         "type":"request",

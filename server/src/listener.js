@@ -14,7 +14,7 @@ client.on('connect', function () {
 
 //EITHER THE TOPIC (IE TOPIC/LAYER) OR THE MESSAGE NEEDS TO SAY WHICH LAYER IT COMES FROM!
 client.on('message', (topic, message, pkt)=>{
-    Object.keys(callbacks[topic]).map(k=>callbacks[topic][k](k,message));
+    Object.keys(callbacks[topic]).map(k=>callbacks[topic][k](k,JSON.parse(message.toString())));
 })
 
 export const unsubscribe = (topic, layer)=>{

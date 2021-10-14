@@ -23,7 +23,7 @@ const callserially = async (list, cb)=>{
     cb();
 }
 
-const _executeactions = async (alist, value="")=>{
+const _executeactions = async (alist, placeholders={})=>{
     const parallel = [];
   
     //for (const row of alist){
@@ -36,9 +36,13 @@ const _executeactions = async (alist, value="")=>{
                 var matches = astr.match(/\|(.*?)\|/);
                 if (matches){
                     const toreplace = matches[0];
-                    const tokens = matches[1].split(":");
-                    const delimiter = tokens.length > 1 ? ` ${tokens[1]} ` : ",";
-                    return  {...a, action:JSON.parse(JSON.stringify(a.action).replace(toreplace,value.trim().split(" ").join(delimiter)))}
+                    const key = matches[1].split(":")[0];
+                    const replacement = (placeholders[key] || "").split(/\s+/);
+                    if (replacement){
+                        const tokens = matches[1].split(":");
+                        const delimiter = tokens.length > 1 ? ` ${tokens[1]} ` : ",";
+                        return  {...a, action:JSON.parse(astr.replace(toreplace,replacement.join(delimiter)))}
+                    }
                 }
                 return a;
             });
@@ -64,25 +68,15 @@ const _executeactions = async (alist, value="")=>{
 const _executespeech = async (lines, placeholders={})=>{
    
     if (placeholders && Object.keys(placeholders).length > 0){
-        
-       
-
         const _lines = lines.map(l=>{
             var matches = l.words.match(/\|(.*?)\|/);
             let _words = l.words;
             
             if (matches){
-                console.log("ok matches is", matches);
                 const toreplace = matches[0];
-
-                console.log("to replace is", toreplace.slice(1,-1));
-                console.log("placeholders are", placeholders);
-                
                 const key = matches[1].split(":")[0];
-                console.log("key is", key);
                 const replacement = (placeholders[key] || "").split(/\s+/);
                 
-                console.log("replacement is", replacement);
                 if (replacement){
                     const tokens = matches[1].split(":");
                     const delimiter = tokens.length > 1 ? ` ${tokens[1]} ` : ",";
@@ -149,7 +143,7 @@ const StateMachine =   (config)=>{
             if (event.onstart){
                 const {speech=[], actions:_actions=[]} = event.onstart;
                 const __startactions =  _actions.map(arr=>(arr||[]).map(a=>({...a,action:actions[a.action]||{}})));
-                await Promise.all([_executeactions(__startactions), _executespeech(speech, placeholders)]);
+                await Promise.all([_executeactions(__startactions, placeholders), _executespeech(speech, placeholders)]);
             }    
         }
        
@@ -159,11 +153,11 @@ const StateMachine =   (config)=>{
     
 
         //this is a subscripton to manual triggers (either by clicking nodes in the tree or calling webhook /event/trigger);
-        subscribe(`/trigger/${id}`, id, async(_layer, message)=>{
+        subscribe(`/trigger/${id}`, id, async(_layer, msg)=>{
           
             try{
-                const _e = JSON.parse(message.toString());
-                const {node, layer} = _e;
+            
+                const {node, layer} = msg;
                
                 const triggeredevent =  eventlookup[node];
                 if (triggeredevent){
@@ -180,23 +174,21 @@ const StateMachine =   (config)=>{
 
         const updateplaceholders = (rule, msg)=>{
             //only assign if rule has triggered
-            const {data} = JSON.parse(msg.toString());
+            
             if (rule.assign){
-                console.log("ok updating placeholders with", rule.assign, data)
-                placeholders[rule.assign] = data;
-                console.log("placeholders", placeholders);
+                placeholders[rule.assign] = msg;
             }
         }
 
-        const trigger = async (triggered, e, id, nexteventid, actionids, message)=>{
-           
-            const msg = JSON.parse(message.toString());
+        const trigger = async (triggered, e, id, nexteventid, actionids, msg)=>{
+            console.log("in trigger with", msg);
+
             const {data} = msg;   
 
             unsubscribe(e.subscription, id);
             const _actions = actionids.map(arr=>(arr||[]).map(a=>({...a, action:actions[a.action]||{}})));
 
-            await _executeactions(_actions, message.toString());
+            await _executeactions(_actions, placeholders);
             const _e = eventlookup[nexteventid];
 
             if (_e){
@@ -204,7 +196,7 @@ const StateMachine =   (config)=>{
                 if (_e.onstart){
                     const {speech=[], actions:_actions=[]} = _e.onstart;
                     const __startactions =  _actions.map(arr=>(arr||[]).map(a=>({...a, action:actions[a.action]||{}})));
-                    await Promise.all([_executeactions(__startactions, message.toString()), _executespeech(speech, placeholders)]);
+                    await Promise.all([_executeactions(__startactions, placeholders), _executespeech(speech, placeholders)]);
                 }
                 send("ready", {layer:config.id, event:{id:nexteventid, type:_e.type}});
                 sub(_e);
@@ -229,10 +221,12 @@ const StateMachine =   (config)=>{
                 console.log("-------------------> setting a timeout", e.timeout.wait);
             }
 
-            subscribe(e.subscription, id,  async(_layer, message)=>{
+            subscribe(e.subscription, id,  async(_layer, msg)=>{
+
+                console.log("ok seen a new message", msg);
+
                 triggered = false;
                 console.log("subscribed", id, e.subscription);
-                const msg = JSON.parse(message.toString());
                 const {data, ts} = msg;     
 
                 
@@ -258,7 +252,7 @@ const StateMachine =   (config)=>{
                     const result = evaluate(item.rule.operator, item.rule.operand, data);
 
                     if (result){
-                        updateplaceholders(item.rule, message);
+                        updateplaceholders(item.rule, data);
                         //if this message was received before we subscribed, discard it!
                         //prevents race condition here - it's possible that the speech on onstart is still being processed by the browser and then sent 
                         //here, and if we've subcribed to the new event, and it is also a speech event then it may receive this speech and act on it..
@@ -281,7 +275,7 @@ const StateMachine =   (config)=>{
                     const result = evaluate(defaultrule.rule.operator, defaultrule.rule.operand, data);
                     
                     if (result){
-                        updateplaceholders(defaultrule.rule, message);
+                        updateplaceholders(defaultrule.rule, data);
                         const sinceaction = ts-subtime;
                         console.log(sinceaction);
                         
@@ -297,10 +291,9 @@ const StateMachine =   (config)=>{
 
                 if (triggered){
                     if (timer){
-                        console.log("clearing timer!!");
                         clearTimeout(timer);
                     }
-                    trigger(triggered, e, id, nexteventid, actionids, message);
+                    trigger(triggered, e, id, nexteventid, actionids, msg);
                 }
             })
         }

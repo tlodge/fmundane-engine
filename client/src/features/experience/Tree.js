@@ -98,44 +98,47 @@ const findNode = (t, name)=>{
 
 const recenter = (gtree,t)=>{
     const g = d3.select(gtree.current);
-    const db = g.select("g#dragbox");
     const {x,y} = _seen[t.id] || {x:0, y:0};
-
-    g.call(d3z.zoom().on("zoom",  (e)=>{
-        db.attr("transform", e.transform)
-    })).call(d3z.zoom, d3z.zoomIdentity.scale(0.8).translate([-y+200,-x+t.height/2]));
-
-    db.attr("transform", `translate(0,0)`);
-    g.attr("transform", `translate(${-y+200},${-x+t.height/2})`);
+    let mx = 0, my=0;
+    const moustrans = g.select("g#dragbox").attr("transform");
+    if (moustrans){
+        [mx,my] = moustrans.split(/\s+/)[0].replace("translate(","").replace(")","").split(",");
+    }
+    g.attr("transform", `translate(${-y-mx+200},${-x-my+t.height/2})`);
 }
 
-const moveChart = (gtree, t)=>{
-    
-    //const g = d3.select(gtree.current);
-    //if (_seen[t.id]){
-     //   const {x,y} = _seen[t.id];
-    //    g.transition().duration(2000).attr("transform", `translate(${-y+200},${-x+t.height/2})`);
-   // }
-}
 
 function Tree(t) {
   
-
+      
     const gtree = React.useRef();
- 
+    
+    const moveChart = ()=>{
+        const g = d3.select(gtree.current);
+        let {x,y} = _seen[t.id] || {x:0,y:0};
+        let mx = 0, my=0;
+        const moustrans = g.select("g#dragbox").attr("transform");
+        if (moustrans){
+            [mx,my] = moustrans.split(/\s+/)[0].replace("translate(","").replace(")","").split(",");
+        }
+        g.transition().duration(2000).attr("transform", `translate(${-y-mx+200},${-x-my+t.height/2})`);
+    }
+
+    
     React.useEffect(() => {
-        moveChart(gtree, t);
+        moveChart();
     }, [t]);
     
-    const {x,y} = _seen[t.id] || {x:0, y:0};
-
     const mytree = useD3((svg) => {
         
        const dgbox = svg.select("g#dragbox");
        
-       svg.call(d3z.zoom().on("zoom",  (e)=>{
-            dgbox.attr("transform", e.transform)
-        })).call(d3z.zoom, d3z.zoomIdentity.scale(0.8).translate([x,y]))
+         svg.call(d3z.zoom().on("zoom",  (e)=>{
+             const {x,y} = e.transform;
+            console.log(x,y);
+            dgbox.attr("transform", `translate(${x},${y})`)
+        }))
+        //svg.call(d3z.zoom, d3z.zoomIdentity.scale(0.8).translate([x,y]))
 
     }, []);
 

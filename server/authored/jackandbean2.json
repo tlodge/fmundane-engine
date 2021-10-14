@@ -52,16 +52,46 @@
             "actions": [
                 []
             ],
-            "event": "magic_beans"
+            "event": "start"
         },
         "events": [
+            {
+                "id": "start",
+                "name": "start",
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "Please tell me your name",
+                            "delay": 1000,
+                            "voice": "Daniel",
+                            "background": "",
+                            "rate": "180"
+                        }
+                    ]
+                },
+                "type": "speech",
+                "subscription": "/speech",
+                "rules":[
+                    {
+                        "rule": {
+                            "operator": "any",
+                            "default": true,
+                            "assign" : "name"
+                        },
+                        "actions": [
+                            []
+                        ],
+                        "next": "magic_beans"
+                    }
+                ]
+            },
             {
                 "id": "magic_beans",
                 "name": "magic beans",
                 "onstart": {
                     "speech": [
                         {
-                            "words": "Jack and the Beanstalk",
+                            "words": "Jack and the Beanstalk, especially for |name|",
                             "delay": 1000,
                             "voice": "Daniel",
                             "background": "",
@@ -538,7 +568,8 @@
                     {
                         "rule": {
                             "operator": "any",
-                            "default": true
+                            "default": true,
+                            "assign": "thing"
                         },
                         "actions": [
                             []
@@ -631,7 +662,8 @@
                     {
                         "rule": {
                             "operator": "any",
-                            "default": true
+                            "default": true,
+                            "assign":"mathsanswer"
                         },
                         "actions": [
                             [
@@ -648,7 +680,7 @@
                 "onstart": {
                     "speech": [
                         {
-                            "words": "Ok I will ask for |value:,| from the man instead",
+                            "words": "Ok I will ask for |thing:,| from the man instead",
                             "delay": 0,
                             "voice": "Daniel",
                             "background": "",
@@ -838,7 +870,7 @@
                 "onstart": {
                     "speech": [
                         {
-                            "words": "I am not sure that |value:,| is the correct answer, sorry",
+                            "words": "I am not sure that |mathsanswer:,| is the correct answer, sorry",
                             "delay": "1000",
                             "voice": "Daniel",
                             "background": "",
@@ -5113,7 +5145,7 @@
                 "onstart": {  
                     "speech": [
                     {
-                        "words": "Seat! Clever. Great. We now have a lovely poem.  Thank you. Here goes ",
+                        "words": "Neat! Clever. Great. We now have a lovely poem.  Thank you. Here goes ",
                         "voice": "Daniel",
                         "delay": 800,
                         "rate": "180"
@@ -5426,7 +5458,7 @@
                 "onstart": {  
                     "speech": [
                     {
-                        "words": "Light.  Yes. OK. That can work.  This poem is great.  Let's do it",
+                        "words": "Bright.  Yes. OK. That can work.  This poem is great.  Let's do it",
                         "voice": "Daniel",
                         "delay": 1000,
                         "rate": "180"

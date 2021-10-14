@@ -61,18 +61,33 @@ const _executeactions = async (alist, value="")=>{
   
 }
 
-const _executespeech = async (lines, value)=>{
+const _executespeech = async (lines, placeholders={})=>{
    
-    if (value && value.trim() != ""){
+    if (placeholders && Object.keys(placeholders).length > 0){
+        
+       
+
         const _lines = lines.map(l=>{
             var matches = l.words.match(/\|(.*?)\|/);
             let _words = l.words;
-
+            
             if (matches){
+                console.log("ok matches is", matches);
                 const toreplace = matches[0];
-                const tokens = matches[1].split(":");
-                const delimiter = tokens.length > 1 ? ` ${tokens[1]} ` : ",";
-                _words = l.words.replace(toreplace,value.trim().split(" ").join(delimiter));
+
+                console.log("to replace is", toreplace.slice(1,-1));
+                console.log("placeholders are", placeholders);
+                
+                const key = matches[1].split(":")[0];
+                console.log("key is", key);
+                const replacement = (placeholders[key] || "").split(/\s+/);
+                
+                console.log("replacement is", replacement);
+                if (replacement){
+                    const tokens = matches[1].split(":");
+                    const delimiter = tokens.length > 1 ? ` ${tokens[1]} ` : ",";
+                    _words = l.words.replace(toreplace,replacement.join(delimiter));
+                }
             }
             return {
                 ...l,
@@ -89,7 +104,7 @@ const StateMachine =   (config)=>{
 
     let event;
     const {events = [], id=""} = config;
-       
+    let placeholders = {};
     const eventlookup = events.reduce((acc, item)=>{
         return {
             ...acc,
@@ -104,6 +119,7 @@ const StateMachine =   (config)=>{
             //send the ready early -- or perhaps an init message?
             if (event.onstart){
                 const {speech=[], actions:_actions=[]} = event.onstart;
+                placeholders = {};
                 const __startactions =  _actions.map(arr=>(arr||[]).map(a=>({...a, action:actions[a.action]||{}})));
                 await Promise.all([await _executeactions(__startactions), await _executespeech(speech)]);
                 
@@ -126,13 +142,14 @@ const StateMachine =   (config)=>{
     
         let eventid = config.start.event;  
         event = eventlookup[eventid];
+      
 
         if (event){
             send("event", {id:config.id,data:event});      
             if (event.onstart){
                 const {speech=[], actions:_actions=[]} = event.onstart;
                 const __startactions =  _actions.map(arr=>(arr||[]).map(a=>({...a,action:actions[a.action]||{}})));
-                await Promise.all([_executeactions(__startactions), _executespeech(speech)]);
+                await Promise.all([_executeactions(__startactions), _executespeech(speech, placeholders)]);
             }    
         }
        
@@ -161,16 +178,23 @@ const StateMachine =   (config)=>{
             }
         });
 
+        const updateplaceholders = (rule, msg)=>{
+            //only assign if rule has triggered
+            const {data} = JSON.parse(msg.toString());
+            if (rule.assign){
+                console.log("ok updating placeholders with", rule.assign, data)
+                placeholders[rule.assign] = data;
+                console.log("placeholders", placeholders);
+            }
+        }
+
         const trigger = async (triggered, e, id, nexteventid, actionids, message)=>{
            
-            console.log("in trigger with actionids", JSON.stringify(actionids,null, 4));
-
             const msg = JSON.parse(message.toString());
             const {data} = msg;   
 
             unsubscribe(e.subscription, id);
             const _actions = actionids.map(arr=>(arr||[]).map(a=>({...a, action:actions[a.action]||{}})));
-            console.log("ok, actioms ate", JSON.stringify(_actions,null,4));
 
             await _executeactions(_actions, message.toString());
             const _e = eventlookup[nexteventid];
@@ -180,7 +204,7 @@ const StateMachine =   (config)=>{
                 if (_e.onstart){
                     const {speech=[], actions:_actions=[]} = _e.onstart;
                     const __startactions =  _actions.map(arr=>(arr||[]).map(a=>({...a, action:actions[a.action]||{}})));
-                    await Promise.all([_executeactions(__startactions, message.toString()), _executespeech(speech, data)]);
+                    await Promise.all([_executeactions(__startactions, message.toString()), _executespeech(speech, placeholders)]);
                 }
                 send("ready", {layer:config.id, event:{id:nexteventid, type:_e.type}});
                 sub(_e);
@@ -218,6 +242,7 @@ const StateMachine =   (config)=>{
 
                 const evaluate = await _fetchrule(e.type);
                 
+                
 
                 const defaultrule = e.rules.reduce((acc,item)=>{
                     const {rule} = item; 
@@ -233,6 +258,7 @@ const StateMachine =   (config)=>{
                     const result = evaluate(item.rule.operator, item.rule.operand, data);
 
                     if (result){
+                        updateplaceholders(item.rule, message);
                         //if this message was received before we subscribed, discard it!
                         //prevents race condition here - it's possible that the speech on onstart is still being processed by the browser and then sent 
                         //here, and if we've subcribed to the new event, and it is also a speech event then it may receive this speech and act on it..
@@ -255,7 +281,7 @@ const StateMachine =   (config)=>{
                     const result = evaluate(defaultrule.rule.operator, defaultrule.rule.operand, data);
                     
                     if (result){
-
+                        updateplaceholders(defaultrule.rule, message);
                         const sinceaction = ts-subtime;
                         console.log(sinceaction);
                         
@@ -275,35 +301,6 @@ const StateMachine =   (config)=>{
                         clearTimeout(timer);
                     }
                     trigger(triggered, e, id, nexteventid, actionids, message);
-
-                    /*if (timer){
-                        console.log("clearing timer!!");
-                        clearTimeout(timer);
-                    }
-                    unsubscribe(e.subscription, id);
-                    const _actions = actionids.map(arr=>(arr||[]).map(a=>({...a, action:actions[a.action]||{}})));
-                    await _executeactions(_actions, message.toString());
-                    const _e = eventlookup[nexteventid];
-
-                   
-                    
-                    if (_e){
-                        send("event", {id:config.id,data:_e,triggered});
-                        if (_e.onstart){
-                            const {speech=[], actions:_actions=[]} = _e.onstart;
-                          
-                           
-                            const __startactions =  _actions.map(arr=>(arr||[]).map(a=>({...a, action:actions[a.action]||{}})));
-                            console.log("PERFORMING ACTIONS...");
-                            await Promise.all([_executeactions(__startactions, message.toString()), _executespeech(speech, data)]);
-                            console.log("DONE PERFORMING ACTIONS...");
-                        }
-                        send("ready", {layer:config.id, event:{id:nexteventid, type:_e.type}});
-                        
-                        sub(_e);
-                     
-                        
-                    }*/
                 }
             })
         }

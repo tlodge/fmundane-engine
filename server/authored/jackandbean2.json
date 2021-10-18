@@ -52,17 +52,30 @@
             "actions": [
                 []
             ],
-            "event": "start"
+            "event": "adultname"
         },
         "events": [
             {
-                "id": "start",
-                "name": "start",
+                "id": "adultname",
+                "name": "adultname",
                 "onstart": {
                     "speech": [
                         {
-                            "words": "Please tell me your name",
-                            "delay": 1000,
+                            "words": "Hello.  My name is Robert.",
+                            "delay": 500,
+                            "voice": "Daniel",
+                            "background": "",
+                            "rate": "180"
+                        },
+                        {
+                            "words": "We are going to listen to a great story",
+                            "delay": 500,
+                            "voice": "Daniel",
+                            "background": "",
+                            "rate": "180"
+                        },
+                        {
+                            "words": "But before we start, I need a bit of information. A question for an adult. Please tell me your name",
                             "voice": "Daniel",
                             "background": "",
                             "rate": "180"
@@ -76,12 +89,177 @@
                         "rule": {
                             "operator": "any",
                             "default": true,
-                            "assign" : "name"
+                            "assign" : "adultname"
                         },
                         "actions": [
                             []
                         ],
+                        "next": "childname"
+                    }
+                ]
+            },
+            {
+                "id": "childname",
+                "name": "childname",
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "Hello |adultname|.  Nice to meet you!",
+                            "delay": 1000,
+                            "voice": "Daniel",
+                            "background": "",
+                            "rate": "180"
+                        },
+                        {
+                            "words": "Now, could you tell me the name of the child who will be taking part?",
+                            "voice": "Daniel",
+                            "background": "",
+                            "rate": "180"
+                        }
+                    ]
+                },
+                "type": "speech",
+                "subscription": "/speech",
+                "rules":[
+                    {
+                        "rule": {
+                            "operator": "any",
+                            "default": true,
+                            "assign" : "childname"
+                        },
+                        "actions": [
+                            []
+                        ],
+                        "next": "instructions"
+                    },
+                    {
+                        "rule": {
+                            "operator": "contains",
+                            "operand": [
+                                "go back",
+                                "back",
+                                "previous",
+                                "rewind"
+                            ]
+                        },
+                        "actions" : [[
+                            {
+                                "action": "soundmedia",
+                                "params": {
+                                    "body": {
+                                        "media": "rewind.wav",
+                                        "nowait": true,
+                                        "delay": 0
+                                    }
+                                }
+                            }
+                        ]],
+                        "next": "adultname"
+                    }
+                ]
+            },
+            {
+                "id": "instructions",
+                "name": "instructions",
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "Hello |childname|.  Nice to meet you too!",
+                            "delay": 1000,
+                            "voice": "Daniel",
+                            "background": "",
+                            "rate": "180"
+                        },
+                        {
+                            "words": "We are nearly ready.  I will assume that |adultname| is going to read from the Jack and the Bean stalk book",
+                            "delay": 1000,
+                            "voice": "Daniel",
+                            "background": "",
+                            "rate": "180"
+                        },
+                        {
+                            "words": "You will know when it is time to read as we will play a sound like this",
+                            "voice": "Daniel",
+                            "background": "",
+                            "rate": "180"
+                        },
+                        {
+                            "words": "",
+                            "delay": 1000,
+                            "voice": "Daniel",
+                            "background": "bell.wav",
+                            "rate": "180"
+                        },
+                        {
+                            "words": "But if you want me to take over, then when you hear this noise ",
+                            "voice": "Daniel",
+                            "delay":500,
+                            "background": "",
+                            "rate": "180"
+                        },
+                        {
+                            "words": "",
+                            "voice": "Daniel",
+                            "background": "bell.wav",
+                            "rate": "180"
+                        },
+                        {
+                            "words": "Then please just say Robert, and I will take over",
+                            "voice": "Daniel",
+                            "delay":500,
+                            "background": "",
+                            "rate": "180"
+                        },
+                        {
+                            "words": "If you are now ready to start, please say yes",
+                            "voice": "Daniel",
+                            "background": "",
+                            "rate": "180"
+                        }
+                    ]
+                },
+                "type": "speech",
+                "subscription": "/speech",
+                "rules":[
+                    {
+                        "rule": {
+                            "operator": "contains",
+                            "operand": [
+                                "yes",
+                                "yeah",
+                                "yep",
+                                "ok"
+                            ]
+                        },
+                        
+                        "actions": [
+                            []
+                        ],
                         "next": "magic_beans"
+                    },
+                    {
+                        "rule": {
+                            "operator": "contains",
+                            "operand": [
+                                "go back",
+                                "back",
+                                "previous",
+                                "rewind"
+                            ]
+                        },
+                        "actions" : [[
+                            {
+                                "action": "soundmedia",
+                                "params": {
+                                    "body": {
+                                        "media": "rewind.wav",
+                                        "nowait": true,
+                                        "delay": 0
+                                    }
+                                }
+                            }
+                        ]],
+                        "next": "childname"
                     }
                 ]
             },
@@ -91,7 +269,7 @@
                 "onstart": {
                     "speech": [
                         {
-                            "words": "Jack and the Beanstalk, especially for |name|",
+                            "words": "Jack and the Beanstalk, especially for |childname|",
                             "delay": 1000,
                             "voice": "Daniel",
                             "background": "",
@@ -102,6 +280,30 @@
                 "type": "speech",
                 "subscription": "/speech",
                 "rules": [
+                    {
+                        "rule": {
+                            "operator": "contains",
+                            "operand": [
+                                "go back",
+                                "back",
+                                "previous",
+                                "rewind"
+                            ]
+                        },
+                        "actions" : [[
+                            {
+                                "action": "soundmedia",
+                                "params": {
+                                    "body": {
+                                        "media": "rewind.wav",
+                                        "nowait": true,
+                                        "delay": 0
+                                    }
+                                }
+                            }
+                        ]],
+                        "next": "instructions"
+                    },
                     {
                         "rule": {
                             "operator": "contains",

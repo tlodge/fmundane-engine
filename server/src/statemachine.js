@@ -176,7 +176,8 @@ const StateMachine =   (config)=>{
             //only assign if rule has triggered
             
             if (rule.assign){
-                placeholders[rule.assign] = msg;
+                const {name, value=null} = rule.assign;
+                placeholders[name] = value || msg;
             }
         }
 
@@ -211,12 +212,43 @@ const StateMachine =   (config)=>{
             
 
             if (e.timeout){
-                timer = setTimeout(()=>{
-                    console.log("timed out!!!!!")
-                    const next = e.timeout.next;
-                    const triggered = e.id;
-                    const actionids = [...(e.timeout.actions || [])];
-                    trigger(triggered, e, e.id, next, actionids, JSON.stringify({data:"",ts:Date.now()}));
+                timer = setTimeout(async ()=>{
+
+                    console.log("have timeout!!", e.timeout)
+                    const {rules=[]} = e.timeout;
+                    console.log("rules are", rules);
+
+                    if (rules.length > 0){
+                        console.log("have rules", rules);
+
+                        for (const r of rules){
+                            console.log("looking at rule", r);
+                            let subject, type;
+                            let actionids = [[]];
+
+                            if (r.rule.subject){
+                                console.log("ok have a rule subject");
+                                subject = placeholders[r.rule.subject];
+                                console.log(subject);
+                                type = "variable";
+                                actionids = [...(r.rule.actions || [])];
+                            }
+                            const evaluate = await _fetchrule(type || e.type);
+                            const result = evaluate(r.rule.operator, r.rule.operand, subject || "");
+                            console.log("result is", result);
+
+                            if (result){
+                                console.log("triggering", r.next);
+                                trigger(e.id, e, e.id, r.next, actionids, JSON.stringify({data:subject||"",ts:Date.now()}));
+                                break;
+                            }
+                        }
+                    }else{
+                        const next = e.timeout.next;
+                        const triggered = e.id;
+                        const actionids = [...(e.timeout.actions || [])];
+                        trigger(triggered, e, e.id, next, actionids, JSON.stringify({data:"",ts:Date.now()}));
+                    }
                 }, e.timeout.wait*1000);
                 console.log("-------------------> setting a timeout", e.timeout.wait);
             }

@@ -89,7 +89,7 @@
                         "rule": {
                             "operator": "any",
                             "default": true,
-                            "assign" : "adultname"
+                            "assign" : {"name":"adultname"}
                         },
                         "actions": [
                             []
@@ -125,12 +125,12 @@
                         "rule": {
                             "operator": "any",
                             "default": true,
-                            "assign" : "childname"
+                            "assign" : {"name":"childname"}
                         },
                         "actions": [
                             []
                         ],
-                        "next": "instructions"
+                        "next": "whowillread"
                     },
                     {
                         "rule": {
@@ -159,8 +159,8 @@
                 ]
             },
             {
-                "id": "instructions",
-                "name": "instructions",
+                "id": "whowillread",
+                "name": "whowillread",
                 "onstart": {
                     "speech": [
                         {
@@ -171,47 +171,20 @@
                             "rate": "180"
                         },
                         {
-                            "words": "We are nearly ready.  I will assume that |adultname| is going to read from the Jack and the Bean stalk book",
+                            "words": "We are nearly ready.",
                             "delay": 1000,
                             "voice": "Daniel",
                             "background": "",
                             "rate": "180"
                         },
                         {
-                            "words": "You will know when it is time to read as we will play a sound like this",
+                            "words": "First |adultname|, you need to decide if you want me to read the story, or if you would like me to read it instead",
                             "voice": "Daniel",
                             "background": "",
                             "rate": "180"
                         },
                         {
-                            "words": "",
-                            "delay": 1000,
-                            "voice": "Daniel",
-                            "background": "bell.wav",
-                            "rate": "180"
-                        },
-                        {
-                            "words": "But if you want me to take over, then when you hear this noise ",
-                            "voice": "Daniel",
-                            "delay":500,
-                            "background": "",
-                            "rate": "180"
-                        },
-                        {
-                            "words": "",
-                            "voice": "Daniel",
-                            "background": "bell.wav",
-                            "rate": "180"
-                        },
-                        {
-                            "words": "Then please just say Robert, and I will take over",
-                            "voice": "Daniel",
-                            "delay":500,
-                            "background": "",
-                            "rate": "180"
-                        },
-                        {
-                            "words": "If you are now ready to start, please say yes",
+                            "words": "If you would like me to read, then you will need to say. Robert. But if you want to read, say. I will read",
                             "voice": "Daniel",
                             "background": "",
                             "rate": "180"
@@ -225,17 +198,36 @@
                         "rule": {
                             "operator": "contains",
                             "operand": [
-                                "yes",
-                                "yeah",
-                                "yep",
-                                "ok"
-                            ]
+                                "Robert",
+                                "Rob"
+                            ],
+                            "assign" : {
+                                "name" : "narrator",
+                                "value": "robert"
+                            }
                         },
-                        
                         "actions": [
                             []
                         ],
-                        "next": "magic_beans"
+                        "next": "robert_introduction"
+                    },
+                    {
+                        "rule": {
+                            "operator": "contains",
+                            "operand": [
+                                "I",
+                                "Will",
+                                "Read"
+                            ],
+                            "assign" : {
+                                "name" : "narrator",
+                                "value": "user"
+                            }
+                        },
+                        "actions": [
+                            []
+                        ],
+                        "next": "user_introduction"
                     },
                     {
                         "rule": {
@@ -259,19 +251,150 @@
                                 }
                             }
                         ]],
-                        "next": "childname"
+                        "next": "whowillread"
                     }
                 ]
             },
             {
-                "id": "magic_beans",
-                "name": "magic beans",
+                "id": "robert_introduction",
+                "name": "robert_introduction",
                 "onstart": {
                     "speech": [
                         {
-                            "words": "Jack and the Beanstalk, especially for |childname|",
+                            "words": "Great. I will read.",
                             "delay": 1000,
                             "voice": "Daniel",
+                            "background": "",
+                            "rate": "180"
+                        },
+                        {
+                            "words": "If you want to take over, then when you hear this noise ",
+                            "voice": "Daniel",
+                            "delay":500,
+                            "background": "",
+                            "rate": "180"
+                        },
+                        {
+                            "words": "",
+                            "voice": "Daniel",
+                            "background": "bell.wav",
+                            "rate": "180"
+                        },
+                        {
+                            "words": "Then please just say.  I will read.",
+                            "voice": "Daniel",
+                            "delay":1000,
+                            "background": "",
+                            "rate": "180"
+                        },
+                        {
+                            "words": "OK let's start",
+                            "voice": "Daniel",
+                            "delay":1000,
+                            "background": "",
+                            "rate": "180"
+                        },
+                        {
+                            "words": "Once upon a time there was a boy called Jack. He lived with his mother.  They were very poor",
+                            "voice": "Daniel",
+                            "delay":500,
+                            "background": "",
+                            "rate": "180"
+                        }, 
+                        {
+                            "words": "All they had was a Cow.  One morning, Jack's mother told Jack to take the cow to the market and sell her",
+                            "voice": "Daniel",
+                            "delay":500,
+                            "background": "",
+                            "rate": "180"
+                        },
+                        {
+                            "words": "When Jack got to the market, he felt nervous",
+                            "voice": "Daniel",
+                            "delay":1000,
+                            "background": "",
+                            "rate": "180"
+                        },
+                        {
+                            "words": "There are not many animals in the market at the moment",
+                            "voice": "Daniel",
+                            "delay": 500
+                        },
+                        {
+                            "words": "Can you name some farm animals?",
+                            "voice": "Daniel"
+                        }
+                    ]
+                },
+                "type": "speech",
+                "subscription": "/speech",
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "contains",
+                            "operand": [
+                                "go back",
+                                "back",
+                                "previous",
+                                "rewind"
+                            ]
+                        },
+                        "actions" : [[
+                            {
+                                "action": "soundmedia",
+                                "params": {
+                                    "body": {
+                                        "media": "rewind.wav",
+                                        "nowait": true,
+                                        "delay": 0
+                                    }
+                                }
+                            }
+                        ]],
+                        "next": "whowillread"
+                    }
+                ],
+                "timeout": {
+                    "wait": 1,
+                    "next": "market"
+                }
+            },
+            {
+                "id": "user_introduction",
+                "name": "user_introduction",
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "Great. You will be reading",
+                            "delay": 1000,
+                            "voice": "Daniel",
+                            "background": "",
+                            "rate": "180"
+                        },
+                        {
+                            "words": "If you decide that you want me to take over, then when you hear this noise ",
+                            "voice": "Daniel",
+                            "delay":500,
+                            "background": "",
+                            "rate": "180"
+                        },
+                        {
+                            "words": "",
+                            "voice": "Daniel",
+                            "background": "bell.wav",
+                            "rate": "180"
+                        },
+                        {
+                            "words": "Then please just say.  Daniel.",
+                            "voice": "Daniel",
+                            "delay":1000,
+                            "background": "",
+                            "rate": "180"
+                        },
+                        {
+                            "words": "When you are ready, you can start",
+                            "voice": "Daniel",
+                            "delay":1000,
                             "background": "",
                             "rate": "180"
                         }
@@ -302,7 +425,7 @@
                                 }
                             }
                         ]],
-                        "next": "instructions"
+                        "next": "whowillread"
                     },
                     {
                         "rule": {
@@ -335,7 +458,7 @@
                                         "body": {
                                             "speech": [
                                                 {
-                                                    "words": "Let's add some by naming a few farm animals.",
+                                                    "words": "Can you name some farm animals?",
                                                     "voice": "Daniel"
                                                 }
                                             ]
@@ -344,13 +467,13 @@
                                 }
                             ]
                         ],
-                        "next": "nameafew"
+                        "next": "market"
                     }
                 ]
             },
             {
-                "id": "nameafew",
-                "name": "nameafew",
+                "id": "market",
+                "name": "market",
                 "onstart": {},
                 "type": "speech",
                 "subscription": "/speech",
@@ -379,7 +502,7 @@
                                 }
                             ]
                         ],
-                        "next": "nameafew"
+                        "next": "market"
                     },
                     {
                         "rule": {
@@ -404,7 +527,7 @@
                                 }
                             ]
                         ],
-                        "next": "nameafew"
+                        "next": "market"
                     },
                     {
                         "rule": {
@@ -430,7 +553,7 @@
                                 }
                             ]
                         ],
-                        "next": "nameafew"
+                        "next": "market"
                     },
                     {
                         "rule": {
@@ -454,7 +577,7 @@
                                 }
                             ]
                         ],
-                        "next": "nameafew"
+                        "next": "market"
                     },
                     {
                         "rule": {
@@ -478,7 +601,7 @@
                                 }
                             ]
                         ],
-                        "next": "nameafew"
+                        "next": "market"
                     },
                     {
                         "rule": {
@@ -504,7 +627,7 @@
                                 }
                             ]
                         ],
-                        "next": "nameafew"
+                        "next": "market"
                     },
                     {
                         "rule": {
@@ -528,7 +651,7 @@
                                 }
                             ]
                         ],
-                        "next": "nameafew"
+                        "next": "market"
                     },
                     {
                         "rule": {
@@ -553,7 +676,7 @@
                                 }
                             ]
                         ],
-                        "next": "nameafew"
+                        "next": "market"
                     },
                     {
                         "rule": {
@@ -576,7 +699,7 @@
                                 }
                             ]
                         ],
-                        "next": "nameafew"
+                        "next": "market"
                     },
                     {
                         "rule": {
@@ -601,7 +724,7 @@
                                 }
                             ]
                         ],
-                        "next": "nameafew"
+                        "next": "market"
                     },
                     {
                         "rule": {
@@ -617,14 +740,19 @@
                         ]],
                         "next": "parttwo"
                     }
-                ]
+                ],
+                "timeout": {
+                    "wait": 20,
+                    "next": "parttwo"
+                }
             },
             {
                 "id": "parttwo",
                 "name": "parttwo",
                 "onstart": {
                    "actions" : [[
-                       {"action":"stopallsound"}
+                        {"action":"stopallsound"},
+                        {"action": "soundmedia","params": {"body": {"media": "bell.wav","nowait": true,"delay": 0}}}
                    ]]
                 },
                 "rules": [
@@ -640,6 +768,35 @@
                         "next": "doyouthink?"
                     }
                 ],
+                "timeout": {
+                    "wait" : 3,
+                    "rules" : [{
+                        "rule": {
+                            "subject" : "narrator",
+                            "operand" : "robert",
+                            "operator": "equals"
+                        },
+                        "next" : "robert_parttwo"
+                    }]
+                },
+                "type": "speech",
+                "subscription": "/speech"
+            },
+            {
+                "id": "robert_parttwo",
+                "name": "robert_parttwo",
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "This is where I read the rest of the story!",
+                            "delay": 0,
+                            "voice": "Daniel",
+                            "background": "",
+                            "rate": "180"
+                        }
+                    ]
+                },
+                "rules": [],
                 "type": "speech",
                 "subscription": "/speech"
             },
@@ -771,7 +928,7 @@
                         "rule": {
                             "operator": "any",
                             "default": true,
-                            "assign": "thing"
+                            "assign": {"name":"thing"}
                         },
                         "actions": [
                             []
@@ -865,7 +1022,7 @@
                         "rule": {
                             "operator": "any",
                             "default": true,
-                            "assign":"mathsanswer"
+                            "assign": {"name":"mathsanswer"}
                         },
                         "actions": [
                             [

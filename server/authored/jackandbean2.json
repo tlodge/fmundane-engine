@@ -742,7 +742,7 @@
                     }
                 ],
                 "timeout": {
-                    "wait": 20,
+                    "wait": 5,
                     "next": "parttwo"
                 }
             },
@@ -750,10 +750,81 @@
                 "id": "parttwo",
                 "name": "parttwo",
                 "onstart": {
+                    "speech":[{
+                        "words": "Lovely, that is much better! Full of animals",
+                        "delay": 0,
+                        "voice": "Daniel",
+                        "background": "",
+                        "rate": "180"
+                    }],
                    "actions" : [[
                         {"action":"stopallsound"},
-                        {"action": "soundmedia","params": {"body": {"media": "bell.wav","nowait": true,"delay": 0}}}
+                        {"action": "soundmedia","params": {"body": {"media": "bell.wav","nowait": true,"delay": 1000}}}
                    ]]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "contains",
+                            "operand": [
+                                "I",
+                                "Will",
+                                "Read"
+                            ],
+                            "assign" : {
+                                "name" : "narrator",
+                                "value": "user"
+                            }
+                        },
+                        "actions": [[]],
+                        "next": "user_parttwo"
+                    },
+                    {
+                        "rule": {
+                            "operator": "contains",
+                            "operand": [
+                                "Robert",
+                                "Rob"
+                            ],
+                            "assign" : {
+                                "name" : "narrator",
+                                "value": "robert"
+                            }
+                        },
+                        "actions": [[]],
+                        "next": "robert_parttwo"
+                    }
+                ],
+                "timeout": {
+                    "wait" : 5,
+                    "rules" : [
+                        {
+                            "rule": {
+                                "subject" : "narrator",
+                                "operator": "equals",
+                                "operand" : "robert"
+                            },
+                            "next" : "robert_parttwo"
+                        },
+                        {
+                            "rule": {
+                                "subject" : "narrator",
+                                "operator": "equals",
+                                "operand" : "user"
+                            },
+                            "next" : "user_parttwo"
+                        }
+                    
+                    ]
+                },
+                "type": "speech",
+                "subscription": "/speech"
+            },
+            {
+                "id": "user_parttwo",
+                "name": "user_parttwo",
+                "onstart": {
+                  
                 },
                 "rules": [
                     {
@@ -768,17 +839,6 @@
                         "next": "doyouthink?"
                     }
                 ],
-                "timeout": {
-                    "wait" : 3,
-                    "rules" : [{
-                        "rule": {
-                            "subject" : "narrator",
-                            "operand" : "robert",
-                            "operator": "equals"
-                        },
-                        "next" : "robert_parttwo"
-                    }]
-                },
                 "type": "speech",
                 "subscription": "/speech"
             },
@@ -788,7 +848,28 @@
                 "onstart": {
                     "speech": [
                         {
-                            "words": "This is where I read the rest of the story!",
+                            "words": "Jack was unable to sell his cow at the market.",
+                            "delay": 0,
+                            "voice": "Daniel",
+                            "background": "",
+                            "rate": "180"
+                        },
+                        {
+                            "words": "He was feeling hungry and wondering what his mum would think",
+                            "delay": 0,
+                            "voice": "Daniel",
+                            "background": "",
+                            "rate": "180"
+                        },
+                        {
+                            "words": "Suddenly Jack met a strange man with twinkly eyes.",
+                            "delay": 0,
+                            "voice": "Daniel",
+                            "background": "",
+                            "rate": "180"
+                        },
+                        {
+                            "words": " The man wanted Daisy and says he will give Jack some magic beans for the cow.",
                             "delay": 0,
                             "voice": "Daniel",
                             "background": "",
@@ -797,6 +878,10 @@
                     ]
                 },
                 "rules": [],
+                "timeout": {
+                    "wait": 1,
+                    "next": "doyouthink?"
+                },
                 "type": "speech",
                 "subscription": "/speech"
             },

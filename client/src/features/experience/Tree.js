@@ -134,8 +134,7 @@ function Tree(t) {
        const dgbox = svg.select("g#dragbox");
        
          svg.call(d3z.zoom().on("zoom",  (e)=>{
-             const {x,y} = e.transform;
-            console.log(x,y);
+            const {x,y} = e.transform;
             dgbox.attr("transform", `translate(${x},${y})`)
         }))
         //svg.call(d3z.zoom, d3z.zoomIdentity.scale(0.8).translate([x,y]))

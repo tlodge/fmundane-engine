@@ -112,10 +112,12 @@ indexRouter.get('/start', async (req, res)=>{
    
     //need to reset everything here..!
     
-    
+    console.log("seen a call to start!!!");
+    console.log("statemanchines is", statemachines, statemachines.length);
+
     if (statemachines.length > 0){
-        for (const statem of statemachines){
-          
+        for (const statem of statemachines){     
+            console.log("calling statemachine unsubscribe!");
             statem.unsubscribe();
         }
     }
@@ -143,7 +145,7 @@ indexRouter.get('/start', async (req, res)=>{
     await Promise.all(parallel.map(async(p)=>{
         await p();
     }));
-    
+    console.log("ok about to send here!!!");
     res.status(200).json(events(_layers));
 });
 

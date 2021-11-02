@@ -1,4 +1,4 @@
-import { compose, createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import io from 'socket.io-client';
 import superagent from 'superagent';
 import * as d3 from 'd3-hierarchy';
@@ -6,7 +6,7 @@ import * as d3 from 'd3-hierarchy';
 //import Layer from './Layer';
 
 const socket = io(window.location.href);
-let recognition, voice;
+let recognition;
 let _canlisten = false;
 
 
@@ -161,6 +161,9 @@ export const listenOnEvents = () => (dispatch, getState) => {
 
   socket.on('event', payload => {
     console.log("seen event", payload);
+    //here it is!!
+    dispatch(setTranscript(""));
+    console.log("now transcript is", getState().experience.transcript);
     dispatch(setEvent(payload));
   });
 
@@ -168,11 +171,12 @@ export const listenOnEvents = () => (dispatch, getState) => {
   
     const {event} = payload; 
     console.log("SEEN A READY!!", event);
-
+    dispatch(setTranscript(""));
+    console.log("now transcript is", getState().experience.transcript);
     dispatch(setReadyForInput(event.id));
 
     if (event.type==="speech"){
-      setTranscript("");
+     
       allowListening();
       startRecognition();
     }
@@ -211,7 +215,7 @@ export const manualTrigger = (layer, node)=>()=>{
 
 export const sendTranscript = () => (dispatch, getState) =>{
   
-    const {transcript, lastsenttranscript} = getState().experience;
+    const {transcript} = getState().experience;
     
     if (transcript.trim() != ""){
       console.log("in send transcript", transcript);
@@ -244,7 +248,7 @@ export const fetchAuthored = ()=>(dispatch)=>{
 
 //this kicks everything off;
 
-export const fetchLayers = (layer, r) => (dispatch)=>{
+export const fetchLayers = (layer, r) => (dispatch, getState)=>{
   
   recognition = r;
 
@@ -268,17 +272,23 @@ export const fetchLayers = (layer, r) => (dispatch)=>{
 
   recognition.onresult = event => {    
    
+    //TODO: why is transcript sending here (post event?)
+
     for (let i = event.resultIndex; i < event.results.length; i++) {
+      
       const transcript = event.results[i][0].transcript;
       if (event.results[i].isFinal){ 
         if (transcript.trim() != ""){
+          //dispatch(recordState(getState().experience.));
+          console.log("setting/sending transcript", (transcript + ' '));
           dispatch(setTranscript(transcript + ' '));
+          dispatch(sendTranscript());
         }
       }
     }
     //if (allowedToListen()){
+    
       
-      dispatch(sendTranscript());
 
     //}
   }
@@ -290,7 +300,7 @@ const startRecognition = ()=>{
   try{  
     recognition.start();
   }catch(err){
-    console.log(err);
+    //console.log(err);
   }
 }
 

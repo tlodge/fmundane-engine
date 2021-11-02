@@ -33,18 +33,21 @@ const _executeactions = async (alist, placeholders={})=>{
             //swap in any params
             const _alist = actionlist.map((a)=>{
                 const astr = JSON.stringify(a.action);
-                var matches = astr.match(/\|(.*?)\|/);
-                if (matches){
-                    const toreplace = matches[0];
-                    const key = matches[1].split(":")[0];
+                var matches = astr.matchAll(/\|(.*?)\|/g);
+
+                for (const match of matches){
+                    const toreplace = match[0];
+                    const key = match[1].split(":")[0];
+                
                     const replacement = (placeholders[key] || "").split(/\s+/);
                     if (replacement){
-                        const tokens = matches[1].split(":");
+                        const tokens = match[1].split(":");
                         const delimiter = tokens.length > 1 ? ` ${tokens[1]} ` : ",";
-                        return  {...a, action:JSON.parse(astr.replace(toreplace,replacement.join(delimiter)))}
+                        astr = replaceAll(astr, toreplace,replacement.join(delimiter));
+                       
                     }
                 }
-                return a;
+                return  {...a, action:JSON.parse(astr)}
             });
             
             parallel.push({list:_alist, cb:()=>{
@@ -56,12 +59,12 @@ const _executeactions = async (alist, placeholders={})=>{
 
    
   //  }
-    console.log("doing send!");
+  
     await Promise.all(parallel.map(async(p)=>{
-        console.log("calling", p.list);
+     
         await callserially(p.list,p.cb);
     }));
-    console.log("Success!!");
+
   
 }
 
@@ -69,20 +72,22 @@ const _executespeech = async (lines, placeholders={})=>{
    
     if (placeholders && Object.keys(placeholders).length > 0){
         const _lines = lines.map(l=>{
-            var matches = l.words.match(/\|(.*?)\|/);
+            var matches = l.words.matchAll(/\|(.*?)\|/g);
             let _words = l.words;
-            
-            if (matches){
-                const toreplace = matches[0];
-                const key = matches[1].split(":")[0];
-                const replacement = (placeholders[key] || "").split(/\s+/);
+
+            for (const match of matches){
                 
+                const toreplace = match[0];
+                const key = match[1].split(":")[0];
+                const replacement = (placeholders[key] || "").split(/\s+/);
+
                 if (replacement){
-                    const tokens = matches[1].split(":");
+                    const tokens = match[1].split(":");
                     const delimiter = tokens.length > 1 ? ` ${tokens[1]} ` : ",";
-                    _words = l.words.replace(toreplace,replacement.join(delimiter));
+                    _words = replaceAll(_words,toreplace,replacement.join(delimiter));
                 }
             }
+
             return {
                 ...l,
                 words : _words
@@ -123,12 +128,14 @@ const StateMachine =   (config)=>{
     }
 
     const _unsubscribe = ()=>{
+        console.log("ok events are", events);
+
         events.map( (e)=>{
-            console.log("unsubscribing from", e.subscription);
             unsubscribe(e.subscription, config.id);
             unsubscribe(`/trigger/${config.id}`, config.id);
         });
         
+        console.log("fully unsubscribed!");
     }
 
 
@@ -214,20 +221,20 @@ const StateMachine =   (config)=>{
             if (e.timeout){
                 timer = setTimeout(async ()=>{
 
-                    console.log("have timeout!!", e.timeout)
+                   
                     const {rules=[]} = e.timeout;
-                    console.log("rules are", rules);
+                   
 
                     if (rules.length > 0){
-                        console.log("have rules", rules);
+                      
 
                         for (const r of rules){
-                            console.log("looking at rule", r);
+                          
                             let subject, type;
                             let actionids = [[]];
 
                             if (r.rule.subject){
-                                console.log("ok have a rule subject");
+                           
                                 subject = placeholders[r.rule.subject];
                                 console.log(subject);
                                 type = "variable";
@@ -235,10 +242,10 @@ const StateMachine =   (config)=>{
                             }
                             const evaluate = await _fetchrule(type || e.type);
                             const result = evaluate(r.rule.operator, r.rule.operand, subject || "");
-                            console.log("result is", result);
+                           
 
                             if (result){
-                                console.log("triggering", r.next);
+                               
                                 trigger(e.id, e, e.id, r.next, actionids, JSON.stringify({data:subject||"",ts:Date.now()}));
                                 break;
                             }
@@ -250,15 +257,15 @@ const StateMachine =   (config)=>{
                         trigger(triggered, e, e.id, next, actionids, JSON.stringify({data:"",ts:Date.now()}));
                     }
                 }, e.timeout.wait*1000);
-                console.log("-------------------> setting a timeout", e.timeout.wait);
+                
             }
 
             subscribe(e.subscription, id,  async(_layer, msg)=>{
 
-                console.log("ok seen a new message", msg);
+               
 
                 triggered = false;
-                console.log("subscribed", id, e.subscription);
+                
                 const {data, ts} = msg;     
 
                 
@@ -290,9 +297,10 @@ const StateMachine =   (config)=>{
                         //here, and if we've subcribed to the new event, and it is also a speech event then it may receive this speech and act on it..
                         //to get round this we give a little bit of time for this to happen before we subscribe.
                         const sinceaction = ts-subtime;
-                        console.log(sinceaction);
+                        //console.log(sinceaction);
 
                         if (e.type==="speech" && sinceaction<2000){
+                            console.log("iGNORING RECEIVED TEXT!!", sinceaction);
                             return acc;
                         }
                         nexteventid = item.next;
@@ -312,8 +320,9 @@ const StateMachine =   (config)=>{
                         console.log(sinceaction);
                         
                         if (e.type==="speech" && sinceaction<2000){
+                            console.log("iGNORING RECEIVED TEXT!!", sinceaction);
                             return;
-                        }
+                       }
 
                         nexteventid = defaultrule.next;
                         triggered = defaultrule.id;

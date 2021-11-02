@@ -19,6 +19,9 @@ client.on('message', (topic, message, pkt)=>{
 
 export const unsubscribe = (topic, layer)=>{
 
+    if (Object.keys(callbacks).length <= 0){
+        return;
+    }
 
     callbacks = Object.keys(callbacks).reduce((acc, _topic)=>{
         if (_topic === topic){
@@ -53,7 +56,6 @@ export const unsubscribe = (topic, layer)=>{
             console.log("fully unsubscribed from topic", topic);
         }); 
     }
-   
 }
 
 export const subscribe = (topic,layer, cb)=>{

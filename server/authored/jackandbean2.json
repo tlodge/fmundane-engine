@@ -311,7 +311,7 @@
                       "words":"OK let's start",
                       "voice":"Daniel",
                       "delay":1000,
-                      "background":"",
+                      "background":"jackback1.wav",
                       "rate":"180"
                    },
                    {
@@ -471,6 +471,7 @@
                                         "words":"There are not many animals in the market at the moment",
                                         "voice":"Daniel",
                                         "delay":1000
+                                       
                                      }
                                   ]
                                }
@@ -499,7 +500,20 @@
              "id":"market",
              "name":"market",
              "onstart":{
-                
+                "actions":[
+                    [
+                       {
+                          "action":"soundmedia",
+                          "params":{
+                             "body":{
+                                "media":"market.wav",
+                                "nowait":true,
+                                "delay":0
+                             }
+                          }
+                       }
+                    ]
+                 ]
              },
              "type":"speech",
              "subscription":"/speech",
@@ -897,7 +911,7 @@
                       "words":"Jack was unable to sell his cow at the market.",
                       "delay":0,
                       "voice":"Daniel",
-                      "background":"",
+                      "background":"jackback1.wav",
                       "rate":"180"
                    },
                    {
@@ -1126,14 +1140,14 @@
                       "words":"Oh.  A bee.",
                       "delay":0,
                       "voice":"Daniel",
-                      "background":"",
+                      "background":"bee.wav",
                       "rate":"180"
                    },
                    {
                       "words":"Get away, get away!",
                       "delay":"500",
                       "voice":"Daniel",
-                      "background":"",
+                      "background":"bee.wav",
                       "rate":"220"
                    },
                    {
@@ -1280,14 +1294,14 @@
                       "words":"Oh.  ",
                       "delay":0,
                       "voice":"Daniel",
-                      "background":"",
+                      "background":"cow.wav",
                       "rate":"180"
                    },
                    {
                       "words":"I have been distracted by the cow.",
                       "delay":0,
                       "voice":"Daniel",
-                      "background":"",
+                      "background":"cow.wav",
                       "rate":"180"
                    },
                    {
@@ -1527,6 +1541,7 @@
                       "words":"Jack took the beans and went back home.",
                       "delay":500,
                       "voice":"Daniel",
+                      "background":"jackback1.wav",
                       "rate":"180"
                    },
                    {
@@ -1973,6 +1988,7 @@
                         {
                            "words":"He went outside and started to climb the beanstalk.",
                            "voice":"Daniel",
+                           "background":"jackback1.wav",
                            "delay":500
                         },
                         {
@@ -1981,9 +1997,14 @@
                            "delay":1000
                         },
                         {
-                           "words":"Jack heard a voice. Fee Figh Foe Thumb",
+                           "words":"Jack heard a voice.",
                            "voice":"Daniel",
                            "delay":500
+                        },
+                        {
+                            "words":"Fee, Thigh, Foe, Thumb",
+                            "voice":"Ralph",
+                            "rate":10
                         },
                         {
                            "words":"He ran into a cupboard",
@@ -2021,6 +2042,8 @@
             {
                 "id":"user_climbthebeanstalk",
                 "name":"user_climbthebeanstalk",
+                "type":"speech",
+                "subscription":"/speech",
                 "onstart":{},
                 "rules":[
                     {
@@ -2043,42 +2066,42 @@
                 "speech":[
                    {
                         "words":"Ah, little boy",
-                        "voice":"Serena",
+                        "voice":"Kate",
                         "delay": 500,
                         "rate":"180"
                    },
                    {
                         "words":"It said",
-                        "voice":"Serena",
+                        "voice":"Daniel",
                         "rate":"180"
                    },
                    {
                         "words":"If you don't want me to tell the giant that you are here.  You must help me write an amazing new poem.  That I can play later on",
-                        "voice":"Serena",
+                        "voice":"Kate",
                         "delay": 1000,
                         "rate":"180"
                    },
                    {
                         "words":"Let me start",
-                        "voice":"Serena",
+                        "voice":"Kate",
                         "delay": 500,
                         "rate":"180"
                     },
                     {
                         "words":"Here is a giant, look where he's sat",
-                        "voice":"Serena",
+                        "voice":"Kate",
                         "delay": 500,
                         "rate":"180"
                     },
                     {
                         "words":"He is playing the harp.  Next to a",
-                        "voice":"Serena",
+                        "voice":"Kate",
                         "delay": 1000,
                         "rate":"180"
                     },
                     {
                         "words":"What word can I use that rhymes with sat?",
-                        "voice":"Serena",
+                        "voice":"Kate",
                         "delay": 1000,
                         "rate":"180"
                     }
@@ -2167,27 +2190,27 @@
                 "speech":[
                    {
                       "words":"CAT you say.  Very good! Let's give it a go",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "rate":"180"
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":" He is playing the harp, and stroking his CAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":200
                    },
                    {
                       "words":"It sits there quietly on the Giant’s KNEE,",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000
                    },
                    {
                       "words":"What word rhymes with KNEE that I could use?",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    }
                 ]
              },
@@ -2280,32 +2303,32 @@
                 "speech":[
                    {
                       "words":"A HAT.  That's great.  I like that a lot",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "rate":"180",
                       "delay":800
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"He's playing a harp in a very fine HAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    },
                    {
                       "words":"The hat is beautiful, everyone can SEE",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Stitched in the front is the letter ",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000
                    },
                    {
                       "words":"OK, what letter can I use that rhymes with SEE?",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000
                    }
                 ]
@@ -2456,32 +2479,32 @@
                 "speech":[
                    {
                       "words":"MAT you say.  Very good! Let's try that",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "rate":"180"
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"Playing a harp on a luxurious mat",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"It's so soft and comfy, he digs in his FEET",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"The only thing that would make it better would be",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    },
                    {
                       "words":"I need your help, please give me a word that rhymes with FEET",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    }
                 ]
@@ -2569,27 +2592,27 @@
                 "speech":[
                    {
                       "words":"A creepy BAT you say.  Very good! Let's try it.",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "rate":"180"
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"Playing a harp upside down, like a BAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"His hair is all tangled and his face has gone red",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000
                    },
                    {
                       "words":"OK, what can I use that rhymes with RED?",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    }
                 ]
              },
@@ -2717,27 +2740,27 @@
                 "speech":[
                    {
                       "words":"RAT you say.  Very good! Although I hate rats.  But lets try it",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "rate":"180"
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"He's playing the harp, unaware that a RAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    },
                    {
                       "words":"Has snuck up behind him and I think he MIGHT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    },
                    {
                       "words":"OK I need a word that rhymes with MIGHT.  Can you help?",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    }
                 ]
@@ -2853,39 +2876,39 @@
                 "speech":[
                    {
                       "words":"Nice.  Here is what we have so far",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"He's playing a harp in a very fine HAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    },
                    {
                       "words":"The hat is beautiful, everyone can SEE",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Stitched in the front is the letter B",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Why the letter B I hear it SAID.  ",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"It is very odd, because his name is ",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000
                    },
                    {
                       "words":"Can you give me a name that rhymes with said?",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000
                    }
                 ]
@@ -2972,39 +2995,39 @@
                 "speech":[
                    {
                       "words":"Nice.  Here is what we have so far",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"He's playing a harp in a very fine HAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    },
                    {
                       "words":"The hat is beautiful, everyone can SEE",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Stitched in the front is the letter C",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Why the letter C I hear it SAID.  ",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"It is very odd, because his name is ",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000
                    },
                    {
                       "words":"Can you give me a name that rhymes with said?",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000
                    }
                 ]
@@ -3091,39 +3114,39 @@
                 "speech":[
                    {
                       "words":"Nice.  Here is what we have so far",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"He's playing a harp in a very fine HAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    },
                    {
                       "words":"The hat is beautiful, everyone can SEE",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Stitched in the front is the letter D",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Why the letter D I hear it SAID.  ",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"It is very odd, because his name is ",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000
                    },
                    {
                       "words":"Can you give me a name that rhymes with said?",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000
                    }
                 ]
@@ -3210,39 +3233,39 @@
                 "speech":[
                    {
                       "words":"Nice.  Here is what we have so far",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"He's playing a harp in a very fine HAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    },
                    {
                       "words":"The hat is beautiful, everyone can SEE",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Stitched in the front is the letter E",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Why the letter E I hear it SAID.",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"It is very odd, because his name is ",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000
                    },
                    {
                       "words":"Can you give me a name that rhymes with said?",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000
                    }
                 ]
@@ -3329,39 +3352,39 @@
                 "speech":[
                    {
                       "words":"Nice.  Here is what we have so far",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"He's playing a harp in a very fine HAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    },
                    {
                       "words":"The hat is beautiful, everyone can SEE",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Stitched in the front is the letter G",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Why the letter G I hear it SAID.",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"It is very odd, because his name is ",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000
                    },
                    {
                       "words":"Can you give me a name that rhymes with said?",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000
                    }
                 ]
@@ -3448,39 +3471,39 @@
                 "speech":[
                    {
                       "words":"Nice.  Here is what we have so far",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"He's playing a harp in a very fine HAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    },
                    {
                       "words":"The hat is beautiful, everyone can SEE",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Stitched in the front is the letter P",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Why the letter P I hear it SAID.",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"It is very odd, because his name is ",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000
                    },
                    {
                       "words":"Can you give me a name that rhymes with said?",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000
                    }
                 ]
@@ -3567,39 +3590,39 @@
                 "speech":[
                    {
                       "words":"Nice.  Here is what we have so far",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"He's playing a harp in a very fine HAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    },
                    {
                       "words":"The hat is beautiful, everyone can SEE",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Stitched in the front is the letter T",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Why the letter T I hear it SAID.",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"It is very odd, because his name is ",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000
                    },
                    {
                       "words":"Can you give me a name that rhymes with said?",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000
                    }
                 ]
@@ -3686,39 +3709,39 @@
                 "speech":[
                    {
                       "words":"Nice.  Here is what we have so far",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"He's playing a harp in a very fine HAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    },
                    {
                       "words":"The hat is beautiful, everyone can SEE",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Stitched in the front is the letter V",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Why the letter V I hear it SAID.",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"It is very odd, because his name is ",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000
                    },
                    {
                       "words":"Can you give me a name that rhymes with said?",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000
                    }
                 ]
@@ -3805,39 +3828,39 @@
                 "speech":[
                    {
                       "words":"Nice.  Here is what we have so far",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"He's playing a harp in a very fine HAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    },
                    {
                       "words":"The hat is beautiful, everyone can SEE",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Stitched in the front is the letter ZEE",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Why the letter ZEE I hear it SAID.",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"It is very odd, because his name is ",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000
                    },
                    {
                       "words":"Can you give me a name that rhymes with said?",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000
                    }
                 ]
@@ -3924,39 +3947,40 @@
                 "speech":[
                    {
                       "words":"We are done!  Magic.  Let's give it a whirl!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "background": "harp.wav",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"He's playing a harp in a very fine HAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    },
                    {
                       "words":"The hat is beautiful, everyone can SEE",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Stitched in the front is the letter B",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Why the letter B?  I hear it SAID",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"It is very odd, because his name is FRED!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000
                    },
                    {
                       "words":"Perfect, let's get on with the story!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000
                    }
                 ]
@@ -3987,39 +4011,40 @@
                 "speech":[
                    {
                       "words":"We are done!  Magic.  Let's give it a whirl!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "background": "harp.wav",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"He's playing a harp in a very fine HAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    },
                    {
                       "words":"The hat is beautiful, everyone can SEE",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Stitched in the front is the letter B",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Why the letter B?  I hear it SAID",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"It is very odd, because his name is ED!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000
                    },
                    {
                       "words":"Perfect, let's get on with the story!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000
                    }
                 ]
@@ -4050,34 +4075,35 @@
                 "speech":[
                    {
                       "words":"We are done!  Magic.  Let's give it a whirl!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "background": "harp.wav",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"He's playing a harp in a very fine HAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    },
                    {
                       "words":"The hat is beautiful, everyone can SEE",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Stitched in the front is the letter B",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Why the letter B?  I hear it SAID",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"It is very odd, because his name is JED!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000
                    },
                    {
@@ -4113,39 +4139,40 @@
                 "speech":[
                    {
                       "words":"We are done!  Magic.  Let's give it a whirl!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "background": "harp.wav",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"He's playing a harp in a very fine HAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    },
                    {
                       "words":"The hat is beautiful, everyone can SEE",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Stitched in the front is the letter B",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Why the letter B?  I hear it SAID",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"It is very odd, because his name is NED!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000
                    },
                    {
                       "words":"Perfect, let's get on with the story!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000
                    }
                 ]
@@ -4176,34 +4203,35 @@
                 "speech":[
                    {
                       "words":"We are done!  Magic.  Let's give it a whirl!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "background": "harp.wav",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"He's playing a harp in a very fine HAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    },
                    {
                       "words":"The hat is beautiful, everyone can SEE",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Stitched in the front is the letter B",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Why the letter B?  I hear it SAID",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"It is very odd, because his name is RED!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000
                    },
                    {
@@ -4239,34 +4267,35 @@
                 "speech":[
                    {
                       "words":"We are done!  Magic.  Let's give it a whirl!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "background": "harp.wav",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"He's playing a harp in a very fine HAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    },
                    {
                       "words":"The hat is beautiful, everyone can SEE",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Stitched in the front is the letter C",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Why the letter C?  I hear it SAID",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"It is very odd, because his name is FRED!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000
                    },
                    {
@@ -4302,34 +4331,35 @@
                 "speech":[
                    {
                       "words":"We are done!  Magic.  Let's give it a whirl!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "background": "harp.wav",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"He's playing a harp in a very fine HAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    },
                    {
                       "words":"The hat is beautiful, everyone can SEE",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Stitched in the front is the letter C",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Why the letter C?  I hear it SAID",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"It is very odd, because his name is ED!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000
                    },
                    {
@@ -4365,34 +4395,35 @@
                 "speech":[
                    {
                       "words":"We are done!  Magic.  Let's give it a whirl!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "background": "harp.wav",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"He's playing a harp in a very fine HAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    },
                    {
                       "words":"The hat is beautiful, everyone can SEE",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Stitched in the front is the letter C",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Why the letter C?  I hear it SAID",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"It is very odd, because his name is JED!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000
                    },
                    {
@@ -4428,34 +4459,35 @@
                 "speech":[
                    {
                       "words":"We are done!  Magic.  Let's give it a whirl!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "background": "harp.wav",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"He's playing a harp in a very fine HAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    },
                    {
                       "words":"The hat is beautiful, everyone can SEE",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Stitched in the front is the letter C",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Why the letter C?  I hear it SAID",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"It is very odd, because his name is NED!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000
                    },
                    {
@@ -4491,34 +4523,35 @@
                 "speech":[
                    {
                       "words":"We are done!  Magic.  Let's give it a whirl!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "background": "harp.wav",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"He's playing a harp in a very fine HAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    },
                    {
                       "words":"The hat is beautiful, everyone can SEE",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Stitched in the front is the letter C",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Why the letter C?  I hear it SAID",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"It is very odd, because his name is RED!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000
                    },
                    {
@@ -4554,34 +4587,35 @@
                 "speech":[
                    {
                       "words":"We are done!  Magic.  Let's give it a whirl!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "background": "harp.wav",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"He's playing a harp in a very fine HAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    },
                    {
                       "words":"The hat is beautiful, everyone can SEE",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Stitched in the front is the letter D",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Why the letter D?  I hear it SAID",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"It is very odd, because his name is FRED!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000
                    },
                    {
@@ -4617,34 +4651,35 @@
                 "speech":[
                    {
                       "words":"We are done!  Magic.  Let's give it a whirl!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "background": "harp.wav",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"He's playing a harp in a very fine HAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    },
                    {
                       "words":"The hat is beautiful, everyone can SEE",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Stitched in the front is the letter D",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Why the letter D?  I hear it SAID",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"It is very odd, because his name is ED!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000
                    },
                    {
@@ -4680,34 +4715,35 @@
                 "speech":[
                    {
                       "words":"We are done!  Magic.  Let's give it a whirl!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "background": "harp.wav",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"He's playing a harp in a very fine HAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    },
                    {
                       "words":"The hat is beautiful, everyone can SEE",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Stitched in the front is the letter D",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Why the letter D?  I hear it SAID",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"It is very odd, because his name is JED!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000
                    },
                    {
@@ -4743,34 +4779,35 @@
                 "speech":[
                    {
                       "words":"We are done!  Magic.  Let's give it a whirl!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "background": "harp.wav",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"He's playing a harp in a very fine HAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    },
                    {
                       "words":"The hat is beautiful, everyone can SEE",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Stitched in the front is the letter D",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Why the letter D?  I hear it SAID",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"It is very odd, because his name is NED!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000
                    },
                    {
@@ -4806,34 +4843,35 @@
                 "speech":[
                    {
                       "words":"We are done!  Magic.  Let's give it a whirl!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "background": "harp.wav",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"He's playing a harp in a very fine HAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    },
                    {
                       "words":"The hat is beautiful, everyone can SEE",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Stitched in the front is the letter D",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Why the letter D?  I hear it SAID",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"It is very odd, because his name is RED!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000
                    },
                    {
@@ -4869,34 +4907,35 @@
                 "speech":[
                    {
                       "words":"We are done!  Magic.  Let's give it a whirl!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "background": "harp.wav",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"He's playing a harp in a very fine HAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    },
                    {
                       "words":"The hat is beautiful, everyone can SEE",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Stitched in the front is the letter E",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Why the letter E?  I hear it SAID",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"It is very odd, because his name is FRED!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000
                    },
                    {
@@ -4932,34 +4971,35 @@
                 "speech":[
                    {
                       "words":"We are done!  Magic.  Let's give it a whirl!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "background": "harp.wav",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"He's playing a harp in a very fine HAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    },
                    {
                       "words":"The hat is beautiful, everyone can SEE",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Stitched in the front is the letter E",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Why the letter E?  I hear it SAID",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"It is very odd, because his name is ED!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000
                    },
                    {
@@ -4995,34 +5035,35 @@
                 "speech":[
                    {
                       "words":"We are done!  Magic.  Let's give it a whirl!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "background": "harp.wav",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"He's playing a harp in a very fine HAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    },
                    {
                       "words":"The hat is beautiful, everyone can SEE",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Stitched in the front is the letter E",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Why the letter E?  I hear it SAID",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"It is very odd, because his name is JED!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000
                    },
                    {
@@ -5058,34 +5099,35 @@
                 "speech":[
                    {
                       "words":"We are done!  Magic.  Let's give it a whirl!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "background": "harp.wav",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"He's playing a harp in a very fine HAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    },
                    {
                       "words":"The hat is beautiful, everyone can SEE",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Stitched in the front is the letter E",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Why the letter E?  I hear it SAID",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"It is very odd, because his name is NED!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000
                    },
                    {
@@ -5121,34 +5163,35 @@
                 "speech":[
                    {
                       "words":"We are done!  Magic.  Let's give it a whirl!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "background": "harp.wav",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"He's playing a harp in a very fine HAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    },
                    {
                       "words":"The hat is beautiful, everyone can SEE",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Stitched in the front is the letter E",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Why the letter E?  I hear it SAID",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"It is very odd, because his name is RED!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000
                    },
                    {
@@ -5184,34 +5227,35 @@
                 "speech":[
                    {
                       "words":"We are done!  Magic.  Let's give it a whirl!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "background": "harp.wav",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"He's playing a harp in a very fine HAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    },
                    {
                       "words":"The hat is beautiful, everyone can SEE",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Stitched in the front is the letter G",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Why the letter G?  I hear it SAID",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"It is very odd, because his name is FRED!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000
                    },
                    {
@@ -5247,34 +5291,35 @@
                 "speech":[
                    {
                       "words":"We are done!  Magic.  Let's give it a whirl!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "background": "harp.wav",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"He's playing a harp in a very fine HAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    },
                    {
                       "words":"The hat is beautiful, everyone can SEE",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Stitched in the front is the letter G",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Why the letter G?  I hear it SAID",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"It is very odd, because his name is ED!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000
                    },
                    {
@@ -5310,34 +5355,35 @@
                 "speech":[
                    {
                       "words":"We are done!  Magic.  Let's give it a whirl!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "background": "harp.wav",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"He's playing a harp in a very fine HAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    },
                    {
                       "words":"The hat is beautiful, everyone can SEE",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Stitched in the front is the letter G",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Why the letter G?  I hear it SAID",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"It is very odd, because his name is JED!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000
                    },
                    {
@@ -5373,34 +5419,35 @@
                 "speech":[
                    {
                       "words":"We are done!  Magic.  Let's give it a whirl!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "background": "harp.wav",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"He's playing a harp in a very fine HAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    },
                    {
                       "words":"The hat is beautiful, everyone can SEE",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Stitched in the front is the letter G",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Why the letter G?  I hear it SAID",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"It is very odd, because his name is NED!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000
                    },
                    {
@@ -5436,34 +5483,35 @@
                 "speech":[
                    {
                       "words":"We are done!  Magic.  Let's give it a whirl!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "background": "harp.wav",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"He's playing a harp in a very fine HAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    },
                    {
                       "words":"The hat is beautiful, everyone can SEE",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Stitched in the front is the letter G",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Why the letter G?  I hear it SAID",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"It is very odd, because his name is RED!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000
                    },
                    {
@@ -5499,34 +5547,35 @@
                 "speech":[
                    {
                       "words":"We are done!  Magic.  Let's give it a whirl!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "background": "harp.wav",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"He's playing a harp in a very fine HAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    },
                    {
                       "words":"The hat is beautiful, everyone can SEE",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Stitched in the front is the letter P",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Why the letter P?  I hear it SAID",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"It is very odd, because his name is FRED!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000
                    },
                    {
@@ -5562,34 +5611,35 @@
                 "speech":[
                    {
                       "words":"We are done!  Magic.  Let's give it a whirl!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "background": "harp.wav",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"He's playing a harp in a very fine HAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    },
                    {
                       "words":"The hat is beautiful, everyone can SEE",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Stitched in the front is the letter P",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Why the letter P?  I hear it SAID",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"It is very odd, because his name is ED!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000
                    },
                    {
@@ -5625,34 +5675,35 @@
                 "speech":[
                    {
                       "words":"We are done!  Magic.  Let's give it a whirl!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "background": "harp.wav",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"He's playing a harp in a very fine HAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    },
                    {
                       "words":"The hat is beautiful, everyone can SEE",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Stitched in the front is the letter P",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Why the letter P?  I hear it SAID",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"It is very odd, because his name is JED!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000
                    },
                    {
@@ -5688,34 +5739,35 @@
                 "speech":[
                    {
                       "words":"We are done!  Magic.  Let's give it a whirl!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "background": "harp.wav",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"He's playing a harp in a very fine HAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    },
                    {
                       "words":"The hat is beautiful, everyone can SEE",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Stitched in the front is the letter P",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Why the letter P?  I hear it SAID",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"It is very odd, because his name is NED!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000
                    },
                    {
@@ -5751,34 +5803,35 @@
                 "speech":[
                    {
                       "words":"We are done!  Magic.  Let's give it a whirl!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "background": "harp.wav",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"He's playing a harp in a very fine HAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    },
                    {
                       "words":"The hat is beautiful, everyone can SEE",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Stitched in the front is the letter P",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Why the letter P?  I hear it SAID",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"It is very odd, because his name is RED!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000
                    },
                    {
@@ -5814,34 +5867,35 @@
                 "speech":[
                    {
                       "words":"We are done!  Magic.  Let's give it a whirl!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "background": "harp.wav",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"He's playing a harp in a very fine HAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    },
                    {
                       "words":"The hat is beautiful, everyone can SEE",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Stitched in the front is the letter T",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Why the letter T?  I hear it SAID",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"It is very odd, because his name is FRED!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000
                    },
                    {
@@ -5877,34 +5931,35 @@
                 "speech":[
                    {
                       "words":"We are done!  Magic.  Let's give it a whirl!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "background": "harp.wav",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"He's playing a harp in a very fine HAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    },
                    {
                       "words":"The hat is beautiful, everyone can SEE",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Stitched in the front is the letter T",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Why the letter T?  I hear it SAID",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"It is very odd, because his name is ED!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000
                    },
                    {
@@ -5940,34 +5995,35 @@
                 "speech":[
                    {
                       "words":"We are done!  Magic.  Let's give it a whirl!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "background": "harp.wav",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"He's playing a harp in a very fine HAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    },
                    {
                       "words":"The hat is beautiful, everyone can SEE",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Stitched in the front is the letter T",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Why the letter T?  I hear it SAID",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"It is very odd, because his name is JED!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000
                    },
                    {
@@ -6003,34 +6059,35 @@
                 "speech":[
                    {
                       "words":"We are done!  Magic.  Let's give it a whirl!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "background": "harp.wav",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"He's playing a harp in a very fine HAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    },
                    {
                       "words":"The hat is beautiful, everyone can SEE",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Stitched in the front is the letter T",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Why the letter T?  I hear it SAID",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"It is very odd, because his name is NED!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000
                    },
                    {
@@ -6066,34 +6123,35 @@
                 "speech":[
                    {
                       "words":"We are done!  Magic.  Let's give it a whirl!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "background": "harp.wav",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"He's playing a harp in a very fine HAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    },
                    {
                       "words":"The hat is beautiful, everyone can SEE",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Stitched in the front is the letter T",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Why the letter T?  I hear it SAID",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"It is very odd, because his name is RED!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000
                    },
                    {
@@ -6129,34 +6187,35 @@
                 "speech":[
                    {
                       "words":"We are done!  Magic.  Let's give it a whirl!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "background": "harp.wav",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"He's playing a harp in a very fine HAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    },
                    {
                       "words":"The hat is beautiful, everyone can SEE",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Stitched in the front is the letter V",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Why the letter V?  I hear it SAID",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"It is very odd, because his name is FRED!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000
                    },
                    {
@@ -6192,34 +6251,35 @@
                 "speech":[
                    {
                       "words":"We are done!  Magic.  Let's give it a whirl!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "background": "harp.wav",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"He's playing a harp in a very fine HAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    },
                    {
                       "words":"The hat is beautiful, everyone can SEE",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Stitched in the front is the letter V",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Why the letter V?  I hear it SAID",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"It is very odd, because his name is ED!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000
                    },
                    {
@@ -6255,34 +6315,35 @@
                 "speech":[
                    {
                       "words":"We are done!  Magic.  Let's give it a whirl!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "background": "harp.wav",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"He's playing a harp in a very fine HAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    },
                    {
                       "words":"The hat is beautiful, everyone can SEE",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Stitched in the front is the letter V",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Why the letter V?  I hear it SAID",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"It is very odd, because his name is JED!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000
                    },
                    {
@@ -6318,34 +6379,35 @@
                 "speech":[
                    {
                       "words":"We are done!  Magic.  Let's give it a whirl!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "background": "harp.wav",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"He's playing a harp in a very fine HAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    },
                    {
                       "words":"The hat is beautiful, everyone can SEE",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Stitched in the front is the letter V",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Why the letter V?  I hear it SAID",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"It is very odd, because his name is NED!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000
                    },
                    {
@@ -6381,34 +6443,35 @@
                 "speech":[
                    {
                       "words":"We are done!  Magic.  Let's give it a whirl!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "background": "harp.wav",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"He's playing a harp in a very fine HAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    },
                    {
                       "words":"The hat is beautiful, everyone can SEE",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Stitched in the front is the letter V",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Why the letter V?  I hear it SAID",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"It is very odd, because his name is RED!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000
                    },
                    {
@@ -6444,34 +6507,35 @@
                 "speech":[
                    {
                       "words":"We are done!  Magic.  Let's give it a whirl!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "background": "harp.wav",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"He's playing a harp in a very fine HAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    },
                    {
                       "words":"The hat is beautiful, everyone can SEE",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Stitched in the front is the letter ZEE",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Why the letter ZEE?  I hear it SAID",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"It is very odd, because his name is FRED!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000
                    },
                    {
@@ -6507,34 +6571,35 @@
                 "speech":[
                    {
                       "words":"We are done!  Magic.  Let's give it a whirl!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "background": "harp.wav",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"He's playing a harp in a very fine HAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    },
                    {
                       "words":"The hat is beautiful, everyone can SEE",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Stitched in the front is the letter ZEE",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Why the letter ZEE?  I hear it SAID",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"It is very odd, because his name is ED!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000
                    },
                    {
@@ -6570,34 +6635,35 @@
                 "speech":[
                    {
                       "words":"We are done!  Magic.  Let's give it a whirl!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "background": "harp.wav",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"He's playing a harp in a very fine HAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    },
                    {
                       "words":"The hat is beautiful, everyone can SEE",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Stitched in the front is the letter ZEE",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Why the letter ZEE?  I hear it SAID",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"It is very odd, because his name is JED!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000
                    },
                    {
@@ -6633,34 +6699,35 @@
                 "speech":[
                    {
                       "words":"We are done!  Magic.  Let's give it a whirl!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "background": "harp.wav",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"He's playing a harp in a very fine HAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    },
                    {
                       "words":"The hat is beautiful, everyone can SEE",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Stitched in the front is the letter ZEE",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Why the letter ZEE?  I hear it SAID",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"It is very odd, because his name is NED!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000
                    },
                    {
@@ -6696,34 +6763,35 @@
                 "speech":[
                    {
                       "words":"We are done!  Magic.  Let's give it a whirl!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "background": "harp.wav",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"He's playing a harp in a very fine HAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    },
                    {
                       "words":"The hat is beautiful, everyone can SEE",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Stitched in the front is the letter ZEE",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"Why the letter ZEE?  I hear it SAID",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    },
                    {
                       "words":"It is very odd, because his name is RED!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000
                    },
                    {
@@ -6759,28 +6827,29 @@
                 "speech":[
                    {
                       "words":"MEAT! Perfect!  Giants love meat.  We now have a lovely poem.  Thank you. Here goes  ",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800,
                       "rate":"180"
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "background": "harp.wav",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"Playing a harp on a luxurious mat",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"It's so soft and comfy, he digs in his FEET",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"The only thing that would make it better would be cake made of MEAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    }
                 ]
@@ -6811,28 +6880,29 @@
                 "speech":[
                    {
                       "words":"BEAT! Perfect!  Giants love funky beats.  We now have a lovely poem.  Thank you. Here goes  ",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800,
                       "rate":"180"
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "background": "harp.wav",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"Playing a harp on a luxurious mat",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"It's so soft and comfy, he digs in his FEET",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
-                      "words":"The only thing that would make it better would be a well sick BEAT",
-                      "voice":"Daniel",
+                      "words":"The only thing that would make it better would be to lay down a BEAT",
+                      "voice":"Kate",
                       "delay":800
                    }
                 ]
@@ -6863,28 +6933,29 @@
                 "speech":[
                    {
                       "words":"Treat! Perfect!  Why didn't I think of that? We now have a lovely poem.  Thank you. Here goes ",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800,
                       "rate":"180"
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "background": "harp.wav",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"Playing a harp on a luxurious mat",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"It's so soft and comfy, he digs in his FEET",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"This is his favourite day.  What a lovely treat!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    }
                 ]
@@ -6915,28 +6986,29 @@
                 "speech":[
                    {
                       "words":"Seat! Clever. Great. We now have a lovely poem.  Thank you. Here goes ",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800,
                       "rate":"180"
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "background": "harp.wav",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"Playing a harp on a luxurious mat",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"It's so soft and comfy, he digs in his FEET",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"With a mat this lovely, who needs a SEAT?",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    }
                 ]
@@ -6967,28 +7039,29 @@
                 "speech":[
                    {
                       "words":"Neat! Clever. Great. We now have a lovely poem.  Thank you. Here goes ",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800,
                       "rate":"180"
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "background": "harp.wav",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"Playing a harp on a luxurious mat",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"It's so soft and comfy, he digs in his FEET",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"And spends all his time making his hair nice and NEAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    }
                 ]
@@ -7019,28 +7092,29 @@
                 "speech":[
                    {
                       "words":"Bite.  Brilliant.  This poem is great.  Let's do it",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000,
                       "rate":"180"
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "background": "harp.wav",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"He's playing the harp, unaware that a RAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    },
                    {
                       "words":"Has snuck up behind him and I think he MIGHT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    },
                    {
                       "words":"Give the giant's bottom a nasty big bite",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    }
                 ]
@@ -7062,28 +7136,29 @@
                 "speech":[
                    {
                       "words":"Kite.  Brilliant.  This poem is great.  Let's do it",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000,
                       "rate":"180"
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "background": "harp.wav",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"He's playing the harp, unaware that a RAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    },
                    {
                       "words":"Has snuck up behind him and I think he MIGHT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    },
                    {
                       "words":"Take the giant outside to fly his big kite",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    }
                 ]
@@ -7105,28 +7180,29 @@
                 "speech":[
                    {
                       "words":"Night.  Brilliant.  This poem is great.  Let's do it",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000,
                       "rate":"180"
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "background": "harp.wav",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"He's playing the harp, unaware that a RAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    },
                    {
                       "words":"Has snuck up behind him and I think he MIGHT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    },
                    {
                       "words":"Steal his socks in the middle of the night",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    }
                 ]
@@ -7148,28 +7224,29 @@
                 "speech":[
                    {
                       "words":"Fight.  Yes that could work.  This poem is great.  Let's do it",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000,
                       "rate":"180"
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "background": "harp.wav",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"He's playing the harp, unaware that a RAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    },
                    {
                       "words":"Has snuck up behind him and I think he MIGHT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    },
                    {
                       "words":"Slap his cheeks and challenge him to a fight",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    }
                 ]
@@ -7191,28 +7268,29 @@
                 "speech":[
                    {
                       "words":"Fight.  Yes that could work.  This poem is great.  Let's do it",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000,
                       "rate":"180"
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "background": "harp.wav",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"He's playing the harp, unaware that a RAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    },
                    {
                       "words":"Has snuck up behind him and I think he MIGHT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    },
                    {
                       "words":"Get close to the giant and give him a fright",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    }
                 ]
@@ -7234,28 +7312,29 @@
                 "speech":[
                    {
                       "words":"Light.  Yes. OK. That can work.  This poem is great.  Let's do it",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000,
                       "rate":"180"
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "background": "harp.wav",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"He's playing the harp, unaware that a RAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    },
                    {
                       "words":"Has snuck up behind him and I think he MIGHT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    },
                    {
                       "words":"Take out a match and set him ALIGHT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    }
                 ]
@@ -7277,28 +7356,29 @@
                 "speech":[
                    {
                       "words":"Bright.  Yes. OK. That can work.  This poem is great.  Let's do it",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000,
                       "rate":"180"
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "background": "harp.wav",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"He's playing the harp, unaware that a RAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    },
                    {
                       "words":"Has snuck up behind him and I think he MIGHT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    },
                    {
                       "words":"Nibble his toes.  Oh he's not very bright",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    }
                 ]
@@ -7320,28 +7400,29 @@
                 "speech":[
                    {
                       "words":"Tight.  Yes I like it!  This poem is perfect now.  Let's do it",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000,
                       "rate":"180"
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "background": "harp.wav",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"He's playing the harp, unaware that a RAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    },
                    {
                       "words":"Has snuck up behind him and I think he MIGHT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    },
                    {
                       "words":"Get past without being seen, but it's going to be TIGHT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":800
                    }
                 ]
@@ -7363,27 +7444,28 @@
                 "speech":[
                    {
                       "words":"Bed?  yes I can work with that.  Here we go!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "rate":"180"
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "background": "harp.wav",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"Playing a harp upside down, like a BAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"His hair is all tangled and his face has gone red",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"He looks like a man in need of a bed",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    }
                 ]
              },
@@ -7404,27 +7486,28 @@
                 "speech":[
                    {
                       "words":"Shed?  yes I can work with that.  Here we go!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "rate":"180"
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "background": "harp.wav",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"Playing a harp upside down, like a BAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"His hair is all tangled and his face has gone red",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"But this is just what he does when he's out in his shed",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    }
                 ]
              },
@@ -7445,27 +7528,28 @@
                 "speech":[
                    {
                       "words":"Head?  yes I can work with that.  Here we go!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "rate":"180"
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "background": "harp.wav",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"Playing a harp upside down, like a BAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"His hair is all tangled and his face has gone red",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"Soon I think his eyes will pop out of his head!",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    }
                 ]
              },
@@ -7486,27 +7570,28 @@
                 "speech":[
                    {
                       "words":"Head?  yes I can work with that.  Here we go!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "rate":"180"
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "background": "harp.wav",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"Playing a harp upside down, like a BAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"His hair is all tangled and his face has gone red",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"When Jack chops the bean stalk, the giant will be DEAD!",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    }
                 ]
              },
@@ -7527,27 +7612,28 @@
                 "speech":[
                    {
                       "words":"Fed?  yes I can work with that.  Here we go!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "rate":"180"
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "background": "harp.wav",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"Playing a harp upside down, like a BAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"His hair is all tangled and his face has gone red",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"His dog is outside and his cat's not been FED",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    }
                 ]
              },
@@ -7568,27 +7654,28 @@
                 "speech":[
                    {
                       "words":"Instead?  yes I can work with that.  Here we go!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "rate":"180"
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "background": "harp.wav",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"Playing a harp upside down, like a BAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"His hair is all tangled and his face has gone red",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"Surely there's something he could do instead?",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    }
                 ]
              },
@@ -7609,27 +7696,28 @@
                 "speech":[
                    {
                       "words":"Tread?  yes I can work with that.  Here we go!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "rate":"180"
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "background": "harp.wav",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"Playing a harp upside down, like a BAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"His hair is all tangled and his face has gone red",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"He's crazy I tell you, so watch where you tread!",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    }
                 ]
              },
@@ -7650,27 +7738,28 @@
                 "speech":[
                    {
                       "words":"Dread?  yes I can work with that.  Here we go!",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "rate":"180"
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "background": "harp.wav",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"Playing a harp upside down, like a BAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"His hair is all tangled and his face has gone red",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"He's crazy I tell you, he fills me with dread",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    }
                 ]
              },
@@ -7690,29 +7779,30 @@
              "onstart":{
                 "speech":[
                    {
-                      "words":"TEA! Brillint.  Ok, let's do this.",
-                      "voice":"Daniel",
+                      "words":"TEA! Brilliant.  Ok, let's do this.",
+                      "voice":"Kate",
                       "delay":1000,
                       "rate":"180"
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "background": "harp.wav",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"He is playing the harp, and stroking his CAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":200
                    },
                    {
                       "words":"It sits there quietly on the Giant’s KNEE,",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":500
                    },
                    {
                       "words":"Purring and dreaming about having sardines for tea",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    }
                 ]
              },
@@ -7733,28 +7823,29 @@
                 "speech":[
                    {
                       "words":"SEA! Brillint.  Ok, let's do this.",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000,
                       "rate":"180"
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "background": "harp.wav",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"He is playing the harp, and stroking his CAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":200
                    },
                    {
                       "words":"It sits there quietly on the Giant’s KNEE,",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":500
                    },
                    {
                       "words":"Dreaming eating all the fish in the sea",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    }
                 ]
              },
@@ -7775,28 +7866,29 @@
                 "speech":[
                    {
                       "words":"BEE! Brillint.  Ok, let's do this.",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000,
                       "rate":"180"
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "background": "harp.wav",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"He is playing the harp, and stroking his CAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":200
                    },
                    {
                       "words":"It sits there quietly on the Giant’s KNEE,",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":500
                    },
                    {
                       "words":"Purring and dreaming about chasing a BEE",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    }
                 ]
              },
@@ -7817,28 +7909,29 @@
                 "speech":[
                    {
                       "words":"SKI! Brilliant.  But tricky.  Let's do this.",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000,
                       "rate":"180"
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "background": "harp.wav",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"He is playing the harp, and stroking his CAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":200
                    },
                    {
                       "words":"It sits there quietly on the Giant’s KNEE,",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":500
                    },
                    {
                       "words":"Wondering if CATS can learn how to SKI",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    }
                 ]
              },
@@ -7859,28 +7952,29 @@
                 "speech":[
                    {
                       "words":"Flea! Brilliant. Cat's have fleas.  Let's do this.",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":1000,
                       "rate":"180"
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
-                      "voice":"Daniel",
+                      "background": "harp.wav",
+                      "voice":"Kate",
                       "delay":100
                    },
                    {
                       "words":"He is playing the harp, and stroking his CAT",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":200
                    },
                    {
                       "words":"It sits there quietly on the Giant’s KNEE,",
-                      "voice":"Daniel",
+                      "voice":"Kate",
                       "delay":500
                    },
                    {
                       "words":"Ow.  That hurt.  He's been bitten by a FLEA",
-                      "voice":"Daniel"
+                      "voice":"Kate"
                    }
                 ]
              },
@@ -8383,7 +8477,7 @@
                    },
                    {
                     "words":"Help, master",
-                    "voice":"Daniel",
+                    "voice":"Kate",
                     "delay":500,
                     "rate":"180"
                    },
@@ -8394,10 +8488,10 @@
                       "rate":"180"
                    },
                    {
-                    "words":"Fee, fye, foe, thumb",
-                    "voice":"Daniel",
+                    "words":"Fee, Thigh, Foe, Thumb",
+                    "voice":"Ralph",
                     "delay":500,
-                    "rate":"90"
+                    "rate":"10"
                    },
                    {
                     "words":"Jack ran and started climbing down the beanstalk.",

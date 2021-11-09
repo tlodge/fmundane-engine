@@ -5,7 +5,7 @@ import {gestureObserved, setTranscript, sendTranscript, buttonPressed} from './e
 import {useDispatch } from 'react-redux';
 
 function Layer(e) {
-
+    const {id} = e;
     const dispatch = useDispatch();
     const renderEvent = (event)=>{
 
@@ -16,7 +16,7 @@ function Layer(e) {
                             names={event.data} 
                             handleAction={(b)=>{
                               
-                                dispatch(buttonPressed(b));
+                                dispatch(buttonPressed(b,id));
                             }}/>
             case "speech":
                 return <Speech  
@@ -24,7 +24,7 @@ function Layer(e) {
                             ready={event.ready} 
                             handleChange={(transcript)=>{
                                
-                                dispatch(setTranscript(transcript));
+                                dispatch(setTranscript({transcript,layerid:id}));
                             }}
                             handleAction={()=>{
                               
@@ -33,7 +33,7 @@ function Layer(e) {
 
             case "gesture":
                 return <Gesture rules={event.rules} ready={event.ready} handleAction={(op)=>{
-                    dispatch(gestureObserved(op));
+                    dispatch(gestureObserved(op,id));
                 }}/>
 
             default:

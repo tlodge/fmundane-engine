@@ -128,14 +128,10 @@ const StateMachine =   (config)=>{
     }
 
     const _unsubscribe = ()=>{
-        console.log("ok events are", events);
-
         events.map( (e)=>{
             unsubscribe(e.subscription, config.id);
             unsubscribe(`/trigger/${config.id}`, config.id);
         });
-        
-        console.log("fully unsubscribed!");
     }
 
 
@@ -144,24 +140,25 @@ const StateMachine =   (config)=>{
         let eventid = config.start.event;  
         event = eventlookup[eventid];
       
+       
 
         if (event){
             send("event", {id:config.id,data:event});      
             if (event.onstart){
                 const {speech=[], actions:_actions=[]} = event.onstart;
                 const __startactions =  _actions.map(arr=>(arr||[]).map(a=>({...a,action:actions[a.action]||{}})));
-                await Promise.all([_executeactions(__startactions, placeholders), _executespeech(speech, placeholders)]);
+                await Promise.all([await _executeactions(__startactions, placeholders), await _executespeech(speech, placeholders)]);
             }    
+            send("ready", {layer:config.id, event:{id:eventid, type: event.type}});
         }
        
-        
-    
-        send("ready", {layer:config.id, event:{id:eventid, type: event.type}});
     
 
         //this is a subscripton to manual triggers (either by clicking nodes in the tree or calling webhook /event/trigger);
         subscribe(`/trigger/${id}`, id, async(_layer, msg)=>{
-          
+
+            console.log("seen trigger for layer", _layer);
+            console.log("and msg is ", msg);
             try{
             
                 const {node, layer} = msg;
@@ -189,7 +186,7 @@ const StateMachine =   (config)=>{
         }
 
         const trigger = async (triggered, e, id, nexteventid, actionids, msg)=>{
-            console.log("in trigger with", msg);
+           
 
             const {data} = msg;   
 
@@ -204,7 +201,7 @@ const StateMachine =   (config)=>{
                 if (_e.onstart){
                     const {speech=[], actions:_actions=[]} = _e.onstart;
                     const __startactions =  _actions.map(arr=>(arr||[]).map(a=>({...a, action:actions[a.action]||{}})));
-                    await Promise.all([_executeactions(__startactions, placeholders), _executespeech(speech, placeholders)]);
+                    await Promise.all([await _executeactions(__startactions, placeholders), await _executespeech(speech, placeholders)]);
                 }
                 send("ready", {layer:config.id, event:{id:nexteventid, type:_e.type}});
                 sub(_e);
@@ -236,7 +233,7 @@ const StateMachine =   (config)=>{
                             if (r.rule.subject){
                            
                                 subject = placeholders[r.rule.subject];
-                                console.log(subject);
+
                                 type = "variable";
                                 actionids = [...(r.rule.actions || [])];
                             }
@@ -261,8 +258,6 @@ const StateMachine =   (config)=>{
             }
 
             subscribe(e.subscription, id,  async(_layer, msg)=>{
-
-               
 
                 triggered = false;
                 
@@ -300,7 +295,6 @@ const StateMachine =   (config)=>{
                         //console.log(sinceaction);
 
                         if (e.type==="speech" && sinceaction<2000){
-                            console.log("iGNORING RECEIVED TEXT!!", sinceaction);
                             return acc;
                         }
                         nexteventid = item.next;
@@ -317,10 +311,10 @@ const StateMachine =   (config)=>{
                     if (result){
                         updateplaceholders(defaultrule.rule, data);
                         const sinceaction = ts-subtime;
-                        console.log(sinceaction);
+                   
                         
                         if (e.type==="speech" && sinceaction<2000){
-                            console.log("iGNORING RECEIVED TEXT!!", sinceaction);
+
                             return;
                        }
 

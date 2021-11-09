@@ -13,6 +13,7 @@ import {
 //mirror a local copy and only update on button press, which then means that we keep the old identity locally before
 //making the change from,to
 export function LinkCreator({onClose}) {
+    
     const dispatch = useDispatch();
     const nodes     = useSelector(selectNodeIds);
     const [linknode, setLinkNode] = useState(nodes[0]);

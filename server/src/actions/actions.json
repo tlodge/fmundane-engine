@@ -18,6 +18,38 @@
         }
     }
    },
+   "smell-left-on":{
+      "type":"request",
+      "data":{
+         "url":"http://[smell-left]/on3",
+         "type":"GET",
+         "contenttype":"application/json"
+      }
+   },
+   "smell-right-on":{
+      "type":"request",
+      "data":{
+         "url":"http://[smell-right]/on3",
+         "type":"GET",
+         "contenttype":"application/json"
+      }
+   },
+   "smell-left-off":{
+      "type":"request",
+      "data":{
+         "url":"http://[smell-left]/off",
+         "type":"GET",
+         "contenttype":"application/json"
+      }
+   },
+   "smell-right-off":{
+      "type":"request",
+      "data":{
+         "url":"http://[smell-right]/off",
+         "type":"GET",
+         "contenttype":"application/json"
+      }
+   },
    "say":{
       "type":"request",
       "data":{
@@ -25,6 +57,22 @@
          "type":"POST",
          "contenttype":"application/json"
       }
+  },
+  "arm-expand":{
+   "type":"request",
+   "data":{
+      "url":"http://[lenovo]:9107/api/arm/expand",
+      "type":"GET",
+      "contenttype":"application/json"
+   }
+  },
+  "arm-collapse":{
+   "type":"request",
+   "data":{
+      "url":"http://[lenovo]:9107/api/arm/collapse",
+      "type":"GET",
+      "contenttype":"application/json"
+   }
   },
    "soundmedia":{
         "type":"request",

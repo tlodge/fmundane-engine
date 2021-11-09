@@ -1,53 +1,53 @@
 [
-    {
-       "id":"keywordlayer",
-       "start":{
-          "actions":[
-             [
-                
-             ]
-          ],
-          "event":"triggerwords"
-       },
-       "events":[
-          {
-             "id":"triggerwords",
-             "name":"triggerwords",
-             "onstart":{
-                
-             },
-             "type":"speech",
-             "subscription":"/speech",
-             "rules":[
-                {
-                   "rule":{
-                      "operator":"contains",
-                      "operand":[
-                         "cow",
-                         "tao",
-                         "how"
-                      ]
-                   },
-                   "actions":[
-                      [
-                         {
-                            "action":"soundmedia",
-                            "params":{
-                               "body":{
-                                  "media":"moo.wav",
-                                  "nowait":true,
-                                  "delay":0
-                               }
-                            }
-                         }
-                      ]
-                   ],
-                   "next":"triggerwords"
-                }
-             ]
-          }
-       ]
-    },
+   {
+      "id":"keywordlayer",
+      "start":{
+         "actions":[
+            [
+               
+            ]
+         ],
+         "event":"triggerwords"
+      },
+      "events":[
+         {
+            "id":"triggerwords",
+            "name":"triggerwords",
+            "onstart":{
+               
+            },
+            "type":"speech",
+            "subscription":"/speech",
+            "rules":[
+               {
+                  "rule":{
+                     "operator":"contains",
+                     "operand":[
+                        "cow",
+                        "tao",
+                        "how"
+                     ]
+                  },
+                  "actions":[
+                     [
+                        {
+                           "action":"soundmedia",
+                           "params":{
+                              "body":{
+                                 "media":"moo.wav",
+                                 "nowait":true,
+                                 "delay":0
+                              }
+                           }
+                        }
+                     ]
+                  ],
+                  "next":"triggerwords"
+               }
+            ]
+         }
+      ]
+   },
     {
        "id":"layer1",
        "start":{
@@ -2012,7 +2012,7 @@
                            "delay":500
                         },
                         {
-                            "words":"An enormous giant came into the room and sat down.  On the table there was a hen and a golden harp.",
+                            "words":"An enormous giant came into the room and sat down.  On the table there was a Hen. And a golden harp.",
                             "voice":"Daniel",
                             "delay":500
                         },
@@ -2076,7 +2076,7 @@
                         "rate":"180"
                    },
                    {
-                        "words":"If you don't want me to tell the giant that you are here.  You must help me write an amazing new poem.  That I can play later on",
+                        "words":"If you don't want me to tell the giant that you are here.  You must help me write an amazing new poem that I can play later on",
                         "voice":"Kate",
                         "delay": 1000,
                         "rate":"180"
@@ -8184,7 +8184,7 @@
                       "rate":"180"
                    },
                    {
-                      "words":"|adultname|.  If you hear |childname| coming you must shout Fee. Fye. Foe. Fum.",
+                      "words":"|adultname|.  If you hear |childname| make any noise you must shout Fee. Fye. Foe. Fum.",
                       "voice":"Daniel",
                       "delay":1000,
                       "rate":"180"
@@ -8243,7 +8243,10 @@
                          "By",
                          "Pi",
                          "Thumb",
-                         "Free"
+                         "Free",
+                         "B5",
+                         "5",
+                         "fee-fi-fo-fum"
                       ]
                    },
                    "actions":[
@@ -8617,6 +8620,7 @@
                    "rule":{
                       "operator":"contains",
                       "operand":[
+                         "Shop",
                          "Chop",
                          "Cut",
                          "Axe"

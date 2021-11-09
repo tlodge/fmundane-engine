@@ -49,7 +49,7 @@ export const handlespeech = async (speech)=>{
     if (!speech || speech.length <= 0)
         return;
 
-    await request({
+    return await request({
          "data": {
             "url": `http://${ips["speech"] || "127.0.0.1"}:9105/api/speech`,
             "type": "POST",
@@ -59,7 +59,7 @@ export const handlespeech = async (speech)=>{
               speech
           }
     });
-
+    
 }
 
 export const handle = async ({action, delay=0, params={}})=>{
@@ -74,6 +74,7 @@ export const handle = async ({action, delay=0, params={}})=>{
         }, action);
 
         const response = await request(_action, delay);
+        console.log("returning from handle!", response);
         return response;
     }
    return;

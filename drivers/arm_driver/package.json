@@ -1,0 +1,17 @@
+{
+    "name": "arm_driver",
+    "version": "1.0.0",
+    "description": "Arm driver",
+    "main": "main.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "express": "^4.16.3",
+        "mqtt": "^2.16.0",
+        "path": "^0.12.7",
+        "serialport": "^9.2.5"
+    }
+}

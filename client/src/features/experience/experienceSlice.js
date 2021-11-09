@@ -7,8 +7,6 @@ import * as d3 from 'd3-hierarchy';
 
 const socket = io(window.location.href);
 let recognition;
-let _canlisten = false;
-
 
 export const experienceSlice = createSlice({
   name: 'experience',
@@ -21,6 +19,7 @@ export const experienceSlice = createSlice({
     lastsenttranscript:"",
     authored:[],
     layerName:"",
+    listening: {},
   },
 
   reducers: {
@@ -40,13 +39,23 @@ export const experienceSlice = createSlice({
       state.events = [...state.events.filter(l=>l.id !== action.payload.id), action.payload];
     },
     setTranscript: (state, action)=>{
-      state.transcript = action.payload;
+      const {transcript, layerid} = action.payload;
+      state.transcript = transcript;
     },
     setReadyForInput: (state,action)=>{
       state.readyforinput = {
         ...state.readyforinput, [action.payload]:true
       }
     },
+
+    setListening: (state, action)=>{
+      const {layerid, listening} = action.payload;
+      state.listening = {
+        ...state.listening,
+        [layerid] : listening
+      }
+    },
+
     sentTranscript: (state)=>{
       state.lastsenttranscript = state.transcript;
     },
@@ -56,30 +65,18 @@ export const experienceSlice = createSlice({
   }
 });
 
-export const { setLayers, setLayerName, setEvent, setEvents, setTranscript,sentTranscript,setReadyForInput,setAuthored,resetReadiness} = experienceSlice.actions;
+export const { setLayers, setLayerName, setEvent, setListening, setEvents, setTranscript,sentTranscript,setReadyForInput,setAuthored,resetReadiness} = experienceSlice.actions;
 
-export const reset = ()=>dispatch=>{
+export const reset = (layerid="")=>dispatch=>{
   superagent.get('/event/start').then(res => {
     dispatch(setEvents(res.body));
-    dispatch(setTranscript(""));
+    dispatch(setTranscript({transcript:"", layerid}));
     dispatch(resetReadiness());
  })
  .catch(err => {
    console.log("error resetting events", err);
     // err.message, err.response
  });
-}
-
-const stopListening = ()=>{
-  _canlisten = false;
-}
-
-const allowListening = ()=>{
-  _canlisten = true;
-}
-
-const allowedToListen = ()=>{
-  return _canlisten;
 }
 
 const delay = (ms) =>{
@@ -160,24 +157,23 @@ export const listenOnEvents = () => (dispatch, getState) => {
 
 
   socket.on('event', payload => {
-    console.log("seen event", payload);
+    //TODO: get layerid from event!
+    console.log("seen an event!", payload);
     //here it is!!
-    dispatch(setTranscript(""));
-    console.log("now transcript is", getState().experience.transcript);
+    dispatch(setTranscript({transcript:""}));
+    dispatch(setListening({layerid: payload.id, listening:false}));
     dispatch(setEvent(payload));
   });
 
   socket.on('ready', payload=>{
-  
-    const {event} = payload; 
-    console.log("SEEN A READY!!", event);
-    dispatch(setTranscript(""));
-    console.log("now transcript is", getState().experience.transcript);
+    //TODO: get layerid from event!
+    const {event, layer} = payload;
+   
+    dispatch(setTranscript({transcript:""}));
     dispatch(setReadyForInput(event.id));
 
     if (event.type==="speech"){
-     
-      allowListening();
+      dispatch(setListening({layerid: layer, listening:true}));
       startRecognition();
     }
   });
@@ -193,9 +189,9 @@ socket.on("connect_error", () => {
   reconnect();
 });
 
-export const buttonPressed  = (b) => ()=>{
-  stopListening();
-  superagent.get("/event/press").query({name:b}).end((err, res) => {
+export const buttonPressed  = (b, layerid) => ()=>{
+  //stopListening();
+  superagent.get("/event/press").query({name:b, layer:layerid}).end((err, res) => {
     if (err){
         console.log(err);
     }   
@@ -214,24 +210,26 @@ export const manualTrigger = (layer, node)=>()=>{
 //on server only subscibe to current events rather than all!!
 
 export const sendTranscript = () => (dispatch, getState) =>{
-  
-    const {transcript} = getState().experience;
-    
-    if (transcript.trim() != ""){
-      console.log("in send transcript", transcript);
-      superagent.get("/event/speech").query({speech:getState().experience.transcript}).end((err, res)=>{
-        //stopListening(); //need to get an event back....
-        if (!err){
-          dispatch(sentTranscript());
-          dispatch(setTranscript(""));
-        }
-      });
-      //dispatch(setEvent({}));
-    }
    
+    const {transcript} = getState().experience;
+    const layers = getState().experience.listening
+    
+    const sendTranscript = async ()=>{
+      for (const key of Object.keys(layers)){
+        if (layers[key]){
+          const result = await superagent.get("/event/speech").query({layer:key, speech:getState().experience.transcript})
+          dispatch(sentTranscript());      
+        }
+      }
+      dispatch(setTranscript({transcript:""}));
+    }
+    
+    if (transcript.trim() !== ""){
+      sendTranscript();
+    }
 };
 
-export const gestureObserved = (g)=> (dispatch, getState) =>{
+export const gestureObserved = (g,layerid)=> (dispatch, getState) =>{
   //stopListening();
   superagent.get("/event/gesture").query({gesture:g}).end((err, res)=>{});
   //dispatch(setEvent({}));
@@ -248,9 +246,12 @@ export const fetchAuthored = ()=>(dispatch)=>{
 
 //this kicks everything off;
 
+//recogniotion cannot know about layer!!
+
 export const fetchLayers = (layer, r) => (dispatch, getState)=>{
   
   recognition = r;
+  
 
   superagent.get('/event/layers').query({layer}).then(res => {
     const trees = res.body.map(et=>({...et.tree, layerid:et.layerid}));
@@ -263,34 +264,34 @@ export const fetchLayers = (layer, r) => (dispatch, getState)=>{
   
   recognition.onend = () => {
     
-    if (allowedToListen()){
+    //if (allowedToListen()){
        startRecognition();
-    }else{
+    //}else{
      
-    }
+    //}
   }
 
   recognition.onresult = event => {    
    
     //TODO: why is transcript sending here (post event?)
 
-    for (let i = event.resultIndex; i < event.results.length; i++) {
-      
+    //need an onresult for each layer?
+
+
+    const listening = getState().experience.listening;
+
+    for (let i = event.resultIndex; i < event.results.length; i++) { 
       const transcript = event.results[i][0].transcript;
       if (event.results[i].isFinal){ 
-        if (transcript.trim() != ""){
+        if (transcript.trim() !== "" && listening){
           //dispatch(recordState(getState().experience.));
-          console.log("setting/sending transcript", (transcript + ' '));
-          dispatch(setTranscript(transcript + ' '));
+
+          //loop through all speech layers and send!
+          dispatch(setTranscript({transcript:transcript + ' '}));
           dispatch(sendTranscript());
         }
       }
     }
-    //if (allowedToListen()){
-    
-      
-
-    //}
   }
 }
 

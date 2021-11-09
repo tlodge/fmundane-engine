@@ -112,12 +112,9 @@ indexRouter.get('/start', async (req, res)=>{
    
     //need to reset everything here..!
     
-    console.log("seen a call to start!!!");
-    console.log("statemanchines is", statemachines, statemachines.length);
 
     if (statemachines.length > 0){
-        for (const statem of statemachines){     
-            console.log("calling statemachine unsubscribe!");
+        for (const statem of statemachines){    
             statem.unsubscribe();
         }
     }
@@ -145,7 +142,7 @@ indexRouter.get('/start', async (req, res)=>{
     await Promise.all(parallel.map(async(p)=>{
         await p();
     }));
-    console.log("ok about to send here!!!");
+   
     res.status(200).json(events(_layers));
 });
 
@@ -158,21 +155,21 @@ indexRouter.get('/trigger', (req, res)=>{
 indexRouter.get('/press', (req, res)=>{
     const ts = Date.now();
     const {name, layer} = req.query;
-    send("/press", JSON.stringify({data:name, ts}));
+    send("/press", JSON.stringify({data:name, layer, ts}));
     res.status(200).json({ press: name });
 }); 
 
 indexRouter.get('/gesture', (req, res)=>{
     const ts = Date.now();
     const {gesture, layer} = req.query;
-    send("/gesture", JSON.stringify({data:gesture, ts}));
+    send("/gesture", JSON.stringify({data:gesture, layer, ts}));
     res.status(200).json({gesture});
 });
 
 indexRouter.get('/speech', (req, res)=>{
     const ts = Date.now();
-    const {speech} = req.query;
-    send("/speech", JSON.stringify({data:speech, ts}));
+    const {speech, layer} = req.query;
+    send("/speech", JSON.stringify({data:speech, layer, ts}));
     res.status(200).json({ speech });
 }); 
 

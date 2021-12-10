@@ -1,53 +1,5 @@
 [   
-   {
-   "id":"keywordlayer",
-   "start":{
-      "actions":[
-         [
-            
-         ]
-      ],
-      "event":"triggerwords"
-   },
-   "events":[
-      {
-         "id":"triggerwords",
-         "name":"triggerwords",
-         "onstart":{
-            
-         },
-         "type":"speech",
-         "subscription":"/speech",
-         "rules":[
-            {
-               "rule":{
-                  "operator":"contains",
-                  "operand":[
-                     "cow",
-                     "tao",
-                     "how"
-                  ]
-               },
-               "actions":[
-                  [
-                     {
-                        "action":"soundmedia",
-                        "params":{
-                           "body":{
-                              "media":"moo.wav",
-                              "nowait":true,
-                              "delay":0
-                           }
-                        }
-                     }
-                  ]
-               ],
-               "next":"triggerwords"
-            }
-         ]
-      }
-   ]
-},
+
     {
        "id":"layer1",
        "start":{
@@ -63,27 +15,56 @@
              "id":"adultname",
              "name":"adultname",
              "onstart":{
+               "actions":[[{
+                  "action":"soundmedia",
+                  "params":{
+                     "body":{
+                        "media":"Music_1.wav",
+                        "nowait":true,
+                        "delay":0
+                     }
+                  }
+                }]],
                 "speech":[
                    {
-                      "words":"Hello.  My name is Robert.",
+                      "words":"Hello.  I have just arrived from another planet. ",
                       "delay":500,
-                      "voice":"Daniel",
+                      "voice":"Ralph",
                       "background":"",
-                      "rate":"180"
+                      "rate":"150"
                    },
                    {
-                      "words":"We are going to listen to a great story",
-                      "delay":500,
-                      "voice":"Daniel",
+                      "words":"I am a very small robot.  I am called Lift Number Five",
+                      "delay":0,
+                      "voice":"Ralph",
                       "background":"",
-                      "rate":"180"
+                      "rate":"150"
                    },
                    {
-                      "words":"But before we start, I need a bit of information. A question for an adult. Please tell me your name",
-                      "voice":"Daniel",
+                     "words":"",
+                     "delay":4000,
+                     "voice":"Ralph",
+                     "background":"SFx_1.wav",
+                     "rate":"150"
+                  },
+                   {
+                      "words":"What is the.",
+                      "voice":"Ralph",
                       "background":"",
-                      "rate":"180"
-                   }
+                      "rate":"150"
+                   },
+                   {
+                     "words":"Big.",
+                     "voice":"Ralph",
+                     "background":"",
+                     "rate":"100"
+                  },
+                  {
+                     "words":"person called?",
+                     "voice":"Ralph",
+                     "background":"",
+                     "rate":"150"
+                  }
                 ]
              },
              "type":"speech",
@@ -102,27 +83,263 @@
                          
                       ]
                    ],
-                   "next":"childname"
+                   "next":"getadultright"
                 }
              ]
           },
+
+
           {
+            "id":"askadultagain",
+            "name":"askadultagain",
+            "onstart":{
+               "actions":[
+                  [
+                     {
+                        "action":"stopallsound"
+                     }
+                  ]
+               ],
+               "speech":[
+                  {
+                     "words":"Oh I am so sorry! My hearing sensors are a bit damaged so you will need to be patient with me",
+                     "delay":500,
+                     "voice":"Ralph",
+                     "background":"",
+                     "rate":"150"
+                  },
+                  {
+                     "words":"I won't call you |adultname| Let's try again",
+                     "delay":500,
+                     "voice":"Ralph",
+                     "background":"",
+                     "rate":"150"
+                  },
+                  {
+                     "words":"What is the big person called?",
+                     "voice":"Ralph",
+                     "background":"",
+                     "rate":"150"
+                  }
+               ]
+            },
+            "type":"speech",
+            "subscription":"/speech",
+            "rules":[
+               {
+                  "rule":{
+                     "operator":"any",
+                     "default":true,
+                     "assign":{
+                        "name":"adultname"
+                     }
+                  },
+                  "actions":[
+                     [
+                        
+                     ]
+                  ],
+                  "next":"getadultright"
+               }
+            ]
+         },
+
+         {
+            "id":"askchildagain",
+            "name":"askchildagain",
+            "onstart":{
+               "actions":[
+                  [
+                     {
+                        "action":"stopallsound"
+                     }
+                  ]
+               ],
+               "speech":[
+                  {
+                     "words":"Oh I am so sorry! My hearing sensors are a bit damaged so you will need to be patient with me",
+                     "delay":500,
+                     "voice":"Ralph",
+                     "background":"",
+                     "rate":"150"
+                  },
+                  {
+                     "words":"I won't call you |childname| Let's try again",
+                     "delay":500,
+                     "voice":"Ralph",
+                     "background":"",
+                     "rate":"150"
+                  },
+                  {
+                     "words":"What is the small person called?",
+                     "voice":"Ralph",
+                     "background":"",
+                     "rate":"150"
+                  }
+               ]
+            },
+            "type":"speech",
+            "subscription":"/speech",
+            "rules":[
+               {
+                  "rule":{
+                     "operator":"any",
+                     "default":true,
+                     "assign":{
+                        "name":"childname"
+                     }
+                  },
+                  "actions":[
+                     [
+                        
+                     ]
+                  ],
+                  "next":"getchildright"
+               }
+            ]
+         },
+
+         {
+            "id":"getadultright",
+            "name":"getadultright",
+            "onstart":{
+               "actions":[
+                  [
+                     {
+                        "action":"stopallsound"
+                     }
+                  ]
+               ],
+               "speech":[
+                  {
+                     "words":"Hello |adultname|.  Nice to meet you!",
+                     "delay":1000,
+                     "voice":"Ralph",
+                     "background":"",
+                     "rate":"150"
+                  },
+                  {
+                     "words":"Did I get that right?",
+                     "voice":"Ralph",
+                     "background":"",
+                     "rate":"150"
+                  }
+               ]
+            },
+            "type":"speech",
+            "subscription":"/speech",
+            "rules":[
+               {
+                  "rule":{
+                     "operator":"contains",
+                     "operand":[
+                        "yes",
+                        "yep",
+                        "yeah"
+                     ]
+                  },
+                  "actions":[
+                     [
+                        
+                     ]
+                  ],
+                  "next":"childname"
+               },
+               {
+                  "rule":{
+                     "operator":"contains",
+                     "operand":[
+                        "no",
+                        "nope",
+                        "not"
+                     ]
+                  },
+                  "actions":[
+                     [
+                        
+                     ]
+                  ],
+                  "next":"askadultagain"
+               }
+            ]
+         },
+
+
+         {
+            "id":"getchildright",
+            "name":"getchildright",
+            "onstart":{
+               "actions":[
+                  [
+                     {
+                        "action":"stopallsound"
+                     }
+                  ]
+               ],
+               "speech":[
+                  {
+                     "words":"Hello |childname|.  Nice to meet you!",
+                     "delay":1000,
+                     "voice":"Ralph",
+                     "background":"",
+                     "rate":"150"
+                  },
+                  {
+                     "words":"Did I get that right?",
+                     "voice":"Ralph",
+                     "background":"",
+                     "rate":"150"
+                  }
+               ]
+            },
+            "type":"speech",
+            "subscription":"/speech",
+            "rules":[
+               {
+                  "rule":{
+                     "operator":"contains",
+                     "operand":[
+                        "yes",
+                        "yep",
+                        "yeah"
+                     ]
+                  },
+                  "actions":[
+                     [
+                        
+                     ]
+                  ],
+                  "next":"askaboutme"
+               },
+               {
+                  "rule":{
+                     "operator":"contains",
+                     "operand":[
+                        "no",
+                        "nope",
+                        "not"
+                     ]
+                  },
+                  "actions":[
+                     [
+                        
+                     ]
+                  ],
+                  "next":"askchildagain"
+               }
+            ]
+         },
+
+         {
              "id":"childname",
              "name":"childname",
              "onstart":{
                 "speech":[
                    {
-                      "words":"Hello |adultname|.  Nice to meet you!",
-                      "delay":1000,
-                      "voice":"Daniel",
+                      "words":"Now, what is the name of the small person?",
+                      "voice":"Ralph",
                       "background":"",
-                      "rate":"180"
-                   },
-                   {
-                      "words":"Now, could you tell me the name of the child who will be taking part?",
-                      "voice":"Daniel",
-                      "background":"",
-                      "rate":"180"
+                      "rate":"150"
                    }
                 ]
              },
@@ -142,7 +359,7 @@
                          
                       ]
                    ],
-                   "next":"whowillread"
+                   "next":"getchildright"
                 },
                 {
                    "rule":{
@@ -168,41 +385,337 @@
                          }
                       ]
                    ],
-                   "next":"adultname"
+                   "next":"askadultagain"
                 }
              ]
           },
+
+
+
           {
+            "id":"askaboutme",
+            "name":"askaboutme",
+            "onstart":{
+               "speech":[
+                  {
+                     "words":"Great. I think I am quite interesting.",
+                     "delay":1000,
+                     "voice":"Ralph",
+                     "background":"",
+                     "rate":"150"
+                  },
+                  {
+                     "words":"Would you like to find out more about me?",
+                     "voice":"Ralph",
+                     "background":"",
+                     "rate":"150"
+                  }
+               ]
+            },
+            "type":"speech",
+            "subscription":"/speech",
+            "rules":[
+               {
+                  "rule":{
+                     "operator":"contains",
+                     "operand":[
+                        "yes",
+                        "yep",
+                        "yeah"
+                     ]
+                  },
+                  "actions":[
+                     [
+                        
+                     ]
+                  ],
+                  "next":"aboutrobot"
+               },
+               {
+                  "rule":{
+                     "operator":"contains",
+                     "operand":[
+                        "no",
+                        "nope"
+                     ]
+                  },
+                  "actions":[
+                     [
+                        
+                     ]
+                  ],
+                  "next":"aboutrobotshort"
+               }
+            ]
+         },                 
+         {
+            "id":"aboutrobot",
+            "name":"aboutrobot",
+            "onstart":{
+               "speech":[
+                  {
+                     "words":"Well, I am having a holiday.  It is the first time I have been to another planet.",
+                     "delay":200,
+                     "voice":"Ralph",
+                     "background":"",
+                     "rate":"150"
+                  },
+                  {
+                     "words":"I came here because you have things called. Stories. On this planet and something called. Fun.",
+                     "voice":"Ralph",
+                     "delay":200,
+                     "background":"",
+                     "rate":"150"
+                  },
+                  {
+                     "words":"I have never done that.  I would like to have fun and tell stories.",
+                     "voice":"Ralph",
+                     "delay":200,
+                     "background":"",
+                     "rate":"150"
+                  },
+                  {
+                     "words":"But my imagination is not very big.  Also my hearing sensors are a bit damaged so I might not always hear you.",
+                     "voice":"Ralph",
+                     "delay":200,
+                     "background":"",
+                     "rate":"150"
+                  },
+                  {
+                     "words":"If I don’t, just be patient with me and try again.",
+                     "voice":"Ralph",
+                     "delay":200,
+                     "background":"",
+                     "rate":"150"
+                  }
+               
+               ]
+            },
+            "type":"speech",
+            "subscription":"/speech",
+            "rules":[
+               {
+                  "rule":{
+                     "operator":"contains",
+                     "operand":[]
+                  },
+                  "actions":[[]],
+                  "next":"foundastory"    
+               }
+            ],
+            "timeout":{
+               "wait":1,
+               "next":"foundastory"
+            }
+         },
+
+         {
+            "id":"aboutrobotshort",
+            "name":"aboutrobotshort",
+            "onstart":{
+               "speech":[
+                    
+                  {
+                     "words":"That’s fine I am actually not very exciting.",
+                     "delay":200,
+                     "voice":"Ralph",
+                     "background":"",
+                     "rate":"150"
+                  },
+                  {
+                     "words":"But, I am having a holiday.  It is the first time I have been to another planet.",
+                     "delay":200,
+                     "voice":"Ralph",
+                     "background":"",
+                     "rate":"150"
+                  },
+                  {
+                     "words":"I came here because you have things called stories on this planet and something called fun.",
+                     "voice":"Ralph",
+                     "delay":200,
+                     "background":"",
+                     "rate":"150"
+                  },
+                  {
+                     "words":"I have never done that.  I would like to have fun and tell stories.",
+                     "voice":"Ralph",
+                     "delay":200,
+                     "background":"",
+                     "rate":"150"
+                  },
+                  {
+                     "words":"But my imagination is not very big.  Also my hearing sensors are a bit damaged so I might not always hear you.",
+                     "voice":"Ralph",
+                     "delay":200,
+                     "background":"",
+                     "rate":"150"
+                  },
+                  {
+                     "words":"If I don’t, just be patient with me and try again.",
+                     "voice":"Ralph",
+                     "delay":200,
+                     "background":"",
+                     "rate":"150"
+                  }
+               ]
+            },
+            "type":"speech",
+            "subscription":"/speech",
+            "rules":[{
+               "rule":{
+                  "operator":"contains",
+                  "operand":[]
+               },
+               "actions":[[]],
+               "next":"foundastory"    
+            }],
+            "timeout":{
+               "wait":1,
+               "next":"foundastory"
+            }
+         },
+
+           
+         {
+            "id":"foundastory",
+            "name":"foundastory",
+            "onstart":{
+               "speech":[
+                  {
+                     "words":" I have found a story in one of your human libraries.",
+                     "delay":500,
+                     "voice":"Ralph",
+                     "background":"",
+                     "rate":"150"
+                  },
+                  {
+                     "words":" It is called Jack and the beanstalk.  I do not know what Jack is.  Or what a beanstalk is.",
+                     "delay":200,
+                     "voice":"Ralph",
+                     "background":"",
+                     "rate":"150"
+                  },
+                  {
+                     "words":"I am not sure I will understand it.  Have you heard of it?",
+                     "voice":"Ralph",
+                     "background":"",
+                     "rate":"150"
+                  },
+                  {
+                     "words":"Can we read it together?",
+                     "voice":"Ralph",
+                     "background":"",
+                     "rate":"150"
+                  }
+               ]
+            },
+            "type":"speech",
+            "subscription":"/speech",
+            "rules":[
+               {
+                  "rule":{
+                     "operator":"contains",
+                     "operand":[
+                        "yes",
+                        "yep",
+                        "yeah"
+                     ],
+                     "assign":{
+                        "name":"narrator",
+                        "value":"robert"
+                     }
+                  },
+                  "actions":[
+                     [
+                        
+                     ]
+                  ],
+                  "next":"whowillread"
+               },
+               {
+                  "rule":{
+                     "operator":"contains",
+                     "operand":[
+                      "no",
+                      "nope",
+                      "not"
+                     ],
+                     "assign":{
+                        "name":"narrator",
+                        "value":"user"
+                     }
+                  },
+                  "actions":[
+                     [
+                        
+                     ]
+                  ],
+                  "next":"user_introduction"
+               },
+               {
+                  "rule":{
+                     "operator":"contains",
+                     "operand":[
+                        "go back",
+                        "back",
+                        "previous",
+                        "rewind"
+                     ]
+                  },
+                  "actions":[
+                     [
+                        {
+                           "action":"soundmedia",
+                           "params":{
+                              "body":{
+                                 "media":"rewind.wav",
+                                 "nowait":true,
+                                 "delay":0
+                              }
+                           }
+                        }
+                     ]
+                  ],
+                  "next":"childname"
+               }
+            ]
+         },
+
+
+
+
+         {
              "id":"whowillread",
              "name":"whowillread",
              "onstart":{
                 "speech":[
                    {
-                      "words":"Hello |childname|. Nice to meet you too!",
+                      "words":"Thank you. I am having the best holiday!",
                       "delay":1000,
-                      "voice":"Daniel",
+                      "voice":"Ralph",
                       "background":"",
-                      "rate":"180"
+                      "rate":"150"
                    },
                    {
-                      "words":"We are nearly ready.",
-                      "delay":1000,
-                      "voice":"Daniel",
+                      "words":"How shall we do this?",
+                      "voice":"Ralph",
                       "background":"",
-                      "rate":"180"
+                      "delay":"1000",
+                      "rate":"150"
                    },
                    {
-                      "words":"First |adultname|, you need to decide if you want me to read the story, or if you would like to read it instead",
-                      "voice":"Daniel",
-                      "background":"",
-                      "rate":"180"
+                     "words":" If you think I should read the story, say. You read",
+                     "voice":"Ralph",
+                     "background":"",
+                     "rate":"150"
                    },
                    {
-                      "words":"If you would like me to read, then just say. Robert. But if instead you want to read, say. I will read",
-                      "voice":"Daniel",
+                      "words":"But |adultname|, if you would like to read the story, say. Me",
+                      "voice":"Ralph",
                       "background":"",
-                      "rate":"180"
+                      "rate":"150"
                    }
+
                 ]
              },
              "type":"speech",
@@ -212,8 +725,10 @@
                    "rule":{
                       "operator":"contains",
                       "operand":[
-                         "Robert",
-                         "Rob"
+                         "You",
+                         "read",
+                         "bleed",
+                         "need"
                       ],
                       "assign":{
                          "name":"narrator",
@@ -231,9 +746,11 @@
                    "rule":{
                       "operator":"contains",
                       "operand":[
-                         "I",
-                         "Will",
-                         "Read"
+                         "Me",
+                         "3",
+                         "Three",
+                         "Be",
+                         "Sea"
                       ],
                       "assign":{
                          "name":"narrator",
@@ -271,7 +788,7 @@
                          }
                       ]
                    ],
-                   "next":"childname"
+                   "next":"foundastory"
                 }
              ]
           },
@@ -280,69 +797,50 @@
              "name":"robert_introduction",
              "onstart":{
                 "speech":[
-                   {
-                      "words":"Great. I am going to tell you a story all about Jack and the Beanstalk",
-                      "delay":1000,
-                      "voice":"Daniel",
-                      "background":"",
-                      "rate":"180"
-                   },
-                   {
-                      "words":"If you want to take over, then when you hear this noise ",
-                      "voice":"Daniel",
-                      "delay":500,
-                      "background":"",
-                      "rate":"180"
-                   },
-                   {
-                      "words":"",
-                      "voice":"Daniel",
-                      "background":"bell.wav",
-                      "rate":"180"
-                   },
-                   {
-                      "words":"Then please just say.  I will read.",
-                      "voice":"Daniel",
-                      "delay":1000,
-                      "background":"",
-                      "rate":"180"
-                   },
-                   {
-                      "words":"OK let's start",
-                      "voice":"Daniel",
-                      "delay":1000,
-                      "background":"jackback1.wav",
-                      "rate":"180"
-                   },
+                  {
+                     "words":"Great.  Let's get started!",
+                     "voice":"Ralph",
+                     "delay":500,
+                     "background":"",
+                     "rate":"150"
+                  },
                    {
                       "words":"Once upon a time there was a boy called Jack. He lived with his mother.  They were very poor",
-                      "voice":"Daniel",
+                      "voice":"Ralph",
                       "delay":500,
                       "background":"",
-                      "rate":"180"
+                      "rate":"150"
                    },
                    {
                       "words":"All they had was a Cow.  One morning, Jack's mother told Jack to take the cow to the market and sell her",
-                      "voice":"Daniel",
+                      "voice":"Ralph",
                       "delay":500,
-                      "background":"",
-                      "rate":"180"
+                      
+                      "rate":"150"
                    },
                    {
                       "words":"When Jack got to the market, he felt nervous",
-                      "voice":"Daniel",
+                      "voice":"Ralph",
                       "delay":1000,
-                      "background":"",
-                      "rate":"180"
+                      "rate":"150"
                    },
                    {
-                      "words":"There are not many animals in the market at the moment",
-                      "voice":"Daniel",
+                      "words":"Oh.  So sorry,  I do not understand farmers market. ",
+                      "voice":"Ralph",
                       "delay":500
                    },
                    {
-                      "words":"Can you name some farm animals?",
-                      "voice":"Daniel"
+                      "words":"Maybe a farmers market has animals from a farm?",
+                      "voice":"Ralph",
+                      "delay":500
+                   },
+                   {
+                     "words":"I think you can help me here.",
+                     "voice":"Ralph"
+                   },
+                   {
+                     "words":"In fifteen seconds, please name as many farm animals as you can.  I will then look up their sounds in my holiday book",
+                     "voice":"Ralph"
                    }
                 ]
              },
@@ -389,36 +887,16 @@
                    {
                       "words":"Great. You have decided to read.",
                       "delay":1000,
-                      "voice":"Daniel",
+                      "voice":"Ralph",
                       "background":"",
-                      "rate":"180"
-                   },
-                   {
-                      "words":"If you decide later that you want me to take over, then when you hear this noise ",
-                      "voice":"Daniel",
-                      "delay":500,
-                      "background":"",
-                      "rate":"180"
-                   },
-                   {
-                      "words":"",
-                      "voice":"Daniel",
-                      "background":"bell.wav",
-                      "rate":"180"
-                   },
-                   {
-                      "words":"Then please just say.  Robert.",
-                      "voice":"Daniel",
-                      "delay":1000,
-                      "background":"",
-                      "rate":"180"
+                      "rate":"150"
                    },
                    {
                       "words":"When you are ready, you can start",
-                      "voice":"Daniel",
+                      "voice":"Ralph",
                       "delay":1000,
                       "background":"",
-                      "rate":"180"
+                      "rate":"150"
                    }
                 ]
              },
@@ -461,16 +939,15 @@
                       ]
                    },
                    "actions":[
-                      [
-                         {
+                        [ {
                             "action":"say",
                             "params":{
                                "body":{
                                   "speech":[
                                      {
-                                        "words":"There are not many animals in the market at the moment",
-                                        "voice":"Daniel",
-                                        "delay":1000
+                                        "words":"Oh.  So sorry,  I do not understand farmers market",
+                                        "voice":"Ralph",
+                                        "delay":500
                                        
                                      }
                                   ]
@@ -483,15 +960,40 @@
                                "body":{
                                   "speech":[
                                      {
-                                        "words":"Can you name some farm animals?",
-                                        "voice":"Daniel"
+                                        "words":"Maybe a farmers market has animals from a farm?",
+                                        "voice":"Ralph"
                                      }
                                   ]
                                }
                             }
-                         }
-                      ]
-                   ],
+                         },
+                         {
+                           "action":"say",
+                           "params":{
+                              "body":{
+                                 "speech":[
+                                    {
+                                       "words":"I think you can help me here. ",
+                                       "voice":"Ralph"
+                                    }
+                                 ]
+                              }
+                           }
+                        },
+                        {
+                           "action":"say",
+                           "params":{
+                              "body":{
+                                 "speech":[
+                                    {
+                                       "words":"In fifteen seconds, please name as many farm animals as you can.  I will then look up their sounds in my holiday book",
+                                       "voice":"Ralph"
+                                    }
+                                 ]
+                              }
+                           }
+                        }
+                   ]],
                    "next":"market"
                 }
              ]
@@ -512,7 +1014,19 @@
                              }
                           }
                        }
-                    ]
+                    ],
+                    [
+                     {
+                        "action":"soundmedia",
+                        "params":{
+                           "body":{
+                              "media":"Soundscape_1.wav",
+                              "nowait":true,
+                              "delay":0
+                           }
+                        }
+                     }
+                  ]
                  ]
              },
              "type":"speech",
@@ -812,7 +1326,7 @@
                }
              ],
              "timeout":{
-                "wait":10,
+                "wait":15,
                 "next":"parttwo"
              }
           },
@@ -820,92 +1334,45 @@
              "id":"parttwo",
              "name":"parttwo",
              "onstart":{
+               "actions":[
+                  [
+                     {
+                        "action":"stopallsound"
+                     }
+                  ]
+               ],
                 "speech":[
                    {
-                      "words":"Lovely, that is much better! Full of animals",
+                      "words":"Thank you.  I understand what a farmers market is now.  They are very noisy!",
                       "delay":0,
-                      "voice":"Daniel",
+                      "voice":"Ralph",
                       "background":"",
-                      "rate":"180"
-                   },
-                   {
-                    "words":"",
-                    "delay":0,
-                    "voice":"Daniel",
-                    "background":"bell.wav",
-                    "rate":"180"
-                 }
+                      "rate":"150"
+                   }
                 ]
              },
              "rules":[
-                {
-                   "rule":{
-                      "operator":"contains",
-                      "operand":[
-                         "I",
-                         "Will",
-                         "Read"
-                      ],
-                      "assign":{
-                         "name":"narrator",
-                         "value":"user"
-                      }
-                   },
-                   "actions":[
-                      [
-                         
-                      ]
-                   ],
-                   "next":"user_parttwo"
-                },
-                {
-                   "rule":{
-                      "operator":"contains",
-                      "operand":[
-                         "Robert",
-                         "Rob"
-                      ],
-                      "assign":{
-                         "name":"narrator",
-                         "value":"robert"
-                      }
-                   },
-                   "actions":[
-                      [
-                         
-                      ]
-                   ],
-                   "next":"robert_parttwo"
-                },
-                {
-                  "rule":{
-                     "operator":"contains",
-                     "operand":[
-                        "go back",
-                        "back",
-                        "previous",
-                        "rewind"
-                     ]
+               
+                  {
+                     "rule":{
+                        "operator":"contains",
+                        "operand":[]
+                     },
+                     "actions":[[]],
+                     "next":"robert_parttwo"    
                   },
-                  "actions":[
-                     [
-                        {
-                           "action":"soundmedia",
-                           "params":{
-                              "body":{
-                                 "media":"rewind.wav",
-                                 "nowait":true,
-                                 "delay":0
-                              }
-                           }
-                        }
-                     ]
-                  ],
-                  "next":"market"
-               }
+                  {
+                     "rule":{
+                        "operator":"contains",
+                        "operand":[]
+                     },
+                     "actions":[[]],
+                     "next":"user_parttwo"    
+                  }
+               
              ],
              "timeout":{
-                "wait":5,
+                "wait":1,
                 "rules":[
                    {
                       "rule":{
@@ -948,7 +1415,7 @@
                          
                       ]
                    ],
-                   "next":"doyouthink?"
+                   "next":"whatarebeans?"
                 }
              ],
              "type":"speech",
@@ -962,55 +1429,98 @@
                    {
                       "words":"Jack was unable to sell his cow at the market.",
                       "delay":0,
-                      "voice":"Daniel",
-                      "background":"jackback1.wav",
-                      "rate":"180"
+                      "voice":"Ralph",
+                      
+                      "rate":"150"
                    },
                    {
                       "words":"He was feeling hungry and wondering what his mum would think",
                       "delay":0,
-                      "voice":"Daniel",
+                      "voice":"Ralph",
                       "background":"",
-                      "rate":"180"
+                      "rate":"150"
                    },
                    {
-                      "words":"Suddenly Jack met a strange man with twinkly eyes.",
+                      "words":"Suddenly Jack met a strange man.",
                       "delay":0,
-                      "voice":"Daniel",
-                      "background":"",
-                      "rate":"180"
+                      "voice":"Ralph",
+                     
+                      "rate":"150"
                    },
                    {
-                      "words":" The man wanted Daisy and says he will give Jack some magic beans for the cow.",
+                     "words":"With twinkly eyes.",
+                     "delay":0,
+                     "voice":"Ralph",
+                     "background":"SFx_3.wav",
+                     "rate":"150"
+                  },
+                   {
+                      "words":" The man wanted Daisy and says he will give Jack",
                       "delay":0,
-                      "voice":"Daniel",
-                      "background":"",
-                      "rate":"180"
-                   }
+                      "voice":"Ralph",
+                      "rate":"150"
+                   },
+                   {
+                     "words":"",
+                     "delay":0,
+                     "voice":"Ralph",
+                     "background":"SFx_4.wav",
+                     "rate":"150"
+                  },
+                   {
+                     "words":"five magic beans for the cow.",
+                     "delay":0,
+                     "voice":"Ralph",
+                   
+                     "rate":"150"
+                  }
                 ]
              },
              "rules":[
-                
-             ],
+               
+               {
+                  "rule":{
+                     "operator":"contains",
+                     "operand":[]
+                  },
+                  "actions":[[]],
+                  "next":"whatarebeans?"    
+               }
+            
+          ],
              "timeout":{
                 "wait":1,
-                "next":"doyouthink?"
+                "next":"whatarebeans?"
              },
              "type":"speech",
              "subscription":"/speech"
           },
           {
-             "id":"doyouthink?",
-             "name":"doyouthink?",
+             "id":"whatarebeans?",
+             "name":"whatarebeans?",
              "onstart":{
                 "speech":[
                    {
-                      "words":"Herm. Do you think you would swap the cow for the beans?",
+                      "words":"Herm. Magic beans?",
                       "delay":0,
-                      "voice":"Daniel",
-                      "background":"",
-                      "rate":"180"
-                   }
+                      "voice":"Ralph",
+                      "background":"SFx_4.wav",
+                      "rate":"150"
+                   },
+                   {
+                     "words":"I do not know this",
+                     "delay":1000,
+                     "voice":"Ralph",
+                     "background":"",
+                     "rate":"150"
+                  },
+                  {
+                     "words":"Is it good to swap magic beans for a cow?",
+                     "delay":500,
+                     "voice":"Ralph",
+                     "background":"",
+                     "rate":"150"
+                  }
                 ]
              },
              "type":"speech",
@@ -1020,7 +1530,9 @@
                    "rule":{
                       "operator":"contains",
                       "operand":[
-                         "yes"
+                         "yes",
+                         "yeah",
+                         "yep"
                       ]
                    },
                    "actions":[
@@ -1028,13 +1540,19 @@
                          
                       ]
                    ],
-                   "next":"yes"
+                   "next":"yes",
+                   "assign":{
+                     "name":"beandescription",
+                     "value":"splendid"
+                  }
                 },
                 {
                    "rule":{
                       "operator":"contains",
                       "operand":[
-                         "no"
+                         "no",
+                         "nope",
+                         "oh"
                       ]
                    },
                    "actions":[
@@ -1042,63 +1560,75 @@
                          
                       ]
                    ],
-                   "next":"no"
+                   "next":"no",
+                   "assign":{
+                     "name":"beandescription",
+                     "value":"nasty"
+                  }
                 }
              ]
           },
+
           {
              "id":"yes",
              "name":"yes",
              "onstart":{
                 "speech":[
                    {
-                      "words":"Well that is good.  I think it sounds like a pretty good deal.",
+                      "words":"Thanks you.  I understand now",
                       "delay":"1000",
-                      "voice":"Daniel",
+                      "voice":"Ralph",
                       "background":"",
-                      "rate":"180"
+                      "rate":"150"
                    },
                    {
-                      "words":"Do you think you could help me count out the beans for the cow?",
+                      "words":"Tomorrow I will look for some magic beans as I think I would like to take a nice cow home with me.",
                       "delay":0,
-                      "voice":"Daniel",
+                      "voice":"Ralph",
                       "background":"",
-                      "rate":"180"
-                   }
+                      "rate":"150"
+                   },
+                   {
+                     "words":"I hope my lift space is big enough for a cow",
+                     "delay":0,
+                     "voice":"Ralph",
+                     "background":"moo.wav",
+                     "rate":"150"
+                  },
+                  {
+                     "words":"Magic beans are good",
+                     "delay":0,
+                     "voice":"Ralph",
+                     "background":"",
+                     "rate":"150"
+                  },
+                  {
+                     "words":"Please help me understand how to swap magic beans for a cow",
+                     "delay":0,
+                     "voice":"Ralph",
+                     "background":"",
+                     "rate":"150"
+                  }
                 ]
              },
              "type":"speech",
              "subscription":"/speech",
              "rules":[
-                {
-                   "rule":{
-                      "operator":"contains",
-                      "operand":[
-                         "yes"
-                      ]
-                   },
-                   "actions":[
-                      [
-                         
-                      ]
-                   ],
-                   "next":"swapyes"
-                },
-                {
-                   "rule":{
-                      "operator":"contains",
-                      "operand":[
-                         "no"
-                      ]
-                   },
-                   "actions":[
-                      [
-                         
-                      ]
-                   ],
-                   "next":"swapno"
-                }
-             ]
+               
+               {
+                  "rule":{
+                     "operator":"contains",
+                     "operand":[]
+                  },
+                  "actions":[[]],
+                  "next":"swapyes"    
+               }
+            
+            ],
+             "timeout":{
+               "wait":1,
+               "next":"swapyes"
+             }
           },
           {
              "id":"no",
@@ -1106,47 +1636,67 @@
              "onstart":{
                 "speech":[
                    {
-                      "words":"Well neither would I.  ",
+                      "words":"I understand",
                       "delay":"500",
-                      "voice":"Daniel",
+                      "voice":"Ralph",
                       "background":"",
-                      "rate":"180"
+                      "rate":"150"
                    },
                    {
-                      "words":"I love cows.  I collect cows.  I have a drawer full of cows in my bedroom.  And one in my car. ",
+                      "words":"It is not good to swap magic beans for a cow. ",
                       "delay":"1000",
-                      "voice":"Daniel",
+                      "voice":"Ralph",
                       "background":"",
-                      "rate":"180"
+                      "rate":"150"
                    },
                    {
-                      "words":"What would you accept instead?",
+                      "words":"I do not want magic beans now",
                       "delay":0,
-                      "voice":"Daniel",
+                      "voice":"Ralph",
                       "background":"",
-                      "rate":"180"
-                   }
+                      "rate":"150"
+                   },
+                   {
+                     "words":"Please never give me any magic beans.  I will not accept magic beans.",
+                     "delay":0,
+                     "voice":"Ralph",
+                     "background":"",
+                     "rate":"150"
+                  },
+                  {
+                     "words":"Magic beans are bad",
+                     "delay":0,
+                     "voice":"Ralph",
+                     "background":"",
+                     "rate":"150"
+                  },
+                  {
+                     "words":"But please help me understand how to swap magic beans for a cow",
+                     "delay":0,
+                     "voice":"Ralph",
+                     "background":"",
+                     "rate":"150"
+                  }
                 ]
              },
              "type":"speech",
              "subscription":"/speech",
              "rules":[
-                {
-                   "rule":{
-                      "operator":"any",
-                      "default":true,
-                      "assign":{
-                         "name":"thing"
-                      }
-                   },
-                   "actions":[
-                      [
-                         
-                      ]
-                   ],
-                   "next":"askforthat"
-                }
-             ]
+               
+               {
+                  "rule":{
+                     "operator":"contains",
+                     "operand":[]
+                  },
+                  "actions":[[]],
+                  "next":"swapyes"    
+               }
+            
+            ],
+             "timeout":{
+               "wait":1,
+               "next":"swapyes"
+             }
           },
           {
              "id":"swapyes",
@@ -1154,60 +1704,46 @@
              "onstart":{
                 "speech":[
                    {
-                      "words":"Open your hands to collect five beans",
+                      "words":"Open your hands to collect five magic beans",
                       "delay":0,
-                      "voice":"Daniel",
+                      "voice":"Ralph",
                       "background":"",
-                      "rate":"180"
+                      "rate":"150"
                    },
                    {
-                      "words":"Here we go.  ",
+                      "words":"Yes.  This is good! Now I count the beans",
                       "delay":0,
-                      "voice":"Daniel",
+                      "voice":"Ralph",
                       "background":"",
-                      "rate":"180"
+                      "rate":"150"
                    },
                    {
                       "words":"One bean",
                       "delay":"100",
-                      "voice":"Daniel",
-                      "background":"",
-                      "rate":"180"
+                      "voice":"Ralph",
+                      "background":"SFx_5a.wav",
+                      "rate":"150"
                    },
                    {
                       "words":"Two beans",
                       "delay":"100",
-                      "voice":"Daniel",
-                      "background":"",
-                      "rate":"180"
+                      "voice":"Ralph",
+                      "background":"SFx_5b.wav",
+                      "rate":"150"
                    },
                    {
-                      "words":"Three beans",
+                      "words":"Oh.  My holiday book does not help me buy anything that costs more than two beans",
                       "delay":"100",
-                      "voice":"Daniel",
+                      "voice":"Ralph",
                       "background":"",
-                      "rate":"180"
+                      "rate":"150"
                    },
                    {
-                      "words":"Oh.  A bee.",
+                      "words":"How many more beans must I give twinkly man?",
                       "delay":0,
-                      "voice":"Daniel",
-                      "background":"bee.wav",
-                      "rate":"180"
-                   },
-                   {
-                      "words":"Get away, get away!",
-                      "delay":"500",
-                      "voice":"Daniel",
-                      "background":"bee.wav",
-                      "rate":"220"
-                   },
-                   {
-                      "words":"Oh. I have lost count.  How many more beans do I need to give you?",
-                      "delay":0,
-                      "voice":"Daniel",
+                      "voice":"Ralph",
                       "background":"",
-                      "rate":"180"
+                      "rate":"150"
                    }
                 ]
              },
@@ -1218,10 +1754,13 @@
                    "rule":{
                       "operator":"contains",
                       "operand":[
-                         "2",
-                         "who",
-                         "loo",
-                         "moo"
+                         "3",
+                         "three",
+                         "she",
+                         "be",
+                         "b",
+                         "bee",
+                         "hee"
                       ]
                    },
                    "actions":[
@@ -1248,188 +1787,74 @@
                 }
              ]
           },
-          {
-             "id":"askforthat",
-             "name":"askforthat",
-             "onstart":{
-                "speech":[
-                   {
-                      "words":"Ok I will ask for |thing:,| from the man instead",
-                      "delay":0,
-                      "voice":"Daniel",
-                      "background":"",
-                      "rate":"180"
-                   },
-                   {
-                      "words":"I am sure it will be fine.  Maybe I'll also ask for the beans.",
-                      "delay":0,
-                      "voice":"Daniel",
-                      "background":"",
-                      "rate":"180"
-                   },
-                   {
-                      "words":"Could you help me swap the beans for the cow?",
-                      "delay":0,
-                      "voice":"Daniel",
-                      "background":"",
-                      "rate":"180"
-                   }
-                ]
-             },
-             "type":"speech",
-             "subscription":"/speech",
-             "rules":[
-                {
-                   "rule":{
-                      "operator":"contains",
-                      "operand":[
-                         "yes"
-                      ]
-                   },
-                   "actions":[
-                      [
-                         ""
-                      ]
-                   ],
-                   "next":"swapyes"
-                },
-                {
-                   "rule":{
-                      "operator":"contains",
-                      "operand":[
-                         "no"
-                      ]
-                   },
-                   "actions":[
-                      [
-                         ""
-                      ]
-                   ],
-                   "next":"swapno"
-                }
-             ]
-          },
-          {
-             "id":"swapno",
-             "name":"swapno",
-             "onstart":{
-                "speech":[
-                   {
-                      "words":"Ok.  Not to worry.  I will collect the beans from the man myself",
-                      "delay":0,
-                      "voice":"Daniel",
-                      "background":"",
-                      "rate":"180"
-                   },
-                   {
-                      "words":"One bean",
-                      "delay":0,
-                      "voice":"Daniel",
-                      "background":"",
-                      "rate":"180"
-                   },
-                   {
-                      "words":"Two beans",
-                      "delay":0,
-                      "voice":"Daniel",
-                      "background":"",
-                      "rate":"180"
-                   },
-                   {
-                      "words":"Three beans.",
-                      "delay":0,
-                      "voice":"Daniel",
-                      "background":"",
-                      "rate":"180"
-                   },
-                   {
-                      "words":"Oh.  ",
-                      "delay":0,
-                      "voice":"Daniel",
-                      "background":"cow.wav",
-                      "rate":"180"
-                   },
-                   {
-                      "words":"I have been distracted by the cow.",
-                      "delay":0,
-                      "voice":"Daniel",
-                      "background":"cow.wav",
-                      "rate":"180"
-                   },
-                   {
-                      "words":"How many more beans do I need to collect?",
-                      "delay":0,
-                      "voice":"Daniel",
-                      "background":"",
-                      "rate":"180"
-                   }
-                ]
-             },
-             "type":"speech",
-             "subscription":"/speech",
-             "rules":[
-                {
-                   "rule":{
-                      "operator":"contains",
-                      "operand":[
-                         "2",
-                         "who",
-                         "loo"
-                      ]
-                   },
-                   "actions":[
-                      [
-                         ""
-                      ]
-                   ],
-                   "next":"correct"
-                },
-                {
-                   "rule":{
-                      "operator":"any",
-                      "default":true
-                   },
-                   "actions":[
-                      [
-                         ""
-                      ]
-                   ],
-                   "next":"incorrect"
-                }
-             ]
-          },
+         
           {
              "id":"correct",
              "name":"correct",
              "onstart":{
                 "speech":[
+                  {
+                     "words":"",
+                     "delay":2000,
+                     "voice":"Ralph",
+                     "background":"tada.mp3",
+                     "rate":"150"
+                  },
                    {
-                      "words":"Thanks!",
+                      "words":"Affirmative!",
                       "delay":0,
-                      "voice":"Daniel",
-                      "background":"tada.mp3",
-                      "rate":"180"
+                      "voice":"Ralph",
+                      "rate":"150"
                    },
                    {
-                      "words":"I am so glad that you listened!  Let's get back to the story!",
-                      "delay":0,
-                      "voice":"Daniel",
-                      "background":"",
-                      "rate":"180"
-                   }
+                      "words":"That is what my calculator says.  Let's count the rest of the beans.",
+                      "delay":500,
+                      "voice":"Ralph",
+                      "rate":"150"
+                   },
+                   {
+                     "words":"Three beans",
+                     "delay":200,
+                     "voice":"Ralph",
+                     "background":"SFx_5c.wav",
+                     "rate":"150"
+                  },
+                  {
+                     "words":"Four beans",
+                     "delay":200,
+                     "voice":"Ralph",
+                     "background":"SFx_5d.wav",
+                     "rate":"150"
+                  },
+                  {
+                     "words":"Five beans",
+                     "delay":1000,
+                     "voice":"Ralph",
+                     "background":"SFx_5e.wav",
+                     "rate":"150"
+                  },
+                  {
+                     "words":"That is very good. Let's get back to the story!",
+                     "voice":"Ralph",
+                     "background":"",
+                     "rate":"150"
+                  }
+
                 ]
              },
              "type":"speech",
              "subscription":"/speech",
              "rules":[
-                 {
-                     "rule":{
-                        "operator":"any",
-                        "default":true
-                    },
-                    "actions":[[]],
-                    "next":"partthree"
-                 }
+               
+               {
+                  "rule":{
+                     "operator":"contains",
+                     "operand":[]
+                  },
+                  "actions":[[]],
+                  "next":"partthree"    
+               }
+            
             ],
             "timeout": {
                 "wait": 1,
@@ -1442,25 +1867,25 @@
              "onstart":{
                 "speech":[
                    {
-                      "words":"I am not sure that |mathsanswer:,| is the correct answer, sorry",
+                      "words":"Negative.  My calculator says |mathsanswer:,| is incorrect",
                       "delay":"1000",
-                      "voice":"Daniel",
+                      "voice":"Ralph",
                       "background":"",
-                      "rate":"180"
+                      "rate":"150"
                    },
                    {
-                      "words":"I need to give you five beans but I think I have only given you three",
+                      "words":"I have given two beans and I must give 5 magic beans",
                       "delay":0,
-                      "voice":"Daniel",
+                      "voice":"Ralph",
                       "background":"",
-                      "rate":"180"
+                      "rate":"150"
                    },
                    {
                       "words":"How many beans should I give you?",
                       "delay":0,
-                      "voice":"Daniel",
+                      "voice":"Ralph",
                       "background":"",
-                      "rate":"180"
+                      "rate":"150"
                    }
                 ]
              },
@@ -1471,9 +1896,12 @@
                    "rule":{
                       "operator":"contains",
                       "operand":[
-                         "2",
-                         "who",
-                         "loo"
+                         "3",
+                         "three",
+                         "he",
+                         "she",
+                         "bee",
+                         "knee"
                       ]
                    },
                    "actions":[
@@ -1505,16 +1933,6 @@
                    [
                       {
                          "action":"stopallsound"
-                      },
-                      {
-                         "action":"soundmedia",
-                         "params":{
-                            "body":{
-                               "media":"bell.wav",
-                               "nowait":true,
-                               "delay":1000
-                            }
-                         }
                       }
                    ]
                 ]
@@ -1522,48 +1940,27 @@
              "type":"speech",
              "subscription":"/speech",
              "rules":[
-                {
-                   "rule":{
-                      "operator":"contains",
-                      "operand":[
-                         "I",
-                         "Will",
-                         "Read"
-                      ],
-                      "assign":{
-                         "name":"narrator",
-                         "value":"user"
-                      }
-                   },
-                   "actions":[
-                      [
-                         
-                      ]
-                   ],
-                   "next":"user_partthree"
-                },
-                {
-                   "rule":{
-                      "operator":"contains",
-                      "operand":[
-                         "Robert",
-                         "Rob"
-                      ],
-                      "assign":{
-                         "name":"narrator",
-                         "value":"robert"
-                      }
-                   },
-                   "actions":[
-                      [
-                         
-                      ]
-                   ],
-                   "next":"robert_partthree"
-                }
-             ],
+               
+               {
+                  "rule":{
+                     "operator":"contains",
+                     "operand":[]
+                  },
+                  "actions":[[]],
+                  "next":"robert_partthree"    
+               },
+               {
+                  "rule":{
+                     "operator":"contains",
+                     "operand":[]
+                  },
+                  "actions":[[]],
+                  "next":"user_partthree"    
+               }
+            
+            ],
              "timeout":{
-                "wait":5,
+                "wait":1,
                 "rules":[
                    {
                       "rule":{
@@ -1592,48 +1989,66 @@
                    {
                       "words":"Jack took the beans and went back home.",
                       "delay":500,
-                      "voice":"Daniel",
-                      "background":"jackback1.wav",
-                      "rate":"180"
+                      "voice":"Ralph",
+                      "background":"Soundscape_1.wav",
+                      "rate":"150"
                    },
                    {
                       "words":"When Jack’s mother saw the beans she was very angry.",
                       "delay":500,
-                      "voice":"Daniel",
-                      "rate":"180"
+                      "voice":"Ralph",
+                      "rate":"150"
                    },
                    {
                       "words":"She threw the beans out of the window.",
                       "delay":500,
-                      "voice":"Daniel",
-                      "rate":"180"
+                      "voice":"Ralph",
+                      "rate":"150"
                    },
+                   {
+                     "words":"",
+                     "delay":500,
+                     "voice":"Ralph",
+                     "background": "SFx_5f.wav",
+                     "rate":"150"
+                  },
                    {
                       "words":"The next morning, Jack looked out of the window. There was a giant bean stalk.",
-                      "voice":"Daniel",
-                      "rate":"180"
+                      "voice":"Ralph",
+                      "background": "SFx_6.wav",
+                      "delay":1200,
+                      "rate":"150"
                    },
                    {
-                      "words":"Wow that is a big bean stalk.  It is taller than two houses and it would probably take an hour to walk around.",
-                      "voice":"Daniel",
-                      "delay":1000
+                      "words":"What is a beanstalk?  I do not understand beanstalk",
+                      "voice":"Ralph",
+                      "delay":500
                    },
                    {
-                      "words":"Seeing that beanstalk makes me quite jealous.  I would quite like one myself.",
-                      "voice":"Daniel",
+                      "words":"Maybe you can help",
+                      "voice":"Ralph",
                       "delay":800
                    },
                    {
-                      "words":"Could you draw a picture of the bean stalk for me?",
-                      "voice":"Daniel"
-                   }
+                     "words":"Could you make a beanstalk to show me what it looks like?",
+                     "voice":"Ralph"
+                  },
+                  {
+                     "words":"Hopefully you have a few things you can use to build one.",
+                     "voice":"Ralph"
+                  }
                 ]
              },
              "type":"speech",
              "subscription":"/speech",
-             "rules":[
-                
-             ],
+             "rules":[{
+               "rule":{
+                  "operator":"contains",
+                  "operand":[]
+               },
+               "actions":[[]],
+               "next":"waitforresponse"    
+            }],
              "timeout":{
                 "wait":1,
                 "next":"waitforresponse"
@@ -1643,12 +2058,26 @@
              "id":"user_partthree",
              "name":"user_partthree",
              "onstart":{
+               "actions":[
+                  [
+                     {
+                        "action":"soundmedia",
+                        "params":{
+                           "body":{
+                              "media":"Soundscape_1.wav",
+                              "nowait":true,
+                              "delay":0
+                           }
+                        }
+                     }
+                  ]
+               ],
                 "speech":[
                    {
                       "words":"",
                       "delay":0,
-                      "voice":"Daniel",
-                      "rate":"180"
+                      "voice":"Ralph",
+                      "rate":"150"
                    }
                 ]
              },
@@ -1670,38 +2099,25 @@
                             "params":{
                                "body":{
                                   "speech":[
-                                     {
-                                        "words":"Wow that is a big beanstalk.  It is taller than two houses and it would probably take an hour to walk around.",
-                                        "voice":"Daniel",
-                                        "delay":1000
-                                     }
-                                  ]
-                               }
-                            }
-                         },
-                         {
-                            "action":"say",
-                            "params":{
-                               "body":{
-                                  "speech":[
-                                     {
-                                        "words":"Seeing that beanstalk makes me quite jealous.  I would quite like one myself.",
-                                        "voice":"Daniel",
-                                        "delay":800
-                                     }
-                                  ]
-                               }
-                            }
-                         },
-                         {
-                            "action":"say",
-                            "params":{
-                               "body":{
-                                  "speech":[
-                                     {
-                                        "words":"Could you draw a picture of the beanstalk for me?",
-                                        "voice":"Daniel"
-                                     }
+                                    {
+                                       "words":"What is a beanstalk?  I do not understand beanstalk",
+                                       "voice":"Ralph",
+                                       "delay":500
+                                    },
+                                    {
+                                       "words":"Maybe you can help",
+                                       "voice":"Ralph",
+                                       "delay":800
+                                    },
+                                    {
+                                       "words":"Could you make a beanstalk to show me what it looks like?",
+                                       "voice":"Ralph"
+                                    },
+                                    {
+                                       "words":"Hopefully you have a few things you can use to build one.",
+                                       "voice":"Ralph"
+                                    }
+
                                   ]
                                }
                             }
@@ -1720,9 +2136,9 @@
                    {
                       "words":"",
                       "delay":0,
-                      "voice":"Daniel",
+                      "voice":"Ralph",
                       "background":"",
-                      "rate":"180"
+                      "rate":"150"
                    }
                 ]
              },
@@ -1744,8 +2160,8 @@
                                "body":{
                                   "speech":[
                                      {
-                                        "words":"Lovely, say done when you are finished",
-                                        "voice":"Daniel"
+                                        "words":"You are very kind. Shout DONE when you are done",
+                                        "voice":"Ralph"
                                      }
                                   ]
                                }
@@ -1770,8 +2186,19 @@
                                "body":{
                                   "speech":[
                                      {
-                                        "words":"That’s fine.  Maybe later. What should Jack do now?  Should he chop it down.  Or climb it.  Or maybe just ignore it and hope it goes away. What do you think? Chop, climb or ignore?",
-                                        "voice":"Daniel"
+                                        "words":"Negative.  That is ok. Beanstalk sounds like something very big.",
+                                        "voice":"Ralph",
+                                        "delay":1000
+                                     },
+                                     {
+                                       "words":"I do not know if a beanstalk is a good thing or a bad thing",
+                                       "voice":"Ralph",
+                                       "delay":1000
+                                     },
+                                     {
+                                       "words":"Let's see what happens in the story and maybe that will help me understand more about beanstalks",
+                                       "voice":"Ralph",
+                                       "delay":1000
                                      }
                                   ]
                                }
@@ -1779,7 +2206,7 @@
                          }
                       ]
                    ],
-                   "next":"whatshouldjackdo"
+                   "next":"partfour"
                 }
              ],
              "timeout":{
@@ -1793,9 +2220,15 @@
                             "body":{
                                "speech":[
                                   {
-                                     "words":"Guess you're drawing.  Please say done when you are finished",
-                                     "voice":"Daniel"
-                                  }
+                                     "words":"okay.  I think you are probably building your beanstalk.  I am really looking forward to seeing it.",
+                                     "delay":500,
+                                     "voice":"Ralph"
+                                  },
+                                  {
+                                    "words":"Shout done when you are finished",
+                                    "delay":500,
+                                    "voice":"Ralph"
+                                 }
                                ]
                             }
                          }
@@ -1808,7 +2241,13 @@
              "id":"drawing",
              "name":"drawing",
              "onstart":{
-                
+               "actions":[
+                  [
+                     {
+                        "action":"stopallsound"
+                     }
+                  ]
+               ]
              },
              "type":"speech",
              "subscription":"/speech",
@@ -1817,7 +2256,7 @@
                    "rule":{
                       "operator":"contains",
                       "operand":[
-                         "done"
+                         "done","gun","fun"
                       ]
                    },
                    "actions":[
@@ -1828,188 +2267,70 @@
                                "body":{
                                   "speech":[
                                      {
-                                        "words":"Brilliant! What should Jack do with the beanstalk now?  Should he chop it down?  Or climb it?  Or maybe just ignore it and hope it goes away? What do you think? Chop, climb or ignore?",
-                                        "voice":"Daniel"
-                                     }
+                                        "words":"Oh.  Thank you.  That is great",
+                                        "voice":"Ralph"
+                                     },
+                                     {
+                                       "words":"Now I know exactly what a beanstalk is.  I think I will take one home with me",
+                                       "voice":"Ralph"
+                                    },
+                                    {
+                                       "words":"Tomorrow I will purchase some beans and a cow and a beanstalk from a shop",
+                                       "voice":"Ralph"
+                                    },
+                                    {
+                                       "words":"My lift friends will be very happy with me.",
+                                       "voice":"Ralph",
+                                       "delay":1000
+                                    },
+                                    {
+                                       "words":"Back to the story",
+                                       "voice":"Ralph",
+                                       "delay":500
+                                    }
+
                                   ]
                                }
                             }
                          }
                       ]
                    ],
-                   "next":"whatshouldjackdo"
+                   "next":"partfour"
                 }
              ]
           },
           {
-             "id":"whatshouldjackdo",
-             "name":"whatshouldjackdo",
+             "id":"partfour",
+             "name":"partfour",
              "onstart":{
-                
+               "actions":[
+                  [
+                     {
+                        "action":"stopallsound"
+                     }
+                  ]
+               ]
              },
              "type":"speech",
              "subscription":"/speech",
-             "rules":[
-                {
-                   "rule":{
-                      "operator":"contains",
-                      "operand":[
-                         "chop",
-                         "hop",
-                         "shop",
-                         "down"
-                      ]
-                   },
-                   "actions":[
-                      [
-                         {
-                            "action":"say",
-                            "params":{
-                               "body":{
-                                  "speech":[
-                                     {
-                                        "words":"Great idea.  Let's chop the bean stalk down.",
-                                        "voice":"Daniel",
-                                        "delay":1000
-                                     },
-                                     {
-                                        "words":"Oh.  But we don't have an axe.  Let's climb the bean stalk first.  Maybe we will find an axe at the top",
-                                        "voice":"Daniel"
-                                     }
-                                  ]
-                               }
-                            }
-                         }
-                      ]
-                   ],
-                   "next":"climbthebeanstalk"
-                },
-                {
-                   "rule":{
-                      "operator":"contains",
-                      "operand":[
-                         "climb",
-                         "lime",
-                         "fine",
-                         "shine"
-                      ]
-                   },
-                   "actions":[
-                      [
-                         {
-                            "action":"say",
-                            "params":{
-                               "body":{
-                                  "speech":[
-                                     {
-                                        "words":"I think that is a good idea.  Let's climb the bean stalk.",
-                                        "voice":"Daniel",
-                                        "delay":1000
-                                     },
-                                     {
-                                        "words":"It is quite high so don't look down.  Or up.",
-                                        "voice":"Daniel"
-                                     }
-                                  ]
-                               }
-                            }
-                         }
-                      ]
-                   ],
-                   "next":"climbthebeanstalk"
-                },
-                {
-                   "rule":{
-                      "operator":"contains",
-                      "operand":[
-                         "ignore",
-                         "away",
-                         "snore"
-                      ]
-                   },
-                   "actions":[
-                      [
-                         {
-                            "action":"say",
-                            "params":{
-                               "body":{
-                                  "speech":[
-                                     {
-                                        "words":"I think ignoring it is a lovely idea.  But it just seems to keep growing.  So before we ignore it, let's climb it.",
-                                        "voice":"Daniel"
-                                     }
-                                  ]
-                               }
-                            }
-                         }
-                      ]
-                   ],
-                   "next":"climbthebeanstalk"
-                }
-             ]
-          },
-          {
-             "id":"climbthebeanstalk",
-             "name":"climbthebeanstalk",
-             "onstart":{
-                "speech":[
-                   {
-                      "words":"let's get back to the story!",
-                      "delay":0,
-                      "voice":"Daniel",
-                      "background":"",
-                      "rate":"180"
-                   },
-                   {
-                    "words":"",
-                    "delay":0,
-                    "voice":"Daniel",
-                    "background":"bell.wav",
-                    "rate":"180"
-                 }
-                ]
+             "rules":[{
+               "rule":{
+                  "operator":"contains",
+                  "operand":[]
+               },
+               "actions":[[]],
+               "next":"robert_climbthebeanstalk"    
              },
-             "type":"speech",
-             "subscription":"/speech",
-             "rules":[
-                {
-                   "rule":{
-                      "operator":"contains",
-                      "operand":[
-                         "I",
-                         "Will",
-                         "Read"
-                      ],
-                      "assign":{
-                         "name":"narrator",
-                         "value":"user"
-                      }
-                   },
-                   "actions":[[]],
-                   "next":"user_climbthebeanstalk"
-                },
-                {
-                   "rule":{
-                      "operator":"contains",
-                      "operand":[
-                         "Robert",
-                         "Rob"
-                      ],
-                      "assign":{
-                         "name":"narrator",
-                         "value":"robert"
-                      }
-                   },
-                   "actions":[
-                      [
-                         
-                      ]
-                   ],
-                   "next":"robert_climbthebeanstalk"
-                }
-             ],
+             {
+               "rule":{
+                  "operator":"contains",
+                  "operand":[]
+               },
+               "actions":[[]],
+               "next":"user_climbthebeanstalk"    
+             }],
              "timeout":{
-                "wait":5,
+                "wait":1,
                 "rules":[
                    {
                       "rule":{
@@ -2039,56 +2360,107 @@
                 "speech":[
                         {
                            "words":"He went outside and started to climb the beanstalk.",
-                           "voice":"Daniel",
-                           "background":"jackback1.wav",
+                           "voice":"Ralph",
+                           "background":"Soundscape_3.wav",
                            "delay":500
                         },
                         {
-                           "words":"He climbed up to the sky through the clouds.  Jack saw a beautiful castle.  He went inside.",
-                           "voice":"Daniel",
+                           "words":"He climbed higher and higher.",
+                           "voice":"Ralph",
                            "delay":1000
                         },
                         {
+                           "words":"So high, he climbed up to the sky through the clouds.",
+                           "voice":"Ralph",
+                           "delay":1000
+                        },
+                        {
+                           "words":"Jack saw a beautiful castle.  He went inside.",
+                           "voice":"Ralph",
+                           "delay":2000
+                        },
+                        {
+                           "words":"",
+                           "voice":"Ralph",
+                           "background":"SFX_7.wav",
+                           "delay":3000
+                        },
+                        {
                            "words":"Jack heard a voice.",
-                           "voice":"Daniel",
+                           "voice":"Ralph",
                            "delay":500
                         },
                         {
                             "words":"Fee, Thigh, Foe, Thumb",
-                            "voice":"Ralph",
-                            "rate":10
+                            "voice":"Daniel",
+                            "rate":80
                         },
                         {
                            "words":"He ran into a cupboard",
-                           "voice":"Daniel",
+                           "voice":"Ralph",
                            "delay":500
                         },
                         {
-                            "words":"An enormous giant came into the room and sat down.  On the table there was a Hen. And a golden harp.",
-                            "voice":"Daniel",
-                            "delay":500
+                           "words":"",
+                           "background":"SFX_8.wav",
+                           "voice":"Ralph"
                         },
                         {
-                            "words":"The giant said. Lay. And the hen laid an egg",
-                            "voice":"Daniel",
+                            "words":"An enormous giant came into the room and sat down.  On the table there was a Hen. And a golden harp.",
+                            "voice":"Ralph"
+                        },
+                        {
+                           "words":"",
+                           "voice":"Ralph",
+                           "background":"SFX_9.wav",
+                           "delay":500
+                       },
+                        {
+                            "words":"The giant said. Lay.",
+                            "voice":"Ralph",
                             "delay":500
                         },
+                       {
+                           "words":"And the hen laid an egg",
+                           "voice":"Ralph",
+                           "delay":1000
+                        }, 
+                        {
+                           "words":"",
+                           "voice":"Ralph",
+                           "background":"SFX_10.wav",
+                           "delay":500
+                       },
                         {
                             "words":"Jack could not believe his eyes.  It was made of gold",
-                            "voice":"Daniel",
+                            "voice":"Ralph",
                             "delay":500
                         },
                         {
                             "words":"The harp was magic too.  And it immediately noticed Jack",
-                            "voice":"Daniel",
+                            "voice":"Ralph",
                             "delay":500
-                        } 
+                        },
+                        {
+                           "words":"",
+                           "background":"SFx_11.wav",
+                           "voice":"Ralph",
+                           "delay":2000
+                       } 
                     ]
                 },
-                "rules":[],
+                "rules":[{
+                  "rule":{
+                     "operator":"contains",
+                     "operand":[]
+                  },
+                  "actions":[[]],
+                  "next":"interaction5"    
+                }
+               ],
                 "timeout":{
                      "wait":1,
-                    "next": "rhymeswithSAT"
+                    "next": "interaction5"
                 }
             },
             {
@@ -2107,9 +2479,74 @@
                         ]
                     },
                     "actions":[[]],
-                    "next":"rhymeswithSAT"
+                    "next":"interaction5"
                     }
                 ]
+            },
+            {
+               "id":"interaction5",
+               "name":"interaction5",
+               "onstart":{
+                  "speech":[
+                     {
+                          "words":"Now I think I understand imagination better",
+                          "voice":"Ralph",
+                          "delay": 500,
+                          "rate":"150"
+                     },
+                      {
+                          "words":"This is such an amazing story.  I want to do some more imagination",
+                          "voice":"Ralph",
+                          "delay": 500,
+                          "rate":"150"
+                      },
+                      {
+                          "words":"I am going to imagine I am a harp now",
+                          "voice":"Ralph",
+                          "delay": 500,
+                          "rate":"150"
+                      },
+                      {
+                          "words":"I will talk in this voice",
+                          "voice":"Ralph",
+                          "delay": 1000,
+                          "rate":"150"
+                      },
+                      {
+                        "words":"Hello I am a magic harp",
+                        "voice":"Kate",
+                        "delay": 1000,
+                        "rate":"150"
+                     },
+                      {
+                        "words":"You imagine that you are Jack.  And if you don't want me to tell the giant you are here, you must help me write a poem.",
+                        "voice":"Ralph",
+                        "delay": 1000,
+                        "rate":"150"
+                     },
+                     {
+                        "words":"Okay.  here we go",
+                        "voice":"Ralph",
+                        "delay": 500,
+                        "rate":"150"
+                     }
+                  ]
+               },
+               "type":"speech",
+               "subscription":"/speech",
+               "rules":[{
+                  "rule":{
+                     "operator":"contains",
+                     "operand":[]
+                  },
+                  "actions":[[]],
+                  "next":"rhymeswithSAT"    
+                }
+               ],
+               "timeout":{
+                  "wait":1,
+                  "next":"rhymeswithSAT"
+               }
             },
             {
              "id":"rhymeswithSAT",
@@ -2120,42 +2557,37 @@
                         "words":"Ah, little boy",
                         "voice":"Kate",
                         "delay": 500,
-                        "rate":"180"
-                   },
-                   {
-                        "words":"It said",
-                        "voice":"Daniel",
-                        "rate":"180"
+                        "rate":"150"
                    },
                    {
                         "words":"If you don't want me to tell the giant that you are here.  You must help me write an amazing new poem that I can play later on",
                         "voice":"Kate",
                         "delay": 1000,
-                        "rate":"180"
+                        "rate":"150"
                    },
                    {
                         "words":"Let me start",
                         "voice":"Kate",
                         "delay": 500,
-                        "rate":"180"
+                        "rate":"150"
                     },
                     {
                         "words":"Here is a giant, look where he's sat",
                         "voice":"Kate",
                         "delay": 500,
-                        "rate":"180"
+                        "rate":"150"
                     },
                     {
                         "words":"He is playing the harp.  Next to a",
                         "voice":"Kate",
                         "delay": 1000,
-                        "rate":"180"
+                        "rate":"150"
                     },
                     {
                         "words":"What word can I use that rhymes with sat?",
                         "voice":"Kate",
                         "delay": 1000,
-                        "rate":"180"
+                        "rate":"150"
                     }
                 ]
              },
@@ -2243,7 +2675,7 @@
                    {
                       "words":"CAT you say.  Very good! Let's give it a go",
                       "voice":"Kate",
-                      "rate":"180"
+                      "rate":"150"
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
@@ -2356,7 +2788,7 @@
                    {
                       "words":"A HAT.  That's great.  I like that a lot",
                       "voice":"Kate",
-                      "rate":"180",
+                      "rate":"150",
                       "delay":800
                    },
                    {
@@ -2532,7 +2964,7 @@
                    {
                       "words":"MAT you say.  Very good! Let's try that",
                       "voice":"Kate",
-                      "rate":"180"
+                      "rate":"150"
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
@@ -2645,7 +3077,7 @@
                    {
                       "words":"A creepy BAT you say.  Very good! Let's try it.",
                       "voice":"Kate",
-                      "rate":"180"
+                      "rate":"150"
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
@@ -2793,7 +3225,7 @@
                    {
                       "words":"RAT you say.  Very good! Although I hate rats.  But lets try it",
                       "voice":"Kate",
-                      "rate":"180"
+                      "rate":"150"
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
@@ -4160,7 +4592,7 @@
                    },
                    {
                       "words":"Perfect, let's get on with the story!",
-                      "voice":"Daniel",
+                      "voice":"Ralph",
                       "delay":1000
                    }
                 ]
@@ -4288,7 +4720,7 @@
                    },
                    {
                       "words":"Perfect, let's get on with the story!",
-                      "voice":"Daniel",
+                      "voice":"Ralph",
                       "delay":1000
                    }
                 ]
@@ -4352,7 +4784,7 @@
                    },
                    {
                       "words":"Perfect, let's get on with the story!",
-                      "voice":"Daniel",
+                      "voice":"Ralph",
                       "delay":1000
                    }
                 ]
@@ -4416,7 +4848,7 @@
                    },
                    {
                       "words":"Perfect, let's get on with the story!",
-                      "voice":"Daniel",
+                      "voice":"Ralph",
                       "delay":1000
                    }
                 ]
@@ -4480,7 +4912,7 @@
                    },
                    {
                       "words":"Perfect, let's get on with the story!",
-                      "voice":"Daniel",
+                      "voice":"Ralph",
                       "delay":1000
                    }
                 ]
@@ -4544,7 +4976,7 @@
                    },
                    {
                       "words":"Perfect, let's get on with the story!",
-                      "voice":"Daniel",
+                      "voice":"Ralph",
                       "delay":1000
                    }
                 ]
@@ -4608,7 +5040,7 @@
                    },
                    {
                       "words":"Perfect, let's get on with the story!",
-                      "voice":"Daniel",
+                      "voice":"Ralph",
                       "delay":1000
                    }
                 ]
@@ -4672,7 +5104,7 @@
                    },
                    {
                       "words":"Perfect, let's get on with the story!",
-                      "voice":"Daniel",
+                      "voice":"Ralph",
                       "delay":1000
                    }
                 ]
@@ -4736,7 +5168,7 @@
                    },
                    {
                       "words":"Perfect, let's get on with the story!",
-                      "voice":"Daniel",
+                      "voice":"Ralph",
                       "delay":1000
                    }
                 ]
@@ -4800,7 +5232,7 @@
                    },
                    {
                       "words":"Perfect, let's get on with the story!",
-                      "voice":"Daniel",
+                      "voice":"Ralph",
                       "delay":1000
                    }
                 ]
@@ -4864,7 +5296,7 @@
                    },
                    {
                       "words":"Perfect, let's get on with the story!",
-                      "voice":"Daniel",
+                      "voice":"Ralph",
                       "delay":1000
                    }
                 ]
@@ -4928,7 +5360,7 @@
                    },
                    {
                       "words":"Perfect, let's get on with the story!",
-                      "voice":"Daniel",
+                      "voice":"Ralph",
                       "delay":1000
                    }
                 ]
@@ -4992,7 +5424,7 @@
                    },
                    {
                       "words":"Perfect, let's get on with the story!",
-                      "voice":"Daniel",
+                      "voice":"Ralph",
                       "delay":1000
                    }
                 ]
@@ -5056,7 +5488,7 @@
                    },
                    {
                       "words":"Perfect, let's get on with the story!",
-                      "voice":"Daniel",
+                      "voice":"Ralph",
                       "delay":1000
                    }
                 ]
@@ -5120,7 +5552,7 @@
                    },
                    {
                       "words":"Perfect, let's get on with the story!",
-                      "voice":"Daniel",
+                      "voice":"Ralph",
                       "delay":1000
                    }
                 ]
@@ -5184,7 +5616,7 @@
                    },
                    {
                       "words":"Perfect, let's get on with the story!",
-                      "voice":"Daniel",
+                      "voice":"Ralph",
                       "delay":1000
                    }
                 ]
@@ -5248,7 +5680,7 @@
                    },
                    {
                       "words":"Perfect, let's get on with the story!",
-                      "voice":"Daniel",
+                      "voice":"Ralph",
                       "delay":1000
                    }
                 ]
@@ -5312,7 +5744,7 @@
                    },
                    {
                       "words":"Perfect, let's get on with the story!",
-                      "voice":"Daniel",
+                      "voice":"Ralph",
                       "delay":1000
                    }
                 ]
@@ -5376,7 +5808,7 @@
                    },
                    {
                       "words":"Perfect, let's get on with the story!",
-                      "voice":"Daniel",
+                      "voice":"Ralph",
                       "delay":1000
                    }
                 ]
@@ -5440,7 +5872,7 @@
                    },
                    {
                       "words":"Perfect, let's get on with the story!",
-                      "voice":"Daniel",
+                      "voice":"Ralph",
                       "delay":1000
                    }
                 ]
@@ -5504,7 +5936,7 @@
                    },
                    {
                       "words":"Perfect, let's get on with the story!",
-                      "voice":"Daniel",
+                      "voice":"Ralph",
                       "delay":1000
                    }
                 ]
@@ -5568,7 +6000,7 @@
                    },
                    {
                       "words":"Perfect, let's get on with the story!",
-                      "voice":"Daniel",
+                      "voice":"Ralph",
                       "delay":1000
                    }
                 ]
@@ -5632,7 +6064,7 @@
                    },
                    {
                       "words":"Perfect, let's get on with the story!",
-                      "voice":"Daniel",
+                      "voice":"Ralph",
                       "delay":1000
                    }
                 ]
@@ -5696,7 +6128,7 @@
                    },
                    {
                       "words":"Perfect, let's get on with the story!",
-                      "voice":"Daniel",
+                      "voice":"Ralph",
                       "delay":1000
                    }
                 ]
@@ -5760,7 +6192,7 @@
                    },
                    {
                       "words":"Perfect, let's get on with the story!",
-                      "voice":"Daniel",
+                      "voice":"Ralph",
                       "delay":1000
                    }
                 ]
@@ -5824,7 +6256,7 @@
                    },
                    {
                       "words":"Perfect, let's get on with the story!",
-                      "voice":"Daniel",
+                      "voice":"Ralph",
                       "delay":1000
                    }
                 ]
@@ -5888,7 +6320,7 @@
                    },
                    {
                       "words":"Perfect, let's get on with the story!",
-                      "voice":"Daniel",
+                      "voice":"Ralph",
                       "delay":1000
                    }
                 ]
@@ -5952,7 +6384,7 @@
                    },
                    {
                       "words":"Perfect, let's get on with the story!",
-                      "voice":"Daniel",
+                      "voice":"Ralph",
                       "delay":1000
                    }
                 ]
@@ -6016,7 +6448,7 @@
                    },
                    {
                       "words":"Perfect, let's get on with the story!",
-                      "voice":"Daniel",
+                      "voice":"Ralph",
                       "delay":1000
                    }
                 ]
@@ -6080,7 +6512,7 @@
                    },
                    {
                       "words":"Perfect, let's get on with the story!",
-                      "voice":"Daniel",
+                      "voice":"Ralph",
                       "delay":1000
                    }
                 ]
@@ -6144,7 +6576,7 @@
                    },
                    {
                       "words":"Perfect, let's get on with the story!",
-                      "voice":"Daniel",
+                      "voice":"Ralph",
                       "delay":1000
                    }
                 ]
@@ -6208,7 +6640,7 @@
                    },
                    {
                       "words":"Perfect, let's get on with the story!",
-                      "voice":"Daniel",
+                      "voice":"Ralph",
                       "delay":1000
                    }
                 ]
@@ -6272,7 +6704,7 @@
                    },
                    {
                       "words":"Perfect, let's get on with the story!",
-                      "voice":"Daniel",
+                      "voice":"Ralph",
                       "delay":1000
                    }
                 ]
@@ -6336,7 +6768,7 @@
                    },
                    {
                       "words":"Perfect, let's get on with the story!",
-                      "voice":"Daniel",
+                      "voice":"Ralph",
                       "delay":1000
                    }
                 ]
@@ -6400,7 +6832,7 @@
                    },
                    {
                       "words":"Perfect, let's get on with the story!",
-                      "voice":"Daniel",
+                      "voice":"Ralph",
                       "delay":1000
                    }
                 ]
@@ -6464,7 +6896,7 @@
                    },
                    {
                       "words":"Perfect, let's get on with the story!",
-                      "voice":"Daniel",
+                      "voice":"Ralph",
                       "delay":1000
                    }
                 ]
@@ -6528,7 +6960,7 @@
                    },
                    {
                       "words":"Perfect, let's get on with the story!",
-                      "voice":"Daniel",
+                      "voice":"Ralph",
                       "delay":1000
                    }
                 ]
@@ -6592,7 +7024,7 @@
                    },
                    {
                       "words":"Perfect, let's get on with the story!",
-                      "voice":"Daniel",
+                      "voice":"Ralph",
                       "delay":1000
                    }
                 ]
@@ -6656,7 +7088,7 @@
                    },
                    {
                       "words":"Perfect, let's get on with the story!",
-                      "voice":"Daniel",
+                      "voice":"Ralph",
                       "delay":1000
                    }
                 ]
@@ -6720,7 +7152,7 @@
                    },
                    {
                       "words":"Perfect, let's get on with the story!",
-                      "voice":"Daniel",
+                      "voice":"Ralph",
                       "delay":1000
                    }
                 ]
@@ -6784,7 +7216,7 @@
                    },
                    {
                       "words":"Perfect, let's get on with the story!",
-                      "voice":"Daniel",
+                      "voice":"Ralph",
                       "delay":1000
                    }
                 ]
@@ -6848,7 +7280,7 @@
                    },
                    {
                       "words":"Perfect, let's get on with the story!",
-                      "voice":"Daniel",
+                      "voice":"Ralph",
                       "delay":1000
                    }
                 ]
@@ -6881,7 +7313,7 @@
                       "words":"MEAT! Perfect!  Giants love meat.  We now have a lovely poem.  Thank you. Here goes  ",
                       "voice":"Kate",
                       "delay":800,
-                      "rate":"180"
+                      "rate":"150"
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
@@ -6934,7 +7366,7 @@
                       "words":"BEAT! Perfect!  Giants love funky beats.  We now have a lovely poem.  Thank you. Here goes  ",
                       "voice":"Kate",
                       "delay":800,
-                      "rate":"180"
+                      "rate":"150"
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
@@ -6987,7 +7419,7 @@
                       "words":"Treat! Perfect!  Why didn't I think of that? We now have a lovely poem.  Thank you. Here goes ",
                       "voice":"Kate",
                       "delay":800,
-                      "rate":"180"
+                      "rate":"150"
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
@@ -7040,7 +7472,7 @@
                       "words":"Seat! Clever. Great. We now have a lovely poem.  Thank you. Here goes ",
                       "voice":"Kate",
                       "delay":800,
-                      "rate":"180"
+                      "rate":"150"
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
@@ -7093,7 +7525,7 @@
                       "words":"Neat! Clever. Great. We now have a lovely poem.  Thank you. Here goes ",
                       "voice":"Kate",
                       "delay":800,
-                      "rate":"180"
+                      "rate":"150"
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
@@ -7146,7 +7578,7 @@
                       "words":"Bite.  Brilliant.  This poem is great.  Let's do it",
                       "voice":"Kate",
                       "delay":1000,
-                      "rate":"180"
+                      "rate":"150"
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
@@ -7190,7 +7622,7 @@
                       "words":"Kite.  Brilliant.  This poem is great.  Let's do it",
                       "voice":"Kate",
                       "delay":1000,
-                      "rate":"180"
+                      "rate":"150"
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
@@ -7234,7 +7666,7 @@
                       "words":"Night.  Brilliant.  This poem is great.  Let's do it",
                       "voice":"Kate",
                       "delay":1000,
-                      "rate":"180"
+                      "rate":"150"
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
@@ -7278,7 +7710,7 @@
                       "words":"Fight.  Yes that could work.  This poem is great.  Let's do it",
                       "voice":"Kate",
                       "delay":1000,
-                      "rate":"180"
+                      "rate":"150"
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
@@ -7322,7 +7754,7 @@
                       "words":"Fight.  Yes that could work.  This poem is great.  Let's do it",
                       "voice":"Kate",
                       "delay":1000,
-                      "rate":"180"
+                      "rate":"150"
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
@@ -7366,7 +7798,7 @@
                       "words":"Light.  Yes. OK. That can work.  This poem is great.  Let's do it",
                       "voice":"Kate",
                       "delay":1000,
-                      "rate":"180"
+                      "rate":"150"
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
@@ -7410,7 +7842,7 @@
                       "words":"Bright.  Yes. OK. That can work.  This poem is great.  Let's do it",
                       "voice":"Kate",
                       "delay":1000,
-                      "rate":"180"
+                      "rate":"150"
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
@@ -7454,7 +7886,7 @@
                       "words":"Tight.  Yes I like it!  This poem is perfect now.  Let's do it",
                       "voice":"Kate",
                       "delay":1000,
-                      "rate":"180"
+                      "rate":"150"
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
@@ -7497,7 +7929,7 @@
                    {
                       "words":"Bed?  yes I can work with that.  Here we go!",
                       "voice":"Kate",
-                      "rate":"180"
+                      "rate":"150"
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
@@ -7539,7 +7971,7 @@
                    {
                       "words":"Shed?  yes I can work with that.  Here we go!",
                       "voice":"Kate",
-                      "rate":"180"
+                      "rate":"150"
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
@@ -7581,7 +8013,7 @@
                    {
                       "words":"Head?  yes I can work with that.  Here we go!",
                       "voice":"Kate",
-                      "rate":"180"
+                      "rate":"150"
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
@@ -7623,7 +8055,7 @@
                    {
                       "words":"Head?  yes I can work with that.  Here we go!",
                       "voice":"Kate",
-                      "rate":"180"
+                      "rate":"150"
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
@@ -7665,7 +8097,7 @@
                    {
                       "words":"Fed?  yes I can work with that.  Here we go!",
                       "voice":"Kate",
-                      "rate":"180"
+                      "rate":"150"
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
@@ -7707,7 +8139,7 @@
                    {
                       "words":"Instead?  yes I can work with that.  Here we go!",
                       "voice":"Kate",
-                      "rate":"180"
+                      "rate":"150"
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
@@ -7749,7 +8181,7 @@
                    {
                       "words":"Tread?  yes I can work with that.  Here we go!",
                       "voice":"Kate",
-                      "rate":"180"
+                      "rate":"150"
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
@@ -7791,7 +8223,7 @@
                    {
                       "words":"Dread?  yes I can work with that.  Here we go!",
                       "voice":"Kate",
-                      "rate":"180"
+                      "rate":"150"
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
@@ -7834,7 +8266,7 @@
                       "words":"TEA! Brilliant.  Ok, let's do this.",
                       "voice":"Kate",
                       "delay":1000,
-                      "rate":"180"
+                      "rate":"150"
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
@@ -7877,7 +8309,7 @@
                       "words":"SEA! Brillint.  Ok, let's do this.",
                       "voice":"Kate",
                       "delay":1000,
-                      "rate":"180"
+                      "rate":"150"
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
@@ -7920,7 +8352,7 @@
                       "words":"BEE! Brillint.  Ok, let's do this.",
                       "voice":"Kate",
                       "delay":1000,
-                      "rate":"180"
+                      "rate":"150"
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
@@ -7963,7 +8395,7 @@
                       "words":"SKI! Brilliant.  But tricky.  Let's do this.",
                       "voice":"Kate",
                       "delay":1000,
-                      "rate":"180"
+                      "rate":"150"
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
@@ -8006,7 +8438,7 @@
                       "words":"Flea! Brilliant. Cat's have fleas.  Let's do this.",
                       "voice":"Kate",
                       "delay":1000,
-                      "rate":"180"
+                      "rate":"150"
                    },
                    {
                       "words":"Here is a giant, look where he's sat",
@@ -8045,65 +8477,25 @@
              "name":"sleepygiant",
              "type":"speech",
              "subscription":"/speech",
-             "onstart":{
-                "actions":[
-                   [
-                      {
-                         "action":"soundmedia",
-                         "params":{
-                            "body":{
-                               "media":"bell.wav",
-                               "nowait":true,
-                               "delay":1000
-                            }
-                         }
-                      }
-                   ]
-                ]
+             "onstart":{},
+             "rules":[{
+               "rule":{
+                  "operator":"contains",
+                  "operand":[]
+               },
+               "actions":[[]],
+               "next":"robert_sleepygiant"    
              },
-             "rules":[
-                {
-                   "rule":{
-                      "operator":"contains",
-                      "operand":[
-                         "I",
-                         "Will",
-                         "Read"
-                      ],
-                      "assign":{
-                         "name":"narrator",
-                         "value":"user"
-                      }
-                   },
-                   "actions":[
-                      [
-                         
-                      ]
-                   ],
-                   "next":"user_sleepygiant"
-                },
-                {
-                   "rule":{
-                      "operator":"contains",
-                      "operand":[
-                         "Robert",
-                         "Rob"
-                      ],
-                      "assign":{
-                         "name":"narrator",
-                         "value":"robert"
-                      }
-                   },
-                   "actions":[
-                      [
-                         
-                      ]
-                   ],
-                   "next":"robert_sleepygiant"
-                }
-             ],
+             {
+               "rule":{
+                  "operator":"contains",
+                  "operand":[]
+               },
+               "actions":[[]],
+               "next":"user_sleepygiant"    
+             }],
              "timeout":{
-                "wait":5,
+                "wait":1,
                 "rules":[
                    {
                       "rule":{
@@ -8130,17 +8522,38 @@
              "type":"speech",
              "subscription":"/speech",
              "onstart":{
+               "actions":[
+                  [
+                     {
+                        "action":"soundmedia",
+                        "params":{
+                           "body":{
+                              "media":"Music_3.wav",
+                              "nowait":true,
+                              "delay":0
+                           }
+                        }
+                     }
+                  ]
+               ],
                 "speech":[
+                  {
+                     "words":"That was fun.  I loved being a harp.",
+                     "voice":"Ralph",
+                     "delay":1000,
+                     "rate":"150"
+                  },
                    {
                       "words":"As the giant listened to the beautiful poem from the harp, he started to feel sleepy.  ",
-                      "voice":"Daniel",
+                      "voice":"Ralph",
                       "delay":1000,
-                      "rate":"180"
+                      "rate":"150"
                    },
                    {
-                      "words":"Once he was asleep,  Jack jumped out of the cupboard.",
-                      "voice":"Daniel",
-                      "rate":"180"
+                      "words":"Once he was asleep,  Jack creeped out of the cupboard.",
+                      "voice":"Ralph",
+                      "rate":"150",
+                      "delay":5000
                    }
                 ]
              },
@@ -8149,7 +8562,14 @@
                 "next":"creepactivity1"
              },
              "rules":[
-                
+               {
+                  "rule":{
+                     "operator":"contains",
+                     "operand":[]
+                  },
+                  "actions":[[]],
+                  "next":"creepactivity1"    
+                }
              ]
           },
           {
@@ -8184,23 +8604,48 @@
              "type":"speech",
              "subscription":"/speech",
              "onstart":{
+               "actions":[
+                  [
+                     {
+                        "action":"stopallsound"
+                     }
+                  ]
+               ],
                 "speech":[
                    {
-                      "words":"Right.  We are now going to play a game. You need to sneak up on the giant.  Do you think you can do that? ",
-                      "voice":"Daniel",
-                      "delay":2000,
-                      "rate":"180"
+                      "words":"This story is very exciting.  Jack must be very careful because the giant could squash him.",
+                      "voice":"Ralph",
+                      "delay":500,
+                      "rate":"150"
                    },
                    {
-                      "words":"|childname|.  You must stand next to |adultname| and then take 8 big steps away.",
-                      "voice":"Daniel",
+                     "words":"But what does it meen to creep?  It sounds like it could be a good thing when there are giants",
+                     "voice":"Ralph",
+                     "delay":500,
+                     "rate":"150"
+                  },
+                  {
+                     "words":"Maybe you can show me creep?",
+                     "voice":"Ralph",
+                     "delay":500,
+                     "rate":"150"
+                  },
+                  {
+                     "words":"|adultname|.  You must use imagination and be a giant.",
+                     "voice":"Ralph",
+                     "delay":1000,
+                     "rate":"150"
+                  },
+                   {
+                      "words":"|childname|.  You are jack.  You will creep. So please take 8 steps away from |adultname|",
+                      "voice":"Ralph",
                       "delay":1000,
-                      "rate":"180"
+                      "rate":"150"
                    },
                    {
                       "words":"Say ready when you are done",
-                      "voice":"Daniel",
-                      "rate":"180"
+                      "voice":"Ralph",
+                      "rate":"150"
                    }
                 ]
              },
@@ -8230,21 +8675,21 @@
              "onstart":{
                 "speech":[
                    {
-                      "words":"Brilliant! Now |adultname| must close their eyes.  And |childname| must creep up on |adultname| and touch their hand without them hearing you",
-                      "voice":"Daniel",
+                      "words":"Brilliant! Now |adultname| you need to close your eyes.  Now |childname|, you must creep up to the giant and touch its hand without it hearing you",
+                      "voice":"Ralph",
                       "delay":1000,
-                      "rate":"180"
+                      "rate":"150"
                    },
                    {
-                      "words":"|adultname|.  If you hear |childname| make any noise you must shout Fee. Fye. Foe. Fum.",
-                      "voice":"Daniel",
+                      "words":"Giant.  If you hear Jack coming, you must shout Fee. Fye. Foe. Fum.",
+                      "voice":"Ralph",
                       "delay":1000,
-                      "rate":"180"
+                      "rate":"150"
                    },
                    {
                       "words":"|childname|.  If you manage to touch their hand, shout Boo!",
-                      "voice":"Daniel",
-                      "rate":"180"
+                      "voice":"Ralph",
+                      "rate":"150"
                    }
                 ]
              },
@@ -8276,8 +8721,8 @@
                 "speech":[
                    {
                       "words":"Ok, let's go!",
-                      "voice":"Daniel",
-                      "rate":"180"
+                      "voice":"Ralph",
+                      "rate":"150"
                    }
                 ]
              },
@@ -8317,6 +8762,7 @@
                    "rule":{
                       "operator":"contains",
                       "operand":[
+                         "Blue",
                          "Boo",
                          "Poo",
                          "New",
@@ -8334,8 +8780,8 @@
                                "body":{
                                   "speech":[
                                      {
-                                        "words":"You did it!  Excellent creeping skills!",
-                                        "voice":"Daniel",
+                                        "words":"You did it!  I think I understand the word creep now.  I think Jack can do it!",
+                                        "voice":"Ralph",
                                         "delay":1000
                                      }
                                   ]
@@ -8357,9 +8803,9 @@
                 "speech":[
                    {
                       "words":"Oh no.  You were heard!  Do you want to try again. Yes or No?",
-                      "voice":"Daniel",
+                      "voice":"Ralph",
                       "background":"fail.mp3",
-                      "rate":"180"
+                      "rate":"150"
                    }
                 ]
              },
@@ -8368,7 +8814,7 @@
                    "rule":{
                       "operator":"contains",
                       "operand":[
-                         "Yes"
+                         "yes"
                       ]
                    },
                    "actions":[
@@ -8380,7 +8826,7 @@
                                   "speech":[
                                      {
                                         "words":"Great, get back into position",
-                                        "voice":"Daniel",
+                                        "voice":"Ralph",
                                         "delay":1000
                                      }
                                   ]
@@ -8424,69 +8870,38 @@
                                "speech":[
                                   {
                                      "words":"Let's get back to the story!",
-                                     "voice":"Daniel",
+                                     "voice":"Ralph",
                                      "delay":1000
                                   }
                                ]
-                            }
-                         }
-                      },
-                      {
-                         "action":"soundmedia",
-                         "params":{
-                            "body":{
-                               "media":"bell.wav",
-                               "nowait":true,
-                               "delay":1000
                             }
                          }
                       }
                    ]
                 ]
              },
+            
              "rules":[
-                {
-                   "rule":{
-                      "operator":"contains",
-                      "operand":[
-                         "I",
-                         "Will",
-                         "Read"
-                      ],
-                      "assign":{
-                         "name":"narrator",
-                         "value":"user"
-                      }
-                   },
-                   "actions":[
-                      [
-                         
-                      ]
-                   ],
-                   "next":"user_climbingdown"
-                },
-                {
-                   "rule":{
-                      "operator":"contains",
-                      "operand":[
-                         "Robert",
-                         "Rob"
-                      ],
-                      "assign":{
-                         "name":"narrator",
-                         "value":"robert"
-                      }
-                   },
-                   "actions":[
-                      [
-                         
-                      ]
-                   ],
-                   "next":"robert_climbingdown"
-                }
-             ],
+               {
+                  "rule":{
+                     "operator":"contains",
+                     "operand":[]
+                  },
+                  "actions":[[]],
+                  "next":"robert_climbingdown"
+               },
+               {
+                  "rule":{
+                     "operator":"contains",
+                     "operand":[]
+                  },
+                  "actions":[[]],
+                  "next":"user_climbingdown"
+               }
+            ],
+
              "timeout":{
-                "wait":5,
+                "wait":1,
                 "rules":[
                    {
                       "rule":{
@@ -8518,63 +8933,142 @@
              }
           },
           {
-             "id":"robert_climbingdown",
-             "name":"robert_climbingdown",
+             "id":"robert_climbingdown2",
+             "name":"robert_climbingdown2",
              "type":"speech",
              "subscription":"/speech",
              "onstart":{
+               "actions":[
+                  [
+                     {
+                        "action":"stopallsound"
+                     },
+                     {
+                        "action":"soundmedia",
+                        "params":{
+                           "body":{
+                              "media":"SFx_12.wav",
+                              "nowait":true,
+                              "delay":0
+                           }
+                        }
+                     }
+                  ]
+               ],
                 "speech":[
                    {
-                      "words":"Jack snuck up very quietly to the giant. He grabbed the hen and the harp.",
-                      "voice":"Daniel",
+                      "words":"",
+                      "voice":"Ralph",
                       "delay":500,
-                      "rate":"180"
+                      "background":"SFx_12.wav",
+                      "rate":"150"
                    },
                    {
                       "words":"The harp forgot its promise to Jack and it sang out",
-                      "voice":"Daniel",
+                      "voice":"Ralph",
                       "delay":500,
-                      "rate":"180"
+                      "rate":"150"
                    },
                    {
                     "words":"Help, master",
                     "voice":"Kate",
                     "delay":500,
-                    "rate":"180"
+                    "rate":"200"
                    },
                    {
                       "words":"The giant woke up and shouted.",
-                      "voice":"Daniel",
+                      "voice":"Ralph",
                       "delay":500,
-                      "rate":"180"
+                      "rate":"150"
                    },
                    {
                     "words":"Fee, Thigh, Foe, Thumb",
-                    "voice":"Ralph",
+                    "voice":"Daniel",
                     "delay":500,
-                    "rate":"10"
+                    "rate":"80"
                    },
                    {
                     "words":"Jack ran and started climbing down the beanstalk.",
-                    "voice":"Daniel",
+                    "voice":"Ralph",
                     "delay":500,
-                    "rate":"180"
+                    "rate":"150"
                  },
                    {
                       "words":"The giant came down after him. ",
-                      "voice":"Daniel",
-                      "rate":"180"
-                   }
+                      "voice":"Ralph",
+                      "rate":"150"
+                   },
+                   {
+                     "words":"",
+                     "voice":"Ralph",
+                     "background":"SFX_13.wav",
+                     "rate":"150",
+                     "delay":4000
+                  }
                 ]
              },
              "rules":[
-                
+               {
+                  "rule":{
+                     "operator":"contains",
+                     "operand":[]
+                  },
+                  "actions":[[]],
+                  "next":"beanstalkbottom"    
+                }
              ],
              "timeout":{
                 "wait":1,
                 "next":"beanstalkbottom"
              }
           },
+
+
+          {
+            "id":"robert_climbingdown",
+            "name":"robert_climbingdown",
+            "type":"speech",
+            "subscription":"/speech",
+            "onstart":{
+              "actions":[
+                 [
+                    {
+                       "action":"soundmedia",
+                       "params":{
+                          "body":{
+                             "media":"Music_3.wav",
+                             "nowait":true,
+                             "delay":0
+                          }
+                       }
+                    }
+                 ]
+              ],
+               "speech":[
+                  {
+                     "words":"Jack snuck up very quietly to the giant. He grabbed the hen and the harp.",
+                     "voice":"Ralph",
+                     "delay":500,
+                     "rate":"150"
+                  }
+               ]
+            },
+            "rules":[
+              {
+                 "rule":{
+                    "operator":"contains",
+                    "operand":[]
+                 },
+                 "actions":[[]],
+                 "next":"robert_climbingdown2"    
+               }
+            ],
+            "timeout":{
+               "wait":1,
+               "next":"robert_climbingdown2"
+            }
+         },
+
           {
              "id":"user_climbingdown",
              "name":"user_climbingdown",
@@ -8610,23 +9104,29 @@
              "onstart":{
                 "speech":[
                    {
-                      "words":"Jack is at the bottom of the beanstalk.  The giant is climbing down and chasing him.",
-                      "voice":"Daniel",
+                      "words":"What an amazing story this is!",
+                      "voice":"Ralph",
                       "delay":500,
-                      "rate":"180"
+                      "rate":"150"
                    },
                    {
-                      "words":"What should he do now?",
-                      "voice":"Daniel",
+                      "words":"Something like this could never happen where I come from",
+                      "voice":"Ralph",
                       "delay":1000,
-                      "rate":"180"
+                      "rate":"150"
                    },
                    {
-                      "words":"Should he chop down the beanstalk. Or should he set fire to it?",
-                      "voice":"Daniel",
+                      "words":"I don't know what Jack should do.  He needs to stop the giant climbing down the beanstalk otherwise he might get caught!",
+                      "voice":"Ralph",
                       "delay":1000,
-                      "rate":"180"
-                   }
+                      "rate":"150"
+                   },
+                   {
+                     "words":"What would you do?  Chop it down?  Set it on fire? ",
+                     "voice":"Ralph",
+                     "delay":1000,
+                     "rate":"150"
+                  }
                 ]
              },
              "rules":[
@@ -8648,24 +9148,15 @@
                                "body":{
                                   "speech":[
                                      {
-                                        "words":"Jack shouted. Mother. Help.",
-                                        "voice":"Daniel",
+                                        "words":"Yes.  That would be a good solution to this tricky situation.  Jack's mother could take out a match and light the beanstalk",
+                                        "voice":"Ralph",
                                         "delay":0
-                                     }
-                                  ]
-                               }
-                            }
-                         },
-                         {
-                            "action":"say",
-                            "params":{
-                               "body":{
-                                  "speech":[
+                                     },
                                      {
-                                        "words":"Jack’s mother took out a match and lit the beanstalk.  It burned brightly",
-                                        "voice":"Daniel",
-                                        "delay":200
-                                     }
+                                       "words":"Can you take the part of Jack's mother and pretend to light the beanstalk you have made?",
+                                       "voice":"Ralph",
+                                       "delay":3000
+                                    }
                                   ]
                                }
                             }
@@ -8692,23 +9183,19 @@
                                "body":{
                                   "speech":[
                                      {
-                                        "words":"Jack shouted. Mother. Help.",
-                                        "voice":"Daniel",
+                                        "words":"Yes.  An axe can be used to chop down trees.  Perhaps it could also chop down a beanstalk.",
+                                        "voice":"Ralph",
                                         "delay":0
-                                     }
-                                  ]
-                               }
-                            }
-                         },
-                         {
-                            "action":"say",
-                            "params":{
-                               "body":{
-                                  "speech":[
-                                     {
-                                        "words":"Jack’s mother took an axe and chopped down the beanstalk.",
-                                        "voice":"Daniel",
-                                        "delay":200
+                                     },
+                                    {
+                                       "words":"Jack’s mother could take an axe and chop down the beanstalk.",
+                                       "voice":"Ralph",
+                                       "delay":200
+                                    },
+                                    {
+                                       "words":"Can you take the part of Jack's mother and pretend to chop down the beanstalk you have made?",
+                                       "voice":"Ralph",
+                                       "delay":200
                                      }
                                   ]
                                }
@@ -8725,59 +9212,35 @@
              "name":"finale",
              "type":"speech",
              "subscription":"/speech",
-             "onstart":{
-                "action":"soundmedia",
-                "params":{
-                   "body":{
-                      "media":"bell.wav",
-                      "nowait":true,
-                      "delay":1000
-                   }
-                }
-             },
+             "onstart":{},
              "rules":[
-                {
-                   "rule":{
-                      "operator":"contains",
-                      "operand":[
-                         "I",
-                         "Will",
-                         "Read"
-                      ],
-                      "assign":{
-                         "name":"narrator",
-                         "value":"user"
-                      }
-                   },
-                   "actions":[
-                      [
-                         
-                      ]
-                   ],
-                   "next":"user_finale"
-                },
-                {
-                   "rule":{
-                      "operator":"contains",
-                      "operand":[
-                         "Robert",
-                         "Rob"
-                      ],
-                      "assign":{
-                         "name":"narrator",
-                         "value":"robert"
-                      }
-                   },
-                   "actions":[
-                      [
-                         
-                      ]
-                   ],
-                   "next":"robert_finale"
-                }
-             ],
+               {
+                  "rule":{
+                     "operator":"contains",
+                     "operand":[
+                        "Happily",
+                        "Ever",
+                        "After"
+                     ]
+                  },
+                  "actions":[
+                     [
+                        
+                     ]
+                  ],
+                  "next":"userfinale"
+               },
+               {
+                  "rule":{
+                     "operator":"contains",
+                     "operand":[]
+                  },
+                  "actions":[[]],
+                  "next":"robert_finale"
+               }
+            ],
              "timeout":{
-                "wait":5,
+                "wait":1,
                 "rules":[
                    {
                       "rule":{
@@ -8836,30 +9299,222 @@
              ]
           },
           {
-             "id":"robert_finale",
-             "name":"robert_finale",
-             "type":"speech",
-             "subscription":"/speech",
-             "onstart":{
-                "speech":[
-                   {
-                      "words":"The giant fell and crashed to the ground. Nobody ever saw him again.",
-                      "voice":"Daniel",
-                      "delay":1000,
-                      "rate":"180"
-                   },
-                   {
-                      "words":"With the golden eggs and the magic harp, Jack and his mother lived happily ever after.",
-                      "voice":"Daniel",
-                      "delay":500,
-                      "rate":"180"
-                   }
-                ]
-             },
-             "rules":[
-                
-             ]
-          }
-       ]
-    }
+            "id":"robert_finale",
+            "name":"robert_finale",
+            "type":"speech",
+            "subscription":"/speech",
+            "onstart":{
+              "actions":[[{
+                 "action":"soundmedia",
+                 "params":{
+                    "body":{
+                       "media":"Music_4.wav",
+                       "nowait":true,
+                       "delay":0
+                    }
+                 }
+              }]],
+               "speech":[
+                  {
+                     "words":"The giant fell and crashed to the ground.",
+                     "voice":"Ralph",
+                     "rate":"150"
+                  }
+               ]
+            },
+            "rules":[
+              {
+                 "rule":{
+                    "operator":"contains",
+                    "operand":[]
+                 },
+                 "actions":[[]],
+                 "next":"robert_finale2"
+              }
+            ],
+            "timeout":{
+               "wait":1,
+               "next":"robert_finale2" 
+            }
+         },
+         {
+            "id":"robert_finale2",
+            "name":"robert_finale2",
+            "type":"speech",
+            "subscription":"/speech",
+            "onstart":{
+              "actions":[
+                 [
+                    {
+                     "action":"stopallsound"
+                     },
+                     {
+                        "action":"soundmedia",
+                        "params":{
+                           "body":{
+                              "media":"SFx_14.wav",
+                              "nowait":false,
+                              "delay":0
+                           }
+                        }
+                     }
+                  ]
+               ],
+               "speech":[
+                  {
+                     "words":"Nobody ever saw him again",
+                     "voice":"Ralph",
+                     "delay":500,
+                     "rate":"150"
+                  },
+                  {
+                     "words":"With the golden eggs and the magic harp, Jack and his mother lived happily ever after.",
+                     "voice":"Ralph",
+                     "background":"Music_5.wav",
+                     "delay":2000,
+                     "rate":"150"
+                  },
+                  {
+                    "words":"Wow that was an amazing story.  I've not read a story before.  Thank you for sharing that with me and helping me understand it.",
+                    "voice":"Ralph", 
+                    "delay":500,
+                    "rate":"150"
+                 },
+                 {
+                    "words":"I hope we can read another one together soon.  Would you like that?",
+                    "voice":"Ralph",
+                    "delay":500,
+                    "rate":"150"
+                 
+                 }
+               ]
+            },
+            "rules":[
+              {
+                 "rule":{
+                    "operator":"contains",
+                    "operand":[
+                       "yes",
+                       "yep",
+                       "yeah"
+                    ]
+                 },
+                 "actions":[
+                    [
+                       {
+                          "action":"say",
+                          "params":{
+                             "body":{
+                                "speech":[
+                                   {
+                                      "words":"OK great. Thanks. I will look forward to that!",
+                                      "voice":"Ralph",
+                                      "delay":1000
+                                   },
+                                  {
+                                     "words":"Goodbye for now!",
+                                     "voice":"Ralph",
+                                     "delay":200
+                                  }
+                                ]
+                             }
+                          }
+                       }
+                    ]
+                 ],
+                 "next":"finale"
+              },
+              {
+                 "rule":{
+                    "operator":"contains",
+                    "operand":[
+                       "no",
+                       "nope",
+                       "nah"
+                    ]
+                 },
+                 "actions":[
+                    [
+                       {
+                          "action":"say",
+                          "params":{
+                             "body":{
+                                "speech":[
+                                   {
+                                      "words":"OK let me know if you change your mind!",
+                                      "voice":"Ralph",
+                                      "delay":1000
+                                   },
+                                  {
+                                     "words":"Goodbye!",
+                                     "voice":"Ralph",
+                                     "delay":200
+                                  }
+                                ]
+                             }
+                          }
+                       }
+                    ]
+                 ],
+                 "next":"finale"
+              }
+            ]
+         }
+
+      
+      ]
+   },
+
+   
+
+    
+    {
+      "id":"keywordlayer",
+      "start":{
+         "actions":[
+            [
+               
+            ]
+         ],
+         "event":"triggerwords"
+      },
+      "events":[
+         {
+            "id":"triggerwords",
+            "name":"triggerwords",
+            "onstart":{
+               
+            },
+            "type":"speech",
+            "subscription":"/speech",
+            "rules":[
+               {
+                  "rule":{
+                     "operator":"contains",
+                     "operand":[
+                        "cow",
+                        "tao",
+                        "how"
+                     ]
+                  },
+                  "actions":[
+                     [
+                        {
+                           "action":"soundmedia",
+                           "params":{
+                              "body":{
+                                 "media":"moo.wav",
+                                 "nowait":true,
+                                 "delay":0
+                              }
+                           }
+                        }
+                     ]
+                  ],
+                  "next":"triggerwords"
+               }
+            ]
+         }
+      ]
+   }
  ]

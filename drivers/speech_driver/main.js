@@ -13,18 +13,28 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+let processes = [];
+
 const playIt = (media="")=>{
     return new Promise((resolve, reject)=>{
-        execFile("afplay", [`${MEDIADIR}/${media}`], (error)=>{
-            if (error){
-                reject();
-                return;
-            }else{
-                resolve();
-                return;
-            }
-        });  
-    })
+        
+            const process = execFile("afplay", [`${MEDIADIR}/${media}`], (error)=>{
+                if (error){
+                    reject();
+                    return;
+                }else{
+                    //processes = processes.filter(p=>p.pid != process.pid);
+                    //console.log("processes now", processes.map(p=>p.pid));
+                    resolve();
+                    return;
+                }
+            })
+            processes = [...processes, process];
+            //console.log("processes now", processes.map(p=>p.pid));
+        
+    }).catch(function(err){
+       //do nothing...this is thrown when processes are killed in media/stop
+    });
 }
 
 const sayIt = (words="", voice="Daniel", rate=150)=>{
@@ -53,6 +63,20 @@ const waitFor = (delay)=>{
         },delay)
     });
 }
+
+app.get('/api/speech/stop', function (req, res, next) {
+    console.log("SEEN A STOP!!", processes);
+
+    for (const p of processes){
+        try{
+            p.kill();
+        }catch(err){
+            //console.log(err);
+        }
+    }
+    res.status(200).send("OK");
+});
+
 
 app.post('/api/speech', async function (req, res, next) {
     const {speech=[]} = req.body;

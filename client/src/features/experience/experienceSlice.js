@@ -163,6 +163,7 @@ export const listenOnEvents = () => (dispatch, getState) => {
     dispatch(setTranscript({transcript:""}));
     dispatch(setListening({layerid: payload.id, listening:false}));
     dispatch(setEvent(payload));
+    console.log("layers are now", getState().experience.listening);
   });
 
   socket.on('ready', payload=>{
@@ -174,6 +175,7 @@ export const listenOnEvents = () => (dispatch, getState) => {
 
     if (event.type==="speech"){
       dispatch(setListening({layerid: layer, listening:true}));
+      console.log("layers are now", getState().experience.listening);
       startRecognition();
     }
   });
@@ -213,10 +215,13 @@ export const sendTranscript = () => (dispatch, getState) =>{
    
     const {transcript} = getState().experience;
     const layers = getState().experience.listening
-    
+    console.log("am in send transcript, listening is", layers);
+
     const sendTranscript = async ()=>{
       for (const key of Object.keys(layers)){
+        console.log("layers key is", layers[key]);
         if (layers[key]){
+          
           const result = await superagent.get("/event/speech").query({layer:key, speech:getState().experience.transcript})
           dispatch(sentTranscript());      
         }
@@ -279,6 +284,8 @@ export const fetchLayers = (layer, r) => (dispatch, getState)=>{
 
 
     const listening = getState().experience.listening;
+    
+    console.log("listening is", listening);
 
     for (let i = event.resultIndex; i < event.results.length; i++) { 
       const transcript = event.results[i][0].transcript;

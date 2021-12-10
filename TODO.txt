@@ -32,3 +32,18 @@ open:
 https://tfhub.dev/tensorflow/tfjs-model/blazeface/1/default/1/model.json?tfjs-format=file with http://localhost:9102/blazeface
 
 https://tfhub.dev/mediapipe/tfjs-model/facemesh/1/default/1/model.json?tfjs-format=file  with http://localhost:9102/facemesh
+
+
+
+THINGS TO CHECK
+
+Local speech recognition and synthesis
+Rapsberry PI with HDI for advert triggering
+Send paul script with paths
+Look into what label printer can print
+
+
+Other improvements
+
+Reference layers from other layers and navigation meta language (layer1:-1) (layer1:pause)  (layer1:id]) eg. to have control over back / forth.
+Timeouts - need to be rendered in the tree.

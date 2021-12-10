@@ -12,7 +12,7 @@ const format = (l)=>{
         events: l.events.map((e,i)=>{
             return {
                 ...e,
-                rules: e.rules.map((r,j)=>{
+                rules: (e.rules||[]).map((r,j)=>{
                     return {
                         id: `${e.id}${i}${j}`,
                         ...r,
@@ -100,11 +100,8 @@ const tree = (layer)=>{
 indexRouter.get('/layers', (req, res)=>{
     const {layer="layer1.json"} = req.query;
     const _lfile = fs.readFileSync(`authored/${layer}.json`);
-
     const _ljson = JSON.parse(_lfile);
     _layers = _ljson.map(f => format(f));
-    
-    //format(JSON.parse(_lfile));
     res.status(200).json(_layers.map(l=>tree(l)));
 });
 

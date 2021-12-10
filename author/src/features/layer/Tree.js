@@ -32,7 +32,8 @@ let _seen   = {};
 let _loops  = [];
 
 const insert = (lookup, event, nodes={})=>{
-   
+
+
     const children = lookup[event.event] || [];
     
     //console.log(nodes[event.event].name || "").split(".");
@@ -59,6 +60,7 @@ const insert = (lookup, event, nodes={})=>{
 }
 
 const convertToHierarchy = (lut,nodes={})=>{
+  console.log("in convert toi hierarchy!")
    _seen = {}; _loops = [];
     return insert (lut, lut["root"],nodes);
 }
@@ -260,7 +262,9 @@ const _empty = (arr)=>{
 
 const treeref = useD3((root) => {
 
+  console.log("converting! toi hierarchy!")
     const jsontree = convertToHierarchy(lookuptable,nodes);
+    console.log("done!");
     const hier = (d3h.hierarchy(jsontree, d=>d.children));
     let _lookup = {}
   

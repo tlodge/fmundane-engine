@@ -4,6 +4,8 @@ require('console-stamp')(console, 'dd-mm-yy HH:MM:ss.l');
 const http = require('http');
 const express = require('express');
 const bodyParser = require('body-parser');
+const request = require('superagent');
+
 const { execFile} = require('child_process');
 var rp = require('request-promise-native')
 const PORT = '9106';
@@ -12,6 +14,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 let processes = [];
+const SPEECHSTOPURL = "http://localhost:9105/api/speech/stop";
 
 const playIt = (media="")=>{
     return new Promise((resolve, reject)=>{
@@ -36,6 +39,8 @@ const playIt = (media="")=>{
 }
 
 app.get('/api/media/stop', function (req, res, next) {
+    console.log("SEEN A STOP!!", processes);
+
     for (const p of processes){
         try{
             p.kill();
@@ -43,6 +48,13 @@ app.get('/api/media/stop', function (req, res, next) {
             console.log(err);
         }
     }
+
+    //also send stop to speech driver incase it's running sounds too!
+    console.log("calling",SPEECHSTOPURL);
+    request.get(SPEECHSTOPURL).timeout({response:1000}).then(res=>{
+      console.log(res.body);
+    });
+
     res.status(200).send("OK");
 });
 

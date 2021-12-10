@@ -143,6 +143,7 @@ function Tree(t) {
 
     const renderLinks = (links, data)=>{
         const seenlinks = {};
+   
 
         return links.map((link)=>{
           
@@ -157,9 +158,14 @@ function Tree(t) {
                 const tx = (l.x-link.from.x)/2;
                 const ty = (Math.max(l.y,link.from.y)-Math.min(l.y,link.from.y))/2;
                 const anchor = "middle";//tx == 0 ? "middle" : tx < 0 ? "end": "start";
+                
+            
                 const labeldata = data[l.trigger];
+
+                
                 const mx = 20 + (labeldata.actions.length - 1) * 20;
 
+               
                 const label = labeldata.actions.map((ld,i)=>{
                     
                     return <text key={ld.map(a=>a.action).join(",")} fontSize="x-small" textAnchor={"middle"} x={l.y+60} y={l.x-mx + (i*18)} > {[...new Set(ld.map(l=>l.action))].join(',')}</text>

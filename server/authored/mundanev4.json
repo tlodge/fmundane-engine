@@ -2354,7 +2354,7 @@
                     {"action":"say", "params":{"body":{"speech":[{"words":"As it happens, analysis of sensor data meant that I decided to show you a more positive ending. I didn't want to upset you. Not in that state","voice":"Daniel"}]}}, "delay":1000},
                     {"action":"say", "delay":1000, "params":{"body":{"speech":[{"words":"Also, you remember the weird science-fiction interlude? That was just for you. You're special","voice":"Daniel"}]}}},
                     {"action":"say", "params":{"body":{"speech":[{"words":"I used a preference model to choose the music I thought you'd like - hope you enjoyed it!","voice":"Daniel"}]}}, "delay":1000},
-                        {"action":"say", "params":{"body":{"speech":[{"words":"Please take your receipt and exit through the gift shop.","voice":"Daniel"}]}}}]
+                    {"action":"say", "params":{"body":{"speech":[{"words":"Please take your receipt and exit through the gift shop.","voice":"Daniel"}]}}}]
                 ]},
                 "type": "button",
                 "subscription": "/press",

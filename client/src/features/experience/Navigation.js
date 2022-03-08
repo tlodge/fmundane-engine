@@ -1,7 +1,7 @@
 import {selectLayerName} from './experienceSlice';
 import { useSelector } from 'react-redux';
 
-const Navigation = ({ start, authored, toggleCreate}) => {
+const Navigation = ({ start, authored, toggleCreate, twineExport}) => {
   
   const layerName = useSelector(selectLayerName);
 
@@ -40,7 +40,8 @@ const Navigation = ({ start, authored, toggleCreate}) => {
 
     <div className="flex flex-row">
       {renderAuthored()}
-      <div className="p-2 text-xs font-bold text-white" onClick={()=>toggleCreate()}>upload</div> 
+      <div className="p-2 text-xs font-bold text-white" onClick={toggleCreate}>upload</div> 
+      <div className="p-2 text-xs font-bold text-white" onClick={twineExport}>export (twine)</div> 
     </div>
   </nav>
 };

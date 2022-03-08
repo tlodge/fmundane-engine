@@ -294,9 +294,9 @@ const StateMachine =   (config)=>{
                         const sinceaction = ts-subtime;
                         //console.log(sinceaction);
 
-                        if (e.type==="speech" && sinceaction<2000){
-                            return acc;
-                        }
+                        //if (e.type==="speech" && sinceaction<2000){
+                        //    return acc;
+                       //}
                         nexteventid = item.next;
                         triggered = item.id;
                         return [...acc, ...item.actions];
@@ -313,10 +313,10 @@ const StateMachine =   (config)=>{
                         const sinceaction = ts-subtime;
                    
                         
-                        if (e.type==="speech" && sinceaction<2000){
+                        //if (e.type==="speech" && sinceaction<2000){
 
-                            return;
-                       }
+                          //  return;
+                       //}
 
                         nexteventid = defaultrule.next;
                         triggered = defaultrule.id;

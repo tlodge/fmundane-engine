@@ -28,7 +28,7 @@ client.on('message', (topic, message, pkt)=>{
 
 export const unsubscribe = (topic, layer)=>{
 
-    if (Object.keys(callbacks).length <= 0){
+    if (Object.keys(callbacks || {}).length <= 0){
         return;
     }
 

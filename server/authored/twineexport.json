@@ -1,0 +1,221 @@
+[
+    {
+        "id": "caravan",
+        "start": {
+            "actions": [
+                []
+            ],
+            "event": "Start"
+        },
+        "events": [
+            {
+                "type": "button",
+                "name": "Start",
+                "id": "Start",
+                "data": [
+                    "reset"
+                ],
+                "subscription": "/press",
+                "onstart": {
+                    "actions": [
+                        [
+                            {
+                                "action": "dysonscreen"
+                            },
+                            {
+                                "action": "talkingon"
+                            }
+                        ]
+                    ]
+                },
+                "rules": [
+                    {
+                        "type": "button",
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "reset"
+                        },
+                        "actions": [
+                            [
+                                {
+                                    "action": "fan",
+                                    "params": {
+                                        "query": {
+                                            "rotate": "false",
+                                            "power": "1",
+                                            "cool": "true"
+                                        }
+                                    },
+                                    "method": "GET"
+                                },
+                                {
+                                    "action": "whitelights"
+                                },
+                                {
+                                    "action": "togglewindows"
+                                }
+                            ]
+                        ],
+                        "next": "reseteverything"
+                    }
+                ]
+            },
+            {
+                "type": "button",
+                "name": "reseteverything",
+                "id": "reseteverything",
+                "data": [
+                    "go"
+                ],
+                "subscription": "/press",
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "I am just turning myself on",
+                            "voice": "wait a minute",
+                            "rate": "Daniel",
+                            "delay": "180"
+                        }
+                    ],
+                    "actions": [
+                        [
+                            {
+                                "action": "print",
+                                "params": {
+                                    "body": {
+                                        "text": "new experience started"
+                                    }
+                                },
+                                "method": "GET"
+                            }
+                        ],
+                        [
+                            {
+                                "action": "immersive",
+                                "params": {
+                                    "query": {
+                                        "script_id": "ID_101"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 300
+                            },
+                            {
+                                "action": "homescreen",
+                                "delay": 500
+                            },
+                            {
+                                "action": "",
+                                "delay": 1000
+                            }
+                        ]
+                    ]
+                },
+                "rules": [
+                    {
+                        "type": "button",
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "go"
+                        },
+                        "actions": [],
+                        "next": "turningon"
+                    }
+                ]
+            },
+            {
+                "type": "button",
+                "name": "turningon",
+                "id": "turningon",
+                "data": [
+                    "next"
+                ],
+                "subscription": "/press",
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "5",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "600"
+                        }
+                    ],
+                    "actions": [
+                        [
+                            {
+                                "action": "mediascreen"
+                            },
+                            {
+                                "action": "print",
+                                "params": {
+                                    "body": {
+                                        "text": "commencing countdown"
+                                    }
+                                },
+                                "method": "GET"
+                            }
+                        ],
+                        [
+                            {
+                                "action": "videomedia",
+                                "params": {
+                                    "query": {
+                                        "media": "countdown.mp4"
+                                    }
+                                },
+                                "method": "GET"
+                            }
+                        ],
+                        [
+                            {
+                                "action": "immersive",
+                                "params": {
+                                    "query": {
+                                        "script_id": "ID101"
+                                    }
+                                },
+                                "method": "GET"
+                            },
+                            {
+                                "action": "immersive",
+                                "params": {
+                                    "query": {
+                                        "script_id": "ID021"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 5000
+                            },
+                            {
+                                "action": "print",
+                                "params": {
+                                    "body": {
+                                        "text": "systems ready"
+                                    }
+                                },
+                                "method": "GET"
+                            }
+                        ]
+                    ]
+                },
+                "rules": [
+                    {
+                        "type": "button",
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "next"
+                        },
+                        "actions": [
+                            [
+                                {
+                                    "action": "homescreen"
+                                }
+                            ]
+                        ],
+                        "next": "tookyourtime"
+                    }
+                ]
+            }
+        ]
+    }
+]

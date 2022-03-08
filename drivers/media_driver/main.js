@@ -39,13 +39,13 @@ const playIt = (media="")=>{
 }
 
 app.get('/api/media/stop', function (req, res, next) {
-    console.log("SEEN A STOP!!", processes);
+    console.log("SEEN A STOP!!");
 
     for (const p of processes){
         try{
             p.kill();
         }catch(err){
-            console.log(err);
+           // console.log(err);
         }
     }
 

@@ -18,6 +18,7 @@ import {
     reset,
     fetchAuthored,
     manualTrigger,
+    twineExport,
 } from './experienceSlice';
 
 export function Experience() {
@@ -126,9 +127,13 @@ export function Experience() {
     toggleCreate(false);
   }
 
+  const exportTwine = ()=>{
+    dispatch(twineExport());
+  }
+
   return (
       <div>
-        <Navigation authored={authored} start={resetExperience} toggleCreate={toggleCreate}/>
+        <Navigation authored={authored} start={resetExperience} toggleCreate={toggleCreate} twineExport={exportTwine}/>
         <div className="flex row mb-4 border-b-2 flex-wrap" >
         {list}
        

@@ -65,7 +65,7 @@ const waitFor = (delay)=>{
 }
 
 app.get('/api/speech/stop', function (req, res, next) {
-    console.log("SEEN A STOP!!", processes);
+    console.log("SEEN A STOP!!");
 
     for (const p of processes){
         try{

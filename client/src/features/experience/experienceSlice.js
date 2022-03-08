@@ -47,7 +47,6 @@ export const experienceSlice = createSlice({
         ...state.readyforinput, [action.payload]:true
       }
     },
-
     setListening: (state, action)=>{
       const {layerid, listening} = action.payload;
       state.listening = {
@@ -55,7 +54,6 @@ export const experienceSlice = createSlice({
         [layerid] : listening
       }
     },
-
     sentTranscript: (state)=>{
       state.lastsenttranscript = state.transcript;
     },
@@ -153,17 +151,17 @@ export const listenOnActions = (window) => async dispatch => {
  });
 }
 
+export const twineExport = () => (dispatch, getState)=>{
+  console.log("LAYERS ARE", getState().experience.layers);
+}
+
 export const listenOnEvents = () => (dispatch, getState) => {
 
 
   socket.on('event', payload => {
-    //TODO: get layerid from event!
-    console.log("seen an event!", payload);
-    //here it is!!
     dispatch(setTranscript({transcript:""}));
     dispatch(setListening({layerid: payload.id, listening:false}));
     dispatch(setEvent(payload));
-    console.log("layers are now", getState().experience.listening);
   });
 
   socket.on('ready', payload=>{
@@ -176,7 +174,7 @@ export const listenOnEvents = () => (dispatch, getState) => {
     if (event.type==="speech"){
       dispatch(setListening({layerid: layer, listening:true}));
       console.log("layers are now", getState().experience.listening);
-      startRecognition();
+      //startRecognition();
     }
   });
 }
@@ -215,14 +213,12 @@ export const sendTranscript = () => (dispatch, getState) =>{
    
     const {transcript} = getState().experience;
     const layers = getState().experience.listening
-    console.log("am in send transcript, listening is", layers);
+
 
     const sendTranscript = async ()=>{
       for (const key of Object.keys(layers)){
-        console.log("layers key is", layers[key]);
-        if (layers[key]){
-          
-          const result = await superagent.get("/event/speech").query({layer:key, speech:getState().experience.transcript})
+        if (layers[key]){    
+          await superagent.get("/event/speech").query({layer:key, speech:getState().experience.transcript})
           dispatch(sentTranscript());      
         }
       }
@@ -268,7 +264,7 @@ export const fetchLayers = (layer, r) => (dispatch, getState)=>{
   });
   
   recognition.onend = () => {
-    
+      console.log("recognition ended");
     //if (allowedToListen()){
        startRecognition();
     //}else{
@@ -281,25 +277,27 @@ export const fetchLayers = (layer, r) => (dispatch, getState)=>{
     //TODO: why is transcript sending here (post event?)
 
     //need an onresult for each layer?
-
+console.log("recognition seen event", event);
 
     const listening = getState().experience.listening;
     
-    console.log("listening is", listening);
-
     for (let i = event.resultIndex; i < event.results.length; i++) { 
       const transcript = event.results[i][0].transcript;
+      console.log(transcript);
       if (event.results[i].isFinal){ 
-        if (transcript.trim() !== "" && listening){
-          //dispatch(recordState(getState().experience.));
-
-          //loop through all speech layers and send!
+        if (transcript.trim() !== ""){//} && listening){
           dispatch(setTranscript({transcript:transcript + ' '}));
           dispatch(sendTranscript());
+        }else{
+          console.log("not listening so not sending!");
         }
       }
     }
   }
+
+  recognition.continuous = true;
+  recognition.interimResults = true;
+  startRecognition();
 }
 
 
@@ -307,13 +305,15 @@ const startRecognition = ()=>{
   
   try{  
     recognition.start();
+    console.log("recognition started");
   }catch(err){
-    //console.log(err);
+    console.log(err);
   }
 }
 
 export const listenToSpeech = () => (dispatch, getState) => {
-  startRecognition();
+  //console.log("called listen to speech!");
+  //startRecognition();
 }
 
 // The function below is called a selector and allows us to select a value from

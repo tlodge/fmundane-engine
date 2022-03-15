@@ -1,5 +1,0 @@
-# for fixing file paths to point at localserver
-sed -i 's/ui\/\/obm_media\//http:\/\/127.0.0.1:8080\//g' EngineModule.js
-
-# for removing function comments
-sed -i 's/\/\/--//g' FunctionsModule.js

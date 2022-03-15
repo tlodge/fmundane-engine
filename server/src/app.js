@@ -18,6 +18,7 @@ app.use('/author', authorRouter);
 
 app.use(express.static(path.join(__dirname, 'client')));
 app.use(express.static(path.join(__dirname, 'author')));
+app.use('/twine', express.static(path.join(__dirname, 'twine')));
 
 app.get("/shutdown", (req,res)=>{
   console.log("shutting down server!");

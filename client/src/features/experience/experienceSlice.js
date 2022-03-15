@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { compose, createSlice } from '@reduxjs/toolkit';
 import io from 'socket.io-client';
 import superagent from 'superagent';
 import * as d3 from 'd3-hierarchy';
@@ -151,8 +151,8 @@ export const listenOnActions = (window) => async dispatch => {
  });
 }
 
-export const twineExport = () => (dispatch, getState)=>{
-  console.log("LAYERS ARE", getState().experience.layers);
+export const renderSpeech = ()=> (dispatch, getState)=>{
+
 }
 
 export const listenOnEvents = () => (dispatch, getState) => {
@@ -213,7 +213,6 @@ export const sendTranscript = () => (dispatch, getState) =>{
    
     const {transcript} = getState().experience;
     const layers = getState().experience.listening
-
 
     const sendTranscript = async ()=>{
       for (const key of Object.keys(layers)){

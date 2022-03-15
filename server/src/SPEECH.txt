@@ -1,0 +1,88 @@
+We're using coqui-tts as the main tts and speech synthesis engine.  
+
+We run tts-server out of docker, which provides an endpoint for sending text to create a wav file.  
+
+Docker instructions:
+--------------------
+
+To build a docker version that listens to incoming requests and processes the file and saves it. first build the base image
+
+git clone https://github.com/synesthesiam/coqui-docker
+
+cd coqui-docker/coqui-tts
+
+Find the latest tag version by going to:
+
+https://github.com/coqui-ai/TTS (click on tags)
+
+docker build -t tlodge/coqui --build-arg TTS_VERSION=0.6.1 .
+
+Now that will create a tlodge/coqui image
+
+Now run it:TTS-0.6.1
+
+docker run -it -p 5002:5002
+
+Then exec into it:
+
+docker exec -it [containertag] sh
+
+now cd TTS-0.6.1/TTS/server
+
+apt-get install vim 
+
+vi server.py
+
+Now add:
+
+in the imports, import jsonify and path:
+
+from flask import Flask, jsonify, render_template, request, send_file
+from pathlib import Path
+
+@app.route("/api/generate", methods=["GET"])
+def generate():
+    t = request.args.get('t')
+    v = request.args.get('v')
+    n = request.args.get('n')
+    text = "sample text" if t is None else t
+    voice = "p305" if v is None else v
+    name = "sample.wav" if n is None else n + ".wav"
+    wav = synthesizer.tts(text,voice,None)
+    subdir = os.path.dirname("/samples/" + name)
+    Path(subdir).mkdir(parents=True, exist_ok=True)
+    exists = Path("/samples/"+name)
+    if not exists.is_file():
+      synthesizer.save_wav(wav, "/samples/" + name)
+    return jsonify(success=True)
+
+and save
+
+now cd /TTS-0.6.1
+
+and run 
+
+make install
+
+This will now install the modified version of flask
+
+Now in another terminal, find the name of the running container (i.e. docker ps)
+
+Then
+
+docker commit (tagname of container)
+docker tag [tagname] tlodge/voicegen:caravan
+
+Now you can kill the current running container and then do a:
+
+docker run -it -p 5002:5002 -v /Users/tlodge/tests/whatpod/server/media/dialogue:/samples tlodge/voicegen:caravan
+
+Realtime(ish) speech to text
+-----------------------------
+
+Note that if you go to 
+
+https://github.com/coqui-ai/STT-examples/tree/r1.0/web_microphone_websocket
+
+To handle local speech recognition.
+

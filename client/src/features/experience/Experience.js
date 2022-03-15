@@ -6,6 +6,7 @@ import Tree from './Tree';
 import useWindowDimensions from '../../hooks/useWindowDimensions';
 import { Importer } from './Importer';
 import request from 'superagent';
+import superagent from 'superagent';
 
 import {
     listenOnEvents,
@@ -14,11 +15,12 @@ import {
     selectEvents,
     selectAuthored,
     selectReadyForInput,
+    selectLayerName,
     selectTrees,
     reset,
     fetchAuthored,
     manualTrigger,
-    twineExport,
+    renderSpeech,
 } from './experienceSlice';
 
 export function Experience() {
@@ -26,6 +28,7 @@ export function Experience() {
   const readyforinput = useSelector(selectReadyForInput);
   const trees = useSelector(selectTrees);
   const authored = useSelector(selectAuthored);
+  const layerName = useSelector(selectLayerName);
 
   const [visibleTrees, setVisibleTrees] = useState({});
   const [create, setCreate] = useState(false);
@@ -128,12 +131,23 @@ export function Experience() {
   }
 
   const exportTwine = ()=>{
-    dispatch(twineExport());
+    superagent.get('/author/translate').query({name:layerName}).then(res => {
+      const {html} = res.body;
+      const htmlString = `data:text/html;chatset=utf-8,${encodeURIComponent(html)}`;
+      const link = document.createElement("a");
+      link.href = htmlString;
+      link.download = `${layerName}.json`;
+      link.click();
+   })
+  }
+
+  const _renderSpeech = ()=>{
+    dispatch(renderSpeech());
   }
 
   return (
       <div>
-        <Navigation authored={authored} start={resetExperience} toggleCreate={toggleCreate} twineExport={exportTwine}/>
+        <Navigation authored={authored} start={resetExperience} toggleCreate={toggleCreate} twineExport={exportTwine} renderSpeech={_renderSpeech}/>
         <div className="flex row mb-4 border-b-2 flex-wrap" >
         {list}
        

@@ -16,6 +16,7 @@ import {
     selectAuthored,
     selectReadyForInput,
     selectLayerName,
+    selectRendering,
     selectTrees,
     reset,
     fetchAuthored,
@@ -29,7 +30,7 @@ export function Experience() {
   const trees = useSelector(selectTrees);
   const authored = useSelector(selectAuthored);
   const layerName = useSelector(selectLayerName);
-
+  const rendering = useSelector(selectRendering);
   const [visibleTrees, setVisibleTrees] = useState({});
   const [create, setCreate] = useState(false);
 
@@ -142,12 +143,13 @@ export function Experience() {
   }
 
   const _renderSpeech = ()=>{
+    console.log("rendering speech!!");
     dispatch(renderSpeech());
   }
 
   return (
       <div>
-        <Navigation authored={authored} start={resetExperience} toggleCreate={toggleCreate} twineExport={exportTwine} renderSpeech={_renderSpeech}/>
+        <Navigation rendering={rendering} authored={authored} start={resetExperience} toggleCreate={toggleCreate} twineExport={exportTwine} renderSpeech={_renderSpeech}/>
         <div className="flex row mb-4 border-b-2 flex-wrap" >
         {list}
        

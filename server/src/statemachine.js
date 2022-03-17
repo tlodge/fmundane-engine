@@ -6,6 +6,7 @@ import ips from './actions/IPs.json';
 import {handle, handlespeech} from './actionhandler';
 import {replaceAll} from './utils';
 
+
 const actions = JSON.parse(Object.keys(ips).reduce((acc, key)=>{
     return replaceAll(acc, `[${key}]`,ips[key]);    
    
@@ -25,7 +26,8 @@ const callserially = async (list, cb)=>{
 
 const _executeactions = async (alist, placeholders={})=>{
     const parallel = [];
-  
+   
+
     //for (const row of alist){
       //  console.log("row is ", row);
         for (const actionlist of alist){
@@ -49,7 +51,8 @@ const _executeactions = async (alist, placeholders={})=>{
                 }
                 return  {...a, action:JSON.parse(astr)}
             });
-            
+          
+
             parallel.push({list:_alist, cb:()=>{
                 send("action", _alist.map(a=>a.action))
             }});
@@ -60,12 +63,13 @@ const _executeactions = async (alist, placeholders={})=>{
    
   //  }
   
+
     await Promise.all(parallel.map(async(p)=>{
      
         await callserially(p.list,p.cb);
     }));
 
-  
+
 }
 
 const _executespeech = async (lines, placeholders={})=>{
@@ -100,7 +104,7 @@ const _executespeech = async (lines, placeholders={})=>{
 }
 
 const StateMachine =   (config)=>{
-
+    
     let event;
     const {events = [], id=""} = config;
     let placeholders = {};
@@ -111,6 +115,33 @@ const StateMachine =   (config)=>{
         }
     },{});
 
+    const formataction = (a)=>{
+        if (actions[a.action]) 
+            return actions[a.action];
+
+        const method = a.method || "GET";
+        
+        const base = {
+            "type":"request",
+            "data":{
+               "url":a.action,
+               "type": method,
+               "contenttype":"application/json"
+            }
+        }
+        if (method == "GET"){
+            return {
+                ...base,
+                query : a.params,
+            }
+        }else{
+            return {
+                ...base,
+                body : a.params,
+            }
+        }
+    }
+
     const reset = async ()=>{
         nexteventid = config.start.event;
      
@@ -119,7 +150,13 @@ const StateMachine =   (config)=>{
             if (event.onstart){
                 const {speech=[], actions:_actions=[]} = event.onstart;
                 placeholders = {};
-                const __startactions =  _actions.map(arr=>(arr||[]).map(a=>({...a, action:actions[a.action]||{}})));
+                const __startactions =  _actions.map(arr=>(arr||[]).map(a=>{
+                    return {
+                        ...a, 
+                        action: formataction(a)
+                    }
+                }));
+
                 await Promise.all([await _executeactions(__startactions), await _executespeech(speech)]);
                 
             }
@@ -146,7 +183,7 @@ const StateMachine =   (config)=>{
             send("event", {id:config.id,data:event});      
             if (event.onstart){
                 const {speech=[], actions:_actions=[]} = event.onstart;
-                const __startactions =  _actions.map(arr=>(arr||[]).map(a=>({...a,action:actions[a.action]||{}})));
+                const __startactions =  _actions.map(arr=>(arr||[]).map(a=>({...a,action:formataction(a)})));
                 await Promise.all([await _executeactions(__startactions, placeholders), await _executespeech(speech, placeholders)]);
             }    
             send("ready", {layer:config.id, event:{id:eventid, type: event.type}});
@@ -155,12 +192,10 @@ const StateMachine =   (config)=>{
     
 
         //this is a subscripton to manual triggers (either by clicking nodes in the tree or calling webhook /event/trigger);
-        subscribe(`/trigger/${id}`, id, async(_layer, msg)=>{
+        subscribe(`/trigger/${id}`, id, async(msg)=>{
 
-            console.log("seen trigger for layer", _layer);
-            console.log("and msg is ", msg);
             try{
-            
+                
                 const {node, layer} = msg;
                
                 const triggeredevent =  eventlookup[node];
@@ -186,24 +221,29 @@ const StateMachine =   (config)=>{
         }
 
         const trigger = async (triggered, e, id, nexteventid, actionids, msg)=>{
-           
+          
 
             const {data} = msg;   
+            
+           
 
             unsubscribe(e.subscription, id);
-            const _actions = actionids.map(arr=>(arr||[]).map(a=>({...a, action:actions[a.action]||{}})));
-
+            
+            const _actions = actionids.map(arr=>(arr||[]).map(a=>({...a, action:formataction(a)})))
+          
             await _executeactions(_actions, placeholders);
+        
             const _e = eventlookup[nexteventid];
-
+          
             if (_e){
                 send("event", {id:config.id,data:_e,triggered});
                 if (_e.onstart){
-                    const {speech=[], actions:_actions=[]} = _e.onstart;
-                    const __startactions =  _actions.map(arr=>(arr||[]).map(a=>({...a, action:actions[a.action]||{}})));
+                    const {speech=[], actions:_sactions=[]} = _e.onstart;
+                    const __startactions =  _sactions.map(arr=>(arr||[]).map(a=>({...a, action: formataction(a)})));
                     await Promise.all([await _executeactions(__startactions, placeholders), await _executespeech(speech, placeholders)]);
                 }
                 send("ready", {layer:config.id, event:{id:nexteventid, type:_e.type}});
+              
                 sub(_e);
             }
         }
@@ -211,10 +251,6 @@ const StateMachine =   (config)=>{
         const sub = (e)=>{
             let nexteventid, triggered, timer;
             event = e;
-            
-            const subtime = Date.now();
-            
-
             if (e.timeout){
                 timer = setTimeout(async ()=>{
 
@@ -257,21 +293,13 @@ const StateMachine =   (config)=>{
                 
             }
 
-            subscribe(e.subscription, id,  async(_layer, msg)=>{
-
+            subscribe(e.subscription, id,  async(msg)=>{
+             
                 triggered = false;
                 
                 const {data, ts} = msg;     
-
-                
-                if (_layer != id){
-                    return;
-               }
-
                 const evaluate = await _fetchrule(e.type);
-                
-                
-
+    
                 const defaultrule = e.rules.reduce((acc,item)=>{
                     const {rule} = item; 
                     if (rule.default){
@@ -282,21 +310,12 @@ const StateMachine =   (config)=>{
 
             
                 let actionids = e.rules.filter(r=>!r.rule.default).reduce((acc, item)=>{ 
-                    
+                   
                     const result = evaluate(item.rule.operator, item.rule.operand, data);
+                   
 
                     if (result){
                         updateplaceholders(item.rule, data);
-                        //if this message was received before we subscribed, discard it!
-                        //prevents race condition here - it's possible that the speech on onstart is still being processed by the browser and then sent 
-                        //here, and if we've subcribed to the new event, and it is also a speech event then it may receive this speech and act on it..
-                        //to get round this we give a little bit of time for this to happen before we subscribe.
-                        const sinceaction = ts-subtime;
-                        //console.log(sinceaction);
-
-                        //if (e.type==="speech" && sinceaction<2000){
-                        //    return acc;
-                       //}
                         nexteventid = item.next;
                         triggered = item.id;
                         return [...acc, ...item.actions];
@@ -304,20 +323,14 @@ const StateMachine =   (config)=>{
                     return acc;
                 },[]);
 
+                
+
                 //if nothing else has triggered and there is a default rule...
                 if (!triggered && defaultrule){
                     const result = evaluate(defaultrule.rule.operator, defaultrule.rule.operand, data);
                     
                     if (result){
                         updateplaceholders(defaultrule.rule, data);
-                        const sinceaction = ts-subtime;
-                   
-                        
-                        //if (e.type==="speech" && sinceaction<2000){
-
-                          //  return;
-                       //}
-
                         nexteventid = defaultrule.next;
                         triggered = defaultrule.id;
                         actionids = [...defaultrule.actions];

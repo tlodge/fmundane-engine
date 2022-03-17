@@ -1,7 +1,7 @@
 import Buttons from "./Buttons";
 import Speech from "./Speech";
-import Gesture from "./Gesture";
-import {gestureObserved, setTranscript, sendTranscript, buttonPressed} from './experienceSlice';
+//import Gesture from "./Gesture";
+import {setTranscript, sendTranscript, buttonPressed} from './experienceSlice';
 import {useDispatch } from 'react-redux';
 
 function Layer(e) {
@@ -31,10 +31,7 @@ function Layer(e) {
                                 dispatch(sendTranscript());
                             }}/>
 
-            case "gesture":
-                return <Gesture rules={event.rules} ready={event.ready} handleAction={(op)=>{
-                    dispatch(gestureObserved(op,id));
-                }}/>
+           
 
             default:
                 return JSON.stringify(event,null,4)

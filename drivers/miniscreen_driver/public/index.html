@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <title>MINISCREEN APP!</title>
+  </head>
+  <body>
+    <script>
+        const parts = window.location.href.replace("http://","").replace("https://","").split(":");
+        const wsurl = `ws://${parts[0]}:${parts[1]}`;
+        const socket = new WebSocket(wsurl);
+        try{
+            socket.onopen = function (event) {
+              console.log("successfully opened socket!");
+            };
+          }catch(err){
+            console.log("error opening socket!");
+          }
+        try{ 
+          socket.addEventListener('message', function (event) {
+                var el = document.getElementById('html');
+                console.log("event data is", event.data);
+                el.innerHTML = event.data;
+          })   
+        }catch(err){
+            console.log(err);
+        }
+    
+    </script>
+    <style>
+        body{
+            padding:0;
+            margin:0;
+        }
+        .container{
+            background:black;
+            width: 100vw;
+            height: 100vh;
+            display:flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+    <div id="root">
+        <div id="html">
+            <div class="container">
+                <img src="flogo.svg" width=200 height=200/>
+            </div>
+        </div>
+    </div>
+  </body>
+</html>

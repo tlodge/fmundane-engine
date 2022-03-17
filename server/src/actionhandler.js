@@ -62,19 +62,23 @@ export const handlespeech = async (speech)=>{
     
 }
 
+const replaceurl = (str)=>{
+    return Object.keys(ips).reduce((acc,key)=>{
+        return acc.replace(`[${key}]`, ips[key]);
+    },str);
+}
+
 export const handle = async ({action, delay=0, params={}})=>{
     
 
-    console.log("action handler seen", action);
-
     if (action.type === "request"){
-          
+        
         const _action = Object.keys(params).reduce((acc, key)=>{
             return {...acc, [key]:params[key]}
         }, action);
-
-        const response = await request(_action, delay);
-        console.log("returning from handle!", response);
+        
+        const __action = {..._action, data : {..._action.data, url:replaceurl(_action.data.url)}};
+        const response = await request(__action, delay);
         return response;
     }
    return;

@@ -1,7 +1,7 @@
 import {selectLayerName} from './experienceSlice';
 import { useSelector } from 'react-redux';
 
-const Navigation = ({ start, authored, toggleCreate, twineExport, renderSpeech}) => {
+const Navigation = ({ start, authored, toggleCreate, twineExport, renderSpeech, rendering}) => {
   
   const layerName = useSelector(selectLayerName);
 
@@ -41,7 +41,7 @@ const Navigation = ({ start, authored, toggleCreate, twineExport, renderSpeech})
       <div className="flex flex-row justify-end">
         <a className="p-2 text-xs font-bold text-white" onClick={toggleCreate}>upload</a> 
         {layerName.trim() != "" && <a className="p-2 text-xs font-bold text-white" onClick={twineExport}>export (twine)</a>} 
-        {layerName.trim() != "" && <a className="p-2 text-xs font-bold text-white" onClick={renderSpeech}>render speech</a>}
+        {layerName.trim() != "" && <a className="p-2 text-xs font-bold text-white" onClick={renderSpeech}>{`${!rendering ? "render speech": "[rendering...]"}`}</a>}
       </div>
     </div>
   </nav>

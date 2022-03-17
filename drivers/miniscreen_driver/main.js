@@ -9,19 +9,20 @@ const sockets = [];
 app.use(cors()) 
 app.use(express.static("public"));
 
-app.get('/send', (req,res)=>{
-    send("hello and welcome!!!");
+app.get('/api/update', (req,res)=>{
+    const {html=""} = req.query; 
+    try{
+        send(html);
+    }finally{
+        console.log("returning success!!");
+        res.send({success:true});
+    }
 })
-//app.get('/',  (req, res)=>{
-//    res.sendFile(path.join(__dirname, 'client', 'index.html'));
-//});
-//initialize a simple http server
-const server = http.createServer(app);
 
-//initialize the WebSocket server instance
+const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
 
-mqtt.subscribe("miniscreen",  (message)=>{
+mqtt.subscribe("/miniscreen",  (message)=>{
     try{     
         const msg = JSON.parse(message);
         send(message.toString());
@@ -42,7 +43,7 @@ const send = (msg)=>{
 
 wss.on('connection', (_ws) => {
     sockets.push(_ws);
-    //connection is up, let's add a simple simple event
+    
     _ws.on('message', (message) => {
         console.log('received: %s', message);
     });
@@ -51,7 +52,7 @@ wss.on('connection', (_ws) => {
         let i = sockets.indexOf(_ws);
         sockets.splice(i, 1);
      });
-    //send immediatly a feedback to the incoming connection    
+      
    
 });
 

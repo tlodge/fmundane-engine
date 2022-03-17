@@ -1,0 +1,47 @@
+[{
+    "id":"keywordlayer",
+    "start":{
+       "actions":[
+          [
+             
+          ]
+       ],
+       "event":"triggerwords"
+    },
+    "events":[
+       {
+          "id":"triggerwords",
+          "name":"triggerwords",
+          "onstart":{
+             
+          },
+          "type":"speech",
+          "subscription":"/speech",
+          "rules":[
+             {
+                "rule":{
+                   "operator":"contains",
+                   "operand":[
+                      "cow",
+                      "green",
+                      "red",
+                      "orange"
+                   ]
+                },
+                "actions":[
+                   [
+                      {
+                         "action":"http://localhost:9107/update",
+                         "method":"GET",
+                         "params":{
+                            "html":"<img src='https://via.placeholder.com/150'>"
+                         }
+                      }
+                   ]
+                ],
+                "next":"triggerwords"
+             }
+          ]
+       }
+    ]
+ }]

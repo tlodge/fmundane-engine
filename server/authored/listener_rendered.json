@@ -1,0 +1,72 @@
+[
+    {
+        "id": "twinerytest",
+        "start": {
+            "actions": [
+                []
+            ],
+            "event": "start"
+        },
+        "events": [
+            {
+                "type": "speech",
+                "name": "start",
+                "id": "start",
+                "subscription": "/speech",
+                "onstart": {
+                    "actions": [
+                        [
+                            {
+                                "action": "soundmedia",
+                                "params": {
+                                    "body": {
+                                        "media": "twinerytest/start_speech_0.wav",
+                                        "nowait": false,
+                                        "delay": 0
+                                    }
+                                }
+                            }
+                        ]
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "contains",
+                            "operand": [
+                                "shape",
+                                "shop",
+                                "pop"
+                            ]
+                        },
+                        "next": "start",
+                        "actions": [
+                            [
+                                {
+                                    "action": "http://[lenovo]:9102/api/message",
+                                    "params": {
+                                        "query": {
+                                            "message": "you just said something!"
+                                        }
+                                    },
+                                    "method": "GET",
+                                    "delay": 0
+                                },
+                                {
+                                    "action": "http://[lenovo]:9107/api/update",
+                                    "params": {
+                                        "query": {
+                                            "html": "<img src='https://via.placeholder.com/150'>"
+                                        }
+                                    },
+                                    "method": "GET",
+                                    "delay": 0
+                                }
+                            ]
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]

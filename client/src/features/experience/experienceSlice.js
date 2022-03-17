@@ -6,7 +6,7 @@ import * as d3 from 'd3-hierarchy';
 //import Layer from './Layer';
 
 const socket = io(window.location.href);
-let recognition;
+
 
 export const experienceSlice = createSlice({
   name: 'experience',
@@ -20,6 +20,7 @@ export const experienceSlice = createSlice({
     authored:[],
     layerName:"",
     listening: {},
+    rendering:false,
   },
 
   reducers: {
@@ -59,11 +60,14 @@ export const experienceSlice = createSlice({
     },
     resetReadiness: (state)=>{
      // state.readyforinput = {};
+    },
+    setRendering: (state,action)=>{
+      state.rendering = action.payload;
     }
   }
 });
 
-export const { setLayers, setLayerName, setEvent, setListening, setEvents, setTranscript,sentTranscript,setReadyForInput,setAuthored,resetReadiness} = experienceSlice.actions;
+export const { setRendering, setLayers, setLayerName, setEvent, setListening, setEvents, setTranscript,sentTranscript,setReadyForInput,setAuthored,resetReadiness} = experienceSlice.actions;
 
 export const reset = (layerid="")=>dispatch=>{
   superagent.get('/event/start').then(res => {
@@ -151,8 +155,12 @@ export const listenOnActions = (window) => async dispatch => {
  });
 }
 
-export const renderSpeech = ()=> (dispatch, getState)=>{
-
+export const renderSpeech = ()=> async (dispatch, getState)=>{
+  console.log("calling out to render");
+  const name = getState().experience.layerName;
+  dispatch(setRendering(true));
+  await superagent.get("/author/render").query({name});
+  dispatch(setRendering(false));
 }
 
 export const listenOnEvents = () => (dispatch, getState) => {
@@ -250,7 +258,7 @@ export const fetchAuthored = ()=>(dispatch)=>{
 
 export const fetchLayers = (layer, r) => (dispatch, getState)=>{
   
-  recognition = r;
+ 
   
 
   superagent.get('/event/layers').query({layer}).then(res => {
@@ -261,54 +269,8 @@ export const fetchLayers = (layer, r) => (dispatch, getState)=>{
   .catch(err => {
     console.log("error resetting events", err);
   });
-  
-  recognition.onend = () => {
-      console.log("recognition ended");
-    //if (allowedToListen()){
-       startRecognition();
-    //}else{
-     
-    //}
-  }
-
-  recognition.onresult = event => {    
-   
-    //TODO: why is transcript sending here (post event?)
-
-    //need an onresult for each layer?
-console.log("recognition seen event", event);
-
-    const listening = getState().experience.listening;
-    
-    for (let i = event.resultIndex; i < event.results.length; i++) { 
-      const transcript = event.results[i][0].transcript;
-      console.log(transcript);
-      if (event.results[i].isFinal){ 
-        if (transcript.trim() !== ""){//} && listening){
-          dispatch(setTranscript({transcript:transcript + ' '}));
-          dispatch(sendTranscript());
-        }else{
-          console.log("not listening so not sending!");
-        }
-      }
-    }
-  }
-
-  recognition.continuous = true;
-  recognition.interimResults = true;
-  startRecognition();
 }
 
-
-const startRecognition = ()=>{
-  
-  try{  
-    recognition.start();
-    console.log("recognition started");
-  }catch(err){
-    console.log(err);
-  }
-}
 
 export const listenToSpeech = () => (dispatch, getState) => {
   //console.log("called listen to speech!");
@@ -330,6 +292,7 @@ export const selectEvents= state => {
 export const selectReadyForInput = state => state.experience.readyforinput;
 export const selectSpeech= state => state.experience.transcript;
 
+
 export const selectTrees = state =>  {
     return state.experience.layers.reduce((acc, item)=>{
       return {
@@ -340,5 +303,6 @@ export const selectTrees = state =>  {
 }
 export const selectAuthored = state => state.experience.authored;
 export const selectLayerName = state => state.experience.layerName;
+export const selectRendering = state => state.experience.rendering;
 
 export default experienceSlice.reducer;

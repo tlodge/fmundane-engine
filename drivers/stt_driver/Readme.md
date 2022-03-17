@@ -10,7 +10,7 @@ and sends it to MQTT, where it is picked up by the future mundane engine and eva
 
 To get started you need to download the pretrained model:
 
-#### Download the pre-trained model (1.8GB):
+#### You will need to download the pre-trained model (1.8GB):
 
 ```
 wget https://github.com/coqui-ai/STT/releases/download/v0.9.3/coqui-stt-0.9.3-models.pbmm

@@ -47,8 +47,22 @@ const sayIt = (words="", voice="Daniel", rate=150)=>{
                 resolve();
                 return;
             }
-        });  
-    })
+        });
+    }).catch((err)=>{
+        return new Promise((resolve, reject)=>{
+            execFile("say", ["-v", "Daniel", `[[rate ${rate}]] ${words}`], (error)=>{
+                if (error){
+                    reject();
+                    return;
+                }else{
+                    resolve();
+                    return;
+                }
+            });
+        }).catch((err)=>{
+            console.log("failed to speak",err);
+        })
+    });
 }
 
 const waitFor = (delay)=>{

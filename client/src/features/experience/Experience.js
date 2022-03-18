@@ -137,13 +137,12 @@ export function Experience() {
       const htmlString = `data:text/html;chatset=utf-8,${encodeURIComponent(html)}`;
       const link = document.createElement("a");
       link.href = htmlString;
-      link.download = `${layerName}.json`;
+      link.download = `${layerName}.html`;
       link.click();
    })
   }
 
   const _renderSpeech = ()=>{
-    console.log("rendering speech!!");
     dispatch(renderSpeech());
   }
 

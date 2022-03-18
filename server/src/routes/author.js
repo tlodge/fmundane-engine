@@ -17,8 +17,6 @@ authorRouter.post('/save', (req, res)=>{
     fs.writeFileSync(`authored/${name}.json`, JSON.stringify(layer,null,4));
     res.status(200).json({});
 });
-
-
  
 authorRouter.post('/audiotest', async (req, res)=>{
     const {lines} = req.body;
@@ -97,6 +95,7 @@ authorRouter.get("/render", async (req, res)=>{
     }
 
     for (const layer of results){
+       
         const {torender,node} = layer;
        
         for (const line of torender){

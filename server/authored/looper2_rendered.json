@@ -1,0 +1,122 @@
+[
+    {
+        "id": "storyloop",
+        "start": {
+            "actions": [
+                []
+            ],
+            "event": "start"
+        },
+        "events": [
+            {
+                "type": "speech",
+                "name": "start",
+                "id": "start",
+                "subscription": "/speech",
+                "onstart": {
+                    "actions": [
+                        []
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "contains",
+                            "operand": [
+                                "cakes",
+                                "shoes",
+                                "elephants",
+                                "bridges",
+                                "nice"
+                            ]
+                        },
+                        "next": "tea",
+                        "actions": [
+                            [
+                                {
+                                    "action": "http://[lenovo]:9107/api/update",
+                                    "params": {
+                                        "query": {
+                                            "html": "<img src='https://via.placeholder.com/150'>"
+                                        }
+                                    },
+                                    "method": "GET",
+                                    "delay": 0
+                                }
+                            ]
+                        ]
+                    }
+                ]
+            },
+            {
+                "type": "speech",
+                "name": "tea",
+                "id": "tea",
+                "subscription": "/speech",
+                "onstart": {
+                    "actions": [
+                        [
+                            {
+                                "action": "soundmedia",
+                                "params": {
+                                    "body": {
+                                        "media": "storyloop/tea_speech_0.wav",
+                                        "nowait": false,
+                                        "delay": "0"
+                                    }
+                                }
+                            },
+                            {
+                                "action": "soundmedia",
+                                "params": {
+                                    "body": {
+                                        "media": "storyloop/tea_speech_1.wav",
+                                        "nowait": false,
+                                        "delay": "23"
+                                    }
+                                }
+                            }
+                        ]
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "contains",
+                            "operand": [
+                                "back"
+                            ]
+                        },
+                        "next": "start",
+                        "actions": [
+                            [
+                                {
+                                    "action": "soundmedia",
+                                    "params": {
+                                        "body": {
+                                            "media": "storyloop/tea_action_0_0.wav",
+                                            "nowait": false,
+                                            "delay": 0,
+                                            "voice": "Nadia"
+                                        }
+                                    }
+                                },
+                                {
+                                    "action": "soundmedia",
+                                    "params": {
+                                        "body": {
+                                            "media": "storyloop/tea_action_0_1.wav",
+                                            "nowait": false,
+                                            "delay": 0,
+                                            "voice": "Daniel"
+                                        }
+                                    }
+                                }
+                            ]
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]

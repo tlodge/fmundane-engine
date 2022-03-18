@@ -1,6 +1,3 @@
-import fs from 'fs'
-import path from 'path';
-
 function escapeRegExp(string) {
     return string.replace(/[.*+\-?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
 }
@@ -78,11 +75,8 @@ const updateOnStartSpeech = (id,node)=>{
             //...node.onstart,
             actions: [...(node.onstart.actions||[]),    
             (node.onstart.speech || []).map((speech,i)=>{
-               lookup = [...lookup, [`${id}/${node.id}_speech_${i}`,speech.words]]     
+               lookup = [...lookup, [`${id}/${node.id}_speech_${i}`,speech.words, speech.voice]]     
                return {
-                   
-                    //...speech,
-                    //audio: `${node.id}_speech_${i}`
                     action: "soundmedia",
                     params:{
                         body:{
@@ -98,6 +92,28 @@ const updateOnStartSpeech = (id,node)=>{
     return [lookup, _node];
 }
 
+const extractlookup = (arr=[], id, nid, i)=>{
+    return arr.map((s,j)=>{
+        return [`${id}/${nid}_action_${i}_${j}`, s.words, s.voice] 
+    })
+}
+
+const extractactions = (arr=[], id, nid, i)=>{
+    return arr.map((s,j)=>{
+        return {
+            action: "soundmedia",
+            params:{
+                body:{
+                    media:`${id}/${nid}_action_${i}_${j}.wav`,
+                    nowait: false,
+                    delay: s.delay || 0,
+                    voice: s.voice
+                }
+            }
+        }
+    })
+}
+
 const updateOnStartActions = (id,node)=>{
     let lookup = [];
    
@@ -106,31 +122,14 @@ const updateOnStartActions = (id,node)=>{
         onstart : {
             ...(node.onstart ||{}),
             actions: (node.onstart.actions||[]).reduce((acc, actionarr)=>{
-                
-                return [...acc, (actionarr||[]).map((action,i)=>{
-                    
-                    if (action.action == "say"){
-                        
-                        lookup = [...lookup, [`${id}/${node.id}_action_${i}`,((action.params.body.speech) || []).reduce((acc, speechitem)=>{
-                            return `${acc} ${speechitem.words}`
-                        },"")]];
-                        return {    
-                            action: "soundmedia",
-                            params:{
-                                body:{
-                                    media:`${id}/${node.id}_action_${i}.wav`,
-                                    nowait: false,
-                                    delay: action.params.body.speech.delay || 0,
-
-                                }
-                            }
-                            //...action,
-                            //audio: `${node.id}_action_${i}`
-                        }
+                return [...acc, (actionarr||[]).reduce((acc1, action,i)=>{
+                    if (action.action == "say" || action.action.indexOf("[speech]") !== -1){
+                        lookup = [...lookup, ...extractlookup(action.params.body.speech, id, node.id, i)]
+                        return [...acc1, ...extractactions(action.params.body.speech, id, node.id, i)]
                     }
-                   
-                    return action;
-                })]
+    
+                    return [...acc1, action]
+                },[])]
             },[])
         }
     }
@@ -147,30 +146,13 @@ const updateRules = (id,node)=>{
             return {
                 ...r,
                 actions: (r.actions||[]).reduce((acc, actionarr)=>{
-            
-                    return [...acc, (actionarr||[]).map((action,i)=>{
-                
-                        if (action.action == "say"){
-                            
-                            lookup = [...lookup, [`${id}/${node.id}_rule_${rindx}`, ((action.params.body.speech) || []).reduce((acc, speechitem)=>{
-                                return `${acc} ${speechitem.words}`
-                            },"")]];
-
-                           
-                            return {    
-                                action: "soundmedia",
-                                params:{
-                                    body:{
-                                        media:`${id}/${node.id}_rule_${rindx}.wav`,
-                                        nowait: false,
-                                        delay: action.params.body.speech.delay || 0,
-
-                                    }
-                                }
-                            }
+                    return [...acc, (actionarr||[]).reduce((acc1, action)=>{
+                        if (action.action == "say" || action.action.indexOf("[speech]") !== -1){
+                           lookup = [...lookup, ...extractlookup(action.params.body.speech, id, node.id, rindx)]
+                           return [...acc1, ...extractactions(action.params.body.speech, id, node.id, rindx)]
                         }
-                        return action;
-                    })]
+                        return [...acc1,action];
+                    },[])]
                 },[])
             }
         })
@@ -196,7 +178,6 @@ const replaceSpeech = (story)=>{
         lookup = [...lookup, ..._lookup];
         return [...acc, node];
     },[])
-
     return [lookup, {...story, events:nodes}];
 }
 
@@ -206,16 +187,7 @@ export function convertToTwine(name, obj){
        final = `${final}
                 ${addTwineHeader(parseStory(story),story.id)}`
     }
-    //const dir = `../twine/${name}`;
-
-    //console.log("have dir", dir);
-
-    //if (!fs.existsSync(dir)){
-    //    console.log("making dir", dir);
-    //    fs.mkdirSync(dir);
-   // }
-    //fs.writeFileSync(`${dir}/${name}.html`, final);
-    return final;//`twine/${name}/${name}.html`
+    return final;
 } 
 
 export function renderSpeech(obj){

@@ -9,8 +9,8 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-
-const port = new SerialPort('/dev/tty.usbserial-A10KME4J', {
+///dev/tty.usbserial-A10KME4J
+const port = new SerialPort('/dev/ttyUSB0', {
     baudRate: 115200
 },  (err)=>{
     if (err) {
@@ -46,9 +46,9 @@ app.get('/api/arm/collapse', async function (req, res, next) {
     res.status(200).send("OK");
 });
 
-app.get('/api/arm/test', async function (req, res, next) {
-    console.log("test");
-    await testIt();
+app.get('/api/arm/scan', async function (req, res, next) {
+    console.log("scan");
+    await scan();
     res.status(200).send("OK");
 });
 
@@ -59,73 +59,133 @@ app.get('/api/arm/expand', async function (req, res, next) {
 });
 
 const collapse = async()=>{
-    await(writeIt("#1 P1500\r")); //center
-    await(writeIt("#2 P0\r")); //90g behind
-    await(writeIt("#3 P3000\r"))
+   //return to base
+    await waitFor(800);
+    await(writeIt("#4 P1500\r"));
+    await(writeIt("#2 P1500\r"));
+    await(writeIt("#1 P1600\r")); 
+    await waitFor(800);
+    await(writeIt("#3 P1000\r"));
+    await waitFor(800);
+    await(writeIt("#3 P1300\r"));
+    await waitFor(800);
+    await(writeIt("#3 P1800\r")); 
+    await waitFor(800);
+    await(writeIt("#2 P1000\r")); 
+    await waitFor(800);
+    await(writeIt("#3 P2000\r"));
+    await(writeIt("#2 P100\r")); 
+    await waitFor(800);
+   
+    await(writeIt("#3 P2000\r")); 
+    await(writeIt("#4 P1500\r"));
+    await waitFor(800);
+    await(writeIt("#3 P2300\r")); 
+    await waitFor(800);
+    await(writeIt("#3 P2500\r")); 
+    await waitFor(800);
+    await(writeIt("#5 P2500\r")); 
+    await waitFor(800);
+    await(writeIt("#4 P0\r")); 
+
 }
 
-const expand = async()=>{
+const fullrun = async()=>{
+   
+    //expand
     await(writeIt("#1 P1500\r")); //center
-    await(writeIt("#2 P1800\r")); //center
-    await(writeIt("#3 P0\r")); 
-}
-
-const testIt = async ()=>{
-   // await(writeIt("#0 P1500\r"));
-
-    await(writeIt("#1 P1500\r"));
+    await(writeIt("#5 P1500\r")); //center
+    await waitFor(1000);
     await(writeIt("#2 P1500\r"));
     await(writeIt("#3 P1500\r"));
     await(writeIt("#4 P1500\r"));
-    await(writeIt("#5 P1500\r"));
-
-    await(writeIt("#1 P1500\r")); //center
     await waitFor(1000);
-    await(writeIt("#1 P0\r")); //90deg
+    await(writeIt("#3 P800\r"));
+    await(writeIt("#4 P1800\r"));
     await waitFor(1000);
-    await(writeIt("#1 P1500\r")); //center
-    await waitFor(1000);
-    await(writeIt("#1 P3000\r")); //-90deg
-    await waitFor(1000);
-    await(writeIt("#1 P1500\r")); //center
     
-    await(writeIt("#2 P1500\r")); //center
-    await waitFor(1000);
-    await(writeIt("#2 P0\r")); //90g behind
-    await waitFor(1000);
-    await(writeIt("#2 P2000\r")); //forward (max with #1 at 90deg)
-    await waitFor(1500);
-    await(writeIt("#2 P1500\r")); //forward (max with #1 at 90deg)
+    //eyes look round
+    await(writeIt("#5 P2500\r")); //center
+    await waitFor(800);
+    await(writeIt("#5 P2000\r")); //center
+    await waitFor(800);
+    await(writeIt("#5 P1500\r")); //center
+    await waitFor(800);
+    await(writeIt("#5 P100\r")); //center
+    await waitFor(800);
+    await(writeIt("#5 P500\r")); //center
+    await waitFor(800);
+    await(writeIt("#5 P800\r")); //center
+    await waitFor(800);
+    await(writeIt("#5 P1500\r")); //center
+    await waitFor(800);
 
-    await(writeIt("#3 P1500\r")); //center
-    await waitFor(1000);
-    await(writeIt("#3 P0\r")); //fully pointing up
-    await waitFor(1000);
-    await(writeIt("#3 P1500\r")); //center
-    await waitFor(1000);
-    await(writeIt("#3 P3000\r")); //fully pointing down
-    await waitFor(1000);
-    await(writeIt("#3 P1500\r")); //center
 
-    await(writeIt("#4 P1500\r")); //center
-    await waitFor(1000);
-    await(writeIt("#4 P0\r")); //fully pointing up
-    await waitFor(1000);
-    await(writeIt("#4 P1500\r")); //center
-    await waitFor(1000);
-    await(writeIt("#4 P3000\r")); //fully pointing down
-    await waitFor(1000);
-    await(writeIt("#4 P1500\r")); //center
+    //return to base
+    await waitFor(800);
+    await(writeIt("#2 P1500\r"));
+    await(writeIt("#1 P1500\r")); 
+    await waitFor(800);
+    await(writeIt("#3 P1000\r"));
+    await waitFor(800);
+    await(writeIt("#3 P1300\r"));
+    await waitFor(800);
+    await(writeIt("#3 P1800\r")); 
+    await waitFor(800);
+    await(writeIt("#2 P1000\r")); 
+    await waitFor(800);
+    await(writeIt("#3 P2000\r"));
+    await(writeIt("#2 P100\r")); 
+    await waitFor(800);
+   
+    await(writeIt("#3 P2000\r")); 
+    await(writeIt("#4 P1500\r"));
+    await waitFor(800);
+    await(writeIt("#3 P2300\r")); 
+    await waitFor(800);
+    await(writeIt("#3 P2500\r")); 
+    await waitFor(800);
+    await(writeIt("#5 P2500\r")); 
+}
 
-} 
+const expand = async()=>{
+    //expand
+    await(writeIt("#4 P1500\r"));
+    waitFor(800);
+    await(writeIt("#1 P1500\r")); //center
+    await(writeIt("#5 P1500\r")); //center
+    await waitFor(1000);
+    await(writeIt("#2 P1500\r"));
+    await(writeIt("#3 P1500\r"));
+    await(writeIt("#4 P1500\r"));
+    await waitFor(1000);
+    await(writeIt("#3 P800\r"));
+    await(writeIt("#4 P1800\r"));
+    await waitFor(1000);
+}
+
+const scan = async()=>{
+    await(writeIt("#5 P2500\r")); //center
+    await waitFor(800);
+    await(writeIt("#5 P2000\r")); //center
+    await waitFor(800);
+    await(writeIt("#5 P1500\r")); //center
+    await waitFor(800);
+    await(writeIt("#5 P100\r")); //center
+    await waitFor(800);
+    await(writeIt("#5 P500\r")); //center
+    await waitFor(800);
+    await(writeIt("#5 P800\r")); //center
+    await waitFor(800);
+    await(writeIt("#5 P1500\r")); //center
+    await waitFor(800);
+}
 
 const shrinkExpand = async ()=>{
     collapse();
     await waitFor(2000);
     expand();
 }
-
-collapse();
+//fullrun()
 http.createServer(app).listen(PORT);
 console.log("listening on port: " + PORT);
-

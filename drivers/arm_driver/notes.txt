@@ -1,0 +1,7 @@
+TODO:
+
+Will need to updeta the firmware on the new M0 - should be a case of going to the wifi101 examples and install FirmwareUpdater code, then upodate through the IDE (tools / wifi101 firmwareupdater).
+
+Put static IPS in the amflifi router (amplifi.lan)
+
+Get the M0 to only respond once the draw has fully opened or closed.

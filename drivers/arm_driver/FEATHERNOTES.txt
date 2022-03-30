@@ -1,0 +1,23 @@
+Connections from Sparkfun ProDriver to Feather M0 wifi:
+
+STBY->A4
+EN->A5
+MODE_0->A0
+MODE_1->A1
+MODE_2->A2
+MODE_3->A3
+GND->GND
+
+And Stepper motor:
+
+Black: A+
+Green: A-
+Blue B-
+Red B+
+
+ProDriver docs:
+
+https://learn.sparkfun.com/tutorials/sparkfun-prodriver-hookup-guide
+
+Note only seem to get the thing to work in Serial mode.  Can't see how to increase speed.  Torque not great.
+

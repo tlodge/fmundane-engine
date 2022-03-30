@@ -1,19 +1,17 @@
 #include <SPI.h>
 #include <WiFi101.h>
-#include <AccelStepper.h>
+#include "SparkFun_ProDriver_TC78H670FTG_Arduino_Library.h" //Click here to get the library: http://librarymanager/All#SparkFun_ProDriver
 #include "arduino_secrets.h" 
-#define OPENLIMIT A2
-#define CLOSELIMIT A3
+#define OPENLIMIT 11
+#define CLOSELIMIT 10
+
+PRODRIVER myProDriver; //Create instance of this object
 
 char ssid[] = SECRET_SSID;    // your network SSID (name)
 char pass[] = SECRET_PASS;    // your network password (use for WPA, or use as key for WEP)
 int keyIndex = 0;             // your network key Index number (needed only for WEP)
-AccelStepper stepper1(AccelStepper::DRIVER, A0, A1);
-
 int status = WL_IDLE_STATUS;
 WiFiServer server(9109);
-int pos1 = 0;
-const int MAXPOS = 54000;
 
 void setup() {
   pinMode(OPENLIMIT, INPUT_PULLUP);
@@ -21,8 +19,12 @@ void setup() {
   Serial.begin(9600);      // initialize serial communication
   pinMode(9, OUTPUT);      // set the LED pin mode
   WiFi.setPins(8,7,4,2);
-  stepper1.setMaxSpeed(5000);
-  stepper1.setAcceleration(5000);
+  
+  myProDriver.settings.controlMode = PRODRIVER_MODE_SERIAL; // non-default mode must be set here
+  myProDriver.setTorque(PRODRIVER_TRQ_100);
+  myProDriver.sendSerialCommand();
+  myProDriver.begin(); // adjus
+  
   // check for the presence of the shield:
   if (WiFi.status() == WL_NO_SHIELD) {
     Serial.println("WiFi shield not present");
@@ -45,7 +47,7 @@ void setup() {
 
 
 void loop() {
-  open();   
+
   WiFiClient client = server.available();   // listen for incoming clients
   //uint8_t i=digitalRead(SWITCH1)
   if (client) {                             // if you get a client,
@@ -96,28 +98,21 @@ void loop() {
 
 void open(){
   Serial.println("opening!");
-  while (pos1 < MAXPOS && digitalRead(OPENLIMIT) != 1){ 
-    stepper1.moveTo(++pos1);
-    Serial.println(pos1);
-    stepper1.run();
-  }
-  Serial.println("open");
-  Serial.println(pos1);
   Serial.println(digitalRead(OPENLIMIT));
+  while (digitalRead(OPENLIMIT) != 1){ 
+      myProDriver.stepSerial(50, 0);
+  }
 }
 
 void close(){
   Serial.println("closing!");
-  while (pos1 > 0 && digitalRead(CLOSELIMIT) != 1){
-    stepper1.moveTo(--pos1);
-     Serial.println(pos1);
-    stepper1.run();
-  }
-  Serial.println("closed!");
-  Serial.println(pos1);
   Serial.println(digitalRead(CLOSELIMIT));
-  
+  while (digitalRead(OPENLIMIT) != 1){ 
+      myProDriver.stepSerial(50, 1);
+  }
+  Serial.println("closed!"); 
 }
+
 void printWiFiStatus() {
   // print the SSID of the network you're attached to:
   Serial.print("SSID: ");

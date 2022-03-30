@@ -5,8 +5,7 @@ function Media({media="", delay=500}) {
 
     const [playit, setPlay] = useState(false);
 
-    //add a 500ms delay to video start to sync with audio if required
-    console.log("delay is", delay);
+    //add a 500ms delay to video start to sync with audio if require
     useEffect(()=>{
         setPlay(false);
 
@@ -21,9 +20,7 @@ function Media({media="", delay=500}) {
 //<iframe src="https://cross-origin.com/myvideo.html" allow="autoplay; fullscreen">
     const renderVideo = ()=>{
         const url = window.location.href.replace("/media", "");
-        console.log("url is", window.location.href);
-        console.log("video src set at", url);
-
+      
         return  <>
                 <iframe src={`${url}/silence.mp3`} type="audio/mp3" allow="autoplay" id="audio" style={{display:"none"}}></iframe>
                 <video fullScreen autoPlay style={{width:"100vw", height:"100vh"}}>

@@ -7,7 +7,6 @@ const bodyParser = require('body-parser');
 const request = require('superagent');
 
 const { execFile} = require('child_process');
-var rp = require('request-promise-native')
 const PORT = '9106';
 const MEDIADIR = '../../media';
 const app = express();

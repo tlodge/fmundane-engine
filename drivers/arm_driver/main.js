@@ -3,14 +3,19 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const SerialPort = require('serialport');
 const { setTimeout } = require('timers');
+const request = require('superagent');
+
 const PORT = '9107';
 
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-///dev/tty.usbserial-A10KME4J
-const port = new SerialPort('/dev/ttyUSB0', {
+// Arm connected to mac: dev/tty.usbserial-A10KME4J
+// Arm connected to lenovo: '/dev/ttyUSB0'
+// Pseudo test port: /dev/ptyp3
+
+const port = new SerialPort('/dev/cu.SOC', {
     baudRate: 115200
 },  (err)=>{
     if (err) {
@@ -41,8 +46,17 @@ const writeIt = (str)=>{
 }
 
 app.get('/api/arm/collapse', async function (req, res, next) {
-    console.log("collapse");
+    console.log("collapsing arm");
     await collapse();
+    console.log("arm collapsed");
+    try{
+        console.log("closing drawer");
+        const result = await request.get("192.168.1.67:9109/C")
+        console.log(result.body);
+        console.log("drawer closed");
+    }catch(err){
+        console.log("failed to close drawer");
+    }
     res.status(200).send("OK");
 });
 
@@ -53,9 +67,20 @@ app.get('/api/arm/scan', async function (req, res, next) {
 });
 
 app.get('/api/arm/expand', async function (req, res, next) {
-    console.log("expand");
-    await expand();
+    
+    try{
+        console.log("opening drawer");
+        const result = await request.get("192.168.1.67:9109/O")
+        console.log(result.body);
+        console.log("expanding arm");
+        await expand();
+        console.log("arm expanded");
+    }catch(err){
+        console.log("failed to open drawer");
+    }
     res.status(200).send("OK");
+    
+    
 });
 
 const collapse = async()=>{

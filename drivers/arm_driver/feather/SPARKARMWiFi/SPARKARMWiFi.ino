@@ -66,7 +66,7 @@ void loop() {
               client.println("HTTP/1.1 200 OK");
               client.println("Content-type:application/json");// GET /L turns the LED off
               client.println();
-              client.println("{'success':true}");
+              client.println("{\"success\":true}");
               client.println();
             break;
           }
@@ -107,7 +107,7 @@ void open(){
 void close(){
   Serial.println("closing!");
   Serial.println(digitalRead(CLOSELIMIT));
-  while (digitalRead(OPENLIMIT) != 1){ 
+  while (digitalRead(CLOSELIMIT) != 1){ 
       myProDriver.stepSerial(50, 1);
   }
   Serial.println("closed!"); 

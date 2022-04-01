@@ -12,6 +12,7 @@
         "express": "^4.16.3",
         "mqtt": "^2.16.0",
         "path": "^0.12.7",
-        "serialport": "^9.2.5"
+        "serialport": "^9.2.5",
+        "superagent": "^7.1.2"
     }
 }

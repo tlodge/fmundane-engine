@@ -2,9 +2,8 @@
 #include <WiFi101.h>
 #include <AccelStepper.h>
 #include "arduino_secrets.h" 
-#define OPENLIMIT A2
-#define CLOSELIMIT A3
-
+#define OPENLIMIT A3
+#define CLOSELIMIT A5
 char ssid[] = SECRET_SSID;    // your network SSID (name)
 char pass[] = SECRET_PASS;    // your network password (use for WPA, or use as key for WEP)
 int keyIndex = 0;             // your network key Index number (needed only for WEP)
@@ -16,6 +15,7 @@ int pos1 = 0;
 const int MAXPOS = 54000;
 
 void setup() {
+  
   pinMode(OPENLIMIT, INPUT_PULLUP);
   pinMode(CLOSELIMIT, INPUT_PULLUP);
   Serial.begin(9600);      // initialize serial communication
@@ -45,7 +45,6 @@ void setup() {
 
 
 void loop() {
-  open();   
   WiFiClient client = server.available();   // listen for incoming clients
   //uint8_t i=digitalRead(SWITCH1)
   if (client) {                             // if you get a client,
@@ -96,27 +95,20 @@ void loop() {
 
 void open(){
   Serial.println("opening!");
-  while (pos1 < MAXPOS && digitalRead(OPENLIMIT) != 1){ 
-    stepper1.moveTo(++pos1);
-    Serial.println(pos1);
+  Serial.println(digitalRead(OPENLIMIT));
+  while (digitalRead(OPENLIMIT) != 1){ 
+    stepper1.moveTo(--pos1);
     stepper1.run();
   }
-  Serial.println("open");
-  Serial.println(pos1);
-  Serial.println(digitalRead(OPENLIMIT));
 }
 
 void close(){
   Serial.println("closing!");
-  while (pos1 > 0 && digitalRead(CLOSELIMIT) != 1){
-    stepper1.moveTo(--pos1);
-     Serial.println(pos1);
+  Serial.println(digitalRead(CLOSELIMIT));
+  while (digitalRead(CLOSELIMIT) != 1){
+    stepper1.moveTo(++pos1);
     stepper1.run();
   }
-  Serial.println("closed!");
-  Serial.println(pos1);
-  Serial.println(digitalRead(CLOSELIMIT));
-  
 }
 void printWiFiStatus() {
   // print the SSID of the network you're attached to:

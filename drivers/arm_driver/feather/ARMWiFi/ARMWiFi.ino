@@ -63,7 +63,7 @@ void loop() {
               client.println("HTTP/1.1 200 OK");
               client.println("Content-type:application/json");// GET /L turns the LED off
               client.println();
-              client.println("{'success':true}");
+              client.println("{\"success\":true}");
               client.println();
             break;
           }

@@ -24,13 +24,24 @@ int MotorControl = 7;    // Digital Arduino Pin used to control the motor
  
 // the setup routine runs once when you press reset:
 void setup()  {
+    servo_L.attach(3);
+
+    for (i = 0; i <= 50; i += 1) {
+    servo_L.write(i);
+    delay(10); // Wait for 50 millisecond(s)
+  }
+  for (k = 50; k >= 0; k -= 1) {
+    servo_L.write(k);
+    delay(10); // Wait for 50 millisecond(s)
+  }
+  delay(1000);
   
   Serial.begin(9600); 
   // declare pin 5 to be an output:
   pinMode(MotorControl, OUTPUT);
        // initialize serial communication
   pinMode(9, OUTPUT);      // set the LED pin mode
-  servo_L.attach(3);
+
   // check for the WiFi module:
 
   if (WiFi.status() == WL_NO_MODULE) {
@@ -154,11 +165,11 @@ void loop()  {
         }
         if (currentLine.endsWith("GET /S")) {
           Serial.println("SWITCHING!!");
-          for (i = 0; i <= 50; i += 1) {
+          for (i = 0; i <= 95; i += 1) {
             servo_L.write(i);
             delay(10); // Wait for 50 millisecond(s)
           }
-          for (k = 50; k >= 0; k -= 1) {
+          for (k = 95; k >= 0; k -= 1) {
             servo_L.write(k);
             delay(10); // Wait for 50 millisecond(s)
           }

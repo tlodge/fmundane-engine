@@ -13,7 +13,7 @@ import useWindowDimensions from "./hooks/useWindowDimensions";
 //const VWIDTH = 1280;//720;//1280;
 //const VHEIGHT = 960;//500;//960;
 
-
+//https://codesandbox.io/s/stqwv?file=/src/App.js:156-190
 
 function FaceScan({scan="none"}) {
 
@@ -96,7 +96,6 @@ function FaceScan({scan="none"}) {
     setVideoOpacity(0);
   }
 
-  console.log("scan is", scan);
 
   return (
     <div style={{backgroundColor:"black"}}>

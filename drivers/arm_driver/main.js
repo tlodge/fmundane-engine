@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // Arm connected to lenovo: '/dev/ttyUSB0'
 // Pseudo test port: /dev/ptyp3
 
-const port = new SerialPort('/dev/cu.SOC', {
+const port = new SerialPort('/dev/ttyUSB0', {
     baudRate: 115200
 },  (err)=>{
     if (err) {
@@ -51,12 +51,15 @@ app.get('/api/arm/collapse', async function (req, res, next) {
     console.log("arm collapsed");
     try{
         console.log("closing drawer");
-        const result = await request.get("192.168.1.67:9109/C")
-        console.log(result.body);
-        console.log("drawer closed");
+        const result = await request.get("192.168.1.162:9109/C")
+        await dock();
+        await toggleDoor();
+        //console.log(result.body);
+        
     }catch(err){
-        console.log("failed to close drawer");
+       //TODO get error in response JSON - check arduino code
     }
+   
     res.status(200).send("OK");
 });
 
@@ -67,21 +70,33 @@ app.get('/api/arm/scan', async function (req, res, next) {
 });
 
 app.get('/api/arm/expand', async function (req, res, next) {
-    
+    console.log("seen arm expand")
+    let opened = false;
+
     try{
-        console.log("opening drawer");
-        const result = await request.get("192.168.1.67:9109/O")
-        console.log(result.body);
-        console.log("expanding arm");
-        await expand();
-        console.log("arm expanded");
+        opened =  await toggleDoor();
+        await undock();
+        if (opened){
+            const result = await request.get("192.168.1.162:9109/O")
+            await expand();
+        }
+      
     }catch(err){
-        console.log("failed to open drawer");
+     //TODO get error in response JSON - check arduino code
     }
     res.status(200).send("OK");
-    
-    
 });
+
+const toggleDoor = async()=>{
+    try{
+    await request.get("192.168.1.221:9109/S");
+    await waitFor(800);
+    return true;
+    }catch(err){
+        console.log("failed to open drawer");
+        return false;
+    }
+}
 
 const collapse = async()=>{
    //return to base
@@ -110,9 +125,13 @@ const collapse = async()=>{
     await(writeIt("#3 P2500\r")); 
     await waitFor(800);
     await(writeIt("#5 P2500\r")); 
+   
+
+}
+
+const dock = async()=>{
     await waitFor(800);
     await(writeIt("#4 P0\r")); 
-
 }
 
 const fullrun = async()=>{
@@ -173,9 +192,15 @@ const fullrun = async()=>{
     await(writeIt("#5 P2500\r")); 
 }
 
+const undock = async()=>{
+    waitFor(800);
+    await(writeIt("#4 P1500\r"));
+}
+
 const expand = async()=>{
     //expand
-    await(writeIt("#4 P1500\r"));
+   
+  
     waitFor(800);
     await(writeIt("#1 P1500\r")); //center
     await(writeIt("#5 P1500\r")); //center
@@ -186,6 +211,7 @@ const expand = async()=>{
     await waitFor(1000);
     await(writeIt("#3 P800\r"));
     await(writeIt("#4 P1800\r"));
+    await(writeIt("#5 P1300\r"));
     await waitFor(1000);
 }
 
@@ -202,7 +228,7 @@ const scan = async()=>{
     await waitFor(800);
     await(writeIt("#5 P800\r")); //center
     await waitFor(800);
-    await(writeIt("#5 P1500\r")); //center
+    await(writeIt("#5 P1300\r")); //center
     await waitFor(800);
 }
 

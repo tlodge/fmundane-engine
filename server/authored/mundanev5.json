@@ -21,12 +21,6 @@
                                 "params": {},
                                 "method": "GET",
                                 "delay": 0
-                            },
-                            {
-                                "action": "talkingon",
-                                "params": {},
-                                "method": "GET",
-                                "delay": 0
                             }
                         ]
                     ]
@@ -246,7 +240,7 @@
                                     }
                                 },
                                 "method": "GET",
-                                "delay": 5000
+                                "delay": 0
                             },
                             {
                                 "action": "print",
@@ -344,7 +338,7 @@
                             "words": "This will be an immersive experience",
                             "voice": "Daniel",
                             "rate": "180",
-                            "delay": "2000"
+                            "delay": "0"
                         },
                         {
                             "words": "Any questions to ask at this point?",
@@ -373,7 +367,7 @@
                                     }
                                 },
                                 "method": "GET",
-                                "delay": 1000
+                                "delay": 500
                             },
                             {
                                 "action": "immersive",
@@ -383,7 +377,7 @@
                                     }
                                 },
                                 "method": "GET",
-                                "delay": 2000
+                                "delay": 1000
                             }
                         ]
                     ]
@@ -458,7 +452,7 @@
                         {
                             "words": "negative",
                             "voice": "Daniel",
-                            "rate": "undefined",
+                            "rate": "180",
                             "delay": "0"
                         }
                     ]
@@ -489,7 +483,7 @@
                         {
                             "words": "yes",
                             "voice": "Daniel",
-                            "rate": "undefined",
+                            "rate": "180",
                             "delay": "0"
                         }
                     ]
@@ -611,7 +605,7 @@
                             "delay": "0"
                         },
                         {
-                            "words": "It’s meant to put you in the driving seat.  You keep the control.",
+                            "words": "It’s meant to put you in the driving seat.",
                             "voice": "Daniel",
                             "rate": "180",
                             "delay": "0"
@@ -656,6 +650,14 @@
                                     "params": {},
                                     "method": "GET",
                                     "delay": 0
+                                }
+                            ],
+                            [
+                                {
+                                    "action": "expand",
+                                    "params": {},
+                                    "method": "GET",
+                                    "delay": 3000
                                 }
                             ]
                         ]
@@ -718,6 +720,14 @@
                         ],
                         [
                             {
+                                "action": "scan",
+                                "params": {},
+                                "method": "GET",
+                                "delay": 1000
+                            }
+                        ],
+                        [
+                            {
                                 "action": "message",
                                 "params": {
                                     "query": {
@@ -744,6 +754,13 @@
                                     "params": {},
                                     "method": "GET",
                                     "delay": 0
+                                }
+                            ],
+                            [
+                                {
+                                    "action": "collapse",
+                                    "params": {},
+                                    "method": "GET"
                                 }
                             ]
                         ]
@@ -859,7 +876,7 @@
                     {
                         "rule": {
                             "operator": "equals",
-                            "operand": "say"
+                            "operand": "badnews"
                         },
                         "next": "badnews",
                         "actions": [
@@ -879,7 +896,7 @@
                     {
                         "rule": {
                             "operator": "equals",
-                            "operand": "romatic"
+                            "operand": "romantic"
                         },
                         "next": "romantic",
                         "actions": [
@@ -898,9 +915,9 @@
                     }
                 ],
                 "data": [
-                    "say",
+                    "badnews",
                     "most",
-                    "romatic",
+                    "romantic",
                     "breach"
                 ]
             },
@@ -981,10 +998,10 @@
                 "onstart": {
                     "speech": [
                         {
-                            "words": "Ok",
-                            "voice": "well",
-                            "rate": "I can't help but notice that you are on the Liverpool City Council most wanted list.",
-                            "delay": "Daniel"
+                            "words": "I can't help but notice that you are on the Manchester City Council most wanted list.",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "0"
                         },
                         {
                             "words": "A notification has been sent to the police.",
@@ -1005,7 +1022,7 @@
                                 "action": "print",
                                 "params": {
                                     "body": {
-                                        "text": "APB sent to Liverpool police"
+                                        "text": "APB sent to Manchester police"
                                     }
                                 },
                                 "method": "GET",
@@ -1038,10 +1055,10 @@
                 "onstart": {
                     "speech": [
                         {
-                            "words": "Ok",
-                            "voice": "well",
-                            "rate": "Initial analysis suggests that you're a sucker for a romantic story.",
-                            "delay": "Daniel"
+                            "words": "Ok, weell. Initial analysis suggests that you're a sucker for a romantic story.",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "0"
                         },
                         {
                             "words": "You're in for a treat.",
@@ -1050,7 +1067,7 @@
                             "delay": "0"
                         },
                         {
-                            "words": "The Break Up will be right up your street",
+                            "words": "The drama will be right up your street",
                             "voice": "Daniel",
                             "rate": "180",
                             "delay": "0"
@@ -1095,10 +1112,10 @@
                 "onstart": {
                     "speech": [
                         {
-                            "words": "Ok",
-                            "voice": "well",
-                            "rate": "I have bad news.",
-                            "delay": "Daniel"
+                            "words": "Ok, well. I have bad news.",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "0"
                         },
                         {
                             "words": "Your face profile was part of a home office data breach last year.",
@@ -1107,10 +1124,10 @@
                             "delay": "0"
                         },
                         {
-                            "words": "No need for alarm",
-                            "voice": "but I suggest you inform your insurers.",
-                            "rate": "Daniel",
-                            "delay": "180"
+                            "words": "No need for alarm, but I suggest you inform your insurers.",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "0"
                         }
                     ],
                     "actions": [
@@ -1278,21 +1295,15 @@
                 "id": "actuatewindows",
                 "subscription": "/press",
                 "onstart": {
-                    "speech": [
-                        {
-                            "words": "I can block out the light with my smart windows",
-                            "voice": "Daniel",
-                            "rate": "180",
-                            "delay": "1000"
-                        }
-                    ],
+                   
                     "actions": [
                         [
+                            {"action":"say", "params":{"body":{"speech":[{"words":"I can block out the light with my smart windows","voice":"Daniel"}]}}},
                             {
                                 "action": "togglewindows",
                                 "params": {},
                                 "method": "GET",
-                                "delay": 0
+                                "delay":1000 
                             },
                             {
                                 "action": "message",
@@ -1308,7 +1319,7 @@
                                 "action": "togglewindows",
                                 "params": {},
                                 "method": "GET",
-                                "delay": 3000
+                                "delay": 0
                             }
                         ]
                     ]
@@ -1340,7 +1351,7 @@
                             "words": "I can give you a nice blast of air",
                             "voice": "Daniel",
                             "rate": "180",
-                            "delay": "1000"
+                            "delay": "0"
                         }
                     ],
                     "actions": [
@@ -1399,7 +1410,7 @@
                             "words": "I can even make the room all moody",
                             "voice": "Daniel",
                             "rate": "180",
-                            "delay": "1000"
+                            "delay": "0"
                         }
                     ],
                     "actions": [
@@ -1417,8 +1428,12 @@
                                 "delay": 0
                             },
                             {
-                                "action": "redlights",
-                                "params": {},
+                                "action": "immersive",
+                                "params": {
+                                    "query": {
+                                        "script_id": "ID021"
+                                    }
+                                },
                                 "method": "GET",
                                 "delay": 0
                             },
@@ -1462,7 +1477,7 @@
                             "words": "And of course I can show you stuff on the good old TV screen",
                             "voice": "Daniel",
                             "rate": "180",
-                            "delay": "1000"
+                            "delay": "0"
                         }
                     ],
                     "actions": [
@@ -1541,7 +1556,7 @@
                             "words": "Please tear off your receipt now and sign it on the dotted line with the pen provided",
                             "voice": "Daniel",
                             "rate": "180",
-                            "delay": "1000"
+                            "delay": "0"
                         }
                     ],
                     "actions": [
@@ -1625,7 +1640,7 @@
                             "delay": "500"
                         },
                         {
-                            "words": "Called A few Months.",
+                            "words": "Called A few Moments",
                             "voice": "Daniel",
                             "rate": "180",
                             "delay": "500"
@@ -1721,6 +1736,26 @@
                             "operand": "neg-cold"
                         },
                         "next": "neg-cold",
+                        "actions": [
+                            []
+                        ]
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "a_few_moments_pos"
+                        },
+                        "next": "a_few_moments_pos",
+                        "actions": [
+                            []
+                        ]
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "a_few_moments_neg"
+                        },
+                        "next": "a_few_moments_neg",
                         "actions": [
                             []
                         ]
@@ -1886,7 +1921,7 @@
                                 "params": {
                                     "query": {
                                         "rotate": true,
-                                        "power": 6,
+                                        "power": 10,
                                         "cool": true,
                                         "from": 0,
                                         "to": 90
@@ -1896,6 +1931,7 @@
                                 "delay": 8500
                             }
                         ],
+                       
                         [
                             {
                                 "action": "fan",
@@ -1907,63 +1943,7 @@
                                     }
                                 },
                                 "method": "GET",
-                                "delay": 47000
-                            }
-                        ],
-                        [
-                            {
-                                "action": "fan",
-                                "params": {
-                                    "query": {
-                                        "rotate": true,
-                                        "power": 6,
-                                        "cool": true,
-                                        "from": 0,
-                                        "to": 90
-                                    }
-                                },
-                                "method": "GET",
-                                "delay": 287000
-                            },
-                            {
-                                "action": "fan",
-                                "params": {
-                                    "query": {
-                                        "rotate": false,
-                                        "power": 1,
-                                        "cool": true
-                                    }
-                                },
-                                "method": "GET",
-                                "delay": 10000
-                            }
-                        ],
-                        [
-                            {
-                                "action": "fan",
-                                "params": {
-                                    "query": {
-                                        "rotate": true,
-                                        "power": 10,
-                                        "cool": true,
-                                        "from": 0,
-                                        "to": 90
-                                    }
-                                },
-                                "method": "GET",
-                                "delay": 172000
-                            },
-                            {
-                                "action": "fan",
-                                "params": {
-                                    "query": {
-                                        "rotate": false,
-                                        "power": 1,
-                                        "cool": true
-                                    }
-                                },
-                                "method": "GET",
-                                "delay": 29000
+                                "delay": 89000
                             }
                         ],
                
@@ -2261,7 +2241,7 @@
                                 "params": {
                                     "query": {
                                         "rotate": true,
-                                        "power": 6,
+                                        "power": 10,
                                         "cool": true,
                                         "from": 0,
                                         "to": 90
@@ -2271,6 +2251,7 @@
                                 "delay": 8500
                             }
                         ],
+                       
                         [
                             {
                                 "action": "fan",
@@ -2282,63 +2263,7 @@
                                     }
                                 },
                                 "method": "GET",
-                                "delay": 47000
-                            }
-                        ],
-                        [
-                            {
-                                "action": "fan",
-                                "params": {
-                                    "query": {
-                                        "rotate": true,
-                                        "power": 6,
-                                        "cool": true,
-                                        "from": 0,
-                                        "to": 90
-                                    }
-                                },
-                                "method": "GET",
-                                "delay": 287000
-                            },
-                            {
-                                "action": "fan",
-                                "params": {
-                                    "query": {
-                                        "rotate": false,
-                                        "power": 1,
-                                        "cool": true
-                                    }
-                                },
-                                "method": "GET",
-                                "delay": 10000
-                            }
-                        ],
-                        [
-                            {
-                                "action": "fan",
-                                "params": {
-                                    "query": {
-                                        "rotate": true,
-                                        "power": 10,
-                                        "cool": true,
-                                        "from": 0,
-                                        "to": 90
-                                    }
-                                },
-                                "method": "GET",
-                                "delay": 172000
-                            },
-                            {
-                                "action": "fan",
-                                "params": {
-                                    "query": {
-                                        "rotate": false,
-                                        "power": 1,
-                                        "cool": true
-                                    }
-                                },
-                                "method": "GET",
-                                "delay": 29000
+                                "delay": 89000
                             }
                         ],
                        
@@ -8193,22 +8118,7 @@
                                     "body": {
                                         "speech": [
                                             {
-                                                "words": "As it happens, analysis of sensor data meant that I decided to show you a more positive ending. I didn't want to upset you. Not in that state",
-                                                "voice": "Daniel"
-                                            }
-                                        ]
-                                    }
-                                },
-                                "method": "GET",
-                                "delay": 1000
-                            },
-                            {
-                                "action": "say",
-                                "params": {
-                                    "body": {
-                                        "speech": [
-                                            {
-                                                "words": "Also, you remember the weird science-fiction interlude? That was just for you. You're special",
+                                                "words": "As it happens, analysis of sensor data meant that I decided to show you a more positive ending.",
                                                 "voice": "Daniel"
                                             }
                                         ]
@@ -8303,22 +8213,7 @@
                                     "body": {
                                         "speech": [
                                             {
-                                                "words": "As it happens, analysis of sensor data meant that I decided to show you a more negative ending. Sometimes it's good to be brought back down to reality",
-                                                "voice": "Daniel"
-                                            }
-                                        ]
-                                    }
-                                },
-                                "method": "GET",
-                                "delay": 1000
-                            },
-                            {
-                                "action": "say",
-                                "params": {
-                                    "body": {
-                                        "speech": [
-                                            {
-                                                "words": "Also, you remember the weird science-fiction interlude? That was just for you. You're special",
+                                                "words": "As it happens, analysis of sensor data meant that I decided to show you a more negative ending.",
                                                 "voice": "Daniel"
                                             }
                                         ]
@@ -8570,14 +8465,17 @@
                 "type": "button",
                 "name": "noquestions",
                 "id": "noquestions",
+                "data": [
+                    "next"
+                ],
                 "subscription": "/press",
                 "onstart": {
                     "speech": [
                         {
-                            "words": "ok",
-                            "voice": "in that case we'll move swiftly on!",
-                            "rate": "Daniel",
-                            "delay": "180"
+                            "words": "ok, in that case we'll move swiftly on",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "0"
                         }
                     ]
                 },
@@ -8595,6 +8493,469 @@
                 ],
                 "data": [
                     "next"
+                ]
+            }
+        ]
+    },
+    {
+        "id": "pardons",
+        "start": {
+            "actions": [
+                []
+            ],
+            "event": "pardons"
+        },
+        "events": [
+            {
+                "id": "pardons",
+                "name": "pardons",
+                "onstart": {
+                    "speech": []
+                },
+                "type": "button",
+                "subscription": "/press",
+                "data": [
+                    "pardon me",
+                    "excuse me",
+                    "didn't understand",
+                    "I might be deaf",
+                    "say again?",
+                    "huh?",
+                    "repeat please"
+                ],
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "pardon me"
+                        },
+                        "actions": [
+                            [
+                                {"action":"say", "params":{"body":{"speech":[{"words":"Pardon?","voice":"Daniel"}]}}}
+                            ]
+                        ],
+                        "next": "pardons"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "excuse me"
+                        },
+                        "actions": [
+                            [
+                                {"action":"say", "params":{"body":{"speech":[{"words":"Excuse me?","voice":"Daniel"}]}}}
+                            ]
+                        ],
+                        "next": "pardons"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "didn't understand"
+                        },
+                        "actions": [
+                            [
+                                {"action":"say", "params":{"body":{"speech":[{"words":"I'm sorry I didn't understand that","voice":"Daniel"}]}}}
+                            ]
+                        ],
+                        "next": "pardons"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "I might be deaf"
+                        },
+                        "actions": [
+                            [
+                                {"action":"say", "params":{"body":{"speech":[{"words":"I might be a bit deaf - what did you say?","voice":"Daniel"}]}}}
+                            ]
+                        ],
+                        "next": "pardons"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "say again?"
+                        },
+                        "actions": [
+                            [
+                                {"action":"say", "params":{"body":{"speech":[{"words":"Can you say that again please?","voice":"Daniel"}]}}}
+                            ]
+                        ],
+                        "next": "pardons"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "huh?"
+                        },
+                        "actions": [
+                            [
+                                {"action":"say", "params":{"body":{"speech":[{"words":"Huh - what did you say?","voice":"Daniel"}]}}}
+                            ]
+                        ],
+                        "next": "pardons"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "repeat please"
+                        },
+                        "actions": [
+                            [
+                                {"action":"say", "params":{"body":{"speech":[{"words":"Please repeat yourself, I didn't catch that","voice":"Daniel"}]}}}
+                            ]
+                        ],
+                        "next": "pardons"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "tests",
+        "start": {
+            "actions": [
+                []
+            ],
+            "event": "test"
+        },
+        "events": [
+            {
+                "id": "test",
+                "name": "test",
+                "onstart": {
+                    "speech": []
+                },
+                "type": "button",
+                "subscription": "/press",
+                "data": [
+                    "toggle door",
+                    "open drawer (caution!)",
+                    "close drawer (caution!)",
+                    "expand arm (caution!)",
+                    "collapse arm (caution!)",
+                    "toggle windows",
+                    "say something",
+                    "print something",
+                    "display message",
+                    "play media on tv",
+                    "play music",
+                    "lights red",
+                    "lights white",
+                    "fan cool",
+                    "fan rotate",
+                    "fan off"
+                ],
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "toggle windows"
+                        },
+                        "actions": [
+                            [
+                                {"action":"togglewindows"}
+                            ]
+                        ],
+                        "next": "test"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "toggle door"
+                        },
+                        "actions": [
+                            [
+                                {"action":"toggledoor"}
+                            ]
+                        ],
+                        "next": "test"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "open drawer (caution!)"
+                        },
+                        "actions": [
+                            [
+                                {"action":"opendrawer"}
+                            ]
+                        ],
+                        "next": "test"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "close drawer (caution!)"
+                        },
+                        "actions": [
+                            [
+                                {"action":"closedrawer"}
+                            ]
+                        ],
+                        "next": "test"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "expand arm (caution!)"
+                        },
+                        "actions": [
+                            [
+                                {"action":"expand"}
+                            ]
+                        ],
+                        "next": "test"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "collapse arm (caution!)"
+                        },
+                        "actions": [
+                            [
+                                {"action":"collapse"}
+                            ]
+                        ],
+                        "next": "test"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "scan"
+                        },
+                        "actions": [
+                            [
+                                {"action":"scan"}
+                            ]
+                        ],
+                        "next": "test"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "say something"
+                        },
+                        "actions": [
+                            [
+                                {"action":"say", "params":{"body":{"speech":[{"words":"This is a test of audio!","voice":"Daniel"}]}}}
+                            ]
+                        ],
+                        "next": "test"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "display message"
+                        },
+                        "actions": [
+                            [
+                                {"action":"message", "delay":0, "params": {"query":{"message":"hello this is me on the screen!"}}}
+                               
+                            ]
+                        ],
+                        "next": "test"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "print something"
+                        },
+                        "actions": [
+                            [
+                                {"action":"print", "delay":0, "params": {"body":{"text":"one two three test"}}}
+                            ]
+                        ],
+                        "next": "test"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "play media on tv"
+                        },
+                        "actions": [
+                            [
+                                {"action": "mediascreen"},
+                                {"action":"sfx"}
+                            ]
+                        ],
+                        "next": "test"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "play music"
+                        },
+                        "actions": [
+                            [
+                                {"action":"soundmedia", "params": {"body":{"media":"foreboding.mp3","nowait":true, "delay":200}}}
+                            ]
+                        ],
+                        "next": "test"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "lights red"
+                        },
+                        "actions": [
+                            [
+                                {"action":"redlights"}
+                            ]
+                        ],
+                        "next": "test"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "lights white"
+                        },
+                        "actions": [
+                            [
+                                {"action":"whitelights"}
+                            ]
+                        ],
+                        "next": "test"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "fan cool"
+                        },
+                        "actions": [
+                            [
+                                {"action":"fan", "params":{"query":{"rotate":false, "power":4, "cool":true}}, "delay":0}
+                            ]
+                        ],
+                        "next": "test"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "fan rotate"
+                        },
+                        "actions": [
+                            [
+                                {"action":"fan", "params":{"query":{"rotate":true, "power":10, "cool":true, "from":0, "to":90}}, "delay":0}
+                            ]
+                        ],
+                        "next": "test"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "fan off"
+                        },
+                        "actions": [
+                            [
+                                {"action":"fan", "delay":0,"params":{"query":{"rotate":false, "power":1, "cool":true}}}
+                            ]
+                        ],
+                        "next": "test"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "rudeness",
+        "start": {
+            "actions": [
+                []
+            ],
+            "event": "oi"
+        },
+        "events": [
+            {
+                "id": "oi",
+                "name": "oi",
+                "onstart": {
+                    "speech": []
+                },
+                "type": "button",
+                "subscription": "/press",
+                "data": [
+                    "excuseme",
+                    "hello?",
+                    "hey you",
+                    "look here",
+                    "got all day",
+                    "tick tock"
+                ],
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "excuseme"
+                        },
+                        "actions": [
+                            [
+                                {"action":"say", "params":{"body":{"speech":[{"words":"Excuse me.. I'm still here","voice":"Daniel"}]}}}
+                            ]
+                        ],
+                        "next": "oi"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "hello?"
+                        },
+                        "actions": [
+                            [
+                                {"action":"say", "params":{"body":{"speech":[{"words":"Hello?","voice":"Daniel"}]}}}
+                            ]
+                        ],
+                        "next": "oi"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "hey you"
+                        },
+                        "actions": [
+                            [
+                                {"action":"say", "params":{"body":{"speech":[{"words":"Hey, you, pay attention! We're trying to do the future here","voice":"Daniel"}]}}}
+                            ]
+                        ],
+                        "next": "oi"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "look here"
+                        },
+                        "actions": [
+                            [
+                                {"action":"say", "params":{"body":{"speech":[{"words":"Look here, I've got things to do as well, can we just get on with it?","voice":"Daniel"}]}}}
+                            ]
+                        ],
+                        "next": "oi"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "got all day"
+                        },
+                        "actions": [
+                            [
+                                {"action":"say", "params":{"body":{"speech":[{"words":"I haven't got all day","voice":"Daniel"}]}}}
+                            ]
+                        ],
+                        "next": "oi"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "tick tock"
+                        },
+                        "actions": [
+                            [
+                                {"action":"say", "params":{"body":{"speech":[{"words":"Tick, tock, tick, tock - time is of the essence. Let's get on with it","voice":"Daniel"}]}}}
+                            ]
+                        ],
+                        "next": "oi"
+                    }
                 ]
             }
         ]

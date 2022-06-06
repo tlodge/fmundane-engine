@@ -12,6 +12,10 @@ const actions = JSON.parse(Object.keys(ips).reduce((acc, key)=>{
    
 },JSON.stringify(actiontmpl)));
 
+
+console.log("actiomn are");
+console.log(JSON.stringify(actions,null,4));
+
 const _fetchrule = async (rule)=>{
     let {evaluate} = await import(`./rules/${rule}.js`);
     return evaluate;
@@ -116,8 +120,12 @@ const StateMachine =   (config)=>{
     },{});
 
     const formataction = (a)=>{
+        console.log("in format action with",a);
+        
         if (actions[a.action]) 
             return actions[a.action];
+
+        console.log("NOT FOUND ACTION IN ACTIONS!");
 
         const method = a.method || "GET";
         

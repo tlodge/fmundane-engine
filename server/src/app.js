@@ -1,11 +1,14 @@
 import logger from 'morgan';
 import express from 'express';
 import cookieParser from 'cookie-parser';
+import fileUpload from 'express-fileupload';
+
 import path from 'path';
 
 import indexRouter from './routes/index';
 import authorRouter from './routes/author';
 import { execFile} from 'child_process';
+import fs from 'fs';
 
 const app = express();
 app.use(logger('dev'));
@@ -19,6 +22,9 @@ app.use('/author', authorRouter);
 app.use(express.static(path.join(__dirname, 'client')));
 app.use(express.static(path.join(__dirname, 'author')));
 app.use('/twine', express.static(path.join(__dirname, 'twine')));
+app.use(fileUpload({createParentPath: true, limits: { 
+  fileSize: 1000 * 1024 * 1024 * 1024 //1000MB max file(s) size
+}}));
 
 app.get("/shutdown", (req,res)=>{
   console.log("shutting down server!");
@@ -39,6 +45,19 @@ app.get('/',  (req, res)=>{
 app.get("/author", (req,res)=>{
   res.sendFile(path.join(__dirname, 'author', 'index.html'));
 });
+
+app.post('/media/upload', (req, res)=>{
+  console.log(req.files);
+  let mfile = req.files.mediaFile;
+  mfile.mv(`../media/${mfile.name}`);
+  res.status(200).json({ success:true });
+}); 
+
+app.get('/media/list', (req, res)=>{
+  const files = fs.readdirSync("../media");
+  const eligible = files.filter(f=>f.endsWith(".mp4") || f.endsWith(".mp3") || f.endsWith("wav"));
+  res.status(200).json({files:eligible});
+})
 
 console.log("dirname is ", __dirname);
 

@@ -78,7 +78,7 @@ export const handle = async ({action, delay=0, params={}})=>{
         }, action);
         
         const __action = {..._action, data : {..._action.data, url:replaceurl(_action.data.url)}};
-        console.log("HAVE ACTION!", action);
+        console.log("HAVE ACTION!", __action);
         const response = await request(__action, delay);
         return response;
     }

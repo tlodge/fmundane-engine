@@ -22,6 +22,10 @@ app.use('/author', authorRouter);
 app.use(express.static(path.join(__dirname, 'client')));
 app.use(express.static(path.join(__dirname, 'author')));
 app.use('/twine', express.static(path.join(__dirname, 'twine')));
+app.use('/wa', express.static(path.join(__dirname, '..', 'webapps')));
+
+console.log("dirname is", __dirname);
+
 app.use(fileUpload({createParentPath: true, limits: { 
   fileSize: 1000 * 1024 * 1024 * 1024 //1000MB max file(s) size
 }}));

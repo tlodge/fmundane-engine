@@ -31,12 +31,47 @@
                             "operator": "equals",
                             "operand": "next"
                         },
-                        "next": "startup",
+                        "next": "bespoketest",
                         "actions": []
                     }
                 ],
                 "data": [
                     "next"
+                ]
+            },
+            {
+                "type": "webhook",
+                "name": "bespoketest",
+                "id": "bespoketest",
+                "subscription": "/webhook",
+                "onstart": {
+                    "actions": [
+                        [
+                            {
+                                "action": "http://[lenovo]:9102/api/message",
+                                "params": {
+                                    "query": {
+                                        "message": "welcome to a special bespoke test!"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 0
+                            }
+                        ]
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "green"
+                        },
+                        "next": "startup",
+                        "actions": []
+                    }
+                ],
+                "data": [
+                    "green"
                 ]
             },
             {

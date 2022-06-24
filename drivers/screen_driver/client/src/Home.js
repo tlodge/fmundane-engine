@@ -2,7 +2,7 @@ import FaceScan from "./FaceScan";
 import AirQuality from "./AirQuality";
 import Media from "./Media";
 import MessageBox from "./MessageBox";
-
+import QRCode from "./QRCode";
 import {useState, useEffect} from "react";
 import {
     BrowserRouter as Router,
@@ -18,6 +18,7 @@ export default function Home() {
     const [scan, setScan] = useState(false);
     const [dyson, setDyson] = useState({});
     const [media, setMedia] = useState("");
+    const [qrcode, setQRCode] = useState("");
     const [delay, setDelay] = useState(500);
     const [message, setMessage] = useState("");
 
@@ -63,6 +64,10 @@ export default function Home() {
             }
             if (msg.type=="dyson"){
                 setDyson(msg.data);
+            }
+            if (msg.type=="qrcode"){
+                setQRCode(msg.data);
+                history.push("/qrcode");
             }
             if (msg.type=="media"){
              
@@ -118,6 +123,16 @@ export default function Home() {
                   <MessageBox message={message}/>
                     <div style={{display:"flex", flex:"1 1 auto", alignItems:"center", justifyContent:"center"}}>    
                     <Media {...props} media={media} delay={delay}/>
+                    </div>
+                    </>
+                )}
+            />
+            <Route path="/qrcode"
+                render = {(props)=>(
+                  <>
+                  <MessageBox message={message}/>
+                    <div style={{display:"flex", flex:"1 1 auto", alignItems:"center", justifyContent:"center"}}>    
+                    <QRCode {...props} qrcode={qrcode}/>
                     </div>
                     </>
                 )}

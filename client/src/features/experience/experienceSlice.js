@@ -59,7 +59,7 @@ export const experienceSlice = createSlice({
       state.lastsenttranscript = state.transcript;
     },
     resetReadiness: (state)=>{
-     // state.readyforinput = {};
+      state.readyforinput = {};
     },
     setRendering: (state,action)=>{
       state.rendering = action.payload;
@@ -71,9 +71,10 @@ export const { setRendering, setLayers, setLayerName, setEvent, setListening, se
 
 export const reset = (layerid="")=>dispatch=>{
   superagent.get('/event/start').then(res => {
+    dispatch(resetReadiness());
     dispatch(setEvents(res.body));
     dispatch(setTranscript({transcript:"", layerid}));
-    dispatch(resetReadiness());
+  
  })
  .catch(err => {
    console.log("error resetting events", err);
@@ -88,37 +89,6 @@ const delay = (ms) =>{
     }, ms);
   });
 }
-
-/*const getVoices = () => {
-  return new Promise(resolve => {
-    let voices = speechSynthesis.getVoices()
-    if (voices.length) {
-      resolve(voices)
-      return
-    }
-    speechSynthesis.onvoiceschanged = () => {
-      voices = speechSynthesis.getVoices()
-      resolve(voices)
-    }
-  })
-}
-
-const sayWords = async (window, words, voice)=>{
-  var msg = new SpeechSynthesisUtterance();
- 
-
-  msg.text = words;
-  msg.voice = voice;
-  try{ 
-     window.speechSynthesis.speak(msg);
-  }catch(err){
-    console.log(err);
-  }
-  
-  return new Promise(resolve => {
-    msg.onend = resolve;
-  });
-}*/
 
 
 //TODO - get rid - this is to react to browser speech synth, which not using now
@@ -156,7 +126,6 @@ export const listenOnActions = (window) => async dispatch => {
 }
 
 export const renderSpeech = ()=> async (dispatch, getState)=>{
-  console.log("calling out to render");
   const name = getState().experience.layerName;
   dispatch(setRendering(true));
   await superagent.get("/author/render").query({name});
@@ -181,8 +150,6 @@ export const listenOnEvents = () => (dispatch, getState) => {
 
     if (event.type==="speech"){
       dispatch(setListening({layerid: layer, listening:true}));
-      console.log("layers are now", getState().experience.listening);
-      //startRecognition();
     }
   });
 }
@@ -198,8 +165,15 @@ socket.on("connect_error", () => {
 });
 
 export const buttonPressed  = (b, layerid) => ()=>{
-  //stopListening();
   superagent.get("/event/press").query({name:b, layer:layerid}).end((err, res) => {
+    if (err){
+        console.log(err);
+    }   
+  });
+}
+
+export const manualWebhook  = (b, layerid) => ()=>{
+  superagent.get("/event/webhook").query({trigger:b}).end((err, res) => {
     if (err){
         console.log(err);
     }   
@@ -258,9 +232,6 @@ export const fetchAuthored = ()=>(dispatch)=>{
 
 export const fetchLayers = (layer, r) => (dispatch, getState)=>{
   
- 
-  
-
   superagent.get('/event/layers').query({layer}).then(res => {
     const trees = res.body.map(et=>({...et.tree, layerid:et.layerid}));
     dispatch(setLayerName(layer));

@@ -50,6 +50,13 @@ app.get('/api/air', (req,res) => {
     res.status(200).send();
 })
 
+app.get('/api/qrcode', (req,res) => {
+    console.log("seen qrcode request!");
+    const {qrcode} = req.query;
+    send(JSON.stringify({type:"qrcode", data:qrcode}));
+    res.status(200).send();
+})
+
 app.get('/api/message', (req,res)=>{
     const {message=""} = req.query;
     console.log("seen message", message);

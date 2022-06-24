@@ -302,7 +302,7 @@ const StateMachine =   (config)=>{
             }
 
             subscribe(e.subscription, id,  async(msg)=>{
-             
+                console.log("seen a subscription event", e.subscription);
                 triggered = false;
                 
                 const {data, ts} = msg;     

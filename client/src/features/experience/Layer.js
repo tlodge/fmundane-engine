@@ -1,7 +1,8 @@
 import Buttons from "./Buttons";
 import Speech from "./Speech";
+import Webhook from "./Webhook";
 //import Gesture from "./Gesture";
-import {setTranscript, sendTranscript, buttonPressed} from './experienceSlice';
+import {setTranscript, sendTranscript, buttonPressed, manualWebhook} from './experienceSlice';
 import {useDispatch } from 'react-redux';
 
 function Layer(e) {
@@ -15,7 +16,6 @@ function Layer(e) {
                             ready={event.ready} 
                             names={event.data} 
                             handleAction={(b)=>{
-                              
                                 dispatch(buttonPressed(b,id));
                             }}/>
             case "speech":
@@ -30,8 +30,13 @@ function Layer(e) {
                               
                                 dispatch(sendTranscript());
                             }}/>
-
-           
+            case "webhook":
+                return <Webhook
+                            ready={event.ready} 
+                            names={event.data} 
+                            handleAction={(b)=>{
+                            dispatch(manualWebhook(b));
+                }}/>
 
             default:
                 return JSON.stringify(event,null,4)

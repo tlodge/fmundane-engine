@@ -55,6 +55,8 @@ export function Experience() {
   }
 
 
+  console.log("ready for inout is", readyforinput);
+
   const [startLabel, setStartLabel] = useState("start");
   
   //const _fetchLayers = (layer)=>{
@@ -111,13 +113,13 @@ export function Experience() {
       return 0;
 
   }).map((e,i)=>{
-  
-  return  <div key = {e.id} className="flex flex-row m-1">
-            <div  className="flex w-64 justify-center overflow-visible" style={{height:visibleTrees[e.id] ? th-2: 280}}>
-              <Layer {...{...e, ready:readyforinput[e.data.id]||false, toggleTree}} />
-            </div>
-           { visibleTrees[e.id]  && <Tree {...{...trees[e.id], handleClick:(node)=>{handleClick(e.id, node)}, height:th, id:e.data.id, triggered:e.triggered}}/>}
-         </div>  
+
+    return  <div key = {e.id} className="flex flex-row m-1">
+              <div  className="flex w-64 justify-center overflow-visible" style={{height:visibleTrees[e.id] ? th-2: 280}}>
+                <Layer {...{...e, ready:readyforinput[e.id]||false, toggleTree}} />
+              </div>
+            { visibleTrees[e.id]  && <Tree {...{...trees[e.id], handleClick:(node)=>{handleClick(e.id, node)}, height:th, id:e.data.id, triggered:e.triggered}}/>}
+          </div>  
   });
 
   //const forest = trees.map((t,i)=><Tree key={i} {...t}/>);

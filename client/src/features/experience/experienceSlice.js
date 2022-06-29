@@ -45,7 +45,7 @@ export const experienceSlice = createSlice({
     },
     setReadyForInput: (state,action)=>{
       state.readyforinput = {
-        ...state.readyforinput, [action.payload]:true
+        ...state.readyforinput, ...action.payload
       }
     },
     setListening: (state, action)=>{
@@ -146,7 +146,8 @@ export const listenOnEvents = () => (dispatch, getState) => {
     const {event, layer} = payload;
    
     dispatch(setTranscript({transcript:""}));
-    dispatch(setReadyForInput(event.id));
+    console.log("setting ready for inout", event, layer);
+    dispatch(setReadyForInput({[layer]:true}));
 
     if (event.type==="speech"){
       dispatch(setListening({layerid: layer, listening:true}));
@@ -164,7 +165,9 @@ socket.on("connect_error", () => {
   reconnect();
 });
 
-export const buttonPressed  = (b, layerid) => ()=>{
+export const buttonPressed  = (b, layerid) => (dispatch)=>{
+  console.log("button pressed!!", b, layerid);
+  dispatch(setReadyForInput({[layerid]:false}));
   superagent.get("/event/press").query({name:b, layer:layerid}).end((err, res) => {
     if (err){
         console.log(err);

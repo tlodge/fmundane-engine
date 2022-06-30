@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "http://192.168.1.11:3001/wa/puzzle/static/css/main.9031cea8.css",
+    "main.js": "http://192.168.1.11:3001/wa/puzzle/static/js/main.ee927c8a.js",
+    "static/js/787.dc03b30a.chunk.js": "http://192.168.1.11:3001/wa/puzzle/static/js/787.dc03b30a.chunk.js",
+    "static/media/logo.svg": "http://192.168.1.11:3001/wa/puzzle/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "index.html": "http://192.168.1.11:3001/wa/puzzle/index.html",
+    "main.9031cea8.css.map": "http://192.168.1.11:3001/wa/puzzle/static/css/main.9031cea8.css.map",
+    "main.ee927c8a.js.map": "http://192.168.1.11:3001/wa/puzzle/static/js/main.ee927c8a.js.map",
+    "787.dc03b30a.chunk.js.map": "http://192.168.1.11:3001/wa/puzzle/static/js/787.dc03b30a.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9031cea8.css",
+    "static/js/main.ee927c8a.js"
+  ]
+}

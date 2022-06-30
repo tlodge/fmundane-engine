@@ -48,6 +48,18 @@
                     "actions": [
                         [
                             {
+                                "action": "qrcode",
+                                "params": {
+                                    "query": {
+                                       "qrcode": "http://192.168.1.11:3001/wa/puzzle"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 0
+                            }
+                        ],
+                        [
+                            {
                                 "action": "http://[lenovo]:9102/api/message",
                                 "params": {
                                     "query": {

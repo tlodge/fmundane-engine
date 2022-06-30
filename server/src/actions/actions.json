@@ -294,5 +294,16 @@
         "type": "GET",
         "contenttype": "application/json"
       }
-  }
+  },
+
+  "qrcode":{
+      "type":"request",
+      "data":{
+         "url": "http://[lenovo]:9102/api/qrcode",
+         "type":"GET",
+         "contenttype":"application/json"
+      },
+      "query":{}
+   }
+
  }

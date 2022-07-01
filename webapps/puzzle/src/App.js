@@ -15,8 +15,7 @@ function App() {
     const dropped = [...box1, ...box2];
     //call the webhook here;
     const fire = async ()=>{
-      console.log("calling webhook!!!");
-      await request.get("/event/webhook?trigger=green")
+      await request.get("/event/webhook?trigger=puzzle")
     }
 
     if (dropped.length >= 6){

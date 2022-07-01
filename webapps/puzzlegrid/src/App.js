@@ -35,9 +35,11 @@ function App() {
       return acc && inpattern == (selected[index] || false);
     },true);
     const sendevent = async ()=>{
-      await request.get("/event/webhook?trigger=puzzlegrid")
+      await request.get("/event/webhook?trigger=gridcomplete")
     }
-    sendevent();
+    if(_complete){
+       sendevent();
+    }
     setComplete(_complete)
   },[selected])
 

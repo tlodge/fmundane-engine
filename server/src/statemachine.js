@@ -120,12 +120,12 @@ const StateMachine =   (config)=>{
     },{});
 
     const formataction = (a)=>{
-        console.log("in format action with",a);
+       
         
         if (actions[a.action]) 
             return actions[a.action];
 
-        console.log("NOT FOUND ACTION IN ACTIONS!");
+        
 
         const method = a.method || "GET";
         

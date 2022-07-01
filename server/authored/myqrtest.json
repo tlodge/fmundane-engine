@@ -1,0 +1,85 @@
+[
+    {
+        "id": "qrtest",
+        "start": {
+            "actions": [
+                []
+            ],
+            "event": "starter"
+        },
+        "events": [
+            {
+                "type": "button",
+                "name": "starter",
+                "id": "starter",
+                "subscription": "/press",
+                "onstart": {
+                    "actions": [
+                        [
+                            {
+                                "action": "http://[lenovo]:9102/api/qrcode",
+                                "params": {
+                                    "query": {
+                                        "qrcode": "http://[lenovo]:3001/wa/puzzle"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 0
+                            }
+                        ]
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "next"
+                        },
+                        "next": "done",
+                        "actions": [
+                            [
+                                {
+                                    "action": "http://[lenovo]:9102/api/message",
+                                    "params": {
+                                        "query": {
+                                            "message": "perfection!"
+                                        }
+                                    },
+                                    "method": "GET",
+                                    "delay": 0
+                                }
+                            ]
+                        ]
+                    }
+                ],
+                "data": [
+                    "next"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "done",
+                "id": "done",
+                "subscription": "/press",
+                "onstart": {
+                    "actions": [
+                        [
+                            {
+                                "action": "http://[lenovo]:9102/api/message",
+                                "params": {
+                                    "query": {
+                                        "message": "I am here!"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 0
+                            }
+                        ]
+                    ]
+                },
+                "rules": [],
+                "data": []
+            }
+        ]
+    }
+]

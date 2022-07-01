@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "http://192.168.1.11:3001/wa/puzzlegrid/static/css/main.43277272.css",
+    "main.js": "http://192.168.1.11:3001/wa/puzzlegrid/static/js/main.2cd7affe.js",
+    "static/js/787.d132e20d.chunk.js": "http://192.168.1.11:3001/wa/puzzlegrid/static/js/787.d132e20d.chunk.js",
+    "static/media/finger.svg": "http://192.168.1.11:3001/wa/puzzlegrid/static/media/finger.c976cd034808b9c7d148e09f116ccc3b.svg",
+    "static/media/eye.svg": "http://192.168.1.11:3001/wa/puzzlegrid/static/media/eye.9bdf01dca925869ff6638050fdaa4452.svg",
+    "index.html": "http://192.168.1.11:3001/wa/puzzlegrid/index.html",
+    "main.43277272.css.map": "http://192.168.1.11:3001/wa/puzzlegrid/static/css/main.43277272.css.map",
+    "main.2cd7affe.js.map": "http://192.168.1.11:3001/wa/puzzlegrid/static/js/main.2cd7affe.js.map",
+    "787.d132e20d.chunk.js.map": "http://192.168.1.11:3001/wa/puzzlegrid/static/js/787.d132e20d.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.43277272.css",
+    "static/js/main.2cd7affe.js"
+  ]
+}

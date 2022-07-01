@@ -51,7 +51,7 @@
                                 "action": "qrcode",
                                 "params": {
                                     "query": {
-                                       "qrcode": "http://192.168.1.11:3001/wa/puzzle"
+                                       "qrcode": "http://192.168.1.11:3001/wa/puzzlegrid"
                                     }
                                 },
                                 "method": "GET",
@@ -76,14 +76,14 @@
                     {
                         "rule": {
                             "operator": "equals",
-                            "operand": "green"
+                            "operand": "gridcomplete"
                         },
                         "next": "startup",
                         "actions": []
                     }
                 ],
                 "data": [
-                    "green"
+                    "gridcomplete"
                 ]
             },
             {

@@ -55,8 +55,6 @@ export function Experience() {
   }
 
 
-  console.log("ready for inout is", readyforinput);
-
   const [startLabel, setStartLabel] = useState("start");
   
   //const _fetchLayers = (layer)=>{

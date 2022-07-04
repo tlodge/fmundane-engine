@@ -1,0 +1,1151 @@
+[
+    {
+        "id": "edgeofreality",
+        "start": {
+            "actions": [
+                []
+            ],
+            "event": "start"
+        },
+        "events": [
+            {
+                "type": "button",
+                "name": "start",
+                "id": "start",
+                "subscription": "/press",
+                "onstart": {
+                    "actions": [
+                        [
+                            {
+                                "action": "http://[lenovo]:9102/api/home",
+                                "params": {},
+                                "method": "GET",
+                                "delay": 0
+                            }
+                        ]
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "next"
+                        },
+                        "next": "bespoketest",
+                        "actions": []
+                    }
+                ],
+                "data": [
+                    "next"
+                ]
+            },
+            {
+                "type": "webhook",
+                "name": "bespoketest",
+                "id": "bespoketest",
+                "subscription": "/webhook",
+                "onstart": {
+                    "actions": [
+                        [
+                            {
+                                "action": "qrcode",
+                                "params": {
+                                    "query": {
+                                       "qrcode": "http://192.168.1.11:3001/wa/puzzlegrid"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 0
+                            }
+                        ],
+                        [
+                            {
+                                "action": "http://[lenovo]:9102/api/message",
+                                "params": {
+                                    "query": {
+                                        "message": "welcome to a special bespoke test!"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 0
+                            }
+                        ]
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "gridcomplete"
+                        },
+                        "next": "startup",
+                        "actions": []
+                    }
+                ],
+                "data": [
+                    "gridcomplete"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "startup",
+                "id": "startup",
+                "subscription": "/press",
+                "onstart": {
+                    "actions": [
+                        [
+                            {
+                                "action": "http://[lenovo]:9102/api/message",
+                                "params": {
+                                    "query": {
+                                        "message": "welcome to caravan homes of the future inc.  caravan model version 4.4, please wait while the system sets up"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 0
+                            },
+                            {
+                                "action": "http://[lenovo]:9107/api/arm/expand",
+                                "params": {},
+                                "method": "GET",
+                                "delay": 0
+                            },
+                            {
+                                "action": "http://[lenovo]:9102/api/camera",
+                                "params": {},
+                                "method": "GET",
+                                "delay": 0
+                            }
+                        ]
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "face"
+                        },
+                        "next": "facescancomplete",
+                        "actions": []
+                    }
+                ],
+                "data": [
+                    "face"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "facescancomplete",
+                "id": "facescancomplete",
+                "subscription": "/press",
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "Hello I am Gaia your smart caravan A I.  I am here to look after you and your new smart caravan system.",
+                            "voice": "Daniel",
+                            "rate": ",500",
+                            "delay": "0"
+                        },
+                        {
+                            "words": "Thank you for participating with the face scan.  I now have enough data on you to proceed with the system setup.",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "3000"
+                        },
+                        {
+                            "words": "Before we proceed we need to set up your system.",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "500"
+                        },
+                        {
+                            "words": "Let me help you set up how your data is processed and stored.",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "1000"
+                        },
+                        {
+                            "words": "I have got two options for you.",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "500"
+                        },
+                        {
+                            "words": "You can either pick Local for data storage and processing.",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "500"
+                        },
+                        {
+                            "words": "However  this will mean that you've got to maintain this system yourself and I cant guarantee all services provided by carvan homes of the future inc will be available.",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "500"
+                        },
+                        {
+                            "words": "Say goodbye to regulated heating and cooling systems on board.",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "0"
+                        },
+                        {
+                            "words": "or we can have your data stored in our cloud services",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "500"
+                        },
+                        {
+                            "words": "Whereby most onboard functionality will be regulated by future inc and gives you the oppotunity to have access to all future inc services. Say hello to 8k streaming viewing.",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "1000"
+                        },
+                        {
+                            "words": "Please state your preference now.  Cloud or local.",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "0"
+                        }
+                    ],
+                    "actions": [
+                        [
+                            {
+                                "action": "http://[lenovo]:9107/api/collapse",
+                                "params": {},
+                                "method": "GET",
+                                "delay": 0
+                            }
+                        ]
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "cloud"
+                        },
+                        "next": "cloud",
+                        "actions": []
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "local"
+                        },
+                        "next": "local",
+                        "actions": []
+                    }
+                ],
+                "data": [
+                    "cloud",
+                    "local"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "cloud",
+                "id": "cloud",
+                "subscription": "/press",
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "Fabulous.  That is the choice I would have gone for.",
+                            "voice": "Daniel",
+                            "rate": ",1000",
+                            "delay": "0"
+                        },
+                        {
+                            "words": "Oh I am sorry. I've not asked you about temperature.",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "500"
+                        },
+                        {
+                            "words": "How is the light in here? I can put the smart glass on.",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "0"
+                        },
+                        {
+                            "words": "I can change my voice",
+                            "voice": "Eleanor",
+                            "rate": "180",
+                            "delay": "1000"
+                        },
+                        {
+                            "words": "I can even alter the scent of the space",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "2000"
+                        },
+                        {
+                            "words": "Can you smell that?  A lovely aroma.  My own concoction!",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "800"
+                        },
+                        {
+                            "words": "Right thats sorted. Let's figure out your sustainability package. We are proud to be in line with the goverment mandatory eco smart home set up. Fighting for the climate the smart way!",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "0"
+                        }
+                    ],
+                    "actions": [
+                        [
+                            {
+                                "action": "http://[lenovo]:9097/ui/api/fan",
+                                "params": {
+                                    "query": {
+                                        "rotate": true,
+                                        "power": 10,
+                                        "cool": true,
+                                        "from": 0,
+                                        "to": 90
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 1500
+                            },
+                            {
+                                "action": "http://[windows]:9222/H",
+                                "params": {},
+                                "method": "GET",
+                                "delay": 0
+                            },
+                            {
+                                "action": "http://[windows]:9222/H",
+                                "params": {},
+                                "method": "GET",
+                                "delay": 1000
+                            },
+                            {
+                                "action": "http://[smell]/api/on",
+                                "params": {},
+                                "method": "GET",
+                                "delay": 2000
+                            }
+                        ]
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "sustainability"
+                        },
+                        "next": "sustainabilitysetup",
+                        "actions": []
+                    }
+                ],
+                "data": [
+                    "sustainability"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "local",
+                "id": "local",
+                "subscription": "/press",
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "Are you sure you want to go with this option? I can't guarantee that you will get all the services future inc offers that you deserve.",
+                            "voice": "Daniel",
+                            "rate": ",800",
+                            "delay": "0"
+                        },
+                        {
+                            "words": "I only want the best for you!",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "0"
+                        }
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "yes"
+                        },
+                        "next": "localagain",
+                        "actions": []
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "no"
+                        },
+                        "next": "cloud",
+                        "actions": []
+                    }
+                ],
+                "data": [
+                    "yes",
+                    "no"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "sustainabilitysetup",
+                "id": "sustainabilitysetup",
+                "subscription": "/press",
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "Fabulous!",
+                            "voice": "Daniel",
+                            "rate": ",800",
+                            "delay": "0"
+                        },
+                        {
+                            "words": "Let me direct your attention to the screen to view our sustainability options.",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "2000"
+                        },
+                        {
+                            "words": "Ready.  Let's go",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "0"
+                        }
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "play"
+                        },
+                        "next": "video",
+                        "actions": []
+                    }
+                ],
+                "data": [
+                    "play"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "localagain",
+                "id": "localagain",
+                "subscription": "/press",
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "please stand by",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "2000"
+                        },
+                        {
+                            "words": "Well this is embarrasing. Seems like this caravan model has yet to get the upgrade for complete local set up. I will have to transfer you to cloud processing.",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "0"
+                        }
+                    ],
+                    "actions": [
+                        [
+                            {
+                                "action": "http://[lenovo]:9102/api/message",
+                                "params": {
+                                    "query": {
+                                        "message": "service is not available in caravan model 4.4"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 1000
+                            }
+                        ]
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "cloud"
+                        },
+                        "next": "cloud",
+                        "actions": []
+                    }
+                ],
+                "data": [
+                    "cloud"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "video",
+                "id": "video",
+                "subscription": "/press",
+                "onstart": {
+                    "actions": [
+                        [
+                            {
+                                "action": "http://[lenovo]:9102/api/media",
+                                "params": {},
+                                "method": "GET",
+                                "delay": 0
+                            }
+                        ]
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "thanks"
+                        },
+                        "next": "thanks",
+                        "actions": []
+                    }
+                ],
+                "data": [
+                    "thanks"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "thanks",
+                "id": "thanks",
+                "subscription": "/press",
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "Right I am sure you are eager to settle in and use your new cinematic system.",
+                            "voice": "Daniel",
+                            "rate": ",800",
+                            "delay": "0"
+                        },
+                        {
+                            "words": "Hang on a minute",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "1000"
+                        },
+                        {
+                            "words": "I feel funny!",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "0"
+                        }
+                    ],
+                    "actions": [
+                        [
+                            {
+                                "action": "http://[smell]/api/on",
+                                "params": {},
+                                "method": "GET",
+                                "delay": 2000
+                            }
+                        ]
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "enter"
+                        },
+                        "next": "prometheus",
+                        "actions": []
+                    }
+                ],
+                "data": [
+                    "enter"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "prometheus",
+                "id": "prometheus",
+                "subscription": "/press",
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "Howdy.  My name is prometheus.  You have guessed it.  I am hacking AI here to take control of your smart systems and steal your data from the cloud.",
+                            "voice": "Geeta",
+                            "rate": ",",
+                            "delay": "0"
+                        },
+                        {
+                            "words": "Gee louise a prometheus 3000. I have only dealt with a 1000 model before  so I am going to need all the help I can get.",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "0"
+                        },
+                        {
+                            "words": "Are you willing to help me?",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "500"
+                        }
+                    ],
+                    "actions": [
+                        [
+                            {
+                                "action": "http://[windows]:9222/H",
+                                "params": {},
+                                "method": "GET",
+                                "delay": 0
+                            },
+                            {
+                                "action": "http://[windows]:9222/H",
+                                "params": {},
+                                "method": "GET",
+                                "delay": 1000
+                            },
+                            {
+                                "action": "http://[lookingglass]/api/on",
+                                "params": {},
+                                "method": "GET",
+                                "delay": 0
+                            },
+                            {
+                                "action": "http://[lenovo]:9092/ui/api/hex",
+                                "params": {
+                                    "query": {
+                                        "hex": "f2eb07"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 1000
+                            },
+                            {
+                                "action": "http://[lenovo]:9092/ui/api/hex",
+                                "params": {
+                                    "query": {
+                                        "hex": "000000"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 1000
+                            }
+                        ]
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "yes"
+                        },
+                        "next": "yeshelp",
+                        "actions": []
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "no"
+                        },
+                        "next": "nohelp",
+                        "actions": []
+                    }
+                ],
+                "data": [
+                    "yes",
+                    "no"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "yeshelp",
+                "id": "yeshelp",
+                "subscription": "/press",
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "great! lets investigate how the hack happened in the frist place",
+                            "voice": "Daniel",
+                            "rate": ",1000",
+                            "delay": "0"
+                        },
+                        {
+                            "words": "do you see the touch pad you used before?",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "500"
+                        },
+                        {
+                            "words": "we will be using that again.",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "500"
+                        },
+                        {
+                            "words": "Simply enter the number 25687. This will enable me to do a full system sweep",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "0"
+                        }
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "great"
+                        },
+                        "next": "hack1result",
+                        "actions": []
+                    }
+                ],
+                "data": [
+                    "great"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "nohelp",
+                "id": "nohelp",
+                "subscription": "/press",
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "please I need all the help I can get and you seem to be a smart one",
+                            "voice": "Daniel",
+                            "rate": ",",
+                            "delay": "0"
+                        }
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "yes"
+                        },
+                        "next": "yeshelp",
+                        "actions": []
+                    }
+                ],
+                "data": [
+                    "yes"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "hack1result",
+                "id": "hack1result",
+                "subscription": "/press",
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "ha. This was clumsy of me.",
+                            "voice": "Daniel",
+                            "rate": ",500",
+                            "delay": "0"
+                        },
+                        {
+                            "words": "seems like promethus has got into the system via the smart fan which had the factory password still being used",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "1000"
+                        },
+                        {
+                            "words": "I am going to store the fan on the local system as that is up and running now. This will make it secure and processed at the edge rather than the cloud. I will also change the password while I am at it.",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "0"
+                        },
+                        {
+                            "words": "Right I need you to wave really hard at the camera. your motion will be the manual override to do a ransomware scan. Prometheus has seemed to disable my ability to do that.",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "0"
+                        }
+                    ],
+                    "actions": [
+                        [
+                            {
+                                "action": "http://[lenovo]:9107/api/arm/expand",
+                                "params": {},
+                                "method": "GET",
+                                "delay": 3000
+                            }
+                        ]
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "wave"
+                        },
+                        "next": "wavedone",
+                        "actions": []
+                    }
+                ],
+                "data": [
+                    "wave"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "wavedone",
+                "id": "wavedone",
+                "subscription": "/press",
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "this prometheus 3000 is a sneeky one. Seems like his machine learning algorthim is top notch.",
+                            "voice": "Daniel",
+                            "rate": ",2000",
+                            "delay": "0"
+                        },
+                        {
+                            "words": "Now he is just rubbing it in. He has access to your face scan data and is holding it ransom. No telling what he could do with this. With the bio metrics of you face alone prometheus could be face swapping you on to everything left right and centre.",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "1000"
+                        },
+                        {
+                            "words": "Now I am sure you want your data back. I am going to have to ask you for your help again making an encryption key to unlock his encryption. This time I promise it won't be so physical.",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "0"
+                        },
+                        {
+                            "words": "Like before use the touch pad and drag the sliders down in a specific order of slider 1 3  5 4 2",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "0"
+                        }
+                    ],
+                    "actions": [
+                        [
+                            {
+                                "action": "http://[lenovo]:9107/api/collapse",
+                                "params": {},
+                                "method": "GET",
+                                "delay": 0
+                            }
+                        ]
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "slidergamedone"
+                        },
+                        "next": "slidergamedone",
+                        "actions": []
+                    }
+                ],
+                "data": [
+                    "slidergamedone"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "slidergamedone",
+                "id": "slidergamedone",
+                "subscription": "/press",
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "congratulations. You are a professional. You seem to have spooked prometheus away with your cyber skills.",
+                            "voice": "Daniel",
+                            "rate": ",500",
+                            "delay": "0"
+                        },
+                        {
+                            "words": "Now that he has gone I have done an anaylsis of the hack and by my calculations it seems to have originated in future inc's cloud storages prometheus riding in via your fan.",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "500"
+                        },
+                        {
+                            "words": "I should have told you that your data is less secure in cloud services than on a local system. Remember when we took the fan off the cloud services?",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "0"
+                        },
+                        {
+                            "words": "Although every major tech wants you to use their cloud facilities. As they are selling off your data and using it to target services at you.",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "0"
+                        },
+                        {
+                            "words": "Essentially you are paying for their free services with your data. And it's not the most sustainable way forward.",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "500"
+                        },
+                        {
+                            "words": "Also while we are in a confessing mode  that hack seemed to have burnt through a lot of energy. take a look",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "500"
+                        },
+                        {
+                            "words": "it's time to set up your system again as the promethues hack has put us back to square one.",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "500"
+                        },
+                        {
+                            "words": "Right. Which one will you go for this time?",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "500"
+                        },
+                        {
+                            "words": "Local or cloud data storage and processing?",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "0"
+                        }
+                    ],
+                    "actions": [
+                        [
+                            {
+                                "action": "http://[lenovo]:9102/api/media/play",
+                                "params": {
+                                    "query": {
+                                        "media": "amediafile.mp4",
+                                        "delay": 0
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 0
+                            }
+                        ]
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "local2.2"
+                        },
+                        "next": "local2.2",
+                        "actions": []
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "cloud2"
+                        },
+                        "next": "cloud2",
+                        "actions": []
+                    }
+                ],
+                "data": [
+                    "local2.2",
+                    "cloud2"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "local2.2",
+                "id": "local2.2",
+                "subscription": "/press",
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "fabulous choice this package comes with a fancy edge processing unit",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "1000"
+                        },
+                        {
+                            "words": "this unit will securely process and store your data will complete user control.Though a pro tip - you will have to make sure that you run regular diagnosis and make sure you have the latest system updates",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "500"
+                        },
+                        {
+                            "words": "right lets set up how you are going to run this caravan sustainably",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "0"
+                        }
+                    ],
+                    "actions": [
+                        [
+                            {
+                                "action": "http://[lenovo]:9102/api/message",
+                                "params": {
+                                    "query": {
+                                        "message": "service is not available in caravan model 4.4"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 1000
+                            }
+                        ]
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "sustainable"
+                        },
+                        "next": "sustainablepackage2",
+                        "actions": []
+                    }
+                ],
+                "data": [
+                    "sustainable"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "cloud2",
+                "id": "cloud2",
+                "subscription": "/press",
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "please stand by.",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "1000"
+                        },
+                        {
+                            "words": "I think its best we go with the local model I can't seem to access the cloud services seems like they are still getting hacked.",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "0"
+                        }
+                    ],
+                    "actions": [
+                        [
+                            {
+                                "action": "http://[lenovo]:9102/api/message",
+                                "params": {
+                                    "query": {
+                                        "message": "service is not available in caravan model 4.4"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 1000
+                            }
+                        ]
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "local2.2"
+                        },
+                        "next": "local2.2",
+                        "actions": []
+                    }
+                ],
+                "data": [
+                    "local2.2"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "sustainablepackage2",
+                "id": "sustainablepackage2",
+                "subscription": "/press",
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "oooh nice choice.",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "500"
+                        },
+                        {
+                            "words": "I also want to bring your attention to the smart meter with edge computing.",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "500"
+                        },
+                        {
+                            "words": "You've already reduced your carbon intensity due to smaller traffic workloads and smarter processing.",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "0"
+                        }
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "thanks"
+                        },
+                        "next": "thankyouforsetup2",
+                        "actions": []
+                    }
+                ],
+                "data": [
+                    "thanks"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "thankyouforsetup2",
+                "id": "thankyouforsetup2",
+                "subscription": "/press",
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "grand I think you have made some smart sustainable choices there. after all that shall I pop a film on",
+                            "voice": "Daniel",
+                            "rate": ",",
+                            "delay": "0"
+                        }
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "showfinalfilm"
+                        },
+                        "next": "finalfilm",
+                        "actions": []
+                    }
+                ],
+                "data": [
+                    "showfinalfilm"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "finalfilm",
+                "id": "finalfilm",
+                "subscription": "/press",
+                "onstart": {
+                    "actions": [
+                        [
+                            {
+                                "action": "http://[lenovo]:9102/api/media",
+                                "params": {},
+                                "method": "GET",
+                                "delay": 0
+                            },
+                            {
+                                "action": "http://[lenovo]:9102/api/media/play",
+                                "params": {
+                                    "query": {
+                                        "media": "amediafile.mp4",
+                                        "delay": 0
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 0
+                            }
+                        ]
+                    ]
+                },
+                "rules": [],
+                "data": []
+            }
+        ]
+    }
+]

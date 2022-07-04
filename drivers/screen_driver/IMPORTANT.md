@@ -4,27 +4,10 @@ When you rebuild the client screen driver, it will pull down the @tensorflow-mod
 
 ## making facemesh work offline
 
-rebuild the screen driver (client)
-rebuild the main client
+The standard @tensorflow/models package pulls its models off the cloud.  The future mundane engine has copies of the models in the public directory so that they can be locally served (i.e. without internet access).  To make this work, go to the client dir and run:
 
-before you do this:
+```
+sh install-local.sh
+```
 
-open: 
-
-/Users/tlodge/futuremundane/fmundane-engine/drivers/screen_driver/client/node_modules/@tensorflow-models/facemesh/dist/facemesh.js
-
-AND REPLACE
-
-https://tfhub.dev/tensorflow/tfjs-model/blazeface/1/default/1/model.json?tfjs-format=file with http://localhost:9102/blazeface
-
-https://tfhub.dev/mediapipe/tfjs-model/facemesh/1/default/1/model.json?tfjs-format=file  with http://localhost:9102/facemesh
-
-open:
-
-/Users/tlodge/futuremundane/fmundane-engine/drivers/screen_driver/client/node_modules/@tensorflow-models/facemesh/dist/facemesh.esm.js
-
-AND REPLACE
-
-https://tfhub.dev/tensorflow/tfjs-model/blazeface/1/default/1/model.json?tfjs-format=file with http://localhost:9102/blazeface
-
-https://tfhub.dev/mediapipe/tfjs-model/facemesh/1/default/1/model.json?tfjs-format=file  with http://localhost:9102/facemesh
+and this will install a modified package off github.

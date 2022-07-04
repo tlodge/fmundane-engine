@@ -11,7 +11,7 @@ const pattern = [0,1,2,3,4,7,12,17,22];
 const SPACINGY = 33;
 const SPACINGX = 45;
 
-const SVGWIDTH = ((RADIUS*2) * 5) + (6* (SPACINGX-RADIUS));
+const SVGWIDTH = ((RADIUS*2) * 5) + (4* (SPACINGX-RADIUS)) + 2;
 const SVGHEIGHT = ((RADIUS*2)* 5) + (6 * (SPACINGY-RADIUS));
 
 function App() {
@@ -47,8 +47,8 @@ function App() {
     const lines = Array.from({ length: 25 }, (_, i) => i)
    
     lines.forEach((l)=>{
-      
-      const cx = SPACINGX + ((l%5)*(SPACINGX+RADIUS));
+    
+      const cx = RADIUS + 1 + ((l%5)*(SPACINGX+RADIUS));
       const cy = SPACINGY + Math.floor(l/5)*(SPACINGY+RADIUS);
         if ( (coords.x > cx - RADIUS && coords.x < cx + RADIUS) && (coords.y > cy - RADIUS && coords.y < cy+RADIUS)){
           if (!painted[l]){  
@@ -75,9 +75,7 @@ function App() {
   const toggleSelectedAt = (e)=>{
     const lines = Array.from({ length: 25 }, (_, i) => i)
     lines.forEach((l)=>{
-
-   
-      const cx = SPACINGX + ((l%5)*(SPACINGX+RADIUS));
+      const cx = RADIUS + 1 + ((l%5)*(SPACINGX+RADIUS));
       const cy = SPACINGY + Math.floor(l/5)*(SPACINGY+RADIUS);
         const {top,left} = svgRef.current.getBoundingClientRect();
         const x = e.pageX - left;
@@ -110,7 +108,7 @@ function App() {
   const renderGrid = ()=>{
     const lines = Array.from({ length: 25 }, (_, i) => i)
     return lines.map((l)=>{
-      const cx = SPACINGX + ((l%5)*(SPACINGX+RADIUS));
+      const cx = RADIUS + 1 + ((l%5)*(SPACINGX+RADIUS));
       const cy = SPACINGY + Math.floor(l/5)*(SPACINGY+RADIUS);
       return  <g key={l}>
         <circle r={RADIUS - (complete ? 5: 0) } cx={cx} cy={cy} className="outer"></circle>

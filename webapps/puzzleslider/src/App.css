@@ -16,6 +16,33 @@ body {
   pointer-events: none;
 }
 
+.vertical-slider{
+  height: 300px;
+  width: 20px;
+  border: 2px solid rgb(0,255,123);
+  margin: 10px 20px 10px 20px; 
+}
+
+.vertical-slider .example-thumb {
+    left: -10px;
+    width: 40px;
+    line-height: 34px;
+    height: 40px;
+    border-radius:25px;
+}
+
+.example-thumb {
+    font-size: 0.9em;
+    text-align: center;
+    background-color: rgb(151,77,242);
+    color: white;
+    cursor: pointer;
+    border: 2px solid rgb(0,255,123);
+    box-sizing: border-box;
+}
+
+
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -76,6 +103,7 @@ body {
   display: flex;
   align-items: center;
   justify-content:center;
+  flex-direction:row;
 }
 
 .toptext{

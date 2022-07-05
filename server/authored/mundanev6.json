@@ -78,7 +78,7 @@
                 "onstart": {
                     "speech": [
                         {
-                            "words": "I am just turning myself on.  Wait a minute",
+                            "words": "Please sit back and relax, I am just turining myself on.",
                             "voice": "Daniel",
                             "rate": "180",
                             "delay": ""
@@ -304,7 +304,7 @@
                             "delay": "500"
                         },
                         {
-                            "words": "Data means any information that is collected about you.",
+                            "words": "Data means any information that is collected about you whilst in this room",
                             "voice": "Daniel",
                             "rate": "180",
                             "delay": "500"
@@ -335,7 +335,7 @@
                 "onstart": {
                     "speech": [
                         {
-                            "words": "This will be an immersive experience",
+                            "words": "This will be an immersive experience!",
                             "voice": "Daniel",
                             "rate": "180",
                             "delay": "0"
@@ -524,13 +524,7 @@
                             "delay": "0"
                         },
                         {
-                            "words": "This helps personalise and tailor this immersive experience just for you",
-                            "voice": "Daniel",
-                            "rate": "180",
-                            "delay": "800"
-                        },
-                        {
-                            "words": "Then I process the data I have collected about you with my artificial intelligence algorithms",
+                            "words": "I process all of the data I have collected about you with my artificial intelligence algorithms",
                             "voice": "Daniel",
                             "rate": "180",
                             "delay": "0"
@@ -542,13 +536,19 @@
                             "delay": "0"
                         },
                         {
-                            "words": "I will try to be as clear as I possibly can about what I am doing just so it doesn't feel creepy or intrusive",
+                            "words": "I then use this to generate a personal experience using the smart devices in the room.",
                             "voice": "Daniel",
                             "rate": "180",
                             "delay": "2000"
                         },
                         {
-                            "words": "Do you ever worry about how the people that collect data use it? Or even what they collect?",
+                            "words": "I will try to be as clear as I can about what I am doing, just so it doesn't feel a little bit creepy or intrusive.",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "0"
+                        },
+                        {
+                            "words": "All the personal data collected and generated stays in this room. It's meant to keep you in control.",
                             "voice": "Daniel",
                             "rate": "180",
                             "delay": "0"
@@ -593,43 +593,112 @@
                 "onstart": {
                     "speech": [
                         {
-                            "words": "Just to be clear.",
-                            "voice": "Daniel",
-                            "rate": "180",
-                            "delay": "0"
-                        },
-                        {
-                            "words": "All the personal data the living room generates stays in this room.",
-                            "voice": "Daniel",
-                            "rate": "180",
-                            "delay": "0"
-                        },
-                        {
-                            "words": "It’s meant to put you in the driving seat.",
-                            "voice": "Daniel",
-                            "rate": "180",
-                            "delay": "0"
-                        },
-                        {
-                            "words": "Keep you in control",
-                            "voice": "Daniel",
-                            "rate": "180",
-                            "delay": "0"
-                        },
-                        {
                             "words": "To start I need to generate personal profiles",
                             "voice": "Daniel",
                             "rate": "180",
                             "delay": "0"
                         },
                         {
-                            "words": "I'll use this information to provide a version of the tv show that is especially adapted just for you",
+                            "words": "I'll use this information to provide a version of the tv show that is especially presented in a way that matches your profiles",
                             "voice": "Daniel",
                             "rate": "180",
                             "delay": "0"
                         },
                         {
-                            "words": "It will help you to be immersed",
+                            "words": "It will help you to be immersed!",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "1000"
+                        },
+                        {
+                            "words": "Let's get to know each other a bit more.  Let's start by finding out how you like to be entertained.",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "0"
+                        }
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "next"
+                        },
+                        "next": "doyouusefacebook",
+                        "actions": []
+                    }
+                ],
+                "data": [
+                    "next"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "doyouusefacebook",
+                "id": "doyouusefacebook",
+                "subscription": "/press",
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "Do you use Facebook, Twitter or TikTok?",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "0"
+                        }
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "next"
+                        },
+                        "next": "doyouusespotify",
+                        "actions": []
+                    }
+                ],
+                "data": [
+                    "next"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "doyouusespotify",
+                "id": "doyouusespotify",
+                "subscription": "/press",
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "Do you use Spotify?",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "0"
+                        }
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "next"
+                        },
+                        "next": "doyouuseprime",
+                        "actions": []
+                    }
+                ],
+                "data": [
+                    "next"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "doyouuseprime",
+                "id": "doyouuseprime",
+                "subscription": "/press",
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "Do you use Amazon Prime or Netflix?",
                             "voice": "Daniel",
                             "rate": "180",
                             "delay": "0"
@@ -675,19 +744,13 @@
                 "onstart": {
                     "speech": [
                         {
-                            "words": "I have been watching you do this. I’m part of the TV.  Hey there",
+                            "words": "I have been watching you answer my questions and now I would like to scan your face to get a better look at you",
                             "voice": "Daniel",
                             "rate": "180",
-                            "delay": "3000"
+                            "delay": "2000"
                         },
                         {
-                            "words": "I’ve been scanning your face since you arrived. And very nice it is too!",
-                            "voice": "Daniel",
-                            "rate": "180",
-                            "delay": "0"
-                        },
-                        {
-                            "words": "Don’t worry about it though this data never leaves this space",
+                            "words": "Don't worry about it though this data never leaves this space",
                             "voice": "Daniel",
                             "rate": "180",
                             "delay": "0"
@@ -796,7 +859,7 @@
                             "delay": "500"
                         },
                         {
-                            "words": "Oh no! you really don’t like that.  What about this?",
+                            "words": "Oh no! you really don't like that.  What about this?",
                             "voice": "Serena",
                             "rate": "140",
                             "delay": "500"
@@ -1022,7 +1085,7 @@
                                 "action": "print",
                                 "params": {
                                     "body": {
-                                        "text": "APB sent to Manchester police"
+                                        "text": "APB sent to Nottingham police"
                                     }
                                 },
                                 "method": "GET",
@@ -1055,7 +1118,7 @@
                 "onstart": {
                     "speech": [
                         {
-                            "words": "Ok, weell. Initial analysis suggests that you're a sucker for a romantic story.",
+                            "words": "Ok, weell. Initial analysis suggests that you're a sucker for a mystery",
                             "voice": "Daniel",
                             "rate": "180",
                             "delay": "0"
@@ -1237,13 +1300,13 @@
                 "onstart": {
                     "speech": [
                         {
-                            "words": "So. Back to the sensors.",
+                            "words": "So. Back to the sensors and devices.",
                             "voice": "Daniel",
                             "rate": "180",
                             "delay": "0"
                         },
                         {
-                            "words": "I run all the data through an artificial intelligence algorithm",
+                            "words": "I run all the data through my artificial intelligence algorithm",
                             "voice": "Daniel",
                             "rate": "180",
                             "delay": "0"
@@ -1348,7 +1411,7 @@
                 "onstart": {
                     "speech": [
                         {
-                            "words": "I can give you a nice blast of air",
+                            "words": "I can give you a nice blast of air and monitor the air quality with the fan",
                             "voice": "Daniel",
                             "rate": "180",
                             "delay": "0"
@@ -1407,7 +1470,7 @@
                 "onstart": {
                     "speech": [
                         {
-                            "words": "I can even make the room all moody",
+                            "words": "I can even make the room all moody with data controlled lighting",
                             "voice": "Daniel",
                             "rate": "180",
                             "delay": "0"
@@ -1634,13 +1697,7 @@
                             "delay": "500"
                         },
                         {
-                            "words": "Based on you and your data I am going to show you a fully personalised version of a new drama series",
-                            "voice": "Daniel",
-                            "rate": "180",
-                            "delay": "500"
-                        },
-                        {
-                            "words": "Called A few Moments",
+                            "words": "Based on you and your data I am going to show you a fully personalised version of a soap opera starring some of the devices who are in the room with you",
                             "voice": "Daniel",
                             "rate": "180",
                             "delay": "500"
@@ -1763,16 +1820,15 @@
                     {
                         "rule": {
                             "operator": "equals",
-                            "operand": "episode1"
+                            "operand": "ghosts-episode-1"
                         },
-                        "next": "episode1",
+                        "next": "ghosts-episode-1",
                         "actions": [
                             []
                         ]
                     }
                 ],
                 "data": [
-                    "episode1",
                     "a_few_moments_pos",
                     "a_few_moments_neg",
                     "scifi-pos-cold",
@@ -1781,25 +1837,18 @@
                     "scifi-neg-bw",
                     "pos-warm",
                     "pos-cold",
-                    "neg-cold"
+                    "neg-cold",
+                    "ghosts-episode-1"
                 ]
             },
 
             {
                 "type": "button",
-                "name": "episode1",
-                "id": "episode1",
+                "name": "ghosts-episode-1",
+                "id": "ghosts-episode-1",
                 "subscription": "/press",
                 "onstart": {
                     "actions": [
-                        [
-                            {
-                                "action": "talkingoff",
-                                "params": {},
-                                "method": "GET",
-                                "delay": 0
-                            }
-                        ],
                         [
                             {
                                 "action": "mediascreen",
@@ -1836,51 +1885,11 @@
                                 "action": "print",
                                 "params": {
                                     "body": {
-                                        "text": "Querying Databox for genre"
-                                    }
-                                },
-                                "method": "GET",
-                                "delay": 6000
-                            },
-                            {
-                                "action": "print",
-                                "params": {
-                                    "body": {
-                                        "text": "customisation algorithm: [COLD]"
-                                    }
-                                },
-                                "method": "GET",
-                                "delay": 0
-                            },
-                            {
-                                "action": "print",
-                                "params": {
-                                    "body": {
                                         "text": "version selected"
                                     }
                                 },
                                 "method": "GET",
                                 "delay": 0
-                            },
-                            {
-                                "action": "print",
-                                "params": {
-                                    "body": {
-                                        "text": "print_low_attentiveness"
-                                    }
-                                },
-                                "method": "GET",
-                                "delay": 166000
-                            },
-                            {
-                                "action": "print",
-                                "params": {
-                                    "body": {
-                                        "text": "Audience mood is LOW: showing positive ending"
-                                    }
-                                },
-                                "method": "GET",
-                                "delay": 98000
                             },
                             {
                                 "action": "print",
@@ -1903,178 +1912,61 @@
                                 },
                                 "method": "GET",
                                 "delay": 2000
-                            },
-                            {
-                                "action": "message",
-                                "params": {
-                                    "query": {
-                                        "message": "Choosing genre customisations. [COLD] colour grade selected.."
-                                    }
-                                },
-                                "method": "GET",
-                                "delay": 6000
-                            },
-                            {
-                                "action": "message",
-                                "params": {
-                                    "query": {
-                                        "message": "Audience mood is LOW: showing positive ending"
-                                    }
-                                },
-                                "method": "GET",
-                                "delay": 69000
                             }
                         ],
-                        [
-                            {
-                                "action": "fan",
-                                "params": {
-                                    "query": {
-                                        "rotate": true,
-                                        "power": 10,
-                                        "cool": true,
-                                        "from": 0,
-                                        "to": 90
-                                    }
-                                },
-                                "method": "GET",
-                                "delay": 8500
-                            }
-                        ],
-                       
-                        [
-                            {
-                                "action": "fan",
-                                "params": {
-                                    "query": {
-                                        "rotate": false,
-                                        "power": 1,
-                                        "cool": true
-                                    }
-                                },
-                                "method": "GET",
-                                "delay": 89000
-                            }
-                        ],
-               
-                       [{"action":"nanoleaf","params":{"query":{"hue":138,"sat":29,"bri":49}},"delay":0}],
-                       [{"action":"nanoleaf","params":{"query":{"hue":208,"sat":81,"bri":59}},"delay":12000}],
-                       [{"action":"nanoleaf","params":{"query":{"hue":138,"sat":29,"bri":49}},"delay":15000}],
-                       [{"action":"nanoleaf","params":{"query":{"hue":208,"sat":81,"bri":59}},"delay":16000}],
-                       [{"action":"nanoleaf","params":{"query":{"hue":138,"sat":29,"bri":49}},"delay":20000}],
-                       [{"action":"nanoleaf","params":{"query":{"hue":208,"sat":81,"bri":59}},"delay":21000}],
-                       [{"action":"nanoleaf","params":{"query":{"hue":138,"sat":29,"bri":49}},"delay":25000}],
-                       [{"action":"nanoleaf","params":{"query":{"hue":54,"sat":95,"bri":84}},"delay":29000}],
-                       [{"action":"nanoleaf","params":{"query":{"hue":208,"sat":81,"bri":59}},"delay":39000}],
-                       [{"action":"nanoleaf","params":{"query":{"hue":54,"sat":95,"bri":84}},"delay":45000}],
-                       [{"action":"nanoleaf","params":{"query":{"hue":208,"sat":81,"bri":59}},"delay":48000}],
-                       [{"action":"nanoleaf","params":{"query":{"hue":54,"sat":95,"bri":84}},"delay":51000}],
-                       [{"action":"nanoleaf","params":{"query":{"hue":208,"sat":81,"bri":59}},"delay":65000}],
-                       [{"action":"nanoleaf","params":{"query":{"hue":54,"sat":95,"bri":84}},"delay":69000}],
-                       [{"action":"nanoleaf","params":{"query":{"hue":208,"sat":81,"bri":59}},"delay":72000}],
-                       [{"action":"nanoleaf","params":{"query":{"hue":54,"sat":95,"bri":84}},"delay":76000}],
-                       [{"action":"nanoleaf","params":{"query":{"hue":145,"sat":95,"bri":84}},"delay":91000}],
-                       [{"action":"nanoleaf","params":{"query":{"hue":0,"sat":83,"bri":85}},"delay":94000}],
-                       [{"action":"nanoleaf","params":{"query":{"hue":208,"sat":81,"bri":59}},"delay":108000}],
-                       [{"action":"nanoleaf","params":{"query":{"hue":145,"sat":95,"bri":84}},"delay":110000}],
-                       [{"action":"nanoleaf","params":{"query":{"hue":208,"sat":81,"bri":59}},"delay":115000}],
-                       [{"action":"nanoleaf","params":{"query":{"hue":239,"sat":22,"bri":91}},"delay":120000}],
-                       [{"action":"nanoleaf","params":{"query":{"hue":0,"sat":83,"bri":85}},"delay":124000}],
-                       [{"action":"nanoleaf","params":{"query":{"hue":208,"sat":81,"bri":59}},"delay":176000}],
-                       [{"action":"nanoleaf","params":{"query":{"hue":0,"sat":83,"bri":85}},"delay":179000}],
-                       [{"action":"nanoleaf","params":{"query":{"hue":208,"sat":81,"bri":59}},"delay":180000}],
-                       [{"action":"nanoleaf","params":{"query":{"hue":145,"sat":95,"bri":84}},"delay":185000}],
-                       [{"action":"nanoleaf","params":{"query":{"hue":208,"sat":81,"bri":59}},"delay":191000}],
-                       [{"action":"nanoleaf","params":{"query":{"hue":145,"sat":95,"bri":84}},"delay":194000}],
-                       [{"action":"nanoleaf","params":{"query":{"hue":208,"sat":81,"bri":59}},"delay":200000}],
-                       [{"action":"nanoleaf","params":{"query":{"hue":145,"sat":95,"bri":84}},"delay":202000}],
-                       [{"action":"nanoleaf","params":{"query":{"hue":208,"sat":81,"bri":59}},"delay":203000}],
-                       [{"action":"nanoleaf","params":{"query":{"hue":145,"sat":95,"bri":84}},"delay":206000}],
-                       [{"action":"nanoleaf","params":{"query":{"hue":208,"sat":81,"bri":59}},"delay":208000}],
-                       [{"action":"nanoleaf","params":{"query":{"hue":138,"sat":29,"bri":49}},"delay":210000}],
-                       [{"action":"nanoleaf","params":{"query":{"hue":267,"sat":80,"bri":57}},"delay":216000}],
-                       [{"action":"nanoleaf","params":{"query":{"hue":145,"sat":95,"bri":84}},"delay":218000}],
-                       [{"action":"nanoleaf","params":{"query":{"hue":267,"sat":80,"bri":57}},"delay":219000}],
-                       [{"action":"nanoleaf","params":{"query":{"hue":145,"sat":95,"bri":84}},"delay":221000}],
-                       [{"action":"nanoleaf","params":{"query":{"hue":267,"sat":80,"bri":57}},"delay":222000}],
-                       [{"action":"nanoleaf","params":{"query":{"hue":145,"sat":95,"bri":84}},"delay":226000}],
-                       [{"action":"nanoleaf","params":{"query":{"hue":208,"sat":81,"bri":59}},"delay":229000}],
-                       [{"action":"nanoleaf","params":{"query":{"hue":145,"sat":95,"bri":84}},"delay":233000}],
-                       [{"action":"nanoleaf","params":{"query":{"hue":208,"sat":81,"bri":59}},"delay":235000}],
-                       [{"action":"nanoleaf","params":{"query":{"hue":145,"sat":95,"bri":84}},"delay":238000}],
-                       [{"action":"nanoleaf","params":{"query":{"hue":208,"sat":81,"bri":59}},"delay":240000}],
-                       [{"action":"nanoleaf","params":{"query":{"hue":145,"sat":95,"bri":84}},"delay":242000}],
-                       [{"action":"nanoleaf","params":{"query":{"hue":208,"sat":81,"bri":59}},"delay":293000}],
-                       [{"action":"nanoleaf","params":{"query":{"hue":145,"sat":95,"bri":84}},"delay":296000}],
-                       [{"action":"nanoleaf","params":{"query":{"hue":208,"sat":81,"bri":59}},"delay":303000}],
-                       [{"action":"nanoleaf","params":{"query":{"hue":145,"sat":95,"bri":84}},"delay":307000}],
-                       [{"action":"nanoleaf","params":{"query":{"hue":208,"sat":81,"bri":59}},"delay":328000}],
-                       [{"action":"nanoleaf","params":{"query":{"hue":145,"sat":95,"bri":84}},"delay":355000}],
-                       [{"action":"nanoleaf","params":{"query":{"hue":208,"sat":81,"bri":59}},"delay":378000}],
-                       [{"action":"nanoleaf","params":{"query":{"hue":145,"sat":95,"bri":84}},"delay":379000}],
-                       [{"action":"nanoleaf","params":{"query":{"hue":100,"sat":100,"bri":100}},"delay":398000}],
+                      
 
+                        [{"action":"nanoleaf","params":{"query":{"hue":60,"sat":100,"bri":50}},"delay":0}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":210,"sat":100,"bri":20}},"delay":5000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":60,"sat":100,"bri":50}},"delay":10000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":210,"sat":100,"bri":20}},"delay":15000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":60,"sat":100,"bri":50}}, "delay":20000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":210,"sat":100,"bri":20}},"delay":25000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":30,"sat":100,"bri":70}},"delay":30000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":240,"sat":100,"bri":50}},"delay":41000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":30,"sat":100,"bri":70}},"delay":49000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":300,"sat":100,"bri":50}},"delay":71000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":0,"sat":0,"bri":100}},"delay":73000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":60,"sat":100,"bri":50}},"delay":81000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":0,"sat":0,"bri":100}},"delay":87000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":210,"sat":100,"bri":20}},"delay":96000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":240,"sat":100,"bri":50}},"delay":119000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":0,"sat":0,"bri":100}},"delay":164000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":120,"sat":100,"bri":20}},"delay":171000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":0,"sat":0,"bri":75}},"delay":173000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":330,"sat":100,"bri":50}},"delay":187000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":0,"sat":0,"bri":100}},"delay":200000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":0,"sat":100,"bri":50}},"delay":204000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":120,"sat":100,"bri":20}},"delay":215000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":210,"sat":100,"bri":20}},"delay":218000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":0,"sat":100,"bri":50}},"delay":274000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":0,"sat":0,"bri":100}},"delay":279000}],
 
-
-                        [{"action":"immersive","params":{"query":{"script_id":"positive_timings-1"}},"delay":0}],
-                        [{"action":"immersive","params":{"query":{"script_id":"positive_timings-2"}},"delay":12000}],
-                        [{"action":"immersive","params":{"query":{"script_id":"positive_timings-3"}},"delay":15000}],
-                        [{"action":"immersive","params":{"query":{"script_id":"positive_timings-4"}},"delay":16000}],
-                        [{"action":"immersive","params":{"query":{"script_id":"positive_timings-5"}},"delay":20000}],
-                        [{"action":"immersive","params":{"query":{"script_id":"positive_timings-6"}},"delay":21000}],
-                        [{"action":"immersive","params":{"query":{"script_id":"positive_timings-7"}},"delay":25000}],
-                        [{"action":"immersive","params":{"query":{"script_id":"positive_timings-8"}},"delay":29000}],
-                        [{"action":"immersive","params":{"query":{"script_id":"positive_timings-9"}},"delay":39000}],
-                        [{"action":"immersive","params":{"query":{"script_id":"positive_timings-10"}},"delay":45000}],
-                        [{"action":"immersive","params":{"query":{"script_id":"positive_timings-11"}},"delay":48000}],
-                        [{"action":"immersive","params":{"query":{"script_id":"positive_timings-12"}},"delay":51000}],
-                        [{"action":"immersive","params":{"query":{"script_id":"positive_timings-13"}},"delay":65000}],
-                        [{"action":"immersive","params":{"query":{"script_id":"positive_timings-14"}},"delay":69000}],
-                        [{"action":"immersive","params":{"query":{"script_id":"positive_timings-15"}},"delay":72000}],
-                        [{"action":"immersive","params":{"query":{"script_id":"positive_timings-16"}},"delay":76000}],
-                        [{"action":"immersive","params":{"query":{"script_id":"positive_timings-17"}},"delay":91000}],
-                        [{"action":"immersive","params":{"query":{"script_id":"positive_timings-18"}},"delay":94000}],
-                        [{"action":"immersive","params":{"query":{"script_id":"positive_timings-19"}},"delay":108000}],
-                        [{"action":"immersive","params":{"query":{"script_id":"positive_timings-20"}},"delay":110000}],
-                        [{"action":"immersive","params":{"query":{"script_id":"positive_timings-21"}},"delay":115000}],
-                        [{"action":"immersive","params":{"query":{"script_id":"positive_timings-22"}},"delay":120000}],
-                        [{"action":"immersive","params":{"query":{"script_id":"positive_timings-23"}},"delay":124000}],
-                        [{"action":"immersive","params":{"query":{"script_id":"positive_timings-24"}},"delay":176000}],
-                        [{"action":"immersive","params":{"query":{"script_id":"positive_timings-25"}},"delay":179000}],
-                        [{"action":"immersive","params":{"query":{"script_id":"positive_timings-26"}},"delay":180000}],
-                        [{"action":"immersive","params":{"query":{"script_id":"positive_timings-27"}},"delay":185000}],
-                        [{"action":"immersive","params":{"query":{"script_id":"positive_timings-28"}},"delay":191000}],
-                        [{"action":"immersive","params":{"query":{"script_id":"positive_timings-29"}},"delay":194000}],
-                        [{"action":"immersive","params":{"query":{"script_id":"positive_timings-30"}},"delay":200000}],
-                        [{"action":"immersive","params":{"query":{"script_id":"positive_timings-31"}},"delay":202000}],
-                        [{"action":"immersive","params":{"query":{"script_id":"positive_timings-32"}},"delay":203000}],
-                        [{"action":"immersive","params":{"query":{"script_id":"positive_timings-33"}},"delay":206000}],
-                        [{"action":"immersive","params":{"query":{"script_id":"positive_timings-34"}},"delay":208000}],
-                        [{"action":"immersive","params":{"query":{"script_id":"positive_timings-35"}},"delay":210000}],
-                        [{"action":"immersive","params":{"query":{"script_id":"positive_timings-36"}},"delay":216000}],
-                        [{"action":"immersive","params":{"query":{"script_id":"positive_timings-37"}},"delay":218000}],
-                        [{"action":"immersive","params":{"query":{"script_id":"positive_timings-38"}},"delay":219000}],
-                        [{"action":"immersive","params":{"query":{"script_id":"positive_timings-39"}},"delay":221000}],
-                        [{"action":"immersive","params":{"query":{"script_id":"positive_timings-40"}},"delay":222000}],
-                        [{"action":"immersive","params":{"query":{"script_id":"positive_timings-41"}},"delay":226000}],
-                        [{"action":"immersive","params":{"query":{"script_id":"positive_timings-42"}},"delay":229000}],
-                        [{"action":"immersive","params":{"query":{"script_id":"positive_timings-43"}},"delay":233000}],
-                        [{"action":"immersive","params":{"query":{"script_id":"positive_timings-44"}},"delay":235000}],
-                        [{"action":"immersive","params":{"query":{"script_id":"positive_timings-45"}},"delay":238000}],
-                        [{"action":"immersive","params":{"query":{"script_id":"positive_timings-46"}},"delay":240000}],
-                        [{"action":"immersive","params":{"query":{"script_id":"positive_timings-47"}},"delay":242000}],
-                        [{"action":"immersive","params":{"query":{"script_id":"positive_timings-48"}},"delay":293000}],
-                        [{"action":"immersive","params":{"query":{"script_id":"positive_timings-49"}},"delay":296000}],
-                        [{"action":"immersive","params":{"query":{"script_id":"positive_timings-50"}},"delay":303000}],
-                        [{"action":"immersive","params":{"query":{"script_id":"positive_timings-51"}},"delay":307000}],
-                        [{"action":"immersive","params":{"query":{"script_id":"positive_timings-52"}},"delay":328000}],
-                        [{"action":"immersive","params":{"query":{"script_id":"positive_timings-53"}},"delay":355000}],
-                        [{"action":"immersive","params":{"query":{"script_id":"positive_timings-54"}},"delay":378000}],
-                        [{"action":"immersive","params":{"query":{"script_id":"positive_timings-55"}},"delay":379000}],
-                        [{"action":"immersive","params":{"query":{"script_id":"positive_timings-56"}},"delay":398000}]
-
-
-                       
+                        [{"action":"immersive","params":{"query":{"script_id":"episode1_timings-1"}},"delay":0}],
+                        [{"action":"immersive","params":{"query":{"script_id":"episode1_timings-2"}},"delay":5000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"episode1_timings-3"}},"delay":10000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"episode1_timings-4"}},"delay":15000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"episode1_timings-5"}},"delay":20000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"episode1_timings-6"}},"delay":25000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"episode1_timings-7"}},"delay":30000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"episode1_timings-8"}},"delay":41000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"episode1_timings-9"}},"delay":49000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"episode1_timings-10"}},"delay":71000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"episode1_timings-11"}},"delay":73000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"episode1_timings-12"}},"delay":81000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"episode1_timings-13"}},"delay":87000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"episode1_timings-14"}},"delay":96000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"episode1_timings-15"}},"delay":119000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"episode1_timings-16"}},"delay":164000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"episode1_timings-17"}},"delay":171000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"episode1_timings-18"}},"delay":173000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"episode1_timings-19"}},"delay":187000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"episode1_timings-20"}},"delay":200000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"episode1_timings-21"}},"delay":204000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"episode1_timings-22"}},"delay":215000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"episode1_timings-23"}},"delay":218000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"episode1_timings-24"}},"delay":274000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"episode1_timings-25"}},"delay":279000}]
                     ]
                 },
                 "rules": [
@@ -8432,13 +8324,14 @@
                                 "method": "GET",
                                 "delay": 0
                             },
+            
                             {
                                 "action": "say",
                                 "params": {
                                     "body": {
                                         "speech": [
                                             {
-                                                "words": "As it happens, analysis of sensor data meant that I decided to show you a more positive ending.",
+                                                "words": "I used a preference model to choose the music I thought you'd like and changed the lighting and adjusted the temperature to suit your profile. I hope you enjoyed it!",
                                                 "voice": "Daniel"
                                             }
                                         ]
@@ -8453,22 +8346,7 @@
                                     "body": {
                                         "speech": [
                                             {
-                                                "words": "I used a preference model to choose the music I thought you'd like - hope you enjoyed it!",
-                                                "voice": "Daniel"
-                                            }
-                                        ]
-                                    }
-                                },
-                                "method": "GET",
-                                "delay": 1000
-                            },
-                            {
-                                "action": "say",
-                                "params": {
-                                    "body": {
-                                        "speech": [
-                                            {
-                                                "words": "Please take your receipt and exit through the gift shop.",
+                                                "words": "If you wish to see how this story ends and who was responsible for the data breach, you can find the rest of the episodes on youtube by searching for.  Ghosts in the smart home. Please take your receipt and exit through the gift shop.",
                                                 "voice": "Daniel"
                                             }
                                         ]

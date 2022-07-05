@@ -1,0 +1,1379 @@
+[
+    {
+        "id": "edgeofreality",
+        "start": {
+            "actions": [
+                []
+            ],
+            "event": "start"
+        },
+        "events": [
+            {
+                "type": "button",
+                "name": "start",
+                "id": "start",
+                "subscription": "/press",
+                "onstart": {
+                    "actions": [
+                        [
+                            {
+                                "action": "http://[lenovo]:9102/api/home",
+                                "params": {},
+                                "method": "GET",
+                                "delay": 0
+                            }
+                        ],
+                        []
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "next"
+                        },
+                        "next": "startup",
+                        "actions": []
+                    }
+                ],
+                "data": [
+                    "next"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "startup",
+                "id": "startup",
+                "subscription": "/press",
+                "onstart": {
+                    "actions": [
+                        [
+                            {
+                                "action": "http://[lenovo]:9102/api/message",
+                                "params": {
+                                    "query": {
+                                        "message": "welcome to caravan homes of the future inc.  caravan model version 4.4, please wait while the system sets up"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 0
+                            },
+                            {
+                                "action": "http://[lenovo]:9107/api/arm/expand",
+                                "params": {},
+                                "method": "GET",
+                                "delay": 0
+                            },
+                            {
+                                "action": "http://[lenovo]:9102/api/camera",
+                                "params": {},
+                                "method": "GET",
+                                "delay": 0
+                            }
+                        ],
+                        []
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "face"
+                        },
+                        "next": "facescancomplete",
+                        "actions": []
+                    }
+                ],
+                "data": [
+                    "face"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "facescancomplete",
+                "id": "facescancomplete",
+                "subscription": "/press",
+                "onstart": {
+                    "actions": [
+                        [
+                            {
+                                "action": "http://[lenovo]:9107/api/collapse",
+                                "params": {},
+                                "method": "GET",
+                                "delay": 0
+                            }
+                        ],
+                        [
+                            {
+                                "action": "soundmedia",
+                                "params": {
+                                    "body": {
+                                        "media": "edgeofreality/facescancomplete_speech_0.wav",
+                                        "nowait": false,
+                                        "delay": "0"
+                                    }
+                                }
+                            },
+                            {
+                                "action": "soundmedia",
+                                "params": {
+                                    "body": {
+                                        "media": "edgeofreality/facescancomplete_speech_1.wav",
+                                        "nowait": false,
+                                        "delay": "3000"
+                                    }
+                                }
+                            },
+                            {
+                                "action": "soundmedia",
+                                "params": {
+                                    "body": {
+                                        "media": "edgeofreality/facescancomplete_speech_2.wav",
+                                        "nowait": false,
+                                        "delay": "500"
+                                    }
+                                }
+                            },
+                            {
+                                "action": "soundmedia",
+                                "params": {
+                                    "body": {
+                                        "media": "edgeofreality/facescancomplete_speech_3.wav",
+                                        "nowait": false,
+                                        "delay": "1000"
+                                    }
+                                }
+                            },
+                            {
+                                "action": "soundmedia",
+                                "params": {
+                                    "body": {
+                                        "media": "edgeofreality/facescancomplete_speech_4.wav",
+                                        "nowait": false,
+                                        "delay": "500"
+                                    }
+                                }
+                            },
+                            {
+                                "action": "soundmedia",
+                                "params": {
+                                    "body": {
+                                        "media": "edgeofreality/facescancomplete_speech_5.wav",
+                                        "nowait": false,
+                                        "delay": "500"
+                                    }
+                                }
+                            },
+                            {
+                                "action": "soundmedia",
+                                "params": {
+                                    "body": {
+                                        "media": "edgeofreality/facescancomplete_speech_6.wav",
+                                        "nowait": false,
+                                        "delay": "500"
+                                    }
+                                }
+                            },
+                            {
+                                "action": "soundmedia",
+                                "params": {
+                                    "body": {
+                                        "media": "edgeofreality/facescancomplete_speech_7.wav",
+                                        "nowait": false,
+                                        "delay": "0"
+                                    }
+                                }
+                            },
+                            {
+                                "action": "soundmedia",
+                                "params": {
+                                    "body": {
+                                        "media": "edgeofreality/facescancomplete_speech_8.wav",
+                                        "nowait": false,
+                                        "delay": "500"
+                                    }
+                                }
+                            },
+                            {
+                                "action": "soundmedia",
+                                "params": {
+                                    "body": {
+                                        "media": "edgeofreality/facescancomplete_speech_9.wav",
+                                        "nowait": false,
+                                        "delay": "1000"
+                                    }
+                                }
+                            },
+                            {
+                                "action": "soundmedia",
+                                "params": {
+                                    "body": {
+                                        "media": "edgeofreality/facescancomplete_speech_10.wav",
+                                        "nowait": false,
+                                        "delay": "0"
+                                    }
+                                }
+                            }
+                        ]
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "cloud"
+                        },
+                        "next": "cloud",
+                        "actions": []
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "local"
+                        },
+                        "next": "local",
+                        "actions": []
+                    }
+                ],
+                "data": [
+                    "cloud",
+                    "local"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "cloud",
+                "id": "cloud",
+                "subscription": "/press",
+                "onstart": {
+                    "actions": [
+                        [
+                            {
+                                "action": "http://[lenovo]:9097/ui/api/fan",
+                                "params": {
+                                    "query": {
+                                        "rotate": true,
+                                        "power": 10,
+                                        "cool": true,
+                                        "from": 0,
+                                        "to": 90
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 1500
+                            },
+                            {
+                                "action": "http://[windows]:9222/H",
+                                "params": {},
+                                "method": "GET",
+                                "delay": 0
+                            },
+                            {
+                                "action": "http://[windows]:9222/H",
+                                "params": {},
+                                "method": "GET",
+                                "delay": 1000
+                            },
+                            {
+                                "action": "http://[smell]/api/on",
+                                "params": {},
+                                "method": "GET",
+                                "delay": 2000
+                            }
+                        ],
+                        [
+                            {
+                                "action": "soundmedia",
+                                "params": {
+                                    "body": {
+                                        "media": "edgeofreality/cloud_speech_0.wav",
+                                        "nowait": false,
+                                        "delay": "0"
+                                    }
+                                }
+                            },
+                            {
+                                "action": "soundmedia",
+                                "params": {
+                                    "body": {
+                                        "media": "edgeofreality/cloud_speech_1.wav",
+                                        "nowait": false,
+                                        "delay": "500"
+                                    }
+                                }
+                            },
+                            {
+                                "action": "soundmedia",
+                                "params": {
+                                    "body": {
+                                        "media": "edgeofreality/cloud_speech_2.wav",
+                                        "nowait": false,
+                                        "delay": "0"
+                                    }
+                                }
+                            },
+                            {
+                                "action": "soundmedia",
+                                "params": {
+                                    "body": {
+                                        "media": "edgeofreality/cloud_speech_3.wav",
+                                        "nowait": false,
+                                        "delay": "1000"
+                                    }
+                                }
+                            },
+                            {
+                                "action": "soundmedia",
+                                "params": {
+                                    "body": {
+                                        "media": "edgeofreality/cloud_speech_4.wav",
+                                        "nowait": false,
+                                        "delay": "2000"
+                                    }
+                                }
+                            },
+                            {
+                                "action": "soundmedia",
+                                "params": {
+                                    "body": {
+                                        "media": "edgeofreality/cloud_speech_5.wav",
+                                        "nowait": false,
+                                        "delay": "800"
+                                    }
+                                }
+                            },
+                            {
+                                "action": "soundmedia",
+                                "params": {
+                                    "body": {
+                                        "media": "edgeofreality/cloud_speech_6.wav",
+                                        "nowait": false,
+                                        "delay": "0"
+                                    }
+                                }
+                            }
+                        ]
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "sustainability"
+                        },
+                        "next": "sustainabilitysetup",
+                        "actions": []
+                    }
+                ],
+                "data": [
+                    "sustainability"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "local",
+                "id": "local",
+                "subscription": "/press",
+                "onstart": {
+                    "actions": [
+                        [
+                            {
+                                "action": "soundmedia",
+                                "params": {
+                                    "body": {
+                                        "media": "edgeofreality/local_speech_0.wav",
+                                        "nowait": false,
+                                        "delay": "0"
+                                    }
+                                }
+                            },
+                            {
+                                "action": "soundmedia",
+                                "params": {
+                                    "body": {
+                                        "media": "edgeofreality/local_speech_1.wav",
+                                        "nowait": false,
+                                        "delay": "0"
+                                    }
+                                }
+                            }
+                        ]
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "yes"
+                        },
+                        "next": "localagain",
+                        "actions": []
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "no"
+                        },
+                        "next": "cloud",
+                        "actions": []
+                    }
+                ],
+                "data": [
+                    "yes",
+                    "no"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "sustainabilitysetup",
+                "id": "sustainabilitysetup",
+                "subscription": "/press",
+                "onstart": {
+                    "actions": [
+                        [
+                            {
+                                "action": "soundmedia",
+                                "params": {
+                                    "body": {
+                                        "media": "edgeofreality/sustainabilitysetup_speech_0.wav",
+                                        "nowait": false,
+                                        "delay": "0"
+                                    }
+                                }
+                            },
+                            {
+                                "action": "soundmedia",
+                                "params": {
+                                    "body": {
+                                        "media": "edgeofreality/sustainabilitysetup_speech_1.wav",
+                                        "nowait": false,
+                                        "delay": "2000"
+                                    }
+                                }
+                            },
+                            {
+                                "action": "soundmedia",
+                                "params": {
+                                    "body": {
+                                        "media": "edgeofreality/sustainabilitysetup_speech_2.wav",
+                                        "nowait": false,
+                                        "delay": "0"
+                                    }
+                                }
+                            }
+                        ]
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "play"
+                        },
+                        "next": "video",
+                        "actions": []
+                    }
+                ],
+                "data": [
+                    "play"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "localagain",
+                "id": "localagain",
+                "subscription": "/press",
+                "onstart": {
+                    "actions": [
+                        [
+                            {
+                                "action": "http://[lenovo]:9102/api/message",
+                                "params": {
+                                    "query": {
+                                        "message": "service is not available in caravan model 4.4"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 1000
+                            }
+                        ],
+                        [
+                            {
+                                "action": "soundmedia",
+                                "params": {
+                                    "body": {
+                                        "media": "edgeofreality/localagain_speech_0.wav",
+                                        "nowait": false,
+                                        "delay": "2000"
+                                    }
+                                }
+                            },
+                            {
+                                "action": "soundmedia",
+                                "params": {
+                                    "body": {
+                                        "media": "edgeofreality/localagain_speech_1.wav",
+                                        "nowait": false,
+                                        "delay": "0"
+                                    }
+                                }
+                            }
+                        ]
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "cloud"
+                        },
+                        "next": "cloud",
+                        "actions": []
+                    }
+                ],
+                "data": [
+                    "cloud"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "video",
+                "id": "video",
+                "subscription": "/press",
+                "onstart": {
+                    "actions": [
+                        [
+                            {
+                                "action": "http://[lenovo]:9102/api/media",
+                                "params": {},
+                                "method": "GET",
+                                "delay": 0
+                            }
+                        ],
+                        []
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "thanks"
+                        },
+                        "next": "thanks",
+                        "actions": []
+                    }
+                ],
+                "data": [
+                    "thanks"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "thanks",
+                "id": "thanks",
+                "subscription": "/press",
+                "onstart": {
+                    "actions": [
+                        [
+                            {
+                                "action": "http://[smell]/api/on",
+                                "params": {},
+                                "method": "GET",
+                                "delay": 2000
+                            }
+                        ],
+                        [
+                            {
+                                "action": "soundmedia",
+                                "params": {
+                                    "body": {
+                                        "media": "edgeofreality/thanks_speech_0.wav",
+                                        "nowait": false,
+                                        "delay": "0"
+                                    }
+                                }
+                            },
+                            {
+                                "action": "soundmedia",
+                                "params": {
+                                    "body": {
+                                        "media": "edgeofreality/thanks_speech_1.wav",
+                                        "nowait": false,
+                                        "delay": "1000"
+                                    }
+                                }
+                            },
+                            {
+                                "action": "soundmedia",
+                                "params": {
+                                    "body": {
+                                        "media": "edgeofreality/thanks_speech_2.wav",
+                                        "nowait": false,
+                                        "delay": "0"
+                                    }
+                                }
+                            }
+                        ]
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "enter"
+                        },
+                        "next": "prometheus",
+                        "actions": []
+                    }
+                ],
+                "data": [
+                    "enter"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "prometheus",
+                "id": "prometheus",
+                "subscription": "/press",
+                "onstart": {
+                    "actions": [
+                        [
+                            {
+                                "action": "http://[windows]:9222/H",
+                                "params": {},
+                                "method": "GET",
+                                "delay": 0
+                            },
+                            {
+                                "action": "http://[windows]:9222/H",
+                                "params": {},
+                                "method": "GET",
+                                "delay": 1000
+                            },
+                            {
+                                "action": "http://[lookingglass]/api/on",
+                                "params": {},
+                                "method": "GET",
+                                "delay": 0
+                            },
+                            {
+                                "action": "http://[lenovo]:9092/ui/api/hex",
+                                "params": {
+                                    "query": {
+                                        "hex": "f2eb07"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 1000
+                            },
+                            {
+                                "action": "http://[lenovo]:9092/ui/api/hex",
+                                "params": {
+                                    "query": {
+                                        "hex": "000000"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 1000
+                            }
+                        ],
+                        [
+                            {
+                                "action": "soundmedia",
+                                "params": {
+                                    "body": {
+                                        "media": "edgeofreality/prometheus_speech_0.wav",
+                                        "nowait": false,
+                                        "delay": "0"
+                                    }
+                                }
+                            },
+                            {
+                                "action": "soundmedia",
+                                "params": {
+                                    "body": {
+                                        "media": "edgeofreality/prometheus_speech_1.wav",
+                                        "nowait": false,
+                                        "delay": "0"
+                                    }
+                                }
+                            },
+                            {
+                                "action": "soundmedia",
+                                "params": {
+                                    "body": {
+                                        "media": "edgeofreality/prometheus_speech_2.wav",
+                                        "nowait": false,
+                                        "delay": "500"
+                                    }
+                                }
+                            }
+                        ]
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "yes"
+                        },
+                        "next": "yeshelp",
+                        "actions": []
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "no"
+                        },
+                        "next": "nohelp",
+                        "actions": []
+                    }
+                ],
+                "data": [
+                    "yes",
+                    "no"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "yeshelp",
+                "id": "yeshelp",
+                "subscription": "/press",
+                "onstart": {
+                    "actions": [
+                        [
+                            {
+                                "action": "soundmedia",
+                                "params": {
+                                    "body": {
+                                        "media": "edgeofreality/yeshelp_speech_0.wav",
+                                        "nowait": false,
+                                        "delay": "0"
+                                    }
+                                }
+                            },
+                            {
+                                "action": "soundmedia",
+                                "params": {
+                                    "body": {
+                                        "media": "edgeofreality/yeshelp_speech_1.wav",
+                                        "nowait": false,
+                                        "delay": "500"
+                                    }
+                                }
+                            },
+                            {
+                                "action": "soundmedia",
+                                "params": {
+                                    "body": {
+                                        "media": "edgeofreality/yeshelp_speech_2.wav",
+                                        "nowait": false,
+                                        "delay": "500"
+                                    }
+                                }
+                            },
+                            {
+                                "action": "soundmedia",
+                                "params": {
+                                    "body": {
+                                        "media": "edgeofreality/yeshelp_speech_3.wav",
+                                        "nowait": false,
+                                        "delay": "0"
+                                    }
+                                }
+                            }
+                        ]
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "great"
+                        },
+                        "next": "hack1result",
+                        "actions": []
+                    }
+                ],
+                "data": [
+                    "great"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "nohelp",
+                "id": "nohelp",
+                "subscription": "/press",
+                "onstart": {
+                    "actions": [
+                        [
+                            {
+                                "action": "soundmedia",
+                                "params": {
+                                    "body": {
+                                        "media": "edgeofreality/nohelp_speech_0.wav",
+                                        "nowait": false,
+                                        "delay": "0"
+                                    }
+                                }
+                            }
+                        ]
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "yes"
+                        },
+                        "next": "yeshelp",
+                        "actions": []
+                    }
+                ],
+                "data": [
+                    "yes"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "hack1result",
+                "id": "hack1result",
+                "subscription": "/press",
+                "onstart": {
+                    "actions": [
+                        [
+                            {
+                                "action": "http://[lenovo]:9107/api/arm/expand",
+                                "params": {},
+                                "method": "GET",
+                                "delay": 3000
+                            }
+                        ],
+                        [
+                            {
+                                "action": "soundmedia",
+                                "params": {
+                                    "body": {
+                                        "media": "edgeofreality/hack1result_speech_0.wav",
+                                        "nowait": false,
+                                        "delay": "0"
+                                    }
+                                }
+                            },
+                            {
+                                "action": "soundmedia",
+                                "params": {
+                                    "body": {
+                                        "media": "edgeofreality/hack1result_speech_1.wav",
+                                        "nowait": false,
+                                        "delay": "1000"
+                                    }
+                                }
+                            },
+                            {
+                                "action": "soundmedia",
+                                "params": {
+                                    "body": {
+                                        "media": "edgeofreality/hack1result_speech_2.wav",
+                                        "nowait": false,
+                                        "delay": "0"
+                                    }
+                                }
+                            },
+                            {
+                                "action": "soundmedia",
+                                "params": {
+                                    "body": {
+                                        "media": "edgeofreality/hack1result_speech_3.wav",
+                                        "nowait": false,
+                                        "delay": "0"
+                                    }
+                                }
+                            }
+                        ]
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "wave"
+                        },
+                        "next": "wavedone",
+                        "actions": []
+                    }
+                ],
+                "data": [
+                    "wave"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "wavedone",
+                "id": "wavedone",
+                "subscription": "/press",
+                "onstart": {
+                    "actions": [
+                        [
+                            {
+                                "action": "http://[lenovo]:9107/api/collapse",
+                                "params": {},
+                                "method": "GET",
+                                "delay": 0
+                            }
+                        ],
+                        [
+                            {
+                                "action": "soundmedia",
+                                "params": {
+                                    "body": {
+                                        "media": "edgeofreality/wavedone_speech_0.wav",
+                                        "nowait": false,
+                                        "delay": "0"
+                                    }
+                                }
+                            },
+                            {
+                                "action": "soundmedia",
+                                "params": {
+                                    "body": {
+                                        "media": "edgeofreality/wavedone_speech_1.wav",
+                                        "nowait": false,
+                                        "delay": "1000"
+                                    }
+                                }
+                            },
+                            {
+                                "action": "soundmedia",
+                                "params": {
+                                    "body": {
+                                        "media": "edgeofreality/wavedone_speech_2.wav",
+                                        "nowait": false,
+                                        "delay": "0"
+                                    }
+                                }
+                            },
+                            {
+                                "action": "soundmedia",
+                                "params": {
+                                    "body": {
+                                        "media": "edgeofreality/wavedone_speech_3.wav",
+                                        "nowait": false,
+                                        "delay": "0"
+                                    }
+                                }
+                            }
+                        ]
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "slidergamedone"
+                        },
+                        "next": "slidergamedone",
+                        "actions": []
+                    }
+                ],
+                "data": [
+                    "slidergamedone"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "slidergamedone",
+                "id": "slidergamedone",
+                "subscription": "/press",
+                "onstart": {
+                    "actions": [
+                        [
+                            {
+                                "action": "http://[lenovo]:9102/api/media/play",
+                                "params": {
+                                    "query": {
+                                        "media": "amediafile.mp4",
+                                        "delay": 0
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 0
+                            }
+                        ],
+                        [
+                            {
+                                "action": "soundmedia",
+                                "params": {
+                                    "body": {
+                                        "media": "edgeofreality/slidergamedone_speech_0.wav",
+                                        "nowait": false,
+                                        "delay": "0"
+                                    }
+                                }
+                            },
+                            {
+                                "action": "soundmedia",
+                                "params": {
+                                    "body": {
+                                        "media": "edgeofreality/slidergamedone_speech_1.wav",
+                                        "nowait": false,
+                                        "delay": "500"
+                                    }
+                                }
+                            },
+                            {
+                                "action": "soundmedia",
+                                "params": {
+                                    "body": {
+                                        "media": "edgeofreality/slidergamedone_speech_2.wav",
+                                        "nowait": false,
+                                        "delay": "0"
+                                    }
+                                }
+                            },
+                            {
+                                "action": "soundmedia",
+                                "params": {
+                                    "body": {
+                                        "media": "edgeofreality/slidergamedone_speech_3.wav",
+                                        "nowait": false,
+                                        "delay": "0"
+                                    }
+                                }
+                            },
+                            {
+                                "action": "soundmedia",
+                                "params": {
+                                    "body": {
+                                        "media": "edgeofreality/slidergamedone_speech_4.wav",
+                                        "nowait": false,
+                                        "delay": "500"
+                                    }
+                                }
+                            },
+                            {
+                                "action": "soundmedia",
+                                "params": {
+                                    "body": {
+                                        "media": "edgeofreality/slidergamedone_speech_5.wav",
+                                        "nowait": false,
+                                        "delay": "500"
+                                    }
+                                }
+                            },
+                            {
+                                "action": "soundmedia",
+                                "params": {
+                                    "body": {
+                                        "media": "edgeofreality/slidergamedone_speech_6.wav",
+                                        "nowait": false,
+                                        "delay": "500"
+                                    }
+                                }
+                            },
+                            {
+                                "action": "soundmedia",
+                                "params": {
+                                    "body": {
+                                        "media": "edgeofreality/slidergamedone_speech_7.wav",
+                                        "nowait": false,
+                                        "delay": "500"
+                                    }
+                                }
+                            },
+                            {
+                                "action": "soundmedia",
+                                "params": {
+                                    "body": {
+                                        "media": "edgeofreality/slidergamedone_speech_8.wav",
+                                        "nowait": false,
+                                        "delay": "0"
+                                    }
+                                }
+                            }
+                        ]
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "local2.2"
+                        },
+                        "next": "local2.2",
+                        "actions": []
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "cloud2"
+                        },
+                        "next": "cloud2",
+                        "actions": []
+                    }
+                ],
+                "data": [
+                    "local2.2",
+                    "cloud2"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "local2.2",
+                "id": "local2.2",
+                "subscription": "/press",
+                "onstart": {
+                    "actions": [
+                        [
+                            {
+                                "action": "http://[lenovo]:9102/api/message",
+                                "params": {
+                                    "query": {
+                                        "message": "service is not available in caravan model 4.4"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 1000
+                            }
+                        ],
+                        [
+                            {
+                                "action": "soundmedia",
+                                "params": {
+                                    "body": {
+                                        "media": "edgeofreality/local2.2_speech_0.wav",
+                                        "nowait": false,
+                                        "delay": "1000"
+                                    }
+                                }
+                            },
+                            {
+                                "action": "soundmedia",
+                                "params": {
+                                    "body": {
+                                        "media": "edgeofreality/local2.2_speech_1.wav",
+                                        "nowait": false,
+                                        "delay": "500"
+                                    }
+                                }
+                            },
+                            {
+                                "action": "soundmedia",
+                                "params": {
+                                    "body": {
+                                        "media": "edgeofreality/local2.2_speech_2.wav",
+                                        "nowait": false,
+                                        "delay": "0"
+                                    }
+                                }
+                            }
+                        ]
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "sustainable"
+                        },
+                        "next": "sustainablepackage2",
+                        "actions": []
+                    }
+                ],
+                "data": [
+                    "sustainable"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "cloud2",
+                "id": "cloud2",
+                "subscription": "/press",
+                "onstart": {
+                    "actions": [
+                        [
+                            {
+                                "action": "http://[lenovo]:9102/api/message",
+                                "params": {
+                                    "query": {
+                                        "message": "service is not available in caravan model 4.4"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 1000
+                            }
+                        ],
+                        [
+                            {
+                                "action": "soundmedia",
+                                "params": {
+                                    "body": {
+                                        "media": "edgeofreality/cloud2_speech_0.wav",
+                                        "nowait": false,
+                                        "delay": "1000"
+                                    }
+                                }
+                            },
+                            {
+                                "action": "soundmedia",
+                                "params": {
+                                    "body": {
+                                        "media": "edgeofreality/cloud2_speech_1.wav",
+                                        "nowait": false,
+                                        "delay": "0"
+                                    }
+                                }
+                            }
+                        ]
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "local2.2"
+                        },
+                        "next": "local2.2",
+                        "actions": []
+                    }
+                ],
+                "data": [
+                    "local2.2"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "sustainablepackage2",
+                "id": "sustainablepackage2",
+                "subscription": "/press",
+                "onstart": {
+                    "actions": [
+                        [
+                            {
+                                "action": "soundmedia",
+                                "params": {
+                                    "body": {
+                                        "media": "edgeofreality/sustainablepackage2_speech_0.wav",
+                                        "nowait": false,
+                                        "delay": "500"
+                                    }
+                                }
+                            },
+                            {
+                                "action": "soundmedia",
+                                "params": {
+                                    "body": {
+                                        "media": "edgeofreality/sustainablepackage2_speech_1.wav",
+                                        "nowait": false,
+                                        "delay": "500"
+                                    }
+                                }
+                            },
+                            {
+                                "action": "soundmedia",
+                                "params": {
+                                    "body": {
+                                        "media": "edgeofreality/sustainablepackage2_speech_2.wav",
+                                        "nowait": false,
+                                        "delay": "0"
+                                    }
+                                }
+                            }
+                        ]
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "thanks"
+                        },
+                        "next": "thankyouforsetup2",
+                        "actions": []
+                    }
+                ],
+                "data": [
+                    "thanks"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "thankyouforsetup2",
+                "id": "thankyouforsetup2",
+                "subscription": "/press",
+                "onstart": {
+                    "actions": [
+                        [
+                            {
+                                "action": "soundmedia",
+                                "params": {
+                                    "body": {
+                                        "media": "edgeofreality/thankyouforsetup2_speech_0.wav",
+                                        "nowait": false,
+                                        "delay": "0"
+                                    }
+                                }
+                            }
+                        ]
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "showfinalfilm"
+                        },
+                        "next": "finalfilm",
+                        "actions": []
+                    }
+                ],
+                "data": [
+                    "showfinalfilm"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "finalfilm",
+                "id": "finalfilm",
+                "subscription": "/press",
+                "onstart": {
+                    "actions": [
+                        [
+                            {
+                                "action": "http://[lenovo]:9102/api/media",
+                                "params": {},
+                                "method": "GET",
+                                "delay": 0
+                            },
+                            {
+                                "action": "http://[lenovo]:9102/api/media/play",
+                                "params": {
+                                    "query": {
+                                        "media": "amediafile.mp4",
+                                        "delay": 0
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 0
+                            }
+                        ],
+                        []
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "test"
+                        },
+                        "next": "somewhere",
+                        "actions": []
+                    }
+                ],
+                "data": [
+                    "test"
+                ]
+            }
+        ]
+    }
+]

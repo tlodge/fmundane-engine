@@ -77,7 +77,10 @@ app.get('/api/arm/expand', async function (req, res, next) {
         opened =  await toggleDoor();
         await undock();
         if (opened){
+            console.log("door opened. waiting for drawer to open");
             const result = await request.get("192.168.1.162:9109/O")
+            console.log("got result from drawer");
+            console.log(result.body);
             await expand();
         }
       

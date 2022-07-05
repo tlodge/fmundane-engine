@@ -116,7 +116,8 @@
    "data": {
      "url": "http://192.168.1.244:9222/H",
      "type": "GET",
-     "contenttype": "application/json"
+     "contenttype": "application/json",
+     "timeout": 500
    }
  },
 
@@ -272,7 +273,8 @@
       "data": {
         "url": "http://192.168.1.221:9109/S",
         "type": "GET",
-        "contenttype": "application/json"
+        "contenttype": "application/json",
+        "timeout":500
       }
   },
   

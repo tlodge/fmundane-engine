@@ -78,7 +78,11 @@
                 "onstart": {
                     "speech": [
                         {
+<<<<<<< HEAD
                             "words": "Please sit back and relax, I am just turining myself on.",
+=======
+                            "words": "Please sit back and relax, I am just turning myself on.",
+>>>>>>> 103fcf2e16c54fe39fca9125ca8ef1a34a08f01a
                             "voice": "Daniel",
                             "rate": "180",
                             "delay": ""
@@ -1085,7 +1089,11 @@
                                 "action": "print",
                                 "params": {
                                     "body": {
+<<<<<<< HEAD
                                         "text": "APB sent to Nottingham police"
+=======
+                                        "text": "APB sent to Manchester police"
+>>>>>>> 103fcf2e16c54fe39fca9125ca8ef1a34a08f01a
                                     }
                                 },
                                 "method": "GET",
@@ -1118,7 +1126,11 @@
                 "onstart": {
                     "speech": [
                         {
+<<<<<<< HEAD
                             "words": "Ok, weell. Initial analysis suggests that you're a sucker for a mystery",
+=======
+                            "words": "Ok, weell. Initial analysis suggests that you're a sucker for a romantic story.",
+>>>>>>> 103fcf2e16c54fe39fca9125ca8ef1a34a08f01a
                             "voice": "Daniel",
                             "rate": "180",
                             "delay": "0"
@@ -1730,6 +1742,7 @@
                     {
                         "rule": {
                             "operator": "equals",
+<<<<<<< HEAD
                             "operand": "scifi-pos-cold"
                         },
                         "next": "scifi-pos-cold",
@@ -1820,6 +1833,8 @@
                     {
                         "rule": {
                             "operator": "equals",
+=======
+>>>>>>> 103fcf2e16c54fe39fca9125ca8ef1a34a08f01a
                             "operand": "ghosts-episode-1"
                         },
                         "next": "ghosts-episode-1",
@@ -1829,6 +1844,7 @@
                     }
                 ],
                 "data": [
+<<<<<<< HEAD
                     "a_few_moments_pos",
                     "a_few_moments_neg",
                     "scifi-pos-cold",
@@ -1838,6 +1854,8 @@
                     "pos-warm",
                     "pos-cold",
                     "neg-cold",
+=======
+>>>>>>> 103fcf2e16c54fe39fca9125ca8ef1a34a08f01a
                     "ghosts-episode-1"
                 ]
             },
@@ -1851,6 +1869,17 @@
                     "actions": [
                         [
                             {
+<<<<<<< HEAD
+=======
+                                "action": "talkingoff",
+                                "params": {},
+                                "method": "GET",
+                                "delay": 0
+                            }
+                        ],
+                        [
+                            {
+>>>>>>> 103fcf2e16c54fe39fca9125ca8ef1a34a08f01a
                                 "action": "mediascreen",
                                 "params": {},
                                 "method": "GET",
@@ -1914,7 +1943,41 @@
                                 "delay": 2000
                             }
                         ],
+<<<<<<< HEAD
                       
+=======
+                        [
+                            {
+                                "action": "fan",
+                                "params": {
+                                    "query": {
+                                        "rotate": true,
+                                        "power": 10,
+                                        "cool": true,
+                                        "from": 0,
+                                        "to": 90
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 8500
+                            }
+                        ],
+                       
+                        [
+                            {
+                                "action": "fan",
+                                "params": {
+                                    "query": {
+                                        "rotate": false,
+                                        "power": 1,
+                                        "cool": true
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 89000
+                            }
+                        ],
+>>>>>>> 103fcf2e16c54fe39fca9125ca8ef1a34a08f01a
 
                         [{"action":"nanoleaf","params":{"query":{"hue":60,"sat":100,"bri":50}},"delay":0}],
                         [{"action":"nanoleaf","params":{"query":{"hue":210,"sat":100,"bri":20}},"delay":5000}],
@@ -1975,7 +2038,11 @@
                             "operator": "equals",
                             "operand": "debrief"
                         },
+<<<<<<< HEAD
                         "next": "SCIFIdebriefPOS",
+=======
+                        "next": "EpisodeOneDebrief",
+>>>>>>> 103fcf2e16c54fe39fca9125ca8ef1a34a08f01a
                         "actions": [
                             []
                         ]
@@ -1985,17 +2052,99 @@
                     "debrief"
                 ]
             },
+<<<<<<< HEAD
 
 
             {
                 "type": "button",
                 "name": "a_few_moments_pos",
                 "id": "a_few_moments_pos",
+=======
+            {
+                "type": "button",
+                "name": "waitabit",
+                "id": "waitabit",
+                "subscription": "/press",
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "I'll just wait a little bit for you to think some more",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "0"
+                        },
+                        {
+                            "words": "1 mississippi",
+                            "voice": "2 mississipi",
+                            "rate": "Daniel",
+                            "delay": "180"
+                        }
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "try"
+                        },
+                        "next": "back2sensors",
+                        "actions": [
+                            []
+                        ]
+                    }
+                ],
+                "data": [
+                    "try"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "pardon",
+                "id": "pardon",
+                "subscription": "/press",
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "I am so sorry I didn't understand.",
+                            "voice": "Daniel",
+                            "rate": "190",
+                            "delay": "0"
+                        },
+                        {
+                            "words": "Would you repeat that please?",
+                            "voice": "Daniel",
+                            "rate": "140",
+                            "delay": "0"
+                        }
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "next"
+                        },
+                        "next": "databox",
+                        "actions": [
+                            []
+                        ]
+                    }
+                ],
+                "data": [
+                    "next"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "EpisodeOneDebrief",
+                "id": "EpisodeOneDebrief",
+>>>>>>> 103fcf2e16c54fe39fca9125ca8ef1a34a08f01a
                 "subscription": "/press",
                 "onstart": {
                     "actions": [
                         [
                             {
+<<<<<<< HEAD
                                 "action": "talkingoff",
                                 "params": {},
                                 "method": "GET",
@@ -2005,6 +2154,9 @@
                         [
                             {
                                 "action": "mediascreen",
+=======
+                                "action": "talkingon",
+>>>>>>> 103fcf2e16c54fe39fca9125ca8ef1a34a08f01a
                                 "params": {},
                                 "method": "GET",
                                 "delay": 0
@@ -2012,6 +2164,7 @@
                         ],
                         [
                             {
+<<<<<<< HEAD
                                 "action": "videomedia",
                                 "params": {
                                     "query": {
@@ -8635,6 +8788,62 @@
                                                 "voice": "Daniel"
                                             }
                                         ]
+=======
+                                "action": "say",
+                                "params": {
+                                    "body": {
+                                        "speech": [
+                                            {
+                                                "words": "Please remain seated",
+                                                "voice": "Daniel"
+                                            }
+                                        ]
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 0
+                            },
+                            {
+                                "action": "say",
+                                "params": {
+                                    "body": {
+                                        "speech": [
+                                            {
+                                                "words": "As it happens, analysis of sensor data meant that I decided to show you a more positive ending.",
+                                                "voice": "Daniel"
+                                            }
+                                        ]
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 1000
+                            },
+                            {
+                                "action": "say",
+                                "params": {
+                                    "body": {
+                                        "speech": [
+                                            {
+                                                "words": "I used a preference model to choose the music I thought you'd like - hope you enjoyed it!",
+                                                "voice": "Daniel"
+                                            }
+                                        ]
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 1000
+                            },
+                            {
+                                "action": "say",
+                                "params": {
+                                    "body": {
+                                        "speech": [
+                                            {
+                                                "words": "Please take your receipt and exit through the gift shop.",
+                                                "voice": "Daniel"
+                                            }
+                                        ]
+>>>>>>> 103fcf2e16c54fe39fca9125ca8ef1a34a08f01a
                                     }
                                 },
                                 "method": "GET",
@@ -8688,9 +8897,12 @@
                             []
                         ]
                     }
+<<<<<<< HEAD
                 ],
                 "data": [
                     "next"
+=======
+>>>>>>> 103fcf2e16c54fe39fca9125ca8ef1a34a08f01a
                 ]
             }
         ]

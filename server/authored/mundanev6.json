@@ -1118,7 +1118,7 @@
                 "onstart": {
                     "speech": [
                         {
-                            "words": "Ok, weell. Initial analysis suggests that you're a sucker for a romantic story.",
+                            "words": "Ok, weell. Initial analysis suggests that you're a sucker for a mystery.",
                             "voice": "Daniel",
                             "rate": "180",
                             "delay": "0"
@@ -2035,14 +2035,14 @@
                                     "body": {
                                         "speech": [
                                             {
-                                                "words": "As it happens, analysis of sensor data meant that I decided to show you a more positive ending.",
+                                                "words": "As it happens, I used a preference model to choose the music I thought you'd like.",
                                                 "voice": "Daniel"
                                             }
                                         ]
                                     }
                                 },
                                 "method": "GET",
-                                "delay": 1000
+                                "delay": 300
                             },
                             {
                                 "action": "say",
@@ -2050,7 +2050,40 @@
                                     "body": {
                                         "speech": [
                                             {
-                                                "words": "I used a preference model to choose the music I thought you'd like - hope you enjoyed it!",
+                                                "words": "I also changed the lighting and adjusted the temperature to suit your profile.",
+                                                "voice": "Daniel"
+                                            }
+                                         
+                                        ]
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 300
+                            },
+                            {
+                                "action": "say",
+                                "params": {
+                                    "body": {
+                                        "speech": [
+                                            {
+                                                "words": "I hope you enjoyed it.",
+                                                "voice": "Daniel"
+                                            }
+                                         
+                                        ]
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 500
+                            },
+                           
+                            {
+                                "action": "say",
+                                "params": {
+                                    "body": {
+                                        "speech": [
+                                            {
+                                                "words": "If you wish to see how the story ends and who was responsible for the security breach you can find the rest of the episodes on you tube.  By searching for ghosts in the smart home.",
                                                 "voice": "Daniel"
                                             }
                                         ]

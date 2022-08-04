@@ -14,6 +14,7 @@ body {
 .finger{
   height: 30vmin;
   pointer-events: none;
+  margin-bottom:10px;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -66,6 +67,8 @@ body {
   border: 2px solid rgb(0,255,123);
   width: calc(100vw - 30px);
   margin: 5px 0px 5px 0px;
+  padding: 10px;
+  box-sizing: border-box;
 }
 
 .innerbox{
@@ -86,12 +89,13 @@ body {
 
 .bottomtext{
   color: white;/*rgb(0,255,123);*/
-  margin-top:20px;
   font-weight: 700;
 }
 
 .textcontainer {
   width: 250px;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 .bottombox{

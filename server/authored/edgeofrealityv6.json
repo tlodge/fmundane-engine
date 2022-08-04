@@ -83,13 +83,13 @@
                                                 "delay": "0"
                                             },
                                             {
-                                                "words": "Thank you for participating with the face scan.  I now have enough data on you to proceed with system set up.",
+                                                "words": "Thank you for participating with the face scan. I now have enough data on you to proceed with system set up.",
                                                 "voice": "Serena",
                                                 "rate": "180",
                                                 "delay": "500"
                                             },
                                             {
-                                                "words": "Please sit back and watch future inc’s latest informational video version 3.1 final\"",
+                                                "words": "Please sit back and watch future inc's latest informational video version 3.1 final\"",
                                                 "voice": "Serena",
                                                 "rate": "180",
                                                 "delay": "2000"
@@ -174,20 +174,20 @@
                                     "body": {
                                         "speech": [
                                             {
-                                                "words": "Fabulous that’s the choice I would have gone for.",
+                                                "words": "Fabulous that's the choice I would have gone for.",
                                                 "voice": "Serena",
                                                 "rate": "180",
                                                 "delay": "0"
                                             },
                                             {
-                                                "words": "Oh I am sorry I have not asked you about the temperature. ",
+                                                "words": "Oh I am sorry I have not asked you about the temperature.",
                                                 "voice": "Serena",
                                                 "rate": "180",
                                                 "delay": "0"
                                             },
                                             {
                                                 "words": "I can turn the fan on.",
-                                                "voice": "Daniel",
+                                                "voice": "Serena",
                                                 "rate": "180",
                                                 "delay": "0"
                                             }
@@ -323,7 +323,7 @@
                                     "body": {
                                         "speech": [
                                             {
-                                                "words": "Are you sure you want to go with this option. I can’t guarantee that you will get all the services you deserve",
+                                                "words": "Are you sure you want to go with this option. I can't guarantee that you will get all the services you deserve",
                                                 "voice": "Serena",
                                                 "rate": "180",
                                                 "delay": "0"
@@ -409,7 +409,7 @@
                                 "action": "http://[lenovo]:9102/api/qrcode",
                                 "params": {
                                     "query": {
-                                        "qrcode": "http://[lenovo]:3001/wa/puzzlegrid"
+                                        "qrcode": "http://[lenovo]:3001/wa/optionschooser"
                                     }
                                 },
                                 "method": "GET",
@@ -470,7 +470,7 @@
                                             },
                                             {
                                                 "words": "seems like this caravan model has yet to get the upgrade for complete local set up. ",
-                                                "voice": "Daniel",
+                                                "voice": "Serena",
                                                 "rate": "180",
                                                 "delay": "500"
                                             },
@@ -608,7 +608,7 @@
                                             {
                                                 "words": "It won't be a stylish marriage.",
                                                 "voice": "Serena",
-                                                "rate": "180",
+                                                "rate": "60",
                                                 "delay": "0"
                                             }
                                         ]

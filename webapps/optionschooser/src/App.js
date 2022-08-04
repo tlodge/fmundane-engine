@@ -4,7 +4,7 @@ import threestars from './3stars.svg';
 import bucket from './bucket.svg';
 import dedupdata from './dedupdata.svg';
 import storage from './storage.svg';
-
+import lock from './lock.svg';
 import './App.css';
 import {useEffect, useState, useRef} from 'react';
 import request from 'superagent';
@@ -72,7 +72,7 @@ function App() {
             </div>
         </div>
         <div className="lockincontainer">
-              <div onClick={trigger} className="lockin">Lock in choices</div>
+              <div onClick={trigger} className="lockin"><img className="imglock" src={lock}/>Lock in choices</div>
         </div>
         <div className="bottombox">
 

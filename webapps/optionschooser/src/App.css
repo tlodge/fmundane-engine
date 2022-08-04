@@ -102,7 +102,7 @@ body {
   flex-direction:column; 
   border: 2px solid rgb(0,255,123);
   width: calc(100vw - 30px);
-  margin: 5px 0px 5px 0px;
+  
   box-sizing: border-box;
 }
 
@@ -161,13 +161,13 @@ body {
   height: 100px;
 }
 
-.lockincontainer{
-  
-  width: 100%;
- 
+.imglock{
+  width: 30px;
+  margin-right: 10px;
+}
 
-  
-  
+.lockincontainer{
+  width: 100%;
 }
 
 .lockin{
@@ -175,9 +175,10 @@ body {
   font-weight: 700;
   width: calc(100vw -20px);
   background: #4C17BD;
-  margin: 0px 15px 5px 15px;
-  height: 50px;
+  margin: 0px 15px 8px 15px;
+  height: 70px;
   display: flex;
   align-items:center;
   justify-content:center;
+  cursor: pointer;
 }

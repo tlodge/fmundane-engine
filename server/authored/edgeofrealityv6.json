@@ -30,13 +30,13 @@
                                 "action": "http://[lenovo]:9107/api/arm/expand",
                                 "params": {},
                                 "method": "GET",
-                                "delay": 5000
+                                "delay": 0
                             },
                             {
                                 "action": "http://[lenovo]:9107/api/collapse",
                                 "params": {},
                                 "method": "GET",
-                                "delay": 10000
+                                "delay": 0
                             }
                         ],
                         [
@@ -110,7 +110,7 @@
                                 "action": "http://[lenovo]:9102/api/media/play",
                                 "params": {
                                     "query": {
-                                        "media": "TV.mp4",
+                                        "media": "countdown.mp4",
                                         "delay": 0
                                     }
                                 },
@@ -132,7 +132,7 @@
                                     }
                                 },
                                 "method": "POST",
-                                "delay": 0
+                                "delay": 10000
                             }
                         ]
                     ]

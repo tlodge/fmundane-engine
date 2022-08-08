@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // Arm connected to mac: dev/tty.usbserial-A10KME4J
 // Arm connected to lenovo: '/dev/ttyUSB0'
 // Pseudo test port: /dev/ptyp3
-
+//on mac -  /dev/cu.SOC
 const port = new SerialPort('/dev/ttyUSB0', {
     baudRate: 115200
 },  (err)=>{

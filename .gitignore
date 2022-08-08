@@ -8,3 +8,4 @@ drivers/media_driver/media/
 drivers/stt_driver/coqui-stt-0.9.3-models.pbmm
 drivers/stt_driver/coqui-stt-0.9.3-models.scorer
 media/
+!server/webapps/**/media

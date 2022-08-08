@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg"  width="100%" height="100%" viewBox="0 0 337 389" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
+    <g transform="matrix(1,0,0,1,-4749,-3930)">
+        <g id="Artboard7" transform="matrix(0.595745,0,0,1.07778,1996.04,-181.228)">
+            <rect x="4621.03" y="3814.54" width="564" height="360" style="fill:none;"/>
+            <g transform="matrix(0.680456,0,0,0.376124,2826.89,3575.87)">
+                <circle cx="3040.72" cy="1089.02" r="271" style="fill:none;stroke:rgb(34,215,150);stroke-width:47.55px;"/>
+            </g>
+            <g transform="matrix(0.745917,0,0,0.412308,2776.53,3696.03)">
+                <path d="M2950.22,681.83C2951.42,688.372 2952.06,695.122 2952.06,702.017C2952.06,763.096 2902.47,812.684 2841.39,812.684C2780.31,812.684 2730.72,763.096 2730.72,702.017C2730.72,640.939 2780.31,591.351 2841.39,591.351C2856.55,591.351 2871.01,594.408 2884.18,599.943C2875.81,609.361 2870.72,621.766 2870.72,635.351C2870.72,664.786 2894.62,688.684 2924.06,688.684C2933.56,688.684 2942.48,686.194 2950.22,681.83Z" style="fill:rgb(34,215,150);stroke:rgb(34,215,150);stroke-width:7.5px;"/>
+            </g>
+        </g>
+    </g>
+</svg>

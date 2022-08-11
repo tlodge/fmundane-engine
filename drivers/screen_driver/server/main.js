@@ -31,6 +31,13 @@ app.get('/api/home', (req,res) => {
 	res.status(200).send();
 })
 
+app.get('/api/web', (req, res)=>{
+    console.log("seen web");
+    const {snippet=""} = req.query;
+    send(JSON.stringify({type:"web", snippet}));
+	res.status(200).send();
+});
+
 app.get('/api/media/play',  (req,res) => {
     console.log("seen media play request");
     const {media="", delay=500} = req.query;

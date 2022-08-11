@@ -3,14 +3,15 @@ import AirQuality from "./AirQuality";
 import Media from "./Media";
 import MessageBox from "./MessageBox";
 import QRCode from "./QRCode";
+import WebSnippet from "./WebSnippet";
 import {useState, useEffect} from "react";
+import request from 'superagent';
+
 import {
-    BrowserRouter as Router,
     Switch,
     Route,
     useHistory,
   } from "react-router-dom";
-import { merge } from "d3";
 
 export default function Home() {
 
@@ -21,10 +22,23 @@ export default function Home() {
     const [qrcode, setQRCode] = useState("");
     const [delay, setDelay] = useState(500);
     const [message, setMessage] = useState("");
+    const [snippet, setSnippet] = useState("");
 
     const parts = window.location.href.replace("http://","").replace("https://","").split(":");
     const wsurl = `ws://${parts[0]}:${parts[1]}`;
     let _msgtimeout;
+
+    const fetchSnippet = (snippet)=>{
+      request.get(`/snippets/${snippet}`).then(res => {
+        const {text=""} = res;
+        console.log(text)
+        setSnippet(text);
+        history.push("/web");
+      })
+      .catch(err => {
+         console.log(err);
+      });
+    }
 
     useEffect(()=>{
        if (message.trim() == "")
@@ -55,6 +69,9 @@ export default function Home() {
             if (msg.type=="url"){
                 setMedia("");
                 history.push(msg.url);
+            }
+            if (msg.type=="web"){
+               fetchSnippet(msg.snippet);
             }
             if (msg.type=="message"){
                 setMessage(msg.message);
@@ -137,6 +154,15 @@ export default function Home() {
                     </>
                 )}
             />
+            <Route path="/web"
+              render = {(props)=>(
+                <>
+                <MessageBox message={message}/>
+                  <div style={{display:"flex", flex:"1 1 auto", alignItems:"center", justifyContent:"center"}}>    
+                  <WebSnippet {...props} snippet={snippet}/>
+                  </div>
+                  </>
+            )}/>
             <Route path="/"
                  render = {(props)=>(
                  <>

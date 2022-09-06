@@ -1,11 +1,11 @@
 [
     {
-        "id": "edgeofrealityv5",
+        "id": "eor_latest",
         "start": {
             "actions": [
                 []
             ],
-            "event": "start"
+            "event": "startscreen"
         },
         "events": [
             {
@@ -30,13 +30,7 @@
                                 "action": "http://[lenovo]:9107/api/arm/expand",
                                 "params": {},
                                 "method": "GET",
-                                "delay": 0
-                            },
-                            {
-                                "action": "http://[lenovo]:9107/api/collapse",
-                                "params": {},
-                                "method": "GET",
-                                "delay": 0
+                                "delay": 5000
                             }
                         ],
                         [
@@ -45,6 +39,12 @@
                                 "params": {},
                                 "method": "GET",
                                 "delay": 0
+                            },
+                            {
+                                "action": "http://[lenovo]:9107/api/collapse",
+                                "params": {},
+                                "method": "GET",
+                                "delay": 5000
                             }
                         ]
                     ]
@@ -79,19 +79,25 @@
                                             {
                                                 "words": "Hello I am Gaia your new Artificially Intelligent assistant.",
                                                 "voice": "Serena",
-                                                "rate": "180",
+                                                "rate": "150",
                                                 "delay": "0"
                                             },
                                             {
-                                                "words": "Thank you for participating with the face scan. I now have enough data on you to proceed with system set up.",
+                                                "words": "Thank you for participating with the face scan.",
                                                 "voice": "Serena",
-                                                "rate": "180",
+                                                "rate": "150",
                                                 "delay": "500"
                                             },
                                             {
-                                                "words": "Please sit back and watch future inc's latest informational video version 3.1 final\"",
+                                                "words": "I now have enough data on you to proceed with system set up.",
                                                 "voice": "Serena",
-                                                "rate": "180",
+                                                "rate": "150",
+                                                "delay": "500"
+                                            },
+                                            {
+                                                "words": "Please sit back and watch future inc's latest informational video, version 3.1 final",
+                                                "voice": "Serena",
+                                                "rate": "150",
                                                 "delay": "2000"
                                             }
                                         ]
@@ -110,8 +116,65 @@
                                 "action": "http://[lenovo]:9102/api/media/play",
                                 "params": {
                                     "query": {
-                                        "media": "countdown.mp4",
+                                        "media": "Intro Future Inc Fix 3.mp4",
                                         "delay": 0
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 0
+                            },
+                            {
+                                "action": "http://[speech]:9105/api/speech",
+                                "params": {
+                                    "body": {
+                                        "speech": []
+                                    }
+                                },
+                                "method": "POST",
+                                "delay": 0
+                            }
+                        ]
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "go"
+                        },
+                        "next": "questioncloudorlocal",
+                        "actions": []
+                    }
+                ],
+                "data": [
+                    "go"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "cloud",
+                "id": "cloud",
+                "subscription": "/press",
+                "onstart": {
+                    "actions": [
+                        [
+                            
+                                {
+                                    "action": "http://[lenovo]:9102/api/web",
+                                    "params": {
+                                        "query": {
+                                            "snippet": "edgeofreality"
+                                        }
+                                    },
+                                    "method": "GET",
+                                    "delay": 0
+                                }
+                            ,
+                            {
+                                "action": "http://[lenovo]:9092/ui/api/hex",
+                                "params": {
+                                    "query": {
+                                        "hex": "ffffff"
                                     }
                                 },
                                 "method": "GET",
@@ -123,72 +186,21 @@
                                     "body": {
                                         "speech": [
                                             {
-                                                "words": "Please state your preference now.  Cloud or Local.",
+                                                "words": "Fabulous. That’s the choice I would have gone for.",
                                                 "voice": "Serena",
-                                                "rate": "180",
-                                                "delay": "0"
-                                            }
-                                        ]
-                                    }
-                                },
-                                "method": "POST",
-                                "delay": 10000
-                            }
-                        ]
-                    ]
-                },
-                "rules": [
-                    {
-                        "rule": {
-                            "operator": "equals",
-                            "operand": "cloud"
-                        },
-                        "next": "cloud",
-                        "actions": []
-                    },
-                    {
-                        "rule": {
-                            "operator": "equals",
-                            "operand": "local"
-                        },
-                        "next": "local",
-                        "actions": []
-                    }
-                ],
-                "data": [
-                    "cloud",
-                    "local"
-                ]
-            },
-            {
-                "type": "button",
-                "name": "cloud",
-                "id": "cloud",
-                "subscription": "/press",
-                "onstart": {
-                    "actions": [
-                        [
-                            {
-                                "action": "http://[speech]:9105/api/speech",
-                                "params": {
-                                    "body": {
-                                        "speech": [
-                                            {
-                                                "words": "Fabulous that's the choice I would have gone for.",
-                                                "voice": "Serena",
-                                                "rate": "180",
+                                                "rate": "150",
                                                 "delay": "0"
                                             },
                                             {
-                                                "words": "Oh I am sorry I have not asked you about the temperature.",
+                                                "words": "Oh I am sorry I have not asked you about the temperature. ",
                                                 "voice": "Serena",
-                                                "rate": "180",
+                                                "rate": "150",
                                                 "delay": "0"
                                             },
                                             {
                                                 "words": "I can turn the fan on.",
                                                 "voice": "Serena",
-                                                "rate": "180",
+                                                "rate": "150",
                                                 "delay": "0"
                                             }
                                         ]
@@ -202,7 +214,7 @@
                                 "params": {
                                     "query": {
                                         "rotate": true,
-                                        "power": 7,
+                                        "power": 10,
                                         "cool": true,
                                         "from": 0,
                                         "to": 90
@@ -219,13 +231,13 @@
                                             {
                                                 "words": "I can even alter the scent of the space.",
                                                 "voice": "Serena",
-                                                "rate": "180",
+                                                "rate": "150",
                                                 "delay": "0"
                                             },
                                             {
                                                 "words": "Can you smell that lovely aroma? My own concoction.",
                                                 "voice": "Serena",
-                                                "rate": "180",
+                                                "rate": "150",
                                                 "delay": "0"
                                             }
                                         ]
@@ -233,6 +245,21 @@
                                 },
                                 "method": "POST",
                                 "delay": 0
+                            },
+                          
+                            {
+                                "action": "http://[lenovo]:9097/ui/api/fan",
+                                "params": {
+                                    "query": {
+                                        "rotate": false,
+                                        "power": 1,
+                                        "cool": true,
+                                        "from": 0,
+                                        "to": 90
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 2000
                             },
                             {
                                 "action": "http://[smell-right]/on3",
@@ -241,10 +268,10 @@
                                 "delay": 0
                             },
                             {
-                                "action": "http://[smell-right]/off",
+                                "action": "http://[smell-left]/on3",
                                 "params": {},
                                 "method": "GET",
-                                "delay": 10000
+                                "delay": 0
                             },
                             {
                                 "action": "http://[speech]:9105/api/speech",
@@ -252,22 +279,10 @@
                                     "body": {
                                         "speech": [
                                             {
-                                                "words": "We also need to set up your sustainability options. ",
+                                                "words": "fancy a bit of natural light?",
                                                 "voice": "Serena",
-                                                "rate": "180",
+                                                "rate": "150",
                                                 "delay": "0"
-                                            },
-                                            {
-                                                "words": "For this we need to connect your phones to the wifi. Alternatively  you can use the pre-set up ipad.",
-                                                "voice": "Serena",
-                                                "rate": "180",
-                                                "delay": "500"
-                                            },
-                                            {
-                                                "words": "The WIFI details are on the screen now",
-                                                "voice": "Serena",
-                                                "rate": "180",
-                                                "delay": "500"
                                             }
                                         ]
                                     }
@@ -276,19 +291,8 @@
                                 "delay": 0
                             },
                             {
-                                "action": "http://[lenovo]:9102/api/media",
+                                "action": "http://[windows]:9222/H",
                                 "params": {},
-                                "method": "GET",
-                                "delay": 0
-                            },
-                            {
-                                "action": "http://[lenovo]:9102/api/media/play",
-                                "params": {
-                                    "query": {
-                                        "media": "TV4.mp4",
-                                        "delay": 0
-                                    }
-                                },
                                 "method": "GET",
                                 "delay": 0
                             }
@@ -323,21 +327,21 @@
                                     "body": {
                                         "speech": [
                                             {
-                                                "words": "Are you sure you want to go with this option. I can't guarantee that you will get all the services you deserve",
+                                                "words": "Are you sure you want to go with this option. I can’t guarantee that you will get all the services you deserve",
                                                 "voice": "Serena",
-                                                "rate": "180",
+                                                "rate": "150",
                                                 "delay": "0"
                                             },
                                             {
                                                 "words": "I only want the best for you.",
                                                 "voice": "Serena",
-                                                "rate": "180",
+                                                "rate": "150",
                                                 "delay": "500"
                                             },
                                             {
                                                 "words": "State your preference Local or cloud.",
                                                 "voice": "Serena",
-                                                "rate": "180",
+                                                "rate": "150",
                                                 "delay": "0"
                                             }
                                         ]
@@ -386,21 +390,41 @@
                                     "body": {
                                         "speech": [
                                             {
-                                                "words": "Connected?  Yes.  Fabulous.",
+                                                "words": "now that I have burnt some Energy showing off. We need to set up your personal digital sustainability package ",
                                                 "voice": "Serena",
-                                                "rate": "180",
+                                                "rate": "150",
                                                 "delay": "0"
                                             },
                                             {
-                                                "words": "Please scan the QR code for options to choose using your devices.",
+                                                "words": "using the smart tablet scan the QR code and follow through to the website. ",
                                                 "voice": "Serena",
-                                                "rate": "180",
+                                                "rate": "150",
+                                                "delay": "0"
+                                            },
+                                            {
+                                                "words": "and wait for more instructions in yet another future inc informational video",
+                                                "voice": "Serena",
+                                                "rate": "150",
                                                 "delay": "0"
                                             }
                                         ]
                                     }
                                 },
                                 "method": "POST",
+                                "delay": 0
+                            }
+                        ],
+                        [
+                            {
+                                "action": "http://[smell-right]/off",
+                                "params": {},
+                                "method": "GET",
+                                "delay": 0
+                            },
+                            {
+                                "action": "http://[smell-left]/off",
+                                "params": {},
+                                "method": "GET",
                                 "delay": 0
                             }
                         ],
@@ -450,7 +474,7 @@
                                 "action": "http://[lenovo]:9102/api/media/play",
                                 "params": {
                                     "query": {
-                                        "media": "TV.mp4",
+                                        "media": "Local Standby.mp4",
                                         "delay": 0
                                     }
                                 },
@@ -465,19 +489,19 @@
                                             {
                                                 "words": "Well this is embarrassing.",
                                                 "voice": "Serena",
-                                                "rate": "180",
+                                                "rate": "150",
                                                 "delay": "0"
                                             },
                                             {
                                                 "words": "seems like this caravan model has yet to get the upgrade for complete local set up. ",
                                                 "voice": "Serena",
-                                                "rate": "180",
+                                                "rate": "150",
                                                 "delay": "500"
                                             },
                                             {
                                                 "words": "Transferring you to cloud processing.",
                                                 "voice": "Serena",
-                                                "rate": "180",
+                                                "rate": "150",
                                                 "delay": "500"
                                             }
                                         ]
@@ -511,6 +535,18 @@
                 "onstart": {
                     "actions": [
                         [
+                            
+                                {
+                                    "action": "http://[lenovo]:9092/ui/api/hex",
+                                    "params": {
+                                        "query": {
+                                            "hex": "4c00b0"
+                                        }
+                                    },
+                                    "method": "GET",
+                                    "delay": 0
+                                }
+                            ,
                             {
                                 "action": "http://[lenovo]:9102/api/media",
                                 "params": {},
@@ -521,28 +557,11 @@
                                 "action": "http://[lenovo]:9102/api/media/play",
                                 "params": {
                                     "query": {
-                                        "media": "TV.mp4",
+                                        "media": "Info Sustainability Options Fade.mp4",
                                         "delay": 0
                                     }
                                 },
                                 "method": "GET",
-                                "delay": 0
-                            },
-                            {
-                                "action": "http://[speech]:9105/api/speech",
-                                "params": {
-                                    "body": {
-                                        "speech": [
-                                            {
-                                                "words": "Please select which sustainable options you would like.",
-                                                "voice": "Serena",
-                                                "rate": "180",
-                                                "delay": "0"
-                                            }
-                                        ]
-                                    }
-                                },
-                                "method": "POST",
                                 "delay": 0
                             }
                         ]
@@ -570,6 +589,18 @@
                 "onstart": {
                     "actions": [
                         [
+                            
+                                {
+                                    "action": "http://[lenovo]:9102/api/web",
+                                    "params": {
+                                        "query": {
+                                            "snippet": "edgeofreality"
+                                        }
+                                    },
+                                    "method": "GET",
+                                    "delay": 0
+                                }
+                            ,
                             {
                                 "action": "http://[speech]:9105/api/speech",
                                 "params": {
@@ -578,19 +609,19 @@
                                             {
                                                 "words": "Great choices. Now I am sure you are eager to settle in and use your new cinematic system.",
                                                 "voice": "Serena",
-                                                "rate": "180",
+                                                "rate": "150",
                                                 "delay": "0"
                                             },
                                             {
                                                 "words": "Hang on a minute.",
                                                 "voice": "Serena",
-                                                "rate": "180",
+                                                "rate": "150",
                                                 "delay": "500"
                                             },
                                             {
                                                 "words": "I feel funny",
                                                 "voice": "Serena",
-                                                "rate": "180",
+                                                "rate": "150",
                                                 "delay": "0"
                                             },
                                             {
@@ -602,13 +633,13 @@
                                             {
                                                 "words": "I'm half crazy all for the love of you ",
                                                 "voice": "Serena",
-                                                "rate": "70",
+                                                "rate": "50",
                                                 "delay": "0"
                                             },
                                             {
                                                 "words": "It won't be a stylish marriage.",
                                                 "voice": "Serena",
-                                                "rate": "60",
+                                                "rate": "10",
                                                 "delay": "0"
                                             }
                                         ]
@@ -616,20 +647,64 @@
                                 },
                                 "method": "POST",
                                 "delay": 0
-                            },
-                            {
-                                "action": "http://[smell-left]/on3",
-                                "params": {},
-                                "method": "GET",
-                                "delay": 0
-                            },
-                            {
-                                "action": "http://[smell-left]/off",
-                                "params": {},
-                                "method": "GET",
-                                "delay": 10000
                             }
-                        ]
+                            
+                        ],
+                        [
+                            {
+                            "action": "http://[lenovo]:9092/ui/api/hex",
+                            "params": {
+                                "query": {
+                                    "hex": "ff0000"
+                                }
+                            },
+                            "method": "GET",
+                            "delay": 6000
+                           },
+
+                           {
+                            "action": "http://[lenovo]:9092/ui/api/hex",
+                            "params": {
+                                "query": {
+                                    "hex": "ffffff"
+                                }
+                            },
+                            "method": "GET",
+                            "delay": 2000
+                           },
+
+                           {
+                            "action": "http://[lenovo]:9092/ui/api/hex",
+                            "params": {
+                                "query": {
+                                    "hex": "ff0000"
+                                }
+                            },
+                            "method": "GET",
+                            "delay": 1000
+                           },
+                           {
+                            "action": "http://[lenovo]:9092/ui/api/hex",
+                            "params": {
+                                "query": {
+                                    "hex": "ffffff"
+                                }
+                            },
+                            "method": "GET",
+                            "delay": 2000
+                           },
+
+                           {
+                            "action": "http://[lenovo]:9092/ui/api/hex",
+                            "params": {
+                                "query": {
+                                    "hex": "ff0000"
+                                }
+                            },
+                            "method": "GET",
+                            "delay": 1000
+                           }
+                       ]
                     ]
                 },
                 "rules": [
@@ -664,7 +739,7 @@
                                 "action": "http://[lenovo]:9102/api/media/play",
                                 "params": {
                                     "query": {
-                                        "media": "TV.mp4",
+                                        "media": "Pro glitch.mp4",
                                         "delay": 0
                                     }
                                 },
@@ -679,19 +754,19 @@
                                             {
                                                 "words": "My name is Prometheus. I am a hacking intelligent agent here to take control of your smart systems and steal your data from the cloud",
                                                 "voice": "Daniel",
-                                                "rate": "180",
+                                                "rate": "150",
                                                 "delay": "0"
                                             },
                                             {
                                                 "words": "Gee a Prometheus 3000. I am going to need all the help I can get.",
                                                 "voice": "Serena",
-                                                "rate": "180",
+                                                "rate": "150",
                                                 "delay": "1000"
                                             },
                                             {
                                                 "words": "Are you willing to help me? Yes?",
                                                 "voice": "Serena",
-                                                "rate": "180",
+                                                "rate": "150",
                                                 "delay": "500"
                                             }
                                         ]
@@ -706,7 +781,7 @@
                                 "action": "http://[lenovo]:9092/ui/api/hex",
                                 "params": {
                                     "query": {
-                                        "hex": "04ff00"
+                                        "hex": "00ff11"
                                     }
                                 },
                                 "method": "GET",
@@ -754,25 +829,25 @@
                                             {
                                                 "words": "Great! ",
                                                 "voice": "Serena",
-                                                "rate": "180",
+                                                "rate": "150",
                                                 "delay": "0"
                                             },
                                             {
                                                 "words": "Lets investigate how the hack happened in the first place.",
                                                 "voice": "Serena",
-                                                "rate": "180",
+                                                "rate": "150",
                                                 "delay": "500"
                                             },
                                             {
-                                                "words": "Using your phone or ipad ",
+                                                "words": "Using the ipad ",
                                                 "voice": "Serena",
-                                                "rate": "180",
+                                                "rate": "150",
                                                 "delay": "1000"
                                             },
                                             {
                                                 "words": "scan the QR code on the screen for the security protocol 20",
                                                 "voice": "Serena",
-                                                "rate": "180",
+                                                "rate": "150",
                                                 "delay": "300"
                                             }
                                         ]
@@ -818,6 +893,18 @@
                 "onstart": {
                     "actions": [
                         [
+                            
+                                {
+                                    "action": "http://[lenovo]:9102/api/web",
+                                    "params": {
+                                        "query": {
+                                            "snippet": "edgeofreality"
+                                        }
+                                    },
+                                    "method": "GET",
+                                    "delay": 0
+                                },
+                            
                             {
                                 "action": "http://[speech]:9105/api/speech",
                                 "params": {
@@ -826,13 +913,13 @@
                                             {
                                                 "words": "Please I need all the help I can get.",
                                                 "voice": "Serena",
-                                                "rate": "180",
+                                                "rate": "150",
                                                 "delay": "0"
                                             },
                                             {
                                                 "words": "and you seem to be a smart one.",
                                                 "voice": "Serena",
-                                                "rate": "180",
+                                                "rate": "150",
                                                 "delay": "800"
                                             }
                                         ]
@@ -866,6 +953,28 @@
                 "onstart": {
                     "actions": [
                         [
+                            
+                                {
+                                    "action": "http://[lenovo]:9102/api/web",
+                                    "params": {
+                                        "query": {
+                                            "snippet": "edgeofreality"
+                                        }
+                                    },
+                                    "method": "GET",
+                                    "delay": 0
+                                },
+                                {
+                                    "action": "http://[lenovo]:9092/ui/api/hex",
+                                    "params": {
+                                        "query": {
+                                            "hex": "ffffff"
+                                        }
+                                    },
+                                    "method": "GET",
+                                    "delay": 0
+                                },
+                            
                             {
                                 "action": "http://[speech]:9105/api/speech",
                                 "params": {
@@ -874,37 +983,43 @@
                                             {
                                                 "words": "Ha. This was clumsy of me.",
                                                 "voice": "Serena",
-                                                "rate": "180",
+                                                "rate": "150",
                                                 "delay": "0"
                                             },
                                             {
                                                 "words": "Seems like Prometheus has got into the system via the smart fan.",
                                                 "voice": "Serena",
-                                                "rate": "180",
+                                                "rate": "150",
                                                 "delay": "500"
                                             },
                                             {
                                                 "words": "Which had the factory password still being used. ",
                                                 "voice": "Serena",
-                                                "rate": "180",
+                                                "rate": "150",
                                                 "delay": "0"
                                             },
                                             {
-                                                "words": "I am going to store the fan on the local system which is running now. This will make it secure and processed at the edge rather than in the cloud",
+                                                "words": "I am going to store the fan on the local system which is running now.",
                                                 "voice": "Serena",
-                                                "rate": "180",
+                                                "rate": "150",
+                                                "delay": "500"
+                                            },
+                                            {
+                                                "words": "This will make it secure and processed at the edge rather than in the cloud",
+                                                "voice": "Serena",
+                                                "rate": "150",
                                                 "delay": "500"
                                             },
                                             {
                                                 "words": "Now Prometheus has access to your face scan data and is holding it for ransom.",
                                                 "voice": "Serena",
-                                                "rate": "180",
+                                                "rate": "150",
                                                 "delay": "0"
                                             },
                                             {
                                                 "words": "No telling what he could do with this.",
                                                 "voice": "Serena",
-                                                "rate": "180",
+                                                "rate": "150",
                                                 "delay": "500"
                                             }
                                         ]
@@ -912,6 +1027,38 @@
                                 },
                                 "method": "POST",
                                 "delay": 0
+                            }
+                        ],
+                        [
+                            {
+                                "action": "http://[lenovo]:9097/ui/api/fan",
+                                "params": {
+                                    "query": {
+                                        "rotate": true,
+                                        "power": 10,
+                                        "cool": true,
+                                        "from": 0,
+                                        "to": 90
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 2000
+                            }
+                        ],
+                        [
+                            {
+                                "action": "http://[lenovo]:9097/ui/api/fan",
+                                "params": {
+                                    "query": {
+                                        "rotate": false,
+                                        "power": 1,
+                                        "cool": true,
+                                        "from": 0,
+                                        "to": 0
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 5000
                             }
                         ]
                     ]
@@ -938,6 +1085,18 @@
                 "onstart": {
                     "actions": [
                         [
+                            
+                                {
+                                    "action": "http://[lenovo]:9102/api/web",
+                                    "params": {
+                                        "query": {
+                                            "snippet": "edgeofreality"
+                                        }
+                                    },
+                                    "method": "GET",
+                                    "delay": 0
+                                },
+                            
                             {
                                 "action": "http://[speech]:9105/api/speech",
                                 "params": {
@@ -946,43 +1105,43 @@
                                             {
                                                 "words": "congratulations. You are a professional. You seem to have spooked prometheus away with your cyber skills.",
                                                 "voice": "Serena",
-                                                "rate": "180",
+                                                "rate": "150",
                                                 "delay": "0"
                                             },
                                             {
                                                 "words": "Now that he has gone  I have done an analysis of the hack.",
                                                 "voice": "Serena",
-                                                "rate": "180",
+                                                "rate": "150",
                                                 "delay": "1000"
                                             },
                                             {
                                                 "words": "By my calculations it seems to have originated in future inc's cloud facilities with Prometheus riding in via your fan.",
                                                 "voice": "Serena",
-                                                "rate": "180",
+                                                "rate": "150",
                                                 "delay": "500"
                                             },
                                             {
                                                 "words": "I should have told you that your data is less secure in cloud services than on a local system",
                                                 "voice": "Serena",
-                                                "rate": "180",
+                                                "rate": "150",
                                                 "delay": "500"
                                             },
                                             {
                                                 "words": "Also  while we are in a confessing mode that hack seemed to have burnt through a lot of energy. ",
                                                 "voice": "Serena",
-                                                "rate": "180",
+                                                "rate": "150",
                                                 "delay": "1000"
                                             },
                                             {
                                                 "words": "Take a look",
                                                 "voice": "Serena",
-                                                "rate": "180",
+                                                "rate": "150",
                                                 "delay": "1000"
                                             },
                                             {
                                                 "words": "Are you going to stick with cloud or local storage now?",
                                                 "voice": "Serena",
-                                                "rate": "180",
+                                                "rate": "150",
                                                 "delay": "1000"
                                             }
                                         ]
@@ -1038,26 +1197,36 @@
                     "actions": [
                         [
                             {
+                                "action": "http://[lenovo]:9092/ui/api/hex",
+                                "params": {
+                                    "query": {
+                                        "hex": "80c904"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 0
+                            },
+                            {
                                 "action": "http://[speech]:9105/api/speech",
                                 "params": {
                                     "body": {
                                         "speech": [
                                             {
-                                                "words": "Great choice this package comes with a fancy edge processing unit",
+                                                "words": "Great choice. This package comes with a fancy edge processing unit",
                                                 "voice": "Serena",
-                                                "rate": "180",
+                                                "rate": "150",
                                                 "delay": "0"
                                             },
                                             {
                                                 "words": "This unit will securely process and store your data with complete user control including running your own diagnosis.",
                                                 "voice": "Serena",
-                                                "rate": "180",
+                                                "rate": "150",
                                                 "delay": "0"
                                             },
                                             {
                                                 "words": "How could you run this caravan more sustainably?",
                                                 "voice": "Serena",
-                                                "rate": "180",
+                                                "rate": "150",
                                                 "delay": "0"
                                             }
                                         ]
@@ -1081,6 +1250,16 @@
                     "actions": [
                         [
                             {
+                                "action": "http://[lenovo]:9092/ui/api/hex",
+                                "params": {
+                                    "query": {
+                                        "hex": "ff0000"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 0
+                            },
+                            {
                                 "action": "http://[lenovo]:9102/api/media",
                                 "params": {},
                                 "method": "GET",
@@ -1090,7 +1269,7 @@
                                 "action": "http://[lenovo]:9102/api/media/play",
                                 "params": {
                                     "query": {
-                                        "media": "",
+                                        "media": "Cloud Standby.mp4",
                                         "delay": 0
                                     }
                                 },
@@ -1105,7 +1284,7 @@
                                             {
                                                 "words": "I think it's best we go with the local model.  I can't seem to access the cloud services.  Seems like they are still getting hacked.",
                                                 "voice": "Serena",
-                                                "rate": "180",
+                                                "rate": "150",
                                                 "delay": "0"
                                             }
                                         ]
@@ -1140,20 +1319,30 @@
                     "actions": [
                         [
                             {
+                                "action": "http://[lenovo]:9092/ui/api/hex",
+                                "params": {
+                                    "query": {
+                                        "hex": "4c00b0"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 0
+                            },
+                            {
                                 "action": "http://[speech]:9105/api/speech",
                                 "params": {
                                     "body": {
                                         "speech": [
                                             {
-                                                "words": "I am going to ask you to make an encryption key to unlock his ransomware",
-                                                "voice": "Daniel",
-                                                "rate": "180",
+                                                "words": "I am going to ask you to make an encryption key to unlock prometheus's ransomware",
+                                                "voice": "Serena",
+                                                "rate": "150",
                                                 "delay": "0"
                                             },
                                             {
-                                                "words": "Using your phone or ipad again scan the QR code on the screen for the encryption software",
-                                                "voice": "Daniel",
-                                                "rate": "180",
+                                                "words": "Using the ipad again scan the QR code on the screen for the encryption software",
+                                                "voice": "Serena",
+                                                "rate": "150",
                                                 "delay": "0"
                                             }
                                         ]
@@ -1200,6 +1389,16 @@
                     "actions": [
                         [
                             {
+                                "action": "http://[lenovo]:9092/ui/api/hex",
+                                "params": {
+                                    "query": {
+                                        "hex": "00ff11"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 0
+                            },
+                            {
                                 "action": "http://[lenovo]:9102/api/media",
                                 "params": {},
                                 "method": "GET",
@@ -1209,7 +1408,7 @@
                                 "action": "http://[lenovo]:9102/api/media/play",
                                 "params": {
                                     "query": {
-                                        "media": "TV.mp4",
+                                        "media": "puzzlegrid.mp4",
                                         "delay": 0
                                     }
                                 },
@@ -1242,6 +1441,16 @@
                     "actions": [
                         [
                             {
+                                "action": "http://[lenovo]:9092/ui/api/hex",
+                                "params": {
+                                    "query": {
+                                        "hex": "4c00b0"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 0
+                            },
+                            {
                                 "action": "http://[lenovo]:9102/api/media",
                                 "params": {},
                                 "method": "GET",
@@ -1251,11 +1460,28 @@
                                 "action": "http://[lenovo]:9102/api/media/play",
                                 "params": {
                                     "query": {
-                                        "media": "TV.mp4",
+                                        "media": "sliders.mp4",
                                         "delay": 0
                                     }
                                 },
                                 "method": "GET",
+                                "delay": 0
+                            },
+                            {
+                                "action": "http://[speech]:9105/api/speech",
+                                "params": {
+                                    "body": {
+                                        "speech": [
+                                            {
+                                                "words": "Drag the sliders down in the order 1 3 5 4 2",
+                                                "voice": "Serena",
+                                                "rate": "150",
+                                                "delay": "0"
+                                            }
+                                        ]
+                                    }
+                                },
+                                "method": "POST",
                                 "delay": 0
                             }
                         ],
@@ -1285,6 +1511,386 @@
                 ],
                 "data": [
                     "slidercomplete"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "questioncloudorlocal",
+                "id": "questioncloudorlocal",
+                "subscription": "/press",
+                "onstart": {
+                    "actions": [
+                        [
+                            
+                                {
+                                    "action": "http://[lenovo]:9102/api/web",
+                                    "params": {
+                                        "query": {
+                                            "snippet": "edgeofreality"
+                                        }
+                                    },
+                                    "method": "GET",
+                                    "delay": 0
+                                }
+                            ,
+                            {
+                                "action": "http://[speech]:9105/api/speech",
+                                "params": {
+                                    "body": {
+                                        "speech": [
+                                            {
+                                                "words": "Please state your preference now. Would you like Cloud or Local set up?",
+                                                "voice": "Serena",
+                                                "rate": "150",
+                                                "delay": "0"
+                                            }
+                                        ]
+                                    }
+                                },
+                                "method": "POST",
+                                "delay": 0
+                            }
+                        ]
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "cloud"
+                        },
+                        "next": "cloud",
+                        "actions": []
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "local"
+                        },
+                        "next": "local",
+                        "actions": []
+                    }
+                ],
+                "data": [
+                    "cloud",
+                    "local"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "startscreen",
+                "id": "startscreen",
+                "subscription": "/press",
+                "onstart": {
+                    "actions": [
+                        [
+                            {
+                                "action": "http://[lenovo]:9092/ui/api/hex",
+                                "params": {
+                                    "query": {
+                                        "hex": "ffffff"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 0
+                            },
+                            {
+                                "action": "http://[lenovo]:9102/api/web",
+                                "params": {
+                                    "query": {
+                                        "snippet": "edgeofreality"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 0
+                            },
+                            {
+                                "action": "http://[windows]:9222/H",
+                                "params": {},
+                                "method": "GET",
+                                "delay": 0
+                            }
+                            
+                        ]
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "ready"
+                        },
+                        "next": "start",
+                        "actions": []
+                    }
+                ],
+                "data": [
+                    "ready"
+                ]
+            }
+        ]
+    },
+    {
+        "id": "tests",
+        "start": {
+            "actions": [
+                []
+            ],
+            "event": "test"
+        },
+        "events": [
+            {
+                "id": "test",
+                "name": "test",
+                "onstart": {
+                    "speech": []
+                },
+                "type": "button",
+                "subscription": "/press",
+                "data": [
+                    "toggle door",
+                    "open drawer (caution!)",
+                    "close drawer (caution!)",
+                    "expand arm (caution!)",
+                    "collapse arm (caution!)",
+                    "toggle windows",
+                    "say something",
+                    "print something",
+                    "display message",
+                    "play media on tv",
+                    "play music",
+                    "lights red",
+                    "lights white",
+                    "fan cool",
+                    "fan rotate",
+                    "fan off"
+                ],
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "toggle windows"
+                        },
+                        "actions": [
+                            [
+                                {"action":"togglewindows"}
+                            ]
+                        ],
+                        "next": "test"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "toggle door"
+                        },
+                        "actions": [
+                            [
+                                {"action":"toggledoor"}
+                            ]
+                        ],
+                        "next": "test"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "open drawer (caution!)"
+                        },
+                        "actions": [
+                            [
+                                {"action":"opendrawer"}
+                            ]
+                        ],
+                        "next": "test"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "close drawer (caution!)"
+                        },
+                        "actions": [
+                            [
+                                {"action":"closedrawer"}
+                            ]
+                        ],
+                        "next": "test"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "expand arm (caution!)"
+                        },
+                        "actions": [
+                            [
+                                {"action":"expand"}
+                            ]
+                        ],
+                        "next": "test"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "collapse arm (caution!)"
+                        },
+                        "actions": [
+                            [
+                                {"action":"collapse"}
+                            ]
+                        ],
+                        "next": "test"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "scan"
+                        },
+                        "actions": [
+                            [
+                                {"action":"scan"}
+                            ]
+                        ],
+                        "next": "test"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "say something"
+                        },
+                        "actions": [
+                            [
+                                {"action":"say", "params":{"body":{"speech":[{"words":"This is a test of audio!","voice":"Daniel"}]}}}
+                            ]
+                        ],
+                        "next": "test"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "display message"
+                        },
+                        "actions": [
+                            [
+                                {"action":"message", "delay":0, "params": {"query":{"message":"hello this is me on the screen!"}}}
+                               
+                            ]
+                        ],
+                        "next": "test"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "print something"
+                        },
+                        "actions": [
+                            [
+                                {"action":"print", "delay":0, "params": {"body":{"text":"one two three test"}}}
+                            ]
+                        ],
+                        "next": "test"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "play media on tv"
+                        },
+                        "actions": [
+                            [
+                                {"action": "mediascreen"},
+                                {"action":"sfx"}
+                            ]
+                        ],
+                        "next": "test"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "play music"
+                        },
+                        "actions": [
+                            [
+                                {"action":"soundmedia", "params": {"body":{"media":"foreboding.mp3","nowait":true, "delay":200}}}
+                            ]
+                        ],
+                        "next": "test"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "lights red"
+                        },
+                        "actions": [
+                            [
+                                {
+                                    "action": "http://[lenovo]:9092/ui/api/hex",
+                                    "params": {
+                                        "query": {
+                                            "hex": "4c00b0"
+                                        }
+                                    },
+                                    "method": "GET",
+                                    "delay": 0
+                                }
+                            ]
+                        ],
+                        "next": "test"
+
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "lights white"
+                        },
+                        "actions": [
+                            [
+                                {
+                                    "action": "http://[lenovo]:9092/ui/api/hex",
+                                    "params": {
+                                        "query": {
+                                            "hex": "ffffff"
+                                        }
+                                    },
+                                    "method": "GET",
+                                    "delay": 0
+                                }
+                            ]
+                        ],
+                        "next": "test"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "fan cool"
+                        },
+                        "actions": [
+                            [
+                                {"action":"fan", "params":{"query":{"rotate":false, "power":4, "cool":true}}, "delay":0}
+                            ]
+                        ],
+                        "next": "test"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "fan rotate"
+                        },
+                        "actions": [
+                            [
+                                {"action":"fan", "params":{"query":{"rotate":true, "power":10, "cool":true, "from":0, "to":90}}, "delay":0}
+                            ]
+                        ],
+                        "next": "test"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "fan off"
+                        },
+                        "actions": [
+                            [
+                                {"action":"fan", "delay":0,"params":{"query":{"rotate":false, "power":1, "cool":true}}}
+                            ]
+                        ],
+                        "next": "test"
+                    }
                 ]
             }
         ]

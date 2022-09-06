@@ -40,8 +40,8 @@ function App() {
                         <img className="imgoption" src={storage}/>
                       </div>
                   </div>
-                  <div className="starrating">
-                  <div className="innerborder" style={{background: selected["option1"] ? "#4C17BD":"transparent"}}>
+                  <div onClick={()=>_toggleSelection("star1")} className="starrating">
+                  <div className="innerborder" style={{background: selected["star1"] ? "#4C17BD":"transparent"}}>
                     <img  className="imgstar" src={threestars}/>
                     </div>
                   </div>
@@ -52,8 +52,8 @@ function App() {
                       <img className="imgoption" src={bucket}/>
                     </div>
                   </div>
-                  <div className="starrating">
-                  <div className="innerborder" style={{background: selected["option2"] ? "#4C17BD":"transparent"}}>
+                  <div onClick={()=>_toggleSelection("star2")} className="starrating">
+                  <div className="innerborder" style={{background: selected["star2"] ? "#4C17BD":"transparent"}}>
                     <img  className="imgstar" src={twostars}/>
                   </div>
                   </div>
@@ -64,8 +64,8 @@ function App() {
                     <img className="imgoption" src={dedupdata}/>
                     </div>
                   </div>
-                  <div className="starrating">
-                  <div className="innerborder" style={{background: selected["option3"] ? "#4C17BD":"transparent"}}>
+                  <div onClick={()=>_toggleSelection("star3")} className="starrating">
+                  <div className="innerborder" style={{background: selected["star3"] ? "#4C17BD":"transparent"}}>
                     <img className="imgstar" src={onestar}/>
                     </div>
                   </div>

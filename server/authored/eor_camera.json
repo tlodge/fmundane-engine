@@ -39,12 +39,6 @@
                                 "params": {},
                                 "method": "GET",
                                 "delay": 0
-                            },
-                            {
-                                "action": "http://[lenovo]:9107/api/collapse",
-                                "params": {},
-                                "method": "GET",
-                                "delay": 5000
                             }
                         ]
                     ]
@@ -132,6 +126,14 @@
                                 },
                                 "method": "POST",
                                 "delay": 0
+                            }
+                        ],
+                        [
+                            {
+                                    "action": "http://[lenovo]:9107/api/collapse",
+                                    "params": {},
+                                    "method": "GET",
+                                    "delay": 0    
                             }
                         ]
                     ]

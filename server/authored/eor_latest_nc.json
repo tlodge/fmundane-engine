@@ -41,10 +41,10 @@
                                 "delay": 0
                             },
                             {
-                                "action": "http://[lenovo]:9107/api/collapse",
+                                "action": "http://[lenovo]:9107/api/arm/collapse",
                                 "params": {},
                                 "method": "GET",
-                                "delay": 5000
+                                "delay": 15000
                             }
                         ]
                     ]
@@ -1224,7 +1224,13 @@
                                                 "delay": "0"
                                             },
                                             {
-                                                "words": "How could you run this caravan more sustainably?",
+                                                "words": "Thanks for engaging in this experience exploring sustainability and security at the edge.",
+                                                "voice": "Serena",
+                                                "rate": "150",
+                                                "delay": "800"
+                                            },
+                                            {
+                                                "words": "Have a nice day and please exit through the gift shop",
                                                 "voice": "Serena",
                                                 "rate": "150",
                                                 "delay": "0"

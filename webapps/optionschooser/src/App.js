@@ -37,7 +37,7 @@ function App() {
             <div className="boxrow">
                   <div onClick={()=>_toggleSelection("option1")} className="option" >
                       <div className="innerborder" style={{background: selected["option1"] ? "#4C17BD":"transparent"}}>
-                        <img className="imgoption" src={storage}/>
+                        <img className="imgoption" src={bucket}/>
                       </div>
                   </div>
                   <div onClick={()=>_toggleSelection("star1")} className="starrating">
@@ -49,7 +49,7 @@ function App() {
             <div className="boxrow">
                   <div onClick={()=>_toggleSelection("option2")} className="option">
                     <div className="innerborder" style={{background: selected["option2"] ? "#4C17BD":"transparent"}}>
-                      <img className="imgoption" src={bucket}/>
+                      <img className="imgoption" src={storage}/>
                     </div>
                   </div>
                   <div onClick={()=>_toggleSelection("star2")} className="starrating">

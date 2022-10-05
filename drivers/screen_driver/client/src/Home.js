@@ -4,6 +4,7 @@ import Media from "./Media";
 import MessageBox from "./MessageBox";
 import QRCode from "./QRCode";
 import WebSnippet from "./WebSnippet";
+import FullScreenImage from "./FullScreenImage";
 import {useState, useEffect} from "react";
 import request from 'superagent';
 
@@ -23,6 +24,7 @@ export default function Home() {
     const [delay, setDelay] = useState(500);
     const [message, setMessage] = useState("");
     const [snippet, setSnippet] = useState("");
+    const [image, setImage] = useState("");
 
     const parts = window.location.href.replace("http://","").replace("https://","").split(":");
     const wsurl = `ws://${parts[0]}:${parts[1]}`;
@@ -66,28 +68,34 @@ export default function Home() {
           socket.addEventListener('message', function (event) {
             const msg = JSON.parse(event.data);
             console.log(msg);
-            if (msg.type=="url"){
+            if (msg.type=="url"){ //go to a specific url
                 setMedia("");
                 history.push(msg.url);
             }
-            if (msg.type=="web"){
+            if (msg.type=="web"){ //show a snippet of html(5)
                fetchSnippet(msg.snippet);
             }
-            if (msg.type=="message"){
+            if (msg.type=="message"){ //pop up a message on the screen
                 setMessage(msg.message);
             }
-            if (msg.type=="camera"){
+            if (msg.type=="camera"){ // show a webcam image
                 setScan(msg.state=="scan")
             }
-            if (msg.type=="dyson"){
+            if (msg.type=="dyson"){ //show the data from dyson fan
                 setDyson(msg.data);
             }
-            if (msg.type=="qrcode"){
+            if (msg.type=="qrcode"){ //show a qrcode
                 setQRCode(msg.data);
                 history.push("/qrcode");
             }
+            if (msg.type=="image"){ //show an image
+                setImage(`http://locahost:3001/media/${msg.data}`);
+                history.push("/image");
+            }
             if (msg.type=="media"){
-             
+              //added 4 Oct 2022
+              //set the screen to media screen first if not there already
+              history.push("/media");
               setMedia(msg.media);
               try{
                 setDelay(Number(msg.delay));
@@ -163,12 +171,21 @@ export default function Home() {
                   </div>
                   </>
             )}/>
+            <Route path="/image"
+              render = {(props)=>(
+                <>
+                <MessageBox message={message}/>
+                  <div style={{display:"flex", flex:"1 1 auto", alignItems:"center", justifyContent:"center"}}>    
+                  <FullScreenImage {...props} src={image}/>
+                  </div>
+                  </>
+            )}/>
             <Route path="/"
                  render = {(props)=>(
                  <>
                    <MessageBox message={message}/>
                   <div style={{width:"100%"}}>
-                    <img  style={{margin:300}} src="./flogo.svg"></img>
+                    <img style={{margin:300}} src="./flogo.svg"></img>
                   </div>
                 </>
              )}

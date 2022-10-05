@@ -5,6 +5,7 @@ import Navigation from './Navigation';
 import Tree from './Tree';
 import useWindowDimensions from '../../hooks/useWindowDimensions';
 import { Importer } from './Importer';
+import { Uploader } from './Uploader';
 import request from 'superagent';
 import superagent from 'superagent';
 
@@ -33,6 +34,7 @@ export function Experience() {
   const rendering = useSelector(selectRendering);
   const [visibleTrees, setVisibleTrees] = useState({});
   const [create, setCreate] = useState(false);
+  const [upload, setUpload] = useState(false);
 
   const { height } = useWindowDimensions();
 
@@ -51,6 +53,14 @@ export function Experience() {
       setCreate(value);
     }else{
       setCreate(!create);
+    }
+  }
+
+  const toggleUploadMedia = (value)=>{
+    if (value != undefined){
+      setUpload(value);
+    }else{
+      setUpload(!upload);
     }
   }
 
@@ -146,15 +156,16 @@ export function Experience() {
     dispatch(renderSpeech());
   }
 
+  //importer imports twine!
   return (
       <div>
-        <Navigation rendering={rendering} authored={authored} start={resetExperience} toggleCreate={toggleCreate} twineExport={exportTwine} renderSpeech={_renderSpeech}/>
+        <Navigation rendering={rendering} authored={authored} start={resetExperience} toggleCreate={toggleCreate} toggleUploadMedia={toggleUploadMedia} twineExport={exportTwine} renderSpeech={_renderSpeech}/>
         <div className="flex row mb-4 border-b-2 flex-wrap" >
         {list}
        
         </div>
-       
         {create && <Importer save={(name,json)=>save(name,json)} cancel={()=>toggleCreate(false)}/>}
+        {upload && <Uploader close={()=>toggleUploadMedia(false)}/>}
       </div>
   );
   

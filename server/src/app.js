@@ -7,6 +7,8 @@ import path from 'path';
 
 import indexRouter from './routes/index';
 import authorRouter from './routes/author';
+import placeholderRouter from './routes/placeholder';
+
 import { execFile} from 'child_process';
 import fs from 'fs';
 
@@ -18,12 +20,14 @@ app.use(cookieParser());
 
 app.use('/event', indexRouter);
 app.use('/author', authorRouter);
+app.use('/placeholders', placeholderRouter);
 
 app.use(express.static(path.join(__dirname, 'client')));
 app.use(express.static(path.join(__dirname, 'author')));
 app.use('/twine', express.static(path.join(__dirname, 'twine')));
 app.use('/wa', express.static(path.join(__dirname, '..', 'webapps')));
 
+console.log(path.join(__dirname, '..', '..', 'placeholders'))
 console.log("dirname is", __dirname);
 
 app.use(fileUpload({createParentPath: true, limits: { 

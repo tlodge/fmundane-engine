@@ -26,6 +26,7 @@ app.use(express.static(path.join(__dirname, 'client')));
 app.use(express.static(path.join(__dirname, 'author')));
 app.use('/twine', express.static(path.join(__dirname, 'twine')));
 app.use('/wa', express.static(path.join(__dirname, '..', 'webapps')));
+app.use('/assets', express.static(path.join(__dirname, '..', '..', 'media')));
 
 console.log(path.join(__dirname, '..', '..', 'placeholders'))
 console.log("dirname is", __dirname);

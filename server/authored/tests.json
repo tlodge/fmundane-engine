@@ -1,0 +1,98 @@
+[
+    {
+        "id": "tests",
+        "start": {
+            "actions": [
+                []
+            ],
+            "event": "start"
+        },
+        "events": [
+            {
+                "type": "button",
+                "name": "start",
+                "id": "start",
+                "subscription": "/press",
+                "onstart": {
+                    "actions": [
+                        [
+                            {
+                                "action": "http://[lenovo]:9102/api/media/play",
+                                "params": {
+                                    "query": {
+                                        "media": "TV.mp4"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 0
+                            }
+                        ],
+                        [
+                            {
+                                "action": "http://[speech]:9105/api/speech",
+                                "params": {
+                                    "body": {
+                                        "speech": [
+                                            {
+                                                "words": "Welcome this is me!",
+                                                "voice": "Daniel",
+                                                "rate": "180",
+                                                "delay": "0"
+                                            }
+                                        ]
+                                    }
+                                },
+                                "method": "POST",
+                                "delay": 0
+                            }
+                        ]
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "next"
+                        },
+                        "next": "saythings",
+                        "actions": []
+                    }
+                ],
+                "data": [
+                    "next"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "saythings",
+                "id": "saythings",
+                "subscription": "/press",
+                "onstart": {
+                    "actions": [
+                        [
+                            {
+                                "action": "http://[speech]:9105/api/speech",
+                                "params": {
+                                    "body": {
+                                        "speech": [
+                                            {
+                                                "words": "This is a person talking to you |address|",
+                                                "voice": "Daniel",
+                                                "rate": "180",
+                                                "delay": "0"
+                                            }
+                                        ]
+                                    }
+                                },
+                                "method": "POST",
+                                "delay": 0
+                            }
+                        ]
+                    ]
+                },
+                "rules": [],
+                "data": []
+            }
+        ]
+    }
+]

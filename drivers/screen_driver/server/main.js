@@ -65,9 +65,9 @@ app.get('/api/qrcode', (req,res) => {
 })
 
 app.get('/api/image', (req,res) => {
-    console.log("seen image request!");
-    const {src} = req.query;
-    send(JSON.stringify({type:"image", data:src}));
+    console.log("seen image request!", req.query);
+    const {image} = req.query;
+    send(JSON.stringify({type:"image", image}));
     res.status(200).send();
 })
 

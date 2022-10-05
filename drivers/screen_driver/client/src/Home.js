@@ -89,14 +89,16 @@ export default function Home() {
                 history.push("/qrcode");
             }
             if (msg.type=="image"){ //show an image
-                setImage(`http://locahost:3001/media/${msg.data}`);
+                console.log(msg);
+                setImage(`http://127.0.0.1:3001/assets/${msg.image}`);
                 history.push("/image");
             }
             if (msg.type=="media"){
               //added 4 Oct 2022
               //set the screen to media screen first if not there already
-              history.push("/media");
+              console.log("seen a media request!");
               setMedia(msg.media);
+              setTimeout(()=>{history.push("/media")},500);
               try{
                 setDelay(Number(msg.delay));
               }catch(err){

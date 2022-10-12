@@ -51,15 +51,16 @@ function FaceScan() {
       ){
        
         const video = videoRef.current.video;
-        const videoWidth = videoRef.current.video.videoWidth;
-        const videoHeight = videoRef.current.video.videoHeight;
+        //const videoWidth = videoRef.current.video.videoWidth;
+        //const videoHeight = videoRef.current.video.videoHeight;
 
         videoRef.current.video.width = VWIDTH;
         videoRef.current.video.height = VHEIGHT;
         canvasReference.current.width = VWIDTH;
         canvasReference.current.height = VHEIGHT;
-
+        console.log("estimating");
         const faceEstimate = await network.estimateFaces(video);
+        console.log(faceEstimate);
         const ctx = canvasReference.current.getContext("2d");
         ctx.clearRect(0, 0, canvasReference.current.width,canvasReference.current.height );
         requestAnimationFrame(()=>{drawResults(faceEstimate, ctx)});

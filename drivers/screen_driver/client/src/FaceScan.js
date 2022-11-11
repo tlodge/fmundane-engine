@@ -1,25 +1,16 @@
 //https://medium.com/codesphere-cloud/creating-a-face-detection-web-app-with-react-and-codesphere-28b1f057145d
+//https://codesandbox.io/s/stqwv?file=/src/App.js:156-190
 
 import React, { useRef, useEffect, useState, createRef,  } from "react";
 import "./FaceScan.css";
 import * as tf from "@tensorflow/tfjs";
-
-//import * as facemesh from "@tensorflow-models/facemesh";
 import * as facemesh from "@tensorflow-models/face-landmarks-detection";
 import Webcam from "react-webcam";
-import { drawMesh, drawResults } from "./meshUtilities.js";
-import {useInterval} from './hooks/useInterval';
-import {useCamera} from './hooks/useCamera';
+import {drawResults } from "./meshUtilities.js";
 import useWindowDimensions from "./hooks/useWindowDimensions";
 
-//const VWIDTH = 1280;//720;//1280;
-//const VHEIGHT = 960;//500;//960;
 
-//https://codesandbox.io/s/stqwv?file=/src/App.js:156-190
-
-
-
-function FaceScan() {
+function FaceScan({scan=false}) {
   
   const { height:VHEIGHT, width:VWIDTH } = useWindowDimensions();
   const canvasReference = useRef(null);
@@ -32,14 +23,29 @@ function FaceScan() {
   const [network, setNetwork] = useState(null);
   const [delay, setDelay] = useState(100);
 
-  /*useEffect (()=>{
-      
-      if (video){
-        canvasReference.current.width = 640;// video.videoWidth || VWIDTH ;
-        canvasReference.current.height = 480;//video.videoHeight || VHEIGHT;
-      }
 
-  },[network])*/
+  const loadVideo = ()=>{
+    try{
+      if (
+        typeof videoRef.current !== "undefined" &&
+        videoRef.current !== null &&
+        videoRef.current.video.readyState === 4
+      ){
+       
+        const video = videoRef.current.video;
+        //const videoWidth = videoRef.current.video.videoWidth;
+        //const videoHeight = videoRef.current.video.videoHeight;
+
+        videoRef.current.video.width = VWIDTH;
+        videoRef.current.video.height = VHEIGHT;
+        canvasReference.current.width = VWIDTH;
+        canvasReference.current.height = VHEIGHT;
+      
+      }
+    }catch(err){
+
+    }
+  }
 
   const detectFace = async (network) => {
   
@@ -58,9 +64,7 @@ function FaceScan() {
         videoRef.current.video.height = VHEIGHT;
         canvasReference.current.width = VWIDTH;
         canvasReference.current.height = VHEIGHT;
-        console.log("estimating");
         const faceEstimate = await network.estimateFaces(video);
-        console.log(faceEstimate);
         const ctx = canvasReference.current.getContext("2d");
         ctx.clearRect(0, 0, canvasReference.current.width,canvasReference.current.height );
         requestAnimationFrame(()=>{drawResults(faceEstimate, ctx)});
@@ -77,7 +81,7 @@ function FaceScan() {
   const loadNetwork = async ()=>{
   
     const model = facemesh.SupportedModels.MediaPipeFaceMesh;
-    console.log("ok model is", facemesh.SupportedModels.MediaPipeFaceMesh);
+   
    
     //SEE: https://tfhub.dev/mediapipe/tfjs-model/face_landmarks_detection/face_mesh/1
     const detectorConfig = {
@@ -96,37 +100,19 @@ function FaceScan() {
     setInterval(() => {
       detectFace(detector);
     }, 10);
-    /*facemesh.load({inputResolution: { width: VWIDTH, height: VHEIGHT },scale: 0.8}).then((network)=>{
-      
-      setTimeout(()=>{  
-        setNetwork(network);
-        console.log("network", network);
-      },1000)
-    })*/
-
-    /*setTimeout(()=>{  
-      setNetwork(network);
-      console.log("network", network);
-    },1000)*/
+   
   }
 
   useEffect(()=>{
-    //if (video){
-        loadNetwork();
-   // }
-  },[]);
-
-  /*useInterval( async () => {
-    const result = await detectFace(network,video,canvasReference, scan)
-    if (!result){
-      setDelay(5000);
+    console.log("in camera, scan is", scan);
+    if (scan){
       loadNetwork();
     }else{
-      setDelay(100);
+      loadVideo();
     }
-  }, delay);*/
+  },[]);
 
-  const hideMask = ()=>{
+   const hideMask = ()=>{
     setDelay(null);
     setCanvasOpacity(0);
   }
@@ -183,9 +169,5 @@ function FaceScan() {
     </div>
   );
 }
-/* <button onClick={()=>{showVideo()}}>show video</button>
-    <button onClick={()=>{hideVideo()}}>hide video</button>
-    <button onClick={()=>{showMask()}}>show mask</button>
-    <button onClick={()=>{hideMask()}}>hide mask</button>*/
 
 export default FaceScan;

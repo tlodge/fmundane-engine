@@ -12,15 +12,14 @@ app.use(express.static("../../../media"));
 
 app.get('/api/camera/scan', (req,res) => {
     console.log("seen camera scan request");
-    const {state=null} = req.query;
-    send(JSON.stringify({type:"camera", state}));
+    send(JSON.stringify({type:"camera", state:"scan"}));
     res.status(200).send();
 })
 
 app.get('/api/camera', (req,res) => {
     console.log("seen scan request");
     const {type=null} = req.query;
-    send(JSON.stringify({type:"url", url:"/camera"}));
+    send(JSON.stringify({type:"camera"}));
 	res.status(200).send();
 })
 

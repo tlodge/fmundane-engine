@@ -80,6 +80,7 @@ export default function Home() {
             }
             if (msg.type=="camera"){ // show a webcam image
                 setScan(msg.state=="scan")
+                history.push("/camera");
             }
             if (msg.type=="dyson"){ //show the data from dyson fan
                 setDyson(msg.data);
@@ -96,7 +97,7 @@ export default function Home() {
             if (msg.type=="media"){
               //added 4 Oct 2022
               //set the screen to media screen first if not there already
-              console.log("seen a media request!");
+              console.log("seen a media request!", msg.media);
               setMedia(msg.media);
               setTimeout(()=>{history.push("/media")},500);
               try{
@@ -113,15 +114,6 @@ export default function Home() {
     
      },[]);
 
-    const fakeData = ()=>{
-       setDyson({
-            pm25 : Math.floor(Math.random() * 252),
-            pm10 : Math.floor(Math.random() * 421),
-            voc  : Math.floor(Math.random() * 10),
-            no2  : Math.floor(Math.random() * 10),
-            time : Date.now().toString()
-        });
-    }
     return (
         <div style={{width:"100vw" ,height:"100vh", backgroundColor:"black", display:"flex", alignItems:"center"}}>
          

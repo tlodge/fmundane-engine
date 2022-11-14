@@ -21,7 +21,7 @@ const devices ={
     DRAWER: `/dev/tty.usbserial-11130`
 }
 
-const port = new SerialPort(devices.MAC, {
+const port = new SerialPort(devices.LENOVO, {
     baudRate: 115200
 },  (err)=>{
     if (err) {
@@ -78,6 +78,7 @@ const rawcommand = (command, duration=1000)=>{
            }
         });
     })
+
 }
 
 const beforeMiddleware = (req, res, next)=>{
@@ -204,6 +205,7 @@ app.get('/api/arm/point', beforeMiddleware, async function (req, res, next) {
     }catch(err){
      //TODO get error in response JSON - check arduino code
     }
+    System.out.println("sending an ok!");
     res.status(200).send("OK");
     next();
 },afterMiddleware);
@@ -232,7 +234,7 @@ const yes = async ()=>{
         await actuate(4, 900,300);
         await actuate(4, 100,500);
         await actuate(4, 900,500); 
-        await actuate(4, 550,300);
+        await actuate(4, 350,300);
     }
 }
 
@@ -315,7 +317,7 @@ const expandarm = async()=>{
         await actuate (2, 0, 600);
 
         parallel = [
-            {servo:4, degrees:550, duration:600},
+            {servo:4, degrees:350, duration:600},
             {servo:5, degrees:-100, duration:600},
             {servo:3, degrees:-450, duration:600}
         ]
@@ -498,7 +500,7 @@ const home = async ()=>{
     if (draweropen){ 
 
         const parallel = [
-            {servo:4, degrees:550, duration:1000},
+            {servo:4, degrees:350, duration:1000},
             {servo:2, degrees:0, duration:1000},
             {servo:5, degrees:-100, duration:1000},
             {servo:3, degrees:-450, duration:1000},
@@ -651,6 +653,9 @@ if (process.argv.length >= 3){
    }
    if (command == "expandarm"){
         expandarm();
+   }
+   if (command == "collapsearm"){
+        collapsearm();
    }
    if (command == "toggle"){
         toggleDoor();

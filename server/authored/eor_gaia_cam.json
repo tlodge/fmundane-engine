@@ -5,9 +5,72 @@
             "actions": [
                 []
             ],
-            "event": "start"
+            "event": "reset"
         },
         "events": [
+            {
+                "type": "button",
+                "name": "reset",
+                "id": "reset",
+                "subscription": "/press",
+                "onstart": {
+                    "actions": [
+                        [
+                            {
+                                "action": "http://[windows]:9222/H",
+                                "params": {},
+                                "method": "GET",
+                                "delay": 0
+                            }
+                        ],
+                        [
+                            {
+                                "action": "http://[lenovo]:9092/ui/api/hex",
+                                "params": {
+                                    "query": {
+                                        "hex": "ffd500"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 0
+                            }
+                        ],
+                        [
+                            {
+                                "action": "http://[lenovo]:9107/api/arm/collapse",
+                                "params": {},
+                                "method": "GET",
+                                "delay": 0
+                            }
+                        ],
+                        [
+                            {
+                                "action": "http://[lenovo]:9107/api/arm/lights",
+                                "params": {
+                                    "query": {
+                                        "colour": "0"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 500
+                            }
+                        ]
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "start"
+                        },
+                        "next": "start",
+                        "actions": []
+                    }
+                ],
+                "data": [
+                    "start"
+                ]
+            },
             {
                 "type": "button",
                 "name": "start",

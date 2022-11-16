@@ -3,12 +3,18 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const SerialPort = require('serialport');
 const { setTimeout } = require('timers');
+//const {usb, getDeviceList} = require('usb');
 const request = require('superagent');
 const PORT = '9107';
+//const PORT = '9500';
 const {arm:ARMIP} = require('../../server/src/actions/IPs.json');
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+
+//const mydevices = getDeviceList();
+
+//console.log(mydevices);
 
 // Arm connected to mac: dev/tty.usbserial-A10KME4J
 // Arm connected to lenovo: '/dev/ttyUSB0'
@@ -16,18 +22,26 @@ app.use(bodyParser.urlencoded({ extended: false }));
 //on mac -  /dev/cu.SOC
 
 const devices ={
-    LENOVO : '/dev/ttyUSB0',
+    LENOVO : '/dev/ttyUSB1',
     MAC: '/dev/tty.usbserial-A10KME4J',
-    DRAWER: `/dev/tty.usbserial-11130`
 }
 
-const port = new SerialPort(devices.LENOVO, {
+
+const p1 = new SerialPort('/dev/ttyUSB0', {
     baudRate: 115200
-},  (err)=>{
+  },  (err)=>{
     if (err) {
-        return console.log('Error: ', err.message)
+        console.log(err);
     }
-})
+});
+
+const p2 = new SerialPort('/dev/ttyUSB1', {
+    baudRate: 115200
+  },  (err)=>{
+    if (err) {
+        console.log(err);
+    }
+});
 
 let HANDLING = false;
 
@@ -41,7 +55,23 @@ const waitFor = (duration)=>{
     })
 }
 
-const actuate = (servoId, amount, duration)=>{
+
+const actuate = async (servoId, amount, duration)=>{
+    await Promise.all([
+        await _actuate(p1, servoId, amount, duration),
+        await _actuate(p2, servoId, amount, duration),
+    ]);
+
+}
+
+const rawcommand  = async (command, duration=1000)=>{
+    await Promise.all([
+        await _rawcommand(p1, command, duration),
+        await _rawcommand(p2, command, duration),
+    ]);
+}
+
+const _actuate = (port, servoId, amount, duration)=>{
     const command = `#${servoId} D${amount}T${duration}\r`;
 
     return new Promise((resolve, reject)=>{
@@ -59,7 +89,7 @@ const actuate = (servoId, amount, duration)=>{
     })
 }
 
-const rawcommand = (command, duration=1000)=>{
+const _rawcommand = (port, command, duration=1000)=>{
 
     return new Promise((resolve, reject)=>{
         port.write(`${command}\r`, function(err, result) {
@@ -298,9 +328,10 @@ const dyson = async ()=>{
 }
 
 const expandarm = async()=>{
-    let {draweropen} = await status();
+   console.log("am in expand arm!");
+   // let {draweropen} = await status();
 
-    if (draweropen){
+   // if (draweropen){
         /*
         * perform following once drawer is opened!
         */
@@ -325,7 +356,7 @@ const expandarm = async()=>{
         await Promise.all(parallel.map(async(command)=>{
             await actuate(command.servo, command.degrees, command.duration);
         }));
-    }
+ //   }
 
 }
 
@@ -408,15 +439,18 @@ const openDoor = (attempts = 0)=>{
         }
         else{
             request.get(`${ARMIP}/door/open`).then(async (res,err)=>{
-                console.log(res.body);
-                let {dooropen} = await status();
+                console.log("called it!!");
                 
-                if (dooropen){
-                    resolve(res.body);
+                setTimeout(async ()=>{
+                    const _status =  await status();
+                    console.log(_status);
+                    const {dooropen} = _status;
+                    if (dooropen){
+                        resolve(res.body);
                     return;
                 }else{
                     openDoor(++attempts);
-                }
+                }},500);
             });
         }
     });
@@ -652,6 +686,7 @@ if (process.argv.length >= 3){
         forward();
    }
    if (command == "expandarm"){
+        console.log("expanding arm...");
         expandarm();
    }
    if (command == "collapsearm"){

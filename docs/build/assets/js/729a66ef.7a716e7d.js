@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkfmundane_docs=self.webpackChunkfmundane_docs||[]).push([[2583],{8462:e=>{e.exports=JSON.parse('{"label":"hola","permalink":"/fmundane-engine/blog/tags/hola","allTagsPath":"/fmundane-engine/blog/tags","count":1}')}}]);

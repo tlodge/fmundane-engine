@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # Caravan Intro
 
-The future mundane engine brings together the sensors, devices and actuators in our caravan platform to enable us to create engaging, immersive experiences for small groups (1-4) of participants. Thanks to Matt Pilling for the following architecture diagram.
+The Future Mundane engine brings together the sensors, devices and actuators in our caravan platform to enable us to create engaging, immersive experiences for small groups (1-4) of participants. Thanks to Matt Pilling for the following architecture diagram.
 <img src="../../../img/architecture.png"/>
 
 

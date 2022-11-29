@@ -1,0 +1,88 @@
+{
+    "id": "layer1",
+    "start": {
+        "actions": [
+            []
+        ],
+        "event": "e1"
+    },
+    "events": [
+        {
+            "id": "e1",
+            "name": "e1",
+            "onstart": [
+                {
+                    "words": "something to say",
+                    "duration": 1000
+                },
+                {
+                    "words": "and something after a second."
+                }
+            ],
+            "type": "button",
+            "subscription": "/press",
+            "data": [
+                "yes",
+                "no"
+            ],
+            "rules": [
+                {
+                    "rule": {
+                        "operator": "equals",
+                        "operand": "yes"
+                    },
+                    "actions": [
+                        [
+                            "fanhot"
+                        ]
+                    ],
+                    "next": "e2"
+                },
+                {
+                    "rule": {
+                        "operator": "equals",
+                        "operand": "no"
+                    },
+                    "actions": [
+                        [
+                            "fanoff"
+                        ]
+                    ],
+                    "next": "e3"
+                }
+            ]
+        },
+        {
+            "id": "e2",
+            "name": "e2",
+            "onstart": [
+                {
+                    "words": "you said yes!",
+                    "duration": 500
+                },
+                {
+                    "words": "thanks for saying yes",
+                    "duration": 100
+                }
+            ],
+            "type": "button",
+            "subscription": "/press",
+            "data": [],
+            "rules": []
+        },
+        {
+            "id": "e3",
+            "name": "e3",
+            "onstart": [
+                {
+                    "words": "you said no, shame!",
+                    "duration": 0
+                }
+            ],
+            "type": "button",
+            "subscription": "/press",
+            "data": [],
+            "rules": []
+        }
+    ]
+}

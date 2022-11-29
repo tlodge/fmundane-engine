@@ -1,0 +1,115 @@
+{
+  
+    "id" : "layer2",
+  
+    "start": {
+      "actions": [["bluelights"]],
+      "event": "e0"
+    },
+  
+    "events": [{
+      "id": "e0",
+      "subscription" : "/gesture",
+      "type": "gesture",
+      "rules": [{
+          "rule": {
+            "operator": "equals",
+            "operand": ["yes"]
+          },
+          "actions": [
+            ["fanhot", "blindsup"],
+            ["redlights"]
+          ],
+          "next": "e1"
+        },
+        {
+          "rule": {
+            "operator": "equals",
+            "operand": ["no"]
+          },
+          "actions": [
+            ["bluelights"]
+          ],
+          "next": "e2"
+        }
+      ],
+      "default": {
+        "rule": {
+          "operator": "timeout",
+          "operand": 3000
+        },
+        "actions": ["greet"],
+        "next": "e0"
+      }
+    },
+    {
+      "id": "e1",
+      "subscription" : "/press",
+      "type": "button",
+      "data": ["goodbye", "friend"],
+      "rules": [{
+          "rule": {
+            "operator": "equals",
+            "operand": "goodbye"
+          },
+          "actions": [
+            ["fanoff", "blindsdown"]
+          ],
+          "next": "e0"
+        },
+        {
+          "rule": {
+            "operator": "equals",
+            "operand": "friend"
+          },
+          "actions": [
+            ["pinklights"]
+          ],
+          "next": "e1"
+        }
+      ],
+      "default": {
+        "rule": {
+          "operator": "timeout",
+          "operand": 3000
+        },
+        "actions": ["greet"],
+        "next": "e0"
+      }
+    },
+    {
+      "id": "e2",
+      "subscription" : "/speech",
+      "type": "gesture",
+      "rules": [{
+          "rule": {
+            "operator": "hasgensture",
+            "operand": ["thumbsup"]
+          },
+          "actions": [
+            ["fanoff", "blindsup"]
+          ],
+          "next": "e1"
+        },
+        {
+          "rule": {
+            "operator": "hasword",
+            "operand": ["friend"]
+          },
+          "actions": [
+            ["pinklights"]
+          ],
+          "next": "e0"
+        }
+      ],
+      "default": {
+        "rule": {
+          "operator": "timeout",
+          "operand": 3000
+        },
+        "actions": ["greet"],
+        "next": "e0"
+      }
+    }
+  ]}
+  

@@ -1,0 +1,309 @@
+{
+   "fan":{
+      "type":"request",
+      "data":{
+         "url":"http://localhost:9097/ui/api/fan",
+         "type":"GET",
+         "contenttype":"application/json"
+      },
+      "query":{}
+   },
+  "fanhot":{
+     "type":"request",
+     "data":{
+        "url":"http://localhost:9097/ui/api/fan?rotate=true&power=10&heat=37",
+        "type":"GET",
+        "contenttype":"application/json"
+     }
+  },
+  "print":{
+      "type":"request",
+      "data":{
+         "url":"http://[receipt]:8080/print",
+         "type":"POST",
+         "contenttype":"application/json",
+         "timeout":500
+      },
+      "body":{}
+   },
+  "fanoff":{
+     "type":"request",
+     "data":{
+        "url":"http://localhost:9097/ui/api/fan?rotate=false&power=1&cool=true",
+        "type":"GET",
+        "contenttype":"application/json",
+        "body":{
+           "id":"28282:1292920-2;"
+        }
+    }
+   },
+   "smell-left-on":{
+      "type":"request",
+      "data":{
+         "url":"http://[smell-left]/on3",
+         "type":"GET",
+         "contenttype":"application/json"
+      }
+   },
+   "smell-right-on":{
+      "type":"request",
+      "data":{
+         "url":"http://[smell-right]/on3",
+         "type":"GET",
+         "contenttype":"application/json"
+      }
+   },
+   "smell-left-off":{
+      "type":"request",
+      "data":{
+         "url":"http://[smell-left]/off",
+         "type":"GET",
+         "contenttype":"application/json"
+      }
+   },
+   "smell-right-off":{
+      "type":"request",
+      "data":{
+         "url":"http://[smell-right]/off",
+         "type":"GET",
+         "contenttype":"application/json"
+      }
+   },
+   "say":{
+      "type":"request",
+      "data":{
+         "url":"http://[speech]:9105/api/speech",
+         "type":"POST",
+         "contenttype":"application/json"
+      }
+  },
+  "arm-expand":{
+   "type":"request",
+   "data":{
+      "url":"http://[lenovo]:9107/api/arm/expand",
+      "type":"GET",
+      "contenttype":"application/json"
+   }
+  },
+  "arm-collapse":{
+   "type":"request",
+   "data":{
+      "url":"http://[lenovo]:9107/api/arm/collapse",
+      "type":"GET",
+      "contenttype":"application/json"
+   }
+  },
+   "soundmedia":{
+        "type":"request",
+        "data":{
+           "url":"http://[lenovo]:9106/api/media",
+           "type":"POST",
+           "contenttype":"application/json"
+        },
+        "body":{}
+    },
+    "stopallsound":{
+      "type":"request",
+      "data":{
+         "url":"http://[lenovo]:9106/api/media/stop",
+         "type":"GET",
+         "contenttype":"application/json"
+      },
+      "body":{}
+  },
+  "togglewindows": {
+   "type": "request",
+   "data": {
+     "url": "http://192.168.1.244:9222/H",
+     "type": "GET",
+     "contenttype": "application/json",
+     "timeout": 500
+   }
+ },
+
+    "videomedia":{
+        "type":"request",
+       "data":{
+          "url":"http://127.0.0.1:9102/api/media/play",
+          "type":"GET",
+          "contenttype":"application/json"
+       },
+       "query":{}
+    },
+    "homescreen":{
+       "type":"request",
+       "data":{
+          "url": "http://127.0.0.1:9102/api/home",
+          "type":"GET",
+          "contenttype":"application/json"
+       }
+    },
+    "dysonscreen":{
+       "type":"request",
+       "data":{
+          "url":"http://127.0.0.1:9102/api/air",
+          "type":"GET",
+          "contenttype":"application/json"
+       }
+    },
+    "camerascreen":{
+       "type":"request",
+       "data":{
+          "url":"http://127.0.0.1:9102/api/camera",
+          "type":"GET",
+          "contenttype":"application/json"
+       }
+    },
+    "camerascan":{
+       "type":"request",
+       "data":{
+          "url":"http://127.0.0.1:9102/api/camera/scan",
+          "type":"GET",
+          "contenttype":"application/json"
+       }
+    },
+    "mediascreen":{
+       "type":"request",
+       "data":{
+          "url":"http://127.0.0.1:9102/api/media",
+          "type":"GET",
+          "contenttype":"application/json"
+       }
+    },
+    "immersive":{
+        "type":"request",
+        "data":{
+           "url":"http://[lenovo]:9092/ui/api/light_script",
+           "type":"GET",
+           "contenttype":"application/json",
+           "timeout":500
+        },
+        "query":{}
+     },
+     "nanoleaf":{
+        "type":"request",
+        "data":{
+           "url":"http://[lenovo]:9104/ui/api",
+           "type":"GET",
+           "contenttype":"application/json",
+           "timeout":500
+        },
+        "query":{}
+     },
+    "shutdownprinterpi":{
+       "type":"request",
+       "data":{
+          "url":"http://[receipt]:8080/shutdown",
+          "type":"GET",
+          "contenttype":"application/json",
+          "timeout":500
+       },
+       "query":{
+          "script_id":"ID028"
+       }
+    },
+    "rebootprinterpi":{
+       "type":"request",
+       "data":{
+          "url":"http://[receipt]:8080/reboot",
+          "type":"GET",
+          "contenttype":"application/json",
+          "timeout":500
+       },
+       "query":{
+          "script_id":"ID028"
+       }
+    },
+    "talkingon":{
+      "type":"request",
+      "data":{
+         "url":"http://[voicesensor]/H",
+         "type":"GET",
+         "contenttype":"application/json",
+         "timeout":500
+      }
+    }, 
+    "talkingoff":{
+      "type":"request",
+      "data":{
+         "url":"http://[voicesensor]/L",
+         "type":"GET",
+         "contenttype":"application/json",
+         "timeout":500
+      }
+    },
+    "message":{
+      "type":"request",
+      "data":{
+         "url":"http://[lenovo]:9102/api/message",
+         "type":"GET",
+         "contenttype":"application/json"
+      },
+      "query":{}
+    },
+    "expand":{
+      "type":"request",
+      "data":{
+         "url":"http://[lenovo]:9107/api/arm/expand",
+         "type":"GET",
+         "contenttype":"application/json"
+      },
+      "query":{}
+    },
+    "collapse":{
+      "type":"request",
+      "data":{
+         "url":"http://[lenovo]:9107/api/arm/collapse",
+         "type":"GET",
+         "contenttype":"application/json"
+      },
+      "query":{}
+    },
+    "scan":{
+      "type":"request",
+      "data":{
+         "url":"http://[lenovo]:9107/api/arm/scan",
+         "type":"GET",
+         "contenttype":"application/json"
+      },
+      "query":{}
+    },
+    "toggledoor": {
+      "type": "request",
+      "data": {
+        "url": "http://192.168.1.221:9109/S",
+        "type": "GET",
+        "contenttype": "application/json",
+        "timeout":500
+      }
+  },
+  
+  "opendrawer": {
+      "type": "request",
+      "data": {
+        "url": "http://192.168.1.162:9109/O",
+        "type": "GET",
+        "contenttype": "application/json"
+      }
+  },
+  
+  "closedrawer": {
+      "type": "request",
+      "data": {
+        "url": "http://192.168.1.162:9109/C",
+        "type": "GET",
+        "contenttype": "application/json"
+      }
+  },
+
+  "qrcode":{
+      "type":"request",
+      "data":{
+         "url": "http://[lenovo]:9102/api/qrcode",
+         "type":"GET",
+         "contenttype":"application/json"
+      },
+      "query":{}
+   }
+
+ }

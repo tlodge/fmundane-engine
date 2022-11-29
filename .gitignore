@@ -3,7 +3,6 @@ yarn-error.log
 .env
 .nyc_output
 coverage
-build/
 drivers/media_driver/media/
 drivers/stt_driver/coqui-stt-0.9.3-models.pbmm
 drivers/stt_driver/coqui-stt-0.9.3-models.scorer
@@ -16,13 +15,6 @@ media/
 
 # testing
 /coverage
-
-# next.js
-/.next/
-/out/
-
-# production
-/build
 
 # misc
 .DS_Store
@@ -39,5 +31,3 @@ yarn-error.log*
 .env.test.local
 .env.production.local
 
-# vercel
-.vercel

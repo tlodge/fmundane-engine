@@ -5,9 +5,7 @@ sidebar_position: 1
 # Caravan Intro
 
 The Future Mundane engine brings together the sensors, devices and actuators in our caravan platform to enable us to create engaging, immersive experiences for small groups (1-4) of participants. Thanks to Matt Pilling for the following architecture diagram.
-<img src="../../img/architecture.png"/>
-
-
+<img src="https://tlodge.github.io/fmundane-engine/img/architecture.png"/> 
 There are several components to the software that is used to create and deploy new experiences.  It fits together as follows:
 
 1.	The engine.  This is the underlying (state machine) that takes an experience file then runs it on the caravan.  It is responsible for firing actions when particular events occur.

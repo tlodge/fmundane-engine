@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkfmundane_docs=self.webpackChunkfmundane_docs||[]).push([[3765],{8280:e=>{e.exports=JSON.parse('{"permalink":"/fmundane-engine/blog/tags/hola","page":1,"postsPerPage":10,"totalPages":1,"totalCount":1,"blogDescription":"Blog","blogTitle":"Blog"}')}}]);

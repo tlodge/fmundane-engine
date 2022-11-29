@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkfmundane_docs=self.webpackChunkfmundane_docs||[]).push([[2437],{7008:e=>{e.exports=JSON.parse('{"title":"Twine","slug":"/category/twine","permalink":"/docs/category/twine","navigation":{"previous":{"title":"QRCodes","permalink":"/docs/troubleshooting/qrcodes"},"next":{"title":"Overview","permalink":"/docs/twine/overview"}}}')}}]);

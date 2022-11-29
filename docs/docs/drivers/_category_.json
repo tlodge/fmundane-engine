@@ -1,0 +1,8 @@
+{
+  "label": "Caravan Drivers",
+  "position": 3,
+  "link": {
+    "type": "generated-index",
+    "description": "All about the drivers that communicate with the sensors in the caravan."
+  }
+}

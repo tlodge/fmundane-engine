@@ -15,11 +15,14 @@ app.use(bodyParser.urlencoded({ extended: false }));
 let processes = [];
 const SPEECHSTOPURL = "http://localhost:9105/api/speech/stop";
 
+//on mac afplay on ubunut play (sudo apt-get install sox)
 const playIt = (media="")=>{
     return new Promise((resolve, reject)=>{
-        
-            const process = execFile("afplay", [`${MEDIADIR}/${media}`], (error)=>{
+            console.log("playing", `${MEDIADIR}/${media}`);
+            const process = execFile("sudo", ["-u", "#1000", "XDG_RUNTIME_DIR=/run/user/1000",  "play", `${MEDIADIR}/${media}`], (error)=>{
+            //const process = execFile("play", [`${MEDIADIR}/${media}`], (error)=>{
                 if (error){
+                    console.log(error)
                     reject();
                     return;
                 }else{

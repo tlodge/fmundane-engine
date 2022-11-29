@@ -1,0 +1,2625 @@
+[
+    {
+        "id": "mymundane",
+        "start": {
+            "actions": [
+                []
+            ],
+            "event": "start"
+        },
+        "events": [
+            {
+                "type": "button",
+                "name": "start",
+                "id": "start",
+                "subscription": "/press",
+                "onstart": {
+                    "actions": [
+                        [
+                            {
+                                "action": "dysonscreen",
+                                "params": {},
+                                "method": "GET",
+                                "delay": 0
+                            }
+                        ]
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "reset"
+                        },
+                        "next": "reseteverything",
+                        "actions": [
+                            [
+                                {
+                                    "action": "fan",
+                                    "params": {
+                                        "query": {
+                                            "rotate": false,
+                                            "power": 1,
+                                            "cool": true
+                                        }
+                                    },
+                                    "method": "GET",
+                                    "delay": 0
+                                }
+                            ],
+                            [
+                                {
+                                    "action": "whitelights",
+                                    "params": {},
+                                    "method": "GET",
+                                    "delay": 0
+                                }
+                            ],
+                            [
+                                {
+                                    "action": "togglewindows",
+                                    "params": {},
+                                    "method": "GET",
+                                    "delay": 0
+                                }
+                            ]
+                        ]
+                    }
+                ],
+                "data": [
+                    "reset"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "reseteverything",
+                "id": "reseteverything",
+                "subscription": "/press",
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "Please sit back and relax, I am just turning myself on.",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": ""
+                        }
+                    ],
+                    "actions": [
+                        [
+                            {
+                                "action": "print",
+                                "params": {
+                                    "body": {
+                                        "text": "New experience started.."
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 0
+                            }
+                        ],
+                        [
+                            {
+                                "action": "immersive",
+                                "params": {
+                                    "query": {
+                                        "script_id": "ID101"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 300
+                            },
+                            {
+                                "action": "homescreen",
+                                "params": {},
+                                "method": "GET",
+                                "delay": 500
+                            },
+                            {
+                                "action": "fan",
+                                "params": {
+                                    "query": {
+                                        "rotate": false,
+                                        "power": 4,
+                                        "cool": true
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 1000
+                            }
+                        ]
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "go!"
+                        },
+                        "next": "turningon",
+                        "actions": [
+                            []
+                        ]
+                    }
+                ],
+                "data": [
+                    "go!"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "turningon",
+                "id": "turningon",
+                "subscription": "/press",
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "5",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "600"
+                        },
+                        {
+                            "words": "4?",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "400"
+                        },
+                        {
+                            "words": "3",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "500"
+                        },
+                        {
+                            "words": "2?",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "500"
+                        },
+                        {
+                            "words": "1?",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "50"
+                        },
+                        {
+                            "words": "The living room of the future is a go.",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "0"
+                        }
+                    ],
+                    "actions": [
+                        [
+                            {
+                                "action": "mediascreen",
+                                "params": {},
+                                "method": "GET",
+                                "delay": 0
+                            },
+                            {
+                                "action": "print",
+                                "params": {
+                                    "body": {
+                                        "text": "commencing countdown"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 0
+                            }
+                        ],
+                        [
+                            {
+                                "action": "videomedia",
+                                "params": {
+                                    "query": {
+                                        "media": "countdown.mp4",
+                                        "delay": 0
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 0
+                            }
+                        ],
+                        [
+                            {
+                                "action": "immersive",
+                                "params": {
+                                    "query": {
+                                        "script_id": "ID101"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 0
+                            },
+                            {
+                                "action": "immersive",
+                                "params": {
+                                    "query": {
+                                        "script_id": "ID021"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 0
+                            },
+                            {
+                                "action": "print",
+                                "params": {
+                                    "body": {
+                                        "text": "systems ready"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 0
+                            }
+                        ]
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "next"
+                        },
+                        "next": "tookyourtime",
+                        "actions": [
+                            [
+                                {
+                                    "action": "homescreen",
+                                    "params": {},
+                                    "method": "GET",
+                                    "delay": 0
+                                }
+                            ]
+                        ]
+                    }
+                ],
+                "data": [
+                    "next"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "tookyourtime",
+                "id": "tookyourtime",
+                "subscription": "/press",
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "Thanks for waiting",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "500"
+                        },
+                        {
+                            "words": "The future always takes longer than you think to arrive",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "500"
+                        },
+                        {
+                            "words": "I will now create a personal experience for you whilst protecting the privacy of your data",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "500"
+                        },
+                        {
+                            "words": "Data means any information that is collected about you whilst in this room",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "500"
+                        }
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "next"
+                        },
+                        "next": "aboutme",
+                        "actions": [
+                            []
+                        ]
+                    }
+                ],
+                "data": [
+                    "next"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "aboutme",
+                "id": "aboutme",
+                "subscription": "/press",
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "This will be an immersive experience!",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "0"
+                        },
+                        {
+                            "words": "Any questions to ask at this point?",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "0"
+                        }
+                    ],
+                    "actions": [
+                        [
+                            {
+                                "action": "immersive",
+                                "params": {
+                                    "query": {
+                                        "script_id": "ID106"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 200
+                            },
+                            {
+                                "action": "immersive",
+                                "params": {
+                                    "query": {
+                                        "script_id": "ID016"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 500
+                            },
+                            {
+                                "action": "immersive",
+                                "params": {
+                                    "query": {
+                                        "script_id": "ID021"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 1000
+                            }
+                        ]
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "negative"
+                        },
+                        "next": "negative",
+                        "actions": [
+                            []
+                        ]
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "yes"
+                        },
+                        "next": "positive",
+                        "actions": [
+                            []
+                        ]
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "pardon?"
+                        },
+                        "next": "pardon",
+                        "actions": [
+                            []
+                        ]
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "repeat"
+                        },
+                        "next": "aboutme",
+                        "actions": [
+                            []
+                        ]
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "no"
+                        },
+                        "next": "noquestions",
+                        "actions": [
+                            []
+                        ]
+                    }
+                ],
+                "data": [
+                    "negative",
+                    "yes",
+                    "pardon?",
+                    "repeat",
+                    "no"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "negative",
+                "id": "negative",
+                "subscription": "/press",
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "negative",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "0"
+                        }
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "next"
+                        },
+                        "next": "databox",
+                        "actions": [
+                            []
+                        ]
+                    }
+                ],
+                "data": [
+                    "next"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "positive",
+                "id": "positive",
+                "subscription": "/press",
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "yes",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "0"
+                        }
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "next"
+                        },
+                        "next": "databox",
+                        "actions": [
+                            []
+                        ]
+                    }
+                ],
+                "data": [
+                    "next"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "databox",
+                "id": "databox",
+                "subscription": "/press",
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "Let me tell you about how we use data in this experience",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "500"
+                        },
+                        {
+                            "words": "I use sensors such as your responses to my questions to gather data about you",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "0"
+                        },
+                        {
+                            "words": "I process all of the data I have collected about you with my artificial intelligence algorithms",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "0"
+                        },
+                        {
+                            "words": "These help me see patterns about the way you might behave.",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "0"
+                        },
+                        {
+                            "words": "I then use this to generate a personal experience using the smart devices in the room.",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "2000"
+                        },
+                        {
+                            "words": "I will try to be as clear as I can about what I am doing, just so it doesn't feel a little bit creepy or intrusive.",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "0"
+                        },
+                        {
+                            "words": "All the personal data collected and generated stays in this room. It's meant to keep you in control.",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "0"
+                        }
+                    ],
+                    "actions": [
+                        [
+                            {
+                                "action": "immersive",
+                                "params": {
+                                    "query": {
+                                        "script_id": "ID106"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 200
+                            }
+                        ]
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "next"
+                        },
+                        "next": "thisiswhy",
+                        "actions": [
+                            []
+                        ]
+                    }
+                ],
+                "data": [
+                    "next"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "thisiswhy",
+                "id": "thisiswhy",
+                "subscription": "/press",
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "To start I need to generate personal profiles",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "0"
+                        },
+                        {
+                            "words": "I'll use this information to provide a version of the tv show that is especially presented in a way that matches your profiles",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "0"
+                        },
+                        {
+                            "words": "It will help you to be immersed!",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "1000"
+                        },
+                        {
+                            "words": "Let's get to know each other a bit more.  Let's start by finding out how you like to be entertained.",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "0"
+                        }
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "next"
+                        },
+                        "next": "doyouusefacebook",
+                        "actions": []
+                    }
+                ],
+                "data": [
+                    "next"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "doyouusefacebook",
+                "id": "doyouusefacebook",
+                "subscription": "/press",
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "Do you use Facebook, Twitter or TikTok?",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "0"
+                        }
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "next"
+                        },
+                        "next": "doyouusespotify",
+                        "actions": []
+                    }
+                ],
+                "data": [
+                    "next"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "doyouusespotify",
+                "id": "doyouusespotify",
+                "subscription": "/press",
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "Do you use Spotify?",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "0"
+                        }
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "next"
+                        },
+                        "next": "doyouuseprime",
+                        "actions": []
+                    }
+                ],
+                "data": [
+                    "next"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "doyouuseprime",
+                "id": "doyouuseprime",
+                "subscription": "/press",
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "Do you use Amazon Prime or Netflix?",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "0"
+                        }
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "next"
+                        },
+                        "next": "watchingyou",
+                        "actions": [
+                            [
+                                {
+                                    "action": "camerascreen",
+                                    "params": {},
+                                    "method": "GET",
+                                    "delay": 0
+                                }
+                            ],
+                            [
+                                {
+                                    "action": "expand",
+                                    "params": {},
+                                    "method": "GET",
+                                    "delay": 3000
+                                }
+                            ]
+                        ]
+                    }
+                ],
+                "data": [
+                    "next"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "watchingyou",
+                "id": "watchingyou",
+                "subscription": "/press",
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "I have been watching you answer my questions and now I would like to scan your face to get a better look at you",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "2000"
+                        },
+                        {
+                            "words": "Don't worry about it though this data never leaves this space",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "0"
+                        }
+                    ],
+                    "actions": [
+                        [
+                            {
+                                "action": "print",
+                                "params": {
+                                    "body": {
+                                        "text": "scanning facial features"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 0
+                            }
+                        ],
+                        [
+                            {
+                                "action": "camerascan",
+                                "params": {
+                                    "query": {
+                                        "state": null
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 0
+                            }
+                        ],
+                        [
+                            {
+                                "action": "scan",
+                                "params": {},
+                                "method": "GET",
+                                "delay": 1000
+                            }
+                        ],
+                        [
+                            {
+                                "action": "message",
+                                "params": {
+                                    "query": {
+                                        "message": ":inititiate [FACE] scan"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 10000
+                            }
+                        ]
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "continue"
+                        },
+                        "next": "voices",
+                        "actions": [
+                            [
+                                {
+                                    "action": "homescreen",
+                                    "params": {},
+                                    "method": "GET",
+                                    "delay": 0
+                                }
+                            ],
+                            [
+                                {
+                                    "action": "collapse",
+                                    "params": {},
+                                    "method": "GET"
+                                }
+                            ]
+                        ]
+                    }
+                ],
+                "data": [
+                    "continue"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "voices",
+                "id": "voices",
+                "subscription": "/press",
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "Oh wait.  One minute. Facial analysis shows you dislike my voice.",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "0"
+                        },
+                        {
+                            "words": "What about this?",
+                            "voice": "Emily",
+                            "rate": "180",
+                            "delay": "500"
+                        },
+                        {
+                            "words": "or this?",
+                            "voice": "Tom",
+                            "rate": "180",
+                            "delay": "500"
+                        },
+                        {
+                            "words": "Oh no! you really don't like that.  What about this?",
+                            "voice": "Serena",
+                            "rate": "140",
+                            "delay": "500"
+                        },
+                        {
+                            "words": "No? well surely you like me then?",
+                            "voice": "Lee",
+                            "rate": "180",
+                            "delay": "2000"
+                        },
+                        {
+                            "words": "I'll go back to being myself. Much better.",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "0"
+                        }
+                    ],
+                    "actions": [
+                        [
+                            {
+                                "action": "message",
+                                "params": {
+                                    "query": {
+                                        "message": ":facescan [ALERT: annoying voice]"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 0
+                            }
+                        ]
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "get"
+                        },
+                        "next": "consent",
+                        "actions": [
+                            []
+                        ]
+                    }
+                ],
+                "data": [
+                    "get"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "consent",
+                "id": "consent",
+                "subscription": "/press",
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "Based on your generally agreeable features",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "200"
+                        },
+                        {
+                            "words": "I have concluded that you consent to further profiling of your facial features",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "1000"
+                        },
+                        {
+                            "words": "Yes?",
+                            "voice": "Daniel",
+                            "rate": "200",
+                            "delay": "0"
+                        }
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "badnews"
+                        },
+                        "next": "badnews",
+                        "actions": [
+                            []
+                        ]
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "most"
+                        },
+                        "next": "mostwanted",
+                        "actions": [
+                            []
+                        ]
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "romantic"
+                        },
+                        "next": "romantic",
+                        "actions": [
+                            []
+                        ]
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "breach"
+                        },
+                        "next": "breach",
+                        "actions": [
+                            []
+                        ]
+                    }
+                ],
+                "data": [
+                    "badnews",
+                    "most",
+                    "romantic",
+                    "breach"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "badnews",
+                "id": "badnews",
+                "subscription": "/press",
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "I have bad news as it happens.",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "0"
+                        },
+                        {
+                            "words": "I have used an anonymous face profile",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "0"
+                        },
+                        {
+                            "words": "And compared it against a health service database.",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "0"
+                        },
+                        {
+                            "words": "There is a medium to high risk that you will get heart disease in the next 10 years",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "0"
+                        },
+                        {
+                            "words": "I recommend taking a walk after this experience.",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "0"
+                        }
+                    ],
+                    "actions": [
+                        [
+                            {
+                                "action": "print",
+                                "params": {
+                                    "body": {
+                                        "text": "Health profile: [Heart Disease 87%]"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 0
+                            }
+                        ]
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "explain"
+                        },
+                        "next": "explain",
+                        "actions": [
+                            []
+                        ]
+                    }
+                ],
+                "data": [
+                    "explain"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "mostwanted",
+                "id": "mostwanted",
+                "subscription": "/press",
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "I can't help but notice that you are on the Manchester City Council most wanted list.",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "0"
+                        },
+                        {
+                            "words": "A notification has been sent to the police.",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "0"
+                        },
+                        {
+                            "words": "This complies with GDPR criminal exception notice 10.",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "0"
+                        }
+                    ],
+                    "actions": [
+                        [
+                            {
+                                "action": "print",
+                                "params": {
+                                    "body": {
+                                        "text": "APB sent to Manchester police"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 0
+                            }
+                        ]
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "explain"
+                        },
+                        "next": "explain",
+                        "actions": [
+                            []
+                        ]
+                    }
+                ],
+                "data": [
+                    "explain"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "romantic",
+                "id": "romantic",
+                "subscription": "/press",
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "Ok, weell. Initial analysis suggests that you're a sucker for a mystery.",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "0"
+                        },
+                        {
+                            "words": "You're in for a treat.",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "0"
+                        },
+                        {
+                            "words": "The drama will be right up your street",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "0"
+                        }
+                    ],
+                    "actions": [
+                        [
+                            {
+                                "action": "print",
+                                "params": {
+                                    "body": {
+                                        "text": "Profile feature: [ROMANTIC]"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 0
+                            }
+                        ]
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "explain"
+                        },
+                        "next": "explain",
+                        "actions": [
+                            []
+                        ]
+                    }
+                ],
+                "data": [
+                    "explain"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "breach",
+                "id": "breach",
+                "subscription": "/press",
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "Ok, well. I have bad news.",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "0"
+                        },
+                        {
+                            "words": "Your face profile was part of a home office data breach last year.",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "0"
+                        },
+                        {
+                            "words": "No need for alarm, but I suggest you inform your insurers.",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "0"
+                        }
+                    ],
+                    "actions": [
+                        [
+                            {
+                                "action": "print",
+                                "params": {
+                                    "body": {
+                                        "text": "Data breach suspected"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 0
+                            }
+                        ]
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "explain"
+                        },
+                        "next": "explain",
+                        "actions": [
+                            []
+                        ]
+                    }
+                ],
+                "data": [
+                    "explain"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "explain",
+                "id": "explain",
+                "subscription": "/press",
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "Right. Now I am just going to explain the sensors in the room.",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "0"
+                        },
+                        {
+                            "words": "This is necessary for our meaningful consent procedures. Alright?",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "0"
+                        }
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "continue"
+                        },
+                        "next": "standup",
+                        "actions": [
+                            []
+                        ]
+                    }
+                ],
+                "data": [
+                    "continue"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "standup",
+                "id": "standup",
+                "subscription": "/press",
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "If you wish to withdraw your consent I suggest you hold your thumbs up now",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "800"
+                        }
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "back"
+                        },
+                        "next": "back2sensors",
+                        "actions": [
+                            []
+                        ]
+                    }
+                ],
+                "data": [
+                    "back"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "back2sensors",
+                "id": "back2sensors",
+                "subscription": "/press",
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "So. Back to the sensors and devices.",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "0"
+                        },
+                        {
+                            "words": "I run all the data through my artificial intelligence algorithm",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "0"
+                        },
+                        {
+                            "words": "This allows me to provide you with a completely personalised media experience.",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "0"
+                        },
+                        {
+                            "words": "Assuming that all makes sense. Then. If you are happy to go ahead say yes.",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "0"
+                        }
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "yes"
+                        },
+                        "next": "actuatewindows",
+                        "actions": [
+                            []
+                        ]
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "no"
+                        },
+                        "next": "waitabit",
+                        "actions": [
+                            []
+                        ]
+                    }
+                ],
+                "data": [
+                    "yes",
+                    "no"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "actuatewindows",
+                "id": "actuatewindows",
+                "subscription": "/press",
+                "onstart": {
+                   
+                    "actions": [
+                        [
+                            {"action":"say", "params":{"body":{"speech":[{"words":"I can block out the light with my smart windows","voice":"Daniel"}]}}},
+                            {
+                                "action": "togglewindows",
+                                "params": {},
+                                "method": "GET",
+                                "delay":1000 
+                            },
+                            {
+                                "action": "message",
+                                "params": {
+                                    "query": {
+                                        "message": ":set windows [OPAQUE]"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 0
+                            },
+                            {
+                                "action": "togglewindows",
+                                "params": {},
+                                "method": "GET",
+                                "delay": 0
+                            }
+                        ]
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "show"
+                        },
+                        "next": "actuatefan",
+                        "actions": [
+                            []
+                        ]
+                    }
+                ],
+                "data": [
+                    "show"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "actuatefan",
+                "id": "actuatefan",
+                "subscription": "/press",
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "I can give you a nice blast of air and monitor the air quality with the fan",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "0"
+                        }
+                    ],
+                    "actions": [
+                        [
+                            {
+                                "action": "fan",
+                                "params": {
+                                    "query": {
+                                        "rotate": true,
+                                        "power": 10,
+                                        "cool": true,
+                                        "from": 0,
+                                        "to": 90
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 200
+                            },
+                            {
+                                "action": "message",
+                                "params": {
+                                    "query": {
+                                        "message": ":set fan [FULLPOWER, ROTATE]"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 1000
+                            }
+                        ]
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "actuate"
+                        },
+                        "next": "actuatelights",
+                        "actions": [
+                            []
+                        ]
+                    }
+                ],
+                "data": [
+                    "actuate"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "actuatelights",
+                "id": "actuatelights",
+                "subscription": "/press",
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "I can even make the room all moody with data controlled lighting",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "0"
+                        }
+                    ],
+                    "actions": [
+                        [
+                            {
+                                "action": "fan",
+                                "params": {
+                                    "query": {
+                                        "rotate": false,
+                                        "power": 1,
+                                        "cool": true
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 0
+                            },
+                            {
+                                "action": "immersive",
+                                "params": {
+                                    "query": {
+                                        "script_id": "ID021"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 0
+                            },
+                            {
+                                "action": "message",
+                                "params": {
+                                    "query": {
+                                        "message": ":set lights [RED]; set fan [OFF]"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 1000
+                            }
+                        ]
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "actuatescreen"
+                        },
+                        "next": "actuateweb",
+                        "actions": [
+                            []
+                        ]
+                    }
+                ],
+                "data": [
+                    "actuatescreen"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "actuateweb",
+                "id": "actuateweb",
+                "subscription": "/press",
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "And of course I can show you stuff on the good old TV screen",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "0"
+                        }
+                    ],
+                    "actions": [
+                        [
+                            {
+                                "action": "immersive",
+                                "params": {
+                                    "query": {
+                                        "script_id": "ID021"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 0
+                            },
+                            {
+                                "action": "mediascreen",
+                                "params": {},
+                                "method": "GET",
+                                "delay": 0
+                            },
+                            {
+                                "action": "message",
+                                "params": {
+                                    "query": {
+                                        "message": ":play [TV.mp4]"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 1000
+                            },
+                            {
+                                "action": "videomedia",
+                                "params": {
+                                    "query": {
+                                        "media": "TV.mp4",
+                                        "delay": 50
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 2000
+                            }
+                        ]
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "print"
+                        },
+                        "next": "labelprinter",
+                        "actions": [
+                            [
+                                {
+                                    "action": "homescreen",
+                                    "params": {},
+                                    "method": "GET",
+                                    "delay": 0
+                                }
+                            ]
+                        ]
+                    }
+                ],
+                "data": [
+                    "print"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "labelprinter",
+                "id": "labelprinter",
+                "subscription": "/press",
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "Please tear off your receipt now and sign it on the dotted line with the pen provided",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "0"
+                        }
+                    ],
+                    "actions": [
+                        [
+                            {
+                                "action": "print",
+                                "params": {
+                                    "body": {
+                                        "text": "I consent to all of my data"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 0
+                            },
+                            {
+                                "action": "print",
+                                "params": {
+                                    "body": {
+                                        "text": "being used by Future Mundane Inc."
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 2000
+                            },
+                            {
+                                "action": "print",
+                                "params": {
+                                    "body": {
+                                        "text": "______________________________"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 2000
+                            },
+                            {
+                                "action": "print",
+                                "params": {
+                                    "body": {
+                                        "text": "\n\n\n\n\n"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 2000
+                            }
+                        ]
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "show"
+                        },
+                        "next": "showfilm",
+                        "actions": [
+                            []
+                        ]
+                    }
+                ],
+                "data": [
+                    "show"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "showfilm",
+                "id": "showfilm",
+                "subscription": "/press",
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "Brilliant.  Now.  What we have all been waiting for.",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "500"
+                        },
+                        {
+                            "words": "Based on you and your data I am going to show you a fully personalised version of a soap opera starring some of the devices who are in the room with you",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "500"
+                        },
+                        {
+                            "words": "Sit back relax and enjoy the immersive experience I have created just for you.",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "500"
+                        }
+                    ],
+                    "actions": [
+                        [
+                            {
+                                "action": "homescreen",
+                                "params": {},
+                                "method": "GET",
+                                "delay": 0
+                            },
+                            {
+                                "action": "togglewindows",
+                                "params": {},
+                                "method": "GET",
+                                "delay": 0
+                            }
+                        ]
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "ghosts-episode-1"
+                        },
+                        "next": "ghosts-episode-1",
+                        "actions": [
+                            []
+                        ]
+                    }
+                ],
+                "data": [
+                    "ghosts-episode-1"
+                ]
+            },
+
+            {
+                "type": "button",
+                "name": "ghosts-episode-1",
+                "id": "ghosts-episode-1",
+                "subscription": "/press",
+                "onstart": {
+                    "actions": [
+                        [
+                            {
+                                "action": "talkingoff",
+                                "params": {},
+                                "method": "GET",
+                                "delay": 0
+                            }
+                        ],
+                        [
+                            {
+                                "action": "mediascreen",
+                                "params": {},
+                                "method": "GET",
+                                "delay": 0
+                            }
+                        ],
+                        [
+                            {
+                                "action": "videomedia",
+                                "params": {
+                                    "query": {
+                                        "media": "episode1.mp4",
+                                        "delay": 0
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 0
+                            }
+                        ],
+                        [
+                            {
+                                "action": "print",
+                                "params": {
+                                    "body": {
+                                        "text": "mood in room is positive"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 2000
+                            },
+                            {
+                                "action": "print",
+                                "params": {
+                                    "body": {
+                                        "text": "version selected"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 0
+                            },
+                            {
+                                "action": "print",
+                                "params": {
+                                    "body": {
+                                        "text": "Record of mood analysis logged to Databox vault"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 1000
+                            }
+                        ],
+                        [
+                            {
+                                "action": "message",
+                                "params": {
+                                    "query": {
+                                        "message": "Baseline mood analysis complete, current mood quantified as [POSITIVE]"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 2000
+                            }
+                        ],
+                        [
+                            {
+                                "action": "fan",
+                                "params": {
+                                    "query": {
+                                        "rotate": true,
+                                        "power": 10,
+                                        "cool": true,
+                                        "from": 0,
+                                        "to": 90
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 8500
+                            }
+                        ],
+                       
+                        [
+                            {
+                                "action": "fan",
+                                "params": {
+                                    "query": {
+                                        "rotate": false,
+                                        "power": 1,
+                                        "cool": true
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 89000
+                            }
+                        ],
+
+                        [{"action":"nanoleaf","params":{"query":{"hue":60,"sat":100,"bri":50}},"delay":0}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":210,"sat":100,"bri":20}},"delay":5000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":60,"sat":100,"bri":50}},"delay":10000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":210,"sat":100,"bri":20}},"delay":15000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":60,"sat":100,"bri":50}}, "delay":20000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":210,"sat":100,"bri":20}},"delay":25000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":30,"sat":100,"bri":70}},"delay":30000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":240,"sat":100,"bri":50}},"delay":41000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":30,"sat":100,"bri":70}},"delay":49000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":300,"sat":100,"bri":50}},"delay":71000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":0,"sat":0,"bri":100}},"delay":73000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":60,"sat":100,"bri":50}},"delay":81000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":0,"sat":0,"bri":100}},"delay":87000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":210,"sat":100,"bri":20}},"delay":96000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":240,"sat":100,"bri":50}},"delay":119000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":0,"sat":0,"bri":100}},"delay":164000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":120,"sat":100,"bri":20}},"delay":171000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":0,"sat":0,"bri":75}},"delay":173000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":330,"sat":100,"bri":50}},"delay":187000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":0,"sat":0,"bri":100}},"delay":200000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":0,"sat":100,"bri":50}},"delay":204000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":120,"sat":100,"bri":20}},"delay":215000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":210,"sat":100,"bri":20}},"delay":218000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":0,"sat":100,"bri":50}},"delay":274000}],
+                        [{"action":"nanoleaf","params":{"query":{"hue":0,"sat":0,"bri":100}},"delay":279000}],
+
+                        [{"action":"immersive","params":{"query":{"script_id":"episode1_timings-1"}},"delay":0}],
+                        [{"action":"immersive","params":{"query":{"script_id":"episode1_timings-2"}},"delay":5000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"episode1_timings-3"}},"delay":10000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"episode1_timings-4"}},"delay":15000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"episode1_timings-5"}},"delay":20000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"episode1_timings-6"}},"delay":25000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"episode1_timings-7"}},"delay":30000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"episode1_timings-8"}},"delay":41000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"episode1_timings-9"}},"delay":49000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"episode1_timings-10"}},"delay":71000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"episode1_timings-11"}},"delay":73000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"episode1_timings-12"}},"delay":81000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"episode1_timings-13"}},"delay":87000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"episode1_timings-14"}},"delay":96000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"episode1_timings-15"}},"delay":119000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"episode1_timings-16"}},"delay":164000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"episode1_timings-17"}},"delay":171000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"episode1_timings-18"}},"delay":173000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"episode1_timings-19"}},"delay":187000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"episode1_timings-20"}},"delay":200000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"episode1_timings-21"}},"delay":204000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"episode1_timings-22"}},"delay":215000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"episode1_timings-23"}},"delay":218000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"episode1_timings-24"}},"delay":274000}],
+                        [{"action":"immersive","params":{"query":{"script_id":"episode1_timings-25"}},"delay":279000}]
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "debrief"
+                        },
+                        "next": "EpisodeOneDebrief",
+                        "actions": [
+                            []
+                        ]
+                    }
+                ],
+                "data": [
+                    "debrief"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "waitabit",
+                "id": "waitabit",
+                "subscription": "/press",
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "I'll just wait a little bit for you to think some more",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "0"
+                        },
+                        {
+                            "words": "1 mississippi",
+                            "voice": "2 mississipi",
+                            "rate": "Daniel",
+                            "delay": "180"
+                        }
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "try"
+                        },
+                        "next": "back2sensors",
+                        "actions": [
+                            []
+                        ]
+                    }
+                ],
+                "data": [
+                    "try"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "pardon",
+                "id": "pardon",
+                "subscription": "/press",
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "I am so sorry I didn't understand.",
+                            "voice": "Daniel",
+                            "rate": "190",
+                            "delay": "0"
+                        },
+                        {
+                            "words": "Would you repeat that please?",
+                            "voice": "Daniel",
+                            "rate": "140",
+                            "delay": "0"
+                        }
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "next"
+                        },
+                        "next": "databox",
+                        "actions": [
+                            []
+                        ]
+                    }
+                ],
+                "data": [
+                    "next"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "EpisodeOneDebrief",
+                "id": "EpisodeOneDebrief",
+                "subscription": "/press",
+                "onstart": {
+                    "actions": [
+                        [
+                            {
+                                "action": "talkingon",
+                                "params": {},
+                                "method": "GET",
+                                "delay": 0
+                            }
+                        ],
+                        [
+                            {
+                                "action": "say",
+                                "params": {
+                                    "body": {
+                                        "speech": [
+                                            {
+                                                "words": "Please remain seated",
+                                                "voice": "Daniel"
+                                            }
+                                        ]
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 0
+                            },
+                            {
+                                "action": "say",
+                                "params": {
+                                    "body": {
+                                        "speech": [
+                                            {
+                                                "words": "As it happens, I used a preference model to choose the music I thought you'd like.",
+                                                "voice": "Daniel"
+                                            }
+                                        ]
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 300
+                            },
+                            {
+                                "action": "say",
+                                "params": {
+                                    "body": {
+                                        "speech": [
+                                            {
+                                                "words": "I also changed the lighting and adjusted the temperature to suit your profile.",
+                                                "voice": "Daniel"
+                                            }
+                                         
+                                        ]
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 300
+                            },
+                            {
+                                "action": "say",
+                                "params": {
+                                    "body": {
+                                        "speech": [
+                                            {
+                                                "words": "I hope you enjoyed it.",
+                                                "voice": "Daniel"
+                                            }
+                                         
+                                        ]
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 500
+                            },
+                           
+                            {
+                                "action": "say",
+                                "params": {
+                                    "body": {
+                                        "speech": [
+                                            {
+                                                "words": "If you wish to see how the story ends and who was responsible for the security breach you can find the rest of the episodes on you tube.  By searching for ghosts in the smart home.",
+                                                "voice": "Daniel"
+                                            }
+                                        ]
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 1000
+                            },
+                            {
+                                "action": "say",
+                                "params": {
+                                    "body": {
+                                        "speech": [
+                                            {
+                                                "words": "Please take your receipt and exit through the gift shop.",
+                                                "voice": "Daniel"
+                                            }
+                                        ]
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 0
+                            }
+                        ]
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "done!"
+                        },
+                        "next": "start",
+                        "actions": [
+                            []
+                        ]
+                    }
+                ],
+                "data": [
+                    "done!"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "noquestions",
+                "id": "noquestions",
+                "data": [
+                    "next"
+                ],
+                "subscription": "/press",
+                "onstart": {
+                    "speech": [
+                        {
+                            "words": "ok, in that case we'll move swiftly on",
+                            "voice": "Daniel",
+                            "rate": "180",
+                            "delay": "0"
+                        }
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "next"
+                        },
+                        "next": "databox",
+                        "actions": [
+                            []
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "pardons",
+        "start": {
+            "actions": [
+                []
+            ],
+            "event": "pardons"
+        },
+        "events": [
+            {
+                "id": "pardons",
+                "name": "pardons",
+                "onstart": {
+                    "speech": []
+                },
+                "type": "button",
+                "subscription": "/press",
+                "data": [
+                    "pardon me",
+                    "excuse me",
+                    "didn't understand",
+                    "I might be deaf",
+                    "say again?",
+                    "huh?",
+                    "repeat please"
+                ],
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "pardon me"
+                        },
+                        "actions": [
+                            [
+                                {"action":"say", "params":{"body":{"speech":[{"words":"Pardon?","voice":"Daniel"}]}}}
+                            ]
+                        ],
+                        "next": "pardons"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "excuse me"
+                        },
+                        "actions": [
+                            [
+                                {"action":"say", "params":{"body":{"speech":[{"words":"Excuse me?","voice":"Daniel"}]}}}
+                            ]
+                        ],
+                        "next": "pardons"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "didn't understand"
+                        },
+                        "actions": [
+                            [
+                                {"action":"say", "params":{"body":{"speech":[{"words":"I'm sorry I didn't understand that","voice":"Daniel"}]}}}
+                            ]
+                        ],
+                        "next": "pardons"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "I might be deaf"
+                        },
+                        "actions": [
+                            [
+                                {"action":"say", "params":{"body":{"speech":[{"words":"I might be a bit deaf - what did you say?","voice":"Daniel"}]}}}
+                            ]
+                        ],
+                        "next": "pardons"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "say again?"
+                        },
+                        "actions": [
+                            [
+                                {"action":"say", "params":{"body":{"speech":[{"words":"Can you say that again please?","voice":"Daniel"}]}}}
+                            ]
+                        ],
+                        "next": "pardons"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "huh?"
+                        },
+                        "actions": [
+                            [
+                                {"action":"say", "params":{"body":{"speech":[{"words":"Huh - what did you say?","voice":"Daniel"}]}}}
+                            ]
+                        ],
+                        "next": "pardons"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "repeat please"
+                        },
+                        "actions": [
+                            [
+                                {"action":"say", "params":{"body":{"speech":[{"words":"Please repeat yourself, I didn't catch that","voice":"Daniel"}]}}}
+                            ]
+                        ],
+                        "next": "pardons"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "tests",
+        "start": {
+            "actions": [
+                []
+            ],
+            "event": "test"
+        },
+        "events": [
+            {
+                "id": "test",
+                "name": "test",
+                "onstart": {
+                    "speech": []
+                },
+                "type": "button",
+                "subscription": "/press",
+                "data": [
+                    "toggle door",
+                    "open drawer (caution!)",
+                    "close drawer (caution!)",
+                    "expand arm (caution!)",
+                    "collapse arm (caution!)",
+                    "toggle windows",
+                    "say something",
+                    "print something",
+                    "display message",
+                    "play media on tv",
+                    "play music",
+                    "lights red",
+                    "lights white",
+                    "fan cool",
+                    "fan rotate",
+                    "fan off"
+                ],
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "toggle windows"
+                        },
+                        "actions": [
+                            [
+                                {"action":"togglewindows"}
+                            ]
+                        ],
+                        "next": "test"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "toggle door"
+                        },
+                        "actions": [
+                            [
+                                {"action":"toggledoor"}
+                            ]
+                        ],
+                        "next": "test"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "open drawer (caution!)"
+                        },
+                        "actions": [
+                            [
+                                {"action":"opendrawer"}
+                            ]
+                        ],
+                        "next": "test"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "close drawer (caution!)"
+                        },
+                        "actions": [
+                            [
+                                {"action":"closedrawer"}
+                            ]
+                        ],
+                        "next": "test"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "expand arm (caution!)"
+                        },
+                        "actions": [
+                            [
+                                {"action":"expand"}
+                            ]
+                        ],
+                        "next": "test"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "collapse arm (caution!)"
+                        },
+                        "actions": [
+                            [
+                                {"action":"collapse"}
+                            ]
+                        ],
+                        "next": "test"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "scan"
+                        },
+                        "actions": [
+                            [
+                                {"action":"scan"}
+                            ]
+                        ],
+                        "next": "test"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "say something"
+                        },
+                        "actions": [
+                            [
+                                {"action":"say", "params":{"body":{"speech":[{"words":"This is a test of audio!","voice":"Daniel"}]}}}
+                            ]
+                        ],
+                        "next": "test"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "display message"
+                        },
+                        "actions": [
+                            [
+                                {"action":"message", "delay":0, "params": {"query":{"message":"hello this is me on the screen!"}}}
+                               
+                            ]
+                        ],
+                        "next": "test"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "print something"
+                        },
+                        "actions": [
+                            [
+                                {"action":"print", "delay":0, "params": {"body":{"text":"one two three test"}}}
+                            ]
+                        ],
+                        "next": "test"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "play media on tv"
+                        },
+                        "actions": [
+                            [
+                                {"action": "mediascreen"},
+                                {"action":"sfx"}
+                            ]
+                        ],
+                        "next": "test"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "play music"
+                        },
+                        "actions": [
+                            [
+                                {"action":"soundmedia", "params": {"body":{"media":"foreboding.mp3","nowait":true, "delay":200}}}
+                            ]
+                        ],
+                        "next": "test"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "lights red"
+                        },
+                        "actions": [
+                            [
+                                {"action":"redlights"}
+                            ]
+                        ],
+                        "next": "test"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "lights white"
+                        },
+                        "actions": [
+                            [
+                                {"action":"whitelights"}
+                            ]
+                        ],
+                        "next": "test"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "fan cool"
+                        },
+                        "actions": [
+                            [
+                                {"action":"fan", "params":{"query":{"rotate":false, "power":4, "cool":true}}, "delay":0}
+                            ]
+                        ],
+                        "next": "test"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "fan rotate"
+                        },
+                        "actions": [
+                            [
+                                {"action":"fan", "params":{"query":{"rotate":true, "power":10, "cool":true, "from":0, "to":90}}, "delay":0}
+                            ]
+                        ],
+                        "next": "test"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "fan off"
+                        },
+                        "actions": [
+                            [
+                                {"action":"fan", "delay":0,"params":{"query":{"rotate":false, "power":1, "cool":true}}}
+                            ]
+                        ],
+                        "next": "test"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "rudeness",
+        "start": {
+            "actions": [
+                []
+            ],
+            "event": "oi"
+        },
+        "events": [
+            {
+                "id": "oi",
+                "name": "oi",
+                "onstart": {
+                    "speech": []
+                },
+                "type": "button",
+                "subscription": "/press",
+                "data": [
+                    "excuseme",
+                    "hello?",
+                    "hey you",
+                    "look here",
+                    "got all day",
+                    "tick tock"
+                ],
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "excuseme"
+                        },
+                        "actions": [
+                            [
+                                {"action":"say", "params":{"body":{"speech":[{"words":"Excuse me.. I'm still here","voice":"Daniel"}]}}}
+                            ]
+                        ],
+                        "next": "oi"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "hello?"
+                        },
+                        "actions": [
+                            [
+                                {"action":"say", "params":{"body":{"speech":[{"words":"Hello?","voice":"Daniel"}]}}}
+                            ]
+                        ],
+                        "next": "oi"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "hey you"
+                        },
+                        "actions": [
+                            [
+                                {"action":"say", "params":{"body":{"speech":[{"words":"Hey, you, pay attention! We're trying to do the future here","voice":"Daniel"}]}}}
+                            ]
+                        ],
+                        "next": "oi"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "look here"
+                        },
+                        "actions": [
+                            [
+                                {"action":"say", "params":{"body":{"speech":[{"words":"Look here, I've got things to do as well, can we just get on with it?","voice":"Daniel"}]}}}
+                            ]
+                        ],
+                        "next": "oi"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "got all day"
+                        },
+                        "actions": [
+                            [
+                                {"action":"say", "params":{"body":{"speech":[{"words":"I haven't got all day","voice":"Daniel"}]}}}
+                            ]
+                        ],
+                        "next": "oi"
+                    },
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "tick tock"
+                        },
+                        "actions": [
+                            [
+                                {"action":"say", "params":{"body":{"speech":[{"words":"Tick, tock, tick, tock - time is of the essence. Let's get on with it","voice":"Daniel"}]}}}
+                            ]
+                        ],
+                        "next": "oi"
+                    }
+                ]
+            }
+        ]
+    }
+]

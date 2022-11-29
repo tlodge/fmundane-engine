@@ -1,7 +1,7 @@
 const mqtt = require('mqtt');
-const {MQTT_IP}  = require("./config.json");
-
-console.log("connecting mqtt to", MQTT_IP);
+const ips = require('../../server/src/actions/IPs.json');
+const MQTT_IP = ips.lenovo || "127.0.0.1";
+console.log("read IP from ../../server/src/actions/IPs.json (lenovo)", MQTT_IP);
 const client  = mqtt.connect(`mqtt://${MQTT_IP}`);
 
 const topics = {};

@@ -8,6 +8,7 @@
   </head>
   <body>
     <script>
+        const DEFAULTHTML = `<div class="container"><img src="flogo.svg" width=600 height=600/></div>`
         const parts = window.location.href.replace("http://","").replace("https://","").split(":");
         const wsurl = `ws://${parts[0]}:${parts[1]}`;
         const socket = new WebSocket(wsurl);
@@ -22,7 +23,11 @@
           socket.addEventListener('message', function (event) {
                 var el = document.getElementById('html');
                 console.log("event data is", event.data);
-                el.innerHTML = event.data;
+                if (event.data.trim() == ""){
+                  el.innerHTML = DEFAULTHTML;
+                }else{
+                  el.innerHTML = event.data;
+                }
           })   
         }catch(err){
             console.log(err);
@@ -33,7 +38,20 @@
         body{
             padding:0;
             margin:0;
+            overflow-y: hidden;
+            overflow-x: hidden;
         }
+
+        #root{
+          overflow-y: hidden;
+          overflow-x: hidden;
+        }
+
+        #html{
+          overflow-y: hidden;
+          overflow-x: hidden;
+        }
+
         .container{
             background:black;
             width: 100vw;
@@ -41,12 +59,14 @@
             display:flex;
             align-items: center;
             justify-content: center;
+            overflow-y: hidden;
+            overflow-x: hidden;
         }
     </style>
     <div id="root">
         <div id="html">
             <div class="container">
-                <img src="flogo.svg" width=200 height=200/>
+                <img src="flogo.svg" width=600 height=600/>
             </div>
         </div>
     </div>

@@ -1,0 +1,728 @@
+[
+    {
+        "id": "ghosts",
+        "start": {
+            "actions": [
+                []
+            ],
+            "event": "reset"
+        },
+        "events": [
+            {
+                "type": "button",
+                "name": "reset",
+                "id": "reset",
+                "subscription": "/press",
+                "onstart": {
+                    "actions": [
+                        [
+                            {
+                                "action": "http://[windows]:9222/H",
+                                "params": {},
+                                "method": "GET",
+                                "delay": 0
+                            }
+                        ],
+                        [
+                            {
+                                "action": "http://[lenovo]:9092/ui/api/hex",
+                                "params": {
+                                    "query": {
+                                        "hex": "ffd500"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 0
+                            }
+                        ],
+                        [
+                            {
+                                "action": "http://[lenovo]:9102/api/home",
+                                "params": {},
+                                "method": "GET",
+                                "delay": 0
+                            }
+                        ],
+                        [
+                            {
+                                "action": "http://[lenovo]:9107/api/arm/collapse",
+                                "params": {},
+                                "method": "GET",
+                                "delay": 0
+                            }
+                        ],
+                        [
+                            {
+                                "action": "http://[lenovo]:9107/api/arm/lights",
+                                "params": {
+                                    "query": {
+                                        "colour": "0"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 500
+                            }
+                        ]
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "start"
+                        },
+                        "next": "introduction",
+                        "actions": []
+                    }
+                ],
+                "data": [
+                    "start"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "introduction",
+                "id": "introduction",
+                "subscription": "/press",
+                "onstart": {
+                    "actions": [
+                        [
+                            {
+                                "action": "http://[lenovo]:9102/api/media/play",
+                                "params": {
+                                    "query": {
+                                        "media": "adaptivepodcast/narration.mp3"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 0
+                            },
+                            {
+                                "action": "http://[lenovo]:9107/api/arm/expand",
+                                "params": {},
+                                "method": "GET",
+                                "delay": 25000
+                            }
+                        ]
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "scene-one"
+                        },
+                        "next": "sceneone",
+                        "actions": []
+                    }
+                ],
+                "data": [
+                    "scene-one"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "sceneone",
+                "id": "sceneone",
+                "subscription": "/press",
+                "onstart": {
+                    "actions": [
+                        [
+                            {
+                                "action": "http://[lenovo]:9102/api/media/play",
+                                "params": {
+                                    "query": {
+                                        "media": "adaptivepodcast/scene1.mp3"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 0
+                            }
+                        ]
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "scene-two"
+                        },
+                        "next": "scenetwo",
+                        "actions": []
+                    }
+                ],
+                "data": [
+                    "scene-two"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "scenetwo",
+                "id": "scenetwo",
+                "subscription": "/press",
+                "onstart": {
+                    "actions": [
+                        [
+                            {
+                                "action": "http://[lenovo]:9102/api/media/play",
+                                "params": {
+                                    "query": {
+                                        "media": "adaptivepodcast/scene2.mp3"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 0
+                            }
+                        ],
+                        [
+                            {
+                                "action": "http://[speech]:9105/api/speech",
+                                "params": {
+                                    "body": {
+                                        "speech": [
+                                            {
+                                                "words": "I am quite unusual. That is true.",
+                                                "voice": "Serena",
+                                                "rate": "180",
+                                                "delay": ""
+                                            }
+                                        ]
+                                    }
+                                },
+                                "method": "POST",
+                                "delay": 21000
+                            }
+                        ],
+                        [
+                            {
+                                "action": "http://[lenovo]:9107/api/arm/lights",
+                                "params": {
+                                    "query": {
+                                        "colour": "2"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 21000
+                            }
+                        ],
+                        [
+                            {
+                                "action": "http://[lenovo]:9107/api/arm/lights",
+                                "params": {
+                                    "query": {
+                                        "colour": "0"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 23000
+                            }
+                        ],
+                        [
+                            {
+                                "action": "http://[lenovo]:9107/api/arm/lights",
+                                "params": {
+                                    "query": {
+                                        "colour": "2"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 46500
+                            }
+                        ],
+                        [
+                            {
+                                "action": "http://[lenovo]:9107/api/arm/dyson",
+                                "params": {},
+                                "method": "GET",
+                                "delay": 47000
+                            }
+                        ],
+                        [
+                            {
+                                "action": "http://[speech]:9105/api/speech",
+                                "params": {
+                                    "body": {
+                                        "speech": [
+                                            {
+                                                "words": "heat set",
+                                                "voice": "Serena",
+                                                "rate": "180",
+                                                "delay": "0"
+                                            }
+                                        ]
+                                    }
+                                },
+                                "method": "POST",
+                                "delay": 49000
+                            }
+                        ],
+                        [
+                            {
+                                "action": "http://[lenovo]:9107/api/arm/lights",
+                                "params": {
+                                    "query": {
+                                        "colour": "0"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 50000
+                            }
+                        ],
+                        [
+                            {
+                                "action": "http://[lenovo]:9107/api/arm/lights",
+                                "params": {
+                                    "query": {
+                                        "colour": "2"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 54500
+                            }
+                        ],
+                        [
+                            {
+                                "action": "http://[speech]:9105/api/speech",
+                                "params": {
+                                    "body": {
+                                        "speech": [
+                                            {
+                                                "words": "doors locked",
+                                                "voice": "Serena",
+                                                "rate": "180",
+                                                "delay": "0"
+                                            }
+                                        ]
+                                    }
+                                },
+                                "method": "POST",
+                                "delay": 55000
+                            }
+                        ],
+                        [
+                            {
+                                "action": "http://[lenovo]:9107/api/arm/lights",
+                                "params": {
+                                    "query": {
+                                        "colour": "0"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 58000
+                            }
+                        ]
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "scene-three"
+                        },
+                        "next": "scenethree",
+                        "actions": []
+                    }
+                ],
+                "data": [
+                    "scene-three"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "scenethree",
+                "id": "scenethree",
+                "subscription": "/press",
+                "onstart": {
+                    "actions": [
+                        [
+                            {
+                                "action": "http://[lenovo]:9102/api/media/play",
+                                "params": {
+                                    "query": {
+                                        "media": "adaptivepodcast/scene3.mp3"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 0
+                            }
+                        ],
+                        [
+                            {
+                                "action": "http://[speech]:9105/api/speech",
+                                "params": {
+                                    "body": {
+                                        "speech": [
+                                            {
+                                                "words": "No!",
+                                                "voice": "Serena",
+                                                "rate": "100",
+                                                "delay": "0"
+                                            }
+                                        ]
+                                    }
+                                },
+                                "method": "POST",
+                                "delay": 16000
+                            }
+                        ],
+                        [
+                            {
+                                "action": "http://[lenovo]:9107/api/arm/lights",
+                                "params": {
+                                    "query": {
+                                        "colour": "1"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 16000
+                            }
+                        ],
+                        [
+                            {
+                                "action": "http://[lenovo]:9107/api/arm/no",
+                                "params": {},
+                                "method": "GET",
+                                "delay": 15000
+                            }
+                        ],
+                        [
+                            {
+                                "action": "http://[speech]:9105/api/speech",
+                                "params": {
+                                    "body": {
+                                        "speech": [
+                                            {
+                                                "words": "Sam.  Your father cannot help you.",
+                                                "voice": "Serena",
+                                                "rate": "180",
+                                                "delay": "0"
+                                            }
+                                        ]
+                                    }
+                                },
+                                "method": "POST",
+                                "delay": 19000
+                            },
+                            {
+                                "action": "http://[lenovo]:9107/api/arm/lookdown",
+                                "params": {},
+                                "method": "GET",
+                                "delay": 0
+                            }
+                        ],
+                        [
+                            {
+                                "action": "http://[lenovo]:9107/api/arm/lights",
+                                "params": {
+                                    "query": {
+                                        "colour": "0"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 21000
+                            }
+                        ]
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "scene-four"
+                        },
+                        "next": "scenefour",
+                        "actions": []
+                    }
+                ],
+                "data": [
+                    "scene-four"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "scenefour",
+                "id": "scenefour",
+                "subscription": "/press",
+                "onstart": {
+                    "actions": [
+                        [
+                            {
+                                "action": "http://[lenovo]:9102/api/media/play",
+                                "params": {
+                                    "query": {
+                                        "media": "adaptivepodcast/scene4.mp3"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 0
+                            }
+                        ],
+                        [
+                            {
+                                "action": "http://[speech]:9105/api/speech",
+                                "params": {
+                                    "body": {
+                                        "speech": [
+                                            {
+                                                "words": "|textmessage|",
+                                                "voice": "Serena",
+                                                "rate": "180",
+                                                "delay": "0"
+                                            }
+                                        ]
+                                    }
+                                },
+                                "method": "POST",
+                                "delay": 52000
+                            }
+                        ]
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "scene-five"
+                        },
+                        "next": "scenefive",
+                        "actions": []
+                    }
+                ],
+                "data": [
+                    "scene-five"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "scenefive",
+                "id": "scenefive",
+                "subscription": "/press",
+                "onstart": {
+                    "actions": [
+                        [
+                            {
+                                "action": "http://[lenovo]:9102/api/media/play",
+                                "params": {
+                                    "query": {
+                                        "media": "adaptivepodcast/scene5.mp3"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 0
+                            }
+                        ]
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "scene-six"
+                        },
+                        "next": "scenesix",
+                        "actions": []
+                    }
+                ],
+                "data": [
+                    "scene-six"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "scenesix",
+                "id": "scenesix",
+                "subscription": "/press",
+                "onstart": {
+                    "actions": [
+                        [
+                            {
+                                "action": "http://[lenovo]:9102/api/media/play",
+                                "params": {
+                                    "query": {
+                                        "media": "adaptivepodcast/scene6.mp3"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 0
+                            }
+                        ],
+                        [
+                            {
+                                "action": "http://[lenovo]:9107/api/arm/home",
+                                "params": {},
+                                "method": "GET",
+                                "delay": 20000
+                            },
+                            {
+                                "action": "http://[lenovo]:9107/api/arm/forward",
+                                "params": {},
+                                "method": "GET",
+                                "delay": 1000
+                            },
+                            {
+                                "action": "http://[lenovo]:9107/api/arm/home",
+                                "params": {},
+                                "method": "GET",
+                                "delay": 8000
+                            }
+                        ],
+                        [
+                            {
+                                "action": "http://[speech]:9105/api/speech",
+                                "params": {
+                                    "body": {
+                                        "speech": [
+                                            {
+                                                "words": "yes Sam?",
+                                                "voice": "Serena",
+                                                "rate": "150",
+                                                "delay": "0"
+                                            }
+                                        ]
+                                    }
+                                },
+                                "method": "POST",
+                                "delay": 20000
+                            }
+                        ],
+                        [
+                            {
+                                "action": "http://[speech]:9105/api/speech",
+                                "params": {
+                                    "body": {
+                                        "speech": [
+                                            {
+                                                "words": "I am always here Sam. Right next to you.",
+                                                "voice": "Serena",
+                                                "rate": "150",
+                                                "delay": "0"
+                                            }
+                                        ]
+                                    }
+                                },
+                                "method": "POST",
+                                "delay": 25000
+                            }
+                        ],
+                        [
+                            {
+                                "action": "http://[speech]:9105/api/speech",
+                                "params": {
+                                    "body": {
+                                        "speech": [
+                                            {
+                                                "words": "doors locked",
+                                                "voice": "Serena",
+                                                "rate": "150",
+                                                "delay": "0"
+                                            }
+                                        ]
+                                    }
+                                },
+                                "method": "POST",
+                                "delay": 31000
+                            }
+                        ],
+                        [
+                            {
+                                "action": "http://[speech]:9105/api/speech",
+                                "params": {
+                                    "body": {
+                                        "speech": [
+                                            {
+                                                "words": "calling fire brigade to |address|",
+                                                "voice": "Serena",
+                                                "rate": "150",
+                                                "delay": "0"
+                                            }
+                                        ]
+                                    }
+                                },
+                                "method": "POST",
+                                "delay": 53000
+                            }
+                        ]
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "scene-seven"
+                        },
+                        "next": "sceneseven",
+                        "actions": []
+                    }
+                ],
+                "data": [
+                    "scene-seven"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "sceneseven",
+                "id": "sceneseven",
+                "subscription": "/press",
+                "onstart": {
+                    "actions": [
+                        [
+                            {
+                                "action": "http://[lenovo]:9102/api/media/play",
+                                "params": {
+                                    "query": {
+                                        "media": "adaptivepodcast/scene7.mp3"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 0
+                            }
+                        ]
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "finish"
+                        },
+                        "next": "fini",
+                        "actions": []
+                    }
+                ],
+                "data": [
+                    "finish"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "fini",
+                "id": "fini",
+                "subscription": "/press",
+                "onstart": {
+                    "actions": [
+                        [
+                            {
+                                "action": "http://[lenovo]:9102/api/media/play",
+                                "params": {
+                                    "query": {
+                                        "media": "adaptivepodcast/end.mp3"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 0
+                            },
+                            {
+                                "action": "http://[lenovo]:9107/api/arm/collapse",
+                                "params": {},
+                                "method": "GET",
+                                "delay": 0
+                            }
+                        ]
+                    ]
+                },
+                "rules": [],
+                "data": []
+            }
+        ]
+    }
+]

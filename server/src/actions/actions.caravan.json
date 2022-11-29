@@ -844,6 +844,15 @@
            "query":{
               "script_id":"ID028"
            }
+      },
+      "qrcode":{
+         "type":"request",
+         "data":{
+            "url": "http://127.0.0.1:9102/api/qrcode",
+            "type":"GET",
+            "contenttype":"application/json"
+         },
+         "query":{}
       }
       
 }

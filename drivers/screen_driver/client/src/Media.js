@@ -16,15 +16,16 @@ function Media({media="", delay=500}) {
     },[media])
 
     //on unmount
-  
+  //<iframe src={`${url}/silence.mp3`} type="audio/mp3" allow="autoplay" id="audio" style={{display:"none"}}></iframe>
 //<iframe src="https://cross-origin.com/myvideo.html" allow="autoplay; fullscreen">
+//type="video/mp4"
+
     const renderVideo = ()=>{
         const url = window.location.href.replace("/media", "");
       
         return  <>
-                <iframe src={`${url}/silence.mp3`} type="audio/mp3" allow="autoplay" id="audio" style={{display:"none"}}></iframe>
                 <video fullScreen autoPlay style={{width:"100vw", height:"100vh"}}>
-                    <source src={`${url}/${media}`} type="video/mp4"/>
+                    <source src={`${url}/${media}`} />
                 </video>
                 </>
     }

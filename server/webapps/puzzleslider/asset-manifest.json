@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/wa/puzzleslider/static/css/main.8a4ca598.css",
+    "main.js": "/wa/puzzleslider/static/js/main.eb011369.js",
+    "static/js/787.d132e20d.chunk.js": "/wa/puzzleslider/static/js/787.d132e20d.chunk.js",
+    "static/media/finger.svg": "/wa/puzzleslider/static/media/finger.72c0dcad7e78a3c07db17946e9d0f9d0.svg",
+    "static/media/eye.svg": "/wa/puzzleslider/static/media/eye.58f277af0efe1a0980c4567f50a5d3a6.svg",
+    "index.html": "/wa/puzzleslider/index.html",
+    "main.8a4ca598.css.map": "/wa/puzzleslider/static/css/main.8a4ca598.css.map",
+    "main.eb011369.js.map": "/wa/puzzleslider/static/js/main.eb011369.js.map",
+    "787.d132e20d.chunk.js.map": "/wa/puzzleslider/static/js/787.d132e20d.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.8a4ca598.css",
+    "static/js/main.eb011369.js"
+  ]
+}

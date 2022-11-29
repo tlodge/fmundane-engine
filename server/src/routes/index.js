@@ -149,6 +149,13 @@ indexRouter.get('/trigger', (req, res)=>{
     res.status(200).json({node});
 });
 
+indexRouter.get('/webhook', (req,res)=>{
+    console.log("ok seen a webhook come in!");
+    const {trigger} = req.query;
+    send("/webhook", JSON.stringify({data:trigger}));
+    res.status(200).json({trigger});
+});
+
 indexRouter.get('/press', (req, res)=>{
     const ts = Date.now();
     const {name, layer} = req.query;
@@ -169,5 +176,9 @@ indexRouter.get('/speech', (req, res)=>{
     send("/speech", JSON.stringify({data:speech, layer, ts}));
     res.status(200).json({ speech });
 }); 
+
+
+
+
 
 export default indexRouter;

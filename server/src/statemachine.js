@@ -5,7 +5,7 @@ import actiontmpl from './actions/actions.json';
 import ips from './actions/IPs.json';
 import {handle, handlespeech} from './actionhandler';
 import {replaceAll} from './utils';
-
+import http from 'http';
 
 const actions = JSON.parse(Object.keys(ips).reduce((acc, key)=>{
     return replaceAll(acc, `[${key}]`,ips[key]);    
@@ -34,24 +34,24 @@ const _executeactions = async (alist, placeholders={})=>{
           
             //swap in any params
             const _alist = actionlist.map((a)=>{
-                const astr = JSON.stringify(a.action);
+                
+                let astr = JSON.stringify(a,null,4);
                 var matches = astr.matchAll(/\|(.*?)\|/g);
 
                 for (const match of matches){
                     const toreplace = match[0];
+                    
                     const key = match[1].split(":")[0];
-                
                     const replacement = (placeholders[key] || "").split(/\s+/);
+                    
                     if (replacement){
                         const tokens = match[1].split(":");
-                        const delimiter = tokens.length > 1 ? ` ${tokens[1]} ` : ",";
+                        const delimiter = tokens.length > 1 ? ` ${tokens[1]} ` : " ";
                         astr = replaceAll(astr, toreplace,replacement.join(delimiter));
-                       
                     }
                 }
-                return  {...a, action:JSON.parse(astr)}
+                return  JSON.parse(astr);
             });
-          
 
             parallel.push({list:_alist, cb:()=>{
                 send("action", _alist.map(a=>a.action))
@@ -103,11 +103,45 @@ const _executespeech = async (lines, placeholders={})=>{
     }
 }
 
+const fetchPlaceholders = ()=>{
+    let url = "http://127.0.0.1:3001/placeholders";
+
+    return new Promise ((resolve, reject)=>{
+        http.get(url,(res) => {
+            let body = "";
+
+            res.on("data", (chunk) => {
+                body += chunk;
+            });
+
+            res.on("end", () => {
+                try {
+                    let json = JSON.parse(body);
+                    console.log("nice, have placeholders", json);
+                    resolve(json);
+                } catch (error) {
+                    
+                    console.error(error.message);
+                    reject({error:err.message});
+                };
+            });
+        }).on("error", (error) => {
+            console.error(error.message);
+            reject({error:err.message});
+        });
+    });
+}
+
 const StateMachine =   (config)=>{
     
     let event;
     const {events = [], id=""} = config;
-    let placeholders = {};
+    let placeholders = {}
+    
+    fetchPlaceholders().then((ph)=>{
+        placeholders = ph;
+    });
+
     const eventlookup = events.reduce((acc, item)=>{
         return {
             ...acc,
@@ -116,8 +150,13 @@ const StateMachine =   (config)=>{
     },{});
 
     const formataction = (a)=>{
+       
+       
+
         if (actions[a.action]) 
             return actions[a.action];
+
+        
 
         const method = a.method || "GET";
         
@@ -132,15 +171,17 @@ const StateMachine =   (config)=>{
         if (method == "GET"){
             return {
                 ...base,
-                query : a.params,
+                query :  ((a.params)||{}).query || {},
             }
         }else{
             return {
                 ...base,
-                body : a.params,
+                body : ((a.params)||{}).body || {},
             }
         }
     }
+
+    
 
     const reset = async ()=>{
         nexteventid = config.start.event;
@@ -149,13 +190,17 @@ const StateMachine =   (config)=>{
             //send the ready early -- or perhaps an init message?
             if (event.onstart){
                 const {speech=[], actions:_actions=[]} = event.onstart;
-                placeholders = {};
+                placeholders = await fetchPlaceholders();
+                
+
                 const __startactions =  _actions.map(arr=>(arr||[]).map(a=>{
                     return {
                         ...a, 
                         action: formataction(a)
                     }
                 }));
+
+              
 
                 await Promise.all([await _executeactions(__startactions), await _executespeech(speech)]);
                 
@@ -230,7 +275,7 @@ const StateMachine =   (config)=>{
             unsubscribe(e.subscription, id);
             
             const _actions = actionids.map(arr=>(arr||[]).map(a=>({...a, action:formataction(a)})))
-          
+           
             await _executeactions(_actions, placeholders);
         
             const _e = eventlookup[nexteventid];
@@ -294,7 +339,7 @@ const StateMachine =   (config)=>{
             }
 
             subscribe(e.subscription, id,  async(msg)=>{
-             
+                console.log("seen a subscription event", e.subscription);
                 triggered = false;
                 
                 const {data, ts} = msg;     

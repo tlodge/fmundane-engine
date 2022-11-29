@@ -5,7 +5,6 @@ const http = require('http');
 const express = require('express');
 const bodyParser = require('body-parser');
 const { execFile} = require('child_process');
-var rp = require('request-promise-native')
 const PORT = '9105';
 const MEDIADIR = '../../media';
 

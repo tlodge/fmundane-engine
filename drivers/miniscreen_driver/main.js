@@ -6,13 +6,35 @@ const cors = require('cors');
 const app = express();
 const sockets = [];
 
+
 app.use(cors()) 
+app.use(express.json());
 app.use(express.static("public"));
 
 app.get('/api/update', (req,res)=>{
     const {html=""} = req.query; 
     try{
         send(html);
+    }finally{
+        console.log("returning success!!");
+        res.send({success:true});
+    }
+})
+
+app.post('/api/update', (req,res)=>{
+    const {html=""} = req.body; 
+    console.log("seen html", html)
+    try{
+        send(html);
+    }finally{
+        console.log("returning success!!");
+        res.send({success:true});
+    }
+})
+
+app.get('/api/home', (req,res)=>{
+    try{
+        send("");
     }finally{
         console.log("returning success!!");
         res.send({success:true});

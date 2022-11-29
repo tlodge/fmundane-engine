@@ -1,49 +1,12 @@
+Reference layers from other layers and navigation meta language (layer1:-1) (layer1:pause)  (layer1:id]) eg. to have control over back / forth
+Timeouts (i.e. nodes that automatically progress after a timeout period) - need to be rendered in the tree.
 
-
-To do in Lancaster
-
-* Pull new code
-* Copy new media over
-* mv IPs.caravan.json => IPs.json
-* add supervisord for nanoleaf
-
-rebuild the screen driver (client)
-rebuild the main client
-
-before you do this:
-
-open: 
-
-/Users/tlodge/futuremundane/fmundane-engine/drivers/screen_driver/client/node_modules/@tensorflow-models/facemesh/dist/facemesh.js
-
-AND REPLACE
-
-https://tfhub.dev/tensorflow/tfjs-model/blazeface/1/default/1/model.json?tfjs-format=file with http://localhost:9102/blazeface
-
-https://tfhub.dev/mediapipe/tfjs-model/facemesh/1/default/1/model.json?tfjs-format=file  with http://localhost:9102/facemesh
-
-
-open:
-
- /Users/tlodge/futuremundane/fmundane-engine/drivers/screen_driver/client/node_modules/@tensorflow-models/facemesh/dist/facemesh.esm.js
-
- AND REPLACE
-
-https://tfhub.dev/tensorflow/tfjs-model/blazeface/1/default/1/model.json?tfjs-format=file with http://localhost:9102/blazeface
-
-https://tfhub.dev/mediapipe/tfjs-model/facemesh/1/default/1/model.json?tfjs-format=file  with http://localhost:9102/facemesh
-
-
-
-THINGS TO CHECK
-
-Local speech recognition and synthesis
-Rapsberry PI with HDI for advert triggering
-Send paul script with paths
-Look into what label printer can print
-
-
-Other improvements
-
-Reference layers from other layers and navigation meta language (layer1:-1) (layer1:pause)  (layer1:id]) eg. to have control over back / forth.
-Timeouts - need to be rendered in the tree.
+show placeholders / edit placeholders in WoZ interface
+show error reporting in WoZ interface
+write driver for mini screens
+upload support for media
+flickering lights suppprt (or timings support!)
+check if superflous code in screen driver
+speech recognition in lenovo? -- could pass on to miniscreens?
+speech synthesis lenovo?
+driver for databox

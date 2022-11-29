@@ -17,12 +17,8 @@ client.on('connect', function () {
 client.on('message', (topic, message, pkt)=>{
    
     console.log("seen message", topic, message.toString());
-
     const msg = JSON.parse(message.toString());
-    
     console.log("parsed is", msg);
-
-    const {layer} = msg;
 
     for (const _layer of Object.keys(callbacks[topic])){
         //if (_layer==layer){
@@ -73,10 +69,11 @@ export const unsubscribe = (topic, layer)=>{
 }
 
 export const subscribe = (topic,layer, cb)=>{
- 
+    console.log("*** subscribing to *****", topic);
     const subscribed = Object.keys(callbacks).indexOf(topic) != -1;
     
     if (!subscribed){ 
+        console.log("Client subscribe", topic);
         client.subscribe(topic);
     }
 
@@ -89,6 +86,7 @@ export const subscribe = (topic,layer, cb)=>{
     }
 }
 
-export const send = (topic, message)=>{
+export const send = (topic, message={})=>{
+    console.log("publishing", topic, message)
     client.publish(topic, message);
 }

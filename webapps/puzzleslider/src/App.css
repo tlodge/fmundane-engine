@@ -1,0 +1,138 @@
+body {
+  background-color: rgb(151,77,242);
+  font-family: europa, sans-serif;
+}
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 30vmin;
+  pointer-events: none;
+}
+
+.finger{
+  height: 30vmin;
+  pointer-events: none;
+  margin-bottom:10px;
+}
+
+.vertical-slider{
+  height: 300px;
+  width: 20px;
+  border: 2px solid rgb(0,255,123);
+  margin: 10px 20px 10px 20px; 
+}
+
+.vertical-slider .example-thumb {
+    left: -10px;
+    width: 40px;
+    line-height: 34px;
+    height: 40px;
+    border-radius:25px;
+}
+
+.example-thumb {
+    font-size: 0.9em;
+    text-align: center;
+    background-color: rgb(151,77,242);
+    color: white;
+    cursor: pointer;
+    border: 2px solid rgb(0,255,123);
+    box-sizing: border-box;
+}
+
+
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+.grid{
+  padding:10px;
+}
+
+.inner{
+  fill:rgb(0,255,123);
+  stroke: none;
+}
+
+.outer{
+  stroke:rgb(0,255,123);
+  stroke-width: 1px;
+  fill: none;
+}
+
+.topbox{
+  border: 2px solid rgb(0,255,123);
+  width: calc(100vw - 30px);
+  margin: 5px 0px 5px 0px;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.innerbox{
+  border: 2px solid rgb(0,255,123);
+  width: calc(100vw - 30px);
+  margin: 5px 0px 5px 0px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content:center;
+  flex-direction:row;
+}
+
+.toptext{
+  color: white;/*rgb(0,255,123);*/
+  margin-bottom:20px;
+  font-weight: 700;
+}
+
+.bottomtext{
+  color: white;/*rgb(0,255,123);*/
+  font-weight: 700;
+}
+
+.textcontainer {
+  width: 250px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.bottombox{
+  display: flex;
+  align-items: center;
+  jusify-content:center;
+  flex-direction:column; 
+  border: 2px solid rgb(0,255,123);
+  width: calc(100vw - 30px);
+  margin: 5px 0px 5px 0px;
+  box-sizing: border-box;
+}

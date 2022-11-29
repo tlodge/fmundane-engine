@@ -12,15 +12,14 @@ app.use(express.static("../../../media"));
 
 app.get('/api/camera/scan', (req,res) => {
     console.log("seen camera scan request");
-    const {state=null} = req.query;
-    send(JSON.stringify({type:"camera", state}));
+    send(JSON.stringify({type:"camera", state:"scan"}));
     res.status(200).send();
 })
 
 app.get('/api/camera', (req,res) => {
     console.log("seen scan request");
     const {type=null} = req.query;
-    send(JSON.stringify({type:"url", url:"/camera"}));
+    send(JSON.stringify({type:"camera"}));
 	res.status(200).send();
 })
 
@@ -30,6 +29,13 @@ app.get('/api/home', (req,res) => {
     send(JSON.stringify({type:"url", url:"/"}));
 	res.status(200).send();
 })
+
+app.get('/api/web', (req, res)=>{
+    console.log("seen web");
+    const {snippet=""} = req.query;
+    send(JSON.stringify({type:"web", snippet}));
+	res.status(200).send();
+});
 
 app.get('/api/media/play',  (req,res) => {
     console.log("seen media play request");
@@ -49,6 +55,21 @@ app.get('/api/air', (req,res) => {
     send(JSON.stringify({type:"url", url:"/air"}));
     res.status(200).send();
 })
+
+app.get('/api/qrcode', (req,res) => {
+    console.log("seen qrcode request!");
+    const {qrcode} = req.query;
+    send(JSON.stringify({type:"qrcode", data:qrcode}));
+    res.status(200).send();
+})
+
+app.get('/api/image', (req,res) => {
+    console.log("seen image request!", req.query);
+    const {image} = req.query;
+    send(JSON.stringify({type:"image", image}));
+    res.status(200).send();
+})
+
 
 app.get('/api/message', (req,res)=>{
     const {message=""} = req.query;

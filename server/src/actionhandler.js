@@ -68,6 +68,13 @@ const replaceurl = (str)=>{
     },str);
 }
 
+const replacequery = (obj={})=>{
+    
+    return JSON.parse(Object.keys(ips).reduce((acc,key)=>{
+        return acc.replace(`[${key}]`, ips[key]);
+    },JSON.stringify(obj)));
+}
+
 export const handle = async ({action, delay=0, params={}})=>{
     
 
@@ -77,7 +84,8 @@ export const handle = async ({action, delay=0, params={}})=>{
             return {...acc, [key]:params[key]}
         }, action);
         
-        const __action = {..._action, data : {..._action.data, url:replaceurl(_action.data.url)}};
+        const __action = {..._action, query:replacequery(_action.query), data : {..._action.data, url:replaceurl(_action.data.url)}};
+        console.log("HAVE ACTION!", __action);
         const response = await request(__action, delay);
         return response;
     }

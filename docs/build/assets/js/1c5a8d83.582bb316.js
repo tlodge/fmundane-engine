@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkfmundane_docs=self.webpackChunkfmundane_docs||[]).push([[7752],{7013:(e,n,a)=>{a.r(n),a.d(n,{default:()=>u});var t=a(7294),l=a(3285);function u(){return t.createElement(l.Z,null,t.createElement("h1",null,"My React page"),t.createElement("p",null,"This is a React page"))}}}]);

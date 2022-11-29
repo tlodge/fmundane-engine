@@ -4,7 +4,7 @@ sidebar_position: 2
 
 # Creating Experiences
 
-Note that experiences can be created using a modified version of [Twine](https://twinery.org/).  Though it is worth reading through this to get an idea of the file structure.  However, to get started with authoring, take a look at the [Future Mundane Twine Repo](https://github.com/tlodge/twinejs), and read our docs here.
+Note that experiences can be created using a modified version of [Twine](https://tlodge.github.io/fmundane-twine/).  Though it is worth reading through this to get an idea of the file structure.  However, to get started with authoring, take a look at the [Future Mundane Twine Repo](https://github.com/tlodge/fmundane-twine), and read our docs here.
 
 
 An experience consists of one or more **layers.** A layer can be thought of as a set of nodes and branching paths (i.e. a tree). A **node** is a point in an experience where things ( **actions** ) happen. So a node might turn lights white, turn the fan on and put something on the screen. 

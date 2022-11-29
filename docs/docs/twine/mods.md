@@ -4,6 +4,8 @@ sidebar_position: 2
 
 # Modifications to core Twine
 
+The repo for the modified version of Twine can be found [here](https://github.com/tlodge/fmundane-twine) 
+
 These are the places in the src tree where modifications have been made to core twine
 
 * src/components/rules 
@@ -24,25 +26,11 @@ the code for the ui that handles exporting to the caravan
 
 * src/routes/story-list/toolbar/story/story-actions
 
-downloads and attempts to export to caravan: 
-            
-```await request.post('/author/save').set('Content-Type', 'application/json').send({name,layer:_stories});```
-
-* NB - not using choosetype anymore as this is selected in the rules interface 
 
 ## Building for static twine site (i.e. on github pages)
 
-Run the following:
+This should happen automatically when you push to git.  There is a git workflow at: `fmundane-twine/.github/workflows/deploy.yml` which deploys the dist/web subtree to the gh-pages branch.
 
-```
-npm run build:web
-```
 
-This will build minimised files in dist and copy them to the ../twineweb directory.  The twineweb directory is the dirstibution of a static twine web site that can be hosted on, for example github pages.  To push to github pages:
 
-```
-cd ../twineweb
-git add .
-git commit -m 'my commit message'
-git push
-```
+

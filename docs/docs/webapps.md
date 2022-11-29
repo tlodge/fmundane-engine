@@ -6,9 +6,7 @@ sidebar_position: 5
 
 Webapps are websites that are served from the machine running the future mundane engine. They can then be served up to devices connected to the caravan's network. You can place them in the fmundane-engine/server/webapps directory and they will be served under the /wa subdirectory.  In the edge of reality experience, for example, three webapps have been created to run on user's phones to get users to solve puzzles.
 
-So for example the puzzle webapp is under
-
-fmundane-engine/server/webapps/puzzle
+So for example the puzzle webapp is under `fmundane-engine/server/webapps/puzzle`
 
 and can be found at:
 

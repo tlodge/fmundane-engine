@@ -21,7 +21,7 @@ npm install
 Then run the server
 
 ```
-node main.js
+npm start
 ```
 
 And you should see the wizard of oz interface running at:

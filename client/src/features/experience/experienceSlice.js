@@ -237,6 +237,7 @@ export const fetchLayers = (layer, r) => (dispatch, getState)=>{
   
   superagent.get('/event/layers').query({layer}).then(res => {
     const trees = res.body.map(et=>({...et.tree, layerid:et.layerid}));
+    console.log(trees);
     dispatch(setLayerName(layer));
     dispatch(setLayers(trees));
   })

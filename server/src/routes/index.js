@@ -45,6 +45,47 @@ const indexRouter = express.Router();
 let statemachines = [];
 let _seen   = {};
 
+const extractplaceholderfromaction = (actions)=>{
+    console.log("extracting placholder", JSON.stringify(actions,null,4));
+    const items = {};
+    for (const action of actions){
+        const placeholders = [];
+        const input = JSON.stringify(action,null,4);
+        const indexes = [...input].reduce((acc,item,i)=>{
+            if (item === "|"){
+                return [...acc, i];
+            }
+            return acc;
+        },[]);
+        console.log(indexes);
+    
+  
+        for (let i = 0; i < indexes.length; i+=2){
+            placeholders.push(input.substring(indexes[i]+1,indexes[i+1]))
+        }
+        console.log(placeholders)
+        items[action.action] = placeholders;
+    }
+    console.log(JSON.stringify(items,null,4))
+    return items;
+}
+
+const extractplaceholders = (node)=>{
+    const {onstart, rules} = node;
+    const {actions: osactions} = onstart;
+    const {actions: ractions} = rules;
+    const actions = [...(osactions || []), ...(ractions||[])];
+    let placeholders = {};
+
+    for (const action of actions){
+        if (JSON.stringify(action).indexOf("|") != -1){
+            placeholders = {...placeholders, ...extractplaceholderfromaction(action)};
+        }
+    }
+    
+    return placeholders;
+}
+
 const children = (events, node, trigger, actions=[])=>{
     
     if (!node){
@@ -59,6 +100,12 @@ const children = (events, node, trigger, actions=[])=>{
         }
     }
     _seen[node.id] = true;
+
+    //this is wheer we add placeholders
+    const placeholders = {
+        placeholders : extractplaceholders(node)
+    }
+
     return {
         id: node.id,
         name: node.name || node.id,
@@ -71,7 +118,8 @@ const children = (events, node, trigger, actions=[])=>{
                 //[`${node.id}->${r.next}`]: {rid: r.id, actions:r.actions, rule:r.rule}
                 [r.id]: {rid: r.id, actions:r.actions, rule:r.rule}
             }
-        },{})
+        },{}),
+        ...placeholders,
     }
     
 }
@@ -94,14 +142,20 @@ const tree = (layer)=>{
         tree: children(events, events[layer.start.event],null,[])
     }
 
+   
     return t;
 }
 
 indexRouter.get('/layers', (req, res)=>{
+    
+    console.log("ok getting layers!!");
+
     const {layer="layer1.json"} = req.query;
     const _lfile = fs.readFileSync(`authored/${layer}.json`);
     const _ljson = JSON.parse(_lfile);
+    
     _layers = _ljson.map(f => format(f));
+    //console.log(JSON.stringify(_layers,null,4));
     res.status(200).json(_layers.map(l=>tree(l)));
 });
 

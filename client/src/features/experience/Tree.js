@@ -1,8 +1,12 @@
 import * as React from "react";
 import * as d3 from "d3";
 import * as d3z from "d3-zoom";
+import request from "superagent";
 import {useD3} from '../../hooks/useD3';
-
+import { Uploader } from "./Uploader";
+import {TextEntry} from "./TextEntry";
+import {PlaceholderManager} from "./PlaceholderManager";
+import {placeholderType, updatePlaceholder} from "../../utils";
 
 let _seen = {};
 
@@ -113,6 +117,21 @@ function Tree(t) {
       
     const gtree = React.useRef();
     
+    // to toggle showing the placeholder dialogue
+    const [placeholderVisible, setPlaceholderVisible] = React.useState(false);
+
+    // to toggle the main placeholder management screen on and off
+    const [placeholderManagementVisible, setPlaceholderManagementVisible] = React.useState(false);
+    
+    //record the placeholders for the currently selected node
+    const [selectedPlaceholders, setSelectedPlaceholders] = React.useState({}); //placeholders that have been found for a selected node.
+
+    //all of the placeholders in this tree, indexed by node id
+    const [allPlaceholders, setAllPlaceholders] = React.useState({});
+    
+    const [placeholderValues, setPlaceholderValues] = React.useState({}); //placeholders that have been found in the text
+
+
     const moveChart = ()=>{
         const g = d3.select(gtree.current);
         let {x,y} = _seen[t.id] || {x:0,y:0};
@@ -124,7 +143,36 @@ function Tree(t) {
         g.transition().duration(2000).attr("transform", `translate(${-y-mx+200},${-x-my+t.height/2})`);
     }
 
-    
+    //recursively get all placeholders from this tree
+    const extractPlaceholders = (node)=>{
+        if (Object.keys(node.data.placeholders||{}).length > 0){
+            return {
+                        [node.data.id]:node.data.placeholders, 
+                        ...(node.children || []).reduce((acc, item)=>{
+                            return {...acc, ...extractPlaceholders(item)}
+                        },{})
+            }
+        }else{
+            if ((node.children || []).length > 0){
+                return node.children.reduce((acc, item)=>{
+                    return {...acc, ...extractPlaceholders(item)}
+                },{})
+            }
+            return {};
+        }
+    }
+
+
+    const fetchPlaceHolderValues = async()=>{
+        const {text="{}"} = await request.get("/placeholders/");
+        setPlaceholderValues(JSON.parse(text));
+        setAllPlaceholders(extractPlaceholders(t));
+    }
+
+    React.useEffect(() => {   
+       fetchPlaceHolderValues();
+    }, []);
+
     React.useEffect(() => {
         moveChart();
     }, [t]);
@@ -201,6 +249,62 @@ function Tree(t) {
         });
     }
 
+    const togglePlaceholders = (placeholders={})=>{
+        setSelectedPlaceholders(placeholders)
+        setPlaceholderVisible(!placeholderVisible);
+    }
+
+    const toggleShowPlaceHolderManagement = ()=>{
+        setPlaceholderManagementVisible(!placeholderManagementVisible);
+    }
+
+  
+
+    const renderSpeechPlaceHolder = (value)=>{
+        return <div className="flex flex-col justify-center items-center">
+                    <div className="text-sm">{placeholderValues[value]}</div>
+                    <div className="p-4"> {`set speech for`} <strong>{value}</strong> {"placeholder"}</div>
+                    <TextEntry close={togglePlaceholders} done={(text)=>{togglePlaceholders(); updatePlaceholder(value, text)}}/>
+                </div>
+    }
+
+    const renderImagePlaceHolder = (value)=>{
+        return     <div className="flex flex-col justify-center items-center">
+                        <div className="p-4"> {`upload image for`} <strong>{value}</strong> {"placeholder"}</div>
+                        <div><img width="400px" src={`assets/${placeholderValues[value]}`}/></div>
+                        <Uploader close={togglePlaceholders} success={(name)=>{togglePlaceholders(); updatePlaceholder(value, name)}}/>
+                    </div>
+    }
+
+    const renderPlaceholder  = (key, value)=>{
+
+        const renderType = (key,value)=>{
+            switch (placeholderType(key)){
+                case "speech":
+                    return renderSpeechPlaceHolder(value)
+                case "image":
+                    return renderImagePlaceHolder(value);
+                default:
+                    return;
+            }
+        }
+
+        return  <div onClick={togglePlaceholders} className="flex absolute justify-center items-center" style={{top:0, left:0, width:"100vw", height:"100vh", background:"#ffffff99"}}>
+            <div onClick={(e)=>e.stopPropagation()}className="flex bg-white rounded shadow-lg border-4 border-gray-300 p-6">
+                {renderType(key,value)}
+            </div>
+        </div>
+    }
+
+    //render the placeholders for a particular node
+    const renderPlaceholders = ()=>{
+      return  Object.keys(selectedPlaceholders).map(key=>{
+        return renderPlaceholder(key, selectedPlaceholders[key]);
+      })
+    }
+
+   
+
     const renderTree = (node,selected,rid, handleClick)=>{
        
 
@@ -216,10 +320,15 @@ function Tree(t) {
             paint = selected===node.data.id;// && node.data.trigger == rid;
         }
 
+        const {placeholders={}} = node.data;
+       
+        const show = Object.keys(placeholders).length > 0;
+       
+
         return <g key={`${node.x},${node.y}`}> 
-                
                     <rect onClick={()=>handleClick(node.data.id)} x={node.y-60} y={node.x-10} width={120} height={20} rx={10} style={{fill: paint ? "#4299e1":"white", stroke:"black"}}/>
                     <text onClick={()=>handleClick(node.data.id)} textAnchor="middle" fontSize="x-small"  x={node.y} y={node.x+4}>{node.data.name}</text>
+                    {show && <circle onClick={()=>togglePlaceholders(placeholders)} cx={node.y} cy={node.x-30} r={10} fill="#E91475" stroke="#000"/>}
                     {(node.children || []).map(n=>renderTree(n, selected, rid,handleClick))}
             </g>
 
@@ -237,9 +346,11 @@ function Tree(t) {
 
     generatecoords(t);
 
+    console.log(placeholderValues);
     return <div className="text-black bg-gray-200 rounded bg-white overflow-hidden shadow-lg"> 
         <svg ref={mytree} height={t.height} style={{width:`calc(100vw - 280px)`}}>
             <circle onClick={()=>{recenter(gtree,t)}} cx={50} cy={50} r="10" fill="white" strokeWidth={2} stroke="#000"></circle>
+            <circle onClick={toggleShowPlaceHolderManagement} cx={80} cy={50} r="10" fill="#E91475" strokeWidth={2} stroke="#000"></circle>
             <g ref ={gtree} transform={`translate(120,${t.height/2})`}>
                 <g id="dragbox"> 
                     {renderLinks(links(t), rids(t))}
@@ -247,6 +358,8 @@ function Tree(t) {
                 </g>
             </g>   
         </svg>
+        {placeholderVisible && renderPlaceholders()}
+        {placeholderManagementVisible && <PlaceholderManager placeholders={allPlaceholders} close={toggleShowPlaceHolderManagement}/>}
     </div>
  }
  

@@ -164,8 +164,8 @@ export function Experience() {
         {list}
        
         </div>
-        {create && <Importer save={(name,json)=>save(name,json)} cancel={()=>toggleCreate(false)}/>}
-        {upload && <Uploader close={()=>toggleUploadMedia(false)}/>}
+        {create &&  <div className="absolute right-0" style={{top:80}}><Importer save={(name,json)=>save(name,json)} cancel={()=>toggleCreate(false)}/></div>}
+        {upload && <div className="absolute right-0" style={{top:80}}><Uploader close={()=>toggleUploadMedia(false)}/></div>}
       </div>
   );
   

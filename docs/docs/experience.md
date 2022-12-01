@@ -171,7 +171,7 @@ Experience files are written in json. They are reasonably easy to understand but
 ]
 ```
 
-The "events" array consists of all of the nodes that are in an experience (it should probably be called nodes, but there you go). Each node in the events array has an id, the endpoint that it listens on new events from (the "subscription" label), a set of actions that need to be performed when this node is triggered and a set of things that need to happen when an event comes in that matches a rule. You'll notice that the actions is a multidimensional array. This allows you specifiy that your actions run in sequence or parallel. So the following:
+The "events" array consists of all of the nodes that are in an experience (it should probably be called nodes, but there you go). Each node in the events array has an id, the endpoint that it listens on new events from (the "subscription" label), a set of actions that need to be performed when this node is triggered and a set of things that need to happen when an event comes in that matches a rule. You'll notice that the actions is a multidimensional array. This allows you specify that your actions run in sequence or parallel. So the following:
 
 ```json
 "actions": [
@@ -195,6 +195,6 @@ Would run a then b then c at the same time as d then e. Actions also have a dela
 ]
 ```
 
-You'll notice that the urls called by actions have parts of them within square brackets. These are just address placeholders that are filled in at runtime, they relate to the labels defined in src/actions/IPs.json. Note also that actions have options parameters: "params" which can be used to send additional JSON parameters in a POST or query strings in a GET.
+You'll notice that the urls called by actions have parts of them within square brackets. These are just address placeholders that are filled in at runtime, they relate to the labels defined in src/actions/IPs.json. Note also that actions have options parameters: "params" which can be used to send additional JSON parameters in a POST or query strings in a GET.  You may also find that some (older) experiences have actions that are not urls but are simple labels (e.g. fanoff).  These are looked up in the `server/src/actions.json` file and translated to full urls.
 
 Finally there is a "start" level at the top level of the JSON file which just tells the WoZ interface which node it should load up at start (and any pre-actions that need to occur, such as resetting lights, collapsing the camera and so on).

@@ -154,7 +154,8 @@ var _executeactions = /*#__PURE__*/function () {
         switch (_context4.prev = _context4.next) {
           case 0:
             placeholders = _args4.length > 1 && _args4[1] !== undefined ? _args4[1] : {};
-            parallel = []; //for (const row of alist){
+            parallel = [];
+            console.log("EXECUTING ACTIONS, placholders are", placeholders); //for (const row of alist){
             //  console.log("row is ", row);
 
             _iterator2 = _createForOfIteratorHelper(alist);
@@ -174,6 +175,7 @@ var _executeactions = /*#__PURE__*/function () {
                   try {
                     for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
                       var match = _step3.value;
+                      console.log("AHEV MATCH!!!", match[0]);
                       var toreplace = match[0];
                       var key = match[1].split(":")[0];
                       var replacement = (placeholders[key] || "").split(/\s+/);
@@ -213,7 +215,7 @@ var _executeactions = /*#__PURE__*/function () {
               _iterator2.f();
             }
 
-            _context4.next = 6;
+            _context4.next = 7;
             return Promise.all(parallel.map( /*#__PURE__*/function () {
               var _ref4 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee3(p) {
                 return _regenerator["default"].wrap(function _callee3$(_context3) {
@@ -236,7 +238,7 @@ var _executeactions = /*#__PURE__*/function () {
               };
             }()));
 
-          case 6:
+          case 7:
           case "end":
             return _context4.stop();
         }
@@ -358,9 +360,6 @@ var StateMachine = function StateMachine(config) {
       _config$id = config.id,
       id = _config$id === void 0 ? "" : _config$id;
   var placeholders = {};
-  fetchPlaceholders().then(function (ph) {
-    placeholders = ph;
-  });
   var eventlookup = events.reduce(function (acc, item) {
     return _objectSpread(_objectSpread({}, acc), {}, (0, _defineProperty2["default"])({}, item.id, item));
   }, {});
@@ -473,11 +472,16 @@ var StateMachine = function StateMachine(config) {
         while (1) {
           switch (_context11.prev = _context11.next) {
             case 0:
+              _context11.next = 2;
+              return fetchPlaceholders();
+
+            case 2:
+              placeholders = _context11.sent;
               eventid = config.start.event;
               event = eventlookup[eventid];
 
               if (!event) {
-                _context11.next = 18;
+                _context11.next = 21;
                 break;
               }
 
@@ -487,7 +491,7 @@ var StateMachine = function StateMachine(config) {
               });
 
               if (!event.onstart) {
-                _context11.next = 17;
+                _context11.next = 20;
                 break;
               }
 
@@ -500,21 +504,21 @@ var StateMachine = function StateMachine(config) {
                 });
               });
               _context11.t0 = Promise;
-              _context11.next = 10;
+              _context11.next = 13;
               return _executeactions(__startactions, placeholders);
 
-            case 10:
+            case 13:
               _context11.t1 = _context11.sent;
-              _context11.next = 13;
+              _context11.next = 16;
               return _executespeech(speech, placeholders);
 
-            case 13:
+            case 16:
               _context11.t2 = _context11.sent;
               _context11.t3 = [_context11.t1, _context11.t2];
-              _context11.next = 17;
+              _context11.next = 20;
               return _context11.t0.all.call(_context11.t0, _context11.t3);
 
-            case 17:
+            case 20:
               (0, _ws.send)("ready", {
                 layer: config.id,
                 event: {
@@ -523,7 +527,7 @@ var StateMachine = function StateMachine(config) {
                 }
               });
 
-            case 18:
+            case 21:
               //this is a subscripton to manual triggers (either by clicking nodes in the tree or calling webhook /event/trigger);
               (0, _listener.subscribe)("/trigger/".concat(id), id, /*#__PURE__*/function () {
                 var _ref8 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee7(msg) {
@@ -837,7 +841,7 @@ var StateMachine = function StateMachine(config) {
 
               sub(event);
 
-            case 23:
+            case 26:
             case "end":
               return _context11.stop();
           }

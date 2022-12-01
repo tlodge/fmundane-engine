@@ -27,6 +27,7 @@ const callserially = async (list, cb)=>{
 const _executeactions = async (alist, placeholders={})=>{
     const parallel = [];
    
+    console.log("EXECUTING ACTIONS, placholders are", placeholders);
 
     //for (const row of alist){
       //  console.log("row is ", row);
@@ -37,8 +38,9 @@ const _executeactions = async (alist, placeholders={})=>{
                 
                 let astr = JSON.stringify(a,null,4);
                 var matches = astr.matchAll(/\|(.*?)\|/g);
-
+                
                 for (const match of matches){
+                    console.log("AHEV MATCH!!!", match[0]);
                     const toreplace = match[0];
                     
                     const key = match[1].split(":")[0];
@@ -138,9 +140,7 @@ const StateMachine =   (config)=>{
     const {events = [], id=""} = config;
     let placeholders = {}
     
-    fetchPlaceholders().then((ph)=>{
-        placeholders = ph;
-    });
+   
 
     const eventlookup = events.reduce((acc, item)=>{
         return {
@@ -218,7 +218,7 @@ const StateMachine =   (config)=>{
 
 
     const init = async()=>{
-    
+        placeholders = await fetchPlaceholders();
         let eventid = config.start.event;  
         event = eventlookup[eventid];
       

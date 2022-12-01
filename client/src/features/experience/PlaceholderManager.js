@@ -15,7 +15,6 @@ export function PlaceholderManager({placeholders={}, close=()=>{}}){
     }
 
     useEffect(() => {   
-        console.log("am starting up here!")
        fetchPlaceHolderValues();
     }, []);
 
@@ -30,12 +29,17 @@ export function PlaceholderManager({placeholders={}, close=()=>{}}){
         });
     }
 
+    const _updatePlaceholder= (value, text)=>{
+        updatePlaceholder(value, text);
+        fetchPlaceHolderValues();
+    }
+
     const renderSpeechPlaceHolder = (value, id)=>{
         return <div key={value} className="flex flex-col pt-2">
-                    <div onClick={()=>toggleExpand(id, value)} className="text-sm text-blue-500">{placeholderValues[value]}</div>
+                    <div onClick={()=>toggleExpand(id, value)} className="text-sm text-blue-500">{`current text: ${placeholderValues[value] || "[empty]"}`}</div>
                      {expand[`${id}${value}`] && <div>
                         <div className="p-4"> {`set speech for`} <strong>{value}</strong> {"placeholder"}</div>
-                        <TextEntry close={togglePlaceholders} done={(text)=>{togglePlaceholders(value); updatePlaceholder(value, text)}}/>
+                        <TextEntry close={()=>{toggleExpand(id, value)}} done={(text)=>{toggleExpand(id, value); _updatePlaceholder(value, text)}}/>
                     </div>}
                 </div>
     }
@@ -43,9 +47,9 @@ export function PlaceholderManager({placeholders={}, close=()=>{}}){
     const renderImagePlaceHolder = (value, id)=>{
         return     <div key={value} className="flex flex-col pt-2">
                         <div onClick={()=>toggleExpand(id, value)} className="p-4 text-blue-500"> {`upload image for`} <strong>{value}</strong> {"placeholder"}</div>
-                        <div><img width="100px" src={`assets/${placeholderValues[value]}`}/></div>
+                        <div className="flex justify-center "><img onClick={()=>toggleExpand(id, value)} className="shadow-md" width="250px"  style={{border: "4px solid white"}} src={`assets/${placeholderValues[value]}`}/></div>
                         {expand[`${id}${value}`] && <div>
-                            <Uploader close={togglePlaceholders} success={(name)=>{togglePlaceholders(value); updatePlaceholder(value, name)}}/>
+                            <Uploader close={()=>{toggleExpand(id, value)}} success={(name)=>{toggleExpand(id, value); _updatePlaceholder(value, name)}}/>
                         </div>}
                     </div>
     }

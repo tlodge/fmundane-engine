@@ -161,8 +161,7 @@ export function Experience() {
       <div>
         <Navigation rendering={rendering} authored={authored} start={resetExperience} toggleCreate={toggleCreate} toggleUploadMedia={toggleUploadMedia} twineExport={exportTwine} renderSpeech={_renderSpeech}/>
         <div className="flex row mb-4 border-b-2 flex-wrap" >
-        {list}
-       
+          {list}
         </div>
         {create &&  <div className="absolute right-0" style={{top:80}}><Importer save={(name,json)=>save(name,json)} cancel={()=>toggleCreate(false)}/></div>}
         {upload && <div className="absolute right-0" style={{top:80}}><Uploader close={()=>toggleUploadMedia(false)}/></div>}

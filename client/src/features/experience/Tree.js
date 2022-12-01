@@ -249,7 +249,8 @@ function Tree(t) {
         });
     }
 
-    const togglePlaceholders = (placeholders={})=>{
+    const togglePlaceholders = async (placeholders={})=>{
+        await fetchPlaceHolderValues();
         setSelectedPlaceholders(placeholders)
         setPlaceholderVisible(!placeholderVisible);
     }
@@ -271,7 +272,7 @@ function Tree(t) {
     const renderImagePlaceHolder = (value)=>{
         return     <div className="flex flex-col justify-center items-center">
                         <div className="p-4"> {`upload image for`} <strong>{value}</strong> {"placeholder"}</div>
-                        <div><img width="400px" src={`assets/${placeholderValues[value]}`}/></div>
+                        <div><img className="shadow-lg" style={{border:"5px solid white"}} width="350px" src={`assets/${placeholderValues[value]}`}/></div>
                         <Uploader close={togglePlaceholders} success={(name)=>{togglePlaceholders(); updatePlaceholder(value, name)}}/>
                     </div>
     }
@@ -346,11 +347,14 @@ function Tree(t) {
 
     generatecoords(t);
 
-    console.log(placeholderValues);
     return <div className="text-black bg-gray-200 rounded bg-white overflow-hidden shadow-lg"> 
         <svg ref={mytree} height={t.height} style={{width:`calc(100vw - 280px)`}}>
             <circle onClick={()=>{recenter(gtree,t)}} cx={50} cy={50} r="10" fill="white" strokeWidth={2} stroke="#000"></circle>
-            <circle onClick={toggleShowPlaceHolderManagement} cx={80} cy={50} r="10" fill="#E91475" strokeWidth={2} stroke="#000"></circle>
+            <circle onClick={()=>{recenter(gtree,t)}} cx={50} cy={50} r="5" fill="white" strokeWidth={2} stroke="#000"></circle>
+            <text onClick={()=>{recenter(gtree,t)}}  textAnchor="middle" fontSize="x-small"  x={50} y={80}>recenter</text>
+
+            <circle onClick={toggleShowPlaceHolderManagement} cx={130} cy={50} r="10" fill="#E91475" strokeWidth={2} stroke="#000"></circle>
+            <text onClick={toggleShowPlaceHolderManagement}  textAnchor="middle" fontSize="x-small"  x={130} y={80}>placeholders</text>
             <g ref ={gtree} transform={`translate(120,${t.height/2})`}>
                 <g id="dragbox"> 
                     {renderLinks(links(t), rids(t))}

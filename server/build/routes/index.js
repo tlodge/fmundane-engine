@@ -74,6 +74,72 @@ var indexRouter = _express["default"].Router(); //indexRouter.get('/', (req, res
 var statemachines = [];
 var _seen = {};
 
+var extractplaceholderfromaction = function extractplaceholderfromaction(actions) {
+  console.log("extracting placholder", JSON.stringify(actions, null, 4));
+  var items = {};
+
+  var _iterator = _createForOfIteratorHelper(actions),
+      _step;
+
+  try {
+    for (_iterator.s(); !(_step = _iterator.n()).done;) {
+      var action = _step.value;
+      var placeholders = [];
+      var input = JSON.stringify(action, null, 4);
+      var indexes = (0, _toConsumableArray2["default"])(input).reduce(function (acc, item, i) {
+        if (item === "|") {
+          return [].concat((0, _toConsumableArray2["default"])(acc), [i]);
+        }
+
+        return acc;
+      }, []);
+      console.log(indexes);
+
+      for (var i = 0; i < indexes.length; i += 2) {
+        placeholders.push(input.substring(indexes[i] + 1, indexes[i + 1]));
+      }
+
+      console.log(placeholders);
+      items[action.action] = placeholders;
+    }
+  } catch (err) {
+    _iterator.e(err);
+  } finally {
+    _iterator.f();
+  }
+
+  console.log(JSON.stringify(items, null, 4));
+  return items;
+};
+
+var extractplaceholders = function extractplaceholders(node) {
+  var onstart = node.onstart,
+      rules = node.rules;
+  var osactions = onstart.actions;
+  var ractions = rules.actions;
+  var actions = [].concat((0, _toConsumableArray2["default"])(osactions || []), (0, _toConsumableArray2["default"])(ractions || []));
+  var placeholders = {};
+
+  var _iterator2 = _createForOfIteratorHelper(actions),
+      _step2;
+
+  try {
+    for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+      var action = _step2.value;
+
+      if (JSON.stringify(action).indexOf("|") != -1) {
+        placeholders = _objectSpread(_objectSpread({}, placeholders), extractplaceholderfromaction(action));
+      }
+    }
+  } catch (err) {
+    _iterator2.e(err);
+  } finally {
+    _iterator2.f();
+  }
+
+  return placeholders;
+};
+
 var children = function children(events, node, trigger) {
   var actions = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : [];
 
@@ -89,8 +155,12 @@ var children = function children(events, node, trigger) {
     };
   }
 
-  _seen[node.id] = true;
-  return {
+  _seen[node.id] = true; //this is wheer we add placeholders
+
+  var placeholders = {
+    placeholders: extractplaceholders(node)
+  };
+  return _objectSpread({
     id: node.id,
     name: node.name || node.id,
     trigger: trigger,
@@ -109,7 +179,7 @@ var children = function children(events, node, trigger) {
         rule: r.rule
       }));
     }, {})
-  };
+  }, placeholders);
 };
 
 var tree = function tree(layer) {
@@ -126,6 +196,7 @@ var tree = function tree(layer) {
 };
 
 indexRouter.get('/layers', function (req, res) {
+  console.log("ok getting layers!!");
   var _req$query$layer = req.query.layer,
       layer = _req$query$layer === void 0 ? "layer1.json" : _req$query$layer;
 
@@ -135,14 +206,15 @@ indexRouter.get('/layers', function (req, res) {
 
   _layers = _ljson.map(function (f) {
     return format(f);
-  });
+  }); //console.log(JSON.stringify(_layers,null,4));
+
   res.status(200).json(_layers.map(function (l) {
     return tree(l);
   }));
 });
 indexRouter.get('/start', /*#__PURE__*/function () {
   var _ref = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2(req, res) {
-    var _iterator, _step, statem, parallel, _iterator2, _step2, _loop, _iterator3, _step3, _loop2;
+    var _iterator3, _step3, statem, parallel, _iterator4, _step4, _loop, _iterator5, _step5, _loop2;
 
     return _regenerator["default"].wrap(function _callee2$(_context2) {
       while (1) {
@@ -150,17 +222,17 @@ indexRouter.get('/start', /*#__PURE__*/function () {
           case 0:
             //need to reset everything here..!
             if (statemachines.length > 0) {
-              _iterator = _createForOfIteratorHelper(statemachines);
+              _iterator3 = _createForOfIteratorHelper(statemachines);
 
               try {
-                for (_iterator.s(); !(_step = _iterator.n()).done;) {
-                  statem = _step.value;
+                for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+                  statem = _step3.value;
                   statem.unsubscribe();
                 }
               } catch (err) {
-                _iterator.e(err);
+                _iterator3.e(err);
               } finally {
-                _iterator.f();
+                _iterator3.f();
               }
             }
 
@@ -168,11 +240,11 @@ indexRouter.get('/start', /*#__PURE__*/function () {
             parallel = [];
 
             if (statemachines.length <= 0) {
-              _iterator2 = _createForOfIteratorHelper(_layers);
+              _iterator4 = _createForOfIteratorHelper(_layers);
 
               try {
                 _loop = function _loop() {
-                  var l = _step2.value;
+                  var l = _step4.value;
                   var smac = (0, _statemachine["default"])(l); //await smac.init();
 
                   parallel.push(function () {
@@ -181,32 +253,32 @@ indexRouter.get('/start', /*#__PURE__*/function () {
                   });
                 };
 
-                for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+                for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
                   _loop();
                 }
               } catch (err) {
-                _iterator2.e(err);
+                _iterator4.e(err);
               } finally {
-                _iterator2.f();
+                _iterator4.f();
               }
             } else {
-              _iterator3 = _createForOfIteratorHelper(statemachines);
+              _iterator5 = _createForOfIteratorHelper(statemachines);
 
               try {
                 _loop2 = function _loop2() {
-                  var sm = _step3.value;
+                  var sm = _step5.value;
                   parallel.push(function () {
                     sm.reset();
                   });
                 };
 
-                for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+                for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
                   _loop2();
                 }
               } catch (err) {
-                _iterator3.e(err);
+                _iterator5.e(err);
               } finally {
-                _iterator3.f();
+                _iterator5.f();
               }
             }
 

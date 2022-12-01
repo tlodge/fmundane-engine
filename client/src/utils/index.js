@@ -1,7 +1,13 @@
 import request from "superagent";
 
 export function placeholderType(url){
-    return "image"
+    if (url.indexOf("/image") != -1){
+        return "image";
+    }
+    if (url.indexOf("/speech") != -1){
+        return "speech";
+    }
+    return "";
 }
 
 export async function updatePlaceholder (key, value){

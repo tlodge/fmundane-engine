@@ -13,9 +13,11 @@ indexRouter.get('/set', (req,res)=>{
     let data = fs.readFileSync(fname);
     let placeholders = JSON.parse(data);
     const {key, value} = req.query;
-    placeholders[key] = value;
-    let wdata = JSON.stringify(placeholders,null,4);
-    fs.writeFileSync(fname, wdata);
+    if (key && value){
+        placeholders[key] = value;
+        let wdata = JSON.stringify(placeholders,null,4);
+        fs.writeFileSync(fname, wdata);
+    }
     res.status(200).json(placeholders);
 })
 

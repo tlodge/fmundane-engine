@@ -1,0 +1,79 @@
+[
+    {
+        "id": "placeholdertest",
+        "start": {
+            "actions": [
+                []
+            ],
+            "event": "nodeone"
+        },
+        "events": [
+            {
+                "type": "button",
+                "name": "nodeone",
+                "id": "nodeone",
+                "subscription": "/press",
+                "onstart": {
+                    "actions": [
+                        [
+                            {
+                                "action": "http://[lenovo]:9102/api/image",
+                                "params": {
+                                    "query": {
+                                        "image": "|myimageplaceholder|"
+                                    }
+                                },
+                                "method": "GET",
+                                "delay": 0
+                            }
+                        ]
+                    ]
+                },
+                "rules": [
+                    {
+                        "rule": {
+                            "operator": "equals",
+                            "operand": "next"
+                        },
+                        "next": "nodetwo",
+                        "actions": []
+                    }
+                ],
+                "data": [
+                    "next"
+                ]
+            },
+            {
+                "type": "button",
+                "name": "nodetwo",
+                "id": "nodetwo",
+                "subscription": "/press",
+                "onstart": {
+                    "actions": [
+                        [
+                            {
+                                "action": "http://[speech]:9105/api/speech",
+                                "params": {
+                                    "body": {
+                                        "speech": [
+                                            {
+                                                "words": "hello this is |somemorethings|",
+                                                "voice": "Daniel",
+                                                "rate": "180",
+                                                "delay": "0"
+                                            }
+                                        ]
+                                    }
+                                },
+                                "method": "POST",
+                                "delay": 0
+                            }
+                        ]
+                    ]
+                },
+                "rules": [],
+                "data": []
+            }
+        ]
+    }
+]

@@ -8,12 +8,6 @@ class DysonLinkDevice {
     static get SENSOR_EVENT() { return "sensor-updated"; }
     static get STATE_EVENT() { return "state-updated"; }
 
-    /*"id": "DYSON LINK",
-    "ip": "192.168.1.45",
-    "username": "B3H-UK-NKA0373A",
-    "password": "jNAiFBy+0jkOAV8khMjFKUxuWLhM+seqlGUdH6RW9qQlCI+JIbQZTRlJPj9kcEL6byNu7q+Q0D+0m3PRGooF5A==",
-    "clientid": */
-    
     constructor(model, id, ip, username, password, clientid, mqttrelayaddr="127.0.0.1", cb) {
         
         this._model = model;

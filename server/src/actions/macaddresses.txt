@@ -1,1 +1,3 @@
 lefthand miniscreen: 96:93:0E:DF:2C:DC
+righthand miniscreen: 96:93:0E:89:A7:4E
+nodemcu (ESP-6BE0DD): 96:93:0E:6B:E0:DD
